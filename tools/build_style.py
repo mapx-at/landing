@@ -112,35 +112,66 @@ RAW = {2: "#88CC66", 3: "#EBFFAA", 5: "#47B312", 6: "#73F0FF", 7: "#FFFFFF", 8: 
 LANDUSE_OPACITY = 0.25
 WATER = "#b3d9ff"                     # basemap.at water_a, deckend
 WATER_USAGE = [59, 60]                # FIG: fliessende / stehende Gewaesser (namecat 9)
-BUILDING, BUILDING_LINE, FALLBACK = "#a8968a", "#7d6d62", "#ecebe6"
+BUILDING, BUILDING_LINE, FALLBACK = "#EDCACA", "#CC8F8F", "#ecebe6"   # basemap.at building_a_fill/_outline
 BACKGROUND = "#efefee"               # Flachland-Ton des grauen basemap.at-Reliefs
 
 # ------------------------------------------------------------------ Basis: GIP-Strassen
-# [Klasse, Fuellung, Casing, Breite der Fuellung je Zoom, Legendentext]
+# Farben, Breiten, Zoomstufen und Zeichenreihenfolge wie der basemap.at-Vektorstyle "basemap-at-farbe"
+# (https://basemap.wien.gv.at/basemap-download/webapp/api/styles/basemap-at-farbe, Layer gip_* / giptunnel_* /
+# gipbruecke_*). basemap.at interpoliert linear ("stops"), Casing-Breite = Gesamtbreite (nicht Fuellung + x).
+# [Klasse, Fuellung, Casing, Breite Fuellung je Zoom, Legendentext, Breite Casing je Zoom, Deckkraft je Zoom|None,
+#  Tunnel-Fuellung]
 ROADS = [
-    ["motorway", "#ffd37f", "#cd8966", [[8, 1.4], [10, 2.2], [12, 3], [14, 5], [16, 9], [18, 16]], "Autobahn, Schnellstraße"],
-    ["motorway_link", "#ffebaf", "#cdaa66", [[10, 0.8], [12, 1.4], [14, 2.5], [16, 4.5], [18, 8]], "Rampe"],
-    ["primary", "#ffff99", "#cdaa66", [[8, 1], [10, 1.6], [12, 2.5], [14, 4.5], [16, 8], [18, 14]], "Landesstraße B"],
-    ["secondary", "#ffffff", "#a8a8a8", [[10, 1], [12, 2], [14, 3.8], [16, 7], [18, 12]], "Landesstraße L, Verbindungsstraße"],
-    ["minor", "#ffffff", "#b2b2b2", [[12, 0.8], [13, 1.2], [14, 2.4], [16, 5], [18, 10]], "Gemeindestraße"],
-    ["service", "#ffffff", "#c4c4c4", [[14, 0.8], [16, 2.2], [18, 5]], "Zufahrt, Parkplatz"],
-    ["pedestrian", "#f1ece6", "#b2b2b2", [[14, 1.5], [16, 4.5], [18, 9]], "Fußgängerzone"],
+    ["motorway", "#FFD37F", "#CD8966",
+     [[8, 4.2], [10, 4.8], [11, 5], [12, 5.5], [13, 6], [14, 6.5], [15, 7.5], [16, 9.5], [17, 11.5], [18, 13.5]],
+     "Autobahn, Schnellstraße",
+     [[8, 5.7], [10, 6], [11, 6.5], [12, 7], [13, 7.5], [14, 8], [15, 9], [16, 11], [17, 13], [18, 15]], None, "#FFF2D9"],
+    ["motorway_link", "#FFEBAF", "#CDAA66",
+     [[8, 1.5], [10, 1.5], [11, 2.5], [12, 2], [13, 2.5], [14, 3], [15, 4.5], [16, 4.75], [17, 5.5], [18, 6.5]],
+     "Rampe",
+     [[8, 3], [10, 3], [12, 3.5], [13, 4], [14, 4.5], [15, 6], [16, 6], [17, 7], [18, 8]], None, "#FFF2D9"],
+    ["primary", "#FFFF99", "#CDAA66",
+     [[8, 3.1], [9, 3.2], [10, 3.8], [11, 3.5], [12, 5], [13, 5.5], [14, 6], [15, 7.5], [16, 9], [17, 11], [18, 13]],
+     "Landesstraße B",
+     [[8, 5.2], [9, 5.7], [10, 6], [12, 6.5], [13, 7], [14, 7.5], [15, 9], [16, 10.5], [17, 12.5], [18, 14.5]], None, "#FFFFD9"],
+    ["secondary", "#FFFFFF", "#B2B2B2",
+     [[10, 3.4], [12, 3.5], [13, 4.5], [14, 5], [15, 7], [16, 8], [17, 10], [18, 12]],
+     "Landesstraße L, Verbindungsstraße",
+     [[10, 4.5], [11, 4.5], [12, 5], [13, 6], [14, 6.5], [15, 8.5], [16, 9.5], [17, 11.5], [18, 13.5]], None, "#F2F2F2"],
+    ["minor", "#FFFFFF", "#B2B2B2",
+     [[12, 1.5], [13, 2], [14, 3.5], [15, 5], [16, 6], [17, 8.5], [18, 10.5]],
+     "Gemeindestraße",
+     [[12, 3], [13, 3.5], [14, 5], [15, 6.5], [16, 7.5], [17, 10], [18, 11]], [[11, 0.2], [13, 1]], "#F2F2F2"],
+    ["pedestrian", "#FFDCF0", "#B2B2B2",
+     [[16, 4.75], [17, 5.5], [18, 6.5]], "Fußgängerzone",
+     [[16, 6], [17, 7], [18, 8]], None, "#EBEBEB"],
 ]
 # Wege ohne Casing: [Klasse, Farbe, Breiten, Strichmuster|None, Legendentext]
+# basemap.at: Zufahrt/Güterweg (12010 "beschränkt befahrbar") grau durchgezogen ab z15, Fuß-/Rad-/Wanderwege
+# und Stiegen einheitlich grau gestrichelt ab z15 (gip_footpath)
+WAY_W = [[15, 1], [16, 1.5], [17, 2], [18, 2.5]]
 WAYS = [
-    ["track", "#a89f91", [[14, 0.8], [16, 1.6], [18, 3]], [4, 1.5], "Güter-, Forst-, Feldweg"],
-    ["path", "#8f8f8f", [[15, 0.7], [16, 1.1], [18, 2]], [2, 1.5], "Fußweg, Geh- und Radweg"],
-    ["cycleway", "#4f7fc0", [[15, 0.8], [16, 1.2], [18, 2.2]], [2, 1.5], "Radweg"],
-    ["steps", "#7f7f7f", [[15, 1.5], [16, 2.5], [18, 4]], [0.4, 0.4], "Stiege"],
-    ["trail", "#9b6b43", [[15, 0.7], [16, 1.1], [18, 2]], [3, 2], "Wanderweg, Steig"],
+    ["service", "#B9B9B9", [[15, 2], [16, 2], [17, 3], [18, 4]], None, "Zufahrt, Parkplatz"],
+    ["track", "#B9B9B9", [[15, 2], [16, 2], [17, 3], [18, 4]], None, "Güter-, Forst-, Feldweg"],
+    ["path", "#9C9C9C", WAY_W, [0.7, 1.2], "Fußweg, Geh- und Radweg"],
+    ["cycleway", "#9C9C9C", WAY_W, [0.7, 1.2], "Radweg"],
+    ["steps", "#9C9C9C", WAY_W, [0.7, 1.2], "Stiege"],
+    ["trail", "#9C9C9C", WAY_W, [0.7, 1.2], "Wanderweg, Steig"],
 ]
+BRIDGE_CASING = "#4D3D25"             # basemap.at gipbruecke_*_outline
+BRIDGE_MINZOOM = 16                   # basemap.at zeichnet Bruecken erst ab z16 gesondert
 
 
 def width_expr(stops, add=0, mul=1):
-    e = ["interpolate", ["exponential", 1.4], ["zoom"]]
+    """lineare Interpolation wie die basemap.at-"stops" (base 1)"""
+    e = ["interpolate", ["linear"], ["zoom"]]
     for z, w in stops:
         e += [z, round(w * mul + add, 3)]
     return e
+
+
+def opacity_expr(stops):
+    return width_expr(stops) if stops else 1
 
 
 def gip(lid, cls, brunnel_filter, minzoom, layout, paint):
@@ -153,54 +184,75 @@ def gip(lid, cls, brunnel_filter, minzoom, layout, paint):
 
 
 def road_layers():
-    L = []
+    """-> (tunnel, ebenerdig, bruecken): basemap.at-Reihenfolge Tunnel < Grenzen < Strassen < Bahn < Gebaeude < Bruecken"""
+    T, G, B = [], [], []
     isb = lambda b: ["==", ["get", "brunnel"], b]
-    # 1. Tunnel unter allem: Casing gestrichelt, Fuellung blass
-    for c, fill, casing, w, _ in ROADS:
-        L.append(gip("road-tunnel-casing-" + c, c, isb("tunnel"), w[0][0], None,
-                     {"line-color": casing, "line-width": width_expr(w, 1.5), "line-dasharray": [1.5, 1], "line-opacity": 0.8}))
-        L.append(gip("road-tunnel-" + c, c, isb("tunnel"), w[0][0], {"line-cap": "butt"},
-                     {"line-color": fill, "line-width": width_expr(w), "line-opacity": 0.55}))
+    notunnel = ["!=", ["get", "brunnel"], "tunnel"]
+    # 1. Tunnel: Casing in Klassenfarbe gestrichelt [0.7, 0.3], Fuellung blass, volle Deckkraft
+    for c, fill, casing, w, _, cw, op, tfill in ROADS:
+        T.append(gip("road-tunnel-casing-" + c, c, isb("tunnel"), cw[0][0], None,
+                     {"line-color": casing, "line-width": width_expr(cw), "line-dasharray": [0.7, 0.3],
+                      "line-opacity": opacity_expr(op)}))
+    for c, fill, casing, w, _, cw, op, tfill in ROADS:
+        T.append(gip("road-tunnel-" + c, c, isb("tunnel"), w[0][0], {"line-cap": "butt"},
+                     {"line-color": tfill, "line-width": width_expr(w), "line-opacity": opacity_expr(op)}))
     for c, col, w, _, _ in WAYS:
-        L.append(gip("way-tunnel-" + c, c, isb("tunnel"), w[0][0], None,
-                     {"line-color": col, "line-width": width_expr(w), "line-dasharray": [1, 1.5], "line-opacity": 0.5}))
-    # 2. Wege (ebenerdig und Bruecke)
+        T.append(gip("way-tunnel-" + c, c, isb("tunnel"), w[0][0], None,
+                     {"line-color": "#B2B2B2", "line-width": width_expr(w), "line-dasharray": [0.7, 0.3]}))
+    # 2. Wege (ebenerdig und Bruecke; basemap.at hebt Wege-Bruecken nicht hervor)
     for c, col, w, dash, _ in WAYS:
         p = {"line-color": col, "line-width": width_expr(w)}
         if dash:
             p["line-dasharray"] = dash
-        L.append(gip("way-" + c, c, ["!=", ["get", "brunnel"], "tunnel"], w[0][0],
-                     {"line-cap": "butt", "line-join": "round"}, p))
-    # 3. Ebenerdig: erst alle Casings (niedrige Klassen zuerst), dann alle Fuellungen
-    for c, fill, casing, w, _ in reversed(ROADS):
-        L.append(gip("road-casing-" + c, c, isb("none"), w[0][0], {"line-cap": "round", "line-join": "round"},
-                     {"line-color": casing, "line-width": width_expr(w, 1.5)}))
-    for c, fill, casing, w, _ in reversed(ROADS):
-        L.append(gip("road-" + c, c, isb("none"), w[0][0], {"line-cap": "round", "line-join": "round"},
-                     {"line-color": fill, "line-width": width_expr(w)}))
-    # 4. Bruecken obenauf: dunkleres, breiteres Casing mit flachen Enden
-    for c, fill, casing, w, _ in reversed(ROADS):
-        L.append(gip("road-bridge-casing-" + c, c, isb("bridge"), w[0][0], {"line-cap": "butt", "line-join": "round"},
-                     {"line-color": "#5f5850", "line-width": width_expr(w, 4)}))
-        L.append(gip("road-bridge-" + c, c, isb("bridge"), w[0][0], {"line-cap": "round", "line-join": "round"},
-                     {"line-color": fill, "line-width": width_expr(w)}))
-    return L
+        G.append(gip("way-" + c, c, notunnel, w[0][0], {"line-cap": "butt", "line-join": "round"}, p))
+    # 3. Ebenerdig inkl. Bruecken (unter z16 sehen Bruecken wie Strassen aus): erst alle Casings, dann Fuellungen
+    for c, fill, casing, w, _, cw, op, _t in reversed(ROADS):
+        G.append(gip("road-casing-" + c, c, notunnel, cw[0][0], {"line-cap": "round", "line-join": "round"},
+                     {"line-color": casing, "line-width": width_expr(cw), "line-opacity": opacity_expr(op)}))
+    for c, fill, casing, w, _, cw, op, _t in reversed(ROADS):
+        G.append(gip("road-" + c, c, notunnel, w[0][0], {"line-cap": "round", "line-join": "round"},
+                     {"line-color": fill, "line-width": width_expr(w), "line-opacity": opacity_expr(op)}))
+    # 4. Bruecken ab z16 ueber den Gebaeuden: dunkles Casing (+2,5 px), Fuellung +1 px (gipbruecke_*)
+    for c, fill, casing, w, _, cw, op, _t in reversed(ROADS):
+        bz = [[z, v] for z, v in w if z >= BRIDGE_MINZOOM] or [[BRIDGE_MINZOOM, w[-1][1]]]
+        B.append(gip("road-bridge-casing-" + c, c, isb("bridge"), BRIDGE_MINZOOM, {"line-cap": "butt", "line-join": "round"},
+                     {"line-color": BRIDGE_CASING, "line-width": width_expr(bz, 3.5)}))
+        B.append(gip("road-bridge-" + c, c, isb("bridge"), BRIDGE_MINZOOM, {"line-cap": "butt", "line-join": "round"},
+                     {"line-color": fill, "line-width": width_expr(bz, 1)}))
+    return T, G, B
+
+
+# Strassenbeschriftung wie basemap.at (giplabel_*): Nummern als Punktbeschriftung mit breitem Halo ("Schild"),
+# Namen entlang der Linie in Roboto Medium (hier Noto Sans Medium), Halo in Strassenfarbe bzw. weiss
+def _ref(lid, classes, minzoom, color, halo):
+    return {"id": lid, "type": "symbol", "source": "gip", "source-layer": "gip_l", "minzoom": minzoom,
+            "filter": ["all", ["has", "ref"], ["in", ["get", "draw_class"], ["literal", classes]]],
+            # basemap.at: symbol-placement point (MapLibre setzt dabei auf GIP-Linien kaum Labels) -> entlang der
+            # Linie mit grossem Abstand, aber waagrecht (viewport) wie ein Schild
+            "layout": {"symbol-placement": "line", "symbol-spacing": 400, "text-rotation-alignment": "viewport",
+                       "text-field": ["get", "ref"], "text-font": ["Noto Sans Bold"],
+                       "text-size": ["interpolate", ["linear"], ["zoom"], 15, 10, 16, 12], "text-padding": 30,
+                       "symbol-sort-key": 100},
+            "paint": {"text-color": color, "text-halo-color": halo, "text-halo-width": 6}}
+
+
+def _name(lid, classes, minzoom, color, halo, sizes, spacing):
+    return {"id": lid, "type": "symbol", "source": "gip", "source-layer": "gip_l", "minzoom": minzoom,
+            "filter": ["all", ["has", "name"], ["==", ["get", "brunnel"], "none"],
+                       ["in", ["get", "draw_class"], ["literal", classes]]],
+            "layout": {"symbol-placement": "line", "symbol-spacing": spacing, "text-field": ["get", "name"],
+                       "text-font": ["Noto Sans Medium"], "text-size": width_expr(sizes), "text-padding": 1},
+            "paint": {"text-color": color, "text-halo-color": halo, "text-halo-width": 0.8}}
 
 
 ROAD_LABELS = [
-    {"id": "road-ref", "type": "symbol", "source": "gip", "source-layer": "gip_l", "minzoom": 11,
-     "filter": ["all", ["has", "ref"], ["match", ["get", "draw_class"], ["motorway", "primary", "secondary"], True, False]],
-     "layout": {"symbol-placement": "line", "symbol-spacing": 350, "text-field": ["get", "ref"],
-                "text-font": ["Noto Sans Regular"], "text-size": 10.5, "text-rotation-alignment": "viewport",
-                "text-keep-upright": True},
-     "paint": {"text-color": "#5a1a00", "text-halo-color": "rgba(255,255,255,.95)", "text-halo-width": 1.6}},
-    {"id": "road-name", "type": "symbol", "source": "gip", "source-layer": "gip_l", "minzoom": 15,
-     "filter": ["all", ["has", "name"], ["!=", ["get", "brunnel"], "tunnel"],
-                ["match", ["get", "draw_class"], ["motorway_link", "track", "path", "cycleway", "steps", "trail"], False, True]],
-     "layout": {"symbol-placement": "line", "symbol-spacing": 250, "text-field": ["get", "name"],
-                "text-font": ["Noto Sans Regular"], "text-size": ["interpolate", ["linear"], ["zoom"], 15, 10.5, 18, 13],
-                "text-max-angle": 30, "text-padding": 2},
-     "paint": {"text-color": "#3f3f3f", "text-halo-color": "rgba(255,255,255,.9)", "text-halo-width": 1.4}},
+    _name("road-name-minor", ["secondary", "minor", "pedestrian", "service"], 12, "#4E4E4E", "#FFFFFF",
+          [[12, 9], [15, 9], [16, 11.5], [18, 13]], 300),
+    _name("road-name-primary", ["primary"], 11, "#730000", "#FFFF99", [[11, 9], [14, 10], [16, 12]], 450),
+    _name("road-name-motorway", ["motorway"], 10, "#730000", "#FFD37F", [[10, 9], [14, 10], [16, 12]], 850),
+    _ref("road-ref-secondary", ["secondary"], 11, "#000000", "#FFFFFF"),
+    _ref("road-ref-primary", ["primary"], 9, "#730000", "#FFFF73"),
+    _ref("road-ref-motorway", ["motorway"], 8, "#FFFFFF", "#0064C8"),
 ]
 
 
@@ -218,9 +270,6 @@ def base_bottom(relief):
         {"id": "landuse", "type": "fill", "source": "dkm", "source-layer": "landuse_a",
          "filter": ["!=", ["get", "namecat"], 1],
          "paint": {"fill-color": color, "fill-opacity": LANDUSE_OPACITY, "fill-antialias": False}},
-        {"id": "landuse-line", "type": "line", "source": "dkm", "source-layer": "landuse_a", "minzoom": 14,
-         "paint": {"line-color": "rgba(90,80,70,.25)",
-                   "line-width": ["interpolate", ["linear"], ["zoom"], 14, 0.2, 18, 0.8]}},
         # Gewaesserflaechen der DKM (FIG 59/60) in basemap.at-Blau ueber namecat 9; GGN water_a folgt darueber
         {"id": "water-dkm", "type": "fill", "source": "dkm", "source-layer": "landuse_a",
          "filter": ["in", ["get", "usage"], ["literal", WATER_USAGE]],
@@ -235,18 +284,30 @@ def base_settlement():
          "filter": ["==", ["get", "namecat"], 1],
          "paint": {"fill-color": ["interpolate", ["linear"], ["zoom"], 10, "#D1D1CF", 14, "#F2F2F0"],
                    "fill-opacity": 1, "fill-antialias": False}},
+        # basemap.at landuse_settlement_outline: Umriss der Siedlungsflaechen ab z15 (einzige Nutzungsgrenze)
+        {"id": "landuse-siedlung-line", "type": "line", "source": "dkm", "source-layer": "landuse_a", "minzoom": 15,
+         "filter": ["==", ["get", "namecat"], 1],
+         "paint": {"line-color": ["interpolate", ["linear"], ["zoom"], 15, "#C7C7C4", 17, "#D9D9D6"], "line-width": 0.7}},
     ]
 
 
 def base_buildings():
     return [
+        # basemap.at: Gebaeude ab z13 rosa, Umriss erst ab z16 (0,09 px) bzw. z17 (0,4 px), ueber Strassen und Bahn
         {"id": "building", "type": "fill", "source": "dkm", "source-layer": "building_a", "minzoom": 13,
-         "paint": {"fill-color": BUILDING, "fill-opacity": 0.95}},
-        {"id": "building-line", "type": "line", "source": "dkm", "source-layer": "building_a", "minzoom": 15,
-         "paint": {"line-color": BUILDING_LINE, "line-width": 0.6}},
-        {"id": "parcel", "type": "line", "source": "dkm", "source-layer": "parcel_l", "minzoom": 15,
-         "paint": {"line-color": "rgba(110,95,85,.45)",
-                   "line-width": ["interpolate", ["linear"], ["zoom"], 15, 0.3, 18, 0.9]}},
+         "paint": {"fill-color": BUILDING, "fill-antialias": True}},
+        {"id": "building-line", "type": "line", "source": "dkm", "source-layer": "building_a", "minzoom": 16,
+         "paint": {"line-color": BUILDING_LINE,
+                   "line-width": ["interpolate", ["linear"], ["zoom"], 16, 0.09, 17, 0.4, 19, 2.5]}},
+    ]
+
+
+def base_parcels():
+    # Grundstuecksgrenzen gibt es bei basemap.at nicht: nur ab z16, zart unter den Strassen
+    return [
+        {"id": "parcel", "type": "line", "source": "dkm", "source-layer": "parcel_l", "minzoom": 16,
+         "paint": {"line-color": "rgba(110,95,85,.3)",
+                   "line-width": ["interpolate", ["linear"], ["zoom"], 16, 0.3, 18, 0.8]}},
     ]
 
 
@@ -414,6 +475,82 @@ def geonamen_icons(layers, by_class, icons, log):
     return res
 
 
+# ------------------------------------------------------------------ Angleichung der Fragmente an basemap.at
+BM_WATER = "rgba(179, 217, 255, 1)"   # basemap.at water_a/water_l: Linien in Flaechenfarbe, ohne Umriss
+# GGN rank entspricht basemap.at water_l.namecat (1 Donau/Inn ... 7 Bach): [ab Zoom, Breiten]
+WATER_RANK = {1: (6, [[6, 3], [18, 3]]), 2: (8, [[8, 3], [14, 4], [18, 5]]), 3: (8, [[8, 3], [14, 3.5], [18, 5]]),
+              4: (10, [[10, 3], [14, 3.2], [18, 4.7]]), 5: (10, [[10, 3], [14, 3], [18, 4.5]]),
+              6: (12, [[12, 3], [14, 3], [18, 4.2]]), 7: (15, [[15, 2], [16, 2.5], [18, 3]])}
+
+
+def align_ggn(layers):
+    """GGN-Gewaesser wie basemap.at: Linienfarbe = Flaechenfarbe, Breite/Mindestzoom je Rang (water_l_river1-7)"""
+    width = ["interpolate", ["linear"], ["zoom"]]
+    for z in range(6, 19):
+        m = ["match", ["get", "rank"]]
+        for r, (mz, st) in WATER_RANK.items():
+            v = st[0][1] if z <= st[0][0] else st[-1][1]
+            for (z0, v0), (z1, v1) in zip(st, st[1:]):
+                if z0 <= z <= z1:
+                    v = round(v0 + (z - z0) / (z1 - z0) * (v1 - v0), 2)
+            m += [r, v if z >= mz else 0]
+        m.append(0)
+        width += [z, m]
+    for l in layers:
+        p = l.setdefault("paint", {})
+        if l["id"] == "ggn-water-a":
+            p["fill-color"] = BM_WATER
+            p.pop("fill-outline-color", None)
+        elif l["type"] == "line" and l.get("source-layer") == "water_l":
+            p["line-color"] = BM_WATER
+            p["line-width"] = width
+            p.pop("line-opacity", None)
+            if "tunnel" not in l["id"]:
+                l.setdefault("layout", {})["line-cap"] = "round"
+            else:
+                p["line-dasharray"] = [1, 1]
+    return layers
+
+
+def align_oev(layers):
+    """Bahn wie basemap.at gip_railway: durchgehend braun, ohne weisse Striche, Breite 1,2 (z8) .. 5 (z15);
+    Bruecken erst ab z16 (dunkles Casing 14 px, weiss 10 px, Bahn 5 px obenauf)."""
+    rail = [[6, 0.8], [8, 1.2], [9, 1.3], [10, 1.6], [11, 1.8], [12, 2.2], [12.7, 2.2], [13, 4.5], [14, 4.5],
+            [15, 5], [16, 5], [17, 6], [18, 7]]
+    siding = lambda z: round(0.3 + max(0, min(z, 16) - 12) / 4 * 1.7, 2)   # Abstellgleise 0,3 (z12) .. 2 px (z16)
+    rail_w = ["interpolate", ["linear"], ["zoom"]]
+    for z, v in rail:
+        rail_w += [z, ["match", ["get", "service"], "siding", siding(z), v]]
+    out = []
+    for l in layers:
+        if l["id"] == "oev-rail-dash":
+            continue  # basemap.at hat keine weissen Striche
+        p = l.setdefault("paint", {})
+        if l["id"] in ("oev-rail", "oev-rail-tunnel"):
+            p["line-width"] = rail_w
+            if l["id"] == "oev-rail-tunnel":
+                p["line-color"] = "rgba(217, 195, 173, 1)"
+                p.pop("line-dasharray", None)
+                p.pop("line-opacity", None)
+        elif l["id"] == "oev-rail-bridge-casing":
+            l["minzoom"] = 16
+            p["line-width"] = ["interpolate", ["linear"], ["zoom"], 16, 14, 17, 15, 18, 16]
+        elif l["id"] == "oev-rail-bridge-fill":
+            l["minzoom"] = 16
+            p["line-width"] = ["interpolate", ["linear"], ["zoom"], 16, 10, 17, 11, 18, 12]
+        out.append(l)
+    # Bahn auf der Bruecke obenauf (basemap.at gipbruecke_railway)
+    rail = next((l for l in out if l["id"] == "oev-rail"), None)
+    fill = next((l for l in out if l["id"] == "oev-rail-bridge-fill"), None)
+    if rail and fill:
+        top = copy.deepcopy(rail)
+        top["id"] = "oev-rail-bridge-line"
+        top["minzoom"] = 16
+        top["filter"] = fill["filter"]
+        out.insert(out.index(fill) + 1, top)
+    return out
+
+
 # ------------------------------------------------------------------ Zusammenbau
 def build(vt, tiles):
     log = []
@@ -421,6 +558,16 @@ def build(vt, tiles):
     icons, by_class = load_icons(vt)
     frag = {k: load_fragment(vt, k) for k in FRAGMENTS}
     frag["geonamen"] = geonamen_icons(frag["geonamen"], by_class, icons, log)
+    for l in frag["geonamen"]:   # basemap.at label_*_stadtteil: normale Schreibung, schwarz, 13 px (Roboto Light)
+        if l["id"] == "geonamen-stadtteil":
+            l["layout"].pop("text-transform", None)
+            l["layout"].pop("text-letter-spacing", None)
+            l["layout"]["text-size"] = ["interpolate", ["linear"], ["zoom"], 12, 12, 14, 13, 16, 15]
+            l.setdefault("paint", {})["text-color"] = "#000000"
+    for l in frag["adr"]:   # basemap.at label_housenumber_*: rotbraun, Roboto Medium
+        if l["type"] == "symbol":
+            l.setdefault("paint", {}).update({"text-color": "rgba(128, 51, 51, 1)", "text-halo-color": "rgba(250, 250, 250, 1)"})
+            l.setdefault("layout", {})["text-font"] = ["Noto Sans Medium"]
 
     def split(layers):
         return [l for l in layers if l["type"] != "symbol"], [l for l in layers if l["type"] == "symbol"]
@@ -434,7 +581,17 @@ def build(vt, tiles):
     rel_shade = [l for l in rel if l["type"] == "hillshade"]
     rel_lines = [l for l in rel if l["type"] == "line"]
     rel_lab = [l for l in rel if l["type"] == "symbol"]
-    roads = road_layers()
+    road_t, road_g, road_b = road_layers()
+    roads = road_t + road_g + road_b
+    oev_geom = align_oev(oev_geom)
+    # Bezirks-/Gemeindenamen als Flaechenbeschriftung gibt es bei basemap.at nicht: ausgeblendet (schaltbar)
+    for l in gr_lab:
+        if l["id"] in ("grenzen-label-bezirk", "grenzen-label-gemeinde"):
+            l.setdefault("layout", {})["visibility"] = "none"
+    ggn_geom = align_ggn(ggn_geom)
+    oev_t = [l for l in oev_geom if "tunnel" in l["id"]]
+    oev_b = [l for l in oev_geom if "bridge" in l["id"]]
+    oev_g = [l for l in oev_geom if l not in oev_t and l not in oev_b]
 
     groups = {
         "water": ["water-dkm"] + [l["id"] for l in ggn_geom],
@@ -447,15 +604,19 @@ def build(vt, tiles):
         "labels": [l["id"] for l in ggn_lab + frag["geonamen"]],
         "relief": [l["id"] for l in rel],
     }
-    # Zeichenreihenfolge (unten -> oben)
+    # Zeichenreihenfolge (unten -> oben) wie basemap.at-farbe: Nutzung < Wasser < Siedlung < Tunnel < Grenzen
+    # < Strassen < Bahn < Gebaeude < Bruecken < Beschriftung
     layers = (base_bottom(rel_shade)      # Hintergrund, Hillshade, Raster, landuse, DKM-Gewaesser
               + ggn_geom                   # water_a, water_l
               + base_settlement()          # Siedlung deckend (nach dem Wasser, wie basemap.at)
-              + rel_lines                  # Hoehenlinien
-              + base_buildings()           # Gebaeude, Grundstuecke
-              + roads                      # Tunnel, Wege, Casing, Fuellung, Bruecken
-              + oev_geom                   # Bahn, U-Bahn, Strassenbahn, Seilbahn
-              + gr_geom                    # Grenzen
+              + rel_lines                  # Hoehenlinien (gibt es bei basemap-at-farbe nicht)
+              + base_parcels()             # Grundstuecke (nur mapx)
+              + road_t + oev_t             # Tunnel (Strasse, Bahn)
+              + gr_geom                    # Grenzen unter den Strassen (basemap.at border_* vor gip_*)
+              + road_g                     # Wege, Casing, Fuellung (inkl. Bruecken unter z16)
+              + oev_g                      # Bahn, Seilbahn ...
+              + base_buildings()           # Gebaeude ueber Strassen/Bahn (basemap.at building_a nach gip_*)
+              + road_b + oev_b             # Bruecken ab z16 obenauf
               + frag["adr"]                # Hausnummern
               + ROAD_LABELS                # Strassennummern/-namen
               + ggn_lab                    # Gewaessernamen
