@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>mapx.at – Nutzung</title>
-<meta name="description" content="mapx.at – Pilot: Flächennutzung aus der Digitalen Katastralmappe (BEV) und Straßennetz aus der GIP als Vektorkarte, Bezirk Melk.">
+<title>mapx.at – Vektor-Basemap</title>
+<meta name="description" content="mapx.at – Vektor-Basemap nach basemap.at-Vorbild aus offenen Daten (BEV DKM, GIP, GGN, Verwaltungsgrenzen, Geographische Namen, Adressregister), Pilot Bezirk Melk.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#134e4a">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23134e4a'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%235eead4' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='4' fill='none' stroke='%235eead4' stroke-width='2'/%3E%3C/svg%3E">
@@ -18,7 +18,7 @@
 html,body{height:100%;margin:0}
 body{background:var(--bg);color:var(--fg);font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 #map{position:fixed;inset:0}
-.panel{position:absolute;z-index:2;left:max(10px,env(safe-area-inset-left));top:max(10px,env(safe-area-inset-top));width:236px;max-height:calc(100% - 70px);overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.12);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.panel{position:absolute;z-index:2;left:max(10px,env(safe-area-inset-left));top:max(10px,env(safe-area-inset-top));width:252px;max-height:calc(100% - 70px);overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.12);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
 .panel header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 12px;cursor:pointer;user-select:none}
 .panel h1{margin:0;font-size:16px;font-weight:600;letter-spacing:-.01em}
 .panel h1 span{color:var(--acc)}
@@ -27,23 +27,26 @@ body{background:var(--bg);color:var(--fg);font:14px/1.4 system-ui,-apple-system,
 .body{padding:0 12px 10px}
 .panel.collapsed .body{display:none}
 .panel.collapsed .toggle{transform:rotate(180deg)}
-ul.legend{list-style:none;margin:4px 0 10px;padding:0}
-ul.legend li{display:flex;align-items:center;gap:8px;padding:2px 0}
+ul.legend{list-style:none;margin:4px 0 10px;padding:0;font-size:13px}
+ul.legend li{display:flex;align-items:center;gap:8px;padding:1px 0}
 .sw{width:18px;height:12px;border-radius:2px;border:1px solid rgba(0,0,0,.25);flex:none}
-ul.legend.roads{border-top:1px solid var(--line);padding-top:6px;margin-top:8px}
+details.lg{border-top:1px solid var(--line);margin-top:8px;padding-top:6px}
+details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:none}
 .rsw{width:18px;height:6px;border-radius:3px;flex:none;border:1.5px solid}
 .rsw.dash{height:0;border-width:0;border-top:2px dashed;border-radius:0}
-.ctl{border-top:1px solid var(--line);padding-top:8px;display:grid;gap:7px}
+.ctl{padding-top:2px;display:grid;gap:7px}
 .ctl label{display:flex;align-items:center;gap:8px;cursor:pointer}
 .ctl input[type=range]{width:100%;accent-color:var(--acc)}
-.ctl input[type=checkbox]{accent-color:var(--acc);width:16px;height:16px}
+.ctl input[type=checkbox]{accent-color:var(--acc);width:16px;height:16px;margin:0}
+.ctl .grid{display:grid;grid-template-columns:1fr 1fr;gap:5px 6px;font-size:13px}
+.ctl .grid label{gap:6px}
 .note{font-size:12px;color:var(--muted);margin-top:8px}
 .msg{position:absolute;z-index:3;left:50%;transform:translateX(-50%);bottom:42px;max-width:calc(100% - 32px);background:#7f1d1d;color:#fff;padding:7px 12px;border-radius:8px;font-size:13px;display:none}
 .maplibregl-popup-content{font:13px/1.4 system-ui,sans-serif;color:#1b2b2a;padding:8px 10px}
 .maplibregl-popup-content b{font-weight:600}
-@media (max-width:520px){.panel{width:min(236px,calc(100% - 70px));max-height:60%}}
+@media (max-width:520px){.panel{width:min(252px,calc(100% - 70px));max-height:60%}}
 /* Suche (search.mapx.at, Meilisearch) */
-.search{position:absolute;z-index:4;top:max(10px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(380px,calc(100% - 540px))}
+.search{position:absolute;z-index:4;top:max(10px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(380px,calc(100% - 572px))}
 .search input{width:100%;height:38px;padding:0 34px 0 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--fg);font:15px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;box-shadow:0 2px 10px rgba(0,0,0,.12);-webkit-appearance:none;appearance:none}
 .search input:focus{outline:2px solid var(--acc);outline-offset:-1px}
 .search input::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
@@ -60,32 +63,38 @@ ul.legend.roads{border-top:1px solid var(--line);padding-top:6px;margin-top:8px}
 .search li.info:hover{background:none}
 .search li.src{font-size:11px;border-top:1px solid var(--line);margin-top:4px;padding-top:5px}
 .rev .d{color:#5b6b69;font-size:12px}
-@media (max-width:1000px){.search{left:max(260px,calc(env(safe-area-inset-left) + 256px));transform:none;width:calc(100% - 320px)}}
+@media (max-width:1000px){.search{left:max(276px,calc(env(safe-area-inset-left) + 272px));transform:none;width:calc(100% - 336px)}}
 @media (max-width:520px){.search{left:max(10px,env(safe-area-inset-left));width:calc(100% - 66px)}.panel{top:calc(max(10px,env(safe-area-inset-top)) + 46px)}.search input{font-size:16px}}
 </style>
 </head>
 <body>
-<div id="map" role="region" aria-label="Karte der Flächennutzung"></div>
+<div id="map" role="region" aria-label="Vektor-Basemap"></div>
 
 <section class="panel" id="panel">
   <header id="panelHead" title="Legende ein-/ausklappen">
     <div>
       <h1>map<span>x</span>.at</h1>
-      <div class="sub">Nutzung (DKM) &amp; Straßen (GIP) · Pilot Bezirk Melk</div>
+      <div class="sub">Vektor-Basemap · Pilot Bezirk Melk</div>
     </div>
     <button class="toggle" id="toggle" aria-label="Legende ein-/ausklappen" aria-expanded="true">▴</button>
   </header>
   <div class="body">
-    <ul class="legend" id="legend"></ul>
     <div class="ctl">
-      <label><input type="checkbox" id="bm"> basemap.at als Hintergrund</label>
+      <div class="grid">
+        <label><input type="checkbox" id="bld" checked autocomplete="off"> Gebäude</label>
+        <label><input type="checkbox" id="roads" checked autocomplete="off"> Straßen</label>
+        <label><input type="checkbox" id="water" checked autocomplete="off"> Gewässer</label>
+        <label><input type="checkbox" id="bnd" checked autocomplete="off"> Grenzen</label>
+        <label><input type="checkbox" id="lab" checked autocomplete="off"> Beschriftung</label>
+        <label><input type="checkbox" id="hnr" checked autocomplete="off"> Hausnummern</label>
+      </div>
+      <label><input type="checkbox" id="bm" autocomplete="off"> basemap.at als Hintergrund</label>
       <label for="op">Deckkraft Nutzung</label>
       <input type="range" id="op" min="0" max="100" value="85" aria-label="Deckkraft der Nutzungsflächen">
-      <label><input type="checkbox" id="bld" checked> Gebäude</label>
-      <label><input type="checkbox" id="roads" checked autocomplete="off"> Straßen</label>
     </div>
-    <ul class="legend roads" id="roadLegend"></ul>
-    <div class="note">Fläche oder Straße antippen für Details. Nutzung ab Zoom 10, Gebäude ab Zoom 13, Straßen ab Zoom 8 (Wege ab 14/15).</div>
+    <details class="lg" open><summary>Legende Nutzung</summary><ul class="legend" id="legend"></ul></details>
+    <details class="lg"><summary>Legende Straßen</summary><ul class="legend" id="roadLegend"></ul></details>
+    <div class="note">Antippen für Details, lange drücken/Rechtsklick für die nächste Adresse. Gebäude ab Zoom 13, Grundstücke ab 15, Hausnummern ab 16.</div>
   </div>
 </section>
 
@@ -102,163 +111,16 @@ ul.legend.roads{border-top:1px solid var(--line);padding-top:6px;margin-top:8px}
 (function () {
   "use strict";
 
-  // Kachelquellen; per Query-Parameter ueberschreibbar (Tests, z. B. ?gip=http://localhost:8000/gip-strassen.pmtiles)
+  // Der Kartenstil (alle Layer, Glyphs, Sprites, Legende) steht in style.json und wird mit
+  // tools/build_style.py aus den Style-Fragmenten von mapx-at/vector-tiles erzeugt (siehe README).
+  // Kachelquellen per Query-Parameter ueberschreibbar (Tests), z. B.
+  //   ?gip=http://localhost:8000/gip-strassen.pmtiles&ggn=...&grenzen=...&geonamen=...&adr=...&dkm=...
+  //   ?style=http://localhost:8000/style.json
   var params = new URLSearchParams(location.search);
-  function srcUrl(key, def) {
-    var v = params.get(key);
-    return "pmtiles://" + (v && /^https?:\/\//.test(v) ? v : def);
-  }
-  var TILES = srcUrl("dkm", "https://tiles.mapx.at/dkm-nutzung.pmtiles");
-  var GIP_TILES = srcUrl("gip", "https://tiles.mapx.at/gip-strassen.pmtiles");
+  var SOURCE_PARAMS = ["dkm", "gip", "ggn", "grenzen", "geonamen", "adr"];
+  var STYLE_URL = /^https?:\/\//.test(params.get("style") || "") ? params.get("style") : "style.json";
 
-  // Strassen (GIP) je draw_class, Farben angelehnt an den basemap.at-Style (basemap-at-farbe):
-  // [Klasse, Fuellung, Casing, Breite der Fuellung je Zoom, Legendentext, gestrichelt]
-  var ROADS = [
-    ["motorway",      "#ffd37f", "#cd8966", [[8, 1.4], [10, 2.2], [12, 3], [14, 5], [16, 9], [18, 16]], "Autobahn, Schnellstraße"],
-    ["motorway_link", "#ffebaf", "#cdaa66", [[10, 0.8], [12, 1.4], [14, 2.5], [16, 4.5], [18, 8]], "Rampe"],
-    ["primary",       "#ffff99", "#cdaa66", [[8, 1], [10, 1.6], [12, 2.5], [14, 4.5], [16, 8], [18, 14]], "Landesstraße B"],
-    ["secondary",     "#ffffff", "#a8a8a8", [[10, 1], [12, 2], [14, 3.8], [16, 7], [18, 12]], "Landesstraße L, Verbindungsstraße"],
-    ["minor",         "#ffffff", "#b2b2b2", [[12, 0.8], [13, 1.2], [14, 2.4], [16, 5], [18, 10]], "Gemeindestraße"],
-    ["service",       "#ffffff", "#c4c4c4", [[14, 0.8], [16, 2.2], [18, 5]], "Zufahrt, Parkplatz"],
-    ["pedestrian",    "#f1ece6", "#b2b2b2", [[14, 1.5], [16, 4.5], [18, 9]], "Fußgängerzone"]
-  ];
-  // Wege ohne Casing: [Klasse, Farbe, Breiten, Strichmuster|null, Legendentext]
-  var WAYS = [
-    ["track",    "#a89f91", [[14, 0.8], [16, 1.6], [18, 3]], [4, 1.5], "Güter-, Forst-, Feldweg"],
-    ["path",     "#8f8f8f", [[15, 0.7], [16, 1.1], [18, 2]], [2, 1.5], "Fußweg, Geh- und Radweg"],
-    ["cycleway", "#4f7fc0", [[15, 0.8], [16, 1.2], [18, 2.2]], [2, 1.5], "Radweg"],
-    ["steps",    "#7f7f7f", [[15, 1.5], [16, 2.5], [18, 4]], [0.4, 0.4], "Stiege"],
-    ["trail",    "#9b6b43", [[15, 0.7], [16, 1.1], [18, 2]], [3, 2], "Wanderweg, Steig"]
-  ];
-  var LABELS = { motorway: "Autobahn/Schnellstraße", motorway_link: "Rampe", primary: "Landesstraße B",
-    secondary: "Landesstraße L / Verbindungsstraße", minor: "Gemeindestraße", service: "Zufahrt/Parkplatz",
-    pedestrian: "Fußgängerzone", track: "Güter-/Forstweg", path: "Fuß-/Geh- und Radweg", cycleway: "Radweg",
-    steps: "Stiege", trail: "Wanderweg/Steig" };
-
-  function widthExpr(stops, add, mul) {
-    var e = ["interpolate", ["exponential", 1.4], ["zoom"]];
-    stops.forEach(function (s) { e.push(s[0], s[1] * (mul || 1) + (add || 0)); });
-    return e;
-  }
-  function minz(stops) { return stops[0][0]; }
-  // brunnel: "none" | "bridge" | "tunnel"
-  function roadLayers() {
-    var L = [];
-    var isB = function (b) { return ["==", ["get", "brunnel"], b]; };
-    // 1. Tunnel: Casing gestrichelt, Fuellung blass, alles unter dem uebrigen Netz
-    ROADS.forEach(function (r) {
-      L.push({ id: "road-tunnel-casing-" + r[0], type: "line", source: "gip", "source-layer": "gip_l", minzoom: minz(r[3]),
-        filter: ["all", ["==", ["get", "draw_class"], r[0]], isB("tunnel")],
-        paint: { "line-color": r[2], "line-width": widthExpr(r[3], 1.5), "line-dasharray": [1.5, 1], "line-opacity": 0.8 } });
-      L.push({ id: "road-tunnel-" + r[0], type: "line", source: "gip", "source-layer": "gip_l", minzoom: minz(r[3]),
-        filter: ["all", ["==", ["get", "draw_class"], r[0]], isB("tunnel")],
-        layout: { "line-cap": "butt" },
-        paint: { "line-color": r[1], "line-width": widthExpr(r[3]), "line-opacity": 0.55 } });
-    });
-    WAYS.forEach(function (w) {
-      L.push({ id: "way-tunnel-" + w[0], type: "line", source: "gip", "source-layer": "gip_l", minzoom: minz(w[2]),
-        filter: ["all", ["==", ["get", "draw_class"], w[0]], isB("tunnel")],
-        paint: { "line-color": w[1], "line-width": widthExpr(w[2]), "line-dasharray": [1, 1.5], "line-opacity": 0.5 } });
-    });
-    // 2. Wege (ebenerdig und Bruecke)
-    WAYS.forEach(function (w) {
-      var p = { "line-color": w[1], "line-width": widthExpr(w[2]) };
-      if (w[3]) p["line-dasharray"] = w[3];
-      L.push({ id: "way-" + w[0], type: "line", source: "gip", "source-layer": "gip_l", minzoom: minz(w[2]),
-        filter: ["all", ["==", ["get", "draw_class"], w[0]], ["!=", ["get", "brunnel"], "tunnel"]],
-        layout: { "line-cap": "butt", "line-join": "round" }, paint: p });
-    });
-    // 3. Ebenerdige Strassen: erst alle Casings (niedrige Klassen zuerst), dann alle Fuellungen
-    ROADS.slice().reverse().forEach(function (r) {
-      L.push({ id: "road-casing-" + r[0], type: "line", source: "gip", "source-layer": "gip_l", minzoom: minz(r[3]),
-        filter: ["all", ["==", ["get", "draw_class"], r[0]], ["==", ["get", "brunnel"], "none"]],
-        layout: { "line-cap": "round", "line-join": "round" },
-        paint: { "line-color": r[2], "line-width": widthExpr(r[3], 1.5) } });
-    });
-    ROADS.slice().reverse().forEach(function (r) {
-      L.push({ id: "road-" + r[0], type: "line", source: "gip", "source-layer": "gip_l", minzoom: minz(r[3]),
-        filter: ["all", ["==", ["get", "draw_class"], r[0]], ["==", ["get", "brunnel"], "none"]],
-        layout: { "line-cap": "round", "line-join": "round" },
-        paint: { "line-color": r[1], "line-width": widthExpr(r[3]) } });
-    });
-    // 4. Bruecken obenauf: dunkleres, breiteres Casing mit flachen Enden
-    ROADS.slice().reverse().forEach(function (r) {
-      L.push({ id: "road-bridge-casing-" + r[0], type: "line", source: "gip", "source-layer": "gip_l", minzoom: minz(r[3]),
-        filter: ["all", ["==", ["get", "draw_class"], r[0]], isB("bridge")],
-        layout: { "line-cap": "butt", "line-join": "round" },
-        paint: { "line-color": "#5f5850", "line-width": widthExpr(r[3], 4) } });
-      L.push({ id: "road-bridge-" + r[0], type: "line", source: "gip", "source-layer": "gip_l", minzoom: minz(r[3]),
-        filter: ["all", ["==", ["get", "draw_class"], r[0]], isB("bridge")],
-        layout: { "line-cap": "round", "line-join": "round" },
-        paint: { "line-color": r[1], "line-width": widthExpr(r[3]) } });
-    });
-    return L;
-  }
-  var ROAD_LAYER_IDS = roadLayers().map(function (l) { return l.id; });
-  // Beschriftung (ueber den Gebaeuden): Strassennummern ab z11, Namen entlang der Linie ab z15
-  var LABEL_LAYERS = [
-    { id: "road-ref", type: "symbol", source: "gip", "source-layer": "gip_l", minzoom: 11,
-      filter: ["all", ["has", "ref"], ["match", ["get", "draw_class"], ["motorway", "primary", "secondary"], true, false]],
-      layout: { "symbol-placement": "line", "symbol-spacing": 350, "text-field": ["get", "ref"],
-        "text-font": ["Noto Sans Regular"], "text-size": 10.5, "text-rotation-alignment": "viewport",
-        "text-keep-upright": true },
-      paint: { "text-color": "#5a1a00", "text-halo-color": "rgba(255,255,255,.95)", "text-halo-width": 1.6 } },
-    { id: "road-name", type: "symbol", source: "gip", "source-layer": "gip_l", minzoom: 15,
-      filter: ["all", ["has", "name"], ["!=", ["get", "brunnel"], "tunnel"],
-        ["match", ["get", "draw_class"], ["motorway_link", "track", "path", "cycleway", "steps", "trail"], false, true]],
-      layout: { "symbol-placement": "line", "symbol-spacing": 250, "text-field": ["get", "name"],
-        "text-font": ["Noto Sans Regular"], "text-size": ["interpolate", ["linear"], ["zoom"], 15, 10.5, 18, 13],
-        "text-max-angle": 30, "text-padding": 2 },
-      paint: { "text-color": "#3f3f3f", "text-halo-color": "rgba(255,255,255,.9)", "text-halo-width": 1.4 } }
-  ];
-
-  // namecat = basemap.at-Klasse (int 1-12). Farben = basemap.at-Farbe mit
-  // Deckkraft 0,25 ueber dem Hintergrund vorgemischt (basemap.at legt sie ueber
-  // ein Relief), Siedlung deckend wie bei basemap.at.
-  var CATS = [
-    [1,  "#e0e0de", "Siedlung"],
-    [2,  "#daeacc", "Grünfläche"],
-    [3,  "#f3f7dd", "Landwirtschaft"],
-    [5,  "#cae4b7", "Wald"],
-    [6,  "#d5f3f2", "Gletscher"],
-    [7,  "#f8f7f2", "Verkehr, Sonstiges"],
-    [8,  "#f0f0ec", "Fels, Geröll"],
-    [9,  "#e2f7cf", "Gewässer, Gewässerrand"],
-    [10, "#dfd6c6", "Friedhof"],
-    [11, "#d2ddc6", "Freizeitfläche"],
-    [12, "#e8e7c8", "Weingarten"]
-  ];
-  var BUILDING = "#a8968a", BUILDING_LINE = "#7d6d62", FALLBACK = "#ecebe6";
-
-  var matchColor = ["match", ["get", "namecat"]];
-  CATS.forEach(function (c) { matchColor.push(c[0], c[1]); });
-  matchColor.push(FALLBACK);
-
-  var legend = document.getElementById("legend");
-  CATS.forEach(function (c) {
-    var li = document.createElement("li");
-    var sw = document.createElement("span");
-    sw.className = "sw"; sw.style.background = c[1];
-    li.appendChild(sw); li.appendChild(document.createTextNode(c[2]));
-    legend.appendChild(li);
-  });
-  var lb = document.createElement("li");
-  var sb = document.createElement("span");
-  sb.className = "sw"; sb.style.background = BUILDING; sb.style.borderColor = BUILDING_LINE;
-  lb.appendChild(sb); lb.appendChild(document.createTextNode("Gebäude"));
-  legend.appendChild(lb);
-
-  var roadLegend = document.getElementById("roadLegend");
-  function roadItem(text, fill, line, dashed) {
-    var li = document.createElement("li");
-    var sw = document.createElement("span");
-    sw.className = "rsw" + (dashed ? " dash" : "");
-    if (dashed) { sw.style.borderTopColor = line; } else { sw.style.background = fill; sw.style.borderColor = line; }
-    li.appendChild(sw); li.appendChild(document.createTextNode(text));
-    roadLegend.appendChild(li);
-  }
-  ROADS.forEach(function (r) { if (r[0] !== "motorway_link" && r[0] !== "pedestrian") roadItem(r[4], r[1], r[2], false); });
-  WAYS.forEach(function (w) { if (w[0] !== "steps") roadItem(w[4], null, w[1], true); });
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (ch) { return "&#" + ch.charCodeAt(0) + ";"; }); }
 
   var protocol = new pmtiles.Protocol();
   maplibregl.addProtocol("pmtiles", protocol.tile);
@@ -271,46 +133,10 @@ ul.legend.roads{border-top:1px solid var(--line);padding-top:6px;margin-top:8px}
     maxZoom: 19,
     hash: true,
     attributionControl: false,
-    style: {
-      version: 8,
-      // Freie Glyphen fuer die Strassenbeschriftung (MapLibre-Demotiles: Noto Sans; Open Sans gibt es dort nicht)
-      glyphs: "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
-      sources: {
-        basemap: {
-          type: "raster",
-          tiles: ["https://mapsneu.wien.gv.at/basemap/geolandbasemap/normal/google3857/{z}/{y}/{x}.png"],
-          tileSize: 256,
-          maxzoom: 19,
-          attribution: '<a href="https://basemap.at" target="_blank" rel="noopener">basemap.at</a>'
-        },
-        dkm: {
-          type: "vector",
-          url: TILES,
-          attribution: 'Datenquelle: <a href="https://www.bev.gv.at" target="_blank" rel="noopener">BEV – DKM</a>, <a href="https://creativecommons.org/licenses/by/4.0/deed.de" target="_blank" rel="noopener">CC BY 4.0</a>'
-        },
-        gip: {
-          type: "vector",
-          url: GIP_TILES,
-          attribution: 'Straßen: <a href="https://www.gip.gv.at" target="_blank" rel="noopener">GIP.at</a>, <a href="https://creativecommons.org/licenses/by/4.0/deed.de" target="_blank" rel="noopener">CC BY 4.0</a>'
-        }
-      },
-      layers: [
-        { id: "bg", type: "background", paint: { "background-color": "#f6f4ee" } },
-        { id: "basemap", type: "raster", source: "basemap", layout: { visibility: "none" },
-          paint: { "raster-opacity": 0.6 } },
-        { id: "landuse", type: "fill", source: "dkm", "source-layer": "landuse_a",
-          paint: { "fill-color": matchColor, "fill-opacity": 0.85 } },
-        { id: "landuse-line", type: "line", source: "dkm", "source-layer": "landuse_a", minzoom: 14,
-          paint: { "line-color": "rgba(90,80,70,.35)", "line-width": ["interpolate", ["linear"], ["zoom"], 14, 0.2, 18, 0.8] } }
-      ].concat(roadLayers(), [
-        { id: "building", type: "fill", source: "dkm", "source-layer": "building_a", minzoom: 13,
-          paint: { "fill-color": BUILDING, "fill-opacity": 0.95 } },
-        { id: "building-line", type: "line", source: "dkm", "source-layer": "building_a", minzoom: 15,
-          paint: { "line-color": BUILDING_LINE, "line-width": 0.6 } }
-      ], LABEL_LAYERS)
-    }
+    style: { version: 8, sources: {}, layers: [{ id: "bg0", type: "background", paint: { "background-color": "#f6f4ee" } }] }
   });
 
+  window.mapxMap = map;   // fuer Tests/Konsole
   map.addControl(new maplibregl.AttributionControl({ compact: true }), "bottom-right");
   map.addControl(new maplibregl.NavigationControl({ visualizePitch: false }), "top-right");
   map.addControl(new maplibregl.GeolocateControl({ positionOptions: { enableHighAccuracy: true } }), "top-right");
@@ -318,40 +144,91 @@ ul.legend.roads{border-top:1px solid var(--line);padding-top:6px;margin-top:8px}
   map.dragRotate.disable();
   map.touchZoomRotate.disableRotation();
 
-  // Fehlermeldung, wenn die PMTiles-Datei nicht erreichbar ist.
   var msg = document.getElementById("msg"), shown = false;
+  function showMsg(text) { if (shown) return; shown = true; msg.textContent = text; msg.style.display = "block"; }
   map.on("error", function (e) {
-    if (shown) return;
     var src = e && e.sourceId;
     var text = e && e.error && e.error.message ? e.error.message : "";
-    if (src === "dkm" || src === "gip" || /pmtiles|tiles\.mapx\.at/i.test(text)) {
-      shown = true;
-      msg.textContent = "Die Kacheln von tiles.mapx.at sind gerade nicht erreichbar.";
-      msg.style.display = "block";
+    if (SOURCE_PARAMS.indexOf(src) >= 0 || /pmtiles|tiles\.mapx\.at/i.test(text)) {
+      showMsg("Die Kacheln von tiles.mapx.at sind gerade nicht erreichbar.");
     }
   });
 
-  // Steuerung
-  var bm = document.getElementById("bm"), op = document.getElementById("op"), bld = document.getElementById("bld");
-  function applyOpacity() { map.setPaintProperty("landuse", "fill-opacity", op.value / 100); }
+  var GROUPS = {}, HIDDEN = {}, LEGEND = null, ready = false;
+  fetch(STYLE_URL).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(function (style) {
+    SOURCE_PARAMS.forEach(function (k) {
+      var v = params.get(k);
+      if (v && /^https?:\/\//.test(v) && style.sources[k]) style.sources[k].url = "pmtiles://" + v;
+    });
+    var md = style.metadata || {};
+    GROUPS = md["mapx:groups"] || {};
+    // Layer, die der Style selbst ausschaltet (z. B. grenzen-label-gemeinde), bleiben aus
+    style.layers.forEach(function (l) { if (l.layout && l.layout.visibility === "none") HIDDEN[l.id] = true; });
+    LEGEND = md["mapx:legend"] || null;
+    buildLegend();
+    map.setStyle(style);
+    map.once("styledata", function () {
+      ready = true; applyAll();
+      // Mobil: Quellenangabe eingeklappt starten (Info-Knopf klappt sie auf)
+      map.once("idle", function () {
+        var at = document.querySelector(".maplibregl-ctrl-attrib");
+        if (at && window.matchMedia("(max-width: 520px)").matches) at.classList.remove("maplibregl-compact-show");
+      });
+    });
+  }).catch(function () { showMsg("Der Kartenstil (style.json) konnte nicht geladen werden."); });
+
+  // ---------------------------------------------------------------- Legende aus style.json
+  function sw(cls, bg, border) {
+    var s = document.createElement("span");
+    s.className = cls;
+    if (bg) s.style.background = bg;
+    if (border) s.style.borderColor = border;
+    return s;
+  }
+  function item(ul, swatch, text) {
+    var li = document.createElement("li");
+    li.appendChild(swatch); li.appendChild(document.createTextNode(text)); ul.appendChild(li);
+  }
+  function buildLegend() {
+    if (!LEGEND) return;
+    var legend = document.getElementById("legend"), roadLegend = document.getElementById("roadLegend");
+    legend.innerHTML = ""; roadLegend.innerHTML = "";
+    LEGEND.landuse.forEach(function (c) { item(legend, sw("sw", c[0]), c[1]); });
+    var b = LEGEND.building; item(legend, sw("sw", b[0], b[1]), b[2]);
+    LEGEND.roads.forEach(function (r) {
+      var s = sw("rsw" + (r[3] ? " dash" : ""));
+      if (r[3]) s.style.borderTopColor = r[2]; else { s.style.background = r[1]; s.style.borderColor = r[2]; }
+      item(roadLegend, s, r[0]);
+    });
+  }
+
+  // ---------------------------------------------------------------- Steuerung
+  var bm = document.getElementById("bm"), op = document.getElementById("op");
+  // Checkbox-ID -> Layergruppe(n) in metadata["mapx:groups"]
+  var TOGGLES = { bld: ["buildings", "parcels"], roads: ["roads"], water: ["water"], bnd: ["boundaries"],
+                  lab: ["labels"], hnr: ["housenumbers"] };
+  function groupIds(g) { return (GROUPS[g] || []).filter(function (id) { return !HIDDEN[id] && map.getLayer(id); }); }
+  function setGroup(g, on) {
+    groupIds(g).forEach(function (id) { map.setLayoutProperty(id, "visibility", on ? "visible" : "none"); });
+  }
+  function applyOpacity() { if (map.getLayer("landuse")) map.setPaintProperty("landuse", "fill-opacity", op.value / 100); }
+  function applyAll() {
+    if (!ready) return;
+    Object.keys(TOGGLES).forEach(function (id) {
+      var on = document.getElementById(id).checked;
+      TOGGLES[id].forEach(function (g) { setGroup(g, on); });
+    });
+    if (map.getLayer("basemap")) map.setLayoutProperty("basemap", "visibility", bm.checked ? "visible" : "none");
+    applyOpacity();
+  }
+  Object.keys(TOGGLES).forEach(function (id) { document.getElementById(id).addEventListener("change", applyAll); });
   bm.addEventListener("change", function () {
-    map.setLayoutProperty("basemap", "visibility", bm.checked ? "visible" : "none");
     // Mit Hintergrund die Nutzung etwas zuruecknehmen, ohne den Regler zu ueberschreiben.
     if (bm.checked && op.value > 60) { op.value = 60; }
     if (!bm.checked && op.value == 60) { op.value = 85; }
-    applyOpacity();
+    applyAll();
   });
   op.addEventListener("input", applyOpacity);
-  bld.addEventListener("change", function () {
-    var v = bld.checked ? "visible" : "none";
-    map.setLayoutProperty("building", "visibility", v);
-    map.setLayoutProperty("building-line", "visibility", v);
-  });
-  var roads = document.getElementById("roads");
-  roads.addEventListener("change", function () {
-    var v = roads.checked ? "visible" : "none";
-    ROAD_LAYER_IDS.concat(["road-ref", "road-name"]).forEach(function (id) { map.setLayoutProperty(id, "visibility", v); });
-  });
 
   // Legende ein-/ausklappen (mobil standardmaessig zu)
   var panel = document.getElementById("panel"), tg = document.getElementById("toggle");
@@ -361,41 +238,91 @@ ul.legend.roads{border-top:1px solid var(--line);padding-top:6px;margin-top:8px}
   });
   if (window.matchMedia("(max-width: 520px)").matches) setCollapsed(true);
 
-  // Details per Klick
-  var labels = {};
-  CATS.forEach(function (c) { labels[c[0]] = c[2]; });
-  function esc(s) { return String(s).replace(/[&<>"']/g, function (ch) { return "&#" + ch.charCodeAt(0) + ";"; }); }
+  // ---------------------------------------------------------------- Details per Klick
   var BRUNNEL = { bridge: "Brücke", tunnel: "Tunnel/Unterführung" };
+  var WATER_CLASS = { river: "Fluss", stream: "Bach", canal: "Kanal", ditch: "Graben", lake: "See", pond: "Teich, Weiher" };
+  var BOUNDARY = { state_l: "Staatsgrenze", country_l: "Landesgrenze", district_l: "Bezirksgrenze", municipality_l: "Gemeindegrenze" };
+  var HR = "<hr style='border:0;border-top:1px solid #ddd;margin:5px 0'>";
+  function visible(g) { return groupIds(g).filter(function (id) { return map.getLayoutProperty(id, "visibility") !== "none"; }); }
+  function first(box, ids, pred) {
+    if (!ids.length) return null;
+    var f = map.queryRenderedFeatures(box, { layers: ids });
+    for (var i = 0; i < f.length; i++) if (!pred || pred(f[i])) return f[i];
+    return null;
+  }
   map.on("click", function (e) {
-    // Strassen mit etwas Toleranz treffen (schmale Linien)
+    if (!ready) return;
     var pad = 4, box = [[e.point.x - pad, e.point.y - pad], [e.point.x + pad, e.point.y + pad]];
-    var visibleRoads = roads.checked ? ROAD_LAYER_IDS : [];
-    var r = visibleRoads.length ? map.queryRenderedFeatures(box, { layers: visibleRoads })[0] : null;
-    var f = map.queryRenderedFeatures(e.point, { layers: ["building", "landuse"] });
-    if (!f.length && !r) return;
+    var parts = [], namecats = (LEGEND && LEGEND.namecat) || {};
+    var labels = (LEGEND && LEGEND.roadLabels) || {};
+    var h = first(box, visible("housenumbers"));
+    if (h) {
+      var hp = h.properties || {};
+      parts.push("<b>" + esc((hp.street ? hp.street + " " : "") + hp.hnr) + "</b><br>" +
+                 (hp.type === "parcel" ? "Grundstücksadresse" : "Gebäudeadresse") + '<span class="adr"></span>');
+    }
+    var r = first(box, visible("roads"), function (f) { return f.layer.type === "line"; });
+    if (r) {
+      var rp = r.properties || {}, t = labels[rp.draw_class] || rp.draw_class;
+      var rx = [];
+      if (rp.name || rp.ref) rx.push(esc(t));
+      if (rp.ref && rp.name) rx.push(esc(rp.ref));
+      if (BRUNNEL[rp.brunnel]) rx.push(BRUNNEL[rp.brunnel]);
+      if (rp.oneway == 1) rx.push("Einbahn");
+      parts.push("<b>" + esc(rp.name || rp.ref || t) + "</b>" + (rx.length ? "<br>" + rx.join(" · ") : ""));
+    }
+    var w = first(box, visible("water").filter(function (id) { return id !== "water-dkm"; }));
+    if (w) {
+      var wp = w.properties || {}, wc = WATER_CLASS[wp["class"]] || "Gewässer", wx = [];
+      if (wp.name) wx.push(esc(wc));
+      if (wp.ezg_km2) wx.push("Einzugsgebiet " + Math.round(wp.ezg_km2).toLocaleString("de-AT") + " km²");
+      if (wp.area_km2) wx.push(wp.area_km2 < 0.01 ? "< 1 ha" : wp.area_km2 < 1 ? Math.round(wp.area_km2 * 100) + " ha"
+                               : (+wp.area_km2).toFixed(2).replace(".", ",") + " km²");
+      if (wp.tunnel == 1) wx.push("verrohrt");
+      parts.push("<b>" + esc(wp.name || wc) + "</b>" + (wx.length ? "<br>" + wx.join(" · ") : ""));
+    }
+    var bd = first(box, visible("boundaries"), function (f) { return f.layer.type === "line"; });
+    if (bd) {
+      var bp = bd.properties || {}, bs = "<b>" + (BOUNDARY[bd.sourceLayer] || "Grenze") + "</b>";
+      if (bp.left && bp.right) bs += "<br>" + esc(bp.left) + " | " + esc(bp.right);
+      else if (bp.right) bs += "<br>" + esc(bp.right);
+      parts.push(bs);
+    }
+    var f = map.queryRenderedFeatures(e.point, { layers: ["building", "landuse", "parcel"].filter(function (id) { return map.getLayer(id); }) });
     var b = f.filter(function (x) { return x.layer.id === "building"; })[0];
     var l = f.filter(function (x) { return x.layer.id === "landuse"; })[0];
-    var html = "";
-    if (r) {
-      var rp = r.properties || {};
-      html += "<b>" + esc(rp.name || rp.ref || LABELS[rp.draw_class] || rp.draw_class) + "</b><br>";
-      html += esc(LABELS[rp.draw_class] || rp.draw_class);
-      if (rp.ref && rp.name) html += " · " + esc(rp.ref);
-      if (BRUNNEL[rp.brunnel]) html += " · " + BRUNNEL[rp.brunnel];
-      if (rp.oneway == 1) html += " · Einbahn";
-      html += "<br>";
-      if (b || l) html += "<hr style='border:0;border-top:1px solid #ddd;margin:5px 0'>";
-    }
-    if (b) html += "<b>Gebäude</b><br>";
+    var pc = first(box, visible("parcels"));
+    var low = "";
+    if (b) low += "<b>Gebäude</b><br>";
     if (l) {
       var p = l.properties || {};
-      html += "<b>" + esc(labels[p.namecat] || p.namecat || "unbekannt") + "</b>";
-      if (p.usage != null && p.usage !== "") html += "<br>Nutzung (FIG): " + esc(p.usage);
+      var cat = (p.usage == 59 || p.usage == 60) ? "Gewässer" : (namecats[p.namecat] || p.namecat);
+      low += "<b>" + esc(cat || "unbekannt") + "</b>";
+      if (p.usage != null && p.usage !== "") low += "<br>Nutzung (FIG): " + esc(p.usage);
     }
-    new maplibregl.Popup({ closeButton: true, maxWidth: "240px" }).setLngLat(e.lngLat).setHTML(html).addTo(map);
+    if (pc && pc.properties && pc.properties.gstnr) low += "<br>Grenze Grundstück " + esc(pc.properties.gstnr) + " (KG " + esc(pc.properties.kgnr) + ")";
+    if (low) parts.push(low);
+    // Gemeinde/Bezirk am Klickpunkt aus der naechsten Adresse (Suchindex), bei Grenzen und Hausnummern
+    var wantAdmin = !!(bd || h);
+    if (!parts.length) return;
+    var html = parts.join(HR) + (wantAdmin ? '<div class="adm d"></div>' : "");
+    var pop = new maplibregl.Popup({ closeButton: true, maxWidth: "260px", className: "rev" }).setLngLat(e.lngLat).setHTML(html).addTo(map);
+    if (wantAdmin) {
+      nearestAddress(e.lngLat, 1500).then(function (a) {
+        var el = pop.getElement(); if (!el || !a) return;
+        var adm = el.querySelector(".adm");
+        if (adm) adm.innerHTML = HR + "Gemeinde " + esc(a.municipality || "?") + " · Bezirk " + esc(a.district || "?") +
+          (bd ? " <span class='d'>(am Klickpunkt)</span>" : "");
+        var ad = el.querySelector(".adr");
+        if (ad && h && a.plz) ad.innerHTML = "<br>" + esc(a.plz + " " + (a.postort || a.locality || ""));
+      }).catch(function () {});
+    }
   });
-  map.on("mouseenter", "landuse", function () { map.getCanvas().style.cursor = "pointer"; });
-  map.on("mouseleave", "landuse", function () { map.getCanvas().style.cursor = ""; });
+  map.on("mousemove", function (e) {
+    if (!ready) return;
+    var ids = visible("housenumbers").concat(visible("roads"), visible("water"), ["landuse"]).filter(function (id) { return map.getLayer(id); });
+    map.getCanvas().style.cursor = map.queryRenderedFeatures(e.point, { layers: ids }).length ? "pointer" : "";
+  });
 
   // ---------------------------------------------------------------- Suche (Meilisearch, Index "places")
   // Endpoint und oeffentlicher Search-only-Key (darf nur /indexes/places/search, siehe
@@ -513,6 +440,22 @@ ul.legend.roads{border-top:1px solid var(--line);padding-top:6px;margin-top:8px}
     }
   }
 
+  // Naechster Treffer zu einem Punkt. _geoBoundingBox (Quadrat +-radius) statt _geoRadius: in Meilisearch
+  // 1.56 ~1 ms statt ~100 ms. Treffer in den Ecken (bis radius*1.41) werden verworfen.
+  function geoNear(filter, lat, lng, radius) {
+    var dlat = radius / 111320, dlng = radius / (111320 * Math.cos(lat * Math.PI / 180));
+    var bb = "_geoBoundingBox([" + (lat + dlat).toFixed(6) + ", " + (lng + dlng).toFixed(6) + "], [" +
+             (lat - dlat).toFixed(6) + ", " + (lng - dlng).toFixed(6) + "])";
+    return meili({ q: "", limit: 1, attributesToRetrieve: ATTRS.concat(["municipality", "district", "plz", "postort", "locality"]),
+                   filter: filter + " AND " + bb, sort: ["_geoPoint(" + lat + ", " + lng + "):asc"] }).then(function (j) {
+      var h = j.hits && j.hits[0];
+      return { hits: h && h._geoDistance <= radius ? [h] : [] };
+    });
+  }
+  function nearestAddress(lngLat, radius) {
+    return geoNear("type = address", +lngLat.lat.toFixed(6), +lngLat.lng.toFixed(6), radius).then(function (j) { return j.hits[0]; });
+  }
+
   // Rechtsklick / langes Druecken -> Reverse-Geocoding (naechste Adresse, sonst naechster Ort/Strasse)
   var lastRev = 0, revPop = null;
   function reverse(lngLat) {
@@ -522,18 +465,7 @@ ul.legend.roads{border-top:1px solid var(--line);padding-top:6px;margin-top:8px}
     // closeOnClick aus: das Loslassen nach langem Druecken loest auf manchen Geraeten einen Klick aus
     var pop = revPop = new maplibregl.Popup({ closeButton: true, closeOnClick: false, maxWidth: "260px", className: "rev" })
       .setLngLat(lngLat).setHTML('<span class="d">Suche …</span>').addTo(map);
-    // _geoBoundingBox (Quadrat +-radius) statt _geoRadius: in Meilisearch 1.56 ~1 ms statt ~100 ms.
-    // Treffer in den Ecken (bis radius*1.41) werden verworfen.
-    function q(filter, radius) {
-      var dlat = radius / 111320, dlng = radius / (111320 * Math.cos(lat * Math.PI / 180));
-      var bb = "_geoBoundingBox([" + (lat + dlat).toFixed(6) + ", " + (lng + dlng).toFixed(6) + "], [" +
-               (lat - dlat).toFixed(6) + ", " + (lng - dlng).toFixed(6) + "])";
-      return meili({ q: "", limit: 1, attributesToRetrieve: ATTRS, filter: filter + " AND " + bb,
-                     sort: ["_geoPoint(" + lat + ", " + lng + "):asc"] }).then(function (j) {
-        var h = j.hits && j.hits[0];
-        return { hits: h && h._geoDistance <= radius ? [h] : [] };
-      });
-    }
+    function q(filter, radius) { return geoNear(filter, lat, lng, radius); }
     var coord = '<span class="d">' + lat.toFixed(5) + ", " + lng.toFixed(5) + "</span>";
     q("type = address", 150).then(function (j) {
       if (j.hits && j.hits.length) return j.hits[0];

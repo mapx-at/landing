@@ -1,0 +1,6478 @@
+{
+ "version": 8,
+ "name": "mapx.at Vektor-Basemap",
+ "metadata": {
+  "mapx:generator": "landing/tools/build_style.py – nicht von Hand bearbeiten",
+  "mapx:groups": {
+   "water": [
+    "water-dkm",
+    "ggn-water-a",
+    "ggn-water-l-tunnel",
+    "ggn-water-l"
+   ],
+   "buildings": [
+    "building",
+    "building-line"
+   ],
+   "parcels": [
+    "parcel"
+   ],
+   "roads": [
+    "road-tunnel-casing-motorway",
+    "road-tunnel-motorway",
+    "road-tunnel-casing-motorway_link",
+    "road-tunnel-motorway_link",
+    "road-tunnel-casing-primary",
+    "road-tunnel-primary",
+    "road-tunnel-casing-secondary",
+    "road-tunnel-secondary",
+    "road-tunnel-casing-minor",
+    "road-tunnel-minor",
+    "road-tunnel-casing-service",
+    "road-tunnel-service",
+    "road-tunnel-casing-pedestrian",
+    "road-tunnel-pedestrian",
+    "way-tunnel-track",
+    "way-tunnel-path",
+    "way-tunnel-cycleway",
+    "way-tunnel-steps",
+    "way-tunnel-trail",
+    "way-track",
+    "way-path",
+    "way-cycleway",
+    "way-steps",
+    "way-trail",
+    "road-casing-pedestrian",
+    "road-casing-service",
+    "road-casing-minor",
+    "road-casing-secondary",
+    "road-casing-primary",
+    "road-casing-motorway_link",
+    "road-casing-motorway",
+    "road-pedestrian",
+    "road-service",
+    "road-minor",
+    "road-secondary",
+    "road-primary",
+    "road-motorway_link",
+    "road-motorway",
+    "road-bridge-casing-pedestrian",
+    "road-bridge-pedestrian",
+    "road-bridge-casing-service",
+    "road-bridge-service",
+    "road-bridge-casing-minor",
+    "road-bridge-minor",
+    "road-bridge-casing-secondary",
+    "road-bridge-secondary",
+    "road-bridge-casing-primary",
+    "road-bridge-primary",
+    "road-bridge-casing-motorway_link",
+    "road-bridge-motorway_link",
+    "road-bridge-casing-motorway",
+    "road-bridge-motorway",
+    "road-ref",
+    "road-name"
+   ],
+   "boundaries": [
+    "grenzen-country-outline",
+    "grenzen-district-outline",
+    "grenzen-municipality-outline",
+    "grenzen-country",
+    "grenzen-district",
+    "grenzen-municipality",
+    "grenzen-state-outline",
+    "grenzen-state",
+    "grenzen-label-country-right",
+    "grenzen-label-country-left",
+    "grenzen-label-state-right",
+    "grenzen-label-land",
+    "grenzen-label-bezirk",
+    "grenzen-label-gemeinde"
+   ],
+   "housenumbers": [
+    "housenumber-parcel",
+    "housenumber"
+   ],
+   "labels": [
+    "ggn-water-l-label-donau",
+    "ggn-water-l-label",
+    "ggn-water-a-label",
+    "geonamen-ried",
+    "geonamen-gebiet",
+    "geonamen-gelaende",
+    "geonamen-gletscher",
+    "geonamen-kirche",
+    "geonamen-objekt",
+    "geonamen-objekt-text",
+    "geonamen-gipfel-z8",
+    "geonamen-gipfel",
+    "geonamen-einzelhaus",
+    "geonamen-stadtteil",
+    "geonamen-ort",
+    "geonamen-bezirkshauptort-punkt",
+    "geonamen-bezirkshauptort",
+    "geonamen-hauptstadt-punkt",
+    "geonamen-hauptstadt"
+   ]
+  },
+  "mapx:legend": {
+   "landuse": [
+    [
+     "#e0e0de",
+     "Siedlung"
+    ],
+    [
+     "#daeacc",
+     "Grünfläche"
+    ],
+    [
+     "#f3f7dd",
+     "Landwirtschaft"
+    ],
+    [
+     "#cae4b7",
+     "Wald"
+    ],
+    [
+     "#d5f3f2",
+     "Gletscher"
+    ],
+    [
+     "#f8f7f2",
+     "Verkehr, Sonstiges"
+    ],
+    [
+     "#f0f0ec",
+     "Fels, Geröll"
+    ],
+    [
+     "#e2f7cf",
+     "Gewässerrand, Feuchtgebiet"
+    ],
+    [
+     "#dfd6c6",
+     "Friedhof"
+    ],
+    [
+     "#d2ddc6",
+     "Freizeitfläche"
+    ],
+    [
+     "#e8e7c8",
+     "Weingarten"
+    ],
+    [
+     "#b3d9ff",
+     "Gewässer"
+    ]
+   ],
+   "namecat": {
+    "1": "Siedlung",
+    "2": "Grünfläche",
+    "3": "Landwirtschaft",
+    "5": "Wald",
+    "6": "Gletscher",
+    "7": "Verkehr, Sonstiges",
+    "8": "Fels, Geröll",
+    "9": "Gewässerrand, Feuchtgebiet",
+    "10": "Friedhof",
+    "11": "Freizeitfläche",
+    "12": "Weingarten"
+   },
+   "building": [
+    "#a8968a",
+    "#7d6d62",
+    "Gebäude"
+   ],
+   "roads": [
+    [
+     "Autobahn, Schnellstraße",
+     "#ffd37f",
+     "#cd8966",
+     false
+    ],
+    [
+     "Landesstraße B",
+     "#ffff99",
+     "#cdaa66",
+     false
+    ],
+    [
+     "Landesstraße L, Verbindungsstraße",
+     "#ffffff",
+     "#a8a8a8",
+     false
+    ],
+    [
+     "Gemeindestraße",
+     "#ffffff",
+     "#b2b2b2",
+     false
+    ],
+    [
+     "Zufahrt, Parkplatz",
+     "#ffffff",
+     "#c4c4c4",
+     false
+    ],
+    [
+     "Güter-, Forst-, Feldweg",
+     null,
+     "#a89f91",
+     true
+    ],
+    [
+     "Fußweg, Geh- und Radweg",
+     null,
+     "#8f8f8f",
+     true
+    ],
+    [
+     "Radweg",
+     null,
+     "#4f7fc0",
+     true
+    ],
+    [
+     "Wanderweg, Steig",
+     null,
+     "#9b6b43",
+     true
+    ]
+   ],
+   "roadLabels": {
+    "motorway": "Autobahn, Schnellstraße",
+    "motorway_link": "Rampe",
+    "primary": "Landesstraße B",
+    "secondary": "Landesstraße L, Verbindungsstraße",
+    "minor": "Gemeindestraße",
+    "service": "Zufahrt, Parkplatz",
+    "pedestrian": "Fußgängerzone",
+    "track": "Güter-, Forst-, Feldweg",
+    "path": "Fußweg, Geh- und Radweg",
+    "cycleway": "Radweg",
+    "steps": "Stiege",
+    "trail": "Wanderweg, Steig"
+   }
+  }
+ },
+ "glyphs": "https://tiles.mapx.at/fonts/{fontstack}/{range}.pbf",
+ "sprite": [
+  {
+   "id": "default",
+   "url": "https://tiles.mapx.at/sprites/sprite"
+  },
+  {
+   "id": "sdf",
+   "url": "https://tiles.mapx.at/sprites/sprite-sdf"
+  }
+ ],
+ "sources": {
+  "basemap": {
+   "type": "raster",
+   "tiles": [
+    "https://mapsneu.wien.gv.at/basemap/geolandbasemap/normal/google3857/{z}/{y}/{x}.png"
+   ],
+   "tileSize": 256,
+   "maxzoom": 19,
+   "attribution": "<a href=\"https://basemap.at\" target=\"_blank\" rel=\"noopener\">basemap.at</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
+  },
+  "dkm": {
+   "type": "vector",
+   "url": "pmtiles://https://tiles.mapx.at/dkm-nutzung.pmtiles",
+   "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – DKM</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
+  },
+  "gip": {
+   "type": "vector",
+   "url": "pmtiles://https://tiles.mapx.at/gip-strassen.pmtiles",
+   "attribution": "<a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
+  },
+  "ggn": {
+   "type": "vector",
+   "url": "pmtiles://https://tiles.mapx.at/ggn-gewaesser.pmtiles",
+   "attribution": "<a href=\"https://www.data.gv.at/katalog/datasets/c2287ccb-f44c-48cd-bf7c-ac107b771246\" target=\"_blank\" rel=\"noopener\">BMLUK – GGN v19</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
+  },
+  "grenzen": {
+   "type": "vector",
+   "url": "pmtiles://https://tiles.mapx.at/grenzen.pmtiles",
+   "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Verwaltungsgrenzen</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
+  },
+  "geonamen": {
+   "type": "vector",
+   "url": "pmtiles://https://tiles.mapx.at/geonamen.pmtiles",
+   "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Geographische Namen</a> (Gipfelauswahl: <a href=\"https://basemap.at\" target=\"_blank\" rel=\"noopener\">basemap.at</a>), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
+  },
+  "adr": {
+   "type": "vector",
+   "url": "pmtiles://https://tiles.mapx.at/adr-hausnummern.pmtiles",
+   "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Adressregister</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>, © Österreichisches Adressregister, Stichtagsdaten vom 01.10.2026"
+  }
+ },
+ "layers": [
+  {
+   "id": "bg",
+   "type": "background",
+   "paint": {
+    "background-color": "#f6f4ee"
+   }
+  },
+  {
+   "id": "basemap",
+   "type": "raster",
+   "source": "basemap",
+   "layout": {
+    "visibility": "none"
+   },
+   "paint": {
+    "raster-opacity": 0.6
+   }
+  },
+  {
+   "id": "landuse",
+   "type": "fill",
+   "source": "dkm",
+   "source-layer": "landuse_a",
+   "paint": {
+    "fill-color": [
+     "match",
+     [
+      "get",
+      "namecat"
+     ],
+     1,
+     "#e0e0de",
+     2,
+     "#daeacc",
+     3,
+     "#f3f7dd",
+     5,
+     "#cae4b7",
+     6,
+     "#d5f3f2",
+     7,
+     "#f8f7f2",
+     8,
+     "#f0f0ec",
+     9,
+     "#e2f7cf",
+     10,
+     "#dfd6c6",
+     11,
+     "#d2ddc6",
+     12,
+     "#e8e7c8",
+     "#ecebe6"
+    ],
+    "fill-opacity": 0.85,
+    "fill-antialias": false
+   }
+  },
+  {
+   "id": "landuse-line",
+   "type": "line",
+   "source": "dkm",
+   "source-layer": "landuse_a",
+   "minzoom": 14,
+   "paint": {
+    "line-color": "rgba(90,80,70,.25)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     0.2,
+     18,
+     0.8
+    ]
+   }
+  },
+  {
+   "id": "water-dkm",
+   "type": "fill",
+   "source": "dkm",
+   "source-layer": "landuse_a",
+   "filter": [
+    "in",
+    [
+     "get",
+     "usage"
+    ],
+    [
+     "literal",
+     [
+      59,
+      60
+     ]
+    ]
+   ],
+   "paint": {
+    "fill-color": "#b3d9ff",
+    "fill-antialias": false
+   }
+  },
+  {
+   "id": "ggn-water-a",
+   "type": "fill",
+   "source": "ggn",
+   "source-layer": "water_a",
+   "paint": {
+    "fill-color": "rgba(179, 217, 255, 1)",
+    "fill-outline-color": "rgba(130, 185, 240, 1)",
+    "fill-antialias": true
+   }
+  },
+  {
+   "id": "ggn-water-l-tunnel",
+   "type": "line",
+   "source": "ggn",
+   "source-layer": "water_l",
+   "filter": [
+    "==",
+    [
+     "get",
+     "tunnel"
+    ],
+    1
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "rgba(130, 185, 240, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     [
+      "*",
+      [
+       "match",
+       [
+        "get",
+        "class"
+       ],
+       [
+        "canal",
+        "ditch"
+       ],
+       0.7,
+       1
+      ],
+      [
+       "match",
+       [
+        "get",
+        "rank"
+       ],
+       1,
+       2.5,
+       2,
+       2.0,
+       3,
+       1.6,
+       4,
+       1.2,
+       5,
+       1.0,
+       6,
+       0.6,
+       7,
+       0.4,
+       0.4
+      ]
+     ],
+     10,
+     [
+      "*",
+      [
+       "match",
+       [
+        "get",
+        "class"
+       ],
+       [
+        "canal",
+        "ditch"
+       ],
+       0.7,
+       1
+      ],
+      [
+       "match",
+       [
+        "get",
+        "rank"
+       ],
+       1,
+       3.5,
+       2,
+       3.0,
+       3,
+       2.4,
+       4,
+       2.0,
+       5,
+       1.6,
+       6,
+       0.8,
+       7,
+       0.5,
+       0.5
+      ]
+     ],
+     12,
+     [
+      "*",
+      [
+       "match",
+       [
+        "get",
+        "class"
+       ],
+       [
+        "canal",
+        "ditch"
+       ],
+       0.7,
+       1
+      ],
+      [
+       "match",
+       [
+        "get",
+        "rank"
+       ],
+       1,
+       5.0,
+       2,
+       4.0,
+       3,
+       3.2,
+       4,
+       2.8,
+       5,
+       2.2,
+       6,
+       1.3,
+       7,
+       0.8,
+       0.8
+      ]
+     ],
+     14,
+     [
+      "*",
+      [
+       "match",
+       [
+        "get",
+        "class"
+       ],
+       [
+        "canal",
+        "ditch"
+       ],
+       0.7,
+       1
+      ],
+      [
+       "match",
+       [
+        "get",
+        "rank"
+       ],
+       1,
+       7.0,
+       2,
+       5.5,
+       3,
+       4.5,
+       4,
+       3.8,
+       5,
+       3.0,
+       6,
+       2.0,
+       7,
+       1.3,
+       1.3
+      ]
+     ],
+     16,
+     [
+      "*",
+      [
+       "match",
+       [
+        "get",
+        "class"
+       ],
+       [
+        "canal",
+        "ditch"
+       ],
+       0.7,
+       1
+      ],
+      [
+       "match",
+       [
+        "get",
+        "rank"
+       ],
+       1,
+       10.0,
+       2,
+       8.0,
+       3,
+       6.5,
+       4,
+       5.5,
+       5,
+       4.5,
+       6,
+       3.0,
+       7,
+       2.0,
+       2.0
+      ]
+     ]
+    ],
+    "line-dasharray": [
+     2.5,
+     1.5
+    ],
+    "line-opacity": 0.9
+   }
+  },
+  {
+   "id": "ggn-water-l",
+   "type": "line",
+   "source": "ggn",
+   "source-layer": "water_l",
+   "filter": [
+    "!=",
+    [
+     "get",
+     "tunnel"
+    ],
+    1
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "rgba(130, 185, 240, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     [
+      "*",
+      [
+       "match",
+       [
+        "get",
+        "class"
+       ],
+       [
+        "canal",
+        "ditch"
+       ],
+       0.7,
+       1
+      ],
+      [
+       "match",
+       [
+        "get",
+        "rank"
+       ],
+       1,
+       2.5,
+       2,
+       2.0,
+       3,
+       1.6,
+       4,
+       1.2,
+       5,
+       1.0,
+       6,
+       0.6,
+       7,
+       0.4,
+       0.4
+      ]
+     ],
+     10,
+     [
+      "*",
+      [
+       "match",
+       [
+        "get",
+        "class"
+       ],
+       [
+        "canal",
+        "ditch"
+       ],
+       0.7,
+       1
+      ],
+      [
+       "match",
+       [
+        "get",
+        "rank"
+       ],
+       1,
+       3.5,
+       2,
+       3.0,
+       3,
+       2.4,
+       4,
+       2.0,
+       5,
+       1.6,
+       6,
+       0.8,
+       7,
+       0.5,
+       0.5
+      ]
+     ],
+     12,
+     [
+      "*",
+      [
+       "match",
+       [
+        "get",
+        "class"
+       ],
+       [
+        "canal",
+        "ditch"
+       ],
+       0.7,
+       1
+      ],
+      [
+       "match",
+       [
+        "get",
+        "rank"
+       ],
+       1,
+       5.0,
+       2,
+       4.0,
+       3,
+       3.2,
+       4,
+       2.8,
+       5,
+       2.2,
+       6,
+       1.3,
+       7,
+       0.8,
+       0.8
+      ]
+     ],
+     14,
+     [
+      "*",
+      [
+       "match",
+       [
+        "get",
+        "class"
+       ],
+       [
+        "canal",
+        "ditch"
+       ],
+       0.7,
+       1
+      ],
+      [
+       "match",
+       [
+        "get",
+        "rank"
+       ],
+       1,
+       7.0,
+       2,
+       5.5,
+       3,
+       4.5,
+       4,
+       3.8,
+       5,
+       3.0,
+       6,
+       2.0,
+       7,
+       1.3,
+       1.3
+      ]
+     ],
+     16,
+     [
+      "*",
+      [
+       "match",
+       [
+        "get",
+        "class"
+       ],
+       [
+        "canal",
+        "ditch"
+       ],
+       0.7,
+       1
+      ],
+      [
+       "match",
+       [
+        "get",
+        "rank"
+       ],
+       1,
+       10.0,
+       2,
+       8.0,
+       3,
+       6.5,
+       4,
+       5.5,
+       5,
+       4.5,
+       6,
+       3.0,
+       7,
+       2.0,
+       2.0
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "building",
+   "type": "fill",
+   "source": "dkm",
+   "source-layer": "building_a",
+   "minzoom": 13,
+   "paint": {
+    "fill-color": "#a8968a",
+    "fill-opacity": 0.95
+   }
+  },
+  {
+   "id": "building-line",
+   "type": "line",
+   "source": "dkm",
+   "source-layer": "building_a",
+   "minzoom": 15,
+   "paint": {
+    "line-color": "#7d6d62",
+    "line-width": 0.6
+   }
+  },
+  {
+   "id": "parcel",
+   "type": "line",
+   "source": "dkm",
+   "source-layer": "parcel_l",
+   "minzoom": 15,
+   "paint": {
+    "line-color": "rgba(110,95,85,.45)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     15,
+     0.3,
+     18,
+     0.9
+    ]
+   }
+  },
+  {
+   "id": "road-tunnel-casing-motorway",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 8,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "motorway"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "paint": {
+    "line-color": "#cd8966",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     2.9,
+     10,
+     3.7,
+     12,
+     4.5,
+     14,
+     6.5,
+     16,
+     10.5,
+     18,
+     17.5
+    ],
+    "line-dasharray": [
+     1.5,
+     1
+    ],
+    "line-opacity": 0.8
+   }
+  },
+  {
+   "id": "road-tunnel-motorway",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 8,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "motorway"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt"
+   },
+   "paint": {
+    "line-color": "#ffd37f",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     1.4,
+     10,
+     2.2,
+     12,
+     3,
+     14,
+     5,
+     16,
+     9,
+     18,
+     16
+    ],
+    "line-opacity": 0.55
+   }
+  },
+  {
+   "id": "road-tunnel-casing-motorway_link",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 10,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "motorway_link"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "paint": {
+    "line-color": "#cdaa66",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     2.3,
+     12,
+     2.9,
+     14,
+     4.0,
+     16,
+     6.0,
+     18,
+     9.5
+    ],
+    "line-dasharray": [
+     1.5,
+     1
+    ],
+    "line-opacity": 0.8
+   }
+  },
+  {
+   "id": "road-tunnel-motorway_link",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 10,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "motorway_link"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt"
+   },
+   "paint": {
+    "line-color": "#ffebaf",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     0.8,
+     12,
+     1.4,
+     14,
+     2.5,
+     16,
+     4.5,
+     18,
+     8
+    ],
+    "line-opacity": 0.55
+   }
+  },
+  {
+   "id": "road-tunnel-casing-primary",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 8,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "primary"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "paint": {
+    "line-color": "#cdaa66",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     2.5,
+     10,
+     3.1,
+     12,
+     4.0,
+     14,
+     6.0,
+     16,
+     9.5,
+     18,
+     15.5
+    ],
+    "line-dasharray": [
+     1.5,
+     1
+    ],
+    "line-opacity": 0.8
+   }
+  },
+  {
+   "id": "road-tunnel-primary",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 8,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "primary"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt"
+   },
+   "paint": {
+    "line-color": "#ffff99",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     1,
+     10,
+     1.6,
+     12,
+     2.5,
+     14,
+     4.5,
+     16,
+     8,
+     18,
+     14
+    ],
+    "line-opacity": 0.55
+   }
+  },
+  {
+   "id": "road-tunnel-casing-secondary",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 10,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "secondary"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "paint": {
+    "line-color": "#a8a8a8",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     2.5,
+     12,
+     3.5,
+     14,
+     5.3,
+     16,
+     8.5,
+     18,
+     13.5
+    ],
+    "line-dasharray": [
+     1.5,
+     1
+    ],
+    "line-opacity": 0.8
+   }
+  },
+  {
+   "id": "road-tunnel-secondary",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 10,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "secondary"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt"
+   },
+   "paint": {
+    "line-color": "#ffffff",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     1,
+     12,
+     2,
+     14,
+     3.8,
+     16,
+     7,
+     18,
+     12
+    ],
+    "line-opacity": 0.55
+   }
+  },
+  {
+   "id": "road-tunnel-casing-minor",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 12,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "minor"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "paint": {
+    "line-color": "#b2b2b2",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     12,
+     2.3,
+     13,
+     2.7,
+     14,
+     3.9,
+     16,
+     6.5,
+     18,
+     11.5
+    ],
+    "line-dasharray": [
+     1.5,
+     1
+    ],
+    "line-opacity": 0.8
+   }
+  },
+  {
+   "id": "road-tunnel-minor",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 12,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "minor"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt"
+   },
+   "paint": {
+    "line-color": "#ffffff",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     12,
+     0.8,
+     13,
+     1.2,
+     14,
+     2.4,
+     16,
+     5,
+     18,
+     10
+    ],
+    "line-opacity": 0.55
+   }
+  },
+  {
+   "id": "road-tunnel-casing-service",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 14,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "service"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "paint": {
+    "line-color": "#c4c4c4",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     2.3,
+     16,
+     3.7,
+     18,
+     6.5
+    ],
+    "line-dasharray": [
+     1.5,
+     1
+    ],
+    "line-opacity": 0.8
+   }
+  },
+  {
+   "id": "road-tunnel-service",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 14,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "service"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt"
+   },
+   "paint": {
+    "line-color": "#ffffff",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     0.8,
+     16,
+     2.2,
+     18,
+     5
+    ],
+    "line-opacity": 0.55
+   }
+  },
+  {
+   "id": "road-tunnel-casing-pedestrian",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 14,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "pedestrian"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "paint": {
+    "line-color": "#b2b2b2",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     3.0,
+     16,
+     6.0,
+     18,
+     10.5
+    ],
+    "line-dasharray": [
+     1.5,
+     1
+    ],
+    "line-opacity": 0.8
+   }
+  },
+  {
+   "id": "road-tunnel-pedestrian",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 14,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "pedestrian"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt"
+   },
+   "paint": {
+    "line-color": "#f1ece6",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     1.5,
+     16,
+     4.5,
+     18,
+     9
+    ],
+    "line-opacity": 0.55
+   }
+  },
+  {
+   "id": "way-tunnel-track",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 14,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "track"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "paint": {
+    "line-color": "#a89f91",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     0.8,
+     16,
+     1.6,
+     18,
+     3
+    ],
+    "line-dasharray": [
+     1,
+     1.5
+    ],
+    "line-opacity": 0.5
+   }
+  },
+  {
+   "id": "way-tunnel-path",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 15,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "path"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "paint": {
+    "line-color": "#8f8f8f",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     15,
+     0.7,
+     16,
+     1.1,
+     18,
+     2
+    ],
+    "line-dasharray": [
+     1,
+     1.5
+    ],
+    "line-opacity": 0.5
+   }
+  },
+  {
+   "id": "way-tunnel-cycleway",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 15,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "cycleway"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "paint": {
+    "line-color": "#4f7fc0",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     15,
+     0.8,
+     16,
+     1.2,
+     18,
+     2.2
+    ],
+    "line-dasharray": [
+     1,
+     1.5
+    ],
+    "line-opacity": 0.5
+   }
+  },
+  {
+   "id": "way-tunnel-steps",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 15,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "steps"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "paint": {
+    "line-color": "#7f7f7f",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     15,
+     1.5,
+     16,
+     2.5,
+     18,
+     4
+    ],
+    "line-dasharray": [
+     1,
+     1.5
+    ],
+    "line-opacity": 0.5
+   }
+  },
+  {
+   "id": "way-tunnel-trail",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 15,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "trail"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "paint": {
+    "line-color": "#9b6b43",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     15,
+     0.7,
+     16,
+     1.1,
+     18,
+     2
+    ],
+    "line-dasharray": [
+     1,
+     1.5
+    ],
+    "line-opacity": 0.5
+   }
+  },
+  {
+   "id": "way-track",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 14,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "track"
+    ],
+    [
+     "!=",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#a89f91",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     0.8,
+     16,
+     1.6,
+     18,
+     3
+    ],
+    "line-dasharray": [
+     4,
+     1.5
+    ]
+   }
+  },
+  {
+   "id": "way-path",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 15,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "path"
+    ],
+    [
+     "!=",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#8f8f8f",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     15,
+     0.7,
+     16,
+     1.1,
+     18,
+     2
+    ],
+    "line-dasharray": [
+     2,
+     1.5
+    ]
+   }
+  },
+  {
+   "id": "way-cycleway",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 15,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "cycleway"
+    ],
+    [
+     "!=",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#4f7fc0",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     15,
+     0.8,
+     16,
+     1.2,
+     18,
+     2.2
+    ],
+    "line-dasharray": [
+     2,
+     1.5
+    ]
+   }
+  },
+  {
+   "id": "way-steps",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 15,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "steps"
+    ],
+    [
+     "!=",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#7f7f7f",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     15,
+     1.5,
+     16,
+     2.5,
+     18,
+     4
+    ],
+    "line-dasharray": [
+     0.4,
+     0.4
+    ]
+   }
+  },
+  {
+   "id": "way-trail",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 15,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "trail"
+    ],
+    [
+     "!=",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#9b6b43",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     15,
+     0.7,
+     16,
+     1.1,
+     18,
+     2
+    ],
+    "line-dasharray": [
+     3,
+     2
+    ]
+   }
+  },
+  {
+   "id": "road-casing-pedestrian",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 14,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "pedestrian"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#b2b2b2",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     3.0,
+     16,
+     6.0,
+     18,
+     10.5
+    ]
+   }
+  },
+  {
+   "id": "road-casing-service",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 14,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "service"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#c4c4c4",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     2.3,
+     16,
+     3.7,
+     18,
+     6.5
+    ]
+   }
+  },
+  {
+   "id": "road-casing-minor",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 12,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "minor"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#b2b2b2",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     12,
+     2.3,
+     13,
+     2.7,
+     14,
+     3.9,
+     16,
+     6.5,
+     18,
+     11.5
+    ]
+   }
+  },
+  {
+   "id": "road-casing-secondary",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 10,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "secondary"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#a8a8a8",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     2.5,
+     12,
+     3.5,
+     14,
+     5.3,
+     16,
+     8.5,
+     18,
+     13.5
+    ]
+   }
+  },
+  {
+   "id": "road-casing-primary",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 8,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "primary"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#cdaa66",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     2.5,
+     10,
+     3.1,
+     12,
+     4.0,
+     14,
+     6.0,
+     16,
+     9.5,
+     18,
+     15.5
+    ]
+   }
+  },
+  {
+   "id": "road-casing-motorway_link",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 10,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "motorway_link"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#cdaa66",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     2.3,
+     12,
+     2.9,
+     14,
+     4.0,
+     16,
+     6.0,
+     18,
+     9.5
+    ]
+   }
+  },
+  {
+   "id": "road-casing-motorway",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 8,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "motorway"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#cd8966",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     2.9,
+     10,
+     3.7,
+     12,
+     4.5,
+     14,
+     6.5,
+     16,
+     10.5,
+     18,
+     17.5
+    ]
+   }
+  },
+  {
+   "id": "road-pedestrian",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 14,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "pedestrian"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#f1ece6",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     1.5,
+     16,
+     4.5,
+     18,
+     9
+    ]
+   }
+  },
+  {
+   "id": "road-service",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 14,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "service"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#ffffff",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     0.8,
+     16,
+     2.2,
+     18,
+     5
+    ]
+   }
+  },
+  {
+   "id": "road-minor",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 12,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "minor"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#ffffff",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     12,
+     0.8,
+     13,
+     1.2,
+     14,
+     2.4,
+     16,
+     5,
+     18,
+     10
+    ]
+   }
+  },
+  {
+   "id": "road-secondary",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 10,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "secondary"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#ffffff",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     1,
+     12,
+     2,
+     14,
+     3.8,
+     16,
+     7,
+     18,
+     12
+    ]
+   }
+  },
+  {
+   "id": "road-primary",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 8,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "primary"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#ffff99",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     1,
+     10,
+     1.6,
+     12,
+     2.5,
+     14,
+     4.5,
+     16,
+     8,
+     18,
+     14
+    ]
+   }
+  },
+  {
+   "id": "road-motorway_link",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 10,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "motorway_link"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#ffebaf",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     0.8,
+     12,
+     1.4,
+     14,
+     2.5,
+     16,
+     4.5,
+     18,
+     8
+    ]
+   }
+  },
+  {
+   "id": "road-motorway",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 8,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "motorway"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#ffd37f",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     1.4,
+     10,
+     2.2,
+     12,
+     3,
+     14,
+     5,
+     16,
+     9,
+     18,
+     16
+    ]
+   }
+  },
+  {
+   "id": "road-bridge-casing-pedestrian",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 14,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "pedestrian"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "bridge"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#5f5850",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     5.5,
+     16,
+     8.5,
+     18,
+     13
+    ]
+   }
+  },
+  {
+   "id": "road-bridge-pedestrian",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 14,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "pedestrian"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "bridge"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#f1ece6",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     1.5,
+     16,
+     4.5,
+     18,
+     9
+    ]
+   }
+  },
+  {
+   "id": "road-bridge-casing-service",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 14,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "service"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "bridge"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#5f5850",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     4.8,
+     16,
+     6.2,
+     18,
+     9
+    ]
+   }
+  },
+  {
+   "id": "road-bridge-service",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 14,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "service"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "bridge"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#ffffff",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     0.8,
+     16,
+     2.2,
+     18,
+     5
+    ]
+   }
+  },
+  {
+   "id": "road-bridge-casing-minor",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 12,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "minor"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "bridge"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#5f5850",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     12,
+     4.8,
+     13,
+     5.2,
+     14,
+     6.4,
+     16,
+     9,
+     18,
+     14
+    ]
+   }
+  },
+  {
+   "id": "road-bridge-minor",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 12,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "minor"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "bridge"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#ffffff",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     12,
+     0.8,
+     13,
+     1.2,
+     14,
+     2.4,
+     16,
+     5,
+     18,
+     10
+    ]
+   }
+  },
+  {
+   "id": "road-bridge-casing-secondary",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 10,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "secondary"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "bridge"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#5f5850",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     5,
+     12,
+     6,
+     14,
+     7.8,
+     16,
+     11,
+     18,
+     16
+    ]
+   }
+  },
+  {
+   "id": "road-bridge-secondary",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 10,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "secondary"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "bridge"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#ffffff",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     1,
+     12,
+     2,
+     14,
+     3.8,
+     16,
+     7,
+     18,
+     12
+    ]
+   }
+  },
+  {
+   "id": "road-bridge-casing-primary",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 8,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "primary"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "bridge"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#5f5850",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     5,
+     10,
+     5.6,
+     12,
+     6.5,
+     14,
+     8.5,
+     16,
+     12,
+     18,
+     18
+    ]
+   }
+  },
+  {
+   "id": "road-bridge-primary",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 8,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "primary"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "bridge"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#ffff99",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     1,
+     10,
+     1.6,
+     12,
+     2.5,
+     14,
+     4.5,
+     16,
+     8,
+     18,
+     14
+    ]
+   }
+  },
+  {
+   "id": "road-bridge-casing-motorway_link",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 10,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "motorway_link"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "bridge"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#5f5850",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     4.8,
+     12,
+     5.4,
+     14,
+     6.5,
+     16,
+     8.5,
+     18,
+     12
+    ]
+   }
+  },
+  {
+   "id": "road-bridge-motorway_link",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 10,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "motorway_link"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "bridge"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#ffebaf",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     0.8,
+     12,
+     1.4,
+     14,
+     2.5,
+     16,
+     4.5,
+     18,
+     8
+    ]
+   }
+  },
+  {
+   "id": "road-bridge-casing-motorway",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 8,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "motorway"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "bridge"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#5f5850",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     5.4,
+     10,
+     6.2,
+     12,
+     7,
+     14,
+     9,
+     16,
+     13,
+     18,
+     20
+    ]
+   }
+  },
+  {
+   "id": "road-bridge-motorway",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 8,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "draw_class"
+     ],
+     "motorway"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "bridge"
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#ffd37f",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.4
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     1.4,
+     10,
+     2.2,
+     12,
+     3,
+     14,
+     5,
+     16,
+     9,
+     18,
+     16
+    ]
+   }
+  },
+  {
+   "id": "grenzen-country-outline",
+   "type": "line",
+   "source": "grenzen",
+   "source-layer": "country_l",
+   "layout": {
+    "line-join": "round",
+    "line-cap": "round"
+   },
+   "paint": {
+    "line-color": "rgba(240, 227, 255, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     5,
+     1.2,
+     7,
+     1.5,
+     9,
+     3,
+     11,
+     4,
+     13,
+     5,
+     17,
+     8
+    ]
+   }
+  },
+  {
+   "id": "grenzen-district-outline",
+   "type": "line",
+   "source": "grenzen",
+   "source-layer": "district_l",
+   "layout": {
+    "line-join": "round",
+    "line-cap": "round"
+   },
+   "paint": {
+    "line-color": "rgba(240, 227, 255, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     9,
+     2.3,
+     11,
+     2.9,
+     13,
+     3.9,
+     17,
+     4.4,
+     19,
+     4.9
+    ]
+   },
+   "minzoom": 9
+  },
+  {
+   "id": "grenzen-municipality-outline",
+   "type": "line",
+   "source": "grenzen",
+   "source-layer": "municipality_l",
+   "layout": {
+    "line-join": "round",
+    "line-cap": "round"
+   },
+   "paint": {
+    "line-color": "rgba(240, 227, 255, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     13,
+     3.7,
+     17,
+     4.2
+    ]
+   },
+   "minzoom": 13
+  },
+  {
+   "id": "grenzen-country",
+   "type": "line",
+   "source": "grenzen",
+   "source-layer": "country_l",
+   "layout": {
+    "line-join": "round",
+    "line-cap": "round"
+   },
+   "paint": {
+    "line-color": "rgba(168, 143, 184, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     5,
+     0.8,
+     7,
+     1.2,
+     9,
+     1.6,
+     11,
+     1.6,
+     13,
+     1.6,
+     17,
+     2.6
+    ]
+   }
+  },
+  {
+   "id": "grenzen-district",
+   "type": "line",
+   "source": "grenzen",
+   "source-layer": "district_l",
+   "layout": {
+    "line-join": "round",
+    "line-cap": "round"
+   },
+   "paint": {
+    "line-color": "rgba(168, 143, 184, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     9,
+     1,
+     11,
+     1.3,
+     13,
+     1.7,
+     17,
+     2.2
+    ]
+   },
+   "minzoom": 9
+  },
+  {
+   "id": "grenzen-municipality",
+   "type": "line",
+   "source": "grenzen",
+   "source-layer": "municipality_l",
+   "layout": {
+    "line-join": "round",
+    "line-cap": "round"
+   },
+   "paint": {
+    "line-color": "rgba(168, 143, 184, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     13,
+     1.3,
+     17,
+     1.7
+    ]
+   },
+   "minzoom": 13
+  },
+  {
+   "id": "grenzen-state-outline",
+   "type": "line",
+   "source": "grenzen",
+   "source-layer": "state_l",
+   "layout": {
+    "line-join": "round",
+    "line-cap": "round"
+   },
+   "paint": {
+    "line-color": "rgba(240, 227, 255, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     0,
+     1.8,
+     5,
+     3.6,
+     7,
+     3.1,
+     9,
+     3.6,
+     11,
+     4.6,
+     13,
+     6.6,
+     17,
+     8.6
+    ]
+   }
+  },
+  {
+   "id": "grenzen-state",
+   "type": "line",
+   "source": "grenzen",
+   "source-layer": "state_l",
+   "layout": {
+    "line-join": "round",
+    "line-cap": "round"
+   },
+   "paint": {
+    "line-color": "rgba(168, 143, 184, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     0,
+     1.3,
+     5,
+     1.3,
+     7,
+     2.1,
+     9,
+     2.1,
+     11,
+     2.4,
+     13,
+     2.4,
+     17,
+     3.4
+    ],
+    "line-offset": 2
+   }
+  },
+  {
+   "id": "housenumber-parcel",
+   "type": "symbol",
+   "source": "adr",
+   "source-layer": "housenumber_p",
+   "minzoom": 16,
+   "filter": [
+    "==",
+    [
+     "get",
+     "type"
+    ],
+    "parcel"
+   ],
+   "layout": {
+    "text-field": [
+     "get",
+     "hnr"
+    ],
+    "text-font": [
+     "Noto Sans Italic"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     16,
+     9,
+     18,
+     11,
+     20,
+     11
+    ],
+    "text-max-width": 8,
+    "text-padding": 1,
+    "text-allow-overlap": false,
+    "text-ignore-placement": false,
+    "symbol-sort-key": [
+     "length",
+     [
+      "get",
+      "hnr"
+     ]
+    ],
+    "visibility": "visible"
+   },
+   "paint": {
+    "text-color": "#8c8c8c",
+    "text-halo-color": "rgba(255, 255, 255, 0.9)",
+    "text-halo-width": 1
+   }
+  },
+  {
+   "id": "housenumber",
+   "type": "symbol",
+   "source": "adr",
+   "source-layer": "housenumber_p",
+   "minzoom": 16,
+   "filter": [
+    "!=",
+    [
+     "get",
+     "type"
+    ],
+    "parcel"
+   ],
+   "layout": {
+    "text-field": [
+     "get",
+     "hnr"
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     16,
+     10,
+     18,
+     12,
+     20,
+     12
+    ],
+    "text-max-width": 8,
+    "text-padding": 1,
+    "text-allow-overlap": false,
+    "text-ignore-placement": false,
+    "symbol-sort-key": [
+     "length",
+     [
+      "get",
+      "hnr"
+     ]
+    ],
+    "visibility": "visible"
+   },
+   "paint": {
+    "text-color": "#666666",
+    "text-halo-color": "rgba(255, 255, 255, 0.9)",
+    "text-halo-width": 1
+   }
+  },
+  {
+   "id": "road-ref",
+   "type": "symbol",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 11,
+   "filter": [
+    "all",
+    [
+     "has",
+     "ref"
+    ],
+    [
+     "match",
+     [
+      "get",
+      "draw_class"
+     ],
+     [
+      "motorway",
+      "primary",
+      "secondary"
+     ],
+     true,
+     false
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "symbol-spacing": 350,
+    "text-field": [
+     "get",
+     "ref"
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": 10.5,
+    "text-rotation-alignment": "viewport",
+    "text-keep-upright": true
+   },
+   "paint": {
+    "text-color": "#5a1a00",
+    "text-halo-color": "rgba(255,255,255,.95)",
+    "text-halo-width": 1.6
+   }
+  },
+  {
+   "id": "road-name",
+   "type": "symbol",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 15,
+   "filter": [
+    "all",
+    [
+     "has",
+     "name"
+    ],
+    [
+     "!=",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ],
+    [
+     "match",
+     [
+      "get",
+      "draw_class"
+     ],
+     [
+      "motorway_link",
+      "track",
+      "path",
+      "cycleway",
+      "steps",
+      "trail"
+     ],
+     false,
+     true
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "symbol-spacing": 250,
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     15,
+     10.5,
+     18,
+     13
+    ],
+    "text-max-angle": 30,
+    "text-padding": 2
+   },
+   "paint": {
+    "text-color": "#3f3f3f",
+    "text-halo-color": "rgba(255,255,255,.9)",
+    "text-halo-width": 1.4
+   }
+  },
+  {
+   "id": "ggn-water-l-label-donau",
+   "type": "symbol",
+   "source": "ggn",
+   "source-layer": "water_l",
+   "minzoom": 10,
+   "filter": [
+    "==",
+    [
+     "get",
+     "name"
+    ],
+    "Donau"
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Italic"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     13.2,
+     11,
+     13.5,
+     13,
+     15
+    ],
+    "symbol-spacing": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     600,
+     14,
+     600,
+     16,
+     900
+    ],
+    "text-letter-spacing": 0.03,
+    "text-pitch-alignment": "map",
+    "text-rotation-alignment": "map"
+   },
+   "paint": {
+    "text-color": "rgba(0, 77, 168, 1)",
+    "text-halo-color": "rgba(191, 223, 255, 1)",
+    "text-halo-width": 0.5
+   }
+  },
+  {
+   "id": "ggn-water-l-label",
+   "type": "symbol",
+   "source": "ggn",
+   "source-layer": "water_l",
+   "minzoom": 11,
+   "filter": [
+    "all",
+    [
+     "has",
+     "name"
+    ],
+    [
+     "!",
+     [
+      "==",
+      [
+       "get",
+       "name"
+      ],
+      "Donau"
+     ]
+    ],
+    [
+     "any",
+     [
+      "all",
+      [
+       "<=",
+       [
+        "get",
+        "rank"
+       ],
+       5
+      ],
+      [
+       ">=",
+       [
+        "zoom"
+       ],
+       11
+      ]
+     ],
+     [
+      "all",
+      [
+       "==",
+       [
+        "get",
+        "rank"
+       ],
+       6
+      ],
+      [
+       ">=",
+       [
+        "zoom"
+       ],
+       12
+      ]
+     ],
+     [
+      ">=",
+      [
+       "zoom"
+      ],
+      15
+     ]
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Italic"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     11,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      10.5,
+      2,
+      10,
+      3,
+      9.5,
+      4,
+      8.5,
+      5,
+      8,
+      6,
+      9,
+      8.5
+     ],
+     13,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      12.5,
+      2,
+      12,
+      3,
+      10.5,
+      4,
+      10.5,
+      5,
+      9,
+      6,
+      9.2,
+      8.5
+     ],
+     15,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      14.5,
+      2,
+      13,
+      3,
+      12.5,
+      4,
+      11.5,
+      5,
+      11,
+      6,
+      9.5,
+      8.5
+     ],
+     16,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      16,
+      2,
+      14.5,
+      3,
+      13.5,
+      4,
+      12.5,
+      5,
+      11.5,
+      6,
+      10.2,
+      9.2
+     ]
+    ],
+    "symbol-spacing": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     11,
+     400,
+     13,
+     500,
+     15,
+     750,
+     16,
+     900
+    ],
+    "text-letter-spacing": [
+     "match",
+     [
+      "get",
+      "rank"
+     ],
+     [
+      1,
+      6,
+      7
+     ],
+     0.05,
+     0.03
+    ],
+    "text-pitch-alignment": "map",
+    "text-rotation-alignment": "map"
+   },
+   "paint": {
+    "text-color": "rgba(0, 77, 168, 1)",
+    "text-halo-color": "rgba(191, 223, 255, 1)",
+    "text-halo-width": 0.5
+   }
+  },
+  {
+   "id": "ggn-water-a-label",
+   "type": "symbol",
+   "source": "ggn",
+   "source-layer": "water_a",
+   "minzoom": 10,
+   "filter": [
+    "all",
+    [
+     "has",
+     "name"
+    ],
+    [
+     "any",
+     [
+      "<=",
+      [
+       "get",
+       "rank"
+      ],
+      2
+     ],
+     [
+      ">=",
+      [
+       "zoom"
+      ],
+      14
+     ]
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "point",
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Italic"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      12,
+      11
+     ],
+     14,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      13,
+      2,
+      12,
+      3,
+      11,
+      10
+     ],
+     16,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      14,
+      2,
+      13,
+      3,
+      12,
+      11
+     ]
+    ],
+    "text-letter-spacing": 0.03,
+    "text-max-width": 8
+   },
+   "paint": {
+    "text-color": "rgba(0, 77, 168, 1)",
+    "text-halo-color": "rgba(191, 223, 255, 1)",
+    "text-halo-width": 0.5
+   }
+  },
+  {
+   "id": "grenzen-label-country-right",
+   "type": "symbol",
+   "source": "grenzen",
+   "source-layer": "country_l",
+   "minzoom": 9,
+   "filter": [
+    "has",
+    "right"
+   ],
+   "layout": {
+    "text-field": [
+     "get",
+     "right"
+    ],
+    "text-font": [
+     "Noto Sans Bold"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     9,
+     9,
+     12,
+     11,
+     16,
+     13,
+     18,
+     15
+    ],
+    "symbol-placement": "line",
+    "text-offset": [
+     0,
+     1
+    ],
+    "symbol-spacing": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     9,
+     350,
+     14,
+     500,
+     19,
+     600
+    ],
+    "text-letter-spacing": 0.07
+   },
+   "paint": {
+    "text-color": "rgba(146, 89, 179, 1)",
+    "text-halo-color": "rgba(252, 252, 252, 1)",
+    "text-halo-width": 0.8
+   }
+  },
+  {
+   "id": "grenzen-label-country-left",
+   "type": "symbol",
+   "source": "grenzen",
+   "source-layer": "country_l",
+   "minzoom": 9,
+   "filter": [
+    "has",
+    "left"
+   ],
+   "layout": {
+    "text-field": [
+     "get",
+     "left"
+    ],
+    "text-font": [
+     "Noto Sans Bold"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     9,
+     9,
+     12,
+     11,
+     16,
+     13,
+     18,
+     15
+    ],
+    "symbol-placement": "line",
+    "text-offset": [
+     0,
+     -0.8
+    ],
+    "symbol-spacing": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     9,
+     250,
+     14,
+     400,
+     19,
+     500
+    ],
+    "text-letter-spacing": 0.07
+   },
+   "paint": {
+    "text-color": "rgba(146, 89, 179, 1)",
+    "text-halo-color": "rgba(252, 252, 252, 1)",
+    "text-halo-width": 0.8
+   }
+  },
+  {
+   "id": "grenzen-label-state-right",
+   "type": "symbol",
+   "source": "grenzen",
+   "source-layer": "state_l",
+   "minzoom": 9,
+   "filter": [
+    "has",
+    "right"
+   ],
+   "layout": {
+    "text-field": [
+     "get",
+     "right"
+    ],
+    "text-font": [
+     "Noto Sans Bold"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     9,
+     9,
+     12,
+     11,
+     16,
+     13,
+     18,
+     15
+    ],
+    "symbol-placement": "line",
+    "text-offset": [
+     0,
+     1.2
+    ],
+    "symbol-spacing": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     9,
+     350,
+     14,
+     500,
+     19,
+     600
+    ],
+    "text-letter-spacing": 0.07
+   },
+   "paint": {
+    "text-color": "rgba(146, 89, 179, 1)",
+    "text-halo-color": "rgba(252, 252, 252, 1)",
+    "text-halo-width": 0.8
+   }
+  },
+  {
+   "id": "grenzen-label-land",
+   "type": "symbol",
+   "source": "grenzen",
+   "source-layer": "admin_label_p",
+   "minzoom": 5,
+   "maxzoom": 9,
+   "filter": [
+    "==",
+    [
+     "get",
+     "level"
+    ],
+    "land"
+   ],
+   "layout": {
+    "text-field": [
+     "upcase",
+     [
+      "get",
+      "name"
+     ]
+    ],
+    "text-font": [
+     "Noto Sans Bold"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     5,
+     10,
+     8,
+     13
+    ],
+    "text-letter-spacing": 0.15,
+    "text-max-width": 8
+   },
+   "paint": {
+    "text-color": "rgba(146, 89, 179, 1)",
+    "text-halo-color": "rgba(255, 255, 255, 0.9)",
+    "text-halo-width": 1.2
+   }
+  },
+  {
+   "id": "grenzen-label-bezirk",
+   "type": "symbol",
+   "source": "grenzen",
+   "source-layer": "admin_label_p",
+   "minzoom": 9,
+   "maxzoom": 12,
+   "filter": [
+    "==",
+    [
+     "get",
+     "level"
+    ],
+    "bezirk"
+   ],
+   "layout": {
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     9,
+     10,
+     11,
+     12
+    ],
+    "text-letter-spacing": 0.08,
+    "text-max-width": 8
+   },
+   "paint": {
+    "text-color": "rgba(146, 89, 179, 1)",
+    "text-halo-color": "rgba(255, 255, 255, 0.9)",
+    "text-halo-width": 1.2
+   }
+  },
+  {
+   "id": "grenzen-label-gemeinde",
+   "type": "symbol",
+   "source": "grenzen",
+   "source-layer": "admin_label_p",
+   "minzoom": 12,
+   "filter": [
+    "==",
+    [
+     "get",
+     "level"
+    ],
+    "gemeinde"
+   ],
+   "layout": {
+    "visibility": "none",
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     12,
+     10,
+     16,
+     12
+    ],
+    "text-max-width": 8
+   },
+   "paint": {
+    "text-color": "rgba(146, 89, 179, 1)",
+    "text-halo-color": "rgba(255, 255, 255, 0.9)",
+    "text-halo-width": 1
+   }
+  },
+  {
+   "id": "geonamen-ried",
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "geoname_p",
+   "minzoom": 14,
+   "layout": {
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Italic"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     10,
+     16,
+     11.5
+    ],
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ],
+    "text-max-width": 8,
+    "text-padding": 2,
+    "text-letter-spacing": 0.05
+   },
+   "paint": {
+    "text-color": "rgba(120, 100, 80, 1)",
+    "text-halo-color": "rgba(255, 255, 255, 0.9)",
+    "text-halo-width": 1.2,
+    "text-halo-blur": 0.3
+   },
+   "filter": [
+    "==",
+    [
+     "get",
+     "class"
+    ],
+    "ried"
+   ]
+  },
+  {
+   "id": "geonamen-gebiet",
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "geoname_p",
+   "minzoom": 8,
+   "layout": {
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Medium Italic"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      12,
+      2,
+      11,
+      3,
+      10,
+      9.5
+     ],
+     10,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      12,
+      2,
+      11.5,
+      3,
+      10.5,
+      10
+     ],
+     13,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      14,
+      2,
+      13.5,
+      3,
+      12,
+      11
+     ],
+     16,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      14.5,
+      2,
+      15,
+      3,
+      13,
+      12
+     ]
+    ],
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ],
+    "text-max-width": 8,
+    "text-padding": 2,
+    "text-letter-spacing": [
+     "match",
+     [
+      "get",
+      "rank"
+     ],
+     1,
+     0,
+     2,
+     0.15,
+     0.05
+    ]
+   },
+   "paint": {
+    "text-color": "rgba(138, 69, 69, 1)",
+    "text-halo-color": "rgba(255, 255, 255, 0.9)",
+    "text-halo-width": 1.2,
+    "text-halo-blur": 0.3
+   },
+   "filter": [
+    "in",
+    [
+     "get",
+     "class"
+    ],
+    [
+     "literal",
+     [
+      "gebiet",
+      "gebirge"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "geonamen-gelaende",
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "geoname_p",
+   "minzoom": 11,
+   "layout": {
+    "text-field": [
+     "case",
+     [
+      "all",
+      [
+       "==",
+       [
+        "get",
+        "class"
+       ],
+       "pass"
+      ],
+      [
+       "has",
+       "ele"
+      ]
+     ],
+     [
+      "format",
+      [
+       "get",
+       "name"
+      ],
+      {},
+      "\n",
+      {},
+      [
+       "concat",
+       [
+        "to-string",
+        [
+         "get",
+         "ele"
+        ]
+       ],
+       " m"
+      ],
+      {
+       "font-scale": 0.85
+      }
+     ],
+     [
+      "get",
+      "name"
+     ]
+    ],
+    "text-font": [
+     "Noto Sans Medium Italic"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     11,
+     10.5,
+     14,
+     11.5,
+     16,
+     13
+    ],
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ],
+    "text-max-width": 8,
+    "text-padding": 2
+   },
+   "paint": {
+    "text-color": "rgba(138, 69, 69, 1)",
+    "text-halo-color": "rgba(255, 255, 255, 0.9)",
+    "text-halo-width": 1.2,
+    "text-halo-blur": 0.3
+   },
+   "filter": [
+    "in",
+    [
+     "get",
+     "class"
+    ],
+    [
+     "literal",
+     [
+      "tal",
+      "bergteil",
+      "pass"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "geonamen-gletscher",
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "geoname_p",
+   "minzoom": 10,
+   "layout": {
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Italic"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     10,
+     14,
+     12,
+     16,
+     13
+    ],
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ],
+    "text-max-width": 8,
+    "text-padding": 2
+   },
+   "paint": {
+    "text-color": "rgba(3, 135, 191, 1)",
+    "text-halo-color": "rgba(255, 255, 255, 0.9)",
+    "text-halo-width": 1.2,
+    "text-halo-blur": 0.3
+   },
+   "filter": [
+    "==",
+    [
+     "get",
+     "class"
+    ],
+    "gletscher"
+   ]
+  },
+  {
+   "id": "geonamen-kirche",
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "geoname_p",
+   "minzoom": 14,
+   "layout": {
+    "icon-image": [
+     "match",
+     [
+      "get",
+      "class"
+     ],
+     "kirche",
+     [
+      "case",
+      [
+       "in",
+       "Stift",
+       [
+        "get",
+        "name"
+       ]
+      ],
+      "monastery",
+      [
+       "in",
+       "Kloster",
+       [
+        "get",
+        "name"
+       ]
+      ],
+      "monastery",
+      "church"
+     ],
+     "kapelle",
+     "chapel",
+     "church"
+    ],
+    "icon-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     0.9,
+     17,
+     1.15
+    ],
+    "icon-padding": 1,
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ]
+   },
+   "paint": {},
+   "filter": [
+    "in",
+    [
+     "get",
+     "class"
+    ],
+    [
+     "literal",
+     [
+      "kirche",
+      "kapelle"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "geonamen-objekt",
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "geoname_p",
+   "minzoom": 13,
+   "layout": {
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     13,
+     10,
+     16,
+     11.5
+    ],
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ],
+    "text-max-width": 8,
+    "text-padding": 2,
+    "text-variable-anchor": [
+     "left",
+     "right",
+     "top",
+     "bottom"
+    ],
+    "text-radial-offset": 0.95,
+    "text-justify": "auto",
+    "icon-image": [
+     "match",
+     [
+      "get",
+      "class"
+     ],
+     "religion",
+     "place_of_worship",
+     "burg",
+     "castle",
+     "schloss",
+     "palace",
+     "ruine",
+     "ruins",
+     "turm",
+     [
+      "case",
+      [
+       "in",
+       "warte",
+       [
+        "get",
+        "name"
+       ]
+      ],
+      "observation_tower",
+      [
+       "in",
+       "Warte",
+       [
+        "get",
+        "name"
+       ]
+      ],
+      "observation_tower",
+      "tower"
+     ],
+     "huette",
+     [
+      "case",
+      [
+       "in",
+       "Biwak",
+       [
+        "get",
+        "name"
+       ]
+      ],
+      "bivouac",
+      "shelter"
+     ],
+     "gasthof",
+     "inn",
+     "forst",
+     [
+      "case",
+      [
+       "in",
+       "Jagd",
+       [
+        "get",
+        "name"
+       ]
+      ],
+      "hunting_lodge",
+      "forest_house"
+     ],
+     "hoehle",
+     "cave",
+     "kultur",
+     [
+      "case",
+      [
+       "in",
+       "museum",
+       [
+        "get",
+        "name"
+       ]
+      ],
+      "museum",
+      [
+       "in",
+       "Museum",
+       [
+        "get",
+        "name"
+       ]
+      ],
+      "museum",
+      [
+       "in",
+       "bühne",
+       [
+        "get",
+        "name"
+       ]
+      ],
+      "theatre",
+      [
+       "in",
+       "Bühne",
+       [
+        "get",
+        "name"
+       ]
+      ],
+      "theatre",
+      "archaeological_site"
+     ],
+     "tierpark",
+     "zoo",
+     "sport",
+     [
+      "case",
+      [
+       "in",
+       "Stadion",
+       [
+        "get",
+        "name"
+       ]
+      ],
+      "stadium",
+      "sports"
+     ],
+     "friedhof",
+     "cemetery",
+     "denkmal",
+     "monument",
+     "bergwerk",
+     "mine",
+     "kleindenkmal",
+     [
+      "case",
+      [
+       "in",
+       "kreuz",
+       [
+        "get",
+        "name"
+       ]
+      ],
+      "wayside_cross",
+      [
+       "in",
+       "Kreuz",
+       [
+        "get",
+        "name"
+       ]
+      ],
+      "wayside_cross",
+      "wayside_shrine"
+     ],
+     "place_of_worship"
+    ],
+    "icon-size": 0.9,
+    "text-optional": true
+   },
+   "paint": {
+    "text-color": "#555555",
+    "text-halo-color": "rgba(255, 255, 255, 0.9)",
+    "text-halo-width": 1.2,
+    "text-halo-blur": 0.3
+   },
+   "filter": [
+    "in",
+    [
+     "get",
+     "class"
+    ],
+    [
+     "literal",
+     [
+      "religion",
+      "burg",
+      "schloss",
+      "ruine",
+      "turm",
+      "huette",
+      "gasthof",
+      "forst",
+      "hoehle",
+      "kultur",
+      "tierpark",
+      "sport",
+      "friedhof",
+      "denkmal",
+      "bergwerk",
+      "kleindenkmal"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "geonamen-objekt-text",
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "geoname_p",
+   "minzoom": 13,
+   "layout": {
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     13,
+     10,
+     16,
+     11.5
+    ],
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ],
+    "text-max-width": 8,
+    "text-padding": 2
+   },
+   "paint": {
+    "text-color": "#555555",
+    "text-halo-color": "rgba(255, 255, 255, 0.9)",
+    "text-halo-width": 1.2,
+    "text-halo-blur": 0.3
+   },
+   "filter": [
+    "!",
+    [
+     "in",
+     [
+      "get",
+      "class"
+     ],
+     [
+      "literal",
+      [
+       "ried",
+       "gebiet",
+       "gebirge",
+       "tal",
+       "bergteil",
+       "pass",
+       "gletscher",
+       "kirche",
+       "kapelle",
+       "religion",
+       "burg",
+       "schloss",
+       "ruine",
+       "turm",
+       "huette",
+       "gasthof",
+       "forst",
+       "hoehle",
+       "kultur",
+       "tierpark",
+       "sport",
+       "friedhof",
+       "denkmal",
+       "bergwerk",
+       "kleindenkmal"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "geonamen-gipfel-z8",
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "summit_p",
+   "minzoom": 8,
+   "layout": {
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Italic"
+    ],
+    "text-size": 11,
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ],
+    "text-max-width": 7,
+    "text-padding": 2,
+    "text-anchor": "bottom",
+    "text-letter-spacing": 0.1,
+    "icon-image": "summit",
+    "icon-size": 0.9,
+    "text-offset": [
+     0,
+     -0.55
+    ]
+   },
+   "paint": {
+    "text-color": "rgba(138, 69, 69, 1)",
+    "text-halo-color": "rgba(241, 241, 241, 1)",
+    "text-halo-width": 0.8,
+    "text-halo-blur": 0
+   },
+   "filter": [
+    "==",
+    [
+     "get",
+     "rank"
+    ],
+    1
+   ],
+   "maxzoom": 9
+  },
+  {
+   "id": "geonamen-gipfel",
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "summit_p",
+   "minzoom": 9,
+   "layout": {
+    "text-field": [
+     "case",
+     [
+      "has",
+      "ele"
+     ],
+     [
+      "format",
+      [
+       "get",
+       "name"
+      ],
+      {},
+      "\n",
+      {},
+      [
+       "concat",
+       [
+        "to-string",
+        [
+         "get",
+         "ele"
+        ]
+       ],
+       " m"
+      ],
+      {}
+     ],
+     [
+      "get",
+      "name"
+     ]
+    ],
+    "text-font": [
+     "Noto Sans Italic"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     9,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      12,
+      2,
+      11,
+      3,
+      11,
+      11
+     ],
+     10,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      12.3,
+      2,
+      11,
+      3,
+      11,
+      11
+     ],
+     12,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      13,
+      2,
+      12,
+      3,
+      11,
+      11
+     ],
+     15,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      14,
+      2,
+      13,
+      3,
+      12,
+      12
+     ],
+     16,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      14.2,
+      2,
+      13.2,
+      3,
+      12.2,
+      12.2
+     ]
+    ],
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ],
+    "text-max-width": 8,
+    "text-padding": 2,
+    "text-anchor": "top",
+    "text-offset": [
+     0,
+     0.75
+    ],
+    "text-letter-spacing": 0.05,
+    "icon-image": "summit",
+    "icon-size": 0.9
+   },
+   "paint": {
+    "text-color": "rgba(138, 69, 69, 1)",
+    "text-halo-color": "rgba(241, 241, 241, 1)",
+    "text-halo-width": 0.7,
+    "text-halo-blur": 0
+   }
+  },
+  {
+   "id": "geonamen-einzelhaus",
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "settlement_p",
+   "minzoom": 14,
+   "layout": {
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     11,
+     15,
+     12,
+     16,
+     12.5
+    ],
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ],
+    "text-max-width": 8,
+    "text-padding": 2
+   },
+   "paint": {
+    "text-color": "#000000",
+    "text-halo-color": "rgba(255, 255, 255, 0.9)",
+    "text-halo-width": 1.2,
+    "text-halo-blur": 0.3
+   },
+   "filter": [
+    "==",
+    [
+     "get",
+     "class"
+    ],
+    "einzelhaus"
+   ]
+  },
+  {
+   "id": "geonamen-stadtteil",
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "settlement_p",
+   "minzoom": 12,
+   "layout": {
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     12,
+     11,
+     16,
+     14
+    ],
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ],
+    "text-max-width": 8,
+    "text-padding": 2,
+    "text-transform": "uppercase",
+    "text-letter-spacing": 0.08
+   },
+   "paint": {
+    "text-color": "#333333",
+    "text-halo-color": "rgba(255, 255, 255, 0.9)",
+    "text-halo-width": 1.2,
+    "text-halo-blur": 0.3
+   },
+   "filter": [
+    "==",
+    [
+     "get",
+     "class"
+    ],
+    "stadtteil"
+   ]
+  },
+  {
+   "id": "geonamen-ort",
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "settlement_p",
+   "minzoom": 8,
+   "layout": {
+    "text-field": [
+     "case",
+     [
+      "has",
+      "name_alt"
+     ],
+     [
+      "format",
+      [
+       "get",
+       "name"
+      ],
+      {},
+      "\n",
+      {},
+      [
+       "get",
+       "name_alt"
+      ],
+      {
+       "font-scale": 0.8
+      }
+     ],
+     [
+      "get",
+      "name"
+     ]
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      13.5,
+      2,
+      12.5,
+      3,
+      10.5,
+      4,
+      9.5,
+      5,
+      9.5,
+      6,
+      9,
+      7,
+      9,
+      8,
+      9,
+      9
+     ],
+     9,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      15,
+      2,
+      14,
+      3,
+      12,
+      4,
+      10.5,
+      5,
+      10.5,
+      6,
+      9.5,
+      7,
+      9.5,
+      8,
+      9.5,
+      9.5
+     ],
+     10,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      16,
+      2,
+      15,
+      3,
+      13,
+      4,
+      12,
+      5,
+      12,
+      6,
+      10,
+      7,
+      10,
+      8,
+      10,
+      10
+     ],
+     11,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      17,
+      2,
+      16,
+      3,
+      14,
+      4,
+      13,
+      5,
+      13,
+      6,
+      11,
+      7,
+      11,
+      8,
+      10.5,
+      10.5
+     ],
+     12,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      18,
+      2,
+      17,
+      3,
+      15,
+      4,
+      14,
+      5,
+      14,
+      6,
+      12,
+      7,
+      12,
+      8,
+      11,
+      11
+     ],
+     13,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      19,
+      2,
+      18,
+      3,
+      16,
+      4,
+      15,
+      5,
+      15,
+      6,
+      13,
+      7,
+      13,
+      8,
+      12,
+      12
+     ],
+     14,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      20,
+      2,
+      19,
+      3,
+      17,
+      4,
+      16,
+      5,
+      16,
+      6,
+      14,
+      7,
+      14,
+      8,
+      13,
+      13
+     ],
+     15,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      21,
+      2,
+      20,
+      3,
+      18,
+      4,
+      17,
+      5,
+      17,
+      6,
+      15,
+      7,
+      15,
+      8,
+      14,
+      14
+     ],
+     16,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      21.5,
+      2,
+      20.5,
+      3,
+      18.5,
+      4,
+      17.5,
+      5,
+      17.5,
+      6,
+      15.5,
+      7,
+      16,
+      8,
+      15,
+      15
+     ]
+    ],
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ],
+    "text-max-width": 10,
+    "text-padding": 2,
+    "text-letter-spacing": 0.03
+   },
+   "paint": {
+    "text-color": "#000000",
+    "text-halo-color": "rgba(255, 255, 255, 1)",
+    "text-halo-width": 1,
+    "text-halo-blur": 0
+   },
+   "filter": [
+    "in",
+    [
+     "get",
+     "class"
+    ],
+    [
+     "literal",
+     [
+      "stadt",
+      "markt",
+      "dorf"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "geonamen-bezirkshauptort-punkt",
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "district_capital_p",
+   "minzoom": 8,
+   "layout": {
+    "text-field": [
+     "case",
+     [
+      "has",
+      "name_alt"
+     ],
+     [
+      "format",
+      [
+       "get",
+       "name"
+      ],
+      {},
+      "\n",
+      {},
+      [
+       "get",
+       "name_alt"
+      ],
+      {
+       "font-scale": 0.8
+      }
+     ],
+     [
+      "get",
+      "name"
+     ]
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     12,
+     9,
+     14,
+     10,
+     14,
+     11,
+     15,
+     12,
+     16.5,
+     13,
+     17.5,
+     14,
+     18.5,
+     15,
+     21
+    ],
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ],
+    "text-max-width": 6,
+    "text-padding": 2,
+    "text-allow-overlap": true,
+    "text-letter-spacing": 0.03,
+    "text-anchor": "bottom",
+    "icon-image": "place_capital",
+    "icon-size": 0.9,
+    "icon-allow-overlap": true,
+    "text-offset": [
+     0,
+     -0.45
+    ]
+   },
+   "paint": {
+    "text-color": "#000000",
+    "text-halo-color": "rgba(250, 250, 250, 1)",
+    "text-halo-width": 1.2,
+    "text-halo-blur": 0
+   },
+   "maxzoom": 11
+  },
+  {
+   "id": "geonamen-bezirkshauptort",
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "district_capital_p",
+   "minzoom": 11,
+   "layout": {
+    "text-field": [
+     "case",
+     [
+      "has",
+      "name_alt"
+     ],
+     [
+      "format",
+      [
+       "get",
+       "name"
+      ],
+      {},
+      "\n",
+      {},
+      [
+       "get",
+       "name_alt"
+      ],
+      {
+       "font-scale": 0.8
+      }
+     ],
+     [
+      "get",
+      "name"
+     ]
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     12,
+     9,
+     14,
+     10,
+     14,
+     11,
+     15,
+     12,
+     16.5,
+     13,
+     17.5,
+     14,
+     18.5,
+     15,
+     21
+    ],
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ],
+    "text-max-width": 6,
+    "text-padding": 2,
+    "text-allow-overlap": true,
+    "text-letter-spacing": 0.03
+   },
+   "paint": {
+    "text-color": "#000000",
+    "text-halo-color": "rgba(250, 250, 250, 1)",
+    "text-halo-width": 1.2,
+    "text-halo-blur": 0
+   }
+  },
+  {
+   "id": "geonamen-hauptstadt-punkt",
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "country_capital",
+   "minzoom": 8,
+   "layout": {
+    "text-field": [
+     "case",
+     [
+      "has",
+      "name_alt"
+     ],
+     [
+      "format",
+      [
+       "get",
+       "name"
+      ],
+      {},
+      "\n",
+      {},
+      [
+       "get",
+       "name_alt"
+      ],
+      {
+       "font-scale": 0.8
+      }
+     ],
+     [
+      "get",
+      "name"
+     ]
+    ],
+    "text-font": [
+     "Noto Sans Bold"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     15,
+     10,
+     17,
+     12,
+     19,
+     14,
+     21,
+     16,
+     24
+    ],
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ],
+    "text-max-width": 8,
+    "text-padding": 2,
+    "text-letter-spacing": 0.05,
+    "icon-image": "place_capital",
+    "icon-size": 0.9,
+    "icon-allow-overlap": true,
+    "text-anchor": "bottom",
+    "text-offset": [
+     0,
+     -0.45
+    ]
+   },
+   "paint": {
+    "text-color": "#000000",
+    "text-halo-color": "rgba(255, 255, 255, 0.9)",
+    "text-halo-width": 1.5,
+    "text-halo-blur": 0.3
+   },
+   "maxzoom": 12
+  },
+  {
+   "id": "geonamen-hauptstadt",
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "country_capital",
+   "minzoom": 12,
+   "layout": {
+    "text-field": [
+     "case",
+     [
+      "has",
+      "name_alt"
+     ],
+     [
+      "format",
+      [
+       "get",
+       "name"
+      ],
+      {},
+      "\n",
+      {},
+      [
+       "get",
+       "name_alt"
+      ],
+      {
+       "font-scale": 0.8
+      }
+     ],
+     [
+      "get",
+      "name"
+     ]
+    ],
+    "text-font": [
+     "Noto Sans Bold"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     15,
+     10,
+     17,
+     12,
+     19,
+     14,
+     21,
+     16,
+     24
+    ],
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ],
+    "text-max-width": 8,
+    "text-padding": 2,
+    "text-letter-spacing": 0.05
+   },
+   "paint": {
+    "text-color": "#000000",
+    "text-halo-color": "rgba(255, 255, 255, 0.9)",
+    "text-halo-width": 1.5,
+    "text-halo-blur": 0.3
+   }
+  }
+ ]
+}
