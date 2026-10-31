@@ -496,6 +496,12 @@ def align_ggn(layers):
             m += [r, v if z >= mz else 0]
         m.append(0)
         width += [z, m]
+    # Donau: basemap.at zeichnet sie z8-11 als Flaeche (water_a, eigene Quelle); GGN hat nur die Linie, die DKM-Flaeche
+    # (FIG 59) gibt es erst ab z12 -> Linie in der Breite des Stroms (~300 m), danach liegt sie unter der DKM-Flaeche
+    donau = {8: 3, 9: 3.2, 10: 6, 11: 12}
+    for i in range(3, len(width), 2):
+        z = width[i]
+        width[i + 1] = ["case", ["==", ["get", "name"], "Donau"], donau.get(z, 3 if z < 8 else 20), width[i + 1]]
     for l in layers:
         p = l.setdefault("paint", {})
         if l["id"] == "ggn-water-a":
