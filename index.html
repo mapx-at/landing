@@ -87,10 +87,11 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
         <label><input type="checkbox" id="bnd" checked autocomplete="off"> Grenzen</label>
         <label><input type="checkbox" id="lab" checked autocomplete="off"> Beschriftung</label>
         <label><input type="checkbox" id="hnr" checked autocomplete="off"> Hausnummern</label>
+        <label><input type="checkbox" id="rel" checked autocomplete="off"> Relief</label>
       </div>
       <label><input type="checkbox" id="bm" autocomplete="off"> basemap.at als Hintergrund</label>
       <label for="op">Deckkraft Nutzung</label>
-      <input type="range" id="op" min="0" max="100" value="85" aria-label="Deckkraft der Nutzungsflächen">
+      <input type="range" id="op" min="0" max="100" value="100" aria-label="Deckkraft der Nutzungsflächen">
     </div>
     <details class="lg" open><summary>Legende Nutzung</summary><ul class="legend" id="legend"></ul></details>
     <details class="lg"><summary>Legende Straßen</summary><ul class="legend" id="roadLegend"></ul></details>
@@ -117,7 +118,7 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
   //   ?gip=http://localhost:8000/gip-strassen.pmtiles&ggn=...&grenzen=...&geonamen=...&adr=...&dkm=...
   //   ?style=http://localhost:8000/style.json
   var params = new URLSearchParams(location.search);
-  var SOURCE_PARAMS = ["dkm", "gip", "ggn", "grenzen", "geonamen", "adr", "oev"];
+  var SOURCE_PARAMS = ["dkm", "gip", "ggn", "grenzen", "geonamen", "adr", "oev", "relief", "hoehenlinien"];
   var STYLE_URL = /^https?:\/\//.test(params.get("style") || "") ? params.get("style") : "style.json";
 
   function esc(s) { return String(s).replace(/[&<>"']/g, function (ch) { return "&#" + ch.charCodeAt(0) + ";"; }); }
@@ -206,12 +207,17 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
   var bm = document.getElementById("bm"), op = document.getElementById("op");
   // Checkbox-ID -> Layergruppe(n) in metadata["mapx:groups"]
   var TOGGLES = { bld: ["buildings", "parcels"], roads: ["roads"], water: ["water"], bnd: ["boundaries"],
-                  lab: ["labels"], hnr: ["housenumbers"] };
+                  lab: ["labels"], hnr: ["housenumbers"], rel: ["relief"] };
   function groupIds(g) { return (GROUPS[g] || []).filter(function (id) { return !HIDDEN[id] && map.getLayer(id); }); }
   function setGroup(g, on) {
     groupIds(g).forEach(function (id) { map.setLayoutProperty(id, "visibility", on ? "visible" : "none"); });
   }
-  function applyOpacity() { if (map.getLayer("landuse")) map.setPaintProperty("landuse", "fill-opacity", op.value / 100); }
+  // Regler skaliert die basemap.at-Deckkraft: Nutzung 0,25, Siedlung deckend
+  function applyOpacity() {
+    var f = op.value / 100;
+    if (map.getLayer("landuse")) map.setPaintProperty("landuse", "fill-opacity", 0.25 * f);
+    if (map.getLayer("landuse-siedlung")) map.setPaintProperty("landuse-siedlung", "fill-opacity", f);
+  }
   function applyAll() {
     if (!ready) return;
     Object.keys(TOGGLES).forEach(function (id) {
@@ -225,7 +231,7 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
   bm.addEventListener("change", function () {
     // Mit Hintergrund die Nutzung etwas zuruecknehmen, ohne den Regler zu ueberschreiben.
     if (bm.checked && op.value > 60) { op.value = 60; }
-    if (!bm.checked && op.value == 60) { op.value = 85; }
+    if (!bm.checked && op.value == 60) { op.value = 100; }
     applyAll();
   });
   op.addEventListener("input", applyOpacity);

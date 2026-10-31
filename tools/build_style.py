@@ -50,8 +50,11 @@ ATTRIBUTION = {
            + ", © Österreichisches Adressregister, Stichtagsdaten vom 01.10.2026",
     "oev": a("https://www.gip.gv.at", "GIP.at") + " (Bahn), " + CCBY + "; Flugplätze: "
            + a("https://www.wikidata.org", "Wikidata") + ", CC0",
+    "relief": a("https://data.bev.gv.at/geonetwork/srv/ger/catalog.search#/metadata/5ce253fc-b7c5-4362-97af-6556c18a45d9",
+                "BEV – ALS-DTM 1 m") + " (Stichtag 15.09.2025), " + CCBY,
     "basemap": a("https://basemap.at", "basemap.at") + ", " + CCBY,
 }
+ATTRIBUTION["hoehenlinien"] = ATTRIBUTION["relief"]
 
 # Quellen-ID im Style -> (PMTiles-Datei, Query-Parameter in index.html)
 SOURCES = {
@@ -62,6 +65,8 @@ SOURCES = {
     "geonamen": "geonamen.pmtiles",
     "adr": "adr-hausnummern.pmtiles",
     "oev": "oev.pmtiles",
+    "relief": "relief-terrainrgb.pmtiles",
+    "hoehenlinien": "hoehenlinien.pmtiles",
 }
 
 FRAGMENTS = {
@@ -70,6 +75,7 @@ FRAGMENTS = {
     "geonamen": "geonamen/style/geonamen-layers.json",
     "adr": "adressen/style/housenumber-layers.json",
     "oev": "oev/style/oev-layers.json",
+    "relief": "relief/style/relief-layers.json",
 }
 
 # Fontstack-Ersatz: Open Sans -> Noto Sans (einheitliche Schrift)
@@ -100,10 +106,14 @@ CATS = [
     [11, "#d2ddc6", "Freizeitfläche"],
     [12, "#e8e7c8", "Weingarten"],
 ]
+# Originalfarben basemap.at (fill-opacity 0,25 ueber dem Relief), Siedlung deckend mit Zoomverlauf
+RAW = {2: "#88CC66", 3: "#EBFFAA", 5: "#47B312", 6: "#73F0FF", 7: "#FFFFFF", 8: "#DCE4E4",
+       9: "#A4FF73", 10: "#997D4D", 11: "#66994D", 12: "#BFBF57"}
+LANDUSE_OPACITY = 0.25
 WATER = "#b3d9ff"                     # basemap.at water_a, deckend
 WATER_USAGE = [59, 60]                # FIG: fliessende / stehende Gewaesser (namecat 9)
 BUILDING, BUILDING_LINE, FALLBACK = "#a8968a", "#7d6d62", "#ecebe6"
-BACKGROUND = "#f6f4ee"
+BACKGROUND = "#efefee"               # Flachland-Ton des grauen basemap.at-Reliefs
 
 # ------------------------------------------------------------------ Basis: GIP-Strassen
 # [Klasse, Fuellung, Casing, Breite der Fuellung je Zoom, Legendentext]
@@ -194,17 +204,20 @@ ROAD_LABELS = [
 ]
 
 
-def base_bottom():
+def base_bottom(relief):
     color = ["match", ["get", "namecat"]]
-    for n, c, _ in CATS:
+    for n, c in RAW.items():
         color += [n, c]
     color.append(FALLBACK)
     return [
         {"id": "bg", "type": "background", "paint": {"background-color": BACKGROUND}},
+    ] + relief + [
         {"id": "basemap", "type": "raster", "source": "basemap", "layout": {"visibility": "none"},
          "paint": {"raster-opacity": 0.6}},
+        # wie basemap.at: alle Klassen ausser Siedlung mit 25 % Deckkraft ueber dem Relief
         {"id": "landuse", "type": "fill", "source": "dkm", "source-layer": "landuse_a",
-         "paint": {"fill-color": color, "fill-opacity": 0.85, "fill-antialias": False}},
+         "filter": ["!=", ["get", "namecat"], 1],
+         "paint": {"fill-color": color, "fill-opacity": LANDUSE_OPACITY, "fill-antialias": False}},
         {"id": "landuse-line", "type": "line", "source": "dkm", "source-layer": "landuse_a", "minzoom": 14,
          "paint": {"line-color": "rgba(90,80,70,.25)",
                    "line-width": ["interpolate", ["linear"], ["zoom"], 14, 0.2, 18, 0.8]}},
@@ -212,6 +225,16 @@ def base_bottom():
         {"id": "water-dkm", "type": "fill", "source": "dkm", "source-layer": "landuse_a",
          "filter": ["in", ["get", "usage"], ["literal", WATER_USAGE]],
          "paint": {"fill-color": WATER, "fill-antialias": False}},
+    ]
+
+
+def base_settlement():
+    # Siedlung deckend, nach dem Wasser gezeichnet (basemap.at), Farbe z10 #D1D1CF -> z14 #F2F2F0
+    return [
+        {"id": "landuse-siedlung", "type": "fill", "source": "dkm", "source-layer": "landuse_a",
+         "filter": ["==", ["get", "namecat"], 1],
+         "paint": {"fill-color": ["interpolate", ["linear"], ["zoom"], 10, "#D1D1CF", 14, "#F2F2F0"],
+                   "fill-opacity": 1, "fill-antialias": False}},
     ]
 
 
@@ -236,6 +259,8 @@ def load_fragment(vt, key):
         frag = json.load(f)
     layers = frag["layers"]
     srcs = list(frag.get("sources", {}).keys())
+    if len(srcs) > 1:
+        return layers  # mehrere Quellen (relief + hoehenlinien): IDs beibehalten
     for lyr in layers:
         if lyr.get("source") in srcs:
             lyr["source"] = key  # Quellen-ID vereinheitlichen (z. B. adr-hausnummern -> adr)
@@ -403,6 +428,12 @@ def build(vt, tiles):
     ggn_geom, ggn_lab = split(frag["ggn"])
     gr_geom, gr_lab = split(frag["grenzen"])
     oev_geom, oev_lab = split(frag["oev"])
+    # Relief: eigener Hintergrund entfaellt (bg uebernimmt den Flachland-Ton), Hillshade ganz unten,
+    # Hoehenlinien ueber Nutzung/Wasser, Hoehenzahlen bei den Beschriftungen
+    rel = [l for l in frag["relief"] if l["type"] != "background"]
+    rel_shade = [l for l in rel if l["type"] == "hillshade"]
+    rel_lines = [l for l in rel if l["type"] == "line"]
+    rel_lab = [l for l in rel if l["type"] == "symbol"]
     roads = road_layers()
 
     groups = {
@@ -414,10 +445,13 @@ def build(vt, tiles):
         "boundaries": [l["id"] for l in gr_geom + gr_lab],
         "housenumbers": [l["id"] for l in frag["adr"]],
         "labels": [l["id"] for l in ggn_lab + frag["geonamen"]],
+        "relief": [l["id"] for l in rel],
     }
     # Zeichenreihenfolge (unten -> oben)
-    layers = (base_bottom()               # Hintergrund, Raster, landuse, DKM-Gewaesser
+    layers = (base_bottom(rel_shade)      # Hintergrund, Hillshade, Raster, landuse, DKM-Gewaesser
               + ggn_geom                   # water_a, water_l
+              + base_settlement()          # Siedlung deckend (nach dem Wasser, wie basemap.at)
+              + rel_lines                  # Hoehenlinien
               + base_buildings()           # Gebaeude, Grundstuecke
               + roads                      # Tunnel, Wege, Casing, Fuellung, Bruecken
               + oev_geom                   # Bahn, U-Bahn, Strassenbahn, Seilbahn
@@ -427,6 +461,7 @@ def build(vt, tiles):
               + ggn_lab                    # Gewaessernamen
               + gr_lab                     # Grenz-/Verwaltungsnamen
               + oev_lab                    # Bahnhoefe, Flugplaetze
+              + rel_lab                    # Hoehenzahlen
               + frag["geonamen"])          # Gelaende, Objekte, Gipfel, Orte, Hauptorte zuletzt
 
     fix_fonts(layers, fonts, log)
@@ -444,6 +479,8 @@ def build(vt, tiles):
     for sid, fn in SOURCES.items():
         if sid in used:
             sources[sid] = {"type": "vector", "url": "pmtiles://%s/%s" % (tiles, fn), "attribution": ATTRIBUTION[sid]}
+            if sid == "relief":
+                sources[sid].update({"type": "raster-dem", "encoding": "mapbox", "tileSize": 512})
 
     style = {
         "version": 8,
