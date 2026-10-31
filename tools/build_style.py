@@ -48,6 +48,8 @@ ATTRIBUTION = {
                 + a("https://basemap.at", "basemap.at") + "), " + CCBY,
     "adr": a("https://www.bev.gv.at", "BEV – Adressregister") + ", " + CCBY
            + ", © Österreichisches Adressregister, Stichtagsdaten vom 01.10.2026",
+    "oev": a("https://www.gip.gv.at", "GIP.at") + " (Bahn), " + CCBY + "; Flugplätze: "
+           + a("https://www.wikidata.org", "Wikidata") + ", CC0",
     "basemap": a("https://basemap.at", "basemap.at") + ", " + CCBY,
 }
 
@@ -59,6 +61,7 @@ SOURCES = {
     "grenzen": "grenzen.pmtiles",
     "geonamen": "geonamen.pmtiles",
     "adr": "adr-hausnummern.pmtiles",
+    "oev": "oev.pmtiles",
 }
 
 FRAGMENTS = {
@@ -66,6 +69,7 @@ FRAGMENTS = {
     "grenzen": "grenzen/style/grenzen-layers.json",
     "geonamen": "geonamen/style/geonamen-layers.json",
     "adr": "adressen/style/housenumber-layers.json",
+    "oev": "oev/style/oev-layers.json",
 }
 
 # Fontstack-Ersatz: Open Sans -> Noto Sans (einheitliche Schrift)
@@ -398,13 +402,15 @@ def build(vt, tiles):
 
     ggn_geom, ggn_lab = split(frag["ggn"])
     gr_geom, gr_lab = split(frag["grenzen"])
+    oev_geom, oev_lab = split(frag["oev"])
     roads = road_layers()
 
     groups = {
         "water": ["water-dkm"] + [l["id"] for l in ggn_geom],
         "buildings": ["building", "building-line"],
         "parcels": ["parcel"],
-        "roads": [l["id"] for l in roads] + [l["id"] for l in ROAD_LABELS],
+        "roads": [l["id"] for l in roads] + [l["id"] for l in ROAD_LABELS]
+                 + [l["id"] for l in oev_geom + oev_lab],
         "boundaries": [l["id"] for l in gr_geom + gr_lab],
         "housenumbers": [l["id"] for l in frag["adr"]],
         "labels": [l["id"] for l in ggn_lab + frag["geonamen"]],
@@ -414,11 +420,13 @@ def build(vt, tiles):
               + ggn_geom                   # water_a, water_l
               + base_buildings()           # Gebaeude, Grundstuecke
               + roads                      # Tunnel, Wege, Casing, Fuellung, Bruecken
+              + oev_geom                   # Bahn, U-Bahn, Strassenbahn, Seilbahn
               + gr_geom                    # Grenzen
               + frag["adr"]                # Hausnummern
               + ROAD_LABELS                # Strassennummern/-namen
               + ggn_lab                    # Gewaessernamen
               + gr_lab                     # Grenz-/Verwaltungsnamen
+              + oev_lab                    # Bahnhoefe, Flugplaetze
               + frag["geonamen"])          # Gelaende, Objekte, Gipfel, Orte, Hauptorte zuletzt
 
     fix_fonts(layers, fonts, log)
