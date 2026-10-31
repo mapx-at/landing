@@ -129,6 +129,12 @@
     "geonamen-bezirkshauptort",
     "geonamen-hauptstadt-punkt",
     "geonamen-hauptstadt"
+   ],
+   "relief": [
+    "relief-hillshade",
+    "hoehenlinien",
+    "hoehenlinien-index",
+    "hoehenlinien-label"
    ]
   },
   "mapx:legend": {
@@ -327,6 +333,18 @@
    "type": "vector",
    "url": "pmtiles://https://tiles.mapx.at/oev.pmtiles",
    "attribution": "<a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at</a> (Bahn), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; Flugplätze: <a href=\"https://www.wikidata.org\" target=\"_blank\" rel=\"noopener\">Wikidata</a>, CC0"
+  },
+  "relief": {
+   "type": "raster-dem",
+   "url": "pmtiles://https://tiles.mapx.at/relief-terrainrgb.pmtiles",
+   "attribution": "<a href=\"https://data.bev.gv.at/geonetwork/srv/ger/catalog.search#/metadata/5ce253fc-b7c5-4362-97af-6556c18a45d9\" target=\"_blank\" rel=\"noopener\">BEV – ALS-DTM 1 m</a> (Stichtag 15.09.2025), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>",
+   "encoding": "mapbox",
+   "tileSize": 512
+  },
+  "hoehenlinien": {
+   "type": "vector",
+   "url": "pmtiles://https://tiles.mapx.at/hoehenlinien.pmtiles",
+   "attribution": "<a href=\"https://data.bev.gv.at/geonetwork/srv/ger/catalog.search#/metadata/5ce253fc-b7c5-4362-97af-6556c18a45d9\" target=\"_blank\" rel=\"noopener\">BEV – ALS-DTM 1 m</a> (Stichtag 15.09.2025), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   }
  },
  "layers": [
@@ -334,7 +352,34 @@
    "id": "bg",
    "type": "background",
    "paint": {
-    "background-color": "#f6f4ee"
+    "background-color": "#efefee"
+   }
+  },
+  {
+   "id": "relief-hillshade",
+   "type": "hillshade",
+   "source": "relief",
+   "paint": {
+    "hillshade-illumination-direction": 315,
+    "hillshade-illumination-anchor": "map",
+    "hillshade-exaggeration": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     5,
+     0.5,
+     12,
+     0.45,
+     15,
+     0.4
+    ],
+    "hillshade-shadow-color": "#555555",
+    "hillshade-highlight-color": "#FFFFFF",
+    "hillshade-accent-color": "#777777"
    }
   },
   {
@@ -353,6 +398,14 @@
    "type": "fill",
    "source": "dkm",
    "source-layer": "landuse_a",
+   "filter": [
+    "!=",
+    [
+     "get",
+     "namecat"
+    ],
+    1
+   ],
    "paint": {
     "fill-color": [
      "match",
@@ -360,31 +413,29 @@
       "get",
       "namecat"
      ],
-     1,
-     "#e0e0de",
      2,
-     "#daeacc",
+     "#88CC66",
      3,
-     "#f3f7dd",
+     "#EBFFAA",
      5,
-     "#cae4b7",
+     "#47B312",
      6,
-     "#d5f3f2",
+     "#73F0FF",
      7,
-     "#f8f7f2",
+     "#FFFFFF",
      8,
-     "#f0f0ec",
+     "#DCE4E4",
      9,
-     "#e2f7cf",
+     "#A4FF73",
      10,
-     "#dfd6c6",
+     "#997D4D",
      11,
-     "#d2ddc6",
+     "#66994D",
      12,
-     "#e8e7c8",
+     "#BFBF57",
      "#ecebe6"
     ],
-    "fill-opacity": 0.85,
+    "fill-opacity": 0.25,
     "fill-antialias": false
    }
   },
@@ -899,6 +950,188 @@
        2.0,
        2.0
       ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "landuse-siedlung",
+   "type": "fill",
+   "source": "dkm",
+   "source-layer": "landuse_a",
+   "filter": [
+    "==",
+    [
+     "get",
+     "namecat"
+    ],
+    1
+   ],
+   "paint": {
+    "fill-color": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     "#D1D1CF",
+     14,
+     "#F2F2F0"
+    ],
+    "fill-opacity": 1,
+    "fill-antialias": false
+   }
+  },
+  {
+   "id": "hoehenlinien",
+   "type": "line",
+   "source": "hoehenlinien",
+   "source-layer": "contour_l",
+   "minzoom": 10,
+   "filter": [
+    "all",
+    [
+     "!=",
+     [
+      "get",
+      "index"
+     ],
+     1
+    ]
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": [
+     "step",
+     [
+      "zoom"
+     ],
+     "rgba(128, 111, 102, 0.5)",
+     16,
+     "rgba(128, 102, 89, 0.5)"
+    ],
+    "line-opacity": [
+     "step",
+     [
+      "zoom"
+     ],
+     0.8,
+     11,
+     1
+    ],
+    "line-width": [
+     "step",
+     [
+      "zoom"
+     ],
+     0.8,
+     16,
+     0.55,
+     17,
+     [
+      "case",
+      [
+       "==",
+       [
+        "%",
+        [
+         "get",
+         "ele"
+        ],
+        20
+       ],
+       0
+      ],
+      1.5,
+      0.55
+     ]
+    ]
+   }
+  },
+  {
+   "id": "hoehenlinien-index",
+   "type": "line",
+   "source": "hoehenlinien",
+   "source-layer": "contour_l",
+   "minzoom": 10,
+   "filter": [
+    "==",
+    [
+     "get",
+     "index"
+    ],
+    1
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": [
+     "step",
+     [
+      "zoom"
+     ],
+     "rgba(128, 111, 102, 0.5)",
+     16,
+     "rgba(128, 102, 89, 0.5)"
+    ],
+    "line-opacity": [
+     "step",
+     [
+      "zoom"
+     ],
+     0.8,
+     11,
+     1
+    ],
+    "line-width": [
+     "step",
+     [
+      "zoom"
+     ],
+     1.6,
+     16,
+     [
+      "case",
+      [
+       "==",
+       [
+        "%",
+        [
+         "get",
+         "ele"
+        ],
+        100
+       ],
+       0
+      ],
+      1.6,
+      1.07
+     ],
+     17,
+     [
+      "case",
+      [
+       "==",
+       [
+        "%",
+        [
+         "get",
+         "ele"
+        ],
+        100
+       ],
+       0
+      ],
+      2.67,
+      1.07
      ]
     ]
    }
@@ -6480,6 +6713,74 @@
     "text-color": "rgba(80, 80, 80, 1)",
     "text-halo-color": "rgba(255, 255, 255, 1)",
     "text-halo-width": 1
+   }
+  },
+  {
+   "id": "hoehenlinien-label",
+   "type": "symbol",
+   "source": "hoehenlinien",
+   "source-layer": "contour_l",
+   "minzoom": 10,
+   "filter": [
+    "==",
+    [
+     "get",
+     "index"
+    ],
+    1
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "symbol-spacing": [
+     "step",
+     [
+      "zoom"
+     ],
+     600,
+     14,
+     800,
+     16,
+     1000
+    ],
+    "text-field": [
+     "to-string",
+     [
+      "get",
+      "ele"
+     ]
+    ],
+    "text-font": [
+     "Noto Sans Italic"
+    ],
+    "text-size": [
+     "step",
+     [
+      "zoom"
+     ],
+     13.3,
+     11,
+     12,
+     14,
+     13.3,
+     16,
+     14.7
+    ],
+    "text-max-angle": 30,
+    "text-padding": 4,
+    "text-optional": true
+   },
+   "paint": {
+    "text-color": [
+     "step",
+     [
+      "zoom"
+     ],
+     "#997A6B",
+     11,
+     "#806659"
+    ],
+    "text-halo-color": "rgba(230, 230, 230, 0.5)",
+    "text-halo-width": 1.07
    }
   },
   {
