@@ -71,7 +71,23 @@
     "road-bridge-casing-motorway",
     "road-bridge-motorway",
     "road-ref",
-    "road-name"
+    "road-name",
+    "oev-rail-tunnel",
+    "oev-subway-tunnel",
+    "oev-rail-siding",
+    "oev-rail-bridge-casing",
+    "oev-rail-bridge-fill",
+    "oev-rail",
+    "oev-rail-dash",
+    "oev-rail-construction",
+    "oev-narrow-gauge",
+    "oev-narrow-gauge-ticks",
+    "oev-subway",
+    "oev-tram",
+    "oev-funicular",
+    "oev-cable-car",
+    "oev-station",
+    "oev-airport"
    ],
    "boundaries": [
     "grenzen-country-outline",
@@ -306,6 +322,11 @@
    "type": "vector",
    "url": "pmtiles://https://tiles.mapx.at/adr-hausnummern.pmtiles",
    "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Adressregister</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>, © Österreichisches Adressregister, Stichtagsdaten vom 01.10.2026"
+  },
+  "oev": {
+   "type": "vector",
+   "url": "pmtiles://https://tiles.mapx.at/oev.pmtiles",
+   "attribution": "<a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at</a> (Bahn), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; Flugplätze: <a href=\"https://www.wikidata.org\" target=\"_blank\" rel=\"noopener\">Wikidata</a>, CC0"
   }
  },
  "layers": [
@@ -3652,6 +3673,1321 @@
    }
   },
   {
+   "id": "oev-rail-tunnel",
+   "type": "line",
+   "source": "oev",
+   "source-layer": "rail_l",
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ],
+    [
+     "match",
+     [
+      "get",
+      "class"
+     ],
+     [
+      "rail",
+      "narrow_gauge",
+      "rack"
+     ],
+     true,
+     false
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "rgba(217, 195, 173, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     6,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      0.8,
+      "siding",
+      0.3,
+      0.8
+     ],
+     8,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      1.2,
+      "siding",
+      0.3,
+      0.8
+     ],
+     9,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      1.3,
+      "siding",
+      0.3,
+      1.0
+     ],
+     10,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      1.6,
+      "siding",
+      0.3,
+      1.3
+     ],
+     11,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      1.8,
+      "siding",
+      0.3,
+      1.5
+     ],
+     12,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      2.2,
+      "siding",
+      0.3,
+      1.7
+     ],
+     12.7,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      2.2,
+      "siding",
+      0.51,
+      1.7
+     ],
+     13,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      4.5,
+      "siding",
+      0.6,
+      3.5
+     ],
+     15,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      5.0,
+      "siding",
+      1.53,
+      4.0
+     ],
+     16,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      5.0,
+      "siding",
+      2.0,
+      4.0
+     ],
+     18,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      7.0,
+      "siding",
+      2.67,
+      6.0
+     ],
+     19,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      7,
+      "siding",
+      3.0,
+      6
+     ]
+    ],
+    "line-dasharray": [
+     2,
+     1.2
+    ],
+    "line-opacity": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     6,
+     0.6,
+     12,
+     0.9
+    ]
+   }
+  },
+  {
+   "id": "oev-subway-tunnel",
+   "type": "line",
+   "source": "oev",
+   "source-layer": "rail_l",
+   "minzoom": 12,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ],
+    [
+     "match",
+     [
+      "get",
+      "class"
+     ],
+     [
+      "subway"
+     ],
+     true,
+     false
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "rgba(70, 95, 140, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     12,
+     1,
+     14,
+     2,
+     16,
+     3
+    ],
+    "line-dasharray": [
+     2,
+     1.5
+    ],
+    "line-opacity": 0.5
+   }
+  },
+  {
+   "id": "oev-rail-siding",
+   "type": "line",
+   "source": "oev",
+   "source-layer": "rail_l",
+   "minzoom": 12,
+   "filter": [
+    "all",
+    [
+     "!=",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ],
+    [
+     "!",
+     [
+      "has",
+      "construction"
+     ]
+    ],
+    [
+     "==",
+     [
+      "get",
+      "service"
+     ],
+     "siding"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "rgba(204, 187, 163, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     12,
+     0.3,
+     13,
+     0.6,
+     16,
+     2,
+     19,
+     3
+    ],
+    "line-opacity": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     12,
+     0.4,
+     15,
+     1
+    ]
+   }
+  },
+  {
+   "id": "oev-rail-bridge-casing",
+   "type": "line",
+   "source": "oev",
+   "source-layer": "rail_l",
+   "minzoom": 13,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "bridge"
+    ],
+    [
+     "!=",
+     [
+      "get",
+      "service"
+     ],
+     "siding"
+    ],
+    [
+     "match",
+     [
+      "get",
+      "class"
+     ],
+     [
+      "rail",
+      "narrow_gauge",
+      "rack",
+      "subway",
+      "tram"
+     ],
+     true,
+     false
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "rgba(77, 61, 37, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     13,
+     7,
+     16,
+     11,
+     18,
+     16
+    ]
+   }
+  },
+  {
+   "id": "oev-rail-bridge-fill",
+   "type": "line",
+   "source": "oev",
+   "source-layer": "rail_l",
+   "minzoom": 13,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "bridge"
+    ],
+    [
+     "!=",
+     [
+      "get",
+      "service"
+     ],
+     "siding"
+    ],
+    [
+     "match",
+     [
+      "get",
+      "class"
+     ],
+     [
+      "rail",
+      "narrow_gauge",
+      "rack",
+      "subway",
+      "tram"
+     ],
+     true,
+     false
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "rgba(255, 255, 255, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     13,
+     5.5,
+     16,
+     8.5,
+     18,
+     12
+    ]
+   }
+  },
+  {
+   "id": "oev-rail",
+   "type": "line",
+   "source": "oev",
+   "source-layer": "rail_l",
+   "filter": [
+    "all",
+    [
+     "!=",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ],
+    [
+     "!",
+     [
+      "has",
+      "construction"
+     ]
+    ],
+    [
+     "!=",
+     [
+      "get",
+      "service"
+     ],
+     "siding"
+    ],
+    [
+     "match",
+     [
+      "get",
+      "class"
+     ],
+     [
+      "rail"
+     ],
+     true,
+     false
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "rgba(179, 151, 116, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     6,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      0.8,
+      "siding",
+      0.3,
+      0.8
+     ],
+     8,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      1.2,
+      "siding",
+      0.3,
+      0.8
+     ],
+     9,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      1.3,
+      "siding",
+      0.3,
+      1.0
+     ],
+     10,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      1.6,
+      "siding",
+      0.3,
+      1.3
+     ],
+     11,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      1.8,
+      "siding",
+      0.3,
+      1.5
+     ],
+     12,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      2.2,
+      "siding",
+      0.3,
+      1.7
+     ],
+     12.7,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      2.2,
+      "siding",
+      0.51,
+      1.7
+     ],
+     13,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      4.5,
+      "siding",
+      0.6,
+      3.5
+     ],
+     15,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      5.0,
+      "siding",
+      1.53,
+      4.0
+     ],
+     16,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      5.0,
+      "siding",
+      2.0,
+      4.0
+     ],
+     18,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      7.0,
+      "siding",
+      2.67,
+      6.0
+     ],
+     19,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      7,
+      "siding",
+      3.0,
+      6
+     ]
+    ]
+   }
+  },
+  {
+   "id": "oev-rail-dash",
+   "type": "line",
+   "source": "oev",
+   "source-layer": "rail_l",
+   "minzoom": 13,
+   "filter": [
+    "all",
+    [
+     "!=",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ],
+    [
+     "!",
+     [
+      "has",
+      "construction"
+     ]
+    ],
+    [
+     "!=",
+     [
+      "get",
+      "service"
+     ],
+     "siding"
+    ],
+    [
+     "match",
+     [
+      "get",
+      "class"
+     ],
+     [
+      "rail"
+     ],
+     true,
+     false
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "rgba(255, 255, 255, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     13,
+     1.6,
+     16,
+     1.8,
+     18,
+     2.5
+    ],
+    "line-dasharray": [
+     3,
+     3
+    ]
+   }
+  },
+  {
+   "id": "oev-rail-construction",
+   "type": "line",
+   "source": "oev",
+   "source-layer": "rail_l",
+   "minzoom": 10,
+   "filter": [
+    "all",
+    [
+     "!=",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ],
+    [
+     "has",
+     "construction"
+    ],
+    [
+     "match",
+     [
+      "get",
+      "class"
+     ],
+     [
+      "rail",
+      "narrow_gauge",
+      "rack"
+     ],
+     true,
+     false
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "rgba(204, 188, 163, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     6,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      0.8,
+      "siding",
+      0.3,
+      0.8
+     ],
+     8,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      1.2,
+      "siding",
+      0.3,
+      0.8
+     ],
+     9,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      1.3,
+      "siding",
+      0.3,
+      1.0
+     ],
+     10,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      1.6,
+      "siding",
+      0.3,
+      1.3
+     ],
+     11,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      1.8,
+      "siding",
+      0.3,
+      1.5
+     ],
+     12,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      2.2,
+      "siding",
+      0.3,
+      1.7
+     ],
+     12.7,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      2.2,
+      "siding",
+      0.51,
+      1.7
+     ],
+     13,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      4.5,
+      "siding",
+      0.6,
+      3.5
+     ],
+     15,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      5.0,
+      "siding",
+      1.53,
+      4.0
+     ],
+     16,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      5.0,
+      "siding",
+      2.0,
+      4.0
+     ],
+     18,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      7.0,
+      "siding",
+      2.67,
+      6.0
+     ],
+     19,
+     [
+      "match",
+      [
+       "get",
+       "service"
+      ],
+      "main",
+      7,
+      "siding",
+      3.0,
+      6
+     ]
+    ],
+    "line-dasharray": [
+     3,
+     3
+    ]
+   }
+  },
+  {
+   "id": "oev-narrow-gauge",
+   "type": "line",
+   "source": "oev",
+   "source-layer": "rail_l",
+   "minzoom": 8,
+   "filter": [
+    "all",
+    [
+     "!=",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ],
+    [
+     "!",
+     [
+      "has",
+      "construction"
+     ]
+    ],
+    [
+     "!=",
+     [
+      "get",
+      "service"
+     ],
+     "siding"
+    ],
+    [
+     "match",
+     [
+      "get",
+      "class"
+     ],
+     [
+      "narrow_gauge",
+      "rack"
+     ],
+     true,
+     false
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "rgba(137, 112, 68, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     0.7,
+     10,
+     1,
+     12,
+     1.4,
+     13,
+     2.2,
+     16,
+     3
+    ]
+   }
+  },
+  {
+   "id": "oev-narrow-gauge-ticks",
+   "type": "line",
+   "source": "oev",
+   "source-layer": "rail_l",
+   "minzoom": 14,
+   "filter": [
+    "all",
+    [
+     "!=",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ],
+    [
+     "!",
+     [
+      "has",
+      "construction"
+     ]
+    ],
+    [
+     "!=",
+     [
+      "get",
+      "service"
+     ],
+     "siding"
+    ],
+    [
+     "match",
+     [
+      "get",
+      "class"
+     ],
+     [
+      "narrow_gauge",
+      "rack"
+     ],
+     true,
+     false
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "rgba(137, 112, 68, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     5,
+     16,
+     7
+    ],
+    "line-dasharray": [
+     0.15,
+     2.5
+    ]
+   }
+  },
+  {
+   "id": "oev-subway",
+   "type": "line",
+   "source": "oev",
+   "source-layer": "rail_l",
+   "minzoom": 12,
+   "filter": [
+    "all",
+    [
+     "!=",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ],
+    [
+     "match",
+     [
+      "get",
+      "class"
+     ],
+     [
+      "subway"
+     ],
+     true,
+     false
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "rgba(70, 95, 140, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     12,
+     1,
+     14,
+     2,
+     16,
+     3
+    ]
+   }
+  },
+  {
+   "id": "oev-tram",
+   "type": "line",
+   "source": "oev",
+   "source-layer": "rail_l",
+   "minzoom": 15,
+   "filter": [
+    "all",
+    [
+     "!=",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ],
+    [
+     "match",
+     [
+      "get",
+      "class"
+     ],
+     [
+      "tram"
+     ],
+     true,
+     false
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "rgba(156, 156, 156, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     15,
+     1.2,
+     18,
+     2.5
+    ]
+   }
+  },
+  {
+   "id": "oev-funicular",
+   "type": "line",
+   "source": "oev",
+   "source-layer": "rail_l",
+   "minzoom": 12,
+   "filter": [
+    "match",
+    [
+     "get",
+     "class"
+    ],
+    [
+     "funicular"
+    ],
+    true,
+    false
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "rgba(120, 120, 120, 1)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     12,
+     1,
+     16,
+     2.5
+    ],
+    "line-dasharray": [
+     4,
+     1
+    ]
+   }
+  },
+  {
+   "id": "oev-cable-car",
+   "type": "line",
+   "source": "oev",
+   "source-layer": "rail_l",
+   "minzoom": 12,
+   "filter": [
+    "match",
+    [
+     "get",
+     "class"
+    ],
+    [
+     "cable_car"
+    ],
+    true,
+    false
+   ],
+   "layout": {
+    "line-cap": "square",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": [
+     "match",
+     [
+      "get",
+      "subclass"
+     ],
+     [
+      "drag_lift",
+      "goods",
+      "other"
+     ],
+     "rgba(170, 170, 170, 1)",
+     "rgba(156, 156, 156, 1)"
+    ],
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     12,
+     0.5,
+     14,
+     1,
+     16,
+     1.3
+    ]
+   }
+  },
+  {
    "id": "grenzen-country-outline",
    "type": "line",
    "source": "grenzen",
@@ -4836,6 +6172,313 @@
    "paint": {
     "text-color": "rgba(146, 89, 179, 1)",
     "text-halo-color": "rgba(255, 255, 255, 0.9)",
+    "text-halo-width": 1
+   }
+  },
+  {
+   "id": "oev-station",
+   "type": "symbol",
+   "source": "oev",
+   "source-layer": "station_p",
+   "minzoom": 10,
+   "layout": {
+    "icon-image": "railway_station",
+    "icon-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      0.75,
+      0.6
+     ],
+     14,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      1.0,
+      0.85
+     ],
+     17,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      1.2,
+      1.0
+     ]
+    ],
+    "icon-allow-overlap": true,
+    "icon-ignore-placement": true,
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ],
+    "text-field": [
+     "step",
+     [
+      "zoom"
+     ],
+     [
+      "case",
+      [
+       "==",
+       [
+        "get",
+        "rank"
+       ],
+       1
+      ],
+      [
+       "get",
+       "name"
+      ],
+      ""
+     ],
+     13,
+     [
+      "case",
+      [
+       "<=",
+       [
+        "get",
+        "rank"
+       ],
+       2
+      ],
+      [
+       "get",
+       "name"
+      ],
+      ""
+     ],
+     14,
+     [
+      "get",
+      "name"
+     ]
+    ],
+    "text-font": [
+     "Noto Sans Italic"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     11,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      10,
+      8
+     ],
+     15,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      12,
+      10
+     ],
+     18,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      13,
+      11
+     ]
+    ],
+    "text-anchor": "left",
+    "text-offset": [
+     0.9,
+     0
+    ],
+    "text-justify": "left",
+    "text-max-width": 8,
+    "text-letter-spacing": 0.05,
+    "text-optional": true,
+    "text-padding": 2
+   },
+   "paint": {
+    "text-color": "rgba(60, 60, 60, 1)",
+    "text-halo-color": "rgba(255, 255, 255, 1)",
+    "text-halo-width": 1
+   }
+  },
+  {
+   "id": "oev-airport",
+   "type": "symbol",
+   "source": "oev",
+   "source-layer": "airport_p",
+   "minzoom": 8,
+   "layout": {
+    "icon-image": [
+     "match",
+     [
+      "get",
+      "class"
+     ],
+     "airport",
+     "airport",
+     "airfield"
+    ],
+    "icon-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     [
+      "match",
+      [
+       "get",
+       "class"
+      ],
+      "airport",
+      0.8,
+      0.6
+     ],
+     12,
+     [
+      "match",
+      [
+       "get",
+       "class"
+      ],
+      "airport",
+      1.0,
+      "airfield",
+      0.8,
+      0.65
+     ],
+     16,
+     [
+      "match",
+      [
+       "get",
+       "class"
+      ],
+      "airport",
+      1.3,
+      "airfield",
+      1.0,
+      0.8
+     ]
+    ],
+    "icon-allow-overlap": true,
+    "icon-ignore-placement": true,
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ],
+    "text-field": [
+     "step",
+     [
+      "zoom"
+     ],
+     "",
+     9,
+     [
+      "case",
+      [
+       "==",
+       [
+        "get",
+        "class"
+       ],
+       "airport"
+      ],
+      [
+       "get",
+       "name"
+      ],
+      ""
+     ],
+     11,
+     [
+      "case",
+      [
+       "!=",
+       [
+        "get",
+        "class"
+       ],
+       "heliport"
+      ],
+      [
+       "get",
+       "name"
+      ],
+      ""
+     ],
+     14,
+     [
+      "get",
+      "name"
+     ]
+    ],
+    "text-font": [
+     "Noto Sans Medium Italic"
+    ],
+    "text-size": [
+     "match",
+     [
+      "get",
+      "class"
+     ],
+     "airport",
+     12,
+     "airfield",
+     10,
+     9.5
+    ],
+    "text-anchor": "bottom",
+    "text-offset": [
+     0,
+     -0.9
+    ],
+    "text-max-width": 9,
+    "text-letter-spacing": 0.05,
+    "text-optional": true
+   },
+   "paint": {
+    "text-color": "rgba(80, 80, 80, 1)",
+    "text-halo-color": "rgba(255, 255, 255, 1)",
     "text-halo-width": 1
    }
   },
