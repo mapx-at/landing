@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>mapx.at – Nutzung</title>
-<meta name="description" content="mapx.at – Pilot: Flächennutzung aus der Digitalen Katastralmappe (BEV) als Vektorkarte, Bezirk Melk.">
+<meta name="description" content="mapx.at – Pilot: Flächennutzung aus der Digitalen Katastralmappe (BEV) und Straßennetz aus der GIP als Vektorkarte, Bezirk Melk.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#134e4a">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23134e4a'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%235eead4' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='4' fill='none' stroke='%235eead4' stroke-width='2'/%3E%3C/svg%3E">
@@ -30,6 +30,9 @@ body{background:var(--bg);color:var(--fg);font:14px/1.4 system-ui,-apple-system,
 ul.legend{list-style:none;margin:4px 0 10px;padding:0}
 ul.legend li{display:flex;align-items:center;gap:8px;padding:2px 0}
 .sw{width:18px;height:12px;border-radius:2px;border:1px solid rgba(0,0,0,.25);flex:none}
+ul.legend.roads{border-top:1px solid var(--line);padding-top:6px;margin-top:8px}
+.rsw{width:18px;height:6px;border-radius:3px;flex:none;border:1.5px solid}
+.rsw.dash{height:0;border-width:0;border-top:2px dashed;border-radius:0}
 .ctl{border-top:1px solid var(--line);padding-top:8px;display:grid;gap:7px}
 .ctl label{display:flex;align-items:center;gap:8px;cursor:pointer}
 .ctl input[type=range]{width:100%;accent-color:var(--acc)}
@@ -48,7 +51,7 @@ ul.legend li{display:flex;align-items:center;gap:8px;padding:2px 0}
   <header id="panelHead" title="Legende ein-/ausklappen">
     <div>
       <h1>map<span>x</span>.at</h1>
-      <div class="sub">Flächennutzung (DKM) · Pilot Bezirk Melk</div>
+      <div class="sub">Nutzung (DKM) &amp; Straßen (GIP) · Pilot Bezirk Melk</div>
     </div>
     <button class="toggle" id="toggle" aria-label="Legende ein-/ausklappen" aria-expanded="true">▴</button>
   </header>
@@ -59,8 +62,10 @@ ul.legend li{display:flex;align-items:center;gap:8px;padding:2px 0}
       <label for="op">Deckkraft Nutzung</label>
       <input type="range" id="op" min="0" max="100" value="85" aria-label="Deckkraft der Nutzungsflächen">
       <label><input type="checkbox" id="bld" checked> Gebäude</label>
+      <label><input type="checkbox" id="roads" checked autocomplete="off"> Straßen</label>
     </div>
-    <div class="note">Fläche antippen für Details. Daten ab Zoom 10, Gebäude ab Zoom 13.</div>
+    <ul class="legend roads" id="roadLegend"></ul>
+    <div class="note">Fläche oder Straße antippen für Details. Nutzung ab Zoom 10, Gebäude ab Zoom 13, Straßen ab Zoom 8 (Wege ab 14/15).</div>
   </div>
 </section>
 
@@ -70,7 +75,115 @@ ul.legend li{display:flex;align-items:center;gap:8px;padding:2px 0}
 (function () {
   "use strict";
 
-  var TILES = "pmtiles://https://tiles.mapx.at/dkm-nutzung.pmtiles";
+  // Kachelquellen; per Query-Parameter ueberschreibbar (Tests, z. B. ?gip=http://localhost:8000/gip-strassen.pmtiles)
+  var params = new URLSearchParams(location.search);
+  function srcUrl(key, def) {
+    var v = params.get(key);
+    return "pmtiles://" + (v && /^https?:\/\//.test(v) ? v : def);
+  }
+  var TILES = srcUrl("dkm", "https://tiles.mapx.at/dkm-nutzung.pmtiles");
+  var GIP_TILES = srcUrl("gip", "https://tiles.mapx.at/gip-strassen.pmtiles");
+
+  // Strassen (GIP) je draw_class, Farben angelehnt an den basemap.at-Style (basemap-at-farbe):
+  // [Klasse, Fuellung, Casing, Breite der Fuellung je Zoom, Legendentext, gestrichelt]
+  var ROADS = [
+    ["motorway",      "#ffd37f", "#cd8966", [[8, 1.4], [10, 2.2], [12, 3], [14, 5], [16, 9], [18, 16]], "Autobahn, Schnellstraße"],
+    ["motorway_link", "#ffebaf", "#cdaa66", [[10, 0.8], [12, 1.4], [14, 2.5], [16, 4.5], [18, 8]], "Rampe"],
+    ["primary",       "#ffff99", "#cdaa66", [[8, 1], [10, 1.6], [12, 2.5], [14, 4.5], [16, 8], [18, 14]], "Landesstraße B"],
+    ["secondary",     "#ffffff", "#a8a8a8", [[10, 1], [12, 2], [14, 3.8], [16, 7], [18, 12]], "Landesstraße L, Verbindungsstraße"],
+    ["minor",         "#ffffff", "#b2b2b2", [[12, 0.8], [13, 1.2], [14, 2.4], [16, 5], [18, 10]], "Gemeindestraße"],
+    ["service",       "#ffffff", "#c4c4c4", [[14, 0.8], [16, 2.2], [18, 5]], "Zufahrt, Parkplatz"],
+    ["pedestrian",    "#f1ece6", "#b2b2b2", [[14, 1.5], [16, 4.5], [18, 9]], "Fußgängerzone"]
+  ];
+  // Wege ohne Casing: [Klasse, Farbe, Breiten, Strichmuster|null, Legendentext]
+  var WAYS = [
+    ["track",    "#a89f91", [[14, 0.8], [16, 1.6], [18, 3]], [4, 1.5], "Güter-, Forst-, Feldweg"],
+    ["path",     "#8f8f8f", [[15, 0.7], [16, 1.1], [18, 2]], [2, 1.5], "Fußweg, Geh- und Radweg"],
+    ["cycleway", "#4f7fc0", [[15, 0.8], [16, 1.2], [18, 2.2]], [2, 1.5], "Radweg"],
+    ["steps",    "#7f7f7f", [[15, 1.5], [16, 2.5], [18, 4]], [0.4, 0.4], "Stiege"],
+    ["trail",    "#9b6b43", [[15, 0.7], [16, 1.1], [18, 2]], [3, 2], "Wanderweg, Steig"]
+  ];
+  var LABELS = { motorway: "Autobahn/Schnellstraße", motorway_link: "Rampe", primary: "Landesstraße B",
+    secondary: "Landesstraße L / Verbindungsstraße", minor: "Gemeindestraße", service: "Zufahrt/Parkplatz",
+    pedestrian: "Fußgängerzone", track: "Güter-/Forstweg", path: "Fuß-/Geh- und Radweg", cycleway: "Radweg",
+    steps: "Stiege", trail: "Wanderweg/Steig" };
+
+  function widthExpr(stops, add, mul) {
+    var e = ["interpolate", ["exponential", 1.4], ["zoom"]];
+    stops.forEach(function (s) { e.push(s[0], s[1] * (mul || 1) + (add || 0)); });
+    return e;
+  }
+  function minz(stops) { return stops[0][0]; }
+  // brunnel: "none" | "bridge" | "tunnel"
+  function roadLayers() {
+    var L = [];
+    var isB = function (b) { return ["==", ["get", "brunnel"], b]; };
+    // 1. Tunnel: Casing gestrichelt, Fuellung blass, alles unter dem uebrigen Netz
+    ROADS.forEach(function (r) {
+      L.push({ id: "road-tunnel-casing-" + r[0], type: "line", source: "gip", "source-layer": "gip_l", minzoom: minz(r[3]),
+        filter: ["all", ["==", ["get", "draw_class"], r[0]], isB("tunnel")],
+        paint: { "line-color": r[2], "line-width": widthExpr(r[3], 1.5), "line-dasharray": [1.5, 1], "line-opacity": 0.8 } });
+      L.push({ id: "road-tunnel-" + r[0], type: "line", source: "gip", "source-layer": "gip_l", minzoom: minz(r[3]),
+        filter: ["all", ["==", ["get", "draw_class"], r[0]], isB("tunnel")],
+        layout: { "line-cap": "butt" },
+        paint: { "line-color": r[1], "line-width": widthExpr(r[3]), "line-opacity": 0.55 } });
+    });
+    WAYS.forEach(function (w) {
+      L.push({ id: "way-tunnel-" + w[0], type: "line", source: "gip", "source-layer": "gip_l", minzoom: minz(w[2]),
+        filter: ["all", ["==", ["get", "draw_class"], w[0]], isB("tunnel")],
+        paint: { "line-color": w[1], "line-width": widthExpr(w[2]), "line-dasharray": [1, 1.5], "line-opacity": 0.5 } });
+    });
+    // 2. Wege (ebenerdig und Bruecke)
+    WAYS.forEach(function (w) {
+      var p = { "line-color": w[1], "line-width": widthExpr(w[2]) };
+      if (w[3]) p["line-dasharray"] = w[3];
+      L.push({ id: "way-" + w[0], type: "line", source: "gip", "source-layer": "gip_l", minzoom: minz(w[2]),
+        filter: ["all", ["==", ["get", "draw_class"], w[0]], ["!=", ["get", "brunnel"], "tunnel"]],
+        layout: { "line-cap": "butt", "line-join": "round" }, paint: p });
+    });
+    // 3. Ebenerdige Strassen: erst alle Casings (niedrige Klassen zuerst), dann alle Fuellungen
+    ROADS.slice().reverse().forEach(function (r) {
+      L.push({ id: "road-casing-" + r[0], type: "line", source: "gip", "source-layer": "gip_l", minzoom: minz(r[3]),
+        filter: ["all", ["==", ["get", "draw_class"], r[0]], ["==", ["get", "brunnel"], "none"]],
+        layout: { "line-cap": "round", "line-join": "round" },
+        paint: { "line-color": r[2], "line-width": widthExpr(r[3], 1.5) } });
+    });
+    ROADS.slice().reverse().forEach(function (r) {
+      L.push({ id: "road-" + r[0], type: "line", source: "gip", "source-layer": "gip_l", minzoom: minz(r[3]),
+        filter: ["all", ["==", ["get", "draw_class"], r[0]], ["==", ["get", "brunnel"], "none"]],
+        layout: { "line-cap": "round", "line-join": "round" },
+        paint: { "line-color": r[1], "line-width": widthExpr(r[3]) } });
+    });
+    // 4. Bruecken obenauf: dunkleres, breiteres Casing mit flachen Enden
+    ROADS.slice().reverse().forEach(function (r) {
+      L.push({ id: "road-bridge-casing-" + r[0], type: "line", source: "gip", "source-layer": "gip_l", minzoom: minz(r[3]),
+        filter: ["all", ["==", ["get", "draw_class"], r[0]], isB("bridge")],
+        layout: { "line-cap": "butt", "line-join": "round" },
+        paint: { "line-color": "#5f5850", "line-width": widthExpr(r[3], 4) } });
+      L.push({ id: "road-bridge-" + r[0], type: "line", source: "gip", "source-layer": "gip_l", minzoom: minz(r[3]),
+        filter: ["all", ["==", ["get", "draw_class"], r[0]], isB("bridge")],
+        layout: { "line-cap": "round", "line-join": "round" },
+        paint: { "line-color": r[1], "line-width": widthExpr(r[3]) } });
+    });
+    return L;
+  }
+  var ROAD_LAYER_IDS = roadLayers().map(function (l) { return l.id; });
+  // Beschriftung (ueber den Gebaeuden): Strassennummern ab z11, Namen entlang der Linie ab z15
+  var LABEL_LAYERS = [
+    { id: "road-ref", type: "symbol", source: "gip", "source-layer": "gip_l", minzoom: 11,
+      filter: ["all", ["has", "ref"], ["match", ["get", "draw_class"], ["motorway", "primary", "secondary"], true, false]],
+      layout: { "symbol-placement": "line", "symbol-spacing": 350, "text-field": ["get", "ref"],
+        "text-font": ["Noto Sans Regular"], "text-size": 10.5, "text-rotation-alignment": "viewport",
+        "text-keep-upright": true },
+      paint: { "text-color": "#5a1a00", "text-halo-color": "rgba(255,255,255,.95)", "text-halo-width": 1.6 } },
+    { id: "road-name", type: "symbol", source: "gip", "source-layer": "gip_l", minzoom: 15,
+      filter: ["all", ["has", "name"], ["!=", ["get", "brunnel"], "tunnel"],
+        ["match", ["get", "draw_class"], ["motorway_link", "track", "path", "cycleway", "steps", "trail"], false, true]],
+      layout: { "symbol-placement": "line", "symbol-spacing": 250, "text-field": ["get", "name"],
+        "text-font": ["Noto Sans Regular"], "text-size": ["interpolate", ["linear"], ["zoom"], 15, 10.5, 18, 13],
+        "text-max-angle": 30, "text-padding": 2 },
+      paint: { "text-color": "#3f3f3f", "text-halo-color": "rgba(255,255,255,.9)", "text-halo-width": 1.4 } }
+  ];
 
   // Farben je namecat, angelehnt an die Flaechenfarben von basemap.at.
   var CATS = [
@@ -122,6 +235,18 @@ ul.legend li{display:flex;align-items:center;gap:8px;padding:2px 0}
   lb.appendChild(sb); lb.appendChild(document.createTextNode("Gebäude"));
   legend.appendChild(lb);
 
+  var roadLegend = document.getElementById("roadLegend");
+  function roadItem(text, fill, line, dashed) {
+    var li = document.createElement("li");
+    var sw = document.createElement("span");
+    sw.className = "rsw" + (dashed ? " dash" : "");
+    if (dashed) { sw.style.borderTopColor = line; } else { sw.style.background = fill; sw.style.borderColor = line; }
+    li.appendChild(sw); li.appendChild(document.createTextNode(text));
+    roadLegend.appendChild(li);
+  }
+  ROADS.forEach(function (r) { if (r[0] !== "motorway_link" && r[0] !== "pedestrian") roadItem(r[4], r[1], r[2], false); });
+  WAYS.forEach(function (w) { if (w[0] !== "steps") roadItem(w[4], null, w[1], true); });
+
   var protocol = new pmtiles.Protocol();
   maplibregl.addProtocol("pmtiles", protocol.tile);
 
@@ -135,6 +260,8 @@ ul.legend li{display:flex;align-items:center;gap:8px;padding:2px 0}
     attributionControl: false,
     style: {
       version: 8,
+      // Freie Glyphen fuer die Strassenbeschriftung (MapLibre-Demotiles: Noto Sans; Open Sans gibt es dort nicht)
+      glyphs: "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
       sources: {
         basemap: {
           type: "raster",
@@ -147,6 +274,11 @@ ul.legend li{display:flex;align-items:center;gap:8px;padding:2px 0}
           type: "vector",
           url: TILES,
           attribution: 'Datenquelle: <a href="https://www.bev.gv.at" target="_blank" rel="noopener">BEV – DKM</a>, <a href="https://creativecommons.org/licenses/by/4.0/deed.de" target="_blank" rel="noopener">CC BY 4.0</a>'
+        },
+        gip: {
+          type: "vector",
+          url: GIP_TILES,
+          attribution: 'Straßen: <a href="https://www.gip.gv.at" target="_blank" rel="noopener">GIP.at</a>, <a href="https://creativecommons.org/licenses/by/4.0/deed.de" target="_blank" rel="noopener">CC BY 4.0</a>'
         }
       },
       layers: [
@@ -156,12 +288,13 @@ ul.legend li{display:flex;align-items:center;gap:8px;padding:2px 0}
         { id: "landuse", type: "fill", source: "dkm", "source-layer": "landuse_a",
           paint: { "fill-color": matchColor, "fill-opacity": 0.85 } },
         { id: "landuse-line", type: "line", source: "dkm", "source-layer": "landuse_a", minzoom: 14,
-          paint: { "line-color": "rgba(90,80,70,.35)", "line-width": ["interpolate", ["linear"], ["zoom"], 14, 0.2, 18, 0.8] } },
+          paint: { "line-color": "rgba(90,80,70,.35)", "line-width": ["interpolate", ["linear"], ["zoom"], 14, 0.2, 18, 0.8] } }
+      ].concat(roadLayers(), [
         { id: "building", type: "fill", source: "dkm", "source-layer": "building_a", minzoom: 13,
           paint: { "fill-color": BUILDING, "fill-opacity": 0.95 } },
         { id: "building-line", type: "line", source: "dkm", "source-layer": "building_a", minzoom: 15,
           paint: { "line-color": BUILDING_LINE, "line-width": 0.6 } }
-      ]
+      ], LABEL_LAYERS)
     }
   });
 
@@ -178,7 +311,7 @@ ul.legend li{display:flex;align-items:center;gap:8px;padding:2px 0}
     if (shown) return;
     var src = e && e.sourceId;
     var text = e && e.error && e.error.message ? e.error.message : "";
-    if (src === "dkm" || /pmtiles|tiles\.mapx\.at/i.test(text)) {
+    if (src === "dkm" || src === "gip" || /pmtiles|tiles\.mapx\.at/i.test(text)) {
       shown = true;
       msg.textContent = "Die Kacheln von tiles.mapx.at sind gerade nicht erreichbar.";
       msg.style.display = "block";
@@ -201,6 +334,11 @@ ul.legend li{display:flex;align-items:center;gap:8px;padding:2px 0}
     map.setLayoutProperty("building", "visibility", v);
     map.setLayoutProperty("building-line", "visibility", v);
   });
+  var roads = document.getElementById("roads");
+  roads.addEventListener("change", function () {
+    var v = roads.checked ? "visible" : "none";
+    ROAD_LAYER_IDS.concat(["road-ref", "road-name"]).forEach(function (id) { map.setLayoutProperty(id, "visibility", v); });
+  });
 
   // Legende ein-/ausklappen (mobil standardmaessig zu)
   var panel = document.getElementById("panel"), tg = document.getElementById("toggle");
@@ -214,12 +352,27 @@ ul.legend li{display:flex;align-items:center;gap:8px;padding:2px 0}
   var labels = {};
   CATS.forEach(function (c) { labels[c[0]] = c[2]; });
   function esc(s) { return String(s).replace(/[&<>"']/g, function (ch) { return "&#" + ch.charCodeAt(0) + ";"; }); }
+  var BRUNNEL = { bridge: "Brücke", tunnel: "Tunnel/Unterführung" };
   map.on("click", function (e) {
+    // Strassen mit etwas Toleranz treffen (schmale Linien)
+    var pad = 4, box = [[e.point.x - pad, e.point.y - pad], [e.point.x + pad, e.point.y + pad]];
+    var visibleRoads = roads.checked ? ROAD_LAYER_IDS : [];
+    var r = visibleRoads.length ? map.queryRenderedFeatures(box, { layers: visibleRoads })[0] : null;
     var f = map.queryRenderedFeatures(e.point, { layers: ["building", "landuse"] });
-    if (!f.length) return;
+    if (!f.length && !r) return;
     var b = f.filter(function (x) { return x.layer.id === "building"; })[0];
     var l = f.filter(function (x) { return x.layer.id === "landuse"; })[0];
     var html = "";
+    if (r) {
+      var rp = r.properties || {};
+      html += "<b>" + esc(rp.name || rp.ref || LABELS[rp.draw_class] || rp.draw_class) + "</b><br>";
+      html += esc(LABELS[rp.draw_class] || rp.draw_class);
+      if (rp.ref && rp.name) html += " · " + esc(rp.ref);
+      if (BRUNNEL[rp.brunnel]) html += " · " + BRUNNEL[rp.brunnel];
+      if (rp.oneway == 1) html += " · Einbahn";
+      html += "<br>";
+      if (b || l) html += "<hr style='border:0;border-top:1px solid #ddd;margin:5px 0'>";
+    }
     if (b) html += "<b>Gebäude</b><br>";
     if (l) {
       var p = l.properties || {};
