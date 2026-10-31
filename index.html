@@ -39,6 +39,26 @@ ul.legend li{display:flex;align-items:center;gap:8px;padding:2px 0}
 .maplibregl-popup-content{font:13px/1.4 system-ui,sans-serif;color:#1b2b2a;padding:8px 10px}
 .maplibregl-popup-content b{font-weight:600}
 @media (max-width:520px){.panel{width:min(236px,calc(100% - 70px));max-height:60%}}
+/* Suche (search.mapx.at, Meilisearch) */
+.search{position:absolute;z-index:4;top:max(10px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(380px,calc(100% - 540px))}
+.search input{width:100%;height:38px;padding:0 34px 0 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--fg);font:15px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;box-shadow:0 2px 10px rgba(0,0,0,.12);-webkit-appearance:none;appearance:none}
+.search input:focus{outline:2px solid var(--acc);outline-offset:-1px}
+.search input::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
+.search .clear{position:absolute;right:4px;top:4px;width:30px;height:30px;border:0;background:none;color:var(--muted);font-size:18px;cursor:pointer;display:none}
+.search.has-text .clear{display:block}
+.search ul{list-style:none;margin:4px 0 0;padding:4px 0;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.15);max-height:min(60vh,420px);overflow:auto;display:none}
+.search.open ul{display:block}
+.search li{padding:6px 12px;cursor:pointer;display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:baseline}
+.search li[aria-selected=true],.search li:hover{background:rgba(15,118,110,.12)}
+.search li .t{grid-row:1/3;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--acc);min-width:52px}
+.search li .l{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.search li .c{grid-column:2;font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.search li.info{display:block;color:var(--muted);cursor:default;font-size:13px}
+.search li.info:hover{background:none}
+.search li.src{font-size:11px;border-top:1px solid var(--line);margin-top:4px;padding-top:5px}
+.rev .d{color:#5b6b69;font-size:12px}
+@media (max-width:1000px){.search{left:max(260px,calc(env(safe-area-inset-left) + 256px));transform:none;width:calc(100% - 320px)}}
+@media (max-width:520px){.search{left:max(10px,env(safe-area-inset-left));width:calc(100% - 66px)}.panel{top:calc(max(10px,env(safe-area-inset-top)) + 46px)}.search input{font-size:16px}}
 </style>
 </head>
 <body>
@@ -65,6 +85,13 @@ ul.legend li{display:flex;align-items:center;gap:8px;padding:2px 0}
 </section>
 
 <div class="msg" id="msg"></div>
+
+<div class="search" id="search">
+  <input id="q" type="search" placeholder="Adresse, Ort, Gipfel, Grundstück …" autocomplete="off" autocapitalize="off" spellcheck="false"
+         role="combobox" aria-label="Suche" aria-autocomplete="list" aria-expanded="false" aria-controls="results">
+  <button class="clear" id="qclear" type="button" aria-label="Suche leeren">×</button>
+  <ul id="results" role="listbox" aria-label="Suchergebnisse"></ul>
+</div>
 
 <script>
 (function () {
@@ -230,6 +257,173 @@ ul.legend li{display:flex;align-items:center;gap:8px;padding:2px 0}
   });
   map.on("mouseenter", "landuse", function () { map.getCanvas().style.cursor = "pointer"; });
   map.on("mouseleave", "landuse", function () { map.getCanvas().style.cursor = ""; });
+
+  // ---------------------------------------------------------------- Suche (Meilisearch, Index "places")
+  // Endpoint und oeffentlicher Search-only-Key (darf nur /indexes/places/search, siehe
+  // vector-tiles/search/README). Zum Testen per Query-Parameter ueberschreibbar:
+  //   ?search=http://127.0.0.1:7701&searchKey=<key>
+  var SEARCH_URL = "https://search.mapx.at";
+  var SEARCH_KEY = "";   // wird nach dem ersten Deploy mit dem erzeugten Search-Key befuellt
+  var SEARCH_INDEX = "places";
+  (function () {
+    var p = new URLSearchParams(location.search);
+    if (p.get("search")) SEARCH_URL = p.get("search").replace(/\/+$/, "");
+    if (p.get("searchKey")) SEARCH_KEY = p.get("searchKey");
+  })();
+
+  var TYPE_LABEL = { address: "Adresse", street: "Straße", locality: "Ortschaft", place: "Ort", municipality: "Gemeinde",
+                     district: "Bezirk", state: "Land", parcel: "Grundst.", postcode: "PLZ" };
+  var CLASS_LABEL = { gipfel: "Gipfel", stadt: "Stadt", markt: "Markt", dorf: "Dorf", einzelhaus: "Haus", ried: "Ried",
+                      kirche: "Kirche", schloss: "Schloss", burg: "Burg", ruine: "Ruine", huette: "Hütte", tal: "Tal",
+                      pass: "Pass", gebiet: "Gebiet", gewaesser: "Gewässer", gletscher: "Gletscher" };
+  var ATTRS = ["id", "type", "class", "label", "name", "context", "_geo", "bbox", "zoom"];
+
+  function meili(body, signal) {
+    var h = { "Content-Type": "application/json" };
+    if (SEARCH_KEY) h.Authorization = "Bearer " + SEARCH_KEY;
+    return fetch(SEARCH_URL + "/indexes/" + SEARCH_INDEX + "/search", {
+      method: "POST", headers: h, body: JSON.stringify(body), signal: signal
+    }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });
+  }
+
+  var box = document.getElementById("search"), input = document.getElementById("q"),
+      list = document.getElementById("results"), clearBtn = document.getElementById("qclear");
+  var hits = [], active = -1, timer = null, ctrl = null, marker = null, seq = 0;
+
+  function setOpen(o) { box.classList.toggle("open", o); input.setAttribute("aria-expanded", String(o)); }
+  function info(text) { list.innerHTML = '<li class="info" role="option" aria-disabled="true">' + esc(text) + "</li>"; setOpen(true); }
+
+  function render() {
+    list.innerHTML = "";
+    hits.forEach(function (h, i) {
+      var li = document.createElement("li");
+      li.id = "res-" + i; li.setAttribute("role", "option"); li.setAttribute("aria-selected", String(i === active));
+      var t = (h.type === "place" && CLASS_LABEL[h["class"]]) || TYPE_LABEL[h.type] || h.type;
+      li.innerHTML = '<span class="t">' + esc(t) + '</span><span class="l">' + esc(h.label || h.name) +
+                     '</span><span class="c">' + esc(h.context || "") + "</span>";
+      li.addEventListener("mousedown", function (ev) { ev.preventDefault(); choose(i); });
+      list.appendChild(li);
+    });
+    var src = document.createElement("li");
+    src.className = "info src"; src.setAttribute("aria-hidden", "true");
+    src.textContent = "Daten: BEV – Adressregister, Geonamen, Verwaltungsgrenzen, DKM (CC BY 4.0)";
+    list.appendChild(src);
+    if (active >= 0) input.setAttribute("aria-activedescendant", "res-" + active); else input.removeAttribute("aria-activedescendant");
+    setOpen(hits.length > 0);
+  }
+
+  function search(q) {
+    if (ctrl) ctrl.abort();
+    ctrl = new AbortController();
+    var my = ++seq;
+    meili({ q: q, limit: 8, attributesToRetrieve: ATTRS }, ctrl.signal).then(function (j) {
+      if (my !== seq) return;
+      hits = j.hits || []; active = hits.length ? 0 : -1;
+      if (!hits.length) info("Keine Treffer"); else render();
+    }).catch(function (e) {
+      if (e.name === "AbortError") return;
+      hits = []; info("Suche gerade nicht erreichbar");
+    });
+  }
+
+  input.addEventListener("input", function () {
+    var q = input.value.trim();
+    box.classList.toggle("has-text", input.value.length > 0);
+    clearTimeout(timer);
+    if (q.length < 2) { hits = []; active = -1; setOpen(false); if (ctrl) ctrl.abort(); return; }
+    timer = setTimeout(function () { search(q); }, 180);
+  });
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      if (!hits.length) return;
+      e.preventDefault();
+      active = (active + (e.key === "ArrowDown" ? 1 : hits.length - 1)) % hits.length;
+      render();
+      var el = document.getElementById("res-" + active); if (el) el.scrollIntoView({ block: "nearest" });
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      if (hits.length) choose(active >= 0 ? active : 0);
+    } else if (e.key === "Escape") {
+      if (box.classList.contains("open")) setOpen(false); else { input.value = ""; box.classList.remove("has-text"); }
+    }
+  });
+  input.addEventListener("focus", function () { if (hits.length) render(); });
+  input.addEventListener("blur", function () { setTimeout(function () { setOpen(false); }, 120); });
+  clearBtn.addEventListener("click", function () {
+    input.value = ""; box.classList.remove("has-text"); hits = []; setOpen(false);
+    if (marker) { marker.remove(); marker = null; }
+    input.focus();
+  });
+
+  function choose(i) {
+    var h = hits[i]; if (!h || !h._geo) return;
+    input.value = h.label || h.name; box.classList.add("has-text");
+    setOpen(false); input.blur();
+    var ll = [h._geo.lng, h._geo.lat];
+    if (marker) marker.remove();
+    marker = new maplibregl.Marker({ color: "#0f766e" }).setLngLat(ll)
+      .setPopup(new maplibregl.Popup({ offset: 28, maxWidth: "260px" })
+        .setHTML("<b>" + esc(h.label || h.name) + "</b><br>" + esc(h.context || "")))
+      .addTo(map);
+    var b = h.bbox, z = h.zoom || 15;
+    // Flaechen (Gemeinde, Bezirk, Strasse, Grundstueck ...) mit bbox einpassen, Punkte anfliegen
+    if (b && b.length === 4 && (b[2] - b[0] > 0.0004 || b[3] - b[1] > 0.0003)) {
+      map.fitBounds([[b[0], b[1]], [b[2], b[3]]], { padding: 50, maxZoom: Math.min(19, z + 1), duration: 1200 });
+    } else {
+      map.flyTo({ center: ll, zoom: Math.max(map.getZoom(), z), speed: 1.6 });
+    }
+  }
+
+  // Rechtsklick / langes Druecken -> Reverse-Geocoding (naechste Adresse, sonst naechster Ort/Strasse)
+  var lastRev = 0, revPop = null;
+  function reverse(lngLat) {
+    var now = Date.now(); if (now - lastRev < 800) return; lastRev = now;
+    if (revPop) revPop.remove();
+    var lat = +lngLat.lat.toFixed(6), lng = +lngLat.lng.toFixed(6);
+    // closeOnClick aus: das Loslassen nach langem Druecken loest auf manchen Geraeten einen Klick aus
+    var pop = revPop = new maplibregl.Popup({ closeButton: true, closeOnClick: false, maxWidth: "260px", className: "rev" })
+      .setLngLat(lngLat).setHTML('<span class="d">Suche …</span>').addTo(map);
+    // _geoBoundingBox (Quadrat +-radius) statt _geoRadius: in Meilisearch 1.56 ~1 ms statt ~100 ms.
+    // Treffer in den Ecken (bis radius*1.41) werden verworfen.
+    function q(filter, radius) {
+      var dlat = radius / 111320, dlng = radius / (111320 * Math.cos(lat * Math.PI / 180));
+      var bb = "_geoBoundingBox([" + (lat + dlat).toFixed(6) + ", " + (lng + dlng).toFixed(6) + "], [" +
+               (lat - dlat).toFixed(6) + ", " + (lng - dlng).toFixed(6) + "])";
+      return meili({ q: "", limit: 1, attributesToRetrieve: ATTRS, filter: filter + " AND " + bb,
+                     sort: ["_geoPoint(" + lat + ", " + lng + "):asc"] }).then(function (j) {
+        var h = j.hits && j.hits[0];
+        return { hits: h && h._geoDistance <= radius ? [h] : [] };
+      });
+    }
+    var coord = '<span class="d">' + lat.toFixed(5) + ", " + lng.toFixed(5) + "</span>";
+    q("type = address", 150).then(function (j) {
+      if (j.hits && j.hits.length) return j.hits[0];
+      return q("type IN [street, locality, place]", 3000).then(function (k) { return k.hits && k.hits[0]; });
+    }).then(function (h) {
+      if (!h) { pop.setHTML("Nichts in der Nähe gefunden<br>" + coord); return; }
+      var d = h._geoDistance != null ? Math.round(h._geoDistance) + " m · " : "";
+      pop.setHTML("<b>" + esc(h.label || h.name) + "</b><br>" + esc(h.context || "") +
+                  '<br><span class="d">' + esc(TYPE_LABEL[h.type] || h.type) + " · " + d + "</span>" + coord);
+    }).catch(function () { pop.setHTML("Suche gerade nicht erreichbar<br>" + coord); });
+  }
+  map.on("contextmenu", function (e) { reverse(e.lngLat); });
+  // Langes Druecken (600 ms, < 10 px Bewegung, ein Finger) direkt an den DOM-Touch-Events des Kartencontainers
+  var lpTimer = null, lpStart = null, mapEl = map.getCanvasContainer();
+  function lpCancel() { clearTimeout(lpTimer); lpTimer = null; }
+  mapEl.addEventListener("touchstart", function (e) {
+    lpCancel();
+    if (e.touches.length !== 1) return;
+    var r = mapEl.getBoundingClientRect(), t = e.touches[0];
+    lpStart = { x: t.clientX, y: t.clientY };
+    var ll = map.unproject([t.clientX - r.left, t.clientY - r.top]);
+    lpTimer = setTimeout(function () { lpTimer = null; reverse(ll); }, 600);
+  }, { passive: true });
+  mapEl.addEventListener("touchmove", function (e) {
+    var t = e.touches[0];
+    if (!lpStart || e.touches.length !== 1 || Math.abs(t.clientX - lpStart.x) > 10 || Math.abs(t.clientY - lpStart.y) > 10) lpCancel();
+  }, { passive: true });
+  mapEl.addEventListener("touchend", lpCancel, { passive: true });
+  mapEl.addEventListener("touchcancel", lpCancel, { passive: true });
 })();
 </script>
 </body>
