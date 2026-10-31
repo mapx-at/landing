@@ -40,6 +40,33 @@ Grundstücke → Straßen (Tunnel, Wege, Casing, Füllung, Brücken) → Grenzen
 Straßennummern/-namen → Gewässernamen → Grenz-/Verwaltungsnamen → Geonamen (Gelände, Objekte, Gipfel,
 Orte, Hauptorte zuletzt).
 
+### Übersichtszoom z0–7
+
+Darstellung unter z8 wie `basemap-at-farbe` (alle bm-Layer mit minzoom < 8). Regel: **ab z8 ändert sich nichts.**
+Dafür gibt es eigene Layer `*-low` mit `maxzoom: 8`; bestehende Layer bekommen höchstens einen höheren minzoom
+(≤ 8, Tabelle `LOW_MINZOOM` in `tools/build_style.py`). Prüfen mit
+`python3 -I /data1/mapx/research/lowzoom/compare/scripts/style_check.py <alter style.json> style.json`.
+
+| Inhalt | basemap.at | mapx |
+|---|---|---|
+| Staatsgrenze `state_l` | ab z0, border_state(_outline) | unverändert (Fragment = bm) |
+| Bundeslandgrenzen `country_l` | Daten ab z5 | minzoom 5 |
+| Nutzung `landuse_a` | Daten ab z4, 25 % über dem Relief, Siedlung deckend #D1D1CF | minzoom 4, gleiche Farben |
+| DKM-Gewässer (FIG 59/60) | keine Gewässer in landuse_a | `water-dkm` minzoom 8 |
+| Seen `water_a` | z6+ (9 große Seen) | ohne minzoom, Daten bestimmen |
+| Flüsse `water_l` namecat 1 | water_l_river1 ab z6, 3 px | `ggn-water-l` minzoom 6, rank 1 = 3 px |
+| Autobahn/Schnellstraße | gip_autobahn_z7_11 ab z6, 4,2/5,7 px | `road-low-(casing-)motorway` ab z6 |
+| Rampe, B-Straße | gip_ramp, gip_hauptverbindung_z8_11 ab z7 | `road-low-(casing-)motorway_link/primary` ab z7 |
+| Tunnel (Straße) | bis z10 wie normale Straße | z6–7 ohne Tunnelunterscheidung |
+| Bahn (Hauptbahn 13010) | gip_railway / giptunnel_railway_ ab z6, 1,2 px | `oev-rail(-tunnel)-low` (rail, service main) z6–7, `oev-rail(-tunnel)` ab z8 |
+| Autobahnnummern | giplabel_autobahn_nr_ ab z7, 10 px, padding 100 | `road-ref-motorway-low` z7 |
+| Landeshauptstädte | Label ab z6 (Roboto Medium 13–15 px), rosa Kreis z6–10, Wien ohne Kreis | `geonamen-hauptstadt-low(-punkt)`, `geonamen-hauptstadt-wien-low` z6–7; ab z8 Icon place_capital |
+| Bezirkshauptorte | Label ab z7 (12 px), weißer Kreis z7–11 | `geonamen-bezirkshauptort-low(-punkt)` z7; ab z8 wie bisher |
+| Bundeslandnamen | gibt es nicht | `grenzen-label-land` minzoom 5 → 8 (z8 unverändert) |
+| Relief | graues Rasterrelief überall | nur Melk (relief-terrainrgb z5–16), nicht nachgebaut |
+
+Hinweis: `index.html` begrenzt den Viewer auf `minZoom: 6`; z0–5 sind erst nach einer Anpassung dort erreichbar.
+
 ## Testen
 
 Lokal: `python3 -m http.server` im Repo und `http://localhost:8000/` öffnen. Die Suche erlaubt per CORS nur

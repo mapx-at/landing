@@ -72,6 +72,8 @@
     "road-ref-secondary",
     "road-ref-primary",
     "road-ref-motorway",
+    "oev-rail-tunnel-low",
+    "oev-rail-low",
     "oev-rail-tunnel",
     "oev-subway-tunnel",
     "oev-rail-siding",
@@ -87,7 +89,14 @@
     "oev-funicular",
     "oev-cable-car",
     "oev-station",
-    "oev-airport"
+    "oev-airport",
+    "road-low-casing-primary",
+    "road-low-casing-motorway_link",
+    "road-low-casing-motorway",
+    "road-low-primary",
+    "road-low-motorway_link",
+    "road-low-motorway",
+    "road-ref-motorway-low"
    ],
    "boundaries": [
     "grenzen-country-outline",
@@ -128,7 +137,12 @@
     "geonamen-bezirkshauptort-punkt",
     "geonamen-bezirkshauptort",
     "geonamen-hauptstadt-punkt",
-    "geonamen-hauptstadt"
+    "geonamen-hauptstadt",
+    "geonamen-hauptstadt-low-punkt",
+    "geonamen-bezirkshauptort-low-punkt",
+    "geonamen-hauptstadt-low",
+    "geonamen-hauptstadt-wien-low",
+    "geonamen-bezirkshauptort-low"
    ],
    "relief": [
     "relief-hillshade",
@@ -437,7 +451,8 @@
     ],
     "fill-opacity": 0.25,
     "fill-antialias": false
-   }
+   },
+   "minzoom": 4
   },
   {
    "id": "water-dkm",
@@ -461,7 +476,8 @@
    "paint": {
     "fill-color": "#b3d9ff",
     "fill-antialias": false
-   }
+   },
+   "minzoom": 8
   },
   {
    "id": "ggn-water-a",
@@ -960,7 +976,8 @@
      1,
      1
     ]
-   }
+   },
+   "minzoom": 6
   },
   {
    "id": "ggn-water-l",
@@ -1445,7 +1462,8 @@
       ]
      ]
     ]
-   }
+   },
+   "minzoom": 6
   },
   {
    "id": "landuse-siedlung",
@@ -1476,7 +1494,8 @@
     ],
     "fill-opacity": 1,
     "fill-antialias": false
-   }
+   },
+   "minzoom": 4
   },
   {
    "id": "landuse-siedlung-line",
@@ -2712,6 +2731,56 @@
    }
   },
   {
+   "type": "line",
+   "source": "oev",
+   "source-layer": "rail_l",
+   "minzoom": 6,
+   "maxzoom": 8,
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "id": "oev-rail-tunnel-low",
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "class"
+     ],
+     "rail"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "service"
+     ],
+     "main"
+    ],
+    [
+     "!",
+     [
+      "has",
+      "construction"
+     ]
+    ]
+   ],
+   "paint": {
+    "line-color": "rgba(217, 195, 173, 1)",
+    "line-width": 1.2
+   }
+  },
+  {
    "id": "oev-rail-tunnel",
    "type": "line",
    "source": "oev",
@@ -2899,7 +2968,8 @@
       7
      ]
     ]
-   }
+   },
+   "minzoom": 8
   },
   {
    "id": "oev-subway-tunnel",
@@ -2990,7 +3060,8 @@
      17,
      8
     ]
-   }
+   },
+   "minzoom": 5
   },
   {
    "id": "grenzen-district-outline",
@@ -3084,7 +3155,8 @@
      17,
      2.6
     ]
-   }
+   },
+   "minzoom": 5
   },
   {
    "id": "grenzen-district",
@@ -3215,6 +3287,150 @@
      3.4
     ],
     "line-offset": 2
+   }
+  },
+  {
+   "id": "road-low-casing-primary",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 7,
+   "maxzoom": 8,
+   "filter": [
+    "==",
+    [
+     "get",
+     "draw_class"
+    ],
+    "primary"
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#CDAA66",
+    "line-width": 5.2
+   }
+  },
+  {
+   "id": "road-low-casing-motorway_link",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 7,
+   "maxzoom": 8,
+   "filter": [
+    "==",
+    [
+     "get",
+     "draw_class"
+    ],
+    "motorway_link"
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#CDAA66",
+    "line-width": 3
+   }
+  },
+  {
+   "id": "road-low-casing-motorway",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 6,
+   "maxzoom": 8,
+   "filter": [
+    "==",
+    [
+     "get",
+     "draw_class"
+    ],
+    "motorway"
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#CD8966",
+    "line-width": 5.7
+   }
+  },
+  {
+   "id": "road-low-primary",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 7,
+   "maxzoom": 8,
+   "filter": [
+    "==",
+    [
+     "get",
+     "draw_class"
+    ],
+    "primary"
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#FFFF99",
+    "line-width": 3.1
+   }
+  },
+  {
+   "id": "road-low-motorway_link",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 7,
+   "maxzoom": 8,
+   "filter": [
+    "==",
+    [
+     "get",
+     "draw_class"
+    ],
+    "motorway_link"
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#FFEBAF",
+    "line-width": 1.5
+   }
+  },
+  {
+   "id": "road-low-motorway",
+   "type": "line",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 6,
+   "maxzoom": 8,
+   "filter": [
+    "==",
+    [
+     "get",
+     "draw_class"
+    ],
+    "motorway"
+   ],
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#FFD37F",
+    "line-width": 4.2
    }
   },
   {
@@ -4268,6 +4484,56 @@
    }
   },
   {
+   "type": "line",
+   "source": "oev",
+   "source-layer": "rail_l",
+   "minzoom": 6,
+   "maxzoom": 8,
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "id": "oev-rail-low",
+   "filter": [
+    "all",
+    [
+     "!=",
+     [
+      "get",
+      "brunnel"
+     ],
+     "tunnel"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "class"
+     ],
+     "rail"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "service"
+     ],
+     "main"
+    ],
+    [
+     "!",
+     [
+      "has",
+      "construction"
+     ]
+    ]
+   ],
+   "paint": {
+    "line-color": "rgba(179, 151, 116, 1)",
+    "line-width": 1.2
+   }
+  },
+  {
    "id": "oev-rail-siding",
    "type": "line",
    "source": "oev",
@@ -4538,7 +4804,8 @@
       7
      ]
     ]
-   }
+   },
+   "minzoom": 8
   },
   {
    "id": "oev-rail-construction",
@@ -6147,6 +6414,54 @@
    }
   },
   {
+   "id": "road-ref-motorway-low",
+   "type": "symbol",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 7,
+   "filter": [
+    "all",
+    [
+     "has",
+     "ref"
+    ],
+    [
+     "in",
+     [
+      "get",
+      "draw_class"
+     ],
+     [
+      "literal",
+      [
+       "motorway"
+      ]
+     ]
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "symbol-spacing": 400,
+    "text-rotation-alignment": "viewport",
+    "text-field": [
+     "get",
+     "ref"
+    ],
+    "text-font": [
+     "Noto Sans Bold"
+    ],
+    "text-size": 10,
+    "text-padding": 100,
+    "symbol-sort-key": 100
+   },
+   "paint": {
+    "text-color": "#FFFFFF",
+    "text-halo-color": "#0064C8",
+    "text-halo-width": 6
+   },
+   "maxzoom": 8
+  },
+  {
    "id": "road-name-minor",
    "type": "symbol",
    "source": "gip",
@@ -7097,7 +7412,7 @@
    "type": "symbol",
    "source": "grenzen",
    "source-layer": "admin_label_p",
-   "minzoom": 5,
+   "minzoom": 8,
    "maxzoom": 9,
    "filter": [
     "==",
@@ -9239,6 +9554,229 @@
     "text-halo-width": 1.5,
     "text-halo-blur": 0.3
    }
+  },
+  {
+   "id": "geonamen-hauptstadt-low-punkt",
+   "type": "circle",
+   "source": "geonamen",
+   "source-layer": "country_capital",
+   "minzoom": 6,
+   "maxzoom": 8,
+   "filter": [
+    "!=",
+    [
+     "get",
+     "name"
+    ],
+    "Wien"
+   ],
+   "paint": {
+    "circle-color": "rgba(255, 190, 232, 1)",
+    "circle-stroke-color": "rgba(40, 40, 40, 1)",
+    "circle-stroke-width": 0.8,
+    "circle-radius": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     6,
+     2.0,
+     8,
+     2.5
+    ],
+    "circle-translate": [
+     0,
+     1
+    ],
+    "circle-translate-anchor": "map"
+   }
+  },
+  {
+   "id": "geonamen-bezirkshauptort-low-punkt",
+   "type": "circle",
+   "source": "geonamen",
+   "source-layer": "district_capital_p",
+   "minzoom": 7,
+   "maxzoom": 8,
+   "filter": [
+    "!=",
+    [
+     "get",
+     "name"
+    ],
+    "Wien"
+   ],
+   "paint": {
+    "circle-color": "rgba(250, 250, 250, 1)",
+    "circle-stroke-color": "rgba(40, 40, 40, 1)",
+    "circle-stroke-width": 0.8,
+    "circle-radius": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     7,
+     2.25,
+     8,
+     2.5
+    ],
+    "circle-translate": [
+     0,
+     1
+    ],
+    "circle-translate-anchor": "map"
+   }
+  },
+  {
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "country_capital",
+   "minzoom": 6,
+   "maxzoom": 8,
+   "layout": {
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Medium"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     6,
+     13,
+     9,
+     15
+    ],
+    "text-anchor": "bottom",
+    "text-allow-overlap": true,
+    "text-letter-spacing": 0.05,
+    "text-max-width": 8,
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ]
+   },
+   "paint": {
+    "text-color": "#000000",
+    "text-halo-color": "rgba(250, 250, 250, 1)",
+    "text-halo-width": 1.5
+   },
+   "id": "geonamen-hauptstadt-low",
+   "filter": [
+    "!=",
+    [
+     "get",
+     "name"
+    ],
+    "Wien"
+   ]
+  },
+  {
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "country_capital",
+   "minzoom": 6,
+   "maxzoom": 8,
+   "layout": {
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Medium"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     6,
+     13,
+     9,
+     15
+    ],
+    "text-anchor": "bottom",
+    "text-allow-overlap": true,
+    "text-letter-spacing": 0.05,
+    "text-max-width": 8,
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ]
+   },
+   "paint": {
+    "text-color": "#000000",
+    "text-halo-color": "rgba(250, 250, 250, 1)",
+    "text-halo-width": 1.5
+   },
+   "id": "geonamen-hauptstadt-wien-low",
+   "filter": [
+    "==",
+    [
+     "get",
+     "name"
+    ],
+    "Wien"
+   ]
+  },
+  {
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "district_capital_p",
+   "minzoom": 7,
+   "maxzoom": 8,
+   "layout": {
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     7,
+     12,
+     8,
+     12
+    ],
+    "text-anchor": "bottom",
+    "text-allow-overlap": true,
+    "text-letter-spacing": 0.03,
+    "text-max-width": 6,
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ]
+   },
+   "paint": {
+    "text-color": "#000000",
+    "text-halo-color": "rgba(250, 250, 250, 1)",
+    "text-halo-width": 1.2
+   },
+   "id": "geonamen-bezirkshauptort-low"
   }
  ]
 }
