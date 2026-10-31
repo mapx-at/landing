@@ -185,35 +185,21 @@ ul.legend.roads{border-top:1px solid var(--line);padding-top:6px;margin-top:8px}
       paint: { "text-color": "#3f3f3f", "text-halo-color": "rgba(255,255,255,.9)", "text-halo-width": 1.4 } }
   ];
 
-  // Farben je namecat, angelehnt an die Flaechenfarben von basemap.at.
+  // namecat = basemap.at-Klasse (int 1-12). Farben = basemap.at-Farbe mit
+  // Deckkraft 0,25 ueber dem Hintergrund vorgemischt (basemap.at legt sie ueber
+  // ein Relief), Siedlung deckend wie bei basemap.at.
   var CATS = [
-    ["wald",                 "#c3d9a5", "Wald"],
-    ["krummholz",            "#b5cf9a", "Krummholz"],
-    ["forststrasse",         "#e8e2d0", "Forststraße"],
-    ["verbuscht",            "#d3e2b8", "Verbuscht"],
-    ["acker_wiese",          "#f1efd6", "Acker, Wiese"],
-    ["garten",               "#dfe9c6", "Garten"],
-    ["weingarten",           "#e3d3e3", "Weingarten"],
-    ["dauerkultur",          "#d6e3b5", "Dauerkultur, Obst"],
-    ["alpe",                 "#e6ecc9", "Alpe"],
-    ["gewaesser_fliessend",  "#aad3ee", "Fließgewässer"],
-    ["gewaesser_stehend",    "#9ccbeb", "Stehendes Gewässer"],
-    ["feuchtgebiet",         "#c6e0dc", "Feuchtgebiet"],
-    ["gewaesserrand",        "#d5e6e0", "Gewässerrand"],
-    ["strasse",              "#fbfaf7", "Straße"],
-    ["verkehrsrand",         "#efede6", "Verkehrsrand"],
-    ["schiene",              "#cfc8c2", "Schiene"],
-    ["parkplatz",            "#ebe7e2", "Parkplatz"],
-    ["betrieb",              "#e5d9d4", "Betriebsfläche"],
-    ["gebaeudenebenflaeche", "#e9e3dc", "Gebäudenebenfläche"],
-    ["gebaeude",             "#d6c9bf", "Gebäudefläche"],
-    ["friedhof",             "#cfdcc4", "Friedhof"],
-    ["freizeit",             "#d9ecc0", "Freizeitfläche"],
-    ["abbau",                "#ddd2c4", "Abbau, Halde"],
-    ["fels",                 "#e2ddd8", "Fels, Geröll"],
-    ["vegetationsarm",       "#ede8dc", "Vegetationsarm"],
-    ["gletscher",            "#f2f7fa", "Gletscher"],
-    ["sonstige",             "#ecebe6", "Sonstige"]
+    [1,  "#e0e0de", "Siedlung"],
+    [2,  "#daeacc", "Grünfläche"],
+    [3,  "#f3f7dd", "Landwirtschaft"],
+    [5,  "#cae4b7", "Wald"],
+    [6,  "#d5f3f2", "Gletscher"],
+    [7,  "#f8f7f2", "Verkehr, Sonstiges"],
+    [8,  "#f0f0ec", "Fels, Geröll"],
+    [9,  "#e2f7cf", "Gewässer, Gewässerrand"],
+    [10, "#dfd6c6", "Friedhof"],
+    [11, "#d2ddc6", "Freizeitfläche"],
+    [12, "#e8e7c8", "Weingarten"]
   ];
   var BUILDING = "#a8968a", BUILDING_LINE = "#7d6d62", FALLBACK = "#ecebe6";
 
