@@ -67,8 +67,11 @@
     "road-bridge-casing-motorway",
     "road-bridge-motorway",
     "road-name-minor",
+    "road-name-minor-hi",
     "road-name-primary",
+    "road-name-primary-hi",
     "road-name-motorway",
+    "road-name-motorway-hi",
     "road-ref-secondary",
     "road-ref-primary",
     "road-ref-motorway",
@@ -6500,11 +6503,213 @@
    "maxzoom": 8
   },
   {
+   "id": "hoehenlinien-label",
+   "type": "symbol",
+   "source": "hoehenlinien",
+   "source-layer": "contour_l",
+   "minzoom": 10,
+   "filter": [
+    "==",
+    [
+     "get",
+     "index"
+    ],
+    1
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "symbol-spacing": [
+     "step",
+     [
+      "zoom"
+     ],
+     600,
+     14,
+     800,
+     16,
+     1000
+    ],
+    "text-field": [
+     "to-string",
+     [
+      "get",
+      "ele"
+     ]
+    ],
+    "text-font": [
+     "Noto Sans Italic"
+    ],
+    "text-size": [
+     "step",
+     [
+      "zoom"
+     ],
+     13.3,
+     11,
+     12,
+     14,
+     13.3,
+     16,
+     14.7
+    ],
+    "text-max-angle": 30,
+    "text-padding": 4,
+    "text-optional": true
+   },
+   "paint": {
+    "text-color": [
+     "step",
+     [
+      "zoom"
+     ],
+     "#997A6B",
+     11,
+     "#806659"
+    ],
+    "text-halo-color": "rgba(230, 230, 230, 0.5)",
+    "text-halo-width": 1.07
+   }
+  },
+  {
+   "id": "geonamen-ried",
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "geoname_p",
+   "minzoom": 14,
+   "layout": {
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Italic"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     10,
+     16,
+     11.5
+    ],
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ],
+    "text-max-width": 8,
+    "text-padding": 2,
+    "text-letter-spacing": 0.05
+   },
+   "paint": {
+    "text-color": "rgba(120, 100, 80, 1)",
+    "text-halo-color": "rgba(255, 255, 255, 0.9)",
+    "text-halo-width": 1.2,
+    "text-halo-blur": 0.3
+   },
+   "filter": [
+    "==",
+    [
+     "get",
+     "class"
+    ],
+    "ried"
+   ]
+  },
+  {
    "id": "road-name-minor",
    "type": "symbol",
    "source": "gip",
    "source-layer": "gip_l",
    "minzoom": 12,
+   "filter": [
+    "all",
+    [
+     "has",
+     "name"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ],
+    [
+     "in",
+     [
+      "get",
+      "draw_class"
+     ],
+     [
+      "literal",
+      [
+       "secondary",
+       "minor",
+       "pedestrian",
+       "service"
+      ]
+     ]
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "symbol-spacing": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     13,
+     300,
+     14,
+     80,
+     15,
+     300
+    ],
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Medium"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     12,
+     9,
+     15,
+     9
+    ],
+    "text-padding": 0,
+    "text-max-angle": 60
+   },
+   "paint": {
+    "text-color": "#4E4E4E",
+    "text-halo-color": "#FFFFFF",
+    "text-halo-width": 0.8
+   },
+   "maxzoom": 15
+  },
+  {
+   "id": "road-name-minor-hi",
+   "type": "symbol",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 15,
    "filter": [
     "all",
     [
@@ -6554,8 +6759,6 @@
      [
       "zoom"
      ],
-     12,
-     9,
      15,
      9,
      16,
@@ -6607,7 +6810,21 @@
    ],
    "layout": {
     "symbol-placement": "line",
-    "symbol-spacing": 450,
+    "symbol-spacing": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     12,
+     450,
+     13,
+     250,
+     15,
+     400
+    ],
     "text-field": [
      "get",
      "name"
@@ -6627,6 +6844,73 @@
      9,
      14,
      10,
+     15,
+     11
+    ],
+    "text-padding": 0,
+    "text-max-angle": 60
+   },
+   "paint": {
+    "text-color": "#730000",
+    "text-halo-color": "#FFFF99",
+    "text-halo-width": 0.8
+   },
+   "maxzoom": 15
+  },
+  {
+   "id": "road-name-primary-hi",
+   "type": "symbol",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 15,
+   "filter": [
+    "all",
+    [
+     "has",
+     "name"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ],
+    [
+     "in",
+     [
+      "get",
+      "draw_class"
+     ],
+     [
+      "literal",
+      [
+       "primary"
+      ]
+     ]
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "symbol-spacing": 450,
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Medium"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     15,
+     11,
      16,
      12
     ],
@@ -6694,6 +6978,73 @@
      9,
      14,
      10,
+     15,
+     11
+    ],
+    "text-padding": 0,
+    "text-max-angle": 60
+   },
+   "paint": {
+    "text-color": "#730000",
+    "text-halo-color": "#FFD37F",
+    "text-halo-width": 0.8
+   },
+   "maxzoom": 15
+  },
+  {
+   "id": "road-name-motorway-hi",
+   "type": "symbol",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 15,
+   "filter": [
+    "all",
+    [
+     "has",
+     "name"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ],
+    [
+     "in",
+     [
+      "get",
+      "draw_class"
+     ],
+     [
+      "literal",
+      [
+       "motorway"
+      ]
+     ]
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "symbol-spacing": 850,
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Medium"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     15,
+     11,
      16,
      12
     ],
@@ -7889,124 +8240,6 @@
     "text-halo-color": "rgba(255, 255, 255, 1)",
     "text-halo-width": 1
    }
-  },
-  {
-   "id": "hoehenlinien-label",
-   "type": "symbol",
-   "source": "hoehenlinien",
-   "source-layer": "contour_l",
-   "minzoom": 10,
-   "filter": [
-    "==",
-    [
-     "get",
-     "index"
-    ],
-    1
-   ],
-   "layout": {
-    "symbol-placement": "line",
-    "symbol-spacing": [
-     "step",
-     [
-      "zoom"
-     ],
-     600,
-     14,
-     800,
-     16,
-     1000
-    ],
-    "text-field": [
-     "to-string",
-     [
-      "get",
-      "ele"
-     ]
-    ],
-    "text-font": [
-     "Noto Sans Italic"
-    ],
-    "text-size": [
-     "step",
-     [
-      "zoom"
-     ],
-     13.3,
-     11,
-     12,
-     14,
-     13.3,
-     16,
-     14.7
-    ],
-    "text-max-angle": 30,
-    "text-padding": 4,
-    "text-optional": true
-   },
-   "paint": {
-    "text-color": [
-     "step",
-     [
-      "zoom"
-     ],
-     "#997A6B",
-     11,
-     "#806659"
-    ],
-    "text-halo-color": "rgba(230, 230, 230, 0.5)",
-    "text-halo-width": 1.07
-   }
-  },
-  {
-   "id": "geonamen-ried",
-   "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "geoname_p",
-   "minzoom": 14,
-   "layout": {
-    "text-field": [
-     "get",
-     "name"
-    ],
-    "text-font": [
-     "Noto Sans Italic"
-    ],
-    "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
-     [
-      "zoom"
-     ],
-     14,
-     10,
-     16,
-     11.5
-    ],
-    "symbol-sort-key": [
-     "get",
-     "rank"
-    ],
-    "text-max-width": 8,
-    "text-padding": 2,
-    "text-letter-spacing": 0.05
-   },
-   "paint": {
-    "text-color": "rgba(120, 100, 80, 1)",
-    "text-halo-color": "rgba(255, 255, 255, 0.9)",
-    "text-halo-width": 1.2,
-    "text-halo-blur": 0.3
-   },
-   "filter": [
-    "==",
-    [
-     "get",
-     "class"
-    ],
-    "ried"
-   ]
   },
   {
    "id": "geonamen-gebiet",
