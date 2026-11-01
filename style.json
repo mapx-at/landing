@@ -500,7 +500,7 @@
     "fill-opacity": 0.25,
     "fill-antialias": false
    },
-   "minzoom": 4
+   "minzoom": 2
   },
   {
    "id": "water-dkm",
@@ -9643,7 +9643,7 @@
    "type": "circle",
    "source": "geonamen",
    "source-layer": "country_capital",
-   "minzoom": 6,
+   "minzoom": 5,
    "maxzoom": 8,
    "filter": [
     "!=",
@@ -9665,8 +9665,8 @@
      [
       "zoom"
      ],
-     6,
-     2.0,
+     5,
+     1.75,
      8,
      2.5
     ],
@@ -9720,7 +9720,7 @@
    "type": "symbol",
    "source": "geonamen",
    "source-layer": "country_capital",
-   "minzoom": 6,
+   "minzoom": 5,
    "maxzoom": 8,
    "layout": {
     "text-field": [
@@ -9738,6 +9738,8 @@
      [
       "zoom"
      ],
+     5,
+     12,
      6,
      13,
      9,
@@ -9771,7 +9773,7 @@
    "type": "symbol",
    "source": "geonamen",
    "source-layer": "country_capital",
-   "minzoom": 6,
+   "minzoom": 5,
    "maxzoom": 8,
    "layout": {
     "text-field": [
@@ -9789,6 +9791,8 @@
      [
       "zoom"
      ],
+     5,
+     12,
      6,
      13,
      9,
