@@ -6481,8 +6481,7 @@
     ]
    ],
    "layout": {
-    "symbol-placement": "line",
-    "symbol-spacing": 400,
+    "symbol-placement": "point",
     "text-rotation-alignment": "viewport",
     "text-field": [
      "get",
@@ -6492,7 +6491,7 @@
      "Noto Sans Bold"
     ],
     "text-size": 10,
-    "text-padding": 100,
+    "text-padding": 50,
     "symbol-sort-key": 100
    },
    "paint": {
