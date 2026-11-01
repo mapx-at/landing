@@ -66,6 +66,7 @@
     "road-bridge-motorway_link",
     "road-bridge-casing-motorway",
     "road-bridge-motorway",
+    "road-name-weg",
     "road-name-minor",
     "road-name-minor-hi",
     "road-name-primary",
@@ -6570,6 +6571,88 @@
    }
   },
   {
+   "id": "road-name-weg",
+   "type": "symbol",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 12,
+   "filter": [
+    "all",
+    [
+     "has",
+     "name"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ],
+    [
+     "in",
+     [
+      "get",
+      "draw_class"
+     ],
+     [
+      "literal",
+      [
+       "pedestrian",
+       "service"
+      ]
+     ]
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "symbol-spacing": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     13,
+     200,
+     14,
+     80,
+     15,
+     300
+    ],
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Medium"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     12,
+     9,
+     15,
+     9
+    ],
+    "text-padding": 0,
+    "text-max-angle": 60
+   },
+   "paint": {
+    "text-color": "#4E4E4E",
+    "text-halo-color": "#FFFFFF",
+    "text-halo-width": 0.8
+   },
+   "maxzoom": 15
+  },
+  {
    "id": "geonamen-ried",
    "type": "symbol",
    "source": "geonamen",
@@ -6649,9 +6732,7 @@
       "literal",
       [
        "secondary",
-       "minor",
-       "pedestrian",
-       "service"
+       "minor"
       ]
      ]
     ]
@@ -6667,7 +6748,7 @@
       "zoom"
      ],
      13,
-     300,
+     200,
      14,
      80,
      15,
