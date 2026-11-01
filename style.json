@@ -6,6 +6,7 @@
   "mapx:groups": {
    "water": [
     "water-dkm",
+    "water-rand-line",
     "ggn-water-a",
     "ggn-water-l-tunnel",
     "ggn-water-l"
@@ -76,8 +77,6 @@
     "road-ref-secondary",
     "road-ref-primary",
     "road-ref-motorway",
-    "oev-rail-tunnel-low",
-    "oev-rail-low",
     "oev-rail-tunnel",
     "oev-subway-tunnel",
     "oev-rail-siding",
@@ -111,10 +110,6 @@
     "grenzen-municipality",
     "grenzen-state-outline",
     "grenzen-state",
-    "grenzen-label-country-right",
-    "grenzen-label-country-left",
-    "grenzen-label-state-right",
-    "grenzen-label-land",
     "grenzen-label-bezirk",
     "grenzen-label-gemeinde"
    ],
@@ -162,43 +157,43 @@
      "Siedlung"
     ],
     [
-     "#daeacc",
+     "#e1f2d9",
      "Grünfläche"
     ],
     [
-     "#f3f7dd",
+     "#faffea",
      "Landwirtschaft"
     ],
     [
-     "#cae4b7",
+     "#d1ecc4",
      "Wald"
     ],
     [
-     "#d5f3f2",
+     "#dcfbff",
      "Gletscher"
     ],
     [
-     "#f8f7f2",
+     "#ffffff",
      "Verkehr, Sonstiges"
     ],
     [
-     "#f0f0ec",
+     "#f6f8f8",
      "Fels, Geröll"
     ],
     [
-     "#e2f7cf",
+     "#e8ffdc",
      "Gewässerrand, Feuchtgebiet"
     ],
     [
-     "#dfd6c6",
+     "#e6ded2",
      "Friedhof"
     ],
     [
-     "#d2ddc6",
+     "#d9e6d2",
      "Freizeitfläche"
     ],
     [
-     "#e8e7c8",
+     "#efefd5",
      "Weingarten"
     ],
     [
@@ -412,6 +407,17 @@
    }
   },
   {
+   "id": "land-hell",
+   "type": "fill",
+   "source": "dkm",
+   "source-layer": "landuse_a",
+   "minzoom": 7,
+   "paint": {
+    "fill-color": "#ffffff",
+    "fill-antialias": false
+   }
+  },
+  {
    "id": "relief-hillshade",
    "type": "hillshade",
    "source": "relief",
@@ -482,7 +488,7 @@
      8,
      "#DCE4E4",
      9,
-     "#A4FF73",
+     "#A3FF73",
      10,
      "#997D4D",
      11,
@@ -520,6 +526,25 @@
     "fill-antialias": false
    },
    "minzoom": 8
+  },
+  {
+   "id": "water-rand-line",
+   "type": "line",
+   "source": "dkm",
+   "source-layer": "landuse_a",
+   "minzoom": 17,
+   "filter": [
+    "==",
+    [
+     "get",
+     "usage"
+    ],
+    64
+   ],
+   "paint": {
+    "line-color": "#A3FF73",
+    "line-width": 0.6
+   }
   },
   {
    "id": "ggn-water-a",
@@ -577,7 +602,7 @@
         "rank"
        ],
        1,
-       3.0,
+       0,
        2,
        0,
        3,
@@ -614,9 +639,9 @@
        1,
        3.0,
        2,
-       0,
+       3.0,
        3,
-       0,
+       3.0,
        4,
        0,
        5,
@@ -649,9 +674,9 @@
        1,
        3.0,
        2,
-       3.0,
+       3.14,
        3,
-       3.0,
+       3.07,
        4,
        0,
        5,
@@ -684,13 +709,13 @@
        1,
        3.0,
        2,
-       3.17,
+       3.29,
        3,
-       3.08,
+       3.14,
        4,
-       0,
+       3.0,
        5,
-       0,
+       3.0,
        6,
        0,
        7,
@@ -719,11 +744,11 @@
        1,
        3.0,
        2,
-       3.33,
+       3.43,
        3,
-       3.17,
+       3.21,
        4,
-       3.0,
+       3.04,
        5,
        3.0,
        6,
@@ -754,15 +779,15 @@
        1,
        3.0,
        2,
-       3.5,
+       3.57,
        3,
-       3.25,
+       3.29,
        4,
-       3.05,
+       3.08,
        5,
        3.0,
        6,
-       0,
+       3.0,
        7,
        0,
        0
@@ -789,11 +814,11 @@
        1,
        3.0,
        2,
-       3.67,
+       3.71,
        3,
-       3.33,
+       3.36,
        4,
-       3.1,
+       3.12,
        5,
        3.0,
        6,
@@ -824,11 +849,11 @@
        1,
        3.0,
        2,
-       3.83,
+       3.86,
        3,
-       3.42,
+       3.43,
        4,
-       3.15,
+       3.16,
        5,
        3.0,
        6,
@@ -904,7 +929,7 @@
        6,
        3.3,
        7,
-       2.0,
+       0,
        0
       ]
      ],
@@ -1019,7 +1044,7 @@
      1
     ]
    },
-   "minzoom": 6
+   "minzoom": 11
   },
   {
    "id": "ggn-water-l",
@@ -1067,7 +1092,7 @@
         "rank"
        ],
        1,
-       3.0,
+       0,
        2,
        0,
        3,
@@ -1104,9 +1129,9 @@
        1,
        3.0,
        2,
-       0,
+       3.0,
        3,
-       0,
+       3.0,
        4,
        0,
        5,
@@ -1139,9 +1164,9 @@
        1,
        3.0,
        2,
-       3.0,
+       3.14,
        3,
-       3.0,
+       3.07,
        4,
        0,
        5,
@@ -1174,13 +1199,13 @@
        1,
        3.0,
        2,
-       3.17,
+       3.29,
        3,
-       3.08,
+       3.14,
        4,
-       0,
+       3.0,
        5,
-       0,
+       3.0,
        6,
        0,
        7,
@@ -1209,11 +1234,11 @@
        1,
        3.0,
        2,
-       3.33,
+       3.43,
        3,
-       3.17,
+       3.21,
        4,
-       3.0,
+       3.04,
        5,
        3.0,
        6,
@@ -1244,15 +1269,15 @@
        1,
        3.0,
        2,
-       3.5,
+       3.57,
        3,
-       3.25,
+       3.29,
        4,
-       3.05,
+       3.08,
        5,
        3.0,
        6,
-       0,
+       3.0,
        7,
        0,
        0
@@ -1279,11 +1304,11 @@
        1,
        3.0,
        2,
-       3.67,
+       3.71,
        3,
-       3.33,
+       3.36,
        4,
-       3.1,
+       3.12,
        5,
        3.0,
        6,
@@ -1314,11 +1339,11 @@
        1,
        3.0,
        2,
-       3.83,
+       3.86,
        3,
-       3.42,
+       3.43,
        4,
-       3.15,
+       3.16,
        5,
        3.0,
        6,
@@ -1394,7 +1419,7 @@
        6,
        3.3,
        7,
-       2.0,
+       0,
        0
       ]
      ],
@@ -1505,7 +1530,7 @@
      ]
     ]
    },
-   "minzoom": 6
+   "minzoom": 7
   },
   {
    "id": "landuse-siedlung",
@@ -1537,7 +1562,7 @@
     "fill-opacity": 1,
     "fill-antialias": false
    },
-   "minzoom": 4
+   "minzoom": 10
   },
   {
    "id": "landuse-siedlung-line",
@@ -1786,15 +1811,15 @@
      11,
      6.5,
      12,
-     7,
+     6.67,
      13,
-     7.5,
+     6.67,
      14,
-     8,
+     10.67,
      15,
-     9,
+     10.67,
      16,
-     11,
+     13,
      17,
      13,
      18,
@@ -1847,19 +1872,19 @@
      10,
      3,
      12,
-     3.5,
+     5.33,
      13,
-     4,
+     5.33,
      14,
-     4.5,
+     8,
      15,
-     6,
+     8,
      16,
-     6,
+     8,
      17,
-     7,
+     8.5,
      18,
-     8
+     9
     ],
     "line-dasharray": [
      0.7,
@@ -1910,15 +1935,15 @@
      10,
      6,
      12,
-     6.5,
+     6,
      13,
-     7,
+     6,
      14,
-     7.5,
+     10,
      15,
-     9,
+     10,
      16,
-     10.5,
+     12.5,
      17,
      12.5,
      18,
@@ -1967,17 +1992,17 @@
       "zoom"
      ],
      10,
-     4.5,
+     2.67,
      11,
-     4.5,
+     3.33,
      12,
-     5,
+     6,
      13,
      6,
      14,
-     6.5,
+     6,
      15,
-     8.5,
+     6,
      16,
      9.5,
      17,
@@ -2028,15 +2053,15 @@
       "zoom"
      ],
      12,
-     3,
+     2.67,
      13,
-     3.5,
+     2.67,
      14,
-     5,
+     6,
      15,
-     6.5,
+     6,
      16,
-     7.5,
+     9.33,
      17,
      10,
      18,
@@ -2155,15 +2180,15 @@
      11,
      5,
      12,
-     5.5,
+     4,
      13,
-     6,
+     4,
      14,
-     6.5,
+     8,
      15,
-     7.5,
+     8,
      16,
-     9.5,
+     11.33,
      17,
      11.5,
      18,
@@ -2217,19 +2242,19 @@
      11,
      2.5,
      12,
-     2,
+     4,
      13,
-     2.5,
+     4,
      14,
-     3,
+     6.67,
      15,
-     4.5,
+     6.67,
      16,
-     4.75,
+     6.67,
      17,
-     5.5,
+     7,
      18,
-     6.5
+     7.5
     ],
     "line-opacity": 1
    }
@@ -2281,15 +2306,15 @@
      11,
      3.5,
      12,
-     5,
+     4,
      13,
-     5.5,
+     4,
      14,
-     6,
+     8,
      15,
-     7.5,
+     8,
      16,
-     9,
+     10.67,
      17,
      11,
      18,
@@ -2337,15 +2362,17 @@
       "zoom"
      ],
      10,
-     3.4,
+     1.33,
+     11,
+     2,
      12,
-     3.5,
+     4.67,
      13,
-     4.5,
+     4.67,
      14,
-     5,
+     4.67,
      15,
-     7,
+     4.67,
      16,
      8,
      17,
@@ -2395,15 +2422,15 @@
       "zoom"
      ],
      12,
-     1.5,
+     1.33,
      13,
-     2,
+     1.33,
      14,
-     3.5,
+     4.67,
      15,
-     5,
+     4.67,
      16,
-     6,
+     8,
      17,
      8.5,
      18,
@@ -2773,56 +2800,6 @@
    }
   },
   {
-   "type": "line",
-   "source": "oev",
-   "source-layer": "rail_l",
-   "minzoom": 6,
-   "maxzoom": 8,
-   "layout": {
-    "line-cap": "butt",
-    "line-join": "round"
-   },
-   "id": "oev-rail-tunnel-low",
-   "filter": [
-    "all",
-    [
-     "==",
-     [
-      "get",
-      "brunnel"
-     ],
-     "tunnel"
-    ],
-    [
-     "==",
-     [
-      "get",
-      "class"
-     ],
-     "rail"
-    ],
-    [
-     "==",
-     [
-      "get",
-      "service"
-     ],
-     "main"
-    ],
-    [
-     "!",
-     [
-      "has",
-      "construction"
-     ]
-    ]
-   ],
-   "paint": {
-    "line-color": "rgba(217, 195, 173, 1)",
-    "line-width": 1.2
-   }
-  },
-  {
    "id": "oev-rail-tunnel",
    "type": "line",
    "source": "oev",
@@ -3018,7 +2995,7 @@
    "type": "line",
    "source": "oev",
    "source-layer": "rail_l",
-   "minzoom": 12,
+   "minzoom": 13,
    "filter": [
     "all",
     [
@@ -3136,7 +3113,7 @@
      4.9
     ]
    },
-   "minzoom": 9
+   "minzoom": 8
   },
   {
    "id": "grenzen-municipality-outline",
@@ -3163,7 +3140,7 @@
      4.2
     ]
    },
-   "minzoom": 13
+   "minzoom": 12
   },
   {
    "id": "grenzen-country",
@@ -3229,7 +3206,7 @@
      2.2
     ]
    },
-   "minzoom": 9
+   "minzoom": 8
   },
   {
    "id": "grenzen-municipality",
@@ -3256,7 +3233,7 @@
      1.7
     ]
    },
-   "minzoom": 13
+   "minzoom": 12
   },
   {
    "id": "grenzen-state-outline",
@@ -3360,7 +3337,7 @@
    "type": "line",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 7,
+   "minzoom": 6,
    "maxzoom": 8,
    "filter": [
     "==",
@@ -3432,7 +3409,7 @@
    "type": "line",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 7,
+   "minzoom": 6,
    "maxzoom": 8,
    "filter": [
     "==",
@@ -3880,15 +3857,15 @@
       "zoom"
      ],
      12,
-     3,
+     2.67,
      13,
-     3.5,
+     2.67,
      14,
-     5,
+     6,
      15,
-     6.5,
+     6,
      16,
-     7.5,
+     9.33,
      17,
      10,
      18,
@@ -3949,17 +3926,17 @@
       "zoom"
      ],
      10,
-     4.5,
+     2.67,
      11,
-     4.5,
+     3.33,
      12,
-     5,
+     6,
      13,
      6,
      14,
-     6.5,
+     6,
      15,
-     8.5,
+     6,
      16,
      9.5,
      17,
@@ -4016,15 +3993,15 @@
      10,
      6,
      12,
-     6.5,
+     6,
      13,
-     7,
+     6,
      14,
-     7.5,
+     10,
      15,
-     9,
+     10,
      16,
-     10.5,
+     12.5,
      17,
      12.5,
      18,
@@ -4077,19 +4054,19 @@
      10,
      3,
      12,
-     3.5,
+     5.33,
      13,
-     4,
+     5.33,
      14,
-     4.5,
+     8,
      15,
-     6,
+     8,
      16,
-     6,
+     8,
      17,
-     7,
+     8.5,
      18,
-     8
+     9
     ],
     "line-opacity": 1
    }
@@ -4140,15 +4117,15 @@
      11,
      6.5,
      12,
-     7,
+     6.67,
      13,
-     7.5,
+     6.67,
      14,
-     8,
+     10.67,
      15,
-     9,
+     10.67,
      16,
-     11,
+     13,
      17,
      13,
      18,
@@ -4246,15 +4223,15 @@
       "zoom"
      ],
      12,
-     1.5,
+     1.33,
      13,
-     2,
+     1.33,
      14,
-     3.5,
+     4.67,
      15,
-     5,
+     4.67,
      16,
-     6,
+     8,
      17,
      8.5,
      18,
@@ -4315,15 +4292,17 @@
       "zoom"
      ],
      10,
-     3.4,
+     1.33,
+     11,
+     2,
      12,
-     3.5,
+     4.67,
      13,
-     4.5,
+     4.67,
      14,
-     5,
+     4.67,
      15,
-     7,
+     4.67,
      16,
      8,
      17,
@@ -4382,15 +4361,15 @@
      11,
      3.5,
      12,
-     5,
+     4,
      13,
-     5.5,
+     4,
      14,
-     6,
+     8,
      15,
-     7.5,
+     8,
      16,
-     9,
+     10.67,
      17,
      11,
      18,
@@ -4445,19 +4424,19 @@
      11,
      2.5,
      12,
-     2,
+     4,
      13,
-     2.5,
+     4,
      14,
-     3,
+     6.67,
      15,
-     4.5,
+     6.67,
      16,
-     4.75,
+     6.67,
      17,
-     5.5,
+     7,
      18,
-     6.5
+     7.5
     ],
     "line-opacity": 1
    }
@@ -4508,71 +4487,21 @@
      11,
      5,
      12,
-     5.5,
+     4,
      13,
-     6,
+     4,
      14,
-     6.5,
+     8,
      15,
-     7.5,
+     8,
      16,
-     9.5,
+     11.33,
      17,
      11.5,
      18,
      13.5
     ],
     "line-opacity": 1
-   }
-  },
-  {
-   "type": "line",
-   "source": "oev",
-   "source-layer": "rail_l",
-   "minzoom": 6,
-   "maxzoom": 8,
-   "layout": {
-    "line-cap": "butt",
-    "line-join": "round"
-   },
-   "id": "oev-rail-low",
-   "filter": [
-    "all",
-    [
-     "!=",
-     [
-      "get",
-      "brunnel"
-     ],
-     "tunnel"
-    ],
-    [
-     "==",
-     [
-      "get",
-      "class"
-     ],
-     "rail"
-    ],
-    [
-     "==",
-     [
-      "get",
-      "service"
-     ],
-     "main"
-    ],
-    [
-     "!",
-     [
-      "has",
-      "construction"
-     ]
-    ]
-   ],
-   "paint": {
-    "line-color": "rgba(179, 151, 116, 1)",
-    "line-width": 1.2
    }
   },
   {
@@ -4693,7 +4622,7 @@
     "line-join": "round"
    },
    "paint": {
-    "line-color": "rgba(179, 151, 116, 1)",
+    "line-color": "#897044",
     "line-width": [
      "interpolate",
      [
@@ -4847,7 +4776,7 @@
      ]
     ]
    },
-   "minzoom": 8
+   "minzoom": 9
   },
   {
    "id": "oev-rail-construction",
@@ -5066,7 +4995,7 @@
    "type": "line",
    "source": "oev",
    "source-layer": "rail_l",
-   "minzoom": 8,
+   "minzoom": 10,
    "filter": [
     "all",
     [
@@ -5208,7 +5137,7 @@
    "type": "line",
    "source": "oev",
    "source-layer": "rail_l",
-   "minzoom": 12,
+   "minzoom": 13,
    "filter": [
     "all",
     [
@@ -5260,7 +5189,7 @@
    "type": "line",
    "source": "oev",
    "source-layer": "rail_l",
-   "minzoom": 15,
+   "minzoom": 14,
    "filter": [
     "all",
     [
@@ -5418,7 +5347,7 @@
    "type": "line",
    "source": "dkm",
    "source-layer": "building_a",
-   "minzoom": 16,
+   "minzoom": 18,
    "paint": {
     "line-color": "#CC8F8F",
     "line-width": [
@@ -5574,7 +5503,7 @@
       "zoom"
      ],
      16,
-     9.5,
+     11.5,
      17,
      12.0,
      18,
@@ -5622,7 +5551,7 @@
       "zoom"
      ],
      16,
-     7,
+     9,
      17,
      9.5,
      18,
@@ -5766,7 +5695,7 @@
       "zoom"
      ],
      16,
-     12.5,
+     14.17,
      17,
      14.5,
      18,
@@ -5814,7 +5743,7 @@
       "zoom"
      ],
      16,
-     10,
+     11.67,
      17,
      12,
      18,
@@ -5862,11 +5791,11 @@
       "zoom"
      ],
      16,
-     8.25,
+     10.17,
      17,
-     9.0,
+     10.5,
      18,
-     10.0
+     11.0
     ]
    }
   },
@@ -5910,11 +5839,11 @@
       "zoom"
      ],
      16,
-     5.75,
+     7.67,
      17,
-     6.5,
+     8,
      18,
-     7.5
+     8.5
     ]
    }
   },
@@ -5958,7 +5887,7 @@
       "zoom"
      ],
      16,
-     13.0,
+     14.83,
      17,
      15.0,
      18,
@@ -6006,7 +5935,7 @@
       "zoom"
      ],
      16,
-     10.5,
+     12.33,
      17,
      12.5,
      18,
@@ -6187,7 +6116,7 @@
     "line-join": "round"
    },
    "paint": {
-    "line-color": "rgba(179, 151, 116, 1)",
+    "line-color": "#897044",
     "line-width": [
      "interpolate",
      [
@@ -6575,7 +6504,7 @@
    "type": "symbol",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 12,
+   "minzoom": 14,
    "filter": [
     "all",
     [
@@ -7342,7 +7271,7 @@
    "type": "symbol",
    "source": "ggn",
    "source-layer": "water_l",
-   "minzoom": 10,
+   "minzoom": 7,
    "filter": [
     "==",
     [
@@ -7712,243 +7641,6 @@
    }
   },
   {
-   "id": "grenzen-label-country-right",
-   "type": "symbol",
-   "source": "grenzen",
-   "source-layer": "country_l",
-   "minzoom": 9,
-   "filter": [
-    "has",
-    "right"
-   ],
-   "layout": {
-    "text-field": [
-     "get",
-     "right"
-    ],
-    "text-font": [
-     "Noto Sans Bold"
-    ],
-    "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
-     [
-      "zoom"
-     ],
-     9,
-     9,
-     12,
-     11,
-     16,
-     13,
-     18,
-     15
-    ],
-    "symbol-placement": "line",
-    "text-offset": [
-     0,
-     1
-    ],
-    "symbol-spacing": [
-     "interpolate",
-     [
-      "linear"
-     ],
-     [
-      "zoom"
-     ],
-     9,
-     350,
-     14,
-     500,
-     19,
-     600
-    ],
-    "text-letter-spacing": 0.07
-   },
-   "paint": {
-    "text-color": "rgba(146, 89, 179, 1)",
-    "text-halo-color": "rgba(252, 252, 252, 1)",
-    "text-halo-width": 0.8
-   }
-  },
-  {
-   "id": "grenzen-label-country-left",
-   "type": "symbol",
-   "source": "grenzen",
-   "source-layer": "country_l",
-   "minzoom": 9,
-   "filter": [
-    "has",
-    "left"
-   ],
-   "layout": {
-    "text-field": [
-     "get",
-     "left"
-    ],
-    "text-font": [
-     "Noto Sans Bold"
-    ],
-    "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
-     [
-      "zoom"
-     ],
-     9,
-     9,
-     12,
-     11,
-     16,
-     13,
-     18,
-     15
-    ],
-    "symbol-placement": "line",
-    "text-offset": [
-     0,
-     -0.8
-    ],
-    "symbol-spacing": [
-     "interpolate",
-     [
-      "linear"
-     ],
-     [
-      "zoom"
-     ],
-     9,
-     250,
-     14,
-     400,
-     19,
-     500
-    ],
-    "text-letter-spacing": 0.07
-   },
-   "paint": {
-    "text-color": "rgba(146, 89, 179, 1)",
-    "text-halo-color": "rgba(252, 252, 252, 1)",
-    "text-halo-width": 0.8
-   }
-  },
-  {
-   "id": "grenzen-label-state-right",
-   "type": "symbol",
-   "source": "grenzen",
-   "source-layer": "state_l",
-   "minzoom": 9,
-   "filter": [
-    "has",
-    "right"
-   ],
-   "layout": {
-    "text-field": [
-     "get",
-     "right"
-    ],
-    "text-font": [
-     "Noto Sans Bold"
-    ],
-    "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
-     [
-      "zoom"
-     ],
-     9,
-     9,
-     12,
-     11,
-     16,
-     13,
-     18,
-     15
-    ],
-    "symbol-placement": "line",
-    "text-offset": [
-     0,
-     1.2
-    ],
-    "symbol-spacing": [
-     "interpolate",
-     [
-      "linear"
-     ],
-     [
-      "zoom"
-     ],
-     9,
-     350,
-     14,
-     500,
-     19,
-     600
-    ],
-    "text-letter-spacing": 0.07
-   },
-   "paint": {
-    "text-color": "rgba(146, 89, 179, 1)",
-    "text-halo-color": "rgba(252, 252, 252, 1)",
-    "text-halo-width": 0.8
-   }
-  },
-  {
-   "id": "grenzen-label-land",
-   "type": "symbol",
-   "source": "grenzen",
-   "source-layer": "admin_label_p",
-   "minzoom": 8,
-   "maxzoom": 9,
-   "filter": [
-    "==",
-    [
-     "get",
-     "level"
-    ],
-    "land"
-   ],
-   "layout": {
-    "text-field": [
-     "upcase",
-     [
-      "get",
-      "name"
-     ]
-    ],
-    "text-font": [
-     "Noto Sans Bold"
-    ],
-    "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
-     [
-      "zoom"
-     ],
-     5,
-     10,
-     8,
-     13
-    ],
-    "text-letter-spacing": 0.15,
-    "text-max-width": 8
-   },
-   "paint": {
-    "text-color": "rgba(146, 89, 179, 1)",
-    "text-halo-color": "rgba(255, 255, 255, 0.9)",
-    "text-halo-width": 1.2
-   }
-  },
-  {
    "id": "grenzen-label-bezirk",
    "type": "symbol",
    "source": "grenzen",
@@ -8043,7 +7735,7 @@
    "type": "symbol",
    "source": "oev",
    "source-layer": "station_p",
-   "minzoom": 10,
+   "minzoom": 10.53,
    "layout": {
     "icon-image": "railway_station",
     "icon-size": [
@@ -8205,7 +7897,7 @@
    "type": "symbol",
    "source": "oev",
    "source-layer": "airport_p",
-   "minzoom": 8,
+   "minzoom": 11,
    "layout": {
     "icon-image": [
      "match",
@@ -8573,7 +8265,7 @@
    "type": "symbol",
    "source": "geonamen",
    "source-layer": "geoname_p",
-   "minzoom": 10,
+   "minzoom": 11,
    "layout": {
     "text-field": [
      "get",
@@ -8624,7 +8316,7 @@
    "type": "symbol",
    "source": "geonamen",
    "source-layer": "geoname_p",
-   "minzoom": 14,
+   "minzoom": 13,
    "layout": {
     "icon-image": [
      "match",
@@ -8699,7 +8391,7 @@
    "type": "symbol",
    "source": "geonamen",
    "source-layer": "geoname_p",
-   "minzoom": 13,
+   "minzoom": 15,
    "layout": {
     "text-field": [
      "get",
@@ -8935,7 +8627,7 @@
    "type": "symbol",
    "source": "geonamen",
    "source-layer": "geoname_p",
-   "minzoom": 13,
+   "minzoom": 15,
    "layout": {
     "text-field": [
      "get",
@@ -9211,7 +8903,7 @@
    "type": "symbol",
    "source": "geonamen",
    "source-layer": "settlement_p",
-   "minzoom": 14,
+   "minzoom": 15,
    "layout": {
     "text-field": [
      "get",
@@ -9734,7 +9426,23 @@
      ]
     ],
     "text-font": [
-     "Noto Sans Regular"
+     "step",
+     [
+      "zoom"
+     ],
+     [
+      "literal",
+      [
+       "Noto Sans Regular"
+      ]
+     ],
+     13,
+     [
+      "literal",
+      [
+       "Noto Sans Bold"
+      ]
+     ]
     ],
     "text-size": [
      "interpolate",
@@ -9755,11 +9463,11 @@
      12,
      16.5,
      13,
-     17.5,
+     20,
      14,
-     18.5,
+     21.33,
      15,
-     21
+     22
     ],
     "symbol-sort-key": [
      "get",
