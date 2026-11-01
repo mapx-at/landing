@@ -184,7 +184,7 @@
      "Verkehr, Sonstiges"
     ],
     [
-     "#f6f8f8",
+     "#ffffff",
      "Fels, Geröll"
     ],
     [
@@ -204,6 +204,10 @@
      "Weingarten"
     ],
     [
+     "#d9e6d2",
+     "Alm"
+    ],
+    [
      "#b3d9ff",
      "Gewässer"
     ]
@@ -219,7 +223,8 @@
     "9": "Gewässerrand, Feuchtgebiet",
     "10": "Friedhof",
     "11": "Freizeitfläche",
-    "12": "Weingarten"
+    "12": "Weingarten",
+    "13": "Alm"
    },
    "building": [
     "#EDCACA",
@@ -487,32 +492,71 @@
    ],
    "paint": {
     "fill-color": [
-     "match",
+     "step",
      [
-      "get",
-      "namecat"
+      "zoom"
      ],
-     2,
-     "#88CC66",
-     3,
-     "#EBFFAA",
-     5,
-     "#47B312",
-     6,
-     "#73F0FF",
-     7,
-     "#FFFFFF",
-     8,
-     "#DCE4E4",
-     9,
-     "#A3FF73",
+     [
+      "match",
+      [
+       "get",
+       "namecat"
+      ],
+      2,
+      "#88CC66",
+      3,
+      "#EBFFAA",
+      5,
+      "#47B312",
+      6,
+      "#73F0FF",
+      7,
+      "#FFFFFF",
+      8,
+      "#FFFFFF",
+      9,
+      "#A3FF73",
+      10,
+      "#997D4D",
+      11,
+      "#66994D",
+      12,
+      "#BFBF57",
+      13,
+      "#EBFFAA",
+      "#ecebe6"
+     ],
      10,
-     "#997D4D",
-     11,
-     "#66994D",
-     12,
-     "#BFBF57",
-     "#ecebe6"
+     [
+      "match",
+      [
+       "get",
+       "namecat"
+      ],
+      2,
+      "#88CC66",
+      3,
+      "#EBFFAA",
+      5,
+      "#47B312",
+      6,
+      "#73F0FF",
+      7,
+      "#FFFFFF",
+      8,
+      "#FFFFFF",
+      9,
+      "#A3FF73",
+      10,
+      "#997D4D",
+      11,
+      "#66994D",
+      12,
+      "#BFBF57",
+      13,
+      "#66994D",
+      "#ecebe6"
+     ]
     ],
     "fill-opacity": 0.25,
     "fill-antialias": false
