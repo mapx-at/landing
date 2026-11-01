@@ -2,7 +2,7 @@
  "version": 8,
  "name": "mapx.at Vektor-Basemap",
  "metadata": {
-  "mapx:generator": "landing/tools/build_style.py – nicht von Hand bearbeiten",
+  "mapx:generator": "viewer/tools/build_style.py – nicht von Hand bearbeiten",
   "mapx:groups": {
    "water": [
     "water-dkm",
