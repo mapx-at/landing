@@ -124,7 +124,20 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
   function esc(s) { return String(s).replace(/[&<>"']/g, function (ch) { return "&#" + ch.charCodeAt(0) + ";"; }); }
 
   var protocol = new pmtiles.Protocol();
-  maplibregl.addProtocol("pmtiles", protocol.tile);
+  // Fehlt eine Rasterkachel im PMTiles (Relief ist nur über Land vorhanden, die bounds sind aber ein
+  // Rechteck), liefert pmtiles {data: null}. Der Bildpfad von MapLibre 4.7.1 löst dann sein Promise nie
+  // auf, die Kachel bleibt "loading" und map.loaded() wird nie true (#155). Status 404 schließt sie ab,
+  // ohne error-Ereignis, und die Darstellung bleibt wie bei einer noch nicht geladenen Kachel.
+  maplibregl.addProtocol("pmtiles", function (req, abort) {
+    return protocol.tile(req, abort).then(function (res) {
+      if (req.type !== "json" && res.data == null) {
+        var err = new Error("Kachel fehlt im PMTiles: " + req.url);
+        err.status = 404;
+        throw err;
+      }
+      return res;
+    });
+  });
 
   var map = new maplibregl.Map({
     container: "map",
