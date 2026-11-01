@@ -9047,7 +9047,25 @@
     "text-padding": 2,
     "text-anchor": "bottom",
     "text-letter-spacing": 0.1,
-    "icon-image": "summit",
+    "icon-image": [
+     "case",
+     [
+      "in",
+      [
+       "get",
+       "class"
+      ],
+      [
+       "literal",
+       [
+        "pass",
+        "tal"
+       ]
+      ]
+     ],
+     "",
+     "summit"
+    ],
     "icon-size": 0.9,
     "text-offset": [
      0,
@@ -9209,7 +9227,25 @@
      0.75
     ],
     "text-letter-spacing": 0.05,
-    "icon-image": "summit",
+    "icon-image": [
+     "case",
+     [
+      "in",
+      [
+       "get",
+       "class"
+      ],
+      [
+       "literal",
+       [
+        "pass",
+        "tal"
+       ]
+      ]
+     ],
+     "",
+     "summit"
+    ],
     "icon-size": 0.9
    },
    "paint": {
@@ -9217,7 +9253,23 @@
     "text-halo-color": "rgba(241, 241, 241, 1)",
     "text-halo-width": 0.7,
     "text-halo-blur": 0
-   }
+   },
+   "filter": [
+    "<=",
+    [
+     "get",
+     "rank"
+    ],
+    [
+     "step",
+     [
+      "zoom"
+     ],
+     2,
+     13,
+     99
+    ]
+   ]
   },
   {
    "id": "geonamen-einzelhaus",
