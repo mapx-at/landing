@@ -92,6 +92,10 @@
     "oev-tram",
     "oev-funicular",
     "oev-cable-car",
+    "oev-cable-car-mast",
+    "oev-cable-car-mast-gross",
+    "oev-ferry-klein",
+    "oev-ferry",
     "oev-station",
     "oev-airport",
     "road-low-casing-primary",
@@ -384,7 +388,7 @@
   "oev": {
    "type": "vector",
    "url": "pmtiles://https://tiles.mapx.at/oev-20260708-5269901d.pmtiles",
-   "attribution": "<a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at</a> (Bahn), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; Flugplätze: <a href=\"https://www.wikidata.org\" target=\"_blank\" rel=\"noopener\">Wikidata</a>, CC0"
+   "attribution": "<a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at</a> (Bahn, Fähren), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; Flugplätze: <a href=\"https://www.wikidata.org\" target=\"_blank\" rel=\"noopener\">Wikidata</a>, CC0; Skigebiete: <a href=\"https://www.umweltbundesamt.at\" target=\"_blank\" rel=\"noopener\">Umweltbundesamt</a> 2017, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
   "relief": {
    "type": "raster-dem",
@@ -502,6 +506,19 @@
     "fill-antialias": false
    },
    "minzoom": 2
+  },
+  {
+   "id": "ski",
+   "type": "fill",
+   "source": "oev",
+   "source-layer": "ski_a",
+   "minzoom": 10,
+   "maxzoom": 16,
+   "paint": {
+    "fill-color": "#66994D",
+    "fill-opacity": 0.25,
+    "fill-antialias": false
+   }
   },
   {
    "id": "water-dkm",
@@ -5411,34 +5428,143 @@
     "line-join": "round"
    },
    "paint": {
-    "line-color": [
-     "match",
-     [
-      "get",
-      "subclass"
-     ],
-     [
-      "drag_lift",
-      "goods",
-      "other"
-     ],
-     "rgba(170, 170, 170, 1)",
-     "rgba(156, 156, 156, 1)"
-    ],
+    "line-color": "rgba(156, 156, 156, 1)",
     "line-width": [
-     "interpolate",
-     [
-      "linear"
-     ],
+     "step",
      [
       "zoom"
      ],
-     12,
-     0.5,
-     14,
-     1,
+     0.667,
+     15,
+     1.333,
      16,
-     1.3
+     2
+    ]
+   }
+  },
+  {
+   "id": "oev-cable-car-mast",
+   "type": "line",
+   "source": "oev",
+   "source-layer": "rail_l",
+   "minzoom": 12,
+   "maxzoom": 15,
+   "filter": [
+    "match",
+    [
+     "get",
+     "class"
+    ],
+    [
+     "cable_car"
+    ],
+    true,
+    false
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "rgba(156, 156, 156, 1)",
+    "line-width": 4,
+    "line-dasharray": [
+     1,
+     61.5
+    ]
+   }
+  },
+  {
+   "id": "oev-cable-car-mast-gross",
+   "type": "line",
+   "source": "oev",
+   "source-layer": "rail_l",
+   "minzoom": 15,
+   "filter": [
+    "match",
+    [
+     "get",
+     "class"
+    ],
+    [
+     "cable_car"
+    ],
+    true,
+    false
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "rgba(156, 156, 156, 1)",
+    "line-width": 6,
+    "line-dasharray": [
+     1,
+     40.67
+    ]
+   }
+  },
+  {
+   "id": "oev-ferry-klein",
+   "type": "line",
+   "source": "oev",
+   "source-layer": "rail_l",
+   "minzoom": 11,
+   "maxzoom": 14,
+   "filter": [
+    "match",
+    [
+     "get",
+     "class"
+    ],
+    [
+     "ferry"
+    ],
+    true,
+    false
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#004DA8",
+    "line-width": 1,
+    "line-dasharray": [
+     1,
+     3
+    ]
+   }
+  },
+  {
+   "id": "oev-ferry",
+   "type": "line",
+   "source": "oev",
+   "source-layer": "rail_l",
+   "minzoom": 14,
+   "filter": [
+    "match",
+    [
+     "get",
+     "class"
+    ],
+    [
+     "ferry"
+    ],
+    true,
+    false
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#004DA8",
+    "line-width": 2,
+    "line-dasharray": [
+     1,
+     1.67
     ]
    }
   },
@@ -5449,7 +5575,32 @@
    "source-layer": "building_a",
    "minzoom": 12,
    "paint": {
-    "fill-color": "#EDCACA",
+    "fill-color": [
+     "step",
+     [
+      "zoom"
+     ],
+     "#EDCACA",
+     15,
+     "#EDD8D8",
+     19,
+     "#EDCACA"
+    ],
+    "fill-outline-color": [
+     "step",
+     [
+      "zoom"
+     ],
+     "#EDCACA",
+     15,
+     "#D9ADAD",
+     16,
+     "#CCA3A3",
+     18,
+     "#EDD8D8",
+     19,
+     "#EDCACA"
+    ],
     "fill-antialias": true
    }
   },
