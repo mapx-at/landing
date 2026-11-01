@@ -293,31 +293,31 @@
   },
   "mapx:tiles": {
    "dkm": {
-    "datei": "dkm-nutzung-20260401-0971884b.pmtiles",
+    "datei": "dkm-nutzung-20260401-b9341bb2.pmtiles",
     "stand": "2026-04-01"
    },
    "gip": {
-    "datei": "gip-strassen-20260708-3327c4e0.pmtiles",
+    "datei": "gip-strassen-20260708-105493cb.pmtiles",
     "stand": "2026-07-08"
    },
    "ggn": {
-    "datei": "ggn-gewaesser-v19-456f58b6.pmtiles",
+    "datei": "ggn-gewaesser-v19-5517704e.pmtiles",
     "stand": "v19"
    },
    "grenzen": {
-    "datei": "grenzen-20261001-d5ec1f02.pmtiles",
+    "datei": "grenzen-20261001-db138076.pmtiles",
     "stand": "2026-10-01"
    },
    "geonamen": {
-    "datei": "geonamen-20260323-8c99ba9e.pmtiles",
+    "datei": "geonamen-20260323-2264d56f.pmtiles",
     "stand": "20260323"
    },
    "adr": {
-    "datei": "adr-hausnummern-20261001-76ab4923.pmtiles",
+    "datei": "adr-hausnummern-20261001-eda46fa7.pmtiles",
     "stand": "2026-10-01"
    },
    "oev": {
-    "datei": "oev-20260708-7f447e98.pmtiles",
+    "datei": "oev-20260708-5269901d.pmtiles",
     "stand": "2026-07-08"
    },
    "relief": {
@@ -353,37 +353,37 @@
   },
   "dkm": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/dkm-nutzung-20260401-0971884b.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/dkm-nutzung-20260401-b9341bb2.pmtiles",
    "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – DKM</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
   "gip": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/gip-strassen-20260708-3327c4e0.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/gip-strassen-20260708-105493cb.pmtiles",
    "attribution": "<a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
   "ggn": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/ggn-gewaesser-v19-456f58b6.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/ggn-gewaesser-v19-5517704e.pmtiles",
    "attribution": "<a href=\"https://www.data.gv.at/katalog/datasets/c2287ccb-f44c-48cd-bf7c-ac107b771246\" target=\"_blank\" rel=\"noopener\">BMLUK – GGN v19</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
   "grenzen": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/grenzen-20261001-d5ec1f02.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/grenzen-20261001-db138076.pmtiles",
    "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Verwaltungsgrenzen</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
   "geonamen": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/geonamen-20260323-8c99ba9e.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/geonamen-20260323-2264d56f.pmtiles",
    "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Geographische Namen</a> (Gipfel- und Ortsauswahl, Tiroler Weiler: <a href=\"https://basemap.at\" target=\"_blank\" rel=\"noopener\">basemap.at</a>), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
   "adr": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/adr-hausnummern-20261001-76ab4923.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/adr-hausnummern-20261001-eda46fa7.pmtiles",
    "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Adressregister</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>, © Österreichisches Adressregister, Stichtagsdaten vom 01.10.2026"
   },
   "oev": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/oev-20260708-7f447e98.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/oev-20260708-5269901d.pmtiles",
    "attribution": "<a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at</a> (Bahn), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; Flugplätze: <a href=\"https://www.wikidata.org\" target=\"_blank\" rel=\"noopener\">Wikidata</a>, CC0"
   },
   "relief": {
