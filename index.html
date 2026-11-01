@@ -118,7 +118,7 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
   //   ?gip=http://localhost:8000/gip-strassen.pmtiles&ggn=...&grenzen=...&geonamen=...&adr=...&dkm=...
   //   ?style=http://localhost:8000/style.json
   var params = new URLSearchParams(location.search);
-  var SOURCE_PARAMS = ["dkm", "gip", "ggn", "grenzen", "geonamen", "adr", "oev", "relief", "hoehenlinien"];
+  var SOURCE_PARAMS = ["dkm", "parzellen", "gip", "ggn", "grenzen", "geonamen", "adr", "oev", "relief", "hoehenlinien"];
   var STYLE_URL = /^https?:\/\//.test(params.get("style") || "") ? params.get("style") : "style.json";
 
   function esc(s) { return String(s).replace(/[&<>"']/g, function (ch) { return "&#" + ch.charCodeAt(0) + ";"; }); }
