@@ -7083,7 +7083,15 @@
    ],
    "layout": {
     "symbol-placement": "line",
-    "symbol-spacing": 400,
+    "symbol-spacing": [
+     "step",
+     [
+      "zoom"
+     ],
+     250,
+     12,
+     400
+    ],
     "text-rotation-alignment": "viewport",
     "text-field": [
      "get",
@@ -7105,7 +7113,7 @@
      16,
      12
     ],
-    "text-padding": 30,
+    "text-padding": 6,
     "symbol-sort-key": 100
    },
    "paint": {
@@ -7142,7 +7150,15 @@
    ],
    "layout": {
     "symbol-placement": "line",
-    "symbol-spacing": 400,
+    "symbol-spacing": [
+     "step",
+     [
+      "zoom"
+     ],
+     250,
+     12,
+     400
+    ],
     "text-rotation-alignment": "viewport",
     "text-field": [
      "get",
@@ -7164,7 +7180,7 @@
      16,
      12
     ],
-    "text-padding": 30,
+    "text-padding": 6,
     "symbol-sort-key": 100
    },
    "paint": {
@@ -7201,7 +7217,15 @@
    ],
    "layout": {
     "symbol-placement": "line",
-    "symbol-spacing": 400,
+    "symbol-spacing": [
+     "step",
+     [
+      "zoom"
+     ],
+     250,
+     12,
+     400
+    ],
     "text-rotation-alignment": "viewport",
     "text-field": [
      "get",
@@ -7223,7 +7247,7 @@
      16,
      12
     ],
-    "text-padding": 30,
+    "text-padding": 6,
     "symbol-sort-key": 100
    },
    "paint": {
