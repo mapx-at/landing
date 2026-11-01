@@ -299,23 +299,27 @@
   },
   "mapx:tiles": {
    "dkm": {
-    "datei": "dkm-nutzung-20260401-b9341bb2.pmtiles",
+    "datei": "dkm-nutzung-20260401-eec9802b.pmtiles",
+    "stand": "2026-04-01"
+   },
+   "parzellen": {
+    "datei": "dkm-parzellen-20260401-d5904797.pmtiles",
     "stand": "2026-04-01"
    },
    "gip": {
-    "datei": "gip-strassen-20260708-105493cb.pmtiles",
+    "datei": "gip-strassen-20260708-0e08b62e.pmtiles",
     "stand": "2026-07-08"
    },
    "ggn": {
-    "datei": "ggn-gewaesser-v19-5517704e.pmtiles",
+    "datei": "ggn-gewaesser-v19-d1f8909a.pmtiles",
     "stand": "v19"
    },
    "grenzen": {
-    "datei": "grenzen-20261001-db138076.pmtiles",
+    "datei": "grenzen-20261001-9b743ad9.pmtiles",
     "stand": "2026-10-01"
    },
    "geonamen": {
-    "datei": "geonamen-20260323-2264d56f.pmtiles",
+    "datei": "geonamen-20260323-a2912364.pmtiles",
     "stand": "20260323"
    },
    "adr": {
@@ -323,7 +327,7 @@
     "stand": "2026-10-01"
    },
    "oev": {
-    "datei": "oev-20260708-5269901d.pmtiles",
+    "datei": "oev-20260708-058499c8.pmtiles",
     "stand": "2026-07-08"
    },
    "relief": {
@@ -359,27 +363,32 @@
   },
   "dkm": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/dkm-nutzung-20260401-b9341bb2.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/dkm-nutzung-20260401-eec9802b.pmtiles",
+   "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – DKM</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
+  },
+  "parzellen": {
+   "type": "vector",
+   "url": "pmtiles://https://tiles.mapx.at/dkm-parzellen-20260401-d5904797.pmtiles",
    "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – DKM</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
   "gip": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/gip-strassen-20260708-105493cb.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/gip-strassen-20260708-0e08b62e.pmtiles",
    "attribution": "<a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
   "ggn": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/ggn-gewaesser-v19-5517704e.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/ggn-gewaesser-v19-d1f8909a.pmtiles",
    "attribution": "<a href=\"https://www.data.gv.at/katalog/datasets/c2287ccb-f44c-48cd-bf7c-ac107b771246\" target=\"_blank\" rel=\"noopener\">BMLUK – GGN v19</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
   "grenzen": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/grenzen-20261001-db138076.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/grenzen-20261001-9b743ad9.pmtiles",
    "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Verwaltungsgrenzen</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
   "geonamen": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/geonamen-20260323-2264d56f.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/geonamen-20260323-a2912364.pmtiles",
    "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Geographische Namen</a> (Gipfel- und Ortsauswahl, Tiroler Weiler: <a href=\"https://basemap.at\" target=\"_blank\" rel=\"noopener\">basemap.at</a>), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
   "adr": {
@@ -389,7 +398,7 @@
   },
   "oev": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/oev-20260708-5269901d.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/oev-20260708-058499c8.pmtiles",
    "attribution": "<a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at</a> (Bahn, Fähren), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; Flugplätze: <a href=\"https://www.wikidata.org\" target=\"_blank\" rel=\"noopener\">Wikidata</a>, CC0; Skigebiete: <a href=\"https://www.umweltbundesamt.at\" target=\"_blank\" rel=\"noopener\">Umweltbundesamt</a> 2017, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
   "relief": {
@@ -1770,7 +1779,7 @@
   {
    "id": "parcel",
    "type": "line",
-   "source": "dkm",
+   "source": "parzellen",
    "source-layer": "parcel_l",
    "minzoom": 16,
    "paint": {
