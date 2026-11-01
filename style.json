@@ -68,6 +68,7 @@
     "road-bridge-casing-motorway",
     "road-bridge-motorway",
     "road-name-weg",
+    "road-ref-secondary-pt",
     "road-ref-secondary",
     "road-name-minor",
     "road-name-minor-hi",
@@ -6893,6 +6894,65 @@
     ],
     "ried"
    ]
+  },
+  {
+   "id": "road-ref-secondary-pt",
+   "type": "symbol",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 12,
+   "filter": [
+    "all",
+    [
+     "has",
+     "ref"
+    ],
+    [
+     "in",
+     [
+      "get",
+      "draw_class"
+     ],
+     [
+      "literal",
+      [
+       "secondary"
+      ]
+     ]
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "point",
+    "text-rotation-alignment": "viewport",
+    "text-field": [
+     "get",
+     "ref"
+    ],
+    "text-font": [
+     "Noto Sans Bold"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     15,
+     10,
+     16,
+     12
+    ],
+    "text-padding": 8,
+    "symbol-sort-key": 100
+   },
+   "paint": {
+    "text-color": "#000000",
+    "text-halo-color": "#FFFFFF",
+    "text-halo-width": 6
+   },
+   "maxzoom": 14
   },
   {
    "id": "road-ref-secondary",
