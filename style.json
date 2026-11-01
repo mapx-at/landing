@@ -5447,7 +5447,7 @@
    "type": "fill",
    "source": "dkm",
    "source-layer": "building_a",
-   "minzoom": 13,
+   "minzoom": 12,
    "paint": {
     "fill-color": "#EDCACA",
     "fill-antialias": true
