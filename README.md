@@ -1,3 +1,7 @@
+> **Umgezogen ins Monorepo:** Dieses Repo ist seit 31.10.2026 als `viewer/` (mit Historie, `git subtree`) in
+> [mapx-at/vector-tiles](https://github.com/mapx-at/vector-tiles) enthalten. Weiterentwicklung dort; dieses Repo wird nach
+> der Umstellung archiviert.
+
 # mapx.at – Landing/Viewer
 
 GitHub Pages (`CNAME` = mapx.at). Eine statische Seite: `index.html` (MapLibre GL JS 4.7.1 + pmtiles 3.2.1)
