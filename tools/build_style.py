@@ -161,6 +161,29 @@ WAYS = [
 BRIDGE_CASING = "#4D3D25"             # basemap.at gipbruecke_*_outline
 BRIDGE_MINZOOM = 16                   # basemap.at zeichnet Bruecken erst ab z16 gesondert
 
+# ------------------------------------------------------------------ Uebersichtszoom z0-7
+# Wie basemap-at-farbe (alle Layer mit minzoom < 8). Eigene "-low"-Layer mit maxzoom 8, damit die Darstellung ab z8
+# unveraendert bleibt (bestehende Layer bekommen hoechstens einen hoeheren minzoom <= 8, sonst keine Aenderung).
+LOW = 8
+# basemap.at gip_autobahn_z7_11 (minzoom 6), gip_ramp / gip_hauptverbindung_z8_11 (minzoom 7): erster Stop z8,
+# darunter konstant -> Breite = unser z8-Wert. Tunnel zeichnet basemap.at bis z10 wie normale Strassen.
+LOW_ROADS = {"motorway": 6, "motorway_link": 7, "primary": 7}
+LOW_MINZOOM = {
+    "landuse": 4, "landuse-siedlung": 4,      # basemap.at landuse_a: Daten ab z4 (Style ohne minzoom)
+    "water-dkm": LOW,                         # basemap.at: keine Gewaesser in landuse_a, Seen nur ueber water_a
+    "ggn-water-l": 6, "ggn-water-l-tunnel": 6,  # water_l_river1 (namecat 1) ab z6
+    "grenzen-country": 5, "grenzen-country-outline": 5,  # country_l (Landesgrenzen) erst ab z5
+    "grenzen-label-land": LOW,                # Bundeslandnamen gibt es bei basemap.at nicht
+    "oev-rail": LOW, "oev-rail-tunnel": LOW,  # z6-7 eigene Layer (Breite 1,2 wie gip_railway)
+}
+LOW_RAIL_W = 1.2                      # basemap.at gip_railway / giptunnel_railway_: erster Stop z8 = 1,2
+CAPITAL_LOW = {                        # basemap.at label_country_capital(_vienna), settlement_country_capital
+    "minzoom": 6, "size": [[6, 13], [9, 15]], "font": "Noto Sans Medium", "spacing": 0.05, "halo": 1.5,
+    "circle": "rgba(255, 190, 232, 1)"}
+DISTRICT_LOW = {                       # basemap.at label_district_capital, settlement_district_capital
+    "minzoom": 7, "size": [[7, 12], [8, 12]], "font": "Noto Sans Regular", "spacing": 0.03, "halo": 1.2,
+    "circle": "rgba(250, 250, 250, 1)"}
+
 
 def width_expr(stops, add=0, mul=1):
     """lineare Interpolation wie die basemap.at-"stops" (base 1)"""
@@ -245,6 +268,65 @@ def _name(lid, classes, minzoom, color, halo, sizes, spacing):
             "paint": {"text-color": color, "text-halo-color": halo, "text-halo-width": 0.8}}
 
 
+def road_low_layers():
+    """z6/z7: Autobahn, Rampe, B-Strasse ohne Tunnel-/Brueckenunterscheidung, Casing dann Fuellung"""
+    out = []
+    for kind in ("casing", "fill"):
+        for c, fill, casing, w, _, cw, op, _t in reversed(ROADS):
+            if c not in LOW_ROADS:
+                continue
+            lyr = {"id": ("road-low-casing-" if kind == "casing" else "road-low-") + c, "type": "line",
+                   "source": "gip", "source-layer": "gip_l", "minzoom": LOW_ROADS[c], "maxzoom": LOW,
+                   "filter": ["==", ["get", "draw_class"], c],
+                   "layout": {"line-cap": "round", "line-join": "round"},
+                   "paint": {"line-color": casing if kind == "casing" else fill,
+                             "line-width": (cw if kind == "casing" else w)[0][1]}}
+            out.append(lyr)
+    return out
+
+
+def rail_low_layers():
+    """z6/z7: nur Hauptbahn (basemap.at 13010), Tunnel in hellerem Braun (giptunnel_railway_)"""
+    base = {"type": "line", "source": "oev", "source-layer": "rail_l", "minzoom": 6, "maxzoom": LOW,
+            "layout": {"line-cap": "butt", "line-join": "round"}}
+    main = [["==", ["get", "class"], "rail"], ["==", ["get", "service"], "main"], ["!", ["has", "construction"]]]
+    t = dict(copy.deepcopy(base), id="oev-rail-tunnel-low",
+             filter=["all", ["==", ["get", "brunnel"], "tunnel"]] + main,
+             paint={"line-color": "rgba(217, 195, 173, 1)", "line-width": LOW_RAIL_W})
+    g = dict(copy.deepcopy(base), id="oev-rail-low",
+             filter=["all", ["!=", ["get", "brunnel"], "tunnel"]] + main,
+             paint={"line-color": "rgba(179, 151, 116, 1)", "line-width": LOW_RAIL_W})
+    return [t], [g]
+
+
+def place_low_layers():
+    """Landeshauptstaedte ab z6 (Wien ohne Punkt, eigener Layer wie basemap.at), Bezirkshauptorte ab z7:
+    Kreis + Name darueber (text-anchor bottom), bis z8; ab z8 uebernehmen die geonamen-Layer (Icon place_capital)."""
+    circles, labels = [], []
+    for sl, key, cfg, wien in (("country_capital", "hauptstadt", CAPITAL_LOW, True),
+                               ("district_capital_p", "bezirkshauptort", DISTRICT_LOW, False)):
+        notwien = ["!=", ["get", "name"], "Wien"]
+        z0 = cfg["minzoom"]
+        r = round(2 + (z0 - 6) * 0.25, 3)          # circle-radius stops 6:2, 8:2.5
+        circles.append({"id": "geonamen-%s-low-punkt" % key, "type": "circle", "source": "geonamen",
+                        "source-layer": sl, "minzoom": z0, "maxzoom": LOW, "filter": notwien,
+                        "paint": {"circle-color": cfg["circle"], "circle-stroke-color": "rgba(40, 40, 40, 1)",
+                                  "circle-stroke-width": 0.8,
+                                  "circle-radius": ["interpolate", ["linear"], ["zoom"], z0, r, 8, 2.5],
+                                  "circle-translate": [0, 1], "circle-translate-anchor": "map"}})
+        lab = {"type": "symbol", "source": "geonamen", "source-layer": sl, "minzoom": z0, "maxzoom": LOW,
+               "layout": {"text-field": ["get", "name"], "text-font": [cfg["font"]], "text-size": width_expr(cfg["size"]),
+                          "text-anchor": "bottom", "text-allow-overlap": True, "text-letter-spacing": cfg["spacing"],
+                          "text-max-width": 6 if key == "bezirkshauptort" else 8, "symbol-sort-key": ["get", "rank"]},
+               "paint": {"text-color": "#000000", "text-halo-color": "rgba(250, 250, 250, 1)", "text-halo-width": cfg["halo"]}}
+        if wien:
+            labels.append(dict(copy.deepcopy(lab), id="geonamen-%s-low" % key, filter=notwien))
+            labels.append(dict(copy.deepcopy(lab), id="geonamen-%s-wien-low" % key, filter=["==", ["get", "name"], "Wien"]))
+        else:
+            labels.append(dict(copy.deepcopy(lab), id="geonamen-%s-low" % key))
+    return circles, labels
+
+
 ROAD_LABELS = [
     _name("road-name-minor", ["secondary", "minor", "pedestrian", "service"], 12, "#4E4E4E", "#FFFFFF",
           [[12, 9], [15, 9], [16, 11.5], [18, 13]], 300),
@@ -254,6 +336,11 @@ ROAD_LABELS = [
     _ref("road-ref-primary", ["primary"], 9, "#730000", "#FFFF73"),
     _ref("road-ref-motorway", ["motorway"], 8, "#FFFFFF", "#0064C8"),
 ]
+# basemap.at giplabel_autobahn_nr_ ab z7: 10 px, text-padding 100 (weniger Schilder als ab z8)
+_rl = _ref("road-ref-motorway-low", ["motorway"], 7, "#FFFFFF", "#0064C8")
+_rl["maxzoom"] = LOW
+_rl["layout"].update({"text-size": 10, "text-padding": 100})
+ROAD_LABELS_LOW = [_rl]
 
 
 def base_bottom(relief):
@@ -598,16 +685,22 @@ def build(vt, tiles):
     oev_t = [l for l in oev_geom if "tunnel" in l["id"]]
     oev_b = [l for l in oev_geom if "bridge" in l["id"]]
     oev_g = [l for l in oev_geom if l not in oev_t and l not in oev_b]
+    # Uebersichtszoom z0-7 (eigene Layer mit maxzoom 8, s. LOW_*)
+    road_low = road_low_layers()
+    rail_low_t, rail_low_g = rail_low_layers()
+    oev_t, oev_g = rail_low_t + oev_t, rail_low_g + oev_g
+    oev_geom = rail_low_t + rail_low_g + oev_geom
+    place_low_c, place_low_l = place_low_layers()
 
     groups = {
         "water": ["water-dkm"] + [l["id"] for l in ggn_geom],
         "buildings": ["building", "building-line"],
         "parcels": ["parcel"],
         "roads": [l["id"] for l in roads] + [l["id"] for l in ROAD_LABELS]
-                 + [l["id"] for l in oev_geom + oev_lab],
+                 + [l["id"] for l in oev_geom + oev_lab] + [l["id"] for l in road_low + ROAD_LABELS_LOW],
         "boundaries": [l["id"] for l in gr_geom + gr_lab],
         "housenumbers": [l["id"] for l in frag["adr"]],
-        "labels": [l["id"] for l in ggn_lab + frag["geonamen"]],
+        "labels": [l["id"] for l in ggn_lab + frag["geonamen"]] + [l["id"] for l in place_low_c + place_low_l],
         "relief": [l["id"] for l in rel],
     }
     # Zeichenreihenfolge (unten -> oben) wie basemap.at-farbe: Nutzung < Wasser < Siedlung < Tunnel < Grenzen
@@ -619,17 +712,31 @@ def build(vt, tiles):
               + base_parcels()             # Grundstuecke (nur mapx)
               + road_t + oev_t             # Tunnel (Strasse, Bahn)
               + gr_geom                    # Grenzen unter den Strassen (basemap.at border_* vor gip_*)
+              + road_low                   # z6/z7 Autobahn, Rampe, B-Strasse
               + road_g                     # Wege, Casing, Fuellung (inkl. Bruecken unter z16)
               + oev_g                      # Bahn, Seilbahn ...
               + base_buildings()           # Gebaeude ueber Strassen/Bahn (basemap.at building_a nach gip_*)
               + road_b + oev_b             # Bruecken ab z16 obenauf
               + frag["adr"]                # Hausnummern
+              + ROAD_LABELS_LOW            # Autobahnnummern z7
               + ROAD_LABELS                # Strassennummern/-namen
               + ggn_lab                    # Gewaessernamen
               + gr_lab                     # Grenz-/Verwaltungsnamen
               + oev_lab                    # Bahnhoefe, Flugplaetze
               + rel_lab                    # Hoehenzahlen
-              + frag["geonamen"])          # Gelaende, Objekte, Gipfel, Orte, Hauptorte zuletzt
+              + frag["geonamen"]           # Gelaende, Objekte, Gipfel, Orte, Hauptorte zuletzt
+              + place_low_c + place_low_l)  # z6/z7 Landeshauptstaedte, Bezirkshauptorte (Kreis + Name)
+
+    # Uebersichtszoom: bestehende Layer, die unter z8 anders (oder gar nicht) erscheinen sollen, bekommen nur
+    # einen hoeheren minzoom; alles ab z8 bleibt unveraendert
+    for l in layers:
+        if l["id"] in LOW_MINZOOM:
+            assert l.get("minzoom", 0) <= LOW_MINZOOM[l["id"]] <= LOW, l["id"]
+            l["minzoom"] = LOW_MINZOOM[l["id"]]
+            log.append("%s: minzoom %s" % (l["id"], LOW_MINZOOM[l["id"]]))
+    missing = set(LOW_MINZOOM) - {l["id"] for l in layers}
+    if missing:
+        sys.exit("LOW_MINZOOM: unbekannte Layer %s" % ", ".join(sorted(missing)))
 
     fix_fonts(layers, fonts, log)
     ids = [l["id"] for l in layers]
