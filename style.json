@@ -68,13 +68,14 @@
     "road-bridge-casing-motorway",
     "road-bridge-motorway",
     "road-name-weg",
+    "road-ref-secondary",
     "road-name-minor",
     "road-name-minor-hi",
     "road-name-primary",
     "road-name-primary-hi",
     "road-name-motorway",
     "road-name-motorway-hi",
-    "road-ref-secondary",
+    "road-ref-primary-z9",
     "road-ref-primary",
     "road-ref-motorway",
     "oev-rail-tunnel",
@@ -2091,7 +2092,7 @@
    "type": "line",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 16,
+   "minzoom": 12,
    "filter": [
     "all",
     [
@@ -2121,6 +2122,14 @@
      [
       "zoom"
      ],
+     12,
+     3.33,
+     13,
+     3.33,
+     14,
+     6,
+     15,
+     6,
      16,
      6,
      17,
@@ -2456,7 +2465,7 @@
    "type": "line",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 16,
+   "minzoom": 12,
    "filter": [
     "all",
     [
@@ -2489,6 +2498,14 @@
      [
       "zoom"
      ],
+     12,
+     2,
+     13,
+     2,
+     14,
+     4,
+     15,
+     4,
      16,
      4.75,
      17,
@@ -2504,7 +2521,7 @@
    "type": "line",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 15,
+   "minzoom": 12,
    "filter": [
     "all",
     [
@@ -2534,6 +2551,12 @@
      [
       "zoom"
      ],
+     12,
+     0.67,
+     13,
+     0.67,
+     14,
+     1.33,
      15,
      2,
      16,
@@ -2554,7 +2577,7 @@
    "type": "line",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 15,
+   "minzoom": 12,
    "filter": [
     "all",
     [
@@ -2584,6 +2607,12 @@
      [
       "zoom"
      ],
+     12,
+     0.67,
+     13,
+     0.67,
+     14,
+     1.33,
      15,
      2,
      16,
@@ -2604,7 +2633,7 @@
    "type": "line",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 15,
+   "minzoom": 14,
    "filter": [
     "all",
     [
@@ -2634,6 +2663,8 @@
      [
       "zoom"
      ],
+     14,
+     1,
      15,
      1,
      16,
@@ -2654,7 +2685,7 @@
    "type": "line",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 15,
+   "minzoom": 14,
    "filter": [
     "all",
     [
@@ -2684,6 +2715,8 @@
      [
       "zoom"
      ],
+     14,
+     1,
      15,
      1,
      16,
@@ -2754,7 +2787,7 @@
    "type": "line",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 15,
+   "minzoom": 14,
    "filter": [
     "all",
     [
@@ -2784,6 +2817,8 @@
      [
       "zoom"
      ],
+     14,
+     1,
      15,
      1,
      16,
@@ -2807,26 +2842,47 @@
    "filter": [
     "all",
     [
-     "==",
+     "all",
      [
-      "get",
-      "brunnel"
+      "==",
+      [
+       "get",
+       "brunnel"
+      ],
+      "tunnel"
      ],
-     "tunnel"
+     [
+      "match",
+      [
+       "get",
+       "class"
+      ],
+      [
+       "rail",
+       "narrow_gauge",
+       "rack"
+      ],
+      true,
+      false
+     ]
     ],
     [
-     "match",
+     "any",
      [
-      "get",
-      "class"
+      ">=",
+      [
+       "zoom"
+      ],
+      10
      ],
      [
-      "rail",
-      "narrow_gauge",
-      "rack"
-     ],
-     true,
-     false
+      "==",
+      [
+       "get",
+       "service"
+      ],
+      "main"
+     ]
     ]
    ],
    "layout": {
@@ -3457,7 +3513,7 @@
    "type": "line",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 15,
+   "minzoom": 12,
    "filter": [
     "all",
     [
@@ -3491,6 +3547,12 @@
      [
       "zoom"
      ],
+     12,
+     0.67,
+     13,
+     0.67,
+     14,
+     1.33,
      15,
      2,
      16,
@@ -3507,7 +3569,7 @@
    "type": "line",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 15,
+   "minzoom": 12,
    "filter": [
     "all",
     [
@@ -3541,6 +3603,12 @@
      [
       "zoom"
      ],
+     12,
+     0.67,
+     13,
+     0.67,
+     14,
+     1.33,
      15,
      2,
      16,
@@ -3557,7 +3625,7 @@
    "type": "line",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 15,
+   "minzoom": 14,
    "filter": [
     "all",
     [
@@ -3591,6 +3659,8 @@
      [
       "zoom"
      ],
+     14,
+     1,
      15,
      1,
      16,
@@ -3611,7 +3681,7 @@
    "type": "line",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 15,
+   "minzoom": 14,
    "filter": [
     "all",
     [
@@ -3645,6 +3715,8 @@
      [
       "zoom"
      ],
+     14,
+     1,
      15,
      1,
      16,
@@ -3719,7 +3791,7 @@
    "type": "line",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 15,
+   "minzoom": 14,
    "filter": [
     "all",
     [
@@ -3753,6 +3825,8 @@
      [
       "zoom"
      ],
+     14,
+     1,
      15,
      1,
      16,
@@ -3773,7 +3847,7 @@
    "type": "line",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 16,
+   "minzoom": 12,
    "filter": [
     "all",
     [
@@ -3807,6 +3881,14 @@
      [
       "zoom"
      ],
+     12,
+     3.33,
+     13,
+     3.33,
+     14,
+     6,
+     15,
+     6,
      16,
      6,
      17,
@@ -4139,7 +4221,7 @@
    "type": "line",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 16,
+   "minzoom": 12,
    "filter": [
     "all",
     [
@@ -4173,6 +4255,14 @@
      [
       "zoom"
      ],
+     12,
+     2,
+     13,
+     2,
+     14,
+     4,
+     15,
+     4,
      16,
      4.75,
      17,
@@ -4582,39 +4672,60 @@
    "filter": [
     "all",
     [
-     "!=",
+     "all",
      [
-      "get",
-      "brunnel"
+      "!=",
+      [
+       "get",
+       "brunnel"
+      ],
+      "tunnel"
      ],
-     "tunnel"
-    ],
-    [
-     "!",
      [
-      "has",
-      "construction"
+      "!",
+      [
+       "has",
+       "construction"
+      ]
+     ],
+     [
+      "!=",
+      [
+       "get",
+       "service"
+      ],
+      "siding"
+     ],
+     [
+      "match",
+      [
+       "get",
+       "class"
+      ],
+      [
+       "rail"
+      ],
+      true,
+      false
      ]
     ],
     [
-     "!=",
+     "any",
      [
-      "get",
-      "service"
-     ],
-     "siding"
-    ],
-    [
-     "match",
-     [
-      "get",
-      "class"
+      ">=",
+      [
+       "zoom"
+      ],
+      10
      ],
      [
-      "rail"
-     ],
-     true,
-     false
+      "==",
+      [
+       "get",
+       "service"
+      ],
+      "main"
+     ]
     ]
    ],
    "layout": {
@@ -6632,6 +6743,84 @@
    ]
   },
   {
+   "id": "road-ref-secondary",
+   "type": "symbol",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 11,
+   "filter": [
+    "all",
+    [
+     "has",
+     "ref"
+    ],
+    [
+     "in",
+     [
+      "get",
+      "draw_class"
+     ],
+     [
+      "literal",
+      [
+       "secondary"
+      ]
+     ]
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "symbol-spacing": [
+     "step",
+     [
+      "zoom"
+     ],
+     300,
+     12,
+     150,
+     13,
+     120
+    ],
+    "text-rotation-alignment": "viewport",
+    "text-field": [
+     "get",
+     "ref"
+    ],
+    "text-font": [
+     "Noto Sans Bold"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     15,
+     10,
+     16,
+     12
+    ],
+    "text-padding": [
+     "step",
+     [
+      "zoom"
+     ],
+     12,
+     12,
+     2
+    ],
+    "symbol-sort-key": 100,
+    "text-max-angle": 180
+   },
+   "paint": {
+    "text-color": "#000000",
+    "text-halo-color": "#FFFFFF",
+    "text-halo-width": 6
+   }
+  },
+  {
    "id": "road-name-minor",
    "type": "symbol",
    "source": "gip",
@@ -7066,11 +7255,11 @@
    }
   },
   {
-   "id": "road-ref-secondary",
+   "id": "road-ref-primary-z9",
    "type": "symbol",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 11,
+   "minzoom": 9,
    "filter": [
     "all",
     [
@@ -7086,22 +7275,13 @@
      [
       "literal",
       [
-       "secondary"
+       "primary"
       ]
      ]
     ]
    ],
    "layout": {
-    "symbol-placement": "line",
-    "symbol-spacing": [
-     "step",
-     [
-      "zoom"
-     ],
-     250,
-     12,
-     400
-    ],
+    "symbol-placement": "point",
     "text-rotation-alignment": "viewport",
     "text-field": [
      "get",
@@ -7110,34 +7290,23 @@
     "text-font": [
      "Noto Sans Bold"
     ],
-    "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
-     [
-      "zoom"
-     ],
-     15,
-     10,
-     16,
-     12
-    ],
-    "text-padding": 6,
+    "text-size": 10,
+    "text-padding": 25,
     "symbol-sort-key": 100
    },
    "paint": {
-    "text-color": "#000000",
-    "text-halo-color": "#FFFFFF",
+    "text-color": "#730000",
+    "text-halo-color": "#FFFF73",
     "text-halo-width": 6
-   }
+   },
+   "maxzoom": 10
   },
   {
    "id": "road-ref-primary",
    "type": "symbol",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 9,
+   "minzoom": 10,
    "filter": [
     "all",
     [
