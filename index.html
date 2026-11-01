@@ -128,9 +128,16 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
   // Rechteck), liefert pmtiles {data: null}. Der Bildpfad von MapLibre 4.7.1 löst dann sein Promise nie
   // auf, die Kachel bleibt "loading" und map.loaded() wird nie true (#155). Status 404 schließt sie ab,
   // ohne error-Ereignis, und die Darstellung bleibt wie bei einer noch nicht geladenen Kachel.
+  // MapLibre nimmt maxzoom aus der TileJSON und ignoriert die Angabe im Style, sobald die Quelle eine url hat.
+  // Für Quellen, die der Style niedriger begrenzt als ihr Archiv (Relief, #209), hier deckeln: darüber wird
+  // die Kachel der Grenzstufe hochskaliert und spart die Übertragung.
+  var MAXZOOM = {};
   maplibregl.addProtocol("pmtiles", function (req, abort) {
     return protocol.tile(req, abort).then(function (res) {
-      if (req.type !== "json" && res.data == null) {
+      if (req.type === "json") {
+        var cap = MAXZOOM[req.url];
+        if (cap != null && res.data && res.data.maxzoom > cap) res.data.maxzoom = cap;
+      } else if (res.data == null) {
         var err = new Error("Kachel fehlt im PMTiles: " + req.url);
         err.status = 404;
         throw err;
@@ -160,12 +167,36 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
 
   var msg = document.getElementById("msg"), shown = false;
   function showMsg(text) { if (shown) return; shown = true; msg.textContent = text; msg.style.display = "block"; }
+  function hideMsg() { shown = false; msg.style.display = "none"; }
+
+  // Ein einzelnes error-Ereignis belegt keinen Ausfall: abgebrochene oder vom Browser verworfene Kachelanfragen,
+  // nicht dekodierbare Einzelkacheln unter Last (#207). Der Hinweis erscheint nur, wenn der Kachelserver auch auf
+  // eine eigene Anfrage nicht antwortet, und verschwindet wieder, sobald er antwortet.
+  var TILES_DOWN = "Die Kacheln von tiles.mapx.at sind gerade nicht erreichbar.";
+  var PROBE_RETRY_MS = 15000, tilesDown = false, probing = false, probeUrl = null;
+  function probeTiles() {
+    if (probing || !probeUrl) return;
+    probing = true;
+    fetch(probeUrl, { headers: { Range: "bytes=0-0" }, cache: "no-store" })
+      .then(function (r) { return r.ok; }, function () { return false; })
+      .then(function (ok) {
+        probing = false;
+        if (ok) {
+          if (tilesDown) { tilesDown = false; hideMsg(); }
+          return;
+        }
+        tilesDown = true;
+        showMsg(TILES_DOWN);
+        setTimeout(probeTiles, PROBE_RETRY_MS);
+      });
+  }
   map.on("error", function (e) {
-    var src = e && e.sourceId;
-    var text = e && e.error && e.error.message ? e.error.message : "";
-    if (SOURCE_PARAMS.indexOf(src) >= 0 || /pmtiles|tiles\.mapx\.at/i.test(text)) {
-      showMsg("Die Kacheln von tiles.mapx.at sind gerade nicht erreichbar.");
-    }
+    var src = e && e.sourceId, err = e && e.error;
+    var text = err && err.message ? err.message : "";
+    if (SOURCE_PARAMS.indexOf(src) < 0 && !/pmtiles|tiles\.mapx\.at/i.test(text)) return;
+    if (err && err.name === "AbortError") return;
+    console.warn("Kachelfehler", src || "", text);
+    probeTiles();
   });
 
   var GROUPS = {}, HIDDEN = {}, LEGEND = null, ready = false;
@@ -174,6 +205,14 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
       var v = params.get(k);
       if (v && /^https?:\/\//.test(v) && style.sources[k]) style.sources[k].url = "pmtiles://" + v;
     });
+    Object.keys(style.sources).forEach(function (k) {
+      var so = style.sources[k], u = so.url;
+      if (!/^pmtiles:\/\//.test(u || "")) return;
+      if (so.maxzoom != null) MAXZOOM[u] = so.maxzoom;
+      if (!probeUrl) probeUrl = u.replace(/^pmtiles:\/\//, "");
+    });
+    // Nur für Vergleiche (#209): ?reliefmax=14
+    if (/^\d+$/.test(params.get("reliefmax") || "") && style.sources.relief) MAXZOOM[style.sources.relief.url] = +params.get("reliefmax");
     var md = style.metadata || {};
     GROUPS = md["mapx:groups"] || {};
     // Layer, die der Style selbst ausschaltet (z. B. grenzen-label-gemeinde), bleiben aus

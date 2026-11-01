@@ -395,7 +395,8 @@
    "url": "pmtiles://https://tiles.mapx.at/relief-terrainrgb-20250915-bde91d7b.pmtiles",
    "attribution": "<a href=\"https://data.bev.gv.at/geonetwork/srv/ger/catalog.search#/metadata/5ce253fc-b7c5-4362-97af-6556c18a45d9\" target=\"_blank\" rel=\"noopener\">BEV – ALS-DTM 1 m</a> (Stichtag 15.09.2025), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>",
    "encoding": "mapbox",
-   "tileSize": 512
+   "tileSize": 512,
+   "maxzoom": 15
   },
   "hoehenlinien": {
    "type": "vector",
