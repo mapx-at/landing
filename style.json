@@ -290,6 +290,44 @@
     "steps": "Stiege",
     "trail": "Wanderweg, Steig"
    }
+  },
+  "mapx:tiles": {
+   "dkm": {
+    "datei": "dkm-nutzung.pmtiles",
+    "stand": ""
+   },
+   "gip": {
+    "datei": "gip-strassen.pmtiles",
+    "stand": ""
+   },
+   "ggn": {
+    "datei": "ggn-gewaesser.pmtiles",
+    "stand": ""
+   },
+   "grenzen": {
+    "datei": "grenzen.pmtiles",
+    "stand": ""
+   },
+   "geonamen": {
+    "datei": "geonamen.pmtiles",
+    "stand": ""
+   },
+   "adr": {
+    "datei": "adr-hausnummern.pmtiles",
+    "stand": ""
+   },
+   "oev": {
+    "datei": "oev.pmtiles",
+    "stand": ""
+   },
+   "relief": {
+    "datei": "relief-terrainrgb.pmtiles",
+    "stand": ""
+   },
+   "hoehenlinien": {
+    "datei": "hoehenlinien.pmtiles",
+    "stand": ""
+   }
   }
  },
  "glyphs": "https://tiles.mapx.at/fonts/{fontstack}/{range}.pbf",
