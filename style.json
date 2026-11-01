@@ -126,6 +126,7 @@
    "labels": [
     "ggn-water-l-label-donau",
     "ggn-water-l-label",
+    "ggn-water-label",
     "ggn-water-a-label",
     "geonamen-ried",
     "geonamen-gebiet",
@@ -7715,7 +7716,7 @@
    "type": "symbol",
    "source": "ggn",
    "source-layer": "water_l",
-   "minzoom": 11,
+   "minzoom": 9,
    "filter": [
     "all",
     [
@@ -7734,49 +7735,66 @@
      ]
     ],
     [
-     "any",
+     "case",
      [
-      "all",
-      [
-       "<=",
-       [
-        "get",
-        "rank"
-       ],
-       5
-      ],
-      [
-       ">=",
-       [
-        "zoom"
-       ],
-       11
-      ]
-     ],
-     [
-      "all",
-      [
-       "==",
-       [
-        "get",
-        "rank"
-       ],
-       6
-      ],
-      [
-       ">=",
-       [
-        "zoom"
-       ],
-       12
-      ]
+      "has",
+      "label_z"
      ],
      [
       ">=",
       [
        "zoom"
       ],
-      15
+      [
+       "get",
+       "label_z"
+      ]
+     ],
+     [
+      "any",
+      [
+       "all",
+       [
+        "<=",
+        [
+         "get",
+         "rank"
+        ],
+        5
+       ],
+       [
+        ">=",
+        [
+         "zoom"
+        ],
+        11
+       ]
+      ],
+      [
+       "all",
+       [
+        "==",
+        [
+         "get",
+         "rank"
+        ],
+        6
+       ],
+       [
+        ">=",
+        [
+         "zoom"
+        ],
+        12
+       ]
+      ],
+      [
+       ">=",
+       [
+        "zoom"
+       ],
+       15
+      ]
      ]
     ]
    ],
@@ -7796,6 +7814,27 @@
      ],
      [
       "zoom"
+     ],
+     9,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      10.5,
+      2,
+      10,
+      3,
+      9.5,
+      4,
+      8.5,
+      5,
+      8,
+      6,
+      9,
+      8.5
      ],
      11,
      [
@@ -7915,6 +7954,90 @@
     ],
     "text-pitch-alignment": "map",
     "text-rotation-alignment": "map"
+   },
+   "paint": {
+    "text-color": "rgba(0, 77, 168, 1)",
+    "text-halo-color": "rgba(191, 223, 255, 1)",
+    "text-halo-width": 0.5
+   }
+  },
+  {
+   "id": "ggn-water-label",
+   "type": "symbol",
+   "source": "ggn",
+   "source-layer": "water_label_p",
+   "minzoom": 8,
+   "filter": [
+    ">=",
+    [
+     "zoom"
+    ],
+    [
+     "get",
+     "label_z"
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "point",
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Italic"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      12,
+      11
+     ],
+     14,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      13,
+      2,
+      12,
+      3,
+      11,
+      10
+     ],
+     16,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      14,
+      2,
+      13,
+      3,
+      12,
+      11
+     ]
+    ],
+    "text-letter-spacing": 0.03,
+    "text-max-width": 8
    },
    "paint": {
     "text-color": "rgba(0, 77, 168, 1)",
@@ -8546,7 +8669,7 @@
    "type": "symbol",
    "source": "geonamen",
    "source-layer": "geoname_p",
-   "minzoom": 11,
+   "minzoom": 8,
    "layout": {
     "text-field": [
      "case",
