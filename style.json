@@ -605,6 +605,65 @@
    }
   },
   {
+   "id": "landuse-siedlung",
+   "type": "fill",
+   "source": "dkm",
+   "source-layer": "landuse_a",
+   "filter": [
+    "==",
+    [
+     "get",
+     "namecat"
+    ],
+    1
+   ],
+   "paint": {
+    "fill-color": [
+     "step",
+     [
+      "zoom"
+     ],
+     "#D1D1CF",
+     12,
+     "#F2F2F0"
+    ],
+    "fill-opacity": 1,
+    "fill-antialias": false
+   },
+   "minzoom": 10
+  },
+  {
+   "id": "landuse-siedlung-line",
+   "type": "line",
+   "source": "dkm",
+   "source-layer": "landuse_a",
+   "minzoom": 15,
+   "filter": [
+    "==",
+    [
+     "get",
+     "namecat"
+    ],
+    1
+   ],
+   "paint": {
+    "line-color": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     15,
+     "#C7C7C4",
+     17,
+     "#D9D9D6"
+    ],
+    "line-width": 0.7
+   }
+  },
+  {
    "id": "water-dkm",
    "type": "fill",
    "source": "dkm",
@@ -2475,65 +2534,6 @@
    "minzoom": 7
   },
   {
-   "id": "landuse-siedlung",
-   "type": "fill",
-   "source": "dkm",
-   "source-layer": "landuse_a",
-   "filter": [
-    "==",
-    [
-     "get",
-     "namecat"
-    ],
-    1
-   ],
-   "paint": {
-    "fill-color": [
-     "step",
-     [
-      "zoom"
-     ],
-     "#D1D1CF",
-     12,
-     "#F2F2F0"
-    ],
-    "fill-opacity": 1,
-    "fill-antialias": false
-   },
-   "minzoom": 10
-  },
-  {
-   "id": "landuse-siedlung-line",
-   "type": "line",
-   "source": "dkm",
-   "source-layer": "landuse_a",
-   "minzoom": 15,
-   "filter": [
-    "==",
-    [
-     "get",
-     "namecat"
-    ],
-    1
-   ],
-   "paint": {
-    "line-color": [
-     "interpolate",
-     [
-      "linear"
-     ],
-     [
-      "zoom"
-     ],
-     15,
-     "#C7C7C4",
-     17,
-     "#D9D9D6"
-    ],
-    "line-width": 0.7
-   }
-  },
-  {
    "id": "hoehenlinien",
    "type": "line",
    "source": "hoehenlinien",
@@ -2704,6 +2704,67 @@
      0.3,
      18,
      0.8
+    ]
+   }
+  },
+  {
+   "id": "building",
+   "type": "fill",
+   "source": "dkm",
+   "source-layer": "building_a",
+   "minzoom": 12,
+   "paint": {
+    "fill-color": [
+     "step",
+     [
+      "zoom"
+     ],
+     "#EDCACA",
+     15,
+     "#EDD8D8",
+     19,
+     "#EDCACA"
+    ],
+    "fill-outline-color": [
+     "step",
+     [
+      "zoom"
+     ],
+     "#EDCACA",
+     15,
+     "#D9ADAD",
+     16,
+     "#CCA3A3",
+     18,
+     "#EDD8D8",
+     19,
+     "#EDCACA"
+    ],
+    "fill-antialias": true
+   }
+  },
+  {
+   "id": "building-line",
+   "type": "line",
+   "source": "dkm",
+   "source-layer": "building_a",
+   "minzoom": 18,
+   "paint": {
+    "line-color": "#CC8F8F",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     16,
+     0.09,
+     17,
+     0.4,
+     19,
+     2.5
     ]
    }
   },
@@ -6065,67 +6126,6 @@
     "line-dasharray": [
      1,
      1.67
-    ]
-   }
-  },
-  {
-   "id": "building",
-   "type": "fill",
-   "source": "dkm",
-   "source-layer": "building_a",
-   "minzoom": 12,
-   "paint": {
-    "fill-color": [
-     "step",
-     [
-      "zoom"
-     ],
-     "#EDCACA",
-     15,
-     "#EDD8D8",
-     19,
-     "#EDCACA"
-    ],
-    "fill-outline-color": [
-     "step",
-     [
-      "zoom"
-     ],
-     "#EDCACA",
-     15,
-     "#D9ADAD",
-     16,
-     "#CCA3A3",
-     18,
-     "#EDD8D8",
-     19,
-     "#EDCACA"
-    ],
-    "fill-antialias": true
-   }
-  },
-  {
-   "id": "building-line",
-   "type": "line",
-   "source": "dkm",
-   "source-layer": "building_a",
-   "minzoom": 18,
-   "paint": {
-    "line-color": "#CC8F8F",
-    "line-width": [
-     "interpolate",
-     [
-      "linear"
-     ],
-     [
-      "zoom"
-     ],
-     16,
-     0.09,
-     17,
-     0.4,
-     19,
-     2.5
     ]
    }
   },
