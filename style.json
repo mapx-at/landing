@@ -68,13 +68,21 @@
     "road-bridge-casing-motorway",
     "road-bridge-motorway",
     "road-name-weg",
+    "road-name-fuss",
     "road-ref-secondary",
     "road-name-minor",
-    "road-name-minor-hi",
+    "road-name-minor-z14",
+    "road-name-minor-z16",
+    "road-name-weg-z15",
+    "road-name-weg-z16",
+    "road-name-fuss-z15",
+    "road-name-fuss-z16",
     "road-name-primary",
-    "road-name-primary-hi",
+    "road-name-primary-z14",
+    "road-name-primary-z16",
     "road-name-motorway",
-    "road-name-motorway-hi",
+    "road-name-motorway-z14",
+    "road-name-motorway-z16",
     "road-ref-primary-z9",
     "road-ref-primary",
     "road-ref-primary-l",
@@ -6610,22 +6618,18 @@
      "hnr"
     ],
     "text-font": [
-     "Noto Sans Medium"
+     "Noto Sans Regular"
     ],
     "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
+     "step",
      [
       "zoom"
      ],
-     16,
-     9,
+     9.33,
      18,
-     11,
-     20,
-     11
+     12,
+     19,
+     14.67
     ],
     "text-max-width": 8,
     "text-padding": 1,
@@ -6641,9 +6645,27 @@
     "visibility": "visible"
    },
    "paint": {
-    "text-color": "rgba(128, 51, 51, 1)",
-    "text-halo-color": "rgba(250, 250, 250, 1)",
-    "text-halo-width": 1
+    "text-color": "#803333",
+    "text-halo-color": [
+     "step",
+     [
+      "zoom"
+     ],
+     "#FAFAFA",
+     18,
+     "#FFFFFF"
+    ],
+    "text-halo-width": [
+     "step",
+     [
+      "zoom"
+     ],
+     1.6,
+     18,
+     2,
+     19,
+     2.67
+    ]
    }
   },
   {
@@ -6666,22 +6688,18 @@
      "hnr"
     ],
     "text-font": [
-     "Noto Sans Medium"
+     "Noto Sans Regular"
     ],
     "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
+     "step",
      [
       "zoom"
      ],
-     16,
-     10,
+     9.33,
      18,
      12,
-     20,
-     12
+     19,
+     14.67
     ],
     "text-max-width": 8,
     "text-padding": 1,
@@ -6697,9 +6715,27 @@
     "visibility": "visible"
    },
    "paint": {
-    "text-color": "rgba(128, 51, 51, 1)",
-    "text-halo-color": "rgba(250, 250, 250, 1)",
-    "text-halo-width": 1
+    "text-color": "#803333",
+    "text-halo-color": [
+     "step",
+     [
+      "zoom"
+     ],
+     "#FAFAFA",
+     18,
+     "#FFFFFF"
+    ],
+    "text-halo-width": [
+     "step",
+     [
+      "zoom"
+     ],
+     1.6,
+     18,
+     2,
+     19,
+     2.67
+    ]
    }
   },
   {
@@ -6846,7 +6882,6 @@
      [
       "literal",
       [
-       "pedestrian",
        "service"
       ]
      ]
@@ -6874,9 +6909,56 @@
      "name"
     ],
     "text-font": [
-     "Noto Sans Medium"
+     "Noto Sans Regular"
     ],
-    "text-size": [
+    "text-size": 10.67,
+    "text-padding": 0,
+    "text-max-angle": 60
+   },
+   "paint": {
+    "text-color": "#4E4E4E",
+    "text-halo-color": "#F0F0F0",
+    "text-halo-width": 1.07
+   },
+   "maxzoom": 15
+  },
+  {
+   "id": "road-name-fuss",
+   "type": "symbol",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 14,
+   "filter": [
+    "all",
+    [
+     "has",
+     "name"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ],
+    [
+     "in",
+     [
+      "get",
+      "draw_class"
+     ],
+     [
+      "literal",
+      [
+       "pedestrian"
+      ]
+     ]
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "symbol-spacing": [
      "interpolate",
      [
       "linear"
@@ -6884,18 +6966,28 @@
      [
       "zoom"
      ],
-     12,
-     9,
+     13,
+     200,
+     14,
+     80,
      15,
-     9
+     300
     ],
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": 10.67,
     "text-padding": 0,
     "text-max-angle": 60
    },
    "paint": {
-    "text-color": "#4E4E4E",
-    "text-halo-color": "#FFFFFF",
-    "text-halo-width": 0.8
+    "text-color": "#894444",
+    "text-halo-color": "#FFDCF0",
+    "text-halo-width": 1.07
    },
    "maxzoom": 15
   },
@@ -7084,9 +7176,57 @@
      "name"
     ],
     "text-font": [
-     "Noto Sans Medium"
+     "Noto Sans Regular"
     ],
-    "text-size": [
+    "text-size": 12,
+    "text-padding": 0,
+    "text-max-angle": 60
+   },
+   "paint": {
+    "text-color": "#4E4E4E",
+    "text-halo-color": "#F0F0F0",
+    "text-halo-width": 1.07
+   },
+   "maxzoom": 14
+  },
+  {
+   "id": "road-name-minor-z14",
+   "type": "symbol",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 14,
+   "filter": [
+    "all",
+    [
+     "has",
+     "name"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ],
+    [
+     "in",
+     [
+      "get",
+      "draw_class"
+     ],
+     [
+      "literal",
+      [
+       "secondary",
+       "minor"
+      ]
+     ]
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "symbol-spacing": [
      "interpolate",
      [
       "linear"
@@ -7094,23 +7234,87 @@
      [
       "zoom"
      ],
-     12,
-     9,
+     13,
+     200,
+     14,
+     80,
      15,
-     9
+     300
     ],
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": 13.33,
     "text-padding": 0,
     "text-max-angle": 60
    },
    "paint": {
     "text-color": "#4E4E4E",
-    "text-halo-color": "#FFFFFF",
-    "text-halo-width": 0.8
+    "text-halo-color": "#F0F0F0",
+    "text-halo-width": 1.07
    },
-   "maxzoom": 15
+   "maxzoom": 16
   },
   {
-   "id": "road-name-minor-hi",
+   "id": "road-name-minor-z16",
+   "type": "symbol",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 16,
+   "filter": [
+    "all",
+    [
+     "has",
+     "name"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ],
+    [
+     "in",
+     [
+      "get",
+      "draw_class"
+     ],
+     [
+      "literal",
+      [
+       "secondary",
+       "minor"
+      ]
+     ]
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "symbol-spacing": 300,
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Bold"
+    ],
+    "text-size": 18.67,
+    "text-padding": 1
+   },
+   "paint": {
+    "text-color": "#4E4E4E",
+    "text-halo-color": "#F0F0F0",
+    "text-halo-width": 1.07
+   }
+  },
+  {
+   "id": "road-name-weg-z15",
    "type": "symbol",
    "source": "gip",
    "source-layer": "gip_l",
@@ -7138,9 +7342,6 @@
      [
       "literal",
       [
-       "secondary",
-       "minor",
-       "pedestrian",
        "service"
       ]
      ]
@@ -7154,29 +7355,178 @@
      "name"
     ],
     "text-font": [
-     "Noto Sans Medium"
+     "Noto Sans Regular"
     ],
-    "text-size": [
-     "interpolate",
+    "text-size": 10.67,
+    "text-padding": 0,
+    "text-max-angle": 60
+   },
+   "paint": {
+    "text-color": "#4E4E4E",
+    "text-halo-color": "#F0F0F0",
+    "text-halo-width": 1.07
+   },
+   "maxzoom": 16
+  },
+  {
+   "id": "road-name-weg-z16",
+   "type": "symbol",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 16,
+   "filter": [
+    "all",
+    [
+     "has",
+     "name"
+    ],
+    [
+     "==",
      [
-      "linear"
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ],
+    [
+     "in",
+     [
+      "get",
+      "draw_class"
      ],
      [
-      "zoom"
-     ],
-     15,
-     9,
-     16,
-     11.5,
-     18,
-     13
+      "literal",
+      [
+       "service"
+      ]
+     ]
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "symbol-spacing": 300,
+    "text-field": [
+     "get",
+     "name"
     ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": 16,
     "text-padding": 1
    },
    "paint": {
     "text-color": "#4E4E4E",
-    "text-halo-color": "#FFFFFF",
-    "text-halo-width": 0.8
+    "text-halo-color": "#F0F0F0",
+    "text-halo-width": 1.07
+   }
+  },
+  {
+   "id": "road-name-fuss-z15",
+   "type": "symbol",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 15,
+   "filter": [
+    "all",
+    [
+     "has",
+     "name"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ],
+    [
+     "in",
+     [
+      "get",
+      "draw_class"
+     ],
+     [
+      "literal",
+      [
+       "pedestrian"
+      ]
+     ]
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "symbol-spacing": 300,
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": 10.67,
+    "text-padding": 0,
+    "text-max-angle": 60
+   },
+   "paint": {
+    "text-color": "#894444",
+    "text-halo-color": "#FFDCF0",
+    "text-halo-width": 1.07
+   },
+   "maxzoom": 16
+  },
+  {
+   "id": "road-name-fuss-z16",
+   "type": "symbol",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 16,
+   "filter": [
+    "all",
+    [
+     "has",
+     "name"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ],
+    [
+     "in",
+     [
+      "get",
+      "draw_class"
+     ],
+     [
+      "literal",
+      [
+       "pedestrian"
+      ]
+     ]
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "symbol-spacing": 300,
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": 16,
+    "text-padding": 1
+   },
+   "paint": {
+    "text-color": "#894444",
+    "text-halo-color": "#FFDCF0",
+    "text-halo-width": 1.07
    }
   },
   {
@@ -7235,9 +7585,56 @@
      "name"
     ],
     "text-font": [
-     "Noto Sans Medium"
+     "Noto Sans Bold"
     ],
-    "text-size": [
+    "text-size": 12,
+    "text-padding": 0,
+    "text-max-angle": 60
+   },
+   "paint": {
+    "text-color": "#730000",
+    "text-halo-color": "#FFFF99",
+    "text-halo-width": 1.07
+   },
+   "maxzoom": 14
+  },
+  {
+   "id": "road-name-primary-z14",
+   "type": "symbol",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 14,
+   "filter": [
+    "all",
+    [
+     "has",
+     "name"
+    ],
+    [
+     "==",
+     [
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ],
+    [
+     "in",
+     [
+      "get",
+      "draw_class"
+     ],
+     [
+      "literal",
+      [
+       "primary"
+      ]
+     ]
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "symbol-spacing": [
      "interpolate",
      [
       "linear"
@@ -7245,29 +7642,37 @@
      [
       "zoom"
      ],
-     11,
-     9,
-     14,
-     10,
+     12,
+     450,
+     13,
+     250,
      15,
-     11
+     400
     ],
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Bold"
+    ],
+    "text-size": 16,
     "text-padding": 0,
     "text-max-angle": 60
    },
    "paint": {
     "text-color": "#730000",
     "text-halo-color": "#FFFF99",
-    "text-halo-width": 0.8
+    "text-halo-width": 1.07
    },
-   "maxzoom": 15
+   "maxzoom": 16
   },
   {
-   "id": "road-name-primary-hi",
+   "id": "road-name-primary-z16",
    "type": "symbol",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 15,
+   "minzoom": 16,
    "filter": [
     "all",
     [
@@ -7304,27 +7709,15 @@
      "name"
     ],
     "text-font": [
-     "Noto Sans Medium"
+     "Noto Sans Bold"
     ],
-    "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
-     [
-      "zoom"
-     ],
-     15,
-     11,
-     16,
-     12
-    ],
+    "text-size": 21.33,
     "text-padding": 1
    },
    "paint": {
     "text-color": "#730000",
     "text-halo-color": "#FFFF99",
-    "text-halo-width": 0.8
+    "text-halo-width": 1.07
    }
   },
   {
@@ -7369,23 +7762,9 @@
      "name"
     ],
     "text-font": [
-     "Noto Sans Medium"
+     "Noto Sans Bold"
     ],
-    "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
-     [
-      "zoom"
-     ],
-     10,
-     9,
-     14,
-     10,
-     15,
-     11
-    ],
+    "text-size": 13.33,
     "text-padding": 0,
     "text-max-angle": 60
    },
@@ -7394,14 +7773,14 @@
     "text-halo-color": "#FFD37F",
     "text-halo-width": 0.8
    },
-   "maxzoom": 15
+   "maxzoom": 14
   },
   {
-   "id": "road-name-motorway-hi",
+   "id": "road-name-motorway-z14",
    "type": "symbol",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 15,
+   "minzoom": 14,
    "filter": [
     "all",
     [
@@ -7438,27 +7817,70 @@
      "name"
     ],
     "text-font": [
-     "Noto Sans Medium"
+     "Noto Sans Bold"
     ],
-    "text-size": [
-     "interpolate",
+    "text-size": 16,
+    "text-padding": 0,
+    "text-max-angle": 60
+   },
+   "paint": {
+    "text-color": "#730000",
+    "text-halo-color": "#FFD37F",
+    "text-halo-width": 1.07
+   },
+   "maxzoom": 16
+  },
+  {
+   "id": "road-name-motorway-z16",
+   "type": "symbol",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 16,
+   "filter": [
+    "all",
+    [
+     "has",
+     "name"
+    ],
+    [
+     "==",
      [
-      "linear"
+      "get",
+      "brunnel"
+     ],
+     "none"
+    ],
+    [
+     "in",
+     [
+      "get",
+      "draw_class"
      ],
      [
-      "zoom"
-     ],
-     15,
-     11,
-     16,
-     12
+      "literal",
+      [
+       "motorway"
+      ]
+     ]
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "symbol-spacing": 850,
+    "text-field": [
+     "get",
+     "name"
     ],
+    "text-font": [
+     "Noto Sans Bold"
+    ],
+    "text-size": 21.33,
     "text-padding": 1
    },
    "paint": {
     "text-color": "#730000",
     "text-halo-color": "#FFD37F",
-    "text-halo-width": 0.8
+    "text-halo-width": 1.07
    }
   },
   {
@@ -7772,19 +8194,17 @@
      "Noto Sans Italic"
     ],
     "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
+     "step",
      [
       "zoom"
      ],
-     10,
-     13.2,
+     12,
      11,
-     13.5,
-     13,
-     15
+     14.67,
+     14,
+     16,
+     16,
+     18.67
     ],
     "symbol-spacing": [
      "interpolate",
@@ -7801,14 +8221,14 @@
      16,
      900
     ],
-    "text-letter-spacing": 0.03,
+    "text-letter-spacing": 0.1,
     "text-pitch-alignment": "map",
     "text-rotation-alignment": "map"
    },
    "paint": {
     "text-color": "rgba(0, 77, 168, 1)",
     "text-halo-color": "rgba(191, 223, 255, 1)",
-    "text-halo-width": 0.5
+    "text-halo-width": 0.8
    }
   },
   {
@@ -7908,34 +8328,11 @@
      "Noto Sans Italic"
     ],
     "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
+     "step",
      [
       "zoom"
      ],
-     9,
-     [
-      "match",
-      [
-       "get",
-       "rank"
-      ],
-      1,
-      10.5,
-      2,
-      10,
-      3,
-      9.5,
-      4,
-      8.5,
-      5,
-      8,
-      6,
-      9,
-      8.5
-     ],
+     10.67,
      11,
      [
       "match",
@@ -7944,41 +8341,15 @@
        "rank"
       ],
       1,
-      10.5,
-      2,
-      10,
-      3,
-      9.5,
-      4,
-      8.5,
-      5,
-      8,
-      6,
-      9,
-      8.5
-     ],
-     13,
-     [
-      "match",
+      14.67,
       [
-       "get",
-       "rank"
+       2,
+       3
       ],
-      1,
-      12.5,
-      2,
       12,
-      3,
-      10.5,
-      4,
-      10.5,
-      5,
-      9,
-      6,
-      9.2,
-      8.5
+      10.67
      ],
-     15,
+     14,
      [
       "match",
       [
@@ -7986,18 +8357,13 @@
        "rank"
       ],
       1,
-      14.5,
-      2,
-      13,
-      3,
-      12.5,
-      4,
-      11.5,
-      5,
-      11,
-      6,
-      9.5,
-      8.5
+      16,
+      [
+       2,
+       3
+      ],
+      13.33,
+      10.67
      ],
      16,
      [
@@ -8007,18 +8373,13 @@
        "rank"
       ],
       1,
+      18.67,
+      [
+       2,
+       3
+      ],
       16,
-      2,
-      14.5,
-      3,
-      13.5,
-      4,
-      12.5,
-      5,
-      11.5,
-      6,
-      10.2,
-      9.2
+      12
      ]
     ],
     "symbol-spacing": [
@@ -8038,27 +8399,14 @@
      16,
      900
     ],
-    "text-letter-spacing": [
-     "match",
-     [
-      "get",
-      "rank"
-     ],
-     [
-      1,
-      6,
-      7
-     ],
-     0.05,
-     0.03
-    ],
+    "text-letter-spacing": 0.1,
     "text-pitch-alignment": "map",
     "text-rotation-alignment": "map"
    },
    "paint": {
     "text-color": "rgba(0, 77, 168, 1)",
     "text-halo-color": "rgba(191, 223, 255, 1)",
-    "text-halo-width": 0.5
+    "text-halo-width": 0.8
    }
   },
   {
@@ -8087,14 +8435,10 @@
      "Noto Sans Italic"
     ],
     "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
+     "step",
      [
       "zoom"
      ],
-     10,
      [
       "match",
       [
@@ -8103,22 +8447,35 @@
       ],
       1,
       12,
-      11
-     ],
-     14,
-     [
-      "match",
-      [
-       "get",
-       "rank"
-      ],
-      1,
-      13,
       2,
-      12,
-      3,
-      11,
-      10
+      10.67,
+      10.67
+     ],
+     9,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      13.33,
+      2,
+      10.67,
+      10.67
+     ],
+     12,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      13.33,
+      2,
+      13.33,
+      12
      ],
      16,
      [
@@ -8128,21 +8485,19 @@
        "rank"
       ],
       1,
-      14,
+      18.67,
       2,
-      13,
-      3,
-      12,
-      11
+      16,
+      13.33
      ]
     ],
-    "text-letter-spacing": 0.03,
+    "text-letter-spacing": 0.1,
     "text-max-width": 8
    },
    "paint": {
     "text-color": "rgba(0, 77, 168, 1)",
     "text-halo-color": "rgba(191, 223, 255, 1)",
-    "text-halo-width": 0.5
+    "text-halo-width": 0.533
    }
   },
   {
@@ -8186,14 +8541,10 @@
      "Noto Sans Italic"
     ],
     "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
+     "step",
      [
       "zoom"
      ],
-     10,
      [
       "match",
       [
@@ -8202,22 +8553,35 @@
       ],
       1,
       12,
-      11
-     ],
-     14,
-     [
-      "match",
-      [
-       "get",
-       "rank"
-      ],
-      1,
-      13,
       2,
-      12,
-      3,
-      11,
-      10
+      10.67,
+      10.67
+     ],
+     9,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      13.33,
+      2,
+      10.67,
+      10.67
+     ],
+     12,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      13.33,
+      2,
+      13.33,
+      12
      ],
      16,
      [
@@ -8227,21 +8591,19 @@
        "rank"
       ],
       1,
-      14,
+      18.67,
       2,
-      13,
-      3,
-      12,
-      11
+      16,
+      13.33
      ]
     ],
-    "text-letter-spacing": 0.03,
+    "text-letter-spacing": 0.1,
     "text-max-width": 8
    },
    "paint": {
     "text-color": "rgba(0, 77, 168, 1)",
     "text-halo-color": "rgba(191, 223, 255, 1)",
-    "text-halo-width": 0.5
+    "text-halo-width": 0.533
    }
   },
   {
@@ -8435,49 +8797,16 @@
      ]
     ],
     "text-font": [
-     "Noto Sans Italic"
+     "Noto Sans Bold Italic"
     ],
     "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
+     "step",
      [
       "zoom"
      ],
-     11,
-     [
-      "match",
-      [
-       "get",
-       "rank"
-      ],
-      1,
-      10,
-      8
-     ],
-     15,
-     [
-      "match",
-      [
-       "get",
-       "rank"
-      ],
-      1,
-      12,
-      10
-     ],
-     18,
-     [
-      "match",
-      [
-       "get",
-       "rank"
-      ],
-      1,
-      13,
-      11
-     ]
+     10.67,
+     13.27,
+     13.33
     ],
     "text-anchor": "left",
     "text-offset": [
@@ -8486,14 +8815,22 @@
     ],
     "text-justify": "left",
     "text-max-width": 8,
-    "text-letter-spacing": 0.05,
+    "text-letter-spacing": 0.1,
     "text-optional": true,
     "text-padding": 2
    },
    "paint": {
-    "text-color": "rgba(60, 60, 60, 1)",
-    "text-halo-color": "rgba(255, 255, 255, 1)",
-    "text-halo-width": 1
+    "text-color": "#343434",
+    "text-halo-color": "#FAFAFA",
+    "text-halo-width": [
+     "step",
+     [
+      "zoom"
+     ],
+     1.07,
+     13.27,
+     1.33
+    ]
    }
   },
   {
@@ -8612,19 +8949,16 @@
      ]
     ],
     "text-font": [
-     "Noto Sans Medium Italic"
+     "Noto Sans Bold Italic"
     ],
     "text-size": [
-     "match",
+     "step",
      [
-      "get",
-      "class"
+      "zoom"
      ],
-     "airport",
-     12,
-     "airfield",
-     10,
-     9.5
+     9.33,
+     16,
+     13.33
     ],
     "text-anchor": "bottom",
     "text-offset": [
@@ -8632,13 +8966,13 @@
      -0.9
     ],
     "text-max-width": 9,
-    "text-letter-spacing": 0.05,
+    "text-letter-spacing": 0.1,
     "text-optional": true
    },
    "paint": {
-    "text-color": "rgba(80, 80, 80, 1)",
-    "text-halo-color": "rgba(255, 255, 255, 1)",
-    "text-halo-width": 1
+    "text-color": "#730000",
+    "text-halo-color": "#FAFAFA",
+    "text-halo-width": 1.07
    }
   },
   {
@@ -8744,9 +9078,9 @@
     ]
    },
    "paint": {
-    "text-color": "rgba(138, 69, 69, 1)",
-    "text-halo-color": "rgba(255, 255, 255, 0.9)",
-    "text-halo-width": 1.2,
+    "text-color": "#732600",
+    "text-halo-color": "#FAFAFA",
+    "text-halo-width": 1.73,
     "text-halo-blur": 0.3
    },
    "filter": [
@@ -8843,9 +9177,9 @@
     "text-padding": 2
    },
    "paint": {
-    "text-color": "rgba(138, 69, 69, 1)",
-    "text-halo-color": "rgba(255, 255, 255, 0.9)",
-    "text-halo-width": 1.2,
+    "text-color": "#732600",
+    "text-halo-color": "#FAFAFA",
+    "text-halo-width": 1.73,
     "text-halo-blur": 0.3
    },
    "filter": [
@@ -8901,9 +9235,9 @@
     "text-padding": 2
    },
    "paint": {
-    "text-color": "rgba(3, 135, 191, 1)",
+    "text-color": "#009CE0",
     "text-halo-color": "rgba(255, 255, 255, 0.9)",
-    "text-halo-width": 1.2,
+    "text-halo-width": 0,
     "text-halo-blur": 0.3
    },
    "filter": [
@@ -9192,8 +9526,8 @@
     "text-optional": true
    },
    "paint": {
-    "text-color": "#555555",
-    "text-halo-color": "rgba(255, 255, 255, 0.9)",
+    "text-color": "#732600",
+    "text-halo-color": "#FAFAFA",
     "text-halo-width": 1.2,
     "text-halo-blur": 0.3
    },
@@ -9261,8 +9595,8 @@
     "text-padding": 2
    },
    "paint": {
-    "text-color": "#555555",
-    "text-halo-color": "rgba(255, 255, 255, 0.9)",
+    "text-color": "#732600",
+    "text-halo-color": "#FAFAFA",
     "text-halo-width": 1.2,
     "text-halo-blur": 0.3
    },
@@ -9319,9 +9653,9 @@
      "name"
     ],
     "text-font": [
-     "Noto Sans Italic"
+     "Noto Sans Bold"
     ],
-    "text-size": 11,
+    "text-size": 12,
     "symbol-sort-key": [
      "get",
      "rank"
@@ -9329,7 +9663,6 @@
     "text-max-width": 7,
     "text-padding": 2,
     "text-anchor": "bottom",
-    "text-letter-spacing": 0.1,
     "icon-image": [
      "case",
      [
@@ -9356,9 +9689,9 @@
     ]
    },
    "paint": {
-    "text-color": "rgba(138, 69, 69, 1)",
-    "text-halo-color": "rgba(241, 241, 241, 1)",
-    "text-halo-width": 0.8,
+    "text-color": "#894444",
+    "text-halo-color": "#FAFAFA",
+    "text-halo-width": 0.4,
     "text-halo-blur": 0
    },
    "filter": [
@@ -9412,17 +9745,30 @@
      ]
     ],
     "text-font": [
-     "Noto Sans Italic"
+     "match",
+     [
+      "get",
+      "rank"
+     ],
+     1,
+     [
+      "literal",
+      [
+       "Noto Sans Bold"
+      ]
+     ],
+     [
+      "literal",
+      [
+       "Noto Sans Regular"
+      ]
+     ]
     ],
     "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
+     "step",
      [
       "zoom"
      ],
-     9,
      [
       "match",
       [
@@ -9432,71 +9778,13 @@
       1,
       12,
       2,
-      11,
-      3,
-      11,
-      11
-     ],
-     10,
-     [
-      "match",
-      [
-       "get",
-       "rank"
-      ],
-      1,
-      12.3,
-      2,
-      11,
-      3,
-      11,
-      11
-     ],
-     12,
-     [
-      "match",
-      [
-       "get",
-       "rank"
-      ],
-      1,
-      13,
-      2,
-      12,
-      3,
-      11,
-      11
-     ],
-     15,
-     [
-      "match",
-      [
-       "get",
-       "rank"
-      ],
-      1,
-      14,
-      2,
-      13,
+      10.67,
       3,
       12,
       12
      ],
-     16,
-     [
-      "match",
-      [
-       "get",
-       "rank"
-      ],
-      1,
-      14.2,
-      2,
-      13.2,
-      3,
-      12.2,
-      12.2
-     ]
+     11,
+     12
     ],
     "symbol-sort-key": [
      "get",
@@ -9509,7 +9797,6 @@
      0,
      0.75
     ],
-    "text-letter-spacing": 0.05,
     "icon-image": [
      "case",
      [
@@ -9532,9 +9819,43 @@
     "icon-size": 0.9
    },
    "paint": {
-    "text-color": "rgba(138, 69, 69, 1)",
-    "text-halo-color": "rgba(241, 241, 241, 1)",
-    "text-halo-width": 0.7,
+    "text-color": "#894444",
+    "text-halo-color": "#FAFAFA",
+    "text-halo-width": [
+     "step",
+     [
+      "zoom"
+     ],
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      0.4,
+      2,
+      1.07,
+      3,
+      0.8,
+      0.8
+     ],
+     11,
+     [
+      "match",
+      [
+       "get",
+       "rank"
+      ],
+      1,
+      1.07,
+      2,
+      1.07,
+      3,
+      0.8,
+      0.8
+     ]
+    ],
     "text-halo-blur": 0
    },
    "filter": [
@@ -9569,19 +9890,13 @@
      "Noto Sans Regular"
     ],
     "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
+     "step",
      [
       "zoom"
      ],
-     14,
-     11,
-     15,
-     12,
-     16,
-     12.5
+     14.67,
+     17,
+     17.33
     ],
     "symbol-sort-key": [
      "get",
@@ -9592,8 +9907,16 @@
    },
    "paint": {
     "text-color": "#000000",
-    "text-halo-color": "rgba(255, 255, 255, 0.9)",
-    "text-halo-width": 1.2,
+    "text-halo-color": [
+     "step",
+     [
+      "zoom"
+     ],
+     "#F0F0F0",
+     17,
+     "#FAFAFA"
+    ],
+    "text-halo-width": 2,
     "text-halo-blur": 0.3
    },
    "filter": [
@@ -9692,17 +10015,34 @@
      ]
     ],
     "text-font": [
-     "Noto Sans Regular"
+     "match",
+     [
+      "get",
+      "rank"
+     ],
+     [
+      1,
+      2,
+      3
+     ],
+     [
+      "literal",
+      [
+       "Noto Sans Bold"
+      ]
+     ],
+     [
+      "literal",
+      [
+       "Noto Sans Regular"
+      ]
+     ]
     ],
     "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
+     "step",
      [
       "zoom"
      ],
-     8,
      [
       "match",
       [
@@ -9710,15 +10050,15 @@
        "rank"
       ],
       1,
-      13.5,
+      13.33,
       2,
-      12.5,
+      13.33,
       3,
-      10.5,
+      13.33,
       4,
-      9.5,
+      12,
       5,
-      9.5,
+      12,
       6,
       9,
       7,
@@ -9735,17 +10075,17 @@
        "rank"
       ],
       1,
-      15,
+      13.33,
       2,
-      14,
+      13.33,
       3,
-      12,
+      13.33,
       4,
-      10.5,
+      13.33,
       5,
-      10.5,
+      13.33,
       6,
-      9.5,
+      12,
       7,
       9.5,
       8,
@@ -9760,44 +10100,19 @@
        "rank"
       ],
       1,
-      16,
+      14.67,
       2,
-      15,
+      14.67,
       3,
-      13,
+      14.67,
       4,
-      12,
+      14.67,
       5,
+      14.67,
+      6,
       12,
-      6,
-      10,
       7,
-      10,
-      8,
-      10,
-      10
-     ],
-     11,
-     [
-      "match",
-      [
-       "get",
-       "rank"
-      ],
-      1,
-      17,
-      2,
-      16,
-      3,
-      14,
-      4,
-      13,
-      5,
-      13,
-      6,
-      11,
-      7,
-      11,
+      13.33,
       8,
       10.5,
       10.5
@@ -9810,19 +10125,19 @@
        "rank"
       ],
       1,
-      18,
+      21.33,
       2,
-      17,
+      21.33,
       3,
-      15,
+      21.33,
       4,
-      14,
+      18.67,
       5,
-      14,
+      18.67,
       6,
-      12,
+      16,
       7,
-      12,
+      17.33,
       8,
       11,
       11
@@ -9835,47 +10150,22 @@
        "rank"
       ],
       1,
-      19,
+      21.33,
       2,
-      18,
+      21.33,
       3,
-      16,
+      21.33,
       4,
-      15,
+      18.67,
       5,
-      15,
+      18.67,
       6,
-      13,
+      16,
       7,
-      13,
+      17.33,
       8,
       12,
       12
-     ],
-     14,
-     [
-      "match",
-      [
-       "get",
-       "rank"
-      ],
-      1,
-      20,
-      2,
-      19,
-      3,
-      17,
-      4,
-      16,
-      5,
-      16,
-      6,
-      14,
-      7,
-      14,
-      8,
-      13,
-      13
      ],
      15,
      [
@@ -9885,24 +10175,24 @@
        "rank"
       ],
       1,
-      21,
+      22.67,
       2,
-      20,
+      22.67,
       3,
-      18,
+      22.67,
       4,
-      17,
+      21.33,
       5,
-      17,
+      21.33,
       6,
-      15,
+      21.33,
       7,
-      15,
+      20,
       8,
-      14,
-      14
+      16,
+      16
      ],
-     16,
+     17,
      [
       "match",
       [
@@ -9910,22 +10200,22 @@
        "rank"
       ],
       1,
-      21.5,
+      24,
       2,
-      20.5,
+      24,
       3,
-      18.5,
+      24,
       4,
-      17.5,
+      22.67,
       5,
-      17.5,
+      22.67,
       6,
-      15.5,
+      22.67,
       7,
-      16,
+      21.33,
       8,
-      15,
-      15
+      18.67,
+      18.67
      ]
     ],
     "symbol-sort-key": [
@@ -9938,8 +10228,8 @@
    },
    "paint": {
     "text-color": "#000000",
-    "text-halo-color": "rgba(255, 255, 255, 1)",
-    "text-halo-width": 1,
+    "text-halo-color": "#FAFAFA",
+    "text-halo-width": 2,
     "text-halo-blur": 0
    },
    "filter": [
@@ -9997,29 +10287,27 @@
      "Noto Sans Bold"
     ],
     "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
+     "step",
      [
       "zoom"
      ],
-     8,
-     12,
+     14.67,
      9,
-     14,
+     16,
      10,
-     14,
+     17.33,
      11,
-     15,
+     18.67,
      12,
-     16.5,
+     20,
      13,
-     17.5,
+     21.33,
      14,
-     18.5,
-     15,
-     21
+     22.67,
+     16,
+     24,
+     18,
+     25.33
     ],
     "symbol-sort-key": [
      "get",
@@ -10040,8 +10328,8 @@
    },
    "paint": {
     "text-color": "#000000",
-    "text-halo-color": "rgba(250, 250, 250, 1)",
-    "text-halo-width": 1.2,
+    "text-halo-color": "#FAFAFA",
+    "text-halo-width": 2.67,
     "text-halo-blur": 0
    },
    "maxzoom": 11
@@ -10085,29 +10373,27 @@
      "Noto Sans Bold"
     ],
     "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
+     "step",
      [
       "zoom"
      ],
-     8,
-     12,
+     14.67,
      9,
-     14,
+     16,
      10,
-     14,
+     17.33,
      11,
-     15,
+     18.67,
      12,
-     16.5,
-     13,
      20,
-     14,
+     13,
      21.33,
-     15,
-     22
+     14,
+     22.67,
+     16,
+     24,
+     18,
+     25.33
     ],
     "symbol-sort-key": [
      "get",
@@ -10120,8 +10406,8 @@
    },
    "paint": {
     "text-color": "#000000",
-    "text-halo-color": "rgba(250, 250, 250, 1)",
-    "text-halo-width": 1.2,
+    "text-halo-color": "#FAFAFA",
+    "text-halo-width": 2.67,
     "text-halo-blur": 0
    }
   },
@@ -10164,22 +10450,12 @@
      "Noto Sans Bold"
     ],
     "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
+     "step",
      [
       "zoom"
      ],
-     8,
-     15,
+     18.67,
      10,
-     17,
-     12,
-     19,
-     14,
-     21,
-     16,
      24
     ],
     "symbol-sort-key": [
@@ -10188,7 +10464,7 @@
     ],
     "text-max-width": 8,
     "text-padding": 2,
-    "text-letter-spacing": 0.05,
+    "text-letter-spacing": 0.02,
     "icon-image": "place_capital",
     "icon-size": 0.9,
     "icon-allow-overlap": true,
@@ -10200,8 +10476,8 @@
    },
    "paint": {
     "text-color": "#000000",
-    "text-halo-color": "rgba(255, 255, 255, 0.9)",
-    "text-halo-width": 1.5,
+    "text-halo-color": "#FAFAFA",
+    "text-halo-width": 2,
     "text-halo-blur": 0.3
    },
    "maxzoom": 12
@@ -10245,22 +10521,12 @@
      "Noto Sans Bold"
     ],
     "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
+     "step",
      [
       "zoom"
      ],
-     8,
-     15,
+     18.67,
      10,
-     17,
-     12,
-     19,
-     14,
-     21,
-     16,
      24
     ],
     "symbol-sort-key": [
@@ -10269,12 +10535,12 @@
     ],
     "text-max-width": 8,
     "text-padding": 2,
-    "text-letter-spacing": 0.05
+    "text-letter-spacing": 0.02
    },
    "paint": {
     "text-color": "#000000",
-    "text-halo-color": "rgba(255, 255, 255, 0.9)",
-    "text-halo-width": 1.5,
+    "text-halo-color": "#FAFAFA",
+    "text-halo-width": 2,
     "text-halo-blur": 0.3
    }
   },
@@ -10368,26 +10634,20 @@
      "name"
     ],
     "text-font": [
-     "Noto Sans Medium"
+     "Noto Sans Bold"
     ],
     "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
+     "step",
      [
       "zoom"
      ],
-     5,
      12,
      6,
-     13,
-     9,
-     15
+     18.67
     ],
     "text-anchor": "bottom",
     "text-allow-overlap": true,
-    "text-letter-spacing": 0.05,
+    "text-letter-spacing": 0.02,
     "text-max-width": 8,
     "symbol-sort-key": [
      "get",
@@ -10396,8 +10656,8 @@
    },
    "paint": {
     "text-color": "#000000",
-    "text-halo-color": "rgba(250, 250, 250, 1)",
-    "text-halo-width": 1.5
+    "text-halo-color": "#FAFAFA",
+    "text-halo-width": 2
    },
    "id": "geonamen-hauptstadt-low",
    "filter": [
@@ -10421,26 +10681,20 @@
      "name"
     ],
     "text-font": [
-     "Noto Sans Medium"
+     "Noto Sans Bold"
     ],
     "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
+     "step",
      [
       "zoom"
      ],
-     5,
      12,
      6,
-     13,
-     9,
-     15
+     18.67
     ],
     "text-anchor": "bottom",
     "text-allow-overlap": true,
-    "text-letter-spacing": 0.05,
+    "text-letter-spacing": 0.02,
     "text-max-width": 8,
     "symbol-sort-key": [
      "get",
@@ -10449,8 +10703,8 @@
    },
    "paint": {
     "text-color": "#000000",
-    "text-halo-color": "rgba(250, 250, 250, 1)",
-    "text-halo-width": 1.5
+    "text-halo-color": "#FAFAFA",
+    "text-halo-width": 2
    },
    "id": "geonamen-hauptstadt-wien-low",
    "filter": [
@@ -10476,19 +10730,7 @@
     "text-font": [
      "Noto Sans Bold"
     ],
-    "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
-     [
-      "zoom"
-     ],
-     7,
-     12,
-     8,
-     12
-    ],
+    "text-size": 13.33,
     "text-anchor": "bottom",
     "text-allow-overlap": true,
     "text-letter-spacing": 0.03,
@@ -10500,8 +10742,8 @@
    },
    "paint": {
     "text-color": "#000000",
-    "text-halo-color": "rgba(250, 250, 250, 1)",
-    "text-halo-width": 1.2
+    "text-halo-color": "#FAFAFA",
+    "text-halo-width": 2.67
    },
    "id": "geonamen-bezirkshauptort-low"
   }
