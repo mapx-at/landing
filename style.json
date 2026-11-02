@@ -7145,7 +7145,7 @@
     "text-font": [
      "Noto Sans Regular"
     ],
-    "text-size": 10.67,
+    "text-size": 8.5,
     "text-padding": 0,
     "text-max-angle": 60
    },
@@ -7214,7 +7214,7 @@
     "text-font": [
      "Noto Sans Regular"
     ],
-    "text-size": 10.67,
+    "text-size": 8.5,
     "text-padding": 0,
     "text-max-angle": 60
    },
@@ -7408,7 +7408,7 @@
     "text-font": [
      "Noto Sans Regular"
     ],
-    "text-size": 12,
+    "text-size": 8.5,
     "text-padding": 0,
     "text-max-angle": 60
    },
@@ -7478,7 +7478,7 @@
     "text-font": [
      "Noto Sans Regular"
     ],
-    "text-size": 13.33,
+    "text-size": 10,
     "text-padding": 0,
     "text-max-angle": 60
    },
@@ -7532,9 +7532,9 @@
      "name"
     ],
     "text-font": [
-     "Noto Sans Bold"
+     "Noto Sans Regular"
     ],
-    "text-size": 18.67,
+    "text-size": 12,
     "text-padding": 1
    },
    "paint": {
@@ -7587,7 +7587,7 @@
     "text-font": [
      "Noto Sans Regular"
     ],
-    "text-size": 10.67,
+    "text-size": 9,
     "text-padding": 0,
     "text-max-angle": 60
    },
@@ -7642,7 +7642,7 @@
     "text-font": [
      "Noto Sans Regular"
     ],
-    "text-size": 16,
+    "text-size": 11,
     "text-padding": 1
    },
    "paint": {
@@ -7695,7 +7695,7 @@
     "text-font": [
      "Noto Sans Regular"
     ],
-    "text-size": 10.67,
+    "text-size": 9,
     "text-padding": 0,
     "text-max-angle": 60
    },
@@ -7750,7 +7750,7 @@
     "text-font": [
      "Noto Sans Regular"
     ],
-    "text-size": 16,
+    "text-size": 11,
     "text-padding": 1
    },
    "paint": {
@@ -7817,7 +7817,7 @@
     "text-font": [
      "Noto Sans Bold"
     ],
-    "text-size": 12,
+    "text-size": 8.5,
     "text-padding": 0,
     "text-max-angle": 60
    },
@@ -7886,7 +7886,7 @@
     "text-font": [
      "Noto Sans Bold"
     ],
-    "text-size": 16,
+    "text-size": 10,
     "text-padding": 0,
     "text-max-angle": 60
    },
@@ -7941,7 +7941,7 @@
     "text-font": [
      "Noto Sans Bold"
     ],
-    "text-size": 21.33,
+    "text-size": 12.5,
     "text-padding": 1
    },
    "paint": {
@@ -7994,7 +7994,7 @@
     "text-font": [
      "Noto Sans Bold"
     ],
-    "text-size": 13.33,
+    "text-size": 9,
     "text-padding": 0,
     "text-max-angle": 60
    },
@@ -8049,7 +8049,7 @@
     "text-font": [
      "Noto Sans Bold"
     ],
-    "text-size": 16,
+    "text-size": 10,
     "text-padding": 0,
     "text-max-angle": 60
    },
@@ -8104,7 +8104,7 @@
     "text-font": [
      "Noto Sans Bold"
     ],
-    "text-size": 21.33,
+    "text-size": 12.5,
     "text-padding": 1
    },
    "paint": {
