@@ -68,7 +68,6 @@
     "road-bridge-casing-motorway",
     "road-bridge-motorway",
     "road-name-weg",
-    "road-ref-secondary-pt",
     "road-ref-secondary",
     "road-name-minor",
     "road-name-minor-hi",
@@ -78,6 +77,7 @@
     "road-name-motorway-hi",
     "road-ref-primary-z9",
     "road-ref-primary",
+    "road-ref-primary-l",
     "road-ref-motorway",
     "oev-rail-tunnel",
     "oev-subway-tunnel",
@@ -6950,70 +6950,11 @@
    ]
   },
   {
-   "id": "road-ref-secondary-pt",
-   "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
-   "minzoom": 12,
-   "filter": [
-    "all",
-    [
-     "has",
-     "ref"
-    ],
-    [
-     "in",
-     [
-      "get",
-      "draw_class"
-     ],
-     [
-      "literal",
-      [
-       "secondary"
-      ]
-     ]
-    ]
-   ],
-   "layout": {
-    "symbol-placement": "point",
-    "text-rotation-alignment": "viewport",
-    "text-field": [
-     "get",
-     "ref"
-    ],
-    "text-font": [
-     "Noto Sans Bold"
-    ],
-    "text-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
-     [
-      "zoom"
-     ],
-     15,
-     10,
-     16,
-     12
-    ],
-    "text-padding": 8,
-    "symbol-sort-key": 100
-   },
-   "paint": {
-    "text-color": "#000000",
-    "text-halo-color": "#FFFFFF",
-    "text-halo-width": 6
-   },
-   "maxzoom": 14
-  },
-  {
    "id": "road-ref-secondary",
    "type": "symbol",
    "source": "gip",
    "source-layer": "gip_l",
-   "minzoom": 11,
+   "minzoom": 15,
    "filter": [
     "all",
     [
@@ -7544,6 +7485,19 @@
        "primary"
       ]
      ]
+    ],
+    [
+     "!=",
+     [
+      "slice",
+      [
+       "get",
+       "ref"
+      ],
+      0,
+      1
+     ],
+     "L"
     ]
    ],
    "layout": {
@@ -7591,6 +7545,99 @@
        "primary"
       ]
      ]
+    ],
+    [
+     "!=",
+     [
+      "slice",
+      [
+       "get",
+       "ref"
+      ],
+      0,
+      1
+     ],
+     "L"
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "symbol-spacing": [
+     "step",
+     [
+      "zoom"
+     ],
+     250,
+     12,
+     400
+    ],
+    "text-rotation-alignment": "viewport",
+    "text-field": [
+     "get",
+     "ref"
+    ],
+    "text-font": [
+     "Noto Sans Bold"
+    ],
+    "text-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     15,
+     10,
+     16,
+     12
+    ],
+    "text-padding": 6,
+    "symbol-sort-key": 100
+   },
+   "paint": {
+    "text-color": "#730000",
+    "text-halo-color": "#FFFF73",
+    "text-halo-width": 6
+   }
+  },
+  {
+   "id": "road-ref-primary-l",
+   "type": "symbol",
+   "source": "gip",
+   "source-layer": "gip_l",
+   "minzoom": 15,
+   "filter": [
+    "all",
+    [
+     "has",
+     "ref"
+    ],
+    [
+     "in",
+     [
+      "get",
+      "draw_class"
+     ],
+     [
+      "literal",
+      [
+       "primary"
+      ]
+     ]
+    ],
+    [
+     "==",
+     [
+      "slice",
+      [
+       "get",
+       "ref"
+      ],
+      0,
+      1
+     ],
+     "L"
     ]
    ],
    "layout": {
