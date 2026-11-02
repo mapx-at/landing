@@ -10082,23 +10082,7 @@
      ]
     ],
     "text-font": [
-     "step",
-     [
-      "zoom"
-     ],
-     [
-      "literal",
-      [
-       "Noto Sans Regular"
-      ]
-     ],
-     13,
-     [
-      "literal",
-      [
-       "Noto Sans Bold"
-      ]
-     ]
+     "Noto Sans Bold"
     ],
     "text-size": [
      "interpolate",
@@ -10490,7 +10474,7 @@
      "name"
     ],
     "text-font": [
-     "Noto Sans Regular"
+     "Noto Sans Bold"
     ],
     "text-size": [
      "interpolate",
