@@ -65,6 +65,32 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
 .rev .d{color:#5b6b69;font-size:12px}
 @media (max-width:1000px){.search{left:max(276px,calc(env(safe-area-inset-left) + 272px));transform:none;width:calc(100% - 336px)}}
 @media (max-width:520px){.search{left:max(10px,env(safe-area-inset-left));width:calc(100% - 66px)}.panel{top:calc(max(10px,env(safe-area-inset-top)) + 46px)}.search input{font-size:16px}}
+/* Routenplanung (routing.mapx.at) */
+.rtbtn{width:29px;height:29px;border:0;padding:0;background:#fff;cursor:pointer;font-size:16px;line-height:29px}
+.rt{position:absolute;z-index:4;top:max(10px,env(safe-area-inset-top));right:56px;width:292px;max-height:calc(100% - 70px);overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.15);padding:10px 12px;display:none}
+.rt.open{display:block}
+.rt h2{margin:0 0 8px;font-size:15px;font-weight:600;display:flex;justify-content:space-between;align-items:center}
+.rt h2 button{border:0;background:none;color:var(--muted);font-size:18px;cursor:pointer;padding:0 2px}
+.rt .modes{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:8px}
+.rt .modes button{height:32px;border:1px solid var(--line);border-radius:8px;background:none;color:var(--fg);font:13px system-ui,sans-serif;cursor:pointer}
+.rt .modes button[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#fff}
+.rt .pt{position:relative;display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.rt .pt i{flex:none;width:18px;height:18px;border-radius:50%;color:#fff;font:600 11px/18px system-ui,sans-serif;text-align:center;font-style:normal}
+.rt .pt input{flex:1;min-width:0;height:34px;padding:0 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--fg);font:14px system-ui,sans-serif}
+.rt .pt input:focus{outline:2px solid var(--acc);outline-offset:-1px}
+.rt .pt ul{position:absolute;left:24px;right:0;top:36px;z-index:5;list-style:none;margin:0;padding:3px 0;background:var(--panel);border:1px solid var(--line);border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.2);max-height:200px;overflow:auto;display:none}
+.rt .pt ul.open{display:block}
+.rt .pt li{padding:5px 10px;cursor:pointer;font-size:13px}
+.rt .pt li:hover{background:rgba(15,118,110,.12)}
+.rt .pt li small{display:block;color:var(--muted);font-size:11px}
+.rt .acts{display:flex;gap:6px;margin:6px 0}
+.rt .acts button{flex:1;height:30px;border:1px solid var(--line);border-radius:8px;background:none;color:var(--fg);font:13px system-ui,sans-serif;cursor:pointer}
+.rt .res{font-size:15px;font-weight:600;margin-top:6px}
+.rt .res span{color:var(--muted);font-weight:400;font-size:13px}
+.rt .err{color:#b91c1c;font-size:13px;margin-top:6px}
+@media (prefers-color-scheme:dark){.rt .err{color:#fca5a5}}
+.rt .hint,.rt .attr{font-size:12px;color:var(--muted);margin-top:6px}
+@media (max-width:520px){.rt{right:10px;left:10px;width:auto;top:auto;bottom:34px;max-height:55%}}
 </style>
 </head>
 <body>
@@ -97,6 +123,21 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
     <details class="lg"><summary>Legende Straßen</summary><ul class="legend" id="roadLegend"></ul></details>
     <div class="note">Antippen für Details, lange drücken/Rechtsklick für die nächste Adresse. Gebäude ab Zoom 12, Grundstücke und Hausnummern ab 16.</div>
   </div>
+</section>
+
+<section class="rt" id="rt" aria-label="Routenplanung">
+  <h2>Route <button type="button" id="rtClose" aria-label="Routenplanung schließen">×</button></h2>
+  <div class="modes" role="group" aria-label="Verkehrsmittel">
+    <button type="button" data-p="car" aria-pressed="true">Auto</button>
+    <button type="button" data-p="bike" aria-pressed="false">Rad</button>
+    <button type="button" data-p="foot" aria-pressed="false">Zu Fuß</button>
+  </div>
+  <div class="pt"><i style="background:#15803d">A</i><input id="rtA" type="search" placeholder="Start: Ort suchen oder auf Karte tippen" autocomplete="off" aria-label="Start"><ul id="rtAl"></ul></div>
+  <div class="pt"><i style="background:#b91c1c">B</i><input id="rtB" type="search" placeholder="Ziel: Ort suchen oder auf Karte tippen" autocomplete="off" aria-label="Ziel"><ul id="rtBl"></ul></div>
+  <div class="acts"><button type="button" id="rtSwap">⇅ Tauschen</button><button type="button" id="rtReset">Zurücksetzen</button></div>
+  <div id="rtOut" aria-live="polite"></div>
+  <div class="hint" id="rtHint">Start und Ziel auf der Karte antippen; die Marker lassen sich ziehen.</div>
+  <div class="attr" id="rtAttr" style="display:none"></div>
 </section>
 
 <div class="msg" id="msg"></div>
@@ -309,7 +350,7 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
     return null;
   }
   map.on("click", function (e) {
-    if (!ready) return;
+    if (!ready || (document.getElementById("rt") || {}).className === "rt open") return;
     var pad = 4, box = [[e.point.x - pad, e.point.y - pad], [e.point.x + pad, e.point.y + pad]];
     var parts = [], namecats = (LEGEND && LEGEND.namecat) || {};
     var labels = (LEGEND && LEGEND.roadLabels) || {};
@@ -497,6 +538,169 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
       map.flyTo({ center: ll, zoom: Math.max(map.getZoom(), z), speed: 1.6 });
     }
   }
+
+
+  // ---------------------------------------------------------------- Routenplanung (routing.mapx.at)
+  // GET /route?profile=car|bike|foot&from=lon,lat&to=lon,lat -> GeoJSON-Feature (LineString), Rate-Limit 5 r/s.
+  // Zum Testen per ?routing=http://... ueberschreibbar.
+  var ROUTING_URL = "https://routing.mapx.at";
+  if (params.get("routing")) ROUTING_URL = params.get("routing").replace(/\/+$/, "");
+  var rtEl = document.getElementById("rt"), rtOut = document.getElementById("rtOut"), rtHint = document.getElementById("rtHint"),
+      rtAttr = document.getElementById("rtAttr");
+  var rtPts = { a: null, b: null }, rtMk = { a: null, b: null }, rtProfile = "car", rtCtrl = null, rtTimer = null, rtSeq = 0;
+  var rtIn = { a: document.getElementById("rtA"), b: document.getElementById("rtB") };
+  var rtEmpty = { type: "FeatureCollection", features: [] };
+
+  function rtOpen(o) {
+    rtEl.classList.toggle("open", o); rtBtn.setAttribute("aria-expanded", String(o));
+    map.getCanvas().style.cursor = o ? "crosshair" : "";
+    if (!o) { rtClear(); }
+  }
+  var rtBtn = document.createElement("button");
+  rtBtn.type = "button"; rtBtn.className = "rtbtn"; rtBtn.textContent = "➜"; rtBtn.title = "Routenplanung";
+  rtBtn.setAttribute("aria-label", "Routenplanung"); rtBtn.setAttribute("aria-expanded", "false");
+  rtBtn.addEventListener("click", function () { rtOpen(!rtEl.classList.contains("open")); });
+  map.addControl({
+    onAdd: function () { var d = document.createElement("div"); d.className = "maplibregl-ctrl maplibregl-ctrl-group"; d.appendChild(rtBtn); return d; },
+    onRemove: function () {}
+  }, "top-right");
+  document.getElementById("rtClose").addEventListener("click", function () { rtOpen(false); });
+
+  function rtLayers() {
+    if (map.getSource("route")) return true;
+    if (!map.isStyleLoaded() && !map.getStyle().layers.length) return false;
+    var before; // ueber Strassen, unter der ersten Beschriftung
+    map.getStyle().layers.some(function (l) { if (l.type === "symbol") { before = l.id; return true; } });
+    map.addSource("route", { type: "geojson", data: rtEmpty });
+    map.addLayer({ id: "route-casing", type: "line", source: "route", layout: { "line-cap": "round", "line-join": "round" },
+                   paint: { "line-color": "#ffffff", "line-width": ["interpolate", ["linear"], ["zoom"], 6, 6, 14, 12, 18, 20] } }, before);
+    map.addLayer({ id: "route-line", type: "line", source: "route", layout: { "line-cap": "round", "line-join": "round" },
+                   paint: { "line-color": "#2563eb", "line-width": ["interpolate", ["linear"], ["zoom"], 6, 3, 14, 7, 18, 12] } }, before);
+    return true;
+  }
+  function rtDraw(fc) { if (rtLayers()) map.getSource("route").setData(fc || rtEmpty); }
+
+  function rtMarker(k) {
+    var m = new maplibregl.Marker({ color: k === "a" ? "#15803d" : "#b91c1c", draggable: true }).setLngLat(rtPts[k]).addTo(map);
+    m.on("dragend", function () {
+      var ll = m.getLngLat(); rtPts[k] = [ll.lng, ll.lat];
+      rtIn[k].value = ll.lat.toFixed(5) + ", " + ll.lng.toFixed(5);
+      rtSchedule();
+    });
+    rtMk[k] = m;
+  }
+  function rtSet(k, ll, label, fit) {
+    rtPts[k] = ll;
+    if (rtMk[k]) rtMk[k].setLngLat(ll); else rtMarker(k);
+    rtIn[k].value = label || (ll[1].toFixed(5) + ", " + ll[0].toFixed(5));
+    if (fit && !(rtPts.a && rtPts.b)) map.flyTo({ center: ll, zoom: Math.max(map.getZoom(), 13), speed: 1.6 });
+    rtSchedule();
+  }
+  function rtClear() {
+    if (rtCtrl) rtCtrl.abort();
+    clearTimeout(rtTimer); rtSeq++;
+    ["a", "b"].forEach(function (k) { if (rtMk[k]) rtMk[k].remove(); rtMk[k] = null; rtPts[k] = null; rtIn[k].value = ""; });
+    rtDraw(rtEmpty); rtOut.innerHTML = ""; rtAttr.style.display = "none"; rtHint.style.display = "";
+  }
+  document.getElementById("rtReset").addEventListener("click", rtClear);
+  document.getElementById("rtSwap").addEventListener("click", function () {
+    var t = rtPts.a, tv = rtIn.a.value;
+    rtPts.a = rtPts.b; rtPts.b = t; rtIn.a.value = rtIn.b.value; rtIn.b.value = tv;
+    var m = rtMk.a; rtMk.a = null; var n = rtMk.b; rtMk.b = null;
+    if (m) m.remove(); if (n) n.remove();
+    if (rtPts.a) rtMarker("a"); if (rtPts.b) rtMarker("b");
+    rtSchedule();
+  });
+  Array.prototype.forEach.call(rtEl.querySelectorAll(".modes button"), function (b) {
+    b.addEventListener("click", function () {
+      rtProfile = b.getAttribute("data-p");
+      Array.prototype.forEach.call(rtEl.querySelectorAll(".modes button"), function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      rtSchedule();
+    });
+  });
+
+  // Klick auf die Karte: erst Start, dann Ziel; danach Marker ziehen
+  map.on("click", function (e) {
+    if (!rtEl.classList.contains("open")) return;
+    var k = !rtPts.a ? "a" : !rtPts.b ? "b" : null;
+    if (k) rtSet(k, [e.lngLat.lng, e.lngLat.lat]);
+  });
+
+  function fmtDist(m) { return m < 1000 ? Math.round(m) + " m" : (m / 1000).toFixed(m < 10000 ? 1 : 0).replace(".", ",") + " km"; }
+  function fmtDur(s) {
+    var m = Math.round(s / 60); if (m < 1) return "< 1 Min.";
+    return m < 60 ? m + " Min." : Math.floor(m / 60) + " Std. " + (m % 60 ? (m % 60) + " Min." : "");
+  }
+  function rtError(t) { rtOut.innerHTML = '<div class="err" role="alert">' + esc(t) + "</div>"; rtAttr.style.display = "none"; rtDraw(rtEmpty); }
+  function rtSchedule() {
+    clearTimeout(rtTimer);
+    if (!(rtPts.a && rtPts.b)) { if (rtCtrl) rtCtrl.abort(); rtSeq++; rtDraw(rtEmpty); rtOut.innerHTML = ""; rtAttr.style.display = "none";
+      rtHint.style.display = ""; return; }
+    rtHint.style.display = "none";
+    rtOut.innerHTML = '<div class="hint">Route wird berechnet …</div>';
+    rtTimer = setTimeout(rtCompute, 300);
+  }
+  function rtCompute() {
+    if (rtCtrl) rtCtrl.abort();
+    rtCtrl = new AbortController();
+    var my = ++rtSeq, a = rtPts.a, b = rtPts.b;
+    var url = ROUTING_URL + "/route?profile=" + rtProfile + "&from=" + a[0].toFixed(6) + "," + a[1].toFixed(6) +
+              "&to=" + b[0].toFixed(6) + "," + b[1].toFixed(6);
+    fetch(url, { signal: rtCtrl.signal }).then(function (r) {
+      return r.json().catch(function () { return null; }).then(function (j) { return { r: r, j: j }; });
+    }).then(function (o) {
+      if (my !== rtSeq) return;
+      if (!o.r.ok || !o.j || !o.j.geometry) {
+        var st = o.r.status, d = o.j && (o.j.error || o.j.message || o.j.detail);
+        if (st === 429) return rtError("Zu viele Anfragen – bitte einen Moment warten.");
+        if (st === 404 || st === 422 || st === 400) return rtError("Keine Route gefunden: Start oder Ziel liegt außerhalb Österreichs bzw. ist nicht verbunden" + (d ? " (" + d + ")" : "") + ".");
+        return rtError("Routing gerade nicht erreichbar (HTTP " + st + ").");
+      }
+      var p = o.j.properties || {};
+      rtDraw({ type: "FeatureCollection", features: [o.j] });
+      rtOut.innerHTML = '<div class="res">' + esc(fmtDur(p.duration_s)) + ' <span>· ' + esc(fmtDist(p.distance_m)) + "</span></div>";
+      rtAttr.textContent = p.attribution || "Datenquelle: GIP.at, CC BY 4.0"; rtAttr.style.display = "";
+      var bb = new maplibregl.LngLatBounds();
+      o.j.geometry.coordinates.forEach(function (c) { bb.extend(c); });
+      var narrow = window.innerWidth <= 520;
+      map.fitBounds(bb, { padding: narrow ? { top: 60, bottom: 260, left: 30, right: 30 } : { top: 60, bottom: 60, left: 280, right: 380 }, maxZoom: 17, duration: 600 });
+    }).catch(function (e) {
+      if (e.name === "AbortError" || my !== rtSeq) return;
+      rtError("Routing gerade nicht erreichbar.");
+    });
+  }
+
+  // Ortssuche je Feld (gleiche Meilisearch-Quelle wie die Hauptsuche)
+  function rtAc(k) {
+    var inp = rtIn[k], ul = document.getElementById(k === "a" ? "rtAl" : "rtBl"), t = null, c = null, n = 0, hs = [];
+    function close() { ul.classList.remove("open"); }
+    function pick(h) {
+      close(); if (!h || !h._geo) return;
+      rtSet(k, [h._geo.lng, h._geo.lat], h.label || h.name, true);
+    }
+    inp.addEventListener("input", function () {
+      clearTimeout(t); var q = inp.value.trim();
+      if (q.length < 2 || /^-?\d+[.,]\d+\s*[,;]\s*-?\d+[.,]\d+$/.test(q)) { close(); return; }
+      t = setTimeout(function () {
+        if (c) c.abort(); c = new AbortController(); var my = ++n;
+        meili({ q: q, limit: 6, attributesToRetrieve: ATTRS }, c.signal).then(function (j) {
+          if (my !== n) return;
+          hs = (j.hits || []).filter(function (h) { return h._geo; });
+          ul.innerHTML = "";
+          hs.forEach(function (h, i) {
+            var li = document.createElement("li");
+            li.innerHTML = esc(h.label || h.name) + "<small>" + esc(h.context || "") + "</small>";
+            li.addEventListener("mousedown", function (ev) { ev.preventDefault(); pick(hs[i]); });
+            ul.appendChild(li);
+          });
+          ul.classList.toggle("open", hs.length > 0);
+        }).catch(function () {});
+      }, 200);
+    });
+    inp.addEventListener("keydown", function (e) { if (e.key === "Enter" && hs.length && ul.classList.contains("open")) { e.preventDefault(); pick(hs[0]); } if (e.key === "Escape") close(); });
+    inp.addEventListener("blur", function () { setTimeout(close, 120); });
+  }
+  rtAc("a"); rtAc("b");
 
   // Naechster Treffer zu einem Punkt. _geoBoundingBox (Quadrat +-radius) statt _geoRadius: in Meilisearch
   // 1.56 ~1 ms statt ~100 ms. Treffer in den Ecken (bis radius*1.41) werden verworfen.
