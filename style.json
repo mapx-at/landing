@@ -9784,7 +9784,8 @@
        "friedhof",
        "denkmal",
        "bergwerk",
-       "kleindenkmal"
+       "kleindenkmal",
+       "gipfelkreuz"
       ]
      ]
     ]
@@ -9807,6 +9808,15 @@
      [
       "case",
       [
+       "==",
+       [
+        "get",
+        "rank"
+       ],
+       2
+      ],
+      "monastery",
+      [
        "in",
        "Stift",
        [
@@ -9828,6 +9838,8 @@
      ],
      "kapelle",
      "chapel",
+     "gipfelkreuz",
+     "summit_cross",
      "church"
     ],
     "icon-size": [
@@ -9860,7 +9872,8 @@
      "literal",
      [
       "kirche",
-      "kapelle"
+      "kapelle",
+      "gipfelkreuz"
      ]
     ]
    ]
