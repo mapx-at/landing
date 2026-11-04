@@ -344,11 +344,11 @@
     "stand": "2026-07-08"
    },
    "relief": {
-    "datei": "relief-terrainrgb-20250915-740be844.pmtiles",
+    "datei": "relief-terrainrgb-20250915-ecf3295d.pmtiles",
     "stand": "20250915"
    },
    "hoehenlinien": {
-    "datei": "hoehenlinien-20250915-c806fa8c.pmtiles",
+    "datei": "hoehenlinien-20250915-a8476756.pmtiles",
     "stand": "20250915"
    }
   }
@@ -416,7 +416,7 @@
   },
   "relief": {
    "type": "raster-dem",
-   "url": "pmtiles://https://tiles.mapx.at/relief-terrainrgb-20250915-740be844.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/relief-terrainrgb-20250915-ecf3295d.pmtiles",
    "attribution": "<a href=\"https://data.bev.gv.at/geonetwork/srv/ger/catalog.search#/metadata/5ce253fc-b7c5-4362-97af-6556c18a45d9\" target=\"_blank\" rel=\"noopener\">BEV – ALS-DTM 1 m</a> (Stichtag 15.09.2025), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>",
    "encoding": "mapbox",
    "tileSize": 512,
@@ -424,7 +424,7 @@
   },
   "hoehenlinien": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/hoehenlinien-20250915-c806fa8c.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/hoehenlinien-20250915-a8476756.pmtiles",
    "attribution": "<a href=\"https://data.bev.gv.at/geonetwork/srv/ger/catalog.search#/metadata/5ce253fc-b7c5-4362-97af-6556c18a45d9\" target=\"_blank\" rel=\"noopener\">BEV – ALS-DTM 1 m</a> (Stichtag 15.09.2025), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   }
  },
