@@ -140,9 +140,9 @@
     "geonamen-gebiet",
     "geonamen-gelaende",
     "geonamen-gletscher",
-    "geonamen-kirche",
     "geonamen-objekt",
     "geonamen-objekt-text",
+    "geonamen-kirche",
     "geonamen-gipfel-z8",
     "geonamen-gipfel",
     "geonamen-einzelhaus",
@@ -467,7 +467,11 @@
      12,
      0.45,
      15,
-     0.4
+     0.4,
+     16,
+     0.25,
+     17,
+     0.12
     ],
     "hillshade-shadow-color": "#555555",
     "hillshade-highlight-color": "#FFFFFF",
@@ -9470,81 +9474,6 @@
    ]
   },
   {
-   "id": "geonamen-kirche",
-   "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "geoname_p",
-   "minzoom": 13,
-   "layout": {
-    "icon-image": [
-     "match",
-     [
-      "get",
-      "class"
-     ],
-     "kirche",
-     [
-      "case",
-      [
-       "in",
-       "Stift",
-       [
-        "get",
-        "name"
-       ]
-      ],
-      "monastery",
-      [
-       "in",
-       "Kloster",
-       [
-        "get",
-        "name"
-       ]
-      ],
-      "monastery",
-      "church"
-     ],
-     "kapelle",
-     "chapel",
-     "church"
-    ],
-    "icon-size": [
-     "interpolate",
-     [
-      "linear"
-     ],
-     [
-      "zoom"
-     ],
-     14,
-     0.9,
-     17,
-     1.15
-    ],
-    "icon-padding": 1,
-    "symbol-sort-key": [
-     "get",
-     "rank"
-    ]
-   },
-   "paint": {},
-   "filter": [
-    "in",
-    [
-     "get",
-     "class"
-    ],
-    [
-     "literal",
-     [
-      "kirche",
-      "kapelle"
-     ]
-    ]
-   ]
-  },
-  {
    "id": "geonamen-objekt",
    "type": "symbol",
    "source": "geonamen",
@@ -9857,6 +9786,81 @@
        "bergwerk",
        "kleindenkmal"
       ]
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "geonamen-kirche",
+   "type": "symbol",
+   "source": "geonamen",
+   "source-layer": "geoname_p",
+   "minzoom": 13,
+   "layout": {
+    "icon-image": [
+     "match",
+     [
+      "get",
+      "class"
+     ],
+     "kirche",
+     [
+      "case",
+      [
+       "in",
+       "Stift",
+       [
+        "get",
+        "name"
+       ]
+      ],
+      "monastery",
+      [
+       "in",
+       "Kloster",
+       [
+        "get",
+        "name"
+       ]
+      ],
+      "monastery",
+      "church"
+     ],
+     "kapelle",
+     "chapel",
+     "church"
+    ],
+    "icon-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     0.9,
+     17,
+     1.15
+    ],
+    "icon-padding": 1,
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ]
+   },
+   "paint": {},
+   "filter": [
+    "in",
+    [
+     "get",
+     "class"
+    ],
+    [
+     "literal",
+     [
+      "kirche",
+      "kapelle"
      ]
     ]
    ]
