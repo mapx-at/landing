@@ -100,9 +100,8 @@
     "oev-subway",
     "oev-tram",
     "oev-funicular",
-    "oev-cable-car",
-    "oev-cable-car-mast",
-    "oev-cable-car-mast-gross",
+    "oev-funicular-mast",
+    "oev-funicular-mast-gross",
     "oev-ferry-klein",
     "oev-ferry",
     "oev-station",
@@ -114,6 +113,18 @@
     "road-low-motorway_link",
     "road-low-motorway",
     "road-ref-motorway-low"
+   ],
+   "lifts": [
+    "oev-aerialway",
+    "oev-aerialway-mast",
+    "oev-aerialway-mast-gross",
+    "oev-aerialway-label"
+   ],
+   "symbols": [
+    "geonamen-kirche"
+   ],
+   "buildings3d": [
+    "building-3d"
    ],
    "boundaries": [
     "grenzen-country-outline",
@@ -134,15 +145,14 @@
    "labels": [
     "ggn-water-l-label-donau",
     "ggn-water-l-label",
+    "ggn-water-l-label-abschnitt",
     "ggn-water-label",
-    "ggn-water-a-label",
     "geonamen-ried",
     "geonamen-gebiet",
     "geonamen-gelaende",
     "geonamen-gletscher",
     "geonamen-objekt",
     "geonamen-objekt-text",
-    "geonamen-kirche",
     "geonamen-gipfel-z8",
     "geonamen-gipfel",
     "geonamen-einzelhaus",
@@ -189,7 +199,7 @@
     ],
     [
      "#ffffff",
-     "Verkehr, Sonstiges"
+     "Verkehr, Abbau, Sonstiges"
     ],
     [
      "#ffffff",
@@ -220,19 +230,21 @@
      "Gewässer"
     ]
    ],
-   "namecat": {
-    "1": "Siedlung",
-    "2": "Grünfläche",
-    "3": "Landwirtschaft",
-    "5": "Wald",
-    "6": "Gletscher",
-    "7": "Verkehr, Sonstiges",
-    "8": "Fels, Geröll",
-    "9": "Gewässerrand, Feuchtgebiet",
-    "10": "Friedhof",
-    "11": "Freizeitfläche",
-    "12": "Weingarten",
-    "13": "Alm"
+   "kind": {
+    "residential": "Siedlung",
+    "garden": "Grünfläche",
+    "farmland": "Landwirtschaft",
+    "forest": "Wald",
+    "glacier": "Gletscher",
+    "transport": "Verkehr, Abbau, Sonstiges",
+    "rock": "Fels, Geröll",
+    "water": "Gewässerrand, Feuchtgebiet",
+    "cemetery": "Friedhof",
+    "recreation": "Freizeitfläche",
+    "vineyard": "Weingarten",
+    "alpine_meadow": "Alm",
+    "wetland": "Feuchtgebiet",
+    "quarry": "Abbau, Halde"
    },
    "building": [
     "#EDCACA",
@@ -293,6 +305,12 @@
      null,
      "#9C9C9C",
      true
+    ],
+    [
+     "Seilbahn, Lift",
+     null,
+     "#9C9C9C",
+     true
     ]
    ],
    "roadLabels": {
@@ -311,37 +329,13 @@
    }
   },
   "mapx:tiles": {
-   "dkm": {
-    "datei": "dkm-nutzung-20260401-767e5f3d.pmtiles",
+   "basis": {
+    "datei": "mapx-basis-20260401-c6b5b647.pmtiles",
     "stand": "2026-04-01"
    },
-   "parzellen": {
-    "datei": "dkm-parzellen-20260401-b6cd7eac.pmtiles",
+   "kataster": {
+    "datei": "mapx-kataster-20260401-e4504d72.pmtiles",
     "stand": "2026-04-01"
-   },
-   "gip": {
-    "datei": "gip-strassen-20260708-81d643e8.pmtiles",
-    "stand": "2026-07-08"
-   },
-   "ggn": {
-    "datei": "ggn-gewaesser-v19-638929f9.pmtiles",
-    "stand": "v19"
-   },
-   "grenzen": {
-    "datei": "grenzen-20261001-362b0b68.pmtiles",
-    "stand": "2026-10-01"
-   },
-   "geonamen": {
-    "datei": "geonamen-20260323-488d779d.pmtiles",
-    "stand": "20260323"
-   },
-   "adr": {
-    "datei": "adr-hausnummern-20261001-e6e8231b.pmtiles",
-    "stand": "2026-10-01"
-   },
-   "oev": {
-    "datei": "oev-20260708-04de4c15.pmtiles",
-    "stand": "2026-07-08"
    },
    "relief": {
     "datei": "relief-terrainrgb-20250915-ecf3295d.pmtiles",
@@ -374,45 +368,15 @@
    "maxzoom": 19,
    "attribution": "<a href=\"https://basemap.at\" target=\"_blank\" rel=\"noopener\">basemap.at</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
-  "dkm": {
+  "basis": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/dkm-nutzung-20260401-767e5f3d.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/mapx-basis-20260401-c6b5b647.pmtiles",
+   "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – DKM</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Verwaltungsgrenzen</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.data.gv.at/katalog/datasets/c2287ccb-f44c-48cd-bf7c-ac107b771246\" target=\"_blank\" rel=\"noopener\">BMLUK – GGN v19</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Geographische Namen</a> (Gipfel- und Ortsauswahl, Tiroler Weiler: <a href=\"https://basemap.at\" target=\"_blank\" rel=\"noopener\">basemap.at</a>), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Adressregister</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>, © Österreichisches Adressregister, Stichtagsdaten vom 01.10.2026; <a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at</a> (Bahn, Fähren), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; Seilbahnen und Lifte: <a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – DLM Verkehr</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; Flugplätze: <a href=\"https://www.wikidata.org\" target=\"_blank\" rel=\"noopener\">Wikidata</a>, CC0; Skigebiete: <a href=\"https://www.umweltbundesamt.at\" target=\"_blank\" rel=\"noopener\">Umweltbundesamt</a> 2017, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
+  },
+  "kataster": {
+   "type": "vector",
+   "url": "pmtiles://https://tiles.mapx.at/mapx-kataster-20260401-e4504d72.pmtiles",
    "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – DKM</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
-  },
-  "parzellen": {
-   "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/dkm-parzellen-20260401-b6cd7eac.pmtiles",
-   "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – DKM</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
-  },
-  "gip": {
-   "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/gip-strassen-20260708-81d643e8.pmtiles",
-   "attribution": "<a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
-  },
-  "ggn": {
-   "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/ggn-gewaesser-v19-638929f9.pmtiles",
-   "attribution": "<a href=\"https://www.data.gv.at/katalog/datasets/c2287ccb-f44c-48cd-bf7c-ac107b771246\" target=\"_blank\" rel=\"noopener\">BMLUK – GGN v19</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
-  },
-  "grenzen": {
-   "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/grenzen-20261001-362b0b68.pmtiles",
-   "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Verwaltungsgrenzen</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
-  },
-  "geonamen": {
-   "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/geonamen-20260323-488d779d.pmtiles",
-   "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Geographische Namen</a> (Gipfel- und Ortsauswahl, Tiroler Weiler: <a href=\"https://basemap.at\" target=\"_blank\" rel=\"noopener\">basemap.at</a>), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
-  },
-  "adr": {
-   "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/adr-hausnummern-20261001-e6e8231b.pmtiles",
-   "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Adressregister</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>, © Österreichisches Adressregister, Stichtagsdaten vom 01.10.2026"
-  },
-  "oev": {
-   "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/oev-20260708-04de4c15.pmtiles",
-   "attribution": "<a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at</a> (Bahn, Fähren), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; Flugplätze: <a href=\"https://www.wikidata.org\" target=\"_blank\" rel=\"noopener\">Wikidata</a>, CC0; Skigebiete: <a href=\"https://www.umweltbundesamt.at\" target=\"_blank\" rel=\"noopener\">Umweltbundesamt</a> 2017, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
   "relief": {
    "type": "raster-dem",
@@ -439,7 +403,7 @@
   {
    "id": "land-hell",
    "type": "fill",
-   "source": "dkm",
+   "source": "basis",
    "source-layer": "landuse_a",
    "minzoom": 7,
    "paint": {
@@ -492,15 +456,28 @@
   {
    "id": "landuse",
    "type": "fill",
-   "source": "dkm",
+   "source": "basis",
    "source-layer": "landuse_a",
    "filter": [
-    "!=",
+    "all",
     [
-     "get",
-     "namecat"
+     "!=",
+     [
+      "get",
+      "kind"
+     ],
+     "residential"
     ],
-    1
+    [
+     "<=",
+     [
+      "get",
+      "min_zoom"
+     ],
+     [
+      "zoom"
+     ]
+    ]
    ],
    "paint": {
     "fill-color": [
@@ -512,29 +489,33 @@
       "match",
       [
        "get",
-       "namecat"
+       "kind"
       ],
-      2,
+      "garden",
       "#88CC66",
-      3,
+      "farmland",
       "#EBFFAA",
-      5,
+      "forest",
       "#47B312",
-      6,
+      "glacier",
       "#73F0FF",
-      7,
+      "transport",
       "#FFFFFF",
-      8,
+      "quarry",
       "#FFFFFF",
-      9,
+      "rock",
+      "#FFFFFF",
+      "water",
       "#A3FF73",
-      10,
+      "wetland",
+      "#A3FF73",
+      "cemetery",
       "#997D4D",
-      11,
+      "recreation",
       "#66994D",
-      12,
+      "vineyard",
       "#BFBF57",
-      13,
+      "alpine_meadow",
       "#EBFFAA",
       "#ecebe6"
      ],
@@ -543,29 +524,33 @@
       "match",
       [
        "get",
-       "namecat"
+       "kind"
       ],
-      2,
+      "garden",
       "#88CC66",
-      3,
+      "farmland",
       "#EBFFAA",
-      5,
+      "forest",
       "#47B312",
-      6,
+      "glacier",
       "#73F0FF",
-      7,
+      "transport",
       "#FFFFFF",
-      8,
+      "quarry",
       "#FFFFFF",
-      9,
+      "rock",
+      "#FFFFFF",
+      "water",
       "#A3FF73",
-      10,
+      "wetland",
+      "#A3FF73",
+      "cemetery",
       "#997D4D",
-      11,
+      "recreation",
       "#66994D",
-      12,
+      "vineyard",
       "#BFBF57",
-      13,
+      "alpine_meadow",
       "#66994D",
       "#ecebe6"
      ]
@@ -583,9 +568,9 @@
        "==",
        [
         "get",
-        "namecat"
+        "kind"
        ],
-       2
+       "garden"
       ],
       0.4,
       0.25
@@ -598,10 +583,9 @@
   {
    "id": "ski",
    "type": "fill",
-   "source": "oev",
+   "source": "basis",
    "source-layer": "ski_a",
    "minzoom": 10,
-   "maxzoom": 16,
    "paint": {
     "fill-color": "#66994D",
     "fill-opacity": 0.25,
@@ -611,15 +595,28 @@
   {
    "id": "landuse-siedlung",
    "type": "fill",
-   "source": "dkm",
+   "source": "basis",
    "source-layer": "landuse_a",
    "filter": [
-    "==",
+    "all",
     [
-     "get",
-     "namecat"
+     "==",
+     [
+      "get",
+      "kind"
+     ],
+     "residential"
     ],
-    1
+    [
+     "<=",
+     [
+      "get",
+      "min_zoom"
+     ],
+     [
+      "zoom"
+     ]
+    ]
    ],
    "paint": {
     "fill-color": [
@@ -639,16 +636,16 @@
   {
    "id": "landuse-siedlung-line",
    "type": "line",
-   "source": "dkm",
+   "source": "basis",
    "source-layer": "landuse_a",
    "minzoom": 15,
    "filter": [
     "==",
     [
      "get",
-     "namecat"
+     "kind"
     ],
-    1
+    "residential"
    ],
    "paint": {
     "line-color": [
@@ -670,19 +667,40 @@
   {
    "id": "water-dkm",
    "type": "fill",
-   "source": "dkm",
+   "source": "basis",
    "source-layer": "landuse_a",
    "filter": [
-    "in",
+    "all",
     [
-     "get",
-     "usage"
+     "==",
+     [
+      "get",
+      "kind"
+     ],
+     "water"
     ],
     [
-     "literal",
+     "in",
      [
-      59,
-      60
+      "get",
+      "kind_detail"
+     ],
+     [
+      "literal",
+      [
+       "river",
+       "lake"
+      ]
+     ]
+    ],
+    [
+     "<=",
+     [
+      "get",
+      "min_zoom"
+     ],
+     [
+      "zoom"
      ]
     ]
    ],
@@ -695,16 +713,27 @@
   {
    "id": "water-rand-line",
    "type": "line",
-   "source": "dkm",
+   "source": "basis",
    "source-layer": "landuse_a",
    "minzoom": 17,
    "filter": [
-    "==",
+    "all",
     [
-     "get",
-     "usage"
+     "==",
+     [
+      "get",
+      "kind"
+     ],
+     "water"
     ],
-    64
+    [
+     "==",
+     [
+      "get",
+      "kind_detail"
+     ],
+     "bank"
+    ]
    ],
    "paint": {
     "line-color": "#A3FF73",
@@ -714,7 +743,7 @@
   {
    "id": "ggn-water-a",
    "type": "fill",
-   "source": "ggn",
+   "source": "basis",
    "source-layer": "water_a",
    "paint": {
     "fill-color": "rgba(179, 217, 255, 1)",
@@ -724,15 +753,15 @@
   {
    "id": "ggn-water-l-tunnel",
    "type": "line",
-   "source": "ggn",
+   "source": "basis",
    "source-layer": "water_l",
    "filter": [
     "==",
     [
      "get",
-     "tunnel"
+     "structure"
     ],
-    1
+    "tunnel"
    ],
    "layout": {
     "line-cap": "butt",
@@ -764,7 +793,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        0,
@@ -799,7 +828,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        0,
@@ -834,7 +863,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        1.067,
@@ -869,7 +898,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        1.067,
@@ -904,7 +933,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        1.067,
@@ -939,7 +968,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        1.067,
@@ -974,7 +1003,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        2.4,
@@ -1009,7 +1038,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        2.4,
@@ -1044,7 +1073,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        2.4,
@@ -1079,7 +1108,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        2.4,
@@ -1114,7 +1143,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        2.667,
@@ -1149,7 +1178,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        2.667,
@@ -1184,7 +1213,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        2.667,
@@ -1219,7 +1248,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        2.667,
@@ -1254,7 +1283,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        2.667,
@@ -1289,7 +1318,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        2.667,
@@ -1324,7 +1353,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        4,
@@ -1359,7 +1388,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        4,
@@ -1394,7 +1423,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        4,
@@ -1429,7 +1458,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        4,
@@ -1464,7 +1493,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        8,
@@ -1499,7 +1528,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        8,
@@ -1534,7 +1563,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        8,
@@ -1569,7 +1598,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        8,
@@ -1604,7 +1633,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        8,
@@ -1634,15 +1663,15 @@
   {
    "id": "ggn-water-l",
    "type": "line",
-   "source": "ggn",
+   "source": "basis",
    "source-layer": "water_l",
    "filter": [
     "!=",
     [
      "get",
-     "tunnel"
+     "structure"
     ],
-    1
+    "tunnel"
    ],
    "layout": {
     "line-cap": "round",
@@ -1674,7 +1703,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        0,
@@ -1709,7 +1738,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        0,
@@ -1744,7 +1773,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        1.067,
@@ -1779,7 +1808,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        1.067,
@@ -1814,7 +1843,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        1.067,
@@ -1849,7 +1878,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        1.067,
@@ -1884,7 +1913,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        2.4,
@@ -1919,7 +1948,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        2.4,
@@ -1954,7 +1983,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        2.4,
@@ -1989,7 +2018,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        2.4,
@@ -2024,7 +2053,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        2.667,
@@ -2059,7 +2088,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        2.667,
@@ -2094,7 +2123,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        2.667,
@@ -2129,7 +2158,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        2.667,
@@ -2164,7 +2193,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        2.667,
@@ -2199,7 +2228,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        2.667,
@@ -2234,7 +2263,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        4,
@@ -2269,7 +2298,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        4,
@@ -2304,7 +2333,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        4,
@@ -2339,7 +2368,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        4,
@@ -2374,7 +2403,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        8,
@@ -2409,7 +2438,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        8,
@@ -2444,7 +2473,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        8,
@@ -2479,7 +2508,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        8,
@@ -2514,7 +2543,7 @@
        "match",
        [
         "get",
-        "rank"
+        "sort_rank"
        ],
        1,
        8,
@@ -2691,7 +2720,7 @@
   {
    "id": "parcel",
    "type": "line",
-   "source": "parzellen",
+   "source": "kataster",
    "source-layer": "parcel_l",
    "minzoom": 16,
    "paint": {
@@ -2714,9 +2743,19 @@
   {
    "id": "building",
    "type": "fill",
-   "source": "dkm",
+   "source": "basis",
    "source-layer": "building_a",
    "minzoom": 12,
+   "filter": [
+    "<=",
+    [
+     "get",
+     "min_zoom"
+    ],
+    [
+     "zoom"
+    ]
+   ],
    "paint": {
     "fill-color": [
      "step",
@@ -2750,7 +2789,7 @@
   {
    "id": "building-line",
    "type": "line",
-   "source": "dkm",
+   "source": "basis",
    "source-layer": "building_a",
    "minzoom": 18,
    "paint": {
@@ -2775,8 +2814,8 @@
   {
    "id": "road-tunnel-casing-motorway",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 11,
    "filter": [
     "all",
@@ -2784,7 +2823,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "motorway"
     ],
@@ -2792,7 +2831,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -2865,8 +2904,8 @@
   {
    "id": "road-tunnel-casing-motorway_link",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 11,
    "filter": [
     "all",
@@ -2874,7 +2913,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "motorway_link"
     ],
@@ -2882,7 +2921,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -2955,8 +2994,8 @@
   {
    "id": "road-tunnel-casing-primary",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 11,
    "filter": [
     "all",
@@ -2964,7 +3003,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "primary"
     ],
@@ -2972,7 +3011,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -3045,8 +3084,8 @@
   {
    "id": "road-tunnel-casing-secondary",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 11,
    "filter": [
     "all",
@@ -3054,7 +3093,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "secondary"
     ],
@@ -3062,7 +3101,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -3135,8 +3174,8 @@
   {
    "id": "road-tunnel-casing-minor",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 13,
    "filter": [
     "all",
@@ -3144,7 +3183,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "minor"
     ],
@@ -3152,7 +3191,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -3215,8 +3254,8 @@
   {
    "id": "road-tunnel-casing-pedestrian",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 13,
    "filter": [
     "all",
@@ -3224,7 +3263,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "pedestrian"
     ],
@@ -3232,7 +3271,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -3295,8 +3334,8 @@
   {
    "id": "road-tunnel-motorway",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 11,
    "filter": [
     "all",
@@ -3304,7 +3343,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "motorway"
     ],
@@ -3312,7 +3351,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -3343,8 +3382,8 @@
   {
    "id": "road-tunnel-motorway_link",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 11,
    "filter": [
     "all",
@@ -3352,7 +3391,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "motorway_link"
     ],
@@ -3360,7 +3399,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -3391,8 +3430,8 @@
   {
    "id": "road-tunnel-primary",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 11,
    "filter": [
     "all",
@@ -3400,7 +3439,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "primary"
     ],
@@ -3408,7 +3447,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -3439,8 +3478,8 @@
   {
    "id": "road-tunnel-secondary",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 11,
    "filter": [
     "all",
@@ -3448,7 +3487,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "secondary"
     ],
@@ -3456,7 +3495,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -3487,8 +3526,8 @@
   {
    "id": "road-tunnel-minor",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 13,
    "filter": [
     "all",
@@ -3496,7 +3535,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "minor"
     ],
@@ -3504,7 +3543,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -3533,8 +3572,8 @@
   {
    "id": "road-tunnel-pedestrian",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 13,
    "filter": [
     "all",
@@ -3542,7 +3581,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "pedestrian"
     ],
@@ -3550,7 +3589,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -3579,8 +3618,8 @@
   {
    "id": "way-tunnel-service",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 12,
    "filter": [
     "all",
@@ -3588,7 +3627,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "service"
     ],
@@ -3596,7 +3635,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -3625,8 +3664,8 @@
   {
    "id": "way-tunnel-track",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 12,
    "filter": [
     "all",
@@ -3634,7 +3673,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "track"
     ],
@@ -3642,7 +3681,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -3671,8 +3710,8 @@
   {
    "id": "way-tunnel-path",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
     "all",
@@ -3680,7 +3719,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "path"
     ],
@@ -3688,7 +3727,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -3723,8 +3762,8 @@
   {
    "id": "way-tunnel-cycleway",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
     "all",
@@ -3732,7 +3771,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "cycleway"
     ],
@@ -3740,7 +3779,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -3775,8 +3814,8 @@
   {
    "id": "way-tunnel-steps",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 15,
    "filter": [
     "all",
@@ -3784,7 +3823,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "steps"
     ],
@@ -3792,7 +3831,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -3825,8 +3864,8 @@
   {
    "id": "way-tunnel-trail",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
     "all",
@@ -3834,7 +3873,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "trail"
     ],
@@ -3842,7 +3881,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -3877,7 +3916,7 @@
   {
    "id": "oev-rail-tunnel",
    "type": "line",
-   "source": "oev",
+   "source": "basis",
    "source-layer": "rail_l",
    "filter": [
     "all",
@@ -3887,7 +3926,7 @@
       "==",
       [
        "get",
-       "brunnel"
+       "structure"
       ],
       "tunnel"
      ],
@@ -3895,7 +3934,7 @@
       "match",
       [
        "get",
-       "class"
+       "kind"
       ],
       [
        "rail",
@@ -3919,7 +3958,7 @@
       "==",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main"
      ]
@@ -3940,7 +3979,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       1.067,
@@ -3953,7 +3992,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       0.667,
@@ -3966,7 +4005,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       2,
@@ -3979,7 +4018,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       4,
@@ -3992,7 +4031,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       4,
@@ -4007,7 +4046,7 @@
   {
    "id": "oev-subway-tunnel",
    "type": "line",
-   "source": "oev",
+   "source": "basis",
    "source-layer": "rail_l",
    "minzoom": 13,
    "filter": [
@@ -4016,7 +4055,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ],
@@ -4024,7 +4063,7 @@
      "match",
      [
       "get",
-      "class"
+      "kind"
      ],
      [
       "subway"
@@ -4050,8 +4089,8 @@
   {
    "id": "grenzen-country-outline",
    "type": "line",
-   "source": "grenzen",
-   "source-layer": "country_l",
+   "source": "basis",
+   "source-layer": "boundary_l",
    "layout": {
     "line-join": "round",
     "line-cap": "round"
@@ -4074,13 +4113,21 @@
      5.333
     ]
    },
+   "filter": [
+    "==",
+    [
+     "get",
+     "kind"
+    ],
+    "state"
+   ],
    "minzoom": 5
   },
   {
    "id": "grenzen-district-outline",
    "type": "line",
-   "source": "grenzen",
-   "source-layer": "district_l",
+   "source": "basis",
+   "source-layer": "boundary_l",
    "layout": {
     "line-join": "round",
     "line-cap": "round"
@@ -4097,13 +4144,21 @@
      4
     ]
    },
-   "minzoom": 8
+   "minzoom": 8,
+   "filter": [
+    "==",
+    [
+     "get",
+     "kind"
+    ],
+    "district"
+   ]
   },
   {
    "id": "grenzen-municipality-outline",
    "type": "line",
-   "source": "grenzen",
-   "source-layer": "municipality_l",
+   "source": "basis",
+   "source-layer": "boundary_l",
    "layout": {
     "line-join": "round",
     "line-cap": "round"
@@ -4112,13 +4167,21 @@
     "line-color": "rgba(240, 227, 255, 1)",
     "line-width": 3.333
    },
-   "minzoom": 12
+   "minzoom": 12,
+   "filter": [
+    "==",
+    [
+     "get",
+     "kind"
+    ],
+    "municipality"
+   ]
   },
   {
    "id": "grenzen-country",
    "type": "line",
-   "source": "grenzen",
-   "source-layer": "country_l",
+   "source": "basis",
+   "source-layer": "boundary_l",
    "layout": {
     "line-join": "round",
     "line-cap": "round"
@@ -4137,13 +4200,21 @@
      1.333
     ]
    },
+   "filter": [
+    "==",
+    [
+     "get",
+     "kind"
+    ],
+    "state"
+   ],
    "minzoom": 5
   },
   {
    "id": "grenzen-district",
    "type": "line",
-   "source": "grenzen",
-   "source-layer": "district_l",
+   "source": "basis",
+   "source-layer": "boundary_l",
    "layout": {
     "line-join": "round",
     "line-cap": "round"
@@ -4160,13 +4231,21 @@
      1.333
     ]
    },
-   "minzoom": 8
+   "minzoom": 8,
+   "filter": [
+    "==",
+    [
+     "get",
+     "kind"
+    ],
+    "district"
+   ]
   },
   {
    "id": "grenzen-municipality",
    "type": "line",
-   "source": "grenzen",
-   "source-layer": "municipality_l",
+   "source": "basis",
+   "source-layer": "boundary_l",
    "layout": {
     "line-join": "round",
     "line-cap": "round"
@@ -4183,13 +4262,21 @@
      1.333
     ]
    },
-   "minzoom": 12
+   "minzoom": 12,
+   "filter": [
+    "==",
+    [
+     "get",
+     "kind"
+    ],
+    "municipality"
+   ]
   },
   {
    "id": "grenzen-state-outline",
    "type": "line",
-   "source": "grenzen",
-   "source-layer": "state_l",
+   "source": "basis",
+   "source-layer": "boundary_l",
    "layout": {
     "line-join": "round",
     "line-cap": "round"
@@ -4216,13 +4303,21 @@
      6,
      -4
     ]
-   }
+   },
+   "filter": [
+    "==",
+    [
+     "get",
+     "kind"
+    ],
+    "country"
+   ]
   },
   {
    "id": "grenzen-state",
    "type": "line",
-   "source": "grenzen",
-   "source-layer": "state_l",
+   "source": "basis",
+   "source-layer": "boundary_l",
    "layout": {
     "line-join": "round",
     "line-cap": "round"
@@ -4240,20 +4335,28 @@
      8,
      2
     ]
-   }
+   },
+   "filter": [
+    "==",
+    [
+     "get",
+     "kind"
+    ],
+    "country"
+   ]
   },
   {
    "id": "road-low-casing-primary",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 7,
    "maxzoom": 8,
    "filter": [
     "==",
     [
      "get",
-     "draw_class"
+     "kind_detail"
     ],
     "primary"
    ],
@@ -4269,15 +4372,15 @@
   {
    "id": "road-low-casing-motorway_link",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 6,
    "maxzoom": 8,
    "filter": [
     "==",
     [
      "get",
-     "draw_class"
+     "kind_detail"
     ],
     "motorway_link"
    ],
@@ -4293,15 +4396,15 @@
   {
    "id": "road-low-casing-motorway",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 6,
    "maxzoom": 8,
    "filter": [
     "==",
     [
      "get",
-     "draw_class"
+     "kind_detail"
     ],
     "motorway"
    ],
@@ -4317,15 +4420,15 @@
   {
    "id": "road-low-primary",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 7,
    "maxzoom": 8,
    "filter": [
     "==",
     [
      "get",
-     "draw_class"
+     "kind_detail"
     ],
     "primary"
    ],
@@ -4341,15 +4444,15 @@
   {
    "id": "road-low-motorway_link",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 6,
    "maxzoom": 8,
    "filter": [
     "==",
     [
      "get",
-     "draw_class"
+     "kind_detail"
     ],
     "motorway_link"
    ],
@@ -4365,15 +4468,15 @@
   {
    "id": "road-low-motorway",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 6,
    "maxzoom": 8,
    "filter": [
     "==",
     [
      "get",
-     "draw_class"
+     "kind_detail"
     ],
     "motorway"
    ],
@@ -4389,8 +4492,8 @@
   {
    "id": "way-service",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 12,
    "filter": [
     "all",
@@ -4398,7 +4501,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "service"
     ],
@@ -4406,7 +4509,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -4435,8 +4538,8 @@
   {
    "id": "way-track",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 12,
    "filter": [
     "all",
@@ -4444,7 +4547,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "track"
     ],
@@ -4452,7 +4555,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -4481,8 +4584,8 @@
   {
    "id": "way-path",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
     "all",
@@ -4490,7 +4593,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "path"
     ],
@@ -4498,7 +4601,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -4537,8 +4640,8 @@
   {
    "id": "way-cycleway",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
     "all",
@@ -4546,7 +4649,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "cycleway"
     ],
@@ -4554,7 +4657,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -4593,8 +4696,8 @@
   {
    "id": "way-steps",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 15,
    "filter": [
     "all",
@@ -4602,7 +4705,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "steps"
     ],
@@ -4610,7 +4713,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -4647,8 +4750,8 @@
   {
    "id": "way-trail",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
     "all",
@@ -4656,7 +4759,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "trail"
     ],
@@ -4664,7 +4767,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -4703,8 +4806,8 @@
   {
    "id": "road-casing-pedestrian",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 12,
    "filter": [
     "all",
@@ -4712,7 +4815,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "pedestrian"
     ],
@@ -4720,7 +4823,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -4750,8 +4853,8 @@
   {
    "id": "road-casing-minor",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 12,
    "filter": [
     "all",
@@ -4759,7 +4862,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "minor"
     ],
@@ -4767,7 +4870,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -4797,8 +4900,8 @@
   {
    "id": "road-casing-secondary",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 10,
    "filter": [
     "all",
@@ -4806,7 +4909,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "secondary"
     ],
@@ -4814,7 +4917,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -4846,8 +4949,8 @@
   {
    "id": "road-casing-primary",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 8,
    "filter": [
     "all",
@@ -4855,7 +4958,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "primary"
     ],
@@ -4863,7 +4966,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -4897,8 +5000,8 @@
   {
    "id": "road-casing-motorway_link",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 8,
    "filter": [
     "all",
@@ -4906,7 +5009,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "motorway_link"
     ],
@@ -4914,7 +5017,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -4948,8 +5051,8 @@
   {
    "id": "road-casing-motorway",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 8,
    "filter": [
     "all",
@@ -4957,7 +5060,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "motorway"
     ],
@@ -4965,7 +5068,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -4999,8 +5102,8 @@
   {
    "id": "road-pedestrian",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 12,
    "filter": [
     "all",
@@ -5008,7 +5111,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "pedestrian"
     ],
@@ -5016,7 +5119,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -5046,8 +5149,8 @@
   {
    "id": "road-minor",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 12,
    "filter": [
     "all",
@@ -5055,7 +5158,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "minor"
     ],
@@ -5063,7 +5166,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -5093,8 +5196,8 @@
   {
    "id": "road-secondary",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 10,
    "filter": [
     "all",
@@ -5102,7 +5205,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "secondary"
     ],
@@ -5110,7 +5213,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -5142,8 +5245,8 @@
   {
    "id": "road-primary",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 8,
    "filter": [
     "all",
@@ -5151,7 +5254,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "primary"
     ],
@@ -5159,7 +5262,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -5193,8 +5296,8 @@
   {
    "id": "road-motorway_link",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 8,
    "filter": [
     "all",
@@ -5202,7 +5305,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "motorway_link"
     ],
@@ -5210,7 +5313,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -5244,8 +5347,8 @@
   {
    "id": "road-motorway",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 8,
    "filter": [
     "all",
@@ -5253,7 +5356,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "motorway"
     ],
@@ -5261,7 +5364,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ]
@@ -5295,7 +5398,7 @@
   {
    "id": "oev-rail-siding",
    "type": "line",
-   "source": "oev",
+   "source": "basis",
    "source-layer": "rail_l",
    "minzoom": 12,
    "filter": [
@@ -5304,7 +5407,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ],
@@ -5319,7 +5422,7 @@
      "==",
      [
       "get",
-      "service"
+      "kind_detail"
      ],
      "siding"
     ]
@@ -5357,7 +5460,7 @@
   {
    "id": "oev-rail",
    "type": "line",
-   "source": "oev",
+   "source": "basis",
    "source-layer": "rail_l",
    "filter": [
     "all",
@@ -5367,7 +5470,7 @@
       "!=",
       [
        "get",
-       "brunnel"
+       "structure"
       ],
       "tunnel"
      ],
@@ -5382,7 +5485,7 @@
       "!=",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "siding"
      ],
@@ -5390,7 +5493,7 @@
       "match",
       [
        "get",
-       "class"
+       "kind"
       ],
       [
        "rail"
@@ -5412,7 +5515,7 @@
       "==",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main"
      ]
@@ -5433,7 +5536,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       1.067,
@@ -5446,7 +5549,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       0.667,
@@ -5459,7 +5562,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       2,
@@ -5472,7 +5575,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       4,
@@ -5485,7 +5588,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       4,
@@ -5500,7 +5603,7 @@
   {
    "id": "oev-rail-construction",
    "type": "line",
-   "source": "oev",
+   "source": "basis",
    "source-layer": "rail_l",
    "minzoom": 10,
    "filter": [
@@ -5509,7 +5612,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ],
@@ -5521,7 +5624,7 @@
      "match",
      [
       "get",
-      "class"
+      "kind"
      ],
      [
       "rail",
@@ -5551,7 +5654,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       0.8,
@@ -5564,7 +5667,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       1.2,
@@ -5577,7 +5680,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       1.3,
@@ -5590,7 +5693,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       1.6,
@@ -5603,7 +5706,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       1.8,
@@ -5616,7 +5719,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       2.2,
@@ -5629,7 +5732,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       2.2,
@@ -5642,7 +5745,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       4.5,
@@ -5655,7 +5758,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       5.0,
@@ -5668,7 +5771,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       5.0,
@@ -5681,7 +5784,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       7.0,
@@ -5694,7 +5797,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       7,
@@ -5712,7 +5815,7 @@
   {
    "id": "oev-narrow-gauge",
    "type": "line",
-   "source": "oev",
+   "source": "basis",
    "source-layer": "rail_l",
    "minzoom": 10,
    "filter": [
@@ -5721,7 +5824,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ],
@@ -5736,7 +5839,7 @@
      "!=",
      [
       "get",
-      "service"
+      "kind_detail"
      ],
      "siding"
     ],
@@ -5744,7 +5847,7 @@
      "match",
      [
       "get",
-      "class"
+      "kind"
      ],
      [
       "narrow_gauge",
@@ -5776,7 +5879,7 @@
   {
    "id": "oev-narrow-gauge-ticks",
    "type": "line",
-   "source": "oev",
+   "source": "basis",
    "source-layer": "rail_l",
    "minzoom": 14,
    "filter": [
@@ -5785,7 +5888,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ],
@@ -5800,7 +5903,7 @@
      "!=",
      [
       "get",
-      "service"
+      "kind_detail"
      ],
      "siding"
     ],
@@ -5808,7 +5911,7 @@
      "match",
      [
       "get",
-      "class"
+      "kind"
      ],
      [
       "narrow_gauge",
@@ -5846,7 +5949,7 @@
   {
    "id": "oev-subway",
    "type": "line",
-   "source": "oev",
+   "source": "basis",
    "source-layer": "rail_l",
    "minzoom": 13,
    "filter": [
@@ -5855,7 +5958,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ],
@@ -5863,7 +5966,7 @@
      "match",
      [
       "get",
-      "class"
+      "kind"
      ],
      [
       "subway"
@@ -5884,7 +5987,7 @@
   {
    "id": "oev-tram",
    "type": "line",
-   "source": "oev",
+   "source": "basis",
    "source-layer": "rail_l",
    "minzoom": 14,
    "filter": [
@@ -5893,7 +5996,7 @@
      "!=",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "tunnel"
     ],
@@ -5901,7 +6004,7 @@
      "match",
      [
       "get",
-      "class"
+      "kind"
      ],
      [
       "tram"
@@ -5930,60 +6033,17 @@
   {
    "id": "oev-funicular",
    "type": "line",
-   "source": "oev",
+   "source": "basis",
    "source-layer": "rail_l",
    "minzoom": 12,
    "filter": [
     "match",
     [
      "get",
-     "class"
+     "kind"
     ],
     [
      "funicular"
-    ],
-    true,
-    false
-   ],
-   "layout": {
-    "line-cap": "butt",
-    "line-join": "round"
-   },
-   "paint": {
-    "line-color": "rgba(120, 120, 120, 1)",
-    "line-width": [
-     "interpolate",
-     [
-      "linear"
-     ],
-     [
-      "zoom"
-     ],
-     12,
-     1,
-     16,
-     2.5
-    ],
-    "line-dasharray": [
-     4,
-     1
-    ]
-   }
-  },
-  {
-   "id": "oev-cable-car",
-   "type": "line",
-   "source": "oev",
-   "source-layer": "rail_l",
-   "minzoom": 12,
-   "filter": [
-    "match",
-    [
-     "get",
-     "class"
-    ],
-    [
-     "cable_car"
     ],
     true,
     false
@@ -6008,9 +6068,9 @@
    }
   },
   {
-   "id": "oev-cable-car-mast",
+   "id": "oev-funicular-mast",
    "type": "line",
-   "source": "oev",
+   "source": "basis",
    "source-layer": "rail_l",
    "minzoom": 12,
    "maxzoom": 15,
@@ -6018,10 +6078,10 @@
     "match",
     [
      "get",
-     "class"
+     "kind"
     ],
     [
-     "cable_car"
+     "funicular"
     ],
     true,
     false
@@ -6040,19 +6100,19 @@
    }
   },
   {
-   "id": "oev-cable-car-mast-gross",
+   "id": "oev-funicular-mast-gross",
    "type": "line",
-   "source": "oev",
+   "source": "basis",
    "source-layer": "rail_l",
    "minzoom": 15,
    "filter": [
     "match",
     [
      "get",
-     "class"
+     "kind"
     ],
     [
-     "cable_car"
+     "funicular"
     ],
     true,
     false
@@ -6071,9 +6131,85 @@
    }
   },
   {
+   "id": "oev-aerialway",
+   "type": "line",
+   "source": "basis",
+   "source-layer": "aerialway_l",
+   "minzoom": 12,
+   "filter": [
+    "has",
+    "kind"
+   ],
+   "layout": {
+    "line-cap": "square",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "rgba(156, 156, 156, 1)",
+    "line-width": [
+     "step",
+     [
+      "zoom"
+     ],
+     0.667,
+     15,
+     1.333,
+     16,
+     2
+    ]
+   }
+  },
+  {
+   "id": "oev-aerialway-mast",
+   "type": "line",
+   "source": "basis",
+   "source-layer": "aerialway_l",
+   "minzoom": 12,
+   "maxzoom": 15,
+   "filter": [
+    "has",
+    "kind"
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "rgba(156, 156, 156, 1)",
+    "line-width": 4,
+    "line-dasharray": [
+     1,
+     61.5
+    ]
+   }
+  },
+  {
+   "id": "oev-aerialway-mast-gross",
+   "type": "line",
+   "source": "basis",
+   "source-layer": "aerialway_l",
+   "minzoom": 15,
+   "filter": [
+    "has",
+    "kind"
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "rgba(156, 156, 156, 1)",
+    "line-width": 6,
+    "line-dasharray": [
+     1,
+     40.67
+    ]
+   }
+  },
+  {
    "id": "oev-ferry-klein",
    "type": "line",
-   "source": "oev",
+   "source": "basis",
    "source-layer": "rail_l",
    "minzoom": 11,
    "maxzoom": 14,
@@ -6081,7 +6217,7 @@
     "match",
     [
      "get",
-     "class"
+     "kind"
     ],
     [
      "ferry"
@@ -6105,14 +6241,14 @@
   {
    "id": "oev-ferry",
    "type": "line",
-   "source": "oev",
+   "source": "basis",
    "source-layer": "rail_l",
    "minzoom": 14,
    "filter": [
     "match",
     [
      "get",
-     "class"
+     "kind"
     ],
     [
      "ferry"
@@ -6136,8 +6272,8 @@
   {
    "id": "road-bridge-casing-pedestrian",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
     "all",
@@ -6145,7 +6281,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "pedestrian"
     ],
@@ -6153,7 +6289,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "bridge"
     ]
@@ -6170,8 +6306,8 @@
   {
    "id": "road-bridge-pedestrian",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
     "all",
@@ -6179,7 +6315,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "pedestrian"
     ],
@@ -6187,7 +6323,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "bridge"
     ]
@@ -6204,8 +6340,8 @@
   {
    "id": "road-bridge-casing-minor",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
     "all",
@@ -6213,7 +6349,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "minor"
     ],
@@ -6221,7 +6357,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "bridge"
     ]
@@ -6238,8 +6374,8 @@
   {
    "id": "road-bridge-minor",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
     "all",
@@ -6247,7 +6383,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "minor"
     ],
@@ -6255,7 +6391,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "bridge"
     ]
@@ -6272,8 +6408,8 @@
   {
    "id": "road-bridge-casing-secondary",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
     "all",
@@ -6281,7 +6417,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "secondary"
     ],
@@ -6289,7 +6425,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "bridge"
     ]
@@ -6306,8 +6442,8 @@
   {
    "id": "road-bridge-secondary",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
     "all",
@@ -6315,7 +6451,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "secondary"
     ],
@@ -6323,7 +6459,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "bridge"
     ]
@@ -6340,8 +6476,8 @@
   {
    "id": "road-bridge-casing-primary",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
     "all",
@@ -6349,7 +6485,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "primary"
     ],
@@ -6357,7 +6493,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "bridge"
     ]
@@ -6382,8 +6518,8 @@
   {
    "id": "road-bridge-primary",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
     "all",
@@ -6391,7 +6527,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "primary"
     ],
@@ -6399,7 +6535,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "bridge"
     ]
@@ -6424,8 +6560,8 @@
   {
    "id": "road-bridge-casing-motorway_link",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
     "all",
@@ -6433,7 +6569,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "motorway_link"
     ],
@@ -6441,7 +6577,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "bridge"
     ]
@@ -6466,8 +6602,8 @@
   {
    "id": "road-bridge-motorway_link",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
     "all",
@@ -6475,7 +6611,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "motorway_link"
     ],
@@ -6483,7 +6619,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "bridge"
     ]
@@ -6508,8 +6644,8 @@
   {
    "id": "road-bridge-casing-motorway",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
     "all",
@@ -6517,7 +6653,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "motorway"
     ],
@@ -6525,7 +6661,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "bridge"
     ]
@@ -6550,8 +6686,8 @@
   {
    "id": "road-bridge-motorway",
    "type": "line",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
     "all",
@@ -6559,7 +6695,7 @@
      "==",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      "motorway"
     ],
@@ -6567,7 +6703,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "bridge"
     ]
@@ -6592,7 +6728,7 @@
   {
    "id": "oev-rail-bridge-casing",
    "type": "line",
-   "source": "oev",
+   "source": "basis",
    "source-layer": "rail_l",
    "minzoom": 16,
    "filter": [
@@ -6601,7 +6737,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "bridge"
     ],
@@ -6609,7 +6745,7 @@
      "!=",
      [
       "get",
-      "service"
+      "kind_detail"
      ],
      "siding"
     ],
@@ -6617,7 +6753,7 @@
      "match",
      [
       "get",
-      "class"
+      "kind"
      ],
      [
       "rail",
@@ -6656,7 +6792,7 @@
   {
    "id": "oev-rail-bridge-fill",
    "type": "line",
-   "source": "oev",
+   "source": "basis",
    "source-layer": "rail_l",
    "minzoom": 16,
    "filter": [
@@ -6665,7 +6801,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "bridge"
     ],
@@ -6673,7 +6809,7 @@
      "!=",
      [
       "get",
-      "service"
+      "kind_detail"
      ],
      "siding"
     ],
@@ -6681,7 +6817,7 @@
      "match",
      [
       "get",
-      "class"
+      "kind"
      ],
      [
       "rail",
@@ -6720,7 +6856,7 @@
   {
    "id": "oev-rail-bridge-line",
    "type": "line",
-   "source": "oev",
+   "source": "basis",
    "source-layer": "rail_l",
    "filter": [
     "all",
@@ -6728,7 +6864,7 @@
      "==",
      [
       "get",
-      "brunnel"
+      "structure"
      ],
      "bridge"
     ],
@@ -6736,7 +6872,7 @@
      "!=",
      [
       "get",
-      "service"
+      "kind_detail"
      ],
      "siding"
     ],
@@ -6744,7 +6880,7 @@
      "match",
      [
       "get",
-      "class"
+      "kind"
      ],
      [
       "rail",
@@ -6772,7 +6908,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       1.067,
@@ -6785,7 +6921,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       0.667,
@@ -6798,7 +6934,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       2,
@@ -6811,7 +6947,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       4,
@@ -6824,7 +6960,7 @@
       "match",
       [
        "get",
-       "service"
+       "kind_detail"
       ],
       "main",
       4,
@@ -6837,23 +6973,57 @@
    "minzoom": 16
   },
   {
+   "id": "building-3d",
+   "type": "fill-extrusion",
+   "source": "basis",
+   "source-layer": "building_a",
+   "minzoom": 15,
+   "filter": [
+    "<=",
+    [
+     "get",
+     "min_zoom"
+    ],
+    [
+     "zoom"
+    ]
+   ],
+   "layout": {
+    "visibility": "none"
+   },
+   "paint": {
+    "fill-extrusion-color": "#E6D3D3",
+    "fill-extrusion-height": [
+     "coalesce",
+     [
+      "get",
+      "height"
+     ],
+     4.5
+    ],
+    "fill-extrusion-base": 0,
+    "fill-extrusion-opacity": 0.8,
+    "fill-extrusion-vertical-gradient": true
+   }
+  },
+  {
    "id": "housenumber-parcel",
    "type": "symbol",
-   "source": "adr",
+   "source": "basis",
    "source-layer": "housenumber_p",
    "minzoom": 16,
    "filter": [
     "==",
     [
      "get",
-     "type"
+     "kind"
     ],
     "parcel"
    ],
    "layout": {
     "text-field": [
      "get",
-     "hnr"
+     "housenumber"
     ],
     "text-font": [
      "Noto Sans Regular"
@@ -6877,7 +7047,7 @@
      "length",
      [
       "get",
-      "hnr"
+      "housenumber"
      ]
     ],
     "visibility": "visible"
@@ -6909,21 +7079,21 @@
   {
    "id": "housenumber",
    "type": "symbol",
-   "source": "adr",
+   "source": "basis",
    "source-layer": "housenumber_p",
    "minzoom": 16,
    "filter": [
     "!=",
     [
      "get",
-     "type"
+     "kind"
     ],
     "parcel"
    ],
    "layout": {
     "text-field": [
      "get",
-     "hnr"
+     "housenumber"
     ],
     "text-font": [
      "Noto Sans Regular"
@@ -6947,7 +7117,7 @@
      "length",
      [
       "get",
-      "hnr"
+      "housenumber"
      ]
     ],
     "visibility": "visible"
@@ -6979,8 +7149,8 @@
   {
    "id": "road-ref-motorway-low",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 7,
    "filter": [
     "all",
@@ -6992,7 +7162,7 @@
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -7013,7 +7183,7 @@
      "Noto Sans Bold"
     ],
     "text-size": 8,
-    "text-padding": 50,
+    "text-padding": 18,
     "symbol-sort-key": 100
    },
    "paint": {
@@ -7094,8 +7264,8 @@
   {
    "id": "road-name-weg",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
     "all",
@@ -7104,18 +7274,17 @@
      "name"
     ],
     [
-     "==",
+     "!",
      [
-      "get",
-      "brunnel"
-     ],
-     "none"
+      "has",
+      "structure"
+     ]
     ],
     [
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -7163,8 +7332,8 @@
   {
    "id": "road-name-fuss",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
     "all",
@@ -7173,18 +7342,17 @@
      "name"
     ],
     [
-     "==",
+     "!",
      [
-      "get",
-      "brunnel"
-     ],
-     "none"
+      "has",
+      "structure"
+     ]
     ],
     [
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -7232,8 +7400,8 @@
   {
    "id": "geonamen-ried",
    "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "geoname_p",
+   "source": "basis",
+   "source-layer": "natural_p",
    "minzoom": 14,
    "layout": {
     "text-field": [
@@ -7258,7 +7426,7 @@
     ],
     "symbol-sort-key": [
      "get",
-     "rank"
+     "sort_rank"
     ],
     "text-max-width": 8,
     "text-padding": 2,
@@ -7274,16 +7442,16 @@
     "==",
     [
      "get",
-     "class"
+     "kind"
     ],
-    "ried"
+    "field_name"
    ]
   },
   {
    "id": "road-ref-secondary",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 15,
    "filter": [
     "all",
@@ -7295,7 +7463,7 @@
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -7356,8 +7524,8 @@
   {
    "id": "road-name-minor",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 12,
    "filter": [
     "all",
@@ -7366,18 +7534,17 @@
      "name"
     ],
     [
-     "==",
+     "!",
      [
-      "get",
-      "brunnel"
-     ],
-     "none"
+      "has",
+      "structure"
+     ]
     ],
     [
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -7426,8 +7593,8 @@
   {
    "id": "road-name-minor-z14",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
     "all",
@@ -7436,18 +7603,17 @@
      "name"
     ],
     [
-     "==",
+     "!",
      [
-      "get",
-      "brunnel"
-     ],
-     "none"
+      "has",
+      "structure"
+     ]
     ],
     [
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -7496,8 +7662,8 @@
   {
    "id": "road-name-minor-z16",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
     "all",
@@ -7506,18 +7672,17 @@
      "name"
     ],
     [
-     "==",
+     "!",
      [
-      "get",
-      "brunnel"
-     ],
-     "none"
+      "has",
+      "structure"
+     ]
     ],
     [
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -7550,8 +7715,8 @@
   {
    "id": "road-name-weg-z15",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 15,
    "filter": [
     "all",
@@ -7560,18 +7725,17 @@
      "name"
     ],
     [
-     "==",
+     "!",
      [
-      "get",
-      "brunnel"
-     ],
-     "none"
+      "has",
+      "structure"
+     ]
     ],
     [
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -7605,8 +7769,8 @@
   {
    "id": "road-name-weg-z16",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
     "all",
@@ -7615,18 +7779,17 @@
      "name"
     ],
     [
-     "==",
+     "!",
      [
-      "get",
-      "brunnel"
-     ],
-     "none"
+      "has",
+      "structure"
+     ]
     ],
     [
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -7658,8 +7821,8 @@
   {
    "id": "road-name-fuss-z15",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 15,
    "filter": [
     "all",
@@ -7668,18 +7831,17 @@
      "name"
     ],
     [
-     "==",
+     "!",
      [
-      "get",
-      "brunnel"
-     ],
-     "none"
+      "has",
+      "structure"
+     ]
     ],
     [
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -7713,8 +7875,8 @@
   {
    "id": "road-name-fuss-z16",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
     "all",
@@ -7723,18 +7885,17 @@
      "name"
     ],
     [
-     "==",
+     "!",
      [
-      "get",
-      "brunnel"
-     ],
-     "none"
+      "has",
+      "structure"
+     ]
     ],
     [
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -7766,8 +7927,8 @@
   {
    "id": "road-name-primary",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 11,
    "filter": [
     "all",
@@ -7776,18 +7937,17 @@
      "name"
     ],
     [
-     "==",
+     "!",
      [
-      "get",
-      "brunnel"
-     ],
-     "none"
+      "has",
+      "structure"
+     ]
     ],
     [
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -7835,8 +7995,8 @@
   {
    "id": "road-name-primary-z14",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
     "all",
@@ -7845,18 +8005,17 @@
      "name"
     ],
     [
-     "==",
+     "!",
      [
-      "get",
-      "brunnel"
-     ],
-     "none"
+      "has",
+      "structure"
+     ]
     ],
     [
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -7904,8 +8063,8 @@
   {
    "id": "road-name-primary-z16",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
     "all",
@@ -7914,18 +8073,17 @@
      "name"
     ],
     [
-     "==",
+     "!",
      [
-      "get",
-      "brunnel"
-     ],
-     "none"
+      "has",
+      "structure"
+     ]
     ],
     [
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -7957,8 +8115,8 @@
   {
    "id": "road-name-motorway",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 10,
    "filter": [
     "all",
@@ -7967,18 +8125,17 @@
      "name"
     ],
     [
-     "==",
+     "!",
      [
-      "get",
-      "brunnel"
-     ],
-     "none"
+      "has",
+      "structure"
+     ]
     ],
     [
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -8012,8 +8169,8 @@
   {
    "id": "road-name-motorway-z14",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
     "all",
@@ -8022,18 +8179,17 @@
      "name"
     ],
     [
-     "==",
+     "!",
      [
-      "get",
-      "brunnel"
-     ],
-     "none"
+      "has",
+      "structure"
+     ]
     ],
     [
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -8067,8 +8223,8 @@
   {
    "id": "road-name-motorway-z16",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
     "all",
@@ -8077,18 +8233,17 @@
      "name"
     ],
     [
-     "==",
+     "!",
      [
-      "get",
-      "brunnel"
-     ],
-     "none"
+      "has",
+      "structure"
+     ]
     ],
     [
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -8120,8 +8275,8 @@
   {
    "id": "road-ref-primary-z9",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 9,
    "filter": [
     "all",
@@ -8133,7 +8288,7 @@
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -8180,8 +8335,8 @@
   {
    "id": "road-ref-primary",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 10,
    "filter": [
     "all",
@@ -8193,7 +8348,7 @@
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -8256,8 +8411,8 @@
   {
    "id": "road-ref-primary-l",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 15,
    "filter": [
     "all",
@@ -8269,7 +8424,7 @@
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -8332,8 +8487,8 @@
   {
    "id": "road-ref-motorway",
    "type": "symbol",
-   "source": "gip",
-   "source-layer": "gip_l",
+   "source": "basis",
+   "source-layer": "road_l",
    "minzoom": 8,
    "filter": [
     "all",
@@ -8345,7 +8500,7 @@
      "in",
      [
       "get",
-      "draw_class"
+      "kind_detail"
      ],
      [
       "literal",
@@ -8397,7 +8552,7 @@
   {
    "id": "ggn-water-l-label-donau",
    "type": "symbol",
-   "source": "ggn",
+   "source": "basis",
    "source-layer": "water_l",
    "minzoom": 7,
    "filter": [
@@ -8458,7 +8613,7 @@
   {
    "id": "ggn-water-l-label",
    "type": "symbol",
-   "source": "ggn",
+   "source": "basis",
    "source-layer": "water_l",
    "minzoom": 9,
    "filter": [
@@ -8479,66 +8634,13 @@
      ]
     ],
     [
-     "case",
+     ">=",
      [
-      "has",
-      "label_z"
+      "zoom"
      ],
      [
-      ">=",
-      [
-       "zoom"
-      ],
-      [
-       "get",
-       "label_z"
-      ]
-     ],
-     [
-      "any",
-      [
-       "all",
-       [
-        "<=",
-        [
-         "get",
-         "rank"
-        ],
-        5
-       ],
-       [
-        ">=",
-        [
-         "zoom"
-        ],
-        11
-       ]
-      ],
-      [
-       "all",
-       [
-        "==",
-        [
-         "get",
-         "rank"
-        ],
-        6
-       ],
-       [
-        ">=",
-        [
-         "zoom"
-        ],
-        12
-       ]
-      ],
-      [
-       ">=",
-       [
-        "zoom"
-       ],
-       15
-      ]
+      "get",
+      "min_zoom"
      ]
     ]
    ],
@@ -8562,7 +8664,7 @@
       "match",
       [
        "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       14.67,
@@ -8578,7 +8680,7 @@
       "match",
       [
        "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       16,
@@ -8594,7 +8696,7 @@
       "match",
       [
        "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       18.67,
@@ -8606,6 +8708,115 @@
       12
      ]
     ],
+    "symbol-sort-key": 1,
+    "symbol-spacing": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     11,
+     400,
+     13,
+     500,
+     15,
+     750,
+     16,
+     900
+    ],
+    "text-letter-spacing": 0.1,
+    "text-pitch-alignment": "map",
+    "text-rotation-alignment": "map"
+   },
+   "paint": {
+    "text-color": "rgba(0, 77, 168, 1)",
+    "text-halo-color": "rgba(191, 223, 255, 1)",
+    "text-halo-width": 0.8
+   }
+  },
+  {
+   "id": "ggn-water-l-label-abschnitt",
+   "type": "symbol",
+   "source": "basis",
+   "source-layer": "water_label_l",
+   "minzoom": 9,
+   "filter": [
+    ">=",
+    [
+     "zoom"
+    ],
+    [
+     "get",
+     "min_zoom"
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Italic"
+    ],
+    "text-size": [
+     "step",
+     [
+      "zoom"
+     ],
+     10.67,
+     11,
+     [
+      "match",
+      [
+       "get",
+       "sort_rank"
+      ],
+      1,
+      14.67,
+      [
+       2,
+       3
+      ],
+      12,
+      10.67
+     ],
+     14,
+     [
+      "match",
+      [
+       "get",
+       "sort_rank"
+      ],
+      1,
+      16,
+      [
+       2,
+       3
+      ],
+      13.33,
+      10.67
+     ],
+     16,
+     [
+      "match",
+      [
+       "get",
+       "sort_rank"
+      ],
+      1,
+      18.67,
+      [
+       2,
+       3
+      ],
+      16,
+      12
+     ]
+    ],
+    "symbol-sort-key": 0,
     "symbol-spacing": [
      "interpolate",
      [
@@ -8636,9 +8847,9 @@
   {
    "id": "ggn-water-label",
    "type": "symbol",
-   "source": "ggn",
+   "source": "basis",
    "source-layer": "water_label_p",
-   "minzoom": 8,
+   "minzoom": 7,
    "filter": [
     ">=",
     [
@@ -8646,7 +8857,7 @@
     ],
     [
      "get",
-     "label_z"
+     "min_zoom"
     ]
    ],
    "layout": {
@@ -8667,7 +8878,7 @@
       "match",
       [
        "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       12,
@@ -8680,7 +8891,7 @@
       "match",
       [
        "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       13.33,
@@ -8693,7 +8904,7 @@
       "match",
       [
        "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       13.33,
@@ -8706,113 +8917,7 @@
       "match",
       [
        "get",
-       "rank"
-      ],
-      1,
-      18.67,
-      2,
-      16,
-      13.33
-     ]
-    ],
-    "text-letter-spacing": 0.1,
-    "text-max-width": 8
-   },
-   "paint": {
-    "text-color": "rgba(0, 77, 168, 1)",
-    "text-halo-color": "rgba(191, 223, 255, 1)",
-    "text-halo-width": 0.533
-   }
-  },
-  {
-   "id": "ggn-water-a-label",
-   "type": "symbol",
-   "source": "ggn",
-   "source-layer": "water_a",
-   "minzoom": 10,
-   "filter": [
-    "all",
-    [
-     "has",
-     "name"
-    ],
-    [
-     "any",
-     [
-      "<=",
-      [
-       "get",
-       "rank"
-      ],
-      2
-     ],
-     [
-      ">=",
-      [
-       "zoom"
-      ],
-      14
-     ]
-    ]
-   ],
-   "layout": {
-    "symbol-placement": "point",
-    "text-field": [
-     "get",
-     "name"
-    ],
-    "text-font": [
-     "Noto Sans Italic"
-    ],
-    "text-size": [
-     "step",
-     [
-      "zoom"
-     ],
-     [
-      "match",
-      [
-       "get",
-       "rank"
-      ],
-      1,
-      12,
-      2,
-      10.67,
-      10.67
-     ],
-     9,
-     [
-      "match",
-      [
-       "get",
-       "rank"
-      ],
-      1,
-      13.33,
-      2,
-      10.67,
-      10.67
-     ],
-     12,
-     [
-      "match",
-      [
-       "get",
-       "rank"
-      ],
-      1,
-      13.33,
-      2,
-      13.33,
-      12
-     ],
-     16,
-     [
-      "match",
-      [
-       "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       18.67,
@@ -8833,17 +8938,17 @@
   {
    "id": "grenzen-label-bezirk",
    "type": "symbol",
-   "source": "grenzen",
-   "source-layer": "admin_label_p",
+   "source": "basis",
+   "source-layer": "boundary_label_p",
    "minzoom": 9,
    "maxzoom": 12,
    "filter": [
     "==",
     [
      "get",
-     "level"
+     "kind"
     ],
-    "bezirk"
+    "district"
    ],
    "layout": {
     "text-field": [
@@ -8879,16 +8984,16 @@
   {
    "id": "grenzen-label-gemeinde",
    "type": "symbol",
-   "source": "grenzen",
-   "source-layer": "admin_label_p",
+   "source": "basis",
+   "source-layer": "boundary_label_p",
    "minzoom": 12,
    "filter": [
     "==",
     [
      "get",
-     "level"
+     "kind"
     ],
-    "gemeinde"
+    "municipality"
    ],
    "layout": {
     "visibility": "none",
@@ -8921,11 +9026,64 @@
    }
   },
   {
+   "id": "oev-aerialway-label",
+   "type": "symbol",
+   "source": "basis",
+   "source-layer": "aerialway_l",
+   "minzoom": 14,
+   "filter": [
+    "has",
+    "name"
+   ],
+   "layout": {
+    "symbol-placement": "line",
+    "text-field": [
+     "get",
+     "name"
+    ],
+    "text-font": [
+     "Noto Sans Italic"
+    ],
+    "text-size": [
+     "step",
+     [
+      "zoom"
+     ],
+     10,
+     16,
+     11.5
+    ],
+    "text-letter-spacing": 0.05,
+    "text-max-angle": 30,
+    "symbol-spacing": 350,
+    "text-padding": 4,
+    "text-optional": true
+   },
+   "paint": {
+    "text-color": "#6d6d6d",
+    "text-halo-color": "#FAFAFA",
+    "text-halo-width": 1.2
+   }
+  },
+  {
    "id": "oev-station",
    "type": "symbol",
-   "source": "oev",
-   "source-layer": "station_p",
+   "source": "basis",
+   "source-layer": "transit_p",
    "minzoom": 10.53,
+   "filter": [
+    "match",
+    [
+     "get",
+     "kind"
+    ],
+    [
+     "train_station",
+     "halt"
+    ],
+    true,
+    false
+   ],
    "layout": {
     "icon-image": "railway_station",
     "icon-size": [
@@ -8938,34 +9096,43 @@
      ],
      10,
      [
-      "match",
+      "case",
       [
-       "get",
-       "rank"
+       "<=",
+       [
+        "get",
+        "min_zoom"
+       ],
+       10
       ],
-      1,
       0.75,
       0.6
      ],
      14,
      [
-      "match",
+      "case",
       [
-       "get",
-       "rank"
+       "<=",
+       [
+        "get",
+        "min_zoom"
+       ],
+       10
       ],
-      1,
       1.0,
       0.85
      ],
      17,
      [
-      "match",
+      "case",
       [
-       "get",
-       "rank"
+       "<=",
+       [
+        "get",
+        "min_zoom"
+       ],
+       10
       ],
-      1,
       1.2,
       1.0
      ]
@@ -8974,7 +9141,7 @@
     "icon-ignore-placement": true,
     "symbol-sort-key": [
      "get",
-     "rank"
+     "min_zoom"
     ],
     "text-field": [
      "step",
@@ -8984,12 +9151,12 @@
      [
       "case",
       [
-       "==",
+       "<=",
        [
         "get",
-        "rank"
+        "min_zoom"
        ],
-       1
+       10
       ],
       [
        "get",
@@ -9004,9 +9171,9 @@
        "<=",
        [
         "get",
-        "rank"
+        "min_zoom"
        ],
-       2
+       12
       ],
       [
        "get",
@@ -9060,7 +9227,7 @@
   {
    "id": "oev-airport",
    "type": "symbol",
-   "source": "oev",
+   "source": "basis",
    "source-layer": "airport_p",
    "minzoom": 11,
    "layout": {
@@ -9068,7 +9235,7 @@
      "match",
      [
       "get",
-      "class"
+      "kind"
      ],
      "airport",
      "airport",
@@ -9087,7 +9254,7 @@
       "match",
       [
        "get",
-       "class"
+       "kind"
       ],
       "airport",
       0.8,
@@ -9098,12 +9265,15 @@
       "match",
       [
        "get",
-       "class"
+       "kind"
       ],
+      [
+       "airfield",
+       "military"
+      ],
+      0.8,
       "airport",
       1.0,
-      "airfield",
-      0.8,
       0.65
      ],
      16,
@@ -9111,12 +9281,15 @@
       "match",
       [
        "get",
-       "class"
+       "kind"
       ],
+      [
+       "airfield",
+       "military"
+      ],
+      1.0,
       "airport",
       1.3,
-      "airfield",
-      1.0,
       0.8
      ]
     ],
@@ -9124,7 +9297,7 @@
     "icon-ignore-placement": true,
     "symbol-sort-key": [
      "get",
-     "rank"
+     "min_zoom"
     ],
     "text-field": [
      "step",
@@ -9139,7 +9312,7 @@
        "==",
        [
         "get",
-        "class"
+        "kind"
        ],
        "airport"
       ],
@@ -9156,7 +9329,7 @@
        "!=",
        [
         "get",
-        "class"
+        "kind"
        ],
        "heliport"
       ],
@@ -9202,8 +9375,8 @@
   {
    "id": "geonamen-gebiet",
    "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "geoname_p",
+   "source": "basis",
+   "source-layer": "natural_p",
    "minzoom": 8,
    "layout": {
     "text-field": [
@@ -9226,7 +9399,7 @@
       "match",
       [
        "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       12,
@@ -9241,7 +9414,7 @@
       "match",
       [
        "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       12,
@@ -9256,7 +9429,7 @@
       "match",
       [
        "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       14,
@@ -9271,7 +9444,7 @@
       "match",
       [
        "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       14.5,
@@ -9284,7 +9457,7 @@
     ],
     "symbol-sort-key": [
      "get",
-     "rank"
+     "sort_rank"
     ],
     "text-max-width": 8,
     "text-padding": 2,
@@ -9292,7 +9465,7 @@
      "match",
      [
       "get",
-      "rank"
+      "sort_rank"
      ],
      1,
      0,
@@ -9311,13 +9484,13 @@
     "in",
     [
      "get",
-     "class"
+     "kind"
     ],
     [
      "literal",
      [
-      "gebiet",
-      "gebirge"
+      "area",
+      "mountain_range"
      ]
     ]
    ]
@@ -9325,8 +9498,8 @@
   {
    "id": "geonamen-gelaende",
    "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "geoname_p",
+   "source": "basis",
+   "source-layer": "natural_p",
    "minzoom": 8,
    "layout": {
     "text-field": [
@@ -9337,9 +9510,9 @@
        "==",
        [
         "get",
-        "class"
+        "kind"
        ],
-       "pass"
+       "saddle"
       ],
       [
        "has",
@@ -9395,7 +9568,7 @@
     ],
     "symbol-sort-key": [
      "get",
-     "rank"
+     "sort_rank"
     ],
     "text-max-width": 8,
     "text-padding": 2
@@ -9407,26 +9580,37 @@
     "text-halo-blur": 0.3
    },
    "filter": [
-    "in",
+    "all",
     [
-     "get",
-     "class"
+     "in",
+     [
+      "get",
+      "kind"
+     ],
+     [
+      "literal",
+      [
+       "valley",
+       "ridge",
+       "saddle"
+      ]
+     ]
     ],
     [
-     "literal",
+     "!=",
      [
-      "tal",
-      "bergteil",
-      "pass"
-     ]
+      "get",
+      "kind_detail"
+     ],
+     "summit_label"
     ]
    ]
   },
   {
    "id": "geonamen-gletscher",
    "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "geoname_p",
+   "source": "basis",
+   "source-layer": "natural_p",
    "minzoom": 11,
    "layout": {
     "text-field": [
@@ -9453,7 +9637,7 @@
     ],
     "symbol-sort-key": [
      "get",
-     "rank"
+     "sort_rank"
     ],
     "text-max-width": 8,
     "text-padding": 2
@@ -9468,16 +9652,16 @@
     "==",
     [
      "get",
-     "class"
+     "kind"
     ],
-    "gletscher"
+    "glacier"
    ]
   },
   {
    "id": "geonamen-objekt",
    "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "geoname_p",
+   "source": "basis",
+   "source-layer": "natural_p",
    "minzoom": 15,
    "layout": {
     "text-field": [
@@ -9502,7 +9686,7 @@
     ],
     "symbol-sort-key": [
      "get",
-     "rank"
+     "sort_rank"
     ],
     "text-max-width": 8,
     "text-padding": 2,
@@ -9518,17 +9702,15 @@
      "match",
      [
       "get",
-      "class"
+      "kind"
      ],
-     "religion",
-     "place_of_worship",
-     "burg",
      "castle",
-     "schloss",
+     "castle",
      "palace",
-     "ruine",
+     "palace",
      "ruins",
-     "turm",
+     "ruins",
+     "tower",
      [
       "case",
       [
@@ -9551,102 +9733,9 @@
       "observation_tower",
       "tower"
      ],
-     "huette",
-     [
-      "case",
-      [
-       "in",
-       "Biwak",
-       [
-        "get",
-        "name"
-       ]
-      ],
-      "bivouac",
-      "shelter"
-     ],
-     "gasthof",
-     "inn",
-     "forst",
-     [
-      "case",
-      [
-       "in",
-       "Jagd",
-       [
-        "get",
-        "name"
-       ]
-      ],
-      "hunting_lodge",
-      "forest_house"
-     ],
-     "hoehle",
-     "cave",
-     "kultur",
-     [
-      "case",
-      [
-       "in",
-       "museum",
-       [
-        "get",
-        "name"
-       ]
-      ],
-      "museum",
-      [
-       "in",
-       "Museum",
-       [
-        "get",
-        "name"
-       ]
-      ],
-      "museum",
-      [
-       "in",
-       "bühne",
-       [
-        "get",
-        "name"
-       ]
-      ],
-      "theatre",
-      [
-       "in",
-       "Bühne",
-       [
-        "get",
-        "name"
-       ]
-      ],
-      "theatre",
-      "archaeological_site"
-     ],
-     "tierpark",
-     "zoo",
-     "sport",
-     [
-      "case",
-      [
-       "in",
-       "Stadion",
-       [
-        "get",
-        "name"
-       ]
-      ],
-      "stadium",
-      "sports"
-     ],
-     "friedhof",
-     "cemetery",
-     "denkmal",
      "monument",
-     "bergwerk",
-     "mine",
-     "kleindenkmal",
+     "monument",
+     "minor_monument",
      [
       "case",
       [
@@ -9669,7 +9758,7 @@
       "wayside_cross",
       "wayside_shrine"
      ],
-     "place_of_worship"
+     "castle"
     ],
     "icon-size": 0.9,
     "text-optional": true
@@ -9684,27 +9773,17 @@
     "in",
     [
      "get",
-     "class"
+     "kind"
     ],
     [
      "literal",
      [
-      "religion",
-      "burg",
-      "schloss",
-      "ruine",
-      "turm",
-      "huette",
-      "gasthof",
-      "forst",
-      "hoehle",
-      "kultur",
-      "tierpark",
-      "sport",
-      "friedhof",
-      "denkmal",
-      "bergwerk",
-      "kleindenkmal"
+      "castle",
+      "palace",
+      "ruins",
+      "tower",
+      "monument",
+      "minor_monument"
      ]
     ]
    ]
@@ -9712,8 +9791,8 @@
   {
    "id": "geonamen-objekt-text",
    "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "geoname_p",
+   "source": "basis",
+   "source-layer": "natural_p",
    "minzoom": 15,
    "layout": {
     "text-field": [
@@ -9738,7 +9817,7 @@
     ],
     "symbol-sort-key": [
      "get",
-     "rank"
+     "sort_rank"
     ],
     "text-max-width": 8,
     "text-padding": 2
@@ -9750,42 +9829,44 @@
     "text-halo-blur": 0.3
    },
    "filter": [
-    "!",
+    "all",
     [
      "in",
      [
       "get",
-      "class"
+      "kind"
      ],
      [
       "literal",
       [
-       "ried",
-       "gebiet",
-       "gebirge",
-       "tal",
-       "bergteil",
-       "pass",
-       "gletscher",
-       "kirche",
-       "kapelle",
-       "religion",
-       "burg",
-       "schloss",
-       "ruine",
-       "turm",
-       "huette",
-       "gasthof",
-       "forst",
-       "hoehle",
-       "kultur",
-       "tierpark",
-       "sport",
-       "friedhof",
-       "denkmal",
-       "bergwerk",
-       "kleindenkmal",
-       "gipfelkreuz"
+       "castle",
+       "palace",
+       "ruins",
+       "tower",
+       "minor_monument",
+       "monument",
+       "other"
+      ]
+     ]
+    ],
+    [
+     "!",
+     [
+      "in",
+      [
+       "get",
+       "kind"
+      ],
+      [
+       "literal",
+       [
+        "castle",
+        "palace",
+        "ruins",
+        "tower",
+        "monument",
+        "minor_monument"
+       ]
       ]
      ]
     ]
@@ -9794,28 +9875,19 @@
   {
    "id": "geonamen-kirche",
    "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "geoname_p",
+   "source": "basis",
+   "source-layer": "poi_p",
    "minzoom": 13,
    "layout": {
     "icon-image": [
      "match",
      [
       "get",
-      "class"
+      "kind"
      ],
-     "kirche",
+     "church",
      [
       "case",
-      [
-       "==",
-       [
-        "get",
-        "rank"
-       ],
-       2
-      ],
-      "monastery",
       [
        "in",
        "Stift",
@@ -9836,9 +9908,11 @@
       "monastery",
       "church"
      ],
-     "kapelle",
+     "monastery",
+     "monastery",
      "chapel",
-     "gipfelkreuz",
+     "chapel",
+     "summit_cross",
      "summit_cross",
      "church"
     ],
@@ -9858,31 +9932,16 @@
     "icon-padding": 1,
     "symbol-sort-key": [
      "get",
-     "rank"
+     "sort_rank"
     ]
    },
-   "paint": {},
-   "filter": [
-    "in",
-    [
-     "get",
-     "class"
-    ],
-    [
-     "literal",
-     [
-      "kirche",
-      "kapelle",
-      "gipfelkreuz"
-     ]
-    ]
-   ]
+   "paint": {}
   },
   {
    "id": "geonamen-gipfel-z8",
    "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "summit_p",
+   "source": "basis",
+   "source-layer": "natural_p",
    "minzoom": 8,
    "layout": {
     "text-field": [
@@ -9895,7 +9954,7 @@
     "text-size": 12,
     "symbol-sort-key": [
      "get",
-     "rank"
+     "sort_rank"
     ],
     "text-max-width": 7,
     "text-padding": 2,
@@ -9906,13 +9965,13 @@
       "in",
       [
        "get",
-       "class"
+       "kind"
       ],
       [
        "literal",
        [
-        "pass",
-        "tal"
+        "saddle",
+        "valley"
        ]
       ]
      ],
@@ -9932,20 +9991,42 @@
     "text-halo-blur": 0
    },
    "filter": [
-    "==",
+    "all",
     [
-     "get",
-     "rank"
+     "any",
+     [
+      "==",
+      [
+       "get",
+       "kind"
+      ],
+      "peak"
+     ],
+     [
+      "==",
+      [
+       "get",
+       "kind_detail"
+      ],
+      "summit_label"
+     ]
     ],
-    1
+    [
+     "==",
+     [
+      "get",
+      "sort_rank"
+     ],
+     1
+    ]
    ],
    "maxzoom": 9
   },
   {
    "id": "geonamen-gipfel",
    "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "summit_p",
+   "source": "basis",
+   "source-layer": "natural_p",
    "minzoom": 9,
    "layout": {
     "text-field": [
@@ -9985,7 +10066,7 @@
      "match",
      [
       "get",
-      "rank"
+      "sort_rank"
      ],
      1,
      [
@@ -10010,7 +10091,7 @@
       "match",
       [
        "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       12,
@@ -10025,7 +10106,7 @@
     ],
     "symbol-sort-key": [
      "get",
-     "rank"
+     "sort_rank"
     ],
     "text-max-width": 8,
     "text-padding": 2,
@@ -10035,23 +10116,60 @@
      0.75
     ],
     "icon-image": [
-     "case",
+     "step",
      [
-      "in",
-      [
-       "get",
-       "class"
-      ],
-      [
-       "literal",
-       [
-        "pass",
-        "tal"
-       ]
-      ]
+      "zoom"
      ],
-     "",
-     "summit"
+     [
+      "case",
+      [
+       "any",
+       [
+        "in",
+        [
+         "get",
+         "kind"
+        ],
+        [
+         "literal",
+         [
+          "saddle",
+          "valley"
+         ]
+        ]
+       ],
+       [
+        "!=",
+        [
+         "get",
+         "sort_rank"
+        ],
+        1
+       ]
+      ],
+      "",
+      "summit"
+     ],
+     11,
+     [
+      "case",
+      [
+       "in",
+       [
+        "get",
+        "kind"
+       ],
+       [
+        "literal",
+        [
+         "saddle",
+         "valley"
+        ]
+       ]
+      ],
+      "",
+      "summit"
+     ]
     ],
     "icon-size": 0.9
    },
@@ -10067,7 +10185,7 @@
       "match",
       [
        "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       0.4,
@@ -10082,7 +10200,7 @@
       "match",
       [
        "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       1.07,
@@ -10096,27 +10214,43 @@
     "text-halo-blur": 0
    },
    "filter": [
-    "<=",
+    "all",
     [
-     "get",
-     "rank"
+     "any",
+     [
+      "==",
+      [
+       "get",
+       "kind"
+      ],
+      "peak"
+     ],
+     [
+      "==",
+      [
+       "get",
+       "kind_detail"
+      ],
+      "summit_label"
+     ]
     ],
     [
-     "step",
+     "<=",
+     [
+      "get",
+      "min_zoom"
+     ],
      [
       "zoom"
-     ],
-     2,
-     13,
-     99
+     ]
     ]
    ]
   },
   {
    "id": "geonamen-einzelhaus",
    "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "settlement_p",
+   "source": "basis",
+   "source-layer": "place_p",
    "minzoom": 15,
    "layout": {
     "text-field": [
@@ -10137,7 +10271,7 @@
     ],
     "symbol-sort-key": [
      "get",
-     "rank"
+     "sort_rank"
     ],
     "text-max-width": 8,
     "text-padding": 2
@@ -10160,16 +10294,16 @@
     "==",
     [
      "get",
-     "class"
+     "kind"
     ],
-    "einzelhaus"
+    "locality"
    ]
   },
   {
    "id": "geonamen-stadtteil",
    "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "settlement_p",
+   "source": "basis",
+   "source-layer": "place_p",
    "minzoom": 12,
    "layout": {
     "text-field": [
@@ -10196,7 +10330,7 @@
     ],
     "symbol-sort-key": [
      "get",
-     "rank"
+     "sort_rank"
     ],
     "text-max-width": 8,
     "text-padding": 2
@@ -10211,16 +10345,16 @@
     "==",
     [
      "get",
-     "class"
+     "kind"
     ],
-    "stadtteil"
+    "suburb"
    ]
   },
   {
    "id": "geonamen-ort",
    "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "settlement_p",
+   "source": "basis",
+   "source-layer": "place_p",
    "minzoom": 8,
    "layout": {
     "text-field": [
@@ -10255,7 +10389,7 @@
      "match",
      [
       "get",
-      "rank"
+      "sort_rank"
      ],
      [
       1,
@@ -10284,7 +10418,7 @@
       "match",
       [
        "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       13.33,
@@ -10309,7 +10443,7 @@
       "match",
       [
        "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       13.33,
@@ -10334,7 +10468,7 @@
       "match",
       [
        "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       14.67,
@@ -10359,7 +10493,7 @@
       "match",
       [
        "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       21.33,
@@ -10384,7 +10518,7 @@
       "match",
       [
        "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       21.33,
@@ -10409,7 +10543,7 @@
       "match",
       [
        "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       22.67,
@@ -10434,7 +10568,7 @@
       "match",
       [
        "get",
-       "rank"
+       "sort_rank"
       ],
       1,
       24,
@@ -10457,7 +10591,7 @@
     ],
     "symbol-sort-key": [
      "get",
-     "rank"
+     "sort_rank"
     ],
     "text-max-width": 10,
     "text-padding": 2,
@@ -10470,17 +10604,28 @@
     "text-halo-blur": 0
    },
    "filter": [
-    "in",
+    "all",
     [
-     "get",
-     "class"
+     "in",
+     [
+      "get",
+      "kind"
+     ],
+     [
+      "literal",
+      [
+       "city",
+       "town",
+       "village",
+       "hamlet"
+      ]
+     ]
     ],
     [
-     "literal",
+     "!",
      [
-      "stadt",
-      "markt",
-      "dorf"
+      "has",
+      "capital"
      ]
     ]
    ]
@@ -10488,8 +10633,8 @@
   {
    "id": "geonamen-bezirkshauptort-punkt",
    "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "district_capital_p",
+   "source": "basis",
+   "source-layer": "place_p",
    "minzoom": 8,
    "layout": {
     "text-field": [
@@ -10548,7 +10693,7 @@
     ],
     "symbol-sort-key": [
      "get",
-     "rank"
+     "sort_rank"
     ],
     "text-max-width": 6,
     "text-padding": 2,
@@ -10569,13 +10714,21 @@
     "text-halo-width": 2.67,
     "text-halo-blur": 0
    },
+   "filter": [
+    "==",
+    [
+     "get",
+     "capital"
+    ],
+    "district"
+   ],
    "maxzoom": 11
   },
   {
    "id": "geonamen-bezirkshauptort",
    "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "district_capital_p",
+   "source": "basis",
+   "source-layer": "place_p",
    "minzoom": 11,
    "layout": {
     "text-field": [
@@ -10634,7 +10787,7 @@
     ],
     "symbol-sort-key": [
      "get",
-     "rank"
+     "sort_rank"
     ],
     "text-max-width": 6,
     "text-padding": 2,
@@ -10646,13 +10799,21 @@
     "text-halo-color": "#FAFAFA",
     "text-halo-width": 2.67,
     "text-halo-blur": 0
-   }
+   },
+   "filter": [
+    "==",
+    [
+     "get",
+     "capital"
+    ],
+    "district"
+   ]
   },
   {
    "id": "geonamen-hauptstadt-punkt",
    "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "country_capital",
+   "source": "basis",
+   "source-layer": "place_p",
    "minzoom": 8,
    "layout": {
     "text-field": [
@@ -10697,7 +10858,7 @@
     ],
     "symbol-sort-key": [
      "get",
-     "rank"
+     "sort_rank"
     ],
     "text-max-width": 8,
     "text-padding": 2,
@@ -10717,13 +10878,27 @@
     "text-halo-width": 2,
     "text-halo-blur": 0.3
    },
+   "filter": [
+    "in",
+    [
+     "get",
+     "capital"
+    ],
+    [
+     "literal",
+     [
+      "country",
+      "state"
+     ]
+    ]
+   ],
    "maxzoom": 12
   },
   {
    "id": "geonamen-hauptstadt",
    "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "country_capital",
+   "source": "basis",
+   "source-layer": "place_p",
    "minzoom": 12,
    "layout": {
     "text-field": [
@@ -10768,7 +10943,7 @@
     ],
     "symbol-sort-key": [
      "get",
-     "rank"
+     "sort_rank"
     ],
     "text-max-width": 8,
     "text-padding": 2,
@@ -10779,22 +10954,53 @@
     "text-halo-color": "#FAFAFA",
     "text-halo-width": 2,
     "text-halo-blur": 0.3
-   }
+   },
+   "filter": [
+    "in",
+    [
+     "get",
+     "capital"
+    ],
+    [
+     "literal",
+     [
+      "country",
+      "state"
+     ]
+    ]
+   ]
   },
   {
    "id": "geonamen-hauptstadt-low-punkt",
    "type": "circle",
-   "source": "geonamen",
-   "source-layer": "country_capital",
+   "source": "basis",
+   "source-layer": "place_p",
    "minzoom": 5,
    "maxzoom": 8,
    "filter": [
-    "!=",
+    "all",
     [
-     "get",
-     "name"
+     "in",
+     [
+      "get",
+      "capital"
+     ],
+     [
+      "literal",
+      [
+       "country",
+       "state"
+      ]
+     ]
     ],
-    "Wien"
+    [
+     "!=",
+     [
+      "get",
+      "name"
+     ],
+     "Wien"
+    ]
    ],
    "paint": {
     "circle-color": "rgba(255, 190, 232, 1)",
@@ -10823,17 +11029,28 @@
   {
    "id": "geonamen-bezirkshauptort-low-punkt",
    "type": "circle",
-   "source": "geonamen",
-   "source-layer": "district_capital_p",
+   "source": "basis",
+   "source-layer": "place_p",
    "minzoom": 7,
    "maxzoom": 8,
    "filter": [
-    "!=",
+    "all",
     [
-     "get",
-     "name"
+     "==",
+     [
+      "get",
+      "capital"
+     ],
+     "district"
     ],
-    "Wien"
+    [
+     "!=",
+     [
+      "get",
+      "name"
+     ],
+     "Wien"
+    ]
    ],
    "paint": {
     "circle-color": "rgba(250, 250, 250, 1)",
@@ -10861,10 +11078,35 @@
   },
   {
    "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "country_capital",
+   "source": "basis",
+   "source-layer": "place_p",
    "minzoom": 5,
    "maxzoom": 8,
+   "filter": [
+    "all",
+    [
+     "in",
+     [
+      "get",
+      "capital"
+     ],
+     [
+      "literal",
+      [
+       "country",
+       "state"
+      ]
+     ]
+    ],
+    [
+     "!=",
+     [
+      "get",
+      "name"
+     ],
+     "Wien"
+    ]
+   ],
    "layout": {
     "text-field": [
      "get",
@@ -10888,7 +11130,7 @@
     "text-max-width": 8,
     "symbol-sort-key": [
      "get",
-     "rank"
+     "sort_rank"
     ]
    },
    "paint": {
@@ -10896,22 +11138,39 @@
     "text-halo-color": "#FAFAFA",
     "text-halo-width": 2
    },
-   "id": "geonamen-hauptstadt-low",
-   "filter": [
-    "!=",
-    [
-     "get",
-     "name"
-    ],
-    "Wien"
-   ]
+   "id": "geonamen-hauptstadt-low"
   },
   {
    "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "country_capital",
+   "source": "basis",
+   "source-layer": "place_p",
    "minzoom": 5,
    "maxzoom": 8,
+   "filter": [
+    "all",
+    [
+     "in",
+     [
+      "get",
+      "capital"
+     ],
+     [
+      "literal",
+      [
+       "country",
+       "state"
+      ]
+     ]
+    ],
+    [
+     "==",
+     [
+      "get",
+      "name"
+     ],
+     "Wien"
+    ]
+   ],
    "layout": {
     "text-field": [
      "get",
@@ -10935,7 +11194,7 @@
     "text-max-width": 8,
     "symbol-sort-key": [
      "get",
-     "rank"
+     "sort_rank"
     ]
    },
    "paint": {
@@ -10943,22 +11202,22 @@
     "text-halo-color": "#FAFAFA",
     "text-halo-width": 2
    },
-   "id": "geonamen-hauptstadt-wien-low",
+   "id": "geonamen-hauptstadt-wien-low"
+  },
+  {
+   "type": "symbol",
+   "source": "basis",
+   "source-layer": "place_p",
+   "minzoom": 7,
+   "maxzoom": 8,
    "filter": [
     "==",
     [
      "get",
-     "name"
+     "capital"
     ],
-    "Wien"
-   ]
-  },
-  {
-   "type": "symbol",
-   "source": "geonamen",
-   "source-layer": "district_capital_p",
-   "minzoom": 7,
-   "maxzoom": 8,
+    "district"
+   ],
    "layout": {
     "text-field": [
      "get",
@@ -10974,7 +11233,7 @@
     "text-max-width": 6,
     "symbol-sort-key": [
      "get",
-     "rank"
+     "sort_rank"
     ]
    },
    "paint": {

@@ -44,6 +44,9 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
 .msg{position:absolute;z-index:3;left:50%;transform:translateX(-50%);bottom:42px;max-width:calc(100% - 32px);background:#7f1d1d;color:#fff;padding:7px 12px;border-radius:8px;font-size:13px;display:none}
 .maplibregl-popup-content{font:13px/1.4 system-ui,sans-serif;color:#1b2b2a;padding:8px 10px}
 .maplibregl-popup-content b{font-weight:600}
+/* Quellenangabe (#235): aufgeklappt rechts vom Panel, begrenzt und scrollbar, nie darunter */
+.maplibregl-ctrl-attrib.maplibregl-compact-show{max-width:calc(100vw - 292px);max-height:45vh;overflow:auto;box-sizing:border-box}
+@media (max-width:640px){.maplibregl-ctrl-attrib.maplibregl-compact-show{max-width:calc(100vw - 20px)}}
 @media (max-width:520px){.panel{width:min(252px,calc(100% - 70px));max-height:60%}}
 /* Suche (search.mapx.at, Meilisearch) */
 .search{position:absolute;z-index:4;top:max(10px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(380px,calc(100% - 572px))}
@@ -112,16 +115,19 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
         <label><input type="checkbox" id="water" checked autocomplete="off"> Gewässer</label>
         <label><input type="checkbox" id="bnd" checked autocomplete="off"> Grenzen</label>
         <label><input type="checkbox" id="lab" checked autocomplete="off"> Beschriftung</label>
-        <label><input type="checkbox" id="hnr" checked autocomplete="off"> Hausnummern</label>
+        <label><input type="checkbox" id="housenr" checked autocomplete="off"> Hausnummern</label>
+        <label><input type="checkbox" id="lifts" checked autocomplete="off"> Lifte</label>
+        <label><input type="checkbox" id="sym" checked autocomplete="off"> Symbole</label>
         <label><input type="checkbox" id="rel" checked autocomplete="off"> Relief</label>
       </div>
+      <label><input type="checkbox" id="d3" autocomplete="off"> 3D-Gebäude (ab Zoom 15)</label>
       <label><input type="checkbox" id="bm" autocomplete="off"> basemap.at als Hintergrund</label>
       <label for="op">Deckkraft Nutzung</label>
       <input type="range" id="op" min="0" max="100" value="100" aria-label="Deckkraft der Nutzungsflächen">
     </div>
     <details class="lg" open><summary>Legende Nutzung</summary><ul class="legend" id="legend"></ul></details>
     <details class="lg"><summary>Legende Straßen</summary><ul class="legend" id="roadLegend"></ul></details>
-    <div class="note">Antippen für Details, lange drücken/Rechtsklick für die nächste Adresse. Gebäude ab Zoom 12, Grundstücke und Hausnummern ab 16.</div>
+    <div class="note">Antippen für Details, lange drücken/Rechtsklick für die nächste Adresse. Gebäude ab Zoom 12, 3D-Gebäude ab 15, Grundstücke und Hausnummern ab 16.</div>
   </div>
 </section>
 
@@ -156,10 +162,10 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
   // Der Kartenstil (alle Layer, Glyphs, Sprites, Legende) steht in style.json und wird mit
   // tools/build_style.py aus den Style-Fragmenten von mapx-at/vector-tiles erzeugt (siehe README).
   // Kachelquellen per Query-Parameter ueberschreibbar (Tests), z. B.
-  //   ?gip=http://localhost:8000/gip-strassen.pmtiles&ggn=...&grenzen=...&geonamen=...&adr=...&dkm=...
+  //   ?basis=http://localhost:8000/mapx-basis.pmtiles&kataster=...&relief=...&hoehenlinien=...
   //   ?style=http://localhost:8000/style.json
   var params = new URLSearchParams(location.search);
-  var SOURCE_PARAMS = ["dkm", "parzellen", "gip", "ggn", "grenzen", "geonamen", "adr", "oev", "relief", "hoehenlinien"];
+  var SOURCE_PARAMS = ["basis", "kataster", "relief", "hoehenlinien"];
   var STYLE_URL = /^https?:\/\//.test(params.get("style") || "") ? params.get("style") : "style.json";
 
   function esc(s) { return String(s).replace(/[&<>"']/g, function (ch) { return "&#" + ch.charCodeAt(0) + ";"; }); }
@@ -193,6 +199,7 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
     zoom: 12,
     minZoom: 0,   // alle Zoomstufen wie basemap.at (Übersicht z0–7: Grenzen, Hauptstädte, Landuse ab z4, Netz ab z6)
     maxZoom: 19,
+    maxPitch: 0,   // flach, solange „3D“ aus ist
     hash: true,
     attributionControl: false,
     style: { version: 8, sources: {}, layers: [{ id: "bg0", type: "background", paint: { "background-color": "#f6f4ee" } }] }
@@ -200,7 +207,7 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
 
   window.mapxMap = map;   // fuer Tests/Konsole
   map.addControl(new maplibregl.AttributionControl({ compact: true }), "bottom-right");
-  map.addControl(new maplibregl.NavigationControl({ visualizePitch: false }), "top-right");
+  map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
   map.addControl(new maplibregl.GeolocateControl({ positionOptions: { enableHighAccuracy: true } }), "top-right");
   map.addControl(new maplibregl.ScaleControl({ unit: "metric" }), "bottom-left");
   map.dragRotate.disable();
@@ -257,16 +264,17 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
     var md = style.metadata || {};
     GROUPS = md["mapx:groups"] || {};
     // Layer, die der Style selbst ausschaltet (z. B. grenzen-label-gemeinde), bleiben aus
-    style.layers.forEach(function (l) { if (l.layout && l.layout.visibility === "none") HIDDEN[l.id] = true; });
+    // (building-3d ist von Haus aus aus und wird vom Schalter „3D“ gesteuert)
+    style.layers.forEach(function (l) { if (l.layout && l.layout.visibility === "none" && l.id !== "building-3d") HIDDEN[l.id] = true; });
     LEGEND = md["mapx:legend"] || null;
     buildLegend();
     map.setStyle(style);
     map.once("styledata", function () {
       ready = true; applyAll();
-      // Mobil: Quellenangabe eingeklappt starten (Info-Knopf klappt sie auf)
+      // Quellenangabe überall eingeklappt (#235) starten (Info-Knopf klappt sie auf)
       map.once("idle", function () {
         var at = document.querySelector(".maplibregl-ctrl-attrib");
-        if (at && window.matchMedia("(max-width: 520px)").matches) at.classList.remove("maplibregl-compact-show");
+        if (at) at.classList.remove("maplibregl-compact-show");
       });
     });
   }).catch(function () { showMsg("Der Kartenstil (style.json) konnte nicht geladen werden."); });
@@ -300,7 +308,7 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
   var bm = document.getElementById("bm"), op = document.getElementById("op");
   // Checkbox-ID -> Layergruppe(n) in metadata["mapx:groups"]
   var TOGGLES = { bld: ["buildings", "parcels"], roads: ["roads"], water: ["water"], bnd: ["boundaries"],
-                  lab: ["labels"], hnr: ["housenumbers"], rel: ["relief"] };
+                  lab: ["labels"], housenr: ["housenumbers"], rel: ["relief"], lifts: ["lifts"], sym: ["symbols"] };
   function groupIds(g) { return (GROUPS[g] || []).filter(function (id) { return !HIDDEN[id] && map.getLayer(id); }); }
   function setGroup(g, on) {
     groupIds(g).forEach(function (id) { map.setLayoutProperty(id, "visibility", on ? "visible" : "none"); });
@@ -318,8 +326,29 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
       TOGGLES[id].forEach(function (g) { setGroup(g, on); });
     });
     if (map.getLayer("basemap")) map.setLayoutProperty("basemap", "visibility", bm.checked ? "visible" : "none");
+    // 3D nur zusammen mit den Gebäuden
+    var on3d = d3.checked && document.getElementById("bld").checked;
+    if (map.getLayer("building-3d")) map.setLayoutProperty("building-3d", "visibility", on3d ? "visible" : "none");
     applyOpacity();
   }
+  // 3D: Neigung und Drehung nur mit eingeschaltetem Schalter, sonst wieder flach und nach Norden
+  var d3 = document.getElementById("d3");
+  function apply3d() {
+    if (d3.checked) {
+      map.setMaxPitch(70);
+      map.dragRotate.enable();
+      map.touchZoomRotate.enableRotation();
+      if (map.getPitch() < 1) map.easeTo({ pitch: 50, duration: 600 });
+    } else {
+      map.dragRotate.disable();
+      map.touchZoomRotate.disableRotation();
+      map.easeTo({ pitch: 0, bearing: 0, duration: 400 });
+      map.once("moveend", function () { if (!d3.checked) map.setMaxPitch(0); });
+    }
+    applyAll();
+  }
+  d3.addEventListener("change", apply3d);
+  if (params.get("3d") === "1") { d3.checked = true; map.once("styledata", apply3d); }
   Object.keys(TOGGLES).forEach(function (id) { document.getElementById(id).addEventListener("change", applyAll); });
   bm.addEventListener("change", function () {
     // Mit Hintergrund die Nutzung etwas zuruecknehmen, ohne den Regler zu ueberschreiben.
@@ -338,9 +367,19 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
   if (window.matchMedia("(max-width: 520px)").matches) setCollapsed(true);
 
   // ---------------------------------------------------------------- Details per Klick
-  var BRUNNEL = { bridge: "Brücke", tunnel: "Tunnel/Unterführung" };
-  var WATER_CLASS = { river: "Fluss", stream: "Bach", canal: "Kanal", ditch: "Graben", lake: "See", pond: "Teich, Weiher" };
-  var BOUNDARY = { state_l: "Staatsgrenze", country_l: "Landesgrenze", district_l: "Bezirksgrenze", municipality_l: "Gemeindegrenze" };
+  var STRUCTURE = { bridge: "Brücke", tunnel: "Tunnel/Unterführung" };
+  var BUILDING_KIND = { building: "Gebäude", residential: "Wohngebäude", church: "Kirche", chapel: "Kapelle", school: "Schule",
+                        fire_station: "Feuerwehr", police: "Polizei", pharmacy: "Apotheke", hospital: "Krankenhaus",
+                        townhall: "Rathaus, Gemeindeamt", station: "Bahnhof", castle: "Schloss, Burg", hut: "Hütte",
+                        power: "Kraftwerk, Energie", industrial: "Industrie, Gewerbe" };
+  var AERIALWAY_KIND = { cable_car: "Seilbahn", gondola: "Gondelbahn", chair_lift: "Sessellift", drag_lift: "Schlepplift",
+                         goods: "Materialseilbahn", zip_line: "Seilrutsche", inclined_lift: "Schrägaufzug" };
+  var RAIL_KIND = { rail: "Bahn", narrow_gauge: "Schmalspurbahn", subway: "U-Bahn", tram: "Straßenbahn", funicular: "Standseilbahn",
+                    ferry: "Fähre" };
+  var POI_KIND = { church: "Kirche", monastery: "Kloster, Stift", chapel: "Kapelle", summit_cross: "Gipfelkreuz" };
+  var POI_DETAIL = { eintuermig: "eintürmig", mehrtuermig: "mehrtürmig" };
+  var WATER_CLASS = { river: "Fluss", stream: "Bach", canal: "Kanal", ditch: "Graben", lake: "See", reservoir: "Stausee", pond: "Teich, Weiher" };
+  var BOUNDARY = { country: "Staatsgrenze", state: "Landesgrenze", district: "Bezirksgrenze", municipality: "Gemeindegrenze" };
   var HR = "<hr style='border:0;border-top:1px solid #ddd;margin:5px 0'>";
   function visible(g) { return groupIds(g).filter(function (id) { return map.getLayoutProperty(id, "visibility") !== "none"; }); }
   function first(box, ids, pred) {
@@ -352,52 +391,68 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
   map.on("click", function (e) {
     if (!ready || (document.getElementById("rt") || {}).className === "rt open") return;
     var pad = 4, box = [[e.point.x - pad, e.point.y - pad], [e.point.x + pad, e.point.y + pad]];
-    var parts = [], namecats = (LEGEND && LEGEND.namecat) || {};
+    var parts = [], kinds = (LEGEND && LEGEND.kind) || {};
     var labels = (LEGEND && LEGEND.roadLabels) || {};
     var h = first(box, visible("housenumbers"));
     if (h) {
       var hp = h.properties || {};
-      parts.push("<b>" + esc((hp.street ? hp.street + " " : "") + hp.hnr) + "</b><br>" +
-                 (hp.type === "parcel" ? "Grundstücksadresse" : "Gebäudeadresse") + '<span class="adr"></span>');
+      parts.push("<b>" + esc((hp.street ? hp.street + " " : "") + hp.housenumber) + "</b><br>" +
+                 (hp.kind === "parcel" ? "Grundstücksadresse" : "Gebäudeadresse") + '<span class="adr"></span>');
     }
     var r = first(box, visible("roads"), function (f) { return f.layer.type === "line"; });
     if (r) {
-      var rp = r.properties || {}, t = labels[rp.draw_class] || rp.draw_class;
+      var rp = r.properties || {}, rail = r.layer["source-layer"] === "rail_l";
+      var t = rail ? (RAIL_KIND[rp.kind] || "Bahn") : (labels[rp.kind_detail] || rp.kind_detail);
       var rx = [];
       if (rp.name || rp.ref) rx.push(esc(t));
       if (rp.ref && rp.name) rx.push(esc(rp.ref));
-      if (BRUNNEL[rp.brunnel]) rx.push(BRUNNEL[rp.brunnel]);
-      if (rp.oneway == 1) rx.push("Einbahn");
+      if (STRUCTURE[rp.structure]) rx.push(STRUCTURE[rp.structure]);
+      if (rp.oneway) rx.push("Einbahn");
       parts.push("<b>" + esc(rp.name || rp.ref || t) + "</b>" + (rx.length ? "<br>" + rx.join(" · ") : ""));
+    }
+    var lf = first(box, visible("lifts"), function (f) { return f.layer.type === "line"; });
+    if (lf) {
+      var lp = lf.properties || {}, lt = AERIALWAY_KIND[lp.kind] || "Seilbahn, Lift";
+      parts.push("<b>" + esc(lp.name || lt) + "</b>" + (lp.name ? "<br>" + esc(lt) : ""));
+    }
+    var sy = first([[e.point.x - 10, e.point.y - 10], [e.point.x + 10, e.point.y + 10]], visible("symbols"));
+    if (sy) {
+      var yp = sy.properties || {}, yt = POI_KIND[yp.kind] || "Symbol", yd = POI_DETAIL[yp.kind_detail];
+      parts.push("<b>" + esc(yp.name || yt) + "</b>" + (yp.name || yd ? "<br>" + esc(yt) + (yd ? " · " + yd : "") : ""));
     }
     var w = first(box, visible("water").filter(function (id) { return id !== "water-dkm"; }));
     if (w) {
-      var wp = w.properties || {}, wc = WATER_CLASS[wp["class"]] || "Gewässer", wx = [];
+      var wp = w.properties || {}, wc = WATER_CLASS[wp.kind] || "Gewässer", wx = [];
       if (wp.name) wx.push(esc(wc));
-      if (wp.ezg_km2) wx.push("Einzugsgebiet " + Math.round(wp.ezg_km2).toLocaleString("de-AT") + " km²");
+      if (wp.catchment_km2) wx.push("Einzugsgebiet " + Math.round(wp.catchment_km2).toLocaleString("de-AT") + " km²");
       if (wp.area_km2) wx.push(wp.area_km2 < 0.01 ? "< 1 ha" : wp.area_km2 < 1 ? Math.round(wp.area_km2 * 100) + " ha"
                                : (+wp.area_km2).toFixed(2).replace(".", ",") + " km²");
-      if (wp.tunnel == 1) wx.push("verrohrt");
+      if (wp.structure == "tunnel") wx.push("verrohrt");
       parts.push("<b>" + esc(wp.name || wc) + "</b>" + (wx.length ? "<br>" + wx.join(" · ") : ""));
     }
     var bd = first(box, visible("boundaries"), function (f) { return f.layer.type === "line"; });
     if (bd) {
-      var bp = bd.properties || {}, bs = "<b>" + (BOUNDARY[bd.sourceLayer] || "Grenze") + "</b>";
+      var bp = bd.properties || {}, bs = "<b>" + (BOUNDARY[(bd.properties || {}).kind] || "Grenze") + "</b>";
       if (bp.left && bp.right) bs += "<br>" + esc(bp.left) + " | " + esc(bp.right);
       else if (bp.right) bs += "<br>" + esc(bp.right);
       parts.push(bs);
     }
-    var f = map.queryRenderedFeatures(e.point, { layers: ["building", "landuse", "parcel"].filter(function (id) { return map.getLayer(id); }) });
-    var b = f.filter(function (x) { return x.layer.id === "building"; })[0];
+    var f = map.queryRenderedFeatures(e.point, { layers: ["building-3d", "building", "landuse", "parcel"].filter(function (id) { return map.getLayer(id); }) });
+    var b = f.filter(function (x) { return x.layer.id === "building" || x.layer.id === "building-3d"; })[0];
     var l = f.filter(function (x) { return x.layer.id === "landuse"; })[0];
     var pc = first(box, visible("parcels"));
     var low = "";
-    if (b) low += "<b>Gebäude</b><br>";
+    if (b) {
+      var bp2 = b.properties || {}, bk = BUILDING_KIND[bp2.kind] || bp2.kind || "Gebäude";
+      low += "<b>" + esc(bk === "Gebäude" ? "Gebäude" : "Gebäude: " + bk) + "</b>";
+      if (bp2.height != null) low += "<br>Höhe " + (+bp2.height).toLocaleString("de-AT") + " m";
+      if (bp2.max_height != null) low += (bp2.height != null ? " · " : "<br>") + "max. Höhe " + (+bp2.max_height).toLocaleString("de-AT") + " m";
+      low += "<br>";
+    }
     if (l) {
       var p = l.properties || {};
-      var cat = (p.usage == 59 || p.usage == 60) ? "Gewässer" : (namecats[p.namecat] || p.namecat);
+      var cat = (p.kind === "water" && (p.kind_detail === "river" || p.kind_detail === "lake")) ? "Gewässer" : (kinds[p.kind] || p.kind);
       low += "<b>" + esc(cat || "unbekannt") + "</b>";
-      if (p.usage != null && p.usage !== "") low += "<br>Nutzung (FIG): " + esc(p.usage);
     }
     if (pc && pc.properties && pc.properties.gstnr) low += "<br>Grenze Grundstück " + esc(pc.properties.gstnr) + " (KG " + esc(pc.properties.kgnr) + ")";
     if (low) parts.push(low);
@@ -419,7 +474,7 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
   });
   map.on("mousemove", function (e) {
     if (!ready) return;
-    var ids = visible("housenumbers").concat(visible("roads"), visible("water"), ["landuse"]).filter(function (id) { return map.getLayer(id); });
+    var ids = visible("housenumbers").concat(visible("roads"), visible("lifts"), visible("symbols"), visible("water"), ["landuse"]).filter(function (id) { return map.getLayer(id); });
     map.getCanvas().style.cursor = map.queryRenderedFeatures(e.point, { layers: ids }).length ? "pointer" : "";
   });
 
@@ -444,6 +499,8 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
   var ATTRS = ["id", "type", "class", "label", "name", "context", "_geo", "bbox", "zoom"];
 
   function meili(body, signal) {
+    // „Landeck .102“: Punkt vor der Nummer = Grundstueckssuche (Zahlen allein treffen sonst Adressen vor Grundstuecken, #203)
+    if (/(^|\s)\.\d/.test(body.q || "") && !body.filter) body = Object.assign({}, body, { filter: "type = parcel" });
     var h = { "Content-Type": "application/json" };
     if (SEARCH_KEY) h.Authorization = "Bearer " + SEARCH_KEY;
     return fetch(SEARCH_URL + "/indexes/" + SEARCH_INDEX + "/search", {
