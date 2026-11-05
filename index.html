@@ -8,8 +8,8 @@
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#134e4a">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23134e4a'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%235eead4' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='4' fill='none' stroke='%235eead4' stroke-width='2'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css" integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js" integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.0/dist/maplibre-gl.css" integrity="sha384-uTttxo/aOKbdE5RlD/SPzSDoDmNvGlUYPjONi2MN/b7c9HPSvW07OIuyP7uL6jxK" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.0/dist/maplibre-gl.js" integrity="sha384-5+cfbwT0iiub6VsQAdn6yz16nr6sDiQoHx6tm4O8OVYXHYOxcffFmCJBL0dgdvGp" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/pmtiles@3.2.1/dist/pmtiles.js" integrity="sha384-QfbOCebHNw8pQiPAOd2IFee2v2A5VYZxBk0+JGZ5H+3mfzVIp6zsQNkTsfGJot93" crossorigin="anonymous"></script>
 <style>
 :root{--panel:rgba(255,255,255,.94);--fg:#1b2b2a;--muted:#5b6b69;--line:#d9d4c7;--acc:#0f766e;--bg:#f2efe6}
@@ -46,6 +46,7 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
 .maplibregl-popup-content b{font-weight:600}
 /* Quellenangabe (#235): aufgeklappt rechts vom Panel, begrenzt und scrollbar, nie darunter */
 .maplibregl-ctrl-attrib.maplibregl-compact-show{max-width:calc(100vw - 292px);max-height:45vh;overflow:auto;box-sizing:border-box}
+@media (min-width:641px){.maplibregl-ctrl-attrib.maplibregl-compact-show{max-height:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
 @media (max-width:640px){.maplibregl-ctrl-attrib.maplibregl-compact-show{max-width:calc(100vw - 20px)}}
 @media (max-width:520px){.panel{width:min(252px,calc(100% - 70px));max-height:60%}}
 .btn3d{font:600 12px system-ui,sans-serif;color:#333}
@@ -135,6 +136,7 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
         <label><input type="checkbox" id="rel" checked autocomplete="off"> Relief</label>
       </div>
       <label><input type="checkbox" id="d3" autocomplete="off"> 3D-Gebäude (ab Zoom 15)</label>
+      <label><input type="checkbox" id="terr" autocomplete="off"> 3D-Gelände</label>
       <label><input type="checkbox" id="bm" autocomplete="off"> basemap.at als Hintergrund</label>
       <label for="op">Deckkraft Nutzung</label>
       <input type="range" id="op" min="0" max="100" value="100" aria-label="Deckkraft der Nutzungsflächen">
@@ -186,7 +188,7 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
 
   var protocol = new pmtiles.Protocol();
   // Fehlt eine Rasterkachel im PMTiles (Relief ist nur über Land vorhanden, die bounds sind aber ein
-  // Rechteck), liefert pmtiles {data: null}. Der Bildpfad von MapLibre 4.7.1 löst dann sein Promise nie
+  // Rechteck), liefert pmtiles {data: null}. Der Bildpfad von MapLibre 4.7.1 (in 5.x unverändert abgesichert) löst dann sein Promise nie
   // auf, die Kachel bleibt "loading" und map.loaded() wird nie true (#155). Status 404 schließt sie ab,
   // ohne error-Ereignis, und die Darstellung bleibt wie bei einer noch nicht geladenen Kachel.
   // MapLibre nimmt maxzoom aus der TileJSON und ignoriert die Angabe im Style, sobald die Quelle eine url hat.
@@ -219,17 +221,18 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
     return o;
   }
   var H0 = parseHash();
+  var wantTerr = H0.kv.terr === "1";
   var want3d = H0.kv["3d"] === "1" || params.get("3d") === "1";
 
   var map = new maplibregl.Map({
     container: "map",
     center: H0.lat != null ? [H0.lon, H0.lat] : [15.33, 48.23],
     zoom: H0.zoom != null ? H0.zoom : 12,
-    bearing: want3d && H0.bearing || 0,
-    pitch: want3d && H0.pitch || 0,
+    bearing: (want3d || wantTerr) && H0.bearing || 0,
+    pitch: (want3d || wantTerr) && H0.pitch || 0,
     minZoom: 0,   // alle Zoomstufen wie basemap.at (Übersicht z0–7: Grenzen, Hauptstädte, Landuse ab z4, Netz ab z6)
     maxZoom: 19,
-    maxPitch: want3d ? 70 : 0,   // flach, solange „3D“ aus ist
+    maxPitch: want3d || wantTerr ? 70 : 0,   // flach, solange „3D“ aus ist
     hash: false,
     attributionControl: false,
     style: { version: 8, sources: {}, layers: [{ id: "bg0", type: "background", paint: { "background-color": "#f6f4ee" } }] }
@@ -237,6 +240,16 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
 
   window.mapxMap = map;   // fuer Tests/Konsole
   map.addControl(new maplibregl.AttributionControl({ compact: true }), "bottom-right");
+  // Quellenangabe überall eingeklappt (nur das ⓘ): MapLibre klappt sie ab 641 px Breite selbst auf, das wird
+  // zurückgenommen, solange der Nutzer nicht selbst auf das ⓘ getippt hat
+  (function () {
+    var at = document.querySelector(".maplibregl-ctrl-attrib"), byUser = false;
+    if (!at) return;
+    at.addEventListener("click", function () { byUser = true; }, true);
+    function fix() { if (!byUser && at.classList.contains("maplibregl-compact-show")) { at.classList.remove("maplibregl-compact-show"); at.removeAttribute("open"); } }
+    new MutationObserver(fix).observe(at, { attributes: true, attributeFilter: ["class", "open"] });
+    fix();
+  })();
   map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
   // 3D-Knopf direkt auf der Karte (auch bei eingeklapptem Panel, gut sichtbar auf dem Handy), synchron zum Schalter „3D“
   var btn3d = document.createElement("button");
@@ -288,6 +301,7 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
     SOURCE_PARAMS.forEach(function (k) {
       var v = params.get(k);
       if (v && /^https?:\/\//.test(v) && style.sources[k]) style.sources[k].url = "pmtiles://" + v;
+      if (k === "relief" && v && /^https?:\/\//.test(v) && style.sources["relief-terrain"]) style.sources["relief-terrain"].url = "pmtiles://" + v;
     });
     Object.keys(style.sources).forEach(function (k) {
       var so = style.sources[k], u = so.url;
@@ -366,6 +380,7 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
     var on3d = d3.checked && document.getElementById("bld").checked;
     if (map.getLayer("building-3d")) map.setLayoutProperty("building-3d", "visibility", on3d ? "visible" : "none");
     applyOpacity();
+    applyTerrain();
     applyHousenumbers3d(d3.checked);
   }
   // 3D: Grundstücksnummern aus, Hausnummern erst ab z17 (am Boden liegende Zahlen überdecken sonst die Gebäude)
@@ -381,22 +396,35 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
   }
   // 3D: Neigung und Drehung nur mit eingeschaltetem Schalter, sonst wieder flach und nach Norden
   var d3 = document.getElementById("d3");
+  var terr = document.getElementById("terr"), TERRAIN = null;
   function apply3d() {
-    if (d3.checked) {
+    var need = d3.checked || terr.checked;
+    if (need) {
       map.setMaxPitch(70);
       map.dragRotate.enable();
       map.touchZoomRotate.enableRotation();
-      if (map.getPitch() < 1) map.easeTo({ pitch: 50, duration: 600 });
+      if (map.getPitch() < 1) map.easeTo({ pitch: terr.checked ? 60 : 50, duration: 600 });
     } else {
       map.dragRotate.disable();
       map.touchZoomRotate.disableRotation();
       map.easeTo({ pitch: 0, bearing: 0, duration: 400 });
-      map.once("moveend", function () { if (!d3.checked) map.setMaxPitch(0); });
+      map.once("moveend", function () { if (!d3.checked && !terr.checked) map.setMaxPitch(0); });
     }
     applyAll();
   }
+  // 3D-Gelände: eigene raster-dem-Quelle (relief-terrain) nur bei eingeschaltetem Schalter; aus = keine Kosten.
+  // Nach jedem setStyle (Stilwechsel) erneut setzen.
+  function applyTerrain() {
+    if (!ready || !TERRAIN) return;
+    var on = terr.checked && map.getSource(TERRAIN.source);
+    if (on) map.setTerrain({ source: TERRAIN.source, exaggeration: TERRAIN.exaggeration || 1.4 });
+    else if (map.getTerrain()) map.setTerrain(null);
+  }
+  map.on("style.load", function () { var m = map.getStyle().metadata || {}; TERRAIN = m["mapx:terrain"] || null; applyTerrain(); });
   d3.addEventListener("change", function () { btn3d.setAttribute("aria-pressed", String(d3.checked)); apply3d(); writeHash(); });
+  terr.addEventListener("change", function () { apply3d(); writeHash(); });
   btn3d.addEventListener("click", function () { d3.checked = !d3.checked; d3.dispatchEvent(new Event("change")); });
+  if (wantTerr) { terr.checked = true; map.once("styledata", apply3d); }
   if (want3d) { d3.checked = true; btn3d.setAttribute("aria-pressed", "true"); map.once("styledata", apply3d); }
   Object.keys(TOGGLES).forEach(function (id) { document.getElementById(id).addEventListener("change", applyAll); });
   bm.addEventListener("change", function () {
@@ -429,12 +457,13 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
   function writeHash() {
     if (!ready) return;
     var c = map.getCenter(), z = map.getZoom(), h = "#" + z.toFixed(2) + "/" + c.lat.toFixed(5) + "/" + c.lng.toFixed(5);
-    if (d3.checked && (map.getBearing() || map.getPitch())) h += "/" + Math.round(map.getBearing()) + "/" + Math.round(map.getPitch());
+    if ((d3.checked || terr.checked) && (map.getBearing() || map.getPitch())) h += "/" + Math.round(map.getBearing()) + "/" + Math.round(map.getPitch());
     var off = Object.keys(TOGGLES).filter(function (id) { return !document.getElementById(id).checked; });
     if (off.length) h += "&off=" + off.join(",");
     if (bm.checked) h += "&bm=1";
     if (op.value != (bm.checked ? 60 : 100)) h += "&op=" + op.value;
     if (d3.checked) h += "&3d=1";
+    if (terr.checked) h += "&terr=1";
     if (h === lastHash) return;
     lastHash = h;
     try { history.replaceState(history.state, "", h); } catch (e) {}
@@ -445,7 +474,9 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
     bm.checked = kv.bm === "1";
     op.value = /^\d+$/.test(kv.op || "") ? Math.min(100, +kv.op) : (bm.checked ? 60 : 100);
     var want = kv["3d"] === "1";
+    var wt = kv.terr === "1";
     if (want !== d3.checked) { d3.checked = want; d3.dispatchEvent(new Event("change")); }
+    if (wt !== terr.checked) { terr.checked = wt; terr.dispatchEvent(new Event("change")); }
     applyAll();
   }
   readHashState(H0.kv);
@@ -556,8 +587,13 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
     ["h", "poi", "bld", "road", "lift", "water", "bd", "land", "tun"].forEach(function (k) { parts = parts.concat(P[k]); });
     // Gemeinde/Bezirk am Klickpunkt aus der naechsten Adresse (Suchindex), bei Grenzen und Hausnummern
     var wantAdmin = !!(bd || h);
-    if (!parts.length) return;
-    var html = parts.join(HR) + (wantAdmin ? '<div class="adm d"></div>' : "");
+    var elev = "";
+    if (terr.checked && TERRAIN && map.getTerrain()) {
+      var ez = map.queryTerrainElevation(e.lngLat);
+      if (ez != null) elev = '<div class="d">Geländehöhe ' + Math.round(ez / (TERRAIN.exaggeration || 1)).toLocaleString("de-AT") + " m ü. A.</div>";
+    }
+    if (!parts.length && !elev) return;
+    var html = parts.join(HR) + elev + (wantAdmin ? '<div class="adm d"></div>' : "");
     var pop = new maplibregl.Popup({ closeButton: true, maxWidth: "260px", className: "rev" }).setLngLat(e.lngLat).setHTML(html).addTo(map);
     if (wantAdmin) {
       nearestAddress(e.lngLat, 1500).then(function (a) {
