@@ -1,0 +1,37 @@
+[
+ {
+  "id": "strassen",
+  "name": "Straßen",
+  "gruppe": "Klassisch"
+ },
+ {
+  "id": "outdoor",
+  "name": "Outdoor",
+  "gruppe": "Klassisch"
+ },
+ {
+  "id": "hell",
+  "name": "Hell",
+  "gruppe": "Klassisch"
+ },
+ {
+  "id": "dunkel",
+  "name": "Dunkel",
+  "gruppe": "Klassisch"
+ },
+ {
+  "id": "nav-tag",
+  "name": "Navigation Tag",
+  "gruppe": "Klassisch"
+ },
+ {
+  "id": "nav-nacht",
+  "name": "Navigation Nacht",
+  "gruppe": "Klassisch"
+ },
+ {
+  "id": "satellit",
+  "name": "Satellit + Straßen",
+  "gruppe": "Klassisch"
+ }
+]

@@ -138,6 +138,8 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
       <label><input type="checkbox" id="d3" autocomplete="off"> 3D-Gebäude (ab Zoom 15)</label>
       <label><input type="checkbox" id="terr" autocomplete="off"> 3D-Gelände</label>
       <label><input type="checkbox" id="bm" autocomplete="off"> basemap.at als Hintergrund</label>
+      <label for="stil">Kartenstil</label>
+      <select id="stil" aria-label="Kartenstil"><option value="">mapx (Basis)</option></select>
       <label for="op">Deckkraft Nutzung</label>
       <input type="range" id="op" min="0" max="100" value="100" aria-label="Deckkraft der Nutzungsflächen">
     </div>
@@ -172,6 +174,31 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
 </div>
 
 <script>
+// Stilwahl: ?stil=<id> (Stile in styles/<id>.json, Liste in styles/index.json); Wechsel lädt die Seite neu (Hash bleibt)
+window.mapxStil = (function () {
+  var id = new URLSearchParams(location.search).get("stil") || "";
+  var ok = /^[a-z0-9-]+$/.test(id);
+  var sel = document.getElementById("stil");
+  if (sel) {
+    fetch("styles/index.json").then(function (r) { return r.json(); }).then(function (list) {
+      var groups = {};
+      list.forEach(function (s) {
+        var g = groups[s.gruppe];
+        if (!g) { g = groups[s.gruppe] = document.createElement("optgroup"); g.label = s.gruppe; sel.appendChild(g); }
+        var o = document.createElement("option"); o.value = s.id; o.textContent = s.name; g.appendChild(o);
+      });
+      sel.value = ok ? id : "";
+    }).catch(function () {});
+    sel.addEventListener("change", function () {
+      var u = new URL(location.href);
+      if (sel.value) u.searchParams.set("stil", sel.value); else u.searchParams.delete("stil");
+      location.href = u.toString();
+    });
+  }
+  return { id: ok ? id : "", url: ok ? "styles/" + id + ".json" : null };
+})();
+</script>
+<script>
 (function () {
   "use strict";
 
@@ -182,7 +209,7 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
   //   ?style=http://localhost:8000/style.json
   var params = new URLSearchParams(location.search);
   var SOURCE_PARAMS = ["basis", "kataster", "relief", "hoehenlinien"];
-  var STYLE_URL = /^https?:\/\//.test(params.get("style") || "") ? params.get("style") : "style.json";
+  var STYLE_URL = /^https?:\/\//.test(params.get("style") || "") ? params.get("style") : ((window.mapxStil && window.mapxStil.url) || "style.json");
 
   function esc(s) { return String(s).replace(/[&<>"']/g, function (ch) { return "&#" + ch.charCodeAt(0) + ";"; }); }
 
