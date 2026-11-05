@@ -140,6 +140,10 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
       <label><input type="checkbox" id="bm" autocomplete="off"> basemap.at als Hintergrund</label>
       <label for="stil">Kartenstil</label>
       <select id="stil" aria-label="Kartenstil"><option value="">mapx (Basis)</option></select>
+      <div id="stilStd" style="display:none;gap:6px;margin-top:4px">
+        <select id="stilLicht" aria-label="Licht"><option value="morgen">Morgen</option><option value="tag">Tag</option><option value="abend">Abend</option><option value="nacht">Nacht</option></select>
+        <select id="stilThema" aria-label="Thema"><option value="normal">Normal</option><option value="verblasst">Verblasst</option><option value="monochrom">Monochrom</option></select>
+      </div>
       <label for="op">Deckkraft Nutzung</label>
       <input type="range" id="op" min="0" max="100" value="100" aria-label="Deckkraft der Nutzungsflächen">
     </div>
@@ -177,9 +181,22 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
 // Stilwahl: ?stil=<id> (Stile in styles/<id>.json, Liste in styles/index.json); Wechsel lädt die Seite neu (Hash bleibt)
 window.mapxStil = (function () {
   var id = new URLSearchParams(location.search).get("stil") || "";
+  if (id === "standard") id = "standard-tag-normal";
   var ok = /^[a-z0-9-]+$/.test(id);
+  var std = /^standard-(morgen|tag|abend|nacht)-(normal|verblasst|monochrom)$/.exec(id);
   var sel = document.getElementById("stil");
+  if (std && !/(^|[#&])3d=1/.test(location.hash)) {   // Standard: 3D-Gebäude gleich an (wie #…&3d=1)
+    history.replaceState(null, "", location.pathname + location.search + (location.hash || "#") + "&3d=1");
+  }
+  if (std) { var l3 = document.querySelector("label:has(#d3)"); if (l3 && l3.lastChild) l3.lastChild.nodeValue = " 3D-Gebäude (ab Zoom 14)"; }
+  function go(v) {
+    var u = new URL(location.href);
+    if (v) u.searchParams.set("stil", v); else u.searchParams.delete("stil");
+    if (!/^standard-/.test(v || "")) u.hash = u.hash.replace(/&3d=1/, "");
+    location.href = u.toString();
+  }
   if (sel) {
+    var lic = document.getElementById("stilLicht"), the = document.getElementById("stilThema");
     fetch("styles/index.json").then(function (r) { return r.json(); }).then(function (list) {
       var groups = {};
       list.forEach(function (s) {
@@ -187,15 +204,16 @@ window.mapxStil = (function () {
         if (!g) { g = groups[s.gruppe] = document.createElement("optgroup"); g.label = s.gruppe; sel.appendChild(g); }
         var o = document.createElement("option"); o.value = s.id; o.textContent = s.name; g.appendChild(o);
       });
-      sel.value = ok ? id : "";
+      sel.value = !ok ? "" : std ? "standard-tag-normal" : id;
     }).catch(function () {});
-    sel.addEventListener("change", function () {
-      var u = new URL(location.href);
-      if (sel.value) u.searchParams.set("stil", sel.value); else u.searchParams.delete("stil");
-      location.href = u.toString();
-    });
+    if (std) {
+      document.getElementById("stilStd").style.display = "flex";
+      lic.value = std[1]; the.value = std[2];
+    }
+    sel.addEventListener("change", function () { go(sel.value); });
+    [lic, the].forEach(function (e) { e.addEventListener("change", function () { go("standard-" + lic.value + "-" + the.value); }); });
   }
-  return { id: ok ? id : "", url: ok ? "styles/" + id + ".json" : null };
+  return { id: ok ? id : "", d3: !!std, url: ok ? "styles/" + id + ".json" : null };
 })();
 </script>
 <script>

@@ -1,5 +1,10 @@
 [
  {
+  "id": "standard-tag-normal",
+  "name": "Standard 3D",
+  "gruppe": "Standard"
+ },
+ {
   "id": "strassen",
   "name": "Straßen",
   "gruppe": "Klassisch"
