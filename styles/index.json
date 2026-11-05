@@ -2,86 +2,171 @@
  {
   "id": "standard-tag-normal",
   "name": "Standard 3D",
-  "gruppe": "Standard"
+  "gruppe": "Standard",
+  "vorschau": [
+   "#ebe9e4",
+   "#a5cf8d",
+   "#acd2f1"
+  ]
  },
  {
   "id": "strassen",
   "name": "Straßen",
-  "gruppe": "Klassisch"
+  "gruppe": "Klassisch",
+  "vorschau": [
+   "#efefee",
+   "#c1dead",
+   "#aed5f8"
+  ]
  },
  {
   "id": "outdoor",
   "name": "Outdoor",
-  "gruppe": "Klassisch"
+  "gruppe": "Klassisch",
+  "vorschau": [
+   "#efefee",
+   "#6dcb3a",
+   "#a6d2f8"
+  ]
  },
  {
   "id": "hell",
   "name": "Hell",
-  "gruppe": "Klassisch"
+  "gruppe": "Klassisch",
+  "vorschau": [
+   "#f4f4f4",
+   "#f3f3f3",
+   "#e1e9f0"
+  ]
  },
  {
   "id": "dunkel",
   "name": "Dunkel",
-  "gruppe": "Klassisch"
+  "gruppe": "Klassisch",
+  "vorschau": [
+   "#14171b",
+   "#24292f",
+   "#19283a"
+  ]
  },
  {
   "id": "nav-tag",
   "name": "Navigation Tag",
-  "gruppe": "Klassisch"
+  "gruppe": "Klassisch",
+  "vorschau": [
+   "#eeebe4",
+   "#c8dfb6",
+   "#a5d1f6"
+  ]
  },
  {
   "id": "nav-nacht",
   "name": "Navigation Nacht",
-  "gruppe": "Klassisch"
+  "gruppe": "Klassisch",
+  "vorschau": [
+   "#11151d",
+   "#1f2735",
+   "#122c48"
+  ]
  },
  {
   "id": "satellit",
   "name": "Satellit + Straßen",
-  "gruppe": "Klassisch"
+  "gruppe": "Klassisch",
+  "vorschau": [
+   "#efefee",
+   "#47B312",
+   "#b3d9ff"
+  ]
  },
  {
   "id": "reise",
   "name": "Reise",
-  "gruppe": "Weitere"
+  "gruppe": "Weitere",
+  "vorschau": [
+   "#f2efe9",
+   "#9ed080",
+   "#add5ec"
+  ]
  },
  {
   "id": "schwarzweiss",
   "name": "Schwarzweiß",
-  "gruppe": "Weitere"
+  "gruppe": "Weitere",
+  "vorschau": [
+   "#ffffff",
+   "#ffffff",
+   "#1b1b1b"
+  ]
  },
  {
   "id": "gelaende",
   "name": "Gelände",
-  "gruppe": "Weitere"
+  "gruppe": "Weitere",
+  "vorschau": [
+   "#ece8d6",
+   "#87cc57",
+   "#a7cef0"
+  ]
  },
  {
   "id": "topo",
   "name": "Topo",
-  "gruppe": "Weitere"
+  "gruppe": "Weitere",
+  "vorschau": [
+   "#f0ece0",
+   "#82ca58",
+   "#acd2f3"
+  ]
  },
  {
   "id": "landeskarte",
   "name": "Landeskarte",
-  "gruppe": "Weitere"
+  "gruppe": "Weitere",
+  "vorschau": [
+   "#faf8ee",
+   "#98d275",
+   "#b4daf8"
+  ]
  },
  {
   "id": "rad",
   "name": "Rad",
-  "gruppe": "Weitere"
+  "gruppe": "Weitere",
+  "vorschau": [
+   "#f3f1ea",
+   "#aed892",
+   "#aed4f4"
+  ]
  },
  {
   "id": "oev",
   "name": "ÖV",
-  "gruppe": "Weitere"
+  "gruppe": "Weitere",
+  "vorschau": [
+   "#efeeea",
+   "#b8c3b3",
+   "#bdd3e8"
+  ]
  },
  {
   "id": "bunt",
   "name": "Bunt",
-  "gruppe": "Weitere"
+  "gruppe": "Weitere",
+  "vorschau": [
+   "#f1efe6",
+   "#41c500",
+   "#94c9f8"
+  ]
  },
  {
   "id": "neutral",
   "name": "Neutral",
-  "gruppe": "Weitere"
+  "gruppe": "Weitere",
+  "vorschau": [
+   "#e9e8e5",
+   "#b4c2ad",
+   "#baccdc"
+  ]
  }
 ]

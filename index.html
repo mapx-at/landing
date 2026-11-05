@@ -6,125 +6,273 @@
 <title>mapx.at – Vektor-Basemap</title>
 <meta name="description" content="mapx.at – Vektor-Basemap nach basemap.at-Vorbild aus offenen Daten (BEV DKM, GIP, GGN, Verwaltungsgrenzen, Geographische Namen, Adressregister): Bezirke Melk, Landeck und Gmunden, Verwaltungsgrenzen für ganz Österreich.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#134e4a">
+<meta name="theme-color" content="#3046c5">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23134e4a'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%235eead4' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='4' fill='none' stroke='%235eead4' stroke-width='2'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.0/dist/maplibre-gl.css" integrity="sha384-uTttxo/aOKbdE5RlD/SPzSDoDmNvGlUYPjONi2MN/b7c9HPSvW07OIuyP7uL6jxK" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.0/dist/maplibre-gl.js" integrity="sha384-5+cfbwT0iiub6VsQAdn6yz16nr6sDiQoHx6tm4O8OVYXHYOxcffFmCJBL0dgdvGp" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/pmtiles@3.2.1/dist/pmtiles.js" integrity="sha384-QfbOCebHNw8pQiPAOd2IFee2v2A5VYZxBk0+JGZ5H+3mfzVIp6zsQNkTsfGJot93" crossorigin="anonymous"></script>
-<style>
-:root{--panel:rgba(255,255,255,.94);--fg:#1b2b2a;--muted:#5b6b69;--line:#d9d4c7;--acc:#0f766e;--bg:#f2efe6}
-@media (prefers-color-scheme:dark){:root{--panel:rgba(16,30,34,.94);--fg:#dff5f1;--muted:#9bb5b0;--line:#2c4a50;--acc:#5eead4;--bg:#0c1a1f}}
+<script>
+// Hell/Dunkel vor dem ersten Zeichnen: #...&ui=dark|light > gespeicherte Wahl (localStorage) > Systemeinstellung
+(function () {
+  var m = /[#&]ui=(dark|light)/.exec(location.hash), mode = m ? m[1] : "";
+  try { if (!mode) mode = (JSON.parse(localStorage.getItem("mapx-ui") || "{}") || {}).mode || ""; } catch (e) {}
+  var dark = mode ? mode === "dark" : (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches);
+  document.documentElement.setAttribute("data-ui", dark ? "dark" : "light");
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@700&display=swap">
+<style id="ui-basis">
+/* Oberfläche "Basis" (Mockup Main/Handy): Glas-Panel, Pillen, Kippschalter. Nur Chrome, nicht die Karte. */
+:root{--text:#111827;--muted:#4b5563;--glass:rgba(255,255,255,.9);--card:rgba(255,255,255,.97);--border:rgba(17,24,39,.1);--line:#e5e7eb;
+  --chip:#f3f4f6;--seg:#fff;--seg-sh:0 1px 3px rgba(17,24,39,.14);--off:#8a93a1;--foot:#f9fafb;--shadow:0 8px 30px rgba(17,24,39,.14);
+  --shadow2:0 14px 40px rgba(17,24,39,.2);--accent:#3046c5;--on-accent:#fff;--acc-soft:#e8ebfb;--acc-text:#2a3db0;--err:#b91c1c;--tile:#fff;
+  --pill-on:#111827;--pill-on-text:#fff;--hover:rgba(48,70,197,.1);color-scheme:light}
+[data-ui=dark]{--text:#f3f4f6;--muted:#aab1bc;--glass:rgba(24,27,32,.92);--card:rgba(28,31,37,.97);--border:rgba(255,255,255,.12);--line:rgba(255,255,255,.1);
+  --chip:rgba(255,255,255,.09);--seg:rgba(255,255,255,.18);--seg-sh:none;--off:#6b7280;--foot:rgba(255,255,255,.05);--shadow:0 8px 30px rgba(0,0,0,.5);
+  --shadow2:0 14px 40px rgba(0,0,0,.6);--accent:#6d7ff0;--on-accent:#0b1020;--acc-soft:rgba(109,127,240,.2);--acc-text:#b4bdfb;--err:#fca5a5;--tile:rgba(255,255,255,.05);
+  --pill-on:#f3f4f6;--pill-on-text:#111827;--hover:rgba(109,127,240,.18);color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-ui]){--text:#f3f4f6;--muted:#aab1bc;--glass:rgba(24,27,32,.92);--card:rgba(28,31,37,.97);--border:rgba(255,255,255,.12);--line:rgba(255,255,255,.1);
+  --chip:rgba(255,255,255,.09);--seg:rgba(255,255,255,.18);--seg-sh:none;--off:#6b7280;--foot:rgba(255,255,255,.05);--shadow:0 8px 30px rgba(0,0,0,.5);
+  --shadow2:0 14px 40px rgba(0,0,0,.6);--accent:#6d7ff0;--on-accent:#0b1020;--acc-soft:rgba(109,127,240,.2);--acc-text:#b4bdfb;--err:#fca5a5;--tile:rgba(255,255,255,.05);
+  --pill-on:#f3f4f6;--pill-on-text:#111827;--hover:rgba(109,127,240,.18);color-scheme:dark}}
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
-body{background:var(--bg);color:var(--fg);font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body{background:#efefee;color:var(--text);font:14px/1.4 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 #map{position:fixed;inset:0}
-.panel{position:absolute;z-index:2;left:max(10px,env(safe-area-inset-left));top:max(10px,env(safe-area-inset-top));width:252px;max-height:calc(100% - 70px);overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.12);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
-.panel header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 12px;cursor:pointer;user-select:none}
-.panel h1{margin:0;font-size:16px;font-weight:600;letter-spacing:-.01em}
-.panel h1 span{color:var(--acc)}
-.panel .sub{font-size:12px;color:var(--muted)}
-.toggle{border:0;background:none;color:var(--fg);font-size:18px;line-height:1;padding:2px 4px;cursor:pointer}
-.body{padding:0 12px 10px}
-.panel.collapsed .body{display:none}
-.panel.collapsed .toggle{transform:rotate(180deg)}
+.glass{background:var(--glass);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid var(--border);box-shadow:var(--shadow)}
+.ibtn{width:44px;height:44px;border:0;border-radius:12px;background:var(--chip);color:var(--text);display:inline-flex;align-items:center;justify-content:center;padding:0;flex:none}
+.ibtn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* Panel */
+.panel{position:absolute;z-index:2;left:max(18px,env(safe-area-inset-left));top:max(18px,env(safe-area-inset-top));bottom:18px;width:316px;display:flex;flex-direction:column;border-radius:22px;overflow:hidden;
+  background:var(--glass);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid var(--border);box-shadow:var(--shadow)}
+.panel header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:16px 16px 12px 20px;user-select:none;flex:none}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.logo{width:34px;height:34px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex:none}
+.logo svg{width:18px;height:18px;fill:none;stroke:var(--on-accent);stroke-width:2.2;stroke-linejoin:round}
+.wm{font:700 19px/1.1 "Space Grotesk",Inter,sans-serif;letter-spacing:-.01em}
+.sub{font-size:12px;color:var(--muted)}
+.hbtns{display:flex;gap:6px;flex:none}
+.toggle svg{transition:transform .2s}
+.panel.collapsed .toggle svg{transform:rotate(180deg)}
+.body{flex:1;overflow:auto;padding:4px 20px 8px;display:flex;flex-direction:column;gap:20px;overscroll-behavior:contain}
+.panel.collapsed{bottom:auto}
+.panel.collapsed .body,.panel.collapsed .pfoot,.panel.collapsed .secs{display:none}
+.sec{display:flex;flex-direction:column;gap:10px}
+.sec-h{display:flex;justify-content:space-between;align-items:baseline}
+.sec-h b{font-size:13px;font-weight:600}
+.sec-h span{font-size:12px;color:var(--muted)}
+.seg{display:flex;padding:3px;background:var(--chip);border-radius:12px;gap:2px}
+.seg button{flex:1;min-height:44px;border:0;border-radius:9px;background:transparent;font-size:12px;color:var(--muted)}
+.seg button[aria-pressed=true]{background:var(--seg);box-shadow:var(--seg-sh);font-weight:600;color:var(--text)}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.tile{display:flex;flex-direction:column;gap:6px;text-align:left;padding:4px;border-radius:14px;border:0;background:var(--tile);box-shadow:0 0 0 1px var(--line);color:var(--text);min-height:44px}
+.tile[aria-pressed=true]{box-shadow:0 0 0 2px var(--accent)}
+.tile .swatch{display:block;height:44px;border-radius:10px}
+.tile .nm{font-size:12px;font-weight:500;padding:0 2px 2px;line-height:1.2;overflow-wrap:anywhere}
+.swrow{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;font-size:14px;cursor:pointer}
+.swrow input{-webkit-appearance:none;appearance:none;flex:none;width:40px;height:24px;border-radius:12px;background:var(--off);position:relative;margin:0;cursor:pointer;transition:background .15s}
+.swrow input::after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .15s}
+.swrow input:checked{background:var(--accent)}
+.swrow input:checked::after{transform:translateX(16px);background:var(--on-accent)}
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border-radius:999px;font-size:12px;border:0;background:var(--chip);color:var(--text)}
+.pill[aria-pressed=true]{background:var(--pill-on);color:var(--pill-on-text)}
+.pill i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.secs{padding:0 20px;display:flex;flex-direction:column;gap:14px}
+.secs .sec{padding:12px 0;border-top:1px solid var(--line)}
+.secs[hidden],.sec[hidden]{display:none}
+.chk{display:grid;grid-template-columns:1fr 1fr;gap:0 8px}
+.chk label{display:flex;align-items:center;gap:8px;min-height:44px;font-size:13px;cursor:pointer}
+.chk input,.chk2 input{width:20px;height:20px;margin:0;accent-color:var(--accent);flex:none}
+.chk2 label{display:flex;align-items:center;gap:8px;min-height:44px;font-size:13px;cursor:pointer}
+.op{display:flex;flex-direction:column;gap:2px;font-size:13px}
+.op input[type=range]{width:100%;height:44px;margin:0;accent-color:var(--accent)}
 ul.legend{list-style:none;margin:4px 0 10px;padding:0;font-size:13px}
-ul.legend li{display:flex;align-items:center;gap:8px;padding:1px 0}
-.sw{width:18px;height:12px;border-radius:2px;border:1px solid rgba(0,0,0,.25);flex:none}
-details.lg{border-top:1px solid var(--line);margin-top:6px;padding-top:4px}
-details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:none}
+ul.legend li{display:flex;align-items:center;gap:8px;padding:2px 0}
+.sw{width:18px;height:12px;border-radius:3px;border:1px solid rgba(0,0,0,.3);flex:none}
+details.lg{border-top:1px solid var(--line);padding-top:2px}
+details.lg summary{cursor:pointer;font-size:13px;min-height:44px;display:flex;align-items:center;user-select:none}
 .rsw{width:18px;height:6px;border-radius:3px;flex:none;border:1.5px solid}
 .rsw.dash{height:0;border-width:0;border-top:2px dashed;border-radius:0}
-.ctl{padding-top:0;display:grid;gap:4px}
-.ctl label{display:flex;align-items:center;gap:8px;cursor:pointer}
-.ctl input[type=range]{width:100%;accent-color:var(--acc)}
-.ctl input[type=checkbox]{accent-color:var(--acc);width:16px;height:16px;margin:0}
-.ctl .grid{display:grid;grid-template-columns:1fr 1fr;gap:3px 6px;font-size:13px}
-.ctl .grid label{gap:6px}
-.note{font-size:11px;line-height:1.3;color:var(--muted);margin-top:6px}
-.msg{position:absolute;z-index:3;left:50%;transform:translateX(-50%);bottom:42px;max-width:calc(100% - 32px);background:#7f1d1d;color:#fff;padding:7px 12px;border-radius:8px;font-size:13px;display:none}
-.maplibregl-popup-content{font:13px/1.4 system-ui,sans-serif;color:#1b2b2a;padding:8px 10px}
-.maplibregl-popup-content b{font-weight:600}
-/* Quellenangabe (#235): aufgeklappt rechts vom Panel, begrenzt und scrollbar, nie darunter */
-.maplibregl-ctrl-attrib.maplibregl-compact-show{max-width:calc(100vw - 292px);max-height:45vh;overflow:auto;box-sizing:border-box}
-@media (min-width:641px){.maplibregl-ctrl-attrib.maplibregl-compact-show{max-height:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
-@media (max-width:640px){.maplibregl-ctrl-attrib.maplibregl-compact-show{max-width:calc(100vw - 20px)}}
-@media (max-width:520px){.panel{width:min(252px,calc(100% - 70px));max-height:60%}}
-.btn3d{font:600 12px system-ui,sans-serif;color:#333}
-.btn3d[aria-pressed=true]{background:var(--acc)!important;color:#fff}
-/* Suche (search.mapx.at, Meilisearch) */
-.search{position:absolute;z-index:4;top:max(10px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(380px,calc(100% - 572px))}
-.search input{width:100%;height:38px;padding:0 34px 0 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--fg);font:15px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;box-shadow:0 2px 10px rgba(0,0,0,.12);-webkit-appearance:none;appearance:none}
-.search input:focus{outline:2px solid var(--acc);outline-offset:-1px}
+.note{font-size:12px;line-height:1.35;color:var(--muted)}
+.pfoot{flex:none;display:flex;justify-content:space-between;border-top:1px solid var(--line);margin:0 20px;padding:6px 0 10px}
+.pfoot button{border:0;background:transparent;font-size:13px;min-height:44px;padding:0 10px;border-radius:10px;color:var(--text)}
+.pfoot button[aria-pressed=true]{background:var(--acc-soft);color:var(--acc-text);font-weight:600}
+.msg{position:absolute;z-index:6;left:50%;transform:translateX(-50%);bottom:64px;max-width:calc(100% - 32px);background:#7f1d1d;color:#fff;padding:8px 14px;border-radius:14px;font-size:13px;display:none}
+.msg.ok{background:#14532d}
+/* Suche als Pille oben Mitte */
+.search{position:absolute;z-index:4;top:max(18px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(460px,calc(100% - 800px))}
+.search .field{display:flex;align-items:center;gap:6px;min-height:52px;border-radius:26px;padding:4px 6px 4px 18px;background:var(--glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--border);box-shadow:var(--shadow)}
+.search .field svg.lens{width:18px;height:18px;flex:none;fill:none;stroke:var(--muted);stroke-width:2;stroke-linecap:round}
+.search input{flex:1;min-width:0;height:44px;border:0;outline:0;background:transparent;color:var(--text);font:15px Inter,system-ui,sans-serif;-webkit-appearance:none;appearance:none}
+.search input::placeholder{color:var(--muted);opacity:1}
 .search input::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
-.search .clear{position:absolute;right:4px;top:4px;width:30px;height:30px;border:0;background:none;color:var(--muted);font-size:18px;cursor:pointer;display:none}
+.search .field:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:1px}
+.search .clear{width:44px;height:44px;border:0;background:none;color:var(--muted);font-size:20px;display:none;flex:none;padding:0}
 .search.has-text .clear{display:block}
-.search ul{list-style:none;margin:4px 0 0;padding:4px 0;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.15);max-height:min(60vh,420px);overflow:auto;display:none}
+.routebtn{height:44px;padding:0 16px;border:0;border-radius:22px;background:var(--accent);color:var(--on-accent);font-size:13px;font-weight:600;flex:none}
+.menubtn{display:none;width:44px;height:44px;border:0;border-radius:22px;background:var(--accent);color:var(--on-accent);padding:0;align-items:center;justify-content:center;flex:none}
+.menubtn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.search ul{list-style:none;margin:8px 0 0;padding:6px;background:var(--card);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow2);max-height:min(60vh,420px);overflow:auto;display:none}
 .search.open ul{display:block}
-.search li{padding:6px 12px;cursor:pointer;display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:baseline}
-.search li[aria-selected=true],.search li:hover{background:rgba(15,118,110,.12)}
-.search li .t{grid-row:1/3;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--acc);min-width:52px}
+.search li{padding:8px 12px;border-radius:12px;cursor:pointer;display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:baseline;min-height:44px}
+.search li[aria-selected=true],.search li:hover{background:var(--hover)}
+.search li .t{grid-row:1/3;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--acc-text);min-width:52px}
 .search li .l{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .search li .c{grid-column:2;font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .search li.info{display:block;color:var(--muted);cursor:default;font-size:13px}
 .search li.info:hover{background:none}
-.search li.src{white-space:normal;overflow:visible;line-height:1.35;font-size:11px;border-top:1px solid var(--line);margin-top:4px;padding-top:5px}
-.rev .d{color:#5b6b69;font-size:12px}
-@media (max-width:1000px){.search{left:max(276px,calc(env(safe-area-inset-left) + 272px));transform:none;width:calc(100% - 336px)}}
-@media (max-width:520px){.search{left:max(10px,env(safe-area-inset-left));width:calc(100% - 66px)}.panel{top:calc(max(10px,env(safe-area-inset-top)) + 46px)}.search input{font-size:16px}}
-/* Routenplanung (routing.mapx.at) */
-.rtbtn{width:29px;height:29px;border:0;padding:0;background:#fff;cursor:pointer;font-size:16px;line-height:29px}
-.rt{position:absolute;z-index:4;top:max(10px,env(safe-area-inset-top));right:56px;width:292px;max-height:calc(100% - 70px);overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.15);padding:10px 12px;display:none}
+.search li.src{white-space:normal;overflow:visible;line-height:1.35;font-size:11px;border-top:1px solid var(--line);border-radius:0;margin-top:4px;padding-top:6px;min-height:0}
+/* Kartenknöpfe rechts */
+.maplibregl-ctrl-top-right{top:max(18px,env(safe-area-inset-top));right:max(18px,env(safe-area-inset-right));display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.maplibregl-ctrl-top-right .maplibregl-ctrl{margin:0;float:none}
+.maplibregl-ctrl-group{background:var(--glass)!important;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:16px!important;box-shadow:var(--shadow)!important;overflow:hidden}
+.maplibregl-ctrl-group button{width:46px;height:46px;background-color:transparent;color:var(--text)}
+.maplibregl-ctrl-group button+button{border-top:1px solid var(--line)}
+.maplibregl-ctrl-group button:not(:disabled):hover{background-color:var(--hover)}
+.maplibregl-ctrl-group button .maplibregl-ctrl-icon{background-size:26px}
+[data-ui=dark] .maplibregl-ctrl-group button .maplibregl-ctrl-icon{filter:invert(1) hue-rotate(180deg)}
+@media (prefers-color-scheme:dark){:root:not([data-ui]) .maplibregl-ctrl-group button .maplibregl-ctrl-icon{filter:invert(1) hue-rotate(180deg)}}
+.maplibregl-ctrl-group.g3d{background:linear-gradient(var(--acc-soft),var(--acc-soft)),var(--card)!important}
+.btn3d{font:700 13px Inter,system-ui,sans-serif;color:var(--acc-text)}
+.btn3d[aria-pressed=true]{background:var(--accent)!important;color:var(--on-accent)}
+.maplibregl-ctrl-group.g3d:has(.btn3d[aria-pressed=true]){background:var(--accent)!important}
+/* Maßstab und Quellen unten als Glas-Pillen */
+.maplibregl-ctrl-bottom-left{left:max(352px,env(safe-area-inset-left));bottom:18px}
+.maplibregl-ctrl-bottom-right{right:max(18px,env(safe-area-inset-right));bottom:18px}
+.maplibregl-ctrl-bottom-left .maplibregl-ctrl,.maplibregl-ctrl-bottom-right .maplibregl-ctrl{margin:0}
+.maplibregl-ctrl-scale{background:var(--glass)!important;border:0!important;border-radius:10px;padding:4px 10px!important;font-size:11px;color:var(--text)!important;box-shadow:var(--shadow);height:auto;line-height:1.3}
+.maplibregl-ctrl-attrib{background:var(--glass)!important;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:22px!important;box-shadow:var(--shadow);color:var(--text);min-height:44px;min-width:44px;margin:0;padding:0 44px 0 14px;display:flex;align-items:center}
+.maplibregl-ctrl-attrib:not(.maplibregl-compact-show){padding:0!important;width:44px;height:44px;position:relative}
+.maplibregl-ctrl-attrib .maplibregl-ctrl-attrib-inner{font-size:11px;line-height:1.4;padding:6px 0}
+.maplibregl-ctrl-attrib a{color:var(--acc-text)!important}
+.maplibregl-ctrl-attrib-button,.maplibregl-ctrl-attrib-button:hover,.maplibregl-ctrl-attrib-button:focus{background-color:transparent!important}
+.maplibregl-ctrl-attrib-button{width:44px!important;height:44px!important;right:0;top:0;position:absolute;background-image:none!important;border-radius:22px!important;display:flex;align-items:center;justify-content:center}
+.maplibregl-ctrl-attrib-button::before{content:"\24D8";font-size:20px;line-height:1;color:var(--text)}
+.maplibregl-ctrl-attrib.maplibregl-compact-show{max-width:calc(100vw - 400px);max-height:45vh;overflow:auto}
+@media (min-width:641px){.maplibregl-ctrl-attrib.maplibregl-compact-show{max-height:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+/* Popup als Karte */
+.maplibregl-popup-content{font:13px/1.45 Inter,system-ui,sans-serif;color:var(--text);background:var(--card);padding:14px 16px;border-radius:18px;box-shadow:var(--shadow2);border:1px solid var(--border);overflow:hidden}
+.maplibregl-popup-content.pcp,.pc-popup .maplibregl-popup-content{padding:0}
+.maplibregl-popup-anchor-top .maplibregl-popup-tip,.maplibregl-popup-anchor-top-left .maplibregl-popup-tip,.maplibregl-popup-anchor-top-right .maplibregl-popup-tip{border-bottom-color:var(--card)}
+.maplibregl-popup-anchor-bottom .maplibregl-popup-tip,.maplibregl-popup-anchor-bottom-left .maplibregl-popup-tip,.maplibregl-popup-anchor-bottom-right .maplibregl-popup-tip{border-top-color:var(--card)}
+.maplibregl-popup-anchor-left .maplibregl-popup-tip{border-right-color:var(--card)}
+.maplibregl-popup-anchor-right .maplibregl-popup-tip{border-left-color:var(--card)}
+.maplibregl-popup-close-button{width:44px;height:44px;font-size:20px;color:var(--text);border-radius:12px;right:0;top:0}
+.maplibregl-popup-close-button:hover{background:var(--hover)}
+.maplibregl-popup-content b{font-weight:700}
+.rev .d{color:var(--muted);font-size:12px}
+.pc-body{padding:16px 48px 12px 16px;display:flex;flex-direction:column;gap:6px}
+.pc-pill{align-self:flex-start;font-size:11px;font-weight:600;color:var(--acc-text);background:var(--acc-soft);padding:4px 10px;border-radius:999px}
+.pc-body b{display:block;font-size:17px;line-height:1.25}
+.pc-hr{border:0;border-top:1px solid var(--line);margin:6px 0}
+.pc-acts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.pc-acts button{min-height:44px;border:0;background:transparent;font-size:12px;color:var(--text);padding:0 4px}
+.pc-acts button+button{border-left:1px solid var(--line)}
+.pc-acts button:first-child{color:var(--acc-text);font-weight:600}
+.pc-acts button:hover{background:var(--hover)}
+.pc-src{font-size:11px;color:var(--muted);padding:8px 16px;background:var(--foot)}
+/* Routenplanung */
+.rtbtn-dummy{display:none}
+.rt{position:absolute;z-index:4;top:calc(max(18px,env(safe-area-inset-top)) + 66px);right:82px;width:330px;max-height:calc(100% - 100px);overflow:auto;background:var(--card);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:22px;box-shadow:var(--shadow2);padding:16px 18px;display:none}
 .rt.open{display:block}
-.rt h2{margin:0 0 8px;font-size:15px;font-weight:600;display:flex;justify-content:space-between;align-items:center}
-.rt h2 button{border:0;background:none;color:var(--muted);font-size:18px;cursor:pointer;padding:0 2px}
-.rt .modes{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:8px}
-.rt .modes button{height:32px;border:1px solid var(--line);border-radius:8px;background:none;color:var(--fg);font:13px system-ui,sans-serif;cursor:pointer}
-.rt .modes button[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#fff}
-.rt .pt{position:relative;display:flex;align-items:center;gap:6px;margin-bottom:6px}
-.rt .pt i{flex:none;width:18px;height:18px;border-radius:50%;color:#fff;font:600 11px/18px system-ui,sans-serif;text-align:center;font-style:normal}
-.rt .pt input{flex:1;min-width:0;height:34px;padding:0 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--fg);font:14px system-ui,sans-serif}
-.rt .pt input:focus{outline:2px solid var(--acc);outline-offset:-1px}
-.rt .pt ul{position:absolute;left:24px;right:0;top:36px;z-index:5;list-style:none;margin:0;padding:3px 0;background:var(--panel);border:1px solid var(--line);border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.2);max-height:200px;overflow:auto;display:none}
+.rt h2{margin:0 0 10px;font-size:17px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.rt h2 button{border:0;background:var(--chip);color:var(--text);width:44px;height:44px;border-radius:12px;font-size:18px;padding:0}
+.rt .modes{display:flex;padding:3px;background:var(--chip);border-radius:12px;gap:2px;margin-bottom:10px}
+.rt .modes button{flex:1;min-height:44px;border:0;border-radius:9px;background:transparent;color:var(--muted);font-size:13px}
+.rt .modes button[aria-pressed=true]{background:var(--seg);box-shadow:var(--seg-sh);font-weight:600;color:var(--text)}
+.rt .pt{position:relative;display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.rt .pt i{flex:none;width:22px;height:22px;border-radius:50%;color:#fff;font:600 12px/22px Inter,sans-serif;text-align:center;font-style:normal}
+.rt .pt input{flex:1;min-width:0;height:44px;padding:0 14px;border:1px solid var(--line);border-radius:14px;background:var(--chip);color:var(--text);font:14px Inter,system-ui,sans-serif}
+.rt .pt input::placeholder{color:var(--muted);opacity:1}
+.rt .pt input:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.rt .pt ul{position:absolute;left:30px;right:0;top:48px;z-index:5;list-style:none;margin:0;padding:4px;background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow2);max-height:220px;overflow:auto;display:none}
 .rt .pt ul.open{display:block}
-.rt .pt li{padding:5px 10px;cursor:pointer;font-size:13px}
-.rt .pt li:hover{background:rgba(15,118,110,.12)}
+.rt .pt li{padding:8px 10px;border-radius:10px;cursor:pointer;font-size:13px;min-height:44px}
+.rt .pt li:hover{background:var(--hover)}
 .rt .pt li small{display:block;color:var(--muted);font-size:11px}
-.rt .acts{display:flex;gap:6px;margin:6px 0}
-.rt .acts button{flex:1;height:30px;border:1px solid var(--line);border-radius:8px;background:none;color:var(--fg);font:13px system-ui,sans-serif;cursor:pointer}
-.rt .res{font-size:15px;font-weight:600;margin-top:6px}
+.rt .acts{display:flex;gap:8px;margin:6px 0}
+.rt .acts button{flex:1;min-height:44px;border:0;border-radius:12px;background:var(--chip);color:var(--text);font-size:13px}
+.rt .res{font-size:17px;font-weight:700;margin-top:8px}
 .rt .res span{color:var(--muted);font-weight:400;font-size:13px}
-.rt .err{color:#b91c1c;font-size:13px;margin-top:6px}
-@media (prefers-color-scheme:dark){.rt .err{color:#fca5a5}}
-.rt .hint,.rt .attr{font-size:12px;color:var(--muted);margin-top:6px}
-@media (max-width:520px){.rt{right:10px;left:10px;width:auto;top:auto;bottom:34px;max-height:55%}}
-/* Handy: Touch-Ziele mindestens 40 px */
-@media (pointer:coarse),(max-width:520px){
-  .maplibregl-ctrl-group button{width:40px;height:40px}
-  .maplibregl-ctrl-group button .maplibregl-ctrl-icon{background-size:28px}
-  .rtbtn{width:40px;height:40px;line-height:40px;font-size:20px}
-  .btn3d{font-size:15px}
-  .search .clear{width:40px;height:40px;right:0;top:0}
-  .search input{height:44px}
-  .panel header{padding:12px}
-  .ctl label{min-height:32px}
-  .rt .modes button,.rt .acts button{height:40px}
+.rt .err{color:var(--err);font-size:13px;margin-top:8px}
+.rt .hint,.rt .attr{font-size:12px;color:var(--muted);margin-top:8px}
+/* Mittlere Breite: Suche rechts neben dem Panel */
+@media (max-width:1240px){.search{left:352px;transform:none;width:calc(100% - 352px - 82px)}}
+/* Handy: Panel als Blatt von unten */
+@media (max-width:640px){
+  .panel{left:0;right:0;bottom:0;top:auto;width:auto;max-height:80%;border-radius:26px 26px 0 0;border-bottom:0;padding-bottom:env(safe-area-inset-bottom);transition:transform .25s;box-shadow:0 -10px 40px rgba(17,24,39,.2)}
+  .panel::before{content:"";align-self:center;width:40px;height:5px;border-radius:3px;background:var(--off);margin-top:10px;flex:none}
+  .panel header{padding:8px 16px 8px 20px}
+  .panel.collapsed{transform:translateY(110%);visibility:hidden;transition:transform .25s,visibility 0s .25s;bottom:0}
+  .panel .toggle svg{transform:rotate(-90deg)}
+  .panel.collapsed .toggle svg{transform:rotate(-90deg)}
+  .tiles{display:flex;overflow-x:auto;gap:10px;padding:2px;scroll-snap-type:x proximity}
+  .tile{flex:0 0 88px;border-radius:16px}.tile .swatch{height:60px;border-radius:12px}
+  .search{left:12px;right:12px;width:auto;transform:none;top:max(12px,env(safe-area-inset-top))}
+  .search .field{padding-left:16px}
+  .routebtn{width:44px;padding:0;font-size:0;position:relative}
+  .routebtn::before{content:"";position:absolute;inset:0;margin:auto;width:18px;height:18px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat}
+  .menubtn{display:inline-flex}
+  .search input{font-size:16px}
+  .maplibregl-ctrl-top-right{top:calc(max(12px,env(safe-area-inset-top)) + 66px);right:12px}
+  .maplibregl-ctrl-bottom-left{left:12px;bottom:12px}
+  .maplibregl-ctrl-bottom-right{right:12px;bottom:12px}
+  .maplibregl-ctrl-attrib.maplibregl-compact-show{max-width:calc(100vw - 24px)}
+  .rt{left:0;right:0;width:auto;top:auto;bottom:0;max-height:70%;border-radius:26px 26px 0 0;border-bottom:0;padding-bottom:max(16px,env(safe-area-inset-bottom))}
+  .msg{bottom:76px}
 }
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
+
 </head>
 <body>
 <div id="map" role="region" aria-label="Vektor-Basemap"></div>
 
-<section class="panel" id="panel">
-  <header id="panelHead" title="Legende ein-/ausklappen">
-    <div>
-      <h1>map<span>x</span>.at</h1>
-      <div class="sub">Vektor-Basemap · Österreich</div>
+<section class="panel" id="panel" aria-label="Kartenoptionen">
+  <header id="panelHead">
+    <div class="brand">
+      <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 18l6-12 4 7 3-4 5 9z"/></svg></div>
+      <div><div class="wm">mapx</div><div class="sub">Österreich · amtliche Daten</div></div>
     </div>
-    <button class="toggle" id="toggle" aria-label="Legende ein-/ausklappen" aria-expanded="true">▴</button>
+    <div class="hbtns">
+      <button type="button" class="ibtn" id="themeBtn" aria-label="Hell/Dunkel umschalten" title="Hell/Dunkel">
+        <svg id="icoSun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg id="icoMoon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z"/></svg>
+      </button>
+      <button type="button" class="ibtn toggle" id="toggle" aria-label="Panel ein-/ausklappen" aria-expanded="true" title="Panel ein-/ausklappen"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+    </div>
   </header>
   <div class="body">
-    <div class="ctl">
-      <div class="grid">
+    <div class="sec" id="secStil">
+      <div class="sec-h"><b>Kartenstil</b><span id="stilCount"></span></div>
+      <div class="seg" id="stilSeg" role="group" aria-label="Stilgruppe"></div>
+      <div class="tiles" id="stilTiles" role="group" aria-label="Kartenstile"></div>
+      <select id="stil" aria-label="Kartenstil" hidden><option value="">mapx (Basis)</option></select>
+    </div>
+    <div class="sec" id="secLicht" hidden>
+      <b style="font-size:13px;font-weight:600">Licht</b>
+      <div class="seg" id="lichtSeg" role="group" aria-label="Licht"></div>
+      <b style="font-size:13px;font-weight:600;margin-top:6px">Thema</b>
+      <div class="seg" id="themaSeg" role="group" aria-label="Thema"></div>
+    </div>
+    <div class="sec" style="gap:0">
+      <label class="swrow">3D-Gelände<input type="checkbox" id="terr" role="switch" autocomplete="off"></label>
+      <label class="swrow"><span id="d3lbl">3D-Gebäude (ab Zoom 15)</span><input type="checkbox" id="d3" role="switch" autocomplete="off"></label>
+    </div>
+    <div class="sec" id="secPoi">
+      <b style="font-size:13px;font-weight:600">Orte von Interesse</b>
+      <div class="pills" id="poiPills"></div>
+    </div>
+    <div class="note">Antippen für Details, lange drücken/Rechtsklick für die nächste Adresse. Gebäude ab Zoom 12, 3D-Gebäude ab 15, Grundstücke und Hausnummern ab 16.</div>
+  </div>
+  <div class="secs" id="secs" hidden>
+    <div class="sec" id="secEbenen" hidden>
+      <div class="sec-h"><b>Ebenen</b></div>
+      <div class="chk">
         <label><input type="checkbox" id="bld" checked autocomplete="off"> Gebäude</label>
         <label><input type="checkbox" id="roads" checked autocomplete="off"> Straßen</label>
         <label><input type="checkbox" id="water" checked autocomplete="off"> Gewässer</label>
@@ -135,21 +283,19 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
         <label><input type="checkbox" id="sym" checked autocomplete="off"> Symbole</label>
         <label><input type="checkbox" id="rel" checked autocomplete="off"> Relief</label>
       </div>
-      <label><input type="checkbox" id="d3" autocomplete="off"> 3D-Gebäude (ab Zoom 15)</label>
-      <label><input type="checkbox" id="terr" autocomplete="off"> 3D-Gelände</label>
-      <label><input type="checkbox" id="bm" autocomplete="off"> basemap.at als Hintergrund</label>
-      <label for="stil">Kartenstil</label>
-      <select id="stil" aria-label="Kartenstil"><option value="">mapx (Basis)</option></select>
-      <div id="stilStd" style="display:none;gap:6px;margin-top:4px">
-        <select id="stilLicht" aria-label="Licht"><option value="morgen">Morgen</option><option value="tag">Tag</option><option value="abend">Abend</option><option value="nacht">Nacht</option></select>
-        <select id="stilThema" aria-label="Thema"><option value="normal">Normal</option><option value="verblasst">Verblasst</option><option value="monochrom">Monochrom</option></select>
-      </div>
-      <label for="op">Deckkraft Nutzung</label>
-      <input type="range" id="op" min="0" max="100" value="100" aria-label="Deckkraft der Nutzungsflächen">
+      <label class="swrow">basemap.at als Hintergrund<input type="checkbox" id="bm" role="switch" autocomplete="off"></label>
+      <label class="op">Deckkraft Nutzung
+        <input type="range" id="op" min="0" max="100" value="100" aria-label="Deckkraft der Nutzungsflächen"></label>
     </div>
-    <details class="lg" id="lg1"><summary>Legende Nutzung</summary><ul class="legend" id="legend"></ul></details>
-    <details class="lg" id="lg2"><summary>Legende Straßen</summary><ul class="legend" id="roadLegend"></ul></details>
-    <div class="note">Antippen für Details, lange drücken/Rechtsklick für die nächste Adresse. Gebäude ab Zoom 12, 3D-Gebäude ab 15, Grundstücke und Hausnummern ab 16.</div>
+    <div class="sec" id="secLegende" hidden>
+      <details class="lg" id="lg1"><summary>Legende Nutzung</summary><ul class="legend" id="legend"></ul></details>
+      <details class="lg" id="lg2"><summary>Legende Straßen</summary><ul class="legend" id="roadLegend"></ul></details>
+    </div>
+  </div>
+  <div class="pfoot">
+    <button type="button" id="btnEbenen" aria-pressed="false" aria-controls="secEbenen">Ebenen</button>
+    <button type="button" id="btnLegende" aria-pressed="false" aria-controls="secLegende">Legende</button>
+    <button type="button" id="btnTeilen">Teilen</button>
   </div>
 </section>
 
@@ -160,60 +306,106 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
     <button type="button" data-p="bike" aria-pressed="false">Rad</button>
     <button type="button" data-p="foot" aria-pressed="false">Zu Fuß</button>
   </div>
-  <div class="pt"><i style="background:#15803d">A</i><input id="rtA" type="search" placeholder="Start: Ort suchen oder auf Karte tippen" autocomplete="off" aria-label="Start"><ul id="rtAl"></ul></div>
-  <div class="pt"><i style="background:#b91c1c">B</i><input id="rtB" type="search" placeholder="Ziel: Ort suchen oder auf Karte tippen" autocomplete="off" aria-label="Ziel"><ul id="rtBl"></ul></div>
+  <div class="pt"><i style="background:#15803d">A</i><input id="rtA" type="search" placeholder="Start: Ort suchen" autocomplete="off" aria-label="Start"><ul id="rtAl"></ul></div>
+  <div class="pt"><i style="background:#b91c1c">B</i><input id="rtB" type="search" placeholder="Ziel: Ort suchen" autocomplete="off" aria-label="Ziel"><ul id="rtBl"></ul></div>
   <div class="acts"><button type="button" id="rtSwap">⇅ Tauschen</button><button type="button" id="rtReset">Zurücksetzen</button></div>
   <div id="rtOut" aria-live="polite"></div>
   <div class="hint" id="rtHint">Start und Ziel auf der Karte antippen; die Marker lassen sich ziehen.</div>
   <div class="attr" id="rtAttr" style="display:none"></div>
 </section>
 
-<div class="msg" id="msg"></div>
+<div class="msg" id="msg" role="status"></div>
 
 <div class="search" id="search">
-  <input id="q" type="search" placeholder="Adresse, Ort, Gipfel, Grundstück …" autocomplete="off" autocapitalize="off" spellcheck="false"
-         role="combobox" aria-label="Suche" aria-autocomplete="list" aria-expanded="false" aria-controls="results">
-  <button class="clear" id="qclear" type="button" aria-label="Suche leeren">×</button>
+  <div class="field">
+    <svg class="lens" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+    <input id="q" type="search" placeholder="Adresse, Ort, Gipfel, Grundstück …" autocomplete="off" autocapitalize="off" spellcheck="false"
+           role="combobox" aria-label="Suche" aria-autocomplete="list" aria-expanded="false" aria-controls="results">
+    <button class="clear" id="qclear" type="button" aria-label="Suche leeren">×</button>
+    <button class="routebtn" id="rtGo" type="button" aria-label="Route planen" aria-expanded="false">Route</button>
+    <button class="menubtn" id="menuBtn" type="button" aria-label="Menü: Kartenstil und Ebenen" aria-controls="panel"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
   <ul id="results" role="listbox" aria-label="Suchergebnisse"></ul>
 </div>
 
 <script>
-// Stilwahl: ?stil=<id> (Stile in styles/<id>.json, Liste in styles/index.json); Wechsel lädt die Seite neu (Hash bleibt)
+// Stilwahl: ?stil=<id> (Stile in styles/<id>.json, Liste in styles/index.json); Wechsel lädt die Seite neu (Hash bleibt).
+// Oberfläche: Segment Standard/Klassisch/Weitere + Kacheln mit Farbvorschau (Hintergrund/Wald/Wasser aus index.json "vorschau"),
+// Licht (Morgen/Tag/Abend/Nacht) nur, wenn index.json Standard-Stile mit passender id liefert.
 window.mapxStil = (function () {
   var id = new URLSearchParams(location.search).get("stil") || "";
   if (id === "standard") id = "standard-tag-normal";
   var ok = /^[a-z0-9-]+$/.test(id);
   var std = /^standard-(morgen|tag|abend|nacht)-(normal|verblasst|monochrom)$/.exec(id);
-  var sel = document.getElementById("stil");
   if (std && !/(^|[#&])3d=1/.test(location.hash)) {   // Standard: 3D-Gebäude gleich an (wie #…&3d=1)
     history.replaceState(null, "", location.pathname + location.search + (location.hash || "#") + "&3d=1");
   }
-  if (std) { var l3 = document.querySelector("label:has(#d3)"); if (l3 && l3.lastChild) l3.lastChild.nodeValue = " 3D-Gebäude (ab Zoom 14)"; }
+  if (std) { var l3 = document.getElementById("d3lbl"); if (l3) l3.textContent = "3D-Gebäude (ab Zoom 14)"; }
+  var cur = ok ? id : "";
+  var DARK = /^(dunkel|nav-nacht)$/;
+  var API = { id: cur, d3: !!std, url: ok ? "styles/" + id + ".json" : null, dark: DARK.test(cur) || (std && std[1] === "nacht") };
+  var sel = document.getElementById("stil"), segEl = document.getElementById("stilSeg"), tilesEl = document.getElementById("stilTiles");
+  var BASE = { id: "", name: "Basis", gruppe: "Standard", vorschau: ["#efefee", "#d3e8c2", "#b3d9ff"] };
+  var STD = "standard-tag-normal", LICHTS = ["morgen", "tag", "abend", "nacht"], THEMEN = ["normal", "verblasst", "monochrom"];
+  var FIX = { satellit: ["#4d5a3f", "#3c4a33", "#2f4a5c"] };
+  var LICHT = { morgen: "Morgen", tag: "Tag", abend: "Abend", nacht: "Nacht" };
   function go(v) {
     var u = new URL(location.href);
     if (v) u.searchParams.set("stil", v); else u.searchParams.delete("stil");
     if (!/^standard-/.test(v || "")) u.hash = u.hash.replace(/&3d=1/, "");
     location.href = u.toString();
   }
-  if (sel) {
-    var lic = document.getElementById("stilLicht"), the = document.getElementById("stilThema");
-    fetch("styles/index.json").then(function (r) { return r.json(); }).then(function (list) {
-      var groups = {};
-      list.forEach(function (s) {
-        var g = groups[s.gruppe];
-        if (!g) { g = groups[s.gruppe] = document.createElement("optgroup"); g.label = s.gruppe; sel.appendChild(g); }
-        var o = document.createElement("option"); o.value = s.id; o.textContent = s.name; g.appendChild(o);
-      });
-      sel.value = !ok ? "" : std ? "standard-tag-normal" : id;
-    }).catch(function () {});
-    if (std) {
-      document.getElementById("stilStd").style.display = "flex";
-      lic.value = std[1]; the.value = std[2];
-    }
-    sel.addEventListener("change", function () { go(sel.value); });
-    [lic, the].forEach(function (e) { e.addEventListener("change", function () { go("standard-" + lic.value + "-" + the.value); }); });
+  function swatch(v) {
+    var a = v[0] || "#e5e7eb", b = v[1] || a, c = v[2] || a;
+    return "linear-gradient(160deg," + a + " 0 38%," + b + " 38% 64%," + a + " 64%)," + c;
   }
-  return { id: ok ? id : "", d3: !!std, url: ok ? "styles/" + id + ".json" : null };
+  function render(list) {
+    var all = [BASE].concat(list);
+    var groups = ["Standard", "Klassisch", "Weitere"].filter(function (g) { return all.some(function (s) { return s.gruppe === g; }); });
+    var curId = std ? STD : cur, curS = all.filter(function (s) { return s.id === curId; })[0];
+    var active = curS ? curS.gruppe : groups[0];
+    var cnt = document.getElementById("stilCount"); if (cnt) cnt.textContent = all.length + " Stile";
+    function draw() {
+      segEl.innerHTML = ""; tilesEl.innerHTML = "";
+      groups.forEach(function (g) {
+        var b = document.createElement("button"); b.type = "button"; b.textContent = g; b.setAttribute("aria-pressed", String(g === active));
+        b.addEventListener("click", function () { active = g; draw(); }); segEl.appendChild(b);
+      });
+      segEl.hidden = groups.length < 2;
+      all.filter(function (s) { return s.gruppe === active; }).forEach(function (s) {
+        var b = document.createElement("button"); b.type = "button"; b.className = "tile"; b.setAttribute("aria-pressed", String(s.id === curId));
+        b.setAttribute("aria-label", "Kartenstil " + s.name);
+        var sp = document.createElement("span"); sp.className = "swatch"; sp.style.background = swatch(FIX[s.id] || s.vorschau || []);
+        sp.style.boxShadow = "inset 0 0 0 1px rgba(17,24,39,.08)";
+        var nm = document.createElement("span"); nm.className = "nm"; nm.textContent = s.name;
+        b.appendChild(sp); b.appendChild(nm);
+        b.addEventListener("click", function () { if (s.id !== curId) go(s.id); });
+        tilesEl.appendChild(b);
+      });
+    }
+    draw();
+    if (std) {   // Licht und Thema nur beim Standard-Stil (styles/standard-<licht>-<thema>.json)
+      document.getElementById("secLicht").hidden = false;
+      [["lichtSeg", LICHTS, LICHT, 1], ["themaSeg", THEMEN, null, 2]].forEach(function (c) {
+        var el = document.getElementById(c[0]); if (!el) return; el.innerHTML = "";
+        c[1].forEach(function (k) {
+          var b = document.createElement("button"); b.type = "button"; b.textContent = c[2] ? c[2][k] : k.charAt(0).toUpperCase() + k.slice(1);
+          b.setAttribute("aria-pressed", String(std[c[3]] === k));
+          b.addEventListener("click", function () { if (std[c[3]] !== k) go("standard-" + (c[3] === 1 ? k + "-" + std[2] : std[1] + "-" + k)); });
+          el.appendChild(b);
+        });
+      });
+    }
+    if (sel) {
+      list.forEach(function (s) { var o = document.createElement("option"); o.value = s.id; o.textContent = s.name; sel.appendChild(o); });
+      sel.value = std ? STD : cur;
+    }
+  }
+  if (tilesEl) {
+    render([]);
+    fetch("styles/index.json").then(function (r) { return r.json(); }).then(render).catch(function () {});
+  }
+  return API;
 })();
 </script>
 <script>
@@ -300,7 +492,7 @@ window.mapxStil = (function () {
   var btn3d = document.createElement("button");
   btn3d.type = "button"; btn3d.className = "btn3d"; btn3d.textContent = "3D"; btn3d.title = "3D-Gebäude und Neigung ein/aus";
   btn3d.setAttribute("aria-pressed", "false");
-  map.addControl({ onAdd: function () { var c = document.createElement("div"); c.className = "maplibregl-ctrl maplibregl-ctrl-group"; c.appendChild(btn3d); return c; },
+  map.addControl({ onAdd: function () { var c = document.createElement("div"); c.className = "maplibregl-ctrl maplibregl-ctrl-group g3d"; c.appendChild(btn3d); return c; },
                    onRemove: function () { btn3d.parentNode && btn3d.parentNode.remove(); } }, "top-right");
   map.addControl(new maplibregl.GeolocateControl({ positionOptions: { enableHighAccuracy: true } }), "top-right");
   map.addControl(new maplibregl.ScaleControl({ unit: "metric" }), "bottom-left");
@@ -480,22 +672,81 @@ window.mapxStil = (function () {
   });
   op.addEventListener("input", applyOpacity);
 
-  // Legende ein-/ausklappen (mobil standardmaessig zu)
+  // Panel (Desktop: einklappbar, Handy: Blatt von unten, standardmäßig zu)
   var panel = document.getElementById("panel"), tg = document.getElementById("toggle");
-  // Zustand (Panel, Legenden) merken; localStorage kann fehlen oder werfen (privates Fenster)
+  // Zustand (Panel, Legenden, Hell/Dunkel) merken; localStorage kann fehlen oder werfen (privates Fenster)
   var UI = {};
   try { UI = JSON.parse(localStorage.getItem("mapx-ui") || "{}") || {}; } catch (e) { UI = {}; }
   function saveUI() { try { localStorage.setItem("mapx-ui", JSON.stringify(UI)); } catch (e) {} }
   function setCollapsed(c) { panel.classList.toggle("collapsed", c); tg.setAttribute("aria-expanded", String(!c)); }
-  document.getElementById("panelHead").addEventListener("click", function () {
-    var c = !panel.classList.contains("collapsed"); setCollapsed(c); UI.collapsed = c; saveUI();
-  });
-  setCollapsed(UI.collapsed != null ? !!UI.collapsed : window.matchMedia("(max-width: 520px)").matches);
+  function toggleCollapsed() { var c = !panel.classList.contains("collapsed"); setCollapsed(c); UI.collapsed = c; saveUI(); }
+  tg.addEventListener("click", toggleCollapsed);
+  document.getElementById("menuBtn").addEventListener("click", toggleCollapsed);
+  setCollapsed(UI.collapsed != null && !window.matchMedia("(max-width: 640px)").matches ? !!UI.collapsed : window.matchMedia("(max-width: 640px)").matches);
   ["lg1", "lg2"].forEach(function (id) {
     var d = document.getElementById(id);
     d.open = !!UI[id];   // Legenden standardmäßig zugeklappt
     d.addEventListener("toggle", function () { UI[id] = d.open; saveUI(); });
   });
+  // Fuß: Ebenen und Legende klappen als eigene Bereiche auf, Teilen kopiert den Link
+  var SECS = { btnEbenen: "secEbenen", btnLegende: "secLegende" };
+  function showSecs() {
+    var any = false;
+    Object.keys(SECS).forEach(function (b) {
+      var on = !!UI[SECS[b]]; any = any || on;
+      document.getElementById(b).setAttribute("aria-pressed", String(on)); document.getElementById(SECS[b]).hidden = !on;
+    });
+    var box = document.getElementById("secs"); box.hidden = !any;
+    if (any) document.getElementById("panel").querySelector(".body").style.flex = "0 1 auto";
+    else document.getElementById("panel").querySelector(".body").style.flex = "";
+  }
+  Object.keys(SECS).forEach(function (b) {
+    document.getElementById(b).addEventListener("click", function () {
+      var k = SECS[b], on = !UI[k]; Object.keys(SECS).forEach(function (x) { UI[SECS[x]] = false; }); UI[k] = on; saveUI(); showSecs();
+      if (on) document.getElementById(k).scrollIntoView({ block: "nearest" });
+    });
+  });
+  showSecs();
+  var toastT = null;
+  function toast(t) { msg.textContent = t; msg.classList.add("ok"); msg.style.display = "block"; clearTimeout(toastT);
+    toastT = setTimeout(function () { msg.classList.remove("ok"); if (shown) msg.textContent = TILES_DOWN; else msg.style.display = "none"; }, 2200); }
+  function shareLink(hashOverride) {
+    var url = location.origin + location.pathname + location.search + (hashOverride || location.hash);
+    if (navigator.share) { navigator.share({ title: "mapx.at", url: url }).catch(function () {}); return; }
+    var done = function () { toast("Link kopiert"); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, function () { toast(url); }); else toast(url);
+  }
+  document.getElementById("btnTeilen").addEventListener("click", function () { shareLink(); });
+
+  // Orte von Interesse: Pillen schalten vorhandene Ebenen (Kirchen/Gipfelkreuze = Symbole, Seilbahnen = Lifte);
+  // weitere Kategorien kommen, sobald es POI-Daten gibt (Eintrag in POI_CATS genügt)
+  var POI_CATS = [["sym", "Orte & Symbole", "#a855f7"], ["lifts", "Lifte", "#14b8a6"]];
+  var poiEl = document.getElementById("poiPills");
+  POI_CATS.forEach(function (c) {
+    var inp = document.getElementById(c[0]), b = document.createElement("button");
+    b.type = "button"; b.className = "pill"; b.innerHTML = '<i style="background:' + c[2] + '"></i>' + esc(c[1]);
+    function sync() { b.setAttribute("aria-pressed", String(inp.checked)); }
+    b.addEventListener("click", function () { inp.checked = !inp.checked; inp.dispatchEvent(new Event("change")); });
+    inp.addEventListener("change", sync); sync(); poiEl.appendChild(b); c.push(sync);
+  });
+  function syncPoi() { POI_CATS.forEach(function (c) { c[3](); }); }
+
+  // Hell/Dunkel: gespeicherte/Hash-Wahl > dunkler Kartenstil (nur ohne ausdrückliche Wahl) > Systemeinstellung
+  var root = document.documentElement, mq = window.matchMedia("(prefers-color-scheme: dark)");
+  var uiMode = (/[#&]ui=(dark|light)/.exec(location.hash) || [])[1] || UI.mode || "";
+  function effDark() { return uiMode ? uiMode === "dark" : ((window.mapxStil && window.mapxStil.dark) || mq.matches); }
+  function applyTheme() {
+    var d = effDark(); root.setAttribute("data-ui", d ? "dark" : "light");
+    document.getElementById("icoSun").style.display = d ? "" : "none"; document.getElementById("icoMoon").style.display = d ? "none" : "";
+    var tb = document.getElementById("themeBtn"); tb.setAttribute("aria-pressed", String(d));
+    tb.title = d ? "Zu hell wechseln" : "Zu dunkel wechseln"; tb.setAttribute("aria-label", tb.title);
+    var tc = document.querySelector('meta[name=theme-color]'); if (tc) tc.setAttribute("content", d ? "#181b20" : "#3046c5");
+  }
+  document.getElementById("themeBtn").addEventListener("click", function () {
+    uiMode = effDark() ? "light" : "dark"; UI.mode = uiMode; saveUI(); applyTheme(); lastHash = ""; writeHash();
+  });
+  mq.addEventListener && mq.addEventListener("change", applyTheme);
+  applyTheme();
 
   // ---------------------------------------------------------------- URL-Hash (Ansicht + Ebenen + 3D)
   var lastHash = "";
@@ -509,6 +760,7 @@ window.mapxStil = (function () {
     if (op.value != (bm.checked ? 60 : 100)) h += "&op=" + op.value;
     if (d3.checked) h += "&3d=1";
     if (terr.checked) h += "&terr=1";
+    if (uiMode) h += "&ui=" + uiMode;
     if (h === lastHash) return;
     lastHash = h;
     try { history.replaceState(history.state, "", h); } catch (e) {}
@@ -516,13 +768,14 @@ window.mapxStil = (function () {
   function readHashState(kv) {
     var off = (kv.off || "").split(",");
     Object.keys(TOGGLES).forEach(function (id) { document.getElementById(id).checked = off.indexOf(id) < 0; });
+    if (kv.ui === "dark" || kv.ui === "light") { uiMode = kv.ui; applyTheme(); }
     bm.checked = kv.bm === "1";
     op.value = /^\d+$/.test(kv.op || "") ? Math.min(100, +kv.op) : (bm.checked ? 60 : 100);
     var want = kv["3d"] === "1";
     var wt = kv.terr === "1";
     if (want !== d3.checked) { d3.checked = want; d3.dispatchEvent(new Event("change")); }
     if (wt !== terr.checked) { terr.checked = wt; terr.dispatchEvent(new Event("change")); }
-    applyAll();
+    applyAll(); syncPoi();
   }
   readHashState(H0.kv);
   map.on("moveend", writeHash);
@@ -574,7 +827,7 @@ window.mapxStil = (function () {
     forest_house: "Forsthaus", hunting_lodge: "Jagdhütte", city: "Stadt", district: "Bezirk" };
   var WATER_CLASS = { river: "Fluss", stream: "Bach", canal: "Kanal", ditch: "Graben", lake: "See", reservoir: "Stausee", pond: "Teich, Weiher" };
   var BOUNDARY = { country: "Staatsgrenze", state: "Landesgrenze", district: "Bezirksgrenze", municipality: "Gemeindegrenze" };
-  var HR = "<hr style='border:0;border-top:1px solid #ddd;margin:5px 0'>";
+  var HR = "<hr class='pc-hr'>";
   function visible(g) { return groupIds(g).filter(function (id) { return map.getLayoutProperty(id, "visibility") !== "none"; }); }
   function first(box, ids, pred) {
     if (!ids.length) return null;
@@ -585,7 +838,7 @@ window.mapxStil = (function () {
   map.on("click", function (e) {
     if (!ready || (document.getElementById("rt") || {}).className === "rt open") return;
     var pad = 4, box = [[e.point.x - pad, e.point.y - pad], [e.point.x + pad, e.point.y + pad]];
-    var parts = [], P = { h: [], poi: [], bld: [], road: [], lift: [], water: [], bd: [], land: [], tun: [] }, kinds = (LEGEND && LEGEND.kind) || {};
+    var poiCat = "", parts = [], P = { h: [], poi: [], bld: [], road: [], lift: [], water: [], bd: [], land: [], tun: [] }, kinds = (LEGEND && LEGEND.kind) || {};
     var labels = (LEGEND && LEGEND.roadLabels) || {};
     var h = first(box, visible("housenumbers"));
     if (h) {
@@ -615,7 +868,7 @@ window.mapxStil = (function () {
     var sy = first([[e.point.x - 10, e.point.y - 10], [e.point.x + 10, e.point.y + 10]], visible("symbols"));
     if (sy) {
       var yp = sy.properties || {}, yt = POI_KIND[yp.kind] || "Symbol", yd = POI_DETAIL[yp.kind_detail];
-      P.poi.push("<b>" + esc(yp.name || yt) + "</b>" + (yp.name || yd ? "<br>" + esc(yt) + (yd ? " · " + yd : "") : ""));
+      poiCat = yt; P.poi.push("<b>" + esc(yp.name || yt) + "</b>" + (yp.name || yd ? "<br>" + esc(yt) + (yd ? " · " + yd : "") : ""));
     }
     var w = first(box, visible("water").filter(function (id) { return id !== "water-dkm"; }));
     if (w) {
@@ -657,14 +910,41 @@ window.mapxStil = (function () {
     ["h", "poi", "bld", "road", "lift", "water", "bd", "land", "tun"].forEach(function (k) { parts = parts.concat(P[k]); });
     // Gemeinde/Bezirk am Klickpunkt aus der naechsten Adresse (Suchindex), bei Grenzen und Hausnummern
     var wantAdmin = !!(bd || h);
-    var elev = "";
+    var ez = null;
     if (terr.checked && TERRAIN && map.getTerrain()) {
-      var ez = map.queryTerrainElevation(e.lngLat);
-      if (ez != null) elev = '<div class="d">Geländehöhe ' + Math.round(ez / (TERRAIN.exaggeration || 1)).toLocaleString("de-AT") + " m ü. A.</div>";
+      ez = map.queryTerrainElevation(e.lngLat);
+      if (ez != null) ez = Math.round(ez / (TERRAIN.exaggeration || 1));
     }
-    if (!parts.length && !elev) return;
-    var html = parts.join(HR) + elev + (wantAdmin ? '<div class="adm d"></div>' : "");
-    var pop = new maplibregl.Popup({ closeButton: true, maxWidth: "260px", className: "rev" }).setLngLat(e.lngLat).setHTML(html).addTo(map);
+    if (!parts.length && ez == null) return;
+    // Kopf der Karte: Kategorie des ersten Treffers, Quellenfuß je Datenart
+    var CATS = [["h", "Adresse", "BEV Adressregister"], ["poi", poiCat || "Ort", "BEV DLM, Wien OGD, Geographische Namen"], ["bld", "Gebäude", "BEV DKM"],
+                ["road", "Straße", "GIP.at"], ["lift", "Lift", "GIP.at"], ["water", "Gewässer", "GGN"], ["bd", "Grenze", "BEV Verwaltungsgrenzen"],
+                ["land", "Nutzung", "BEV DKM"], ["tun", "Tunnel", "GIP.at"]];
+    var cat = CATS.filter(function (c) { return P[c[0]].length; })[0] || ["", "Ort", "BEV, GIP.at"];
+    var html = '<div class="pc-body"><span class="pc-pill">' + esc(cat[1]) + "</span>" + parts.join(HR) +
+      (wantAdmin ? '<div class="adm d"></div>' : "") + '</div>' +
+      '<div class="pc-acts"><button type="button" data-a="route">Route</button><button type="button" data-a="share">Teilen</button>' +
+      '<button type="button" data-a="ele">' + (ez != null ? ez.toLocaleString("de-AT") + " m ü. A." : "Höhe") + "</button></div>" +
+      '<div class="pc-src">Quelle: ' + esc(cat[2]) + ", CC BY 4.0</div>";
+    var pop = new maplibregl.Popup({ closeButton: true, maxWidth: "300px", className: "rev pc-popup" }).setLngLat(e.lngLat).setHTML(html).addTo(map);
+    var pel = pop.getElement();
+    pel.querySelector(".pc-acts").addEventListener("click", function (ev) {
+      var a = ev.target.getAttribute && ev.target.getAttribute("data-a");
+      if (a === "route") {
+        rtOpen(true);
+        rtSet(rtPts.b && !rtPts.a ? "a" : "b", [e.lngLat.lng, e.lngLat.lat], ((pel.querySelector(".pc-body b") || {}).textContent || null));
+        pop.remove();
+      } else if (a === "share") {
+        shareLink("#17/" + e.lngLat.lat.toFixed(5) + "/" + e.lngLat.lng.toFixed(5));
+      } else if (a === "ele") {
+        var btn = ev.target;
+        function show() {
+          var z = map.getTerrain() ? map.queryTerrainElevation(e.lngLat) : null;
+          btn.textContent = z != null ? Math.round(z / (TERRAIN.exaggeration || 1)).toLocaleString("de-AT") + " m ü. A." : "keine Höhe";
+        }
+        if (!terr.checked) { btn.textContent = "…"; terr.checked = true; terr.dispatchEvent(new Event("change")); map.once("idle", show); } else show();
+      }
+    });
     if (wantAdmin) {
       nearestAddress(e.lngLat, 1500).then(function (a) {
         var el = pop.getElement(); if (!el || !a) return;
@@ -787,7 +1067,7 @@ window.mapxStil = (function () {
     setOpen(false); input.blur();
     var ll = [h._geo.lng, h._geo.lat];
     if (marker) marker.remove();
-    marker = new maplibregl.Marker({ color: "#0f766e" }).setLngLat(ll)
+    marker = new maplibregl.Marker({ color: "#3046c5" }).setLngLat(ll)
       .setPopup(new maplibregl.Popup({ offset: 28, maxWidth: "260px" })
         .setHTML("<b>" + esc(h.label || h.name) + "</b><br>" + esc(h.context || "")))
       .addTo(map);
@@ -817,14 +1097,8 @@ window.mapxStil = (function () {
     map.getCanvas().style.cursor = o ? "crosshair" : "";
     if (!o) { rtClear(); }
   }
-  var rtBtn = document.createElement("button");
-  rtBtn.type = "button"; rtBtn.className = "rtbtn"; rtBtn.textContent = "➜"; rtBtn.title = "Routenplanung";
-  rtBtn.setAttribute("aria-label", "Routenplanung"); rtBtn.setAttribute("aria-expanded", "false");
+  var rtBtn = document.getElementById("rtGo");   // "Route"-Knopf in der Suchpille
   rtBtn.addEventListener("click", function () { rtOpen(!rtEl.classList.contains("open")); });
-  map.addControl({
-    onAdd: function () { var d = document.createElement("div"); d.className = "maplibregl-ctrl maplibregl-ctrl-group"; d.appendChild(rtBtn); return d; },
-    onRemove: function () {}
-  }, "top-right");
   document.getElementById("rtClose").addEventListener("click", function () { rtOpen(false); });
 
   function rtLayers() {
