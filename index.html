@@ -545,8 +545,33 @@ window.mapxStil = (function () {
                          goods: "Materialseilbahn", zip_line: "Seilrutsche", inclined_lift: "Schrägaufzug" };
   var RAIL_KIND = { rail: "Bahn", narrow_gauge: "Schmalspurbahn", subway: "U-Bahn", tram: "Straßenbahn", funicular: "Standseilbahn",
                     ferry: "Fähre" };
-  var POI_KIND = { church: "Kirche", monastery: "Kloster, Stift", chapel: "Kapelle", summit_cross: "Gipfelkreuz" };
-  var POI_DETAIL = { eintuermig: "eintürmig", mehrtuermig: "mehrtürmig" };
+  var POI_KIND = { church: "Kirche", monastery: "Kloster, Stift", chapel: "Kapelle", summit_cross: "Gipfelkreuz",
+    hospital: "Krankenhaus", clinic: "Ambulatorium", pharmacy: "Apotheke", doctor: "Arzt", ambulance_station: "Rettung", defibrillator: "Defibrillator",
+    school: "Schule", music_school: "Musikschule", kindergarten: "Kindergarten", university: "Universität, Hochschule",
+    townhall: "Gemeindeamt", district_office: "Bezirkshauptmannschaft, Magistrat", police: "Polizei", fire_station: "Feuerwehr", customs: "Zoll",
+    survey_office: "Vermessung, Eichamt", forestry: "Forst, Jagd", visitor_centre: "Besucherzentrum",
+    fuel: "Tankstelle", charging_station: "E-Ladestelle", parking: "Parken", rest_area: "Rastplatz", toll_booth: "Mautstelle",
+    helipad: "Hubschrauberlandeplatz", ferry_terminal: "Fähre, Schiffsstation",
+    swimming_pool: "Bad", swimming_area: "Strandbad", stadium: "Stadion", sports_centre: "Sportanlage", pitch: "Sportplatz",
+    golf_course: "Golfplatz", playground: "Spielplatz", park: "Park", zoo: "Tierpark",
+    alpine_hut: "Schutzhütte", bivouac: "Biwak", inn: "Gasthof", camp_site: "Campingplatz", lodging: "Unterkunft",
+    viewpoint: "Aussichtspunkt", attraction: "Sehenswürdigkeit", cave: "Höhle", mine: "Bergwerk",
+    museum: "Museum", open_air_museum: "Freilichtmuseum", library: "Bibliothek", theatre: "Theater", archaeological_site: "Ausgrabung",
+    cemetery: "Friedhof", place_of_worship: "Gebetsstätte", market: "Markt", toilets: "Öffentliche Toilette", drinking_water: "Trinkbrunnen" };
+  var POI_DETAIL = { eintuermig: "eintürmig", mehrtuermig: "mehrtürmig",
+    public: "öffentlich", branch: "Filiale", inspection: "Inspektion", motorway: "Autobahn", border: "Grenze", traffic: "Verkehr",
+    district_command: "Bezirkskommando", city_command: "Stadtkommando", state_directorate: "Landesdirektion",
+    volunteer: "Freiwillige", professional: "Berufsfeuerwehr", company: "Betriebsfeuerwehr", state_association: "Landesverband",
+    acute: "Akutversorgung", other: "sonstige", outpatient: "ambulant",
+    primary: "Volksschule", secondary: "Mittelschule", academic_secondary: "AHS", general: "allgemeinbildend", prevocational: "Polytechnische",
+    special: "Sonderschule", vocational: "Berufsschule", commercial: "kaufmännisch", technical: "technisch/gewerblich",
+    hospitality: "wirtschaftsberuflich", social: "sozialberuflich", health: "Gesundheit", agricultural: "land-/forstwirtschaftlich",
+    teacher_training: "Lehrerbildung", indoor: "Hallenbad", outdoor: "Freibad", indoor_outdoor: "Hallen- und Freibad", beach: "Strandbad",
+    service_area: "Raststation", picnic: "Rastplatz", park_and_ride: "Park and Ride", garage: "Garage", hydrant: "Trinkhydrant",
+    tennis: "Tennis", soccer: "Fußball", ball_sports: "Ballsport", multi_sport: "Mehrzweck", motor_sport: "Motorsport", winter_sport: "Wintersport",
+    wildlife_park: "Wildpark", historic: "historisch", forest: "Wald", pet: "Tier", synagogue: "Synagoge", buddhist: "buddhistisch", muslim: "muslimisch",
+    open_air: "Freilicht", exhibition_ground: "Ausstellungsgelände", national_park: "Nationalpark", ferry: "Fähre", ship_station: "Schiffsstation",
+    forest_house: "Forsthaus", hunting_lodge: "Jagdhütte", city: "Stadt", district: "Bezirk" };
   var WATER_CLASS = { river: "Fluss", stream: "Bach", canal: "Kanal", ditch: "Graben", lake: "See", reservoir: "Stausee", pond: "Teich, Weiher" };
   var BOUNDARY = { country: "Staatsgrenze", state: "Landesgrenze", district: "Bezirksgrenze", municipality: "Gemeindegrenze" };
   var HR = "<hr style='border:0;border-top:1px solid #ddd;margin:5px 0'>";
