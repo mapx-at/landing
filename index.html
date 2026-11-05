@@ -19,7 +19,7 @@ html,body{height:100%;margin:0}
 body{background:var(--bg);color:var(--fg);font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 #map{position:fixed;inset:0}
 .panel{position:absolute;z-index:2;left:max(10px,env(safe-area-inset-left));top:max(10px,env(safe-area-inset-top));width:252px;max-height:calc(100% - 70px);overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.12);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
-.panel header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 12px;cursor:pointer;user-select:none}
+.panel header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 12px;cursor:pointer;user-select:none}
 .panel h1{margin:0;font-size:16px;font-weight:600;letter-spacing:-.01em}
 .panel h1 span{color:var(--acc)}
 .panel .sub{font-size:12px;color:var(--muted)}
@@ -30,17 +30,17 @@ body{background:var(--bg);color:var(--fg);font:14px/1.4 system-ui,-apple-system,
 ul.legend{list-style:none;margin:4px 0 10px;padding:0;font-size:13px}
 ul.legend li{display:flex;align-items:center;gap:8px;padding:1px 0}
 .sw{width:18px;height:12px;border-radius:2px;border:1px solid rgba(0,0,0,.25);flex:none}
-details.lg{border-top:1px solid var(--line);margin-top:8px;padding-top:6px}
+details.lg{border-top:1px solid var(--line);margin-top:6px;padding-top:4px}
 details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:none}
 .rsw{width:18px;height:6px;border-radius:3px;flex:none;border:1.5px solid}
 .rsw.dash{height:0;border-width:0;border-top:2px dashed;border-radius:0}
-.ctl{padding-top:2px;display:grid;gap:7px}
+.ctl{padding-top:0;display:grid;gap:4px}
 .ctl label{display:flex;align-items:center;gap:8px;cursor:pointer}
 .ctl input[type=range]{width:100%;accent-color:var(--acc)}
 .ctl input[type=checkbox]{accent-color:var(--acc);width:16px;height:16px;margin:0}
-.ctl .grid{display:grid;grid-template-columns:1fr 1fr;gap:5px 6px;font-size:13px}
+.ctl .grid{display:grid;grid-template-columns:1fr 1fr;gap:3px 6px;font-size:13px}
 .ctl .grid label{gap:6px}
-.note{font-size:12px;color:var(--muted);margin-top:8px}
+.note{font-size:11px;line-height:1.3;color:var(--muted);margin-top:6px}
 .msg{position:absolute;z-index:3;left:50%;transform:translateX(-50%);bottom:42px;max-width:calc(100% - 32px);background:#7f1d1d;color:#fff;padding:7px 12px;border-radius:8px;font-size:13px;display:none}
 .maplibregl-popup-content{font:13px/1.4 system-ui,sans-serif;color:#1b2b2a;padding:8px 10px}
 .maplibregl-popup-content b{font-weight:600}
@@ -48,6 +48,8 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
 .maplibregl-ctrl-attrib.maplibregl-compact-show{max-width:calc(100vw - 292px);max-height:45vh;overflow:auto;box-sizing:border-box}
 @media (max-width:640px){.maplibregl-ctrl-attrib.maplibregl-compact-show{max-width:calc(100vw - 20px)}}
 @media (max-width:520px){.panel{width:min(252px,calc(100% - 70px));max-height:60%}}
+.btn3d{font:600 12px system-ui,sans-serif;color:#333}
+.btn3d[aria-pressed=true]{background:var(--acc)!important;color:#fff}
 /* Suche (search.mapx.at, Meilisearch) */
 .search{position:absolute;z-index:4;top:max(10px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(380px,calc(100% - 572px))}
 .search input{width:100%;height:38px;padding:0 34px 0 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--fg);font:15px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;box-shadow:0 2px 10px rgba(0,0,0,.12);-webkit-appearance:none;appearance:none}
@@ -64,7 +66,7 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
 .search li .c{grid-column:2;font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .search li.info{display:block;color:var(--muted);cursor:default;font-size:13px}
 .search li.info:hover{background:none}
-.search li.src{font-size:11px;border-top:1px solid var(--line);margin-top:4px;padding-top:5px}
+.search li.src{white-space:normal;overflow:visible;line-height:1.35;font-size:11px;border-top:1px solid var(--line);margin-top:4px;padding-top:5px}
 .rev .d{color:#5b6b69;font-size:12px}
 @media (max-width:1000px){.search{left:max(276px,calc(env(safe-area-inset-left) + 272px));transform:none;width:calc(100% - 336px)}}
 @media (max-width:520px){.search{left:max(10px,env(safe-area-inset-left));width:calc(100% - 66px)}.panel{top:calc(max(10px,env(safe-area-inset-top)) + 46px)}.search input{font-size:16px}}
@@ -94,6 +96,18 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
 @media (prefers-color-scheme:dark){.rt .err{color:#fca5a5}}
 .rt .hint,.rt .attr{font-size:12px;color:var(--muted);margin-top:6px}
 @media (max-width:520px){.rt{right:10px;left:10px;width:auto;top:auto;bottom:34px;max-height:55%}}
+/* Handy: Touch-Ziele mindestens 40 px */
+@media (pointer:coarse),(max-width:520px){
+  .maplibregl-ctrl-group button{width:40px;height:40px}
+  .maplibregl-ctrl-group button .maplibregl-ctrl-icon{background-size:28px}
+  .rtbtn{width:40px;height:40px;line-height:40px;font-size:20px}
+  .btn3d{font-size:15px}
+  .search .clear{width:40px;height:40px;right:0;top:0}
+  .search input{height:44px}
+  .panel header{padding:12px}
+  .ctl label{min-height:32px}
+  .rt .modes button,.rt .acts button{height:40px}
+}
 </style>
 </head>
 <body>
@@ -125,8 +139,8 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
       <label for="op">Deckkraft Nutzung</label>
       <input type="range" id="op" min="0" max="100" value="100" aria-label="Deckkraft der Nutzungsflächen">
     </div>
-    <details class="lg" open><summary>Legende Nutzung</summary><ul class="legend" id="legend"></ul></details>
-    <details class="lg"><summary>Legende Straßen</summary><ul class="legend" id="roadLegend"></ul></details>
+    <details class="lg" id="lg1"><summary>Legende Nutzung</summary><ul class="legend" id="legend"></ul></details>
+    <details class="lg" id="lg2"><summary>Legende Straßen</summary><ul class="legend" id="roadLegend"></ul></details>
     <div class="note">Antippen für Details, lange drücken/Rechtsklick für die nächste Adresse. Gebäude ab Zoom 12, 3D-Gebäude ab 15, Grundstücke und Hausnummern ab 16.</div>
   </div>
 </section>
@@ -193,14 +207,30 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
     });
   });
 
+  // URL-Hash: #zoom/lat/lon[/bearing/pitch][&off=bld,roads&bm=1&op=60&3d=1] (rückwärtskompatibel zu #z/lat/lon).
+  // Positionsteil wie bei MapLibre, danach key=value-Paare für den Ebenen-Zustand und 3D.
+  function parseHash() {
+    var parts = location.hash.replace(/^#/, "").split("&"), pos = parts[0].split("/").map(Number), o = { kv: {} };
+    if (pos.length >= 3 && !pos.slice(0, 3).some(isNaN) && pos[1] >= -90 && pos[1] <= 90) {
+      o.zoom = pos[0]; o.lat = pos[1]; o.lon = pos[2];
+      if (pos.length >= 5 && !isNaN(pos[3]) && !isNaN(pos[4])) { o.bearing = pos[3]; o.pitch = pos[4]; }
+    }
+    parts.slice(1).forEach(function (kv) { var i = kv.indexOf("="); if (i > 0) o.kv[kv.slice(0, i)] = kv.slice(i + 1); });
+    return o;
+  }
+  var H0 = parseHash();
+  var want3d = H0.kv["3d"] === "1" || params.get("3d") === "1";
+
   var map = new maplibregl.Map({
     container: "map",
-    center: [15.33, 48.23],
-    zoom: 12,
+    center: H0.lat != null ? [H0.lon, H0.lat] : [15.33, 48.23],
+    zoom: H0.zoom != null ? H0.zoom : 12,
+    bearing: want3d && H0.bearing || 0,
+    pitch: want3d && H0.pitch || 0,
     minZoom: 0,   // alle Zoomstufen wie basemap.at (Übersicht z0–7: Grenzen, Hauptstädte, Landuse ab z4, Netz ab z6)
     maxZoom: 19,
-    maxPitch: 0,   // flach, solange „3D“ aus ist
-    hash: true,
+    maxPitch: want3d ? 70 : 0,   // flach, solange „3D“ aus ist
+    hash: false,
     attributionControl: false,
     style: { version: 8, sources: {}, layers: [{ id: "bg0", type: "background", paint: { "background-color": "#f6f4ee" } }] }
   });
@@ -208,6 +238,12 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
   window.mapxMap = map;   // fuer Tests/Konsole
   map.addControl(new maplibregl.AttributionControl({ compact: true }), "bottom-right");
   map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
+  // 3D-Knopf direkt auf der Karte (auch bei eingeklapptem Panel, gut sichtbar auf dem Handy), synchron zum Schalter „3D“
+  var btn3d = document.createElement("button");
+  btn3d.type = "button"; btn3d.className = "btn3d"; btn3d.textContent = "3D"; btn3d.title = "3D-Gebäude und Neigung ein/aus";
+  btn3d.setAttribute("aria-pressed", "false");
+  map.addControl({ onAdd: function () { var c = document.createElement("div"); c.className = "maplibregl-ctrl maplibregl-ctrl-group"; c.appendChild(btn3d); return c; },
+                   onRemove: function () { btn3d.parentNode && btn3d.parentNode.remove(); } }, "top-right");
   map.addControl(new maplibregl.GeolocateControl({ positionOptions: { enableHighAccuracy: true } }), "top-right");
   map.addControl(new maplibregl.ScaleControl({ unit: "metric" }), "bottom-left");
   map.dragRotate.disable();
@@ -330,6 +366,18 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
     var on3d = d3.checked && document.getElementById("bld").checked;
     if (map.getLayer("building-3d")) map.setLayoutProperty("building-3d", "visibility", on3d ? "visible" : "none");
     applyOpacity();
+    applyHousenumbers3d(d3.checked);
+  }
+  // 3D: Grundstücksnummern aus, Hausnummern erst ab z17 (am Boden liegende Zahlen überdecken sonst die Gebäude)
+  var HN_ORIG = {};
+  function applyHousenumbers3d(on) {
+    (GROUPS.housenumbers || []).forEach(function (id) {
+      var l = map.getLayer(id); if (!l) return;
+      if (!(id in HN_ORIG)) HN_ORIG[id] = [l.minzoom || 0, l.maxzoom || 24];
+      var o = HN_ORIG[id], parcel = /parcel/.test(id);
+      map.setLayerZoomRange(id, on && !parcel ? Math.max(o[0], 17) : o[0], o[1]);
+      if (on && parcel) map.setLayoutProperty(id, "visibility", "none");
+    });
   }
   // 3D: Neigung und Drehung nur mit eingeschaltetem Schalter, sonst wieder flach und nach Norden
   var d3 = document.getElementById("d3");
@@ -347,8 +395,9 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
     }
     applyAll();
   }
-  d3.addEventListener("change", apply3d);
-  if (params.get("3d") === "1") { d3.checked = true; map.once("styledata", apply3d); }
+  d3.addEventListener("change", function () { btn3d.setAttribute("aria-pressed", String(d3.checked)); apply3d(); writeHash(); });
+  btn3d.addEventListener("click", function () { d3.checked = !d3.checked; d3.dispatchEvent(new Event("change")); });
+  if (want3d) { d3.checked = true; btn3d.setAttribute("aria-pressed", "true"); map.once("styledata", apply3d); }
   Object.keys(TOGGLES).forEach(function (id) { document.getElementById(id).addEventListener("change", applyAll); });
   bm.addEventListener("change", function () {
     // Mit Hintergrund die Nutzung etwas zuruecknehmen, ohne den Regler zu ueberschreiben.
@@ -360,11 +409,55 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
 
   // Legende ein-/ausklappen (mobil standardmaessig zu)
   var panel = document.getElementById("panel"), tg = document.getElementById("toggle");
+  // Zustand (Panel, Legenden) merken; localStorage kann fehlen oder werfen (privates Fenster)
+  var UI = {};
+  try { UI = JSON.parse(localStorage.getItem("mapx-ui") || "{}") || {}; } catch (e) { UI = {}; }
+  function saveUI() { try { localStorage.setItem("mapx-ui", JSON.stringify(UI)); } catch (e) {} }
   function setCollapsed(c) { panel.classList.toggle("collapsed", c); tg.setAttribute("aria-expanded", String(!c)); }
   document.getElementById("panelHead").addEventListener("click", function () {
-    setCollapsed(!panel.classList.contains("collapsed"));
+    var c = !panel.classList.contains("collapsed"); setCollapsed(c); UI.collapsed = c; saveUI();
   });
-  if (window.matchMedia("(max-width: 520px)").matches) setCollapsed(true);
+  setCollapsed(UI.collapsed != null ? !!UI.collapsed : window.matchMedia("(max-width: 520px)").matches);
+  ["lg1", "lg2"].forEach(function (id) {
+    var d = document.getElementById(id);
+    d.open = !!UI[id];   // Legenden standardmäßig zugeklappt
+    d.addEventListener("toggle", function () { UI[id] = d.open; saveUI(); });
+  });
+
+  // ---------------------------------------------------------------- URL-Hash (Ansicht + Ebenen + 3D)
+  var lastHash = "";
+  function writeHash() {
+    if (!ready) return;
+    var c = map.getCenter(), z = map.getZoom(), h = "#" + z.toFixed(2) + "/" + c.lat.toFixed(5) + "/" + c.lng.toFixed(5);
+    if (d3.checked && (map.getBearing() || map.getPitch())) h += "/" + Math.round(map.getBearing()) + "/" + Math.round(map.getPitch());
+    var off = Object.keys(TOGGLES).filter(function (id) { return !document.getElementById(id).checked; });
+    if (off.length) h += "&off=" + off.join(",");
+    if (bm.checked) h += "&bm=1";
+    if (op.value != (bm.checked ? 60 : 100)) h += "&op=" + op.value;
+    if (d3.checked) h += "&3d=1";
+    if (h === lastHash) return;
+    lastHash = h;
+    try { history.replaceState(history.state, "", h); } catch (e) {}
+  }
+  function readHashState(kv) {
+    var off = (kv.off || "").split(",");
+    Object.keys(TOGGLES).forEach(function (id) { document.getElementById(id).checked = off.indexOf(id) < 0; });
+    bm.checked = kv.bm === "1";
+    op.value = /^\d+$/.test(kv.op || "") ? Math.min(100, +kv.op) : (bm.checked ? 60 : 100);
+    var want = kv["3d"] === "1";
+    if (want !== d3.checked) { d3.checked = want; d3.dispatchEvent(new Event("change")); }
+    applyAll();
+  }
+  readHashState(H0.kv);
+  map.on("moveend", writeHash);
+  Object.keys(TOGGLES).concat(["bm"]).forEach(function (id) { document.getElementById(id).addEventListener("change", writeHash); });
+  op.addEventListener("change", writeHash);
+  window.addEventListener("hashchange", function () {
+    if (location.hash === lastHash) return;   // von uns selbst gesetzt
+    var o = parseHash(); lastHash = location.hash;
+    readHashState(o.kv);
+    if (o.lat != null) map.jumpTo({ center: [o.lon, o.lat], zoom: o.zoom, bearing: o.bearing || 0, pitch: o.pitch || 0 });
+  });
 
   // ---------------------------------------------------------------- Details per Klick
   var STRUCTURE = { bridge: "Brücke", tunnel: "Tunnel/Unterführung" };
@@ -391,15 +484,18 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
   map.on("click", function (e) {
     if (!ready || (document.getElementById("rt") || {}).className === "rt open") return;
     var pad = 4, box = [[e.point.x - pad, e.point.y - pad], [e.point.x + pad, e.point.y + pad]];
-    var parts = [], kinds = (LEGEND && LEGEND.kind) || {};
+    var parts = [], P = { h: [], poi: [], bld: [], road: [], lift: [], water: [], bd: [], land: [], tun: [] }, kinds = (LEGEND && LEGEND.kind) || {};
     var labels = (LEGEND && LEGEND.roadLabels) || {};
     var h = first(box, visible("housenumbers"));
     if (h) {
       var hp = h.properties || {};
-      parts.push("<b>" + esc((hp.street ? hp.street + " " : "") + hp.housenumber) + "</b><br>" +
+      P.h.push("<b>" + esc((hp.street ? hp.street + " " : "") + hp.housenumber) + "</b><br>" +
                  (hp.kind === "parcel" ? "Grundstücksadresse" : "Gebäudeadresse") + '<span class="adr"></span>');
     }
-    var r = first(box, visible("roads"), function (f) { return f.layer.type === "line"; });
+    // Straße: Tunnel/Unterführung nur, wenn nichts anderes getroffen wird, und dann ganz hinten
+    var isLine = function (f) { return f.layer.type === "line"; };
+    var r = first(box, visible("roads"), function (f) { return isLine(f) && (f.properties || {}).structure !== "tunnel"; }), rTun = false;
+    if (!r) { r = first(box, visible("roads"), isLine); rTun = !!r; }
     if (r) {
       var rp = r.properties || {}, rail = r.layer["source-layer"] === "rail_l";
       var t = rail ? (RAIL_KIND[rp.kind] || "Bahn") : (labels[rp.kind_detail] || rp.kind_detail);
@@ -408,17 +504,17 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
       if (rp.ref && rp.name) rx.push(esc(rp.ref));
       if (STRUCTURE[rp.structure]) rx.push(STRUCTURE[rp.structure]);
       if (rp.oneway) rx.push("Einbahn");
-      parts.push("<b>" + esc(rp.name || rp.ref || t) + "</b>" + (rx.length ? "<br>" + rx.join(" · ") : ""));
+      (rTun ? P.tun : P.road).push("<b>" + esc(rp.name || rp.ref || t) + "</b>" + (rx.length ? "<br>" + rx.join(" · ") : ""));
     }
     var lf = first(box, visible("lifts"), function (f) { return f.layer.type === "line"; });
     if (lf) {
       var lp = lf.properties || {}, lt = AERIALWAY_KIND[lp.kind] || "Seilbahn, Lift";
-      parts.push("<b>" + esc(lp.name || lt) + "</b>" + (lp.name ? "<br>" + esc(lt) : ""));
+      P.lift.push("<b>" + esc(lp.name || lt) + "</b>" + (lp.name ? "<br>" + esc(lt) : ""));
     }
     var sy = first([[e.point.x - 10, e.point.y - 10], [e.point.x + 10, e.point.y + 10]], visible("symbols"));
     if (sy) {
       var yp = sy.properties || {}, yt = POI_KIND[yp.kind] || "Symbol", yd = POI_DETAIL[yp.kind_detail];
-      parts.push("<b>" + esc(yp.name || yt) + "</b>" + (yp.name || yd ? "<br>" + esc(yt) + (yd ? " · " + yd : "") : ""));
+      P.poi.push("<b>" + esc(yp.name || yt) + "</b>" + (yp.name || yd ? "<br>" + esc(yt) + (yd ? " · " + yd : "") : ""));
     }
     var w = first(box, visible("water").filter(function (id) { return id !== "water-dkm"; }));
     if (w) {
@@ -428,26 +524,26 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
       if (wp.area_km2) wx.push(wp.area_km2 < 0.01 ? "< 1 ha" : wp.area_km2 < 1 ? Math.round(wp.area_km2 * 100) + " ha"
                                : (+wp.area_km2).toFixed(2).replace(".", ",") + " km²");
       if (wp.structure == "tunnel") wx.push("verrohrt");
-      parts.push("<b>" + esc(wp.name || wc) + "</b>" + (wx.length ? "<br>" + wx.join(" · ") : ""));
+      P.water.push("<b>" + esc(wp.name || wc) + "</b>" + (wx.length ? "<br>" + wx.join(" · ") : ""));
     }
     var bd = first(box, visible("boundaries"), function (f) { return f.layer.type === "line"; });
     if (bd) {
       var bp = bd.properties || {}, bs = "<b>" + (BOUNDARY[(bd.properties || {}).kind] || "Grenze") + "</b>";
       if (bp.left && bp.right) bs += "<br>" + esc(bp.left) + " | " + esc(bp.right);
       else if (bp.right) bs += "<br>" + esc(bp.right);
-      parts.push(bs);
+      P.bd.push(bs);
     }
     var f = map.queryRenderedFeatures(e.point, { layers: ["building-3d", "building", "landuse", "parcel"].filter(function (id) { return map.getLayer(id); }) });
     var b = f.filter(function (x) { return x.layer.id === "building" || x.layer.id === "building-3d"; })[0];
     var l = f.filter(function (x) { return x.layer.id === "landuse"; })[0];
     var pc = first(box, visible("parcels"));
-    var low = "";
+    var low = "", bl = "";
     if (b) {
       var bp2 = b.properties || {}, bk = BUILDING_KIND[bp2.kind] || bp2.kind || "Gebäude";
-      low += "<b>" + esc(bk === "Gebäude" ? "Gebäude" : "Gebäude: " + bk) + "</b>";
-      if (bp2.height != null) low += "<br>Höhe " + (+bp2.height).toLocaleString("de-AT") + " m";
-      if (bp2.max_height != null) low += (bp2.height != null ? " · " : "<br>") + "max. Höhe " + (+bp2.max_height).toLocaleString("de-AT") + " m";
-      low += "<br>";
+      bl += "<b>" + esc(bk === "Gebäude" ? "Gebäude" : "Gebäude: " + bk) + "</b>";
+      if (bp2.height != null) bl += "<br>Höhe " + (+bp2.height).toLocaleString("de-AT") + " m";
+      if (bp2.max_height != null) bl += (bp2.height != null ? " · " : "<br>") + "max. Höhe " + (+bp2.max_height).toLocaleString("de-AT") + " m";
+      P.bld.push(bl);
     }
     if (l) {
       var p = l.properties || {};
@@ -455,7 +551,9 @@ details.lg summary{cursor:pointer;font-size:12px;color:var(--muted);user-select:
       low += "<b>" + esc(cat || "unbekannt") + "</b>";
     }
     if (pc && pc.properties && pc.properties.gstnr) low += "<br>Grenze Grundstück " + esc(pc.properties.gstnr) + " (KG " + esc(pc.properties.kgnr) + ")";
-    if (low) parts.push(low);
+    if (low) P.land.push(low.replace(/^<br>/, ""));
+    // Reihenfolge: Hausnummer/Adresse, POI, Gebäude, Straße, Lift, Gewässer, Grenze, Nutzung, zuletzt Tunnel/Unterführung
+    ["h", "poi", "bld", "road", "lift", "water", "bd", "land", "tun"].forEach(function (k) { parts = parts.concat(P[k]); });
     // Gemeinde/Bezirk am Klickpunkt aus der naechsten Adresse (Suchindex), bei Grenzen und Hausnummern
     var wantAdmin = !!(bd || h);
     if (!parts.length) return;

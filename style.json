@@ -10422,7 +10422,8 @@
      "kind"
     ],
     "suburb"
-   ]
+   ],
+   "maxzoom": 16
   },
   {
    "id": "geonamen-ort",
@@ -10881,7 +10882,8 @@
      "capital"
     ],
     "district"
-   ]
+   ],
+   "maxzoom": 16
   },
   {
    "id": "geonamen-hauptstadt-punkt",
@@ -11042,7 +11044,8 @@
       "state"
      ]
     ]
-   ]
+   ],
+   "maxzoom": 16
   },
   {
    "id": "geonamen-hauptstadt-low-punkt",
