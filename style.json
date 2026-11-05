@@ -112,7 +112,8 @@
     "road-low-primary",
     "road-low-motorway_link",
     "road-low-motorway",
-    "road-ref-motorway-low"
+    "road-ref-motorway-low",
+    "road-ref-motorway-low-s"
    ],
    "lifts": [
     "oev-aerialway",
@@ -7170,10 +7171,83 @@
        "motorway"
       ]
      ]
+    ],
+    [
+     "!=",
+     [
+      "slice",
+      [
+       "get",
+       "ref"
+      ],
+      0,
+      1
+     ],
+     "S"
     ]
    ],
    "layout": {
     "symbol-placement": "point",
+    "text-rotation-alignment": "viewport",
+    "text-field": [
+     "get",
+     "ref"
+    ],
+    "text-font": [
+     "Noto Sans Bold"
+    ],
+    "text-size": 8,
+    "text-padding": 18,
+    "symbol-sort-key": 100
+   },
+   "paint": {
+    "text-color": "#FFFFFF",
+    "text-halo-color": "#0064C8",
+    "text-halo-width": 6
+   },
+   "maxzoom": 8
+  },
+  {
+   "id": "road-ref-motorway-low-s",
+   "type": "symbol",
+   "source": "basis",
+   "source-layer": "road_l",
+   "minzoom": 7,
+   "filter": [
+    "all",
+    [
+     "has",
+     "ref"
+    ],
+    [
+     "in",
+     [
+      "get",
+      "kind_detail"
+     ],
+     [
+      "literal",
+      [
+       "motorway"
+      ]
+     ]
+    ],
+    [
+     "==",
+     [
+      "slice",
+      [
+       "get",
+       "ref"
+      ],
+      0,
+      1
+     ],
+     "S"
+    ]
+   ],
+   "layout": {
+    "symbol-placement": "line-center",
     "text-rotation-alignment": "viewport",
     "text-field": [
      "get",
