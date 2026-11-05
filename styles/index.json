@@ -38,5 +38,50 @@
   "id": "satellit",
   "name": "Satellit + Straßen",
   "gruppe": "Klassisch"
+ },
+ {
+  "id": "reise",
+  "name": "Reise",
+  "gruppe": "Weitere"
+ },
+ {
+  "id": "schwarzweiss",
+  "name": "Schwarzweiß",
+  "gruppe": "Weitere"
+ },
+ {
+  "id": "gelaende",
+  "name": "Gelände",
+  "gruppe": "Weitere"
+ },
+ {
+  "id": "topo",
+  "name": "Topo",
+  "gruppe": "Weitere"
+ },
+ {
+  "id": "landeskarte",
+  "name": "Landeskarte",
+  "gruppe": "Weitere"
+ },
+ {
+  "id": "rad",
+  "name": "Rad",
+  "gruppe": "Weitere"
+ },
+ {
+  "id": "oev",
+  "name": "ÖV",
+  "gruppe": "Weitere"
+ },
+ {
+  "id": "bunt",
+  "name": "Bunt",
+  "gruppe": "Weitere"
+ },
+ {
+  "id": "neutral",
+  "name": "Neutral",
+  "gruppe": "Weitere"
  }
 ]
