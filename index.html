@@ -982,9 +982,16 @@ window.mapxStil = (function () {
                       pass: "Pass", gebiet: "Gebiet", gewaesser: "Gewässer", gletscher: "Gletscher" };
   var ATTRS = ["id", "type", "class", "label", "name", "context", "_geo", "bbox", "zoom"];
 
+  var NON_PARCEL_ATTRS = ["name", "alt", "hnr", "locality", "postort", "plz", "municipality", "district", "state"];
   function meili(body, signal) {
     // „Landeck .102“: Punkt vor der Nummer = Grundstueckssuche (Zahlen allein treffen sonst Adressen vor Grundstuecken, #203)
-    if (/(^|\s)\.\d/.test(body.q || "") && !body.filter) body = Object.assign({}, body, { filter: "type = parcel" });
+    if (/(^|\s)\.\d/.test(body.q || "")) {
+      if (!body.filter) body = Object.assign({}, body, { filter: "type = parcel" });
+    } else if (!body.attributesToSearchOn && !/\d+\/\d+|(^|\s)(grundst\u00fcck|gst|kg)(?=\s|$)|\b\d{5}\b/i.test(body.q || "")) {
+      // reine Zahlen ohne Punkt/Schraegstrich/KG-Bezug: keine Grundstuecksfelder durchsuchen. Meilisearch zerlegt
+      // „1234“ in „1“+„234“, „Landeck 1234“ fand sonst Grundstueck 234/1 statt der Gemeinde (#203)
+      body = Object.assign({}, body, { attributesToSearchOn: NON_PARCEL_ATTRS });
+    }
     var h = { "Content-Type": "application/json" };
     if (SEARCH_KEY) h.Authorization = "Bearer " + SEARCH_KEY;
     return fetch(SEARCH_URL + "/indexes/" + SEARCH_INDEX + "/search", {
