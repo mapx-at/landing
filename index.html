@@ -227,6 +227,71 @@ details.lg summary{cursor:pointer;font-size:13px;min-height:44px;display:flex;al
   .rt{left:0;right:0;width:auto;top:auto;bottom:0;max-height:70%;border-radius:26px 26px 0 0;border-bottom:0;padding-bottom:max(16px,env(safe-area-inset-bottom))}
   .msg{bottom:76px}
 }
+/* Werkzeuge: Messen, Koordinaten, Höhenprofil, Umkreis/Puffer (#81 #91 #99 #147). Karte wie .rt (rechts), Handy als Blatt von unten. */
+.btnwz svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:block;margin:auto}
+.btnwz[aria-pressed=true]{background:var(--accent)!important;color:var(--on-accent)}
+.wz{position:absolute;z-index:4;top:calc(max(18px,env(safe-area-inset-top)) + 66px);right:82px;width:352px;max-height:calc(100% - 100px);overflow:auto;background:var(--card);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:22px;box-shadow:var(--shadow2);padding:14px 16px 12px;display:none;overscroll-behavior:contain}
+.wz.open{display:block}
+.wz h2{margin:0 0 10px;font-size:17px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.wz h2 button{border:0;background:var(--chip);color:var(--text);width:44px;height:44px;border-radius:12px;font-size:18px;padding:0}
+.wz .seg{margin-bottom:8px}
+.wz .seg button{min-width:0;padding:0 4px}
+.wz .seg button[aria-selected=true]{background:var(--seg);box-shadow:var(--seg-sh);font-weight:600;color:var(--text)}
+.wz [hidden]{display:none!important}
+.wz-bar{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.wz-bar button,.wz .btn{min-height:44px;min-width:44px;border:0;border-radius:12px;background:var(--chip);color:var(--text);padding:0 12px;font-size:13px}
+.wz-bar button.pri,.wz .btn.pri{background:var(--accent);color:var(--on-accent);font-weight:600}
+.wz-bar button[aria-pressed=true]{background:var(--acc-soft);color:var(--acc-text);font-weight:600}
+.wz-bar button:disabled,.wz .btn:disabled{opacity:.45;cursor:default}
+.wz .btn.danger{color:var(--err)}
+.wz dl.kv{display:grid;grid-template-columns:auto 1fr;gap:2px 14px;margin:6px 0 8px;font-size:13px}
+.wz dl.kv dt{color:var(--muted)}
+.wz dl.kv dd{margin:0;font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.wz .big{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+.wz .warn{color:var(--err);font-size:12.5px;margin:4px 0}
+.wz .note{margin:6px 0}
+.wz label.f{display:flex;align-items:center;gap:8px;font-size:13px;margin:4px 0}
+.wz input[type=text],.wz input[type=number],.wz input[type=search],.wz select{height:44px;min-width:0;border:1px solid var(--line);border-radius:12px;background:var(--chip);color:var(--text);padding:0 10px;font:14px Inter,system-ui,sans-serif}
+.wz input:focus-visible,.wz select:focus-visible{outline:2px solid var(--accent);outline-offset:-1px}
+.wz .row{display:flex;gap:6px;align-items:center;margin:6px 0}
+.wz .row>input{flex:1}
+.wz-list{list-style:none;margin:6px 0;padding:0;max-height:240px;overflow:auto}
+.wz-list li{display:flex;align-items:center;gap:6px;min-height:44px;border-top:1px solid var(--line);font-size:13px}
+.wz-list li[aria-current=true]{background:var(--hover);border-radius:10px}
+.wz-list li .dot{width:12px;height:12px;border-radius:50%;flex:none;margin-left:6px}
+.wz-list li .nm{flex:1;min-width:0;height:36px!important;padding:0 8px!important;font-size:13px!important}
+.wz-list li .val{flex:none;font-weight:600;font-variant-numeric:tabular-nums;max-width:48%;text-align:right}
+.wz-list li button.go{flex:1;min-width:0;text-align:left;border:0;background:transparent;color:var(--text);min-height:44px;padding:4px 8px;border-radius:10px;font-size:13px}
+.wz-list li button.go small{display:block;color:var(--muted);font-size:11.5px}
+.wz-list li button.x{flex:none;width:44px;height:44px;border:0;background:transparent;color:var(--muted);font-size:18px;border-radius:12px}
+table.cx{width:100%;border-collapse:collapse;font-size:12.5px}
+table.cx th{font-weight:500;color:var(--muted);text-align:left;padding:0 6px 0 0;vertical-align:middle;width:27%;font-size:12px}
+table.cx td{padding:0;vertical-align:middle;font-variant-numeric:tabular-nums}
+table.cx td.v{word-break:normal;font-size:12px;padding-right:4px}
+table.cx td.c{width:44px}
+table.cx td.c button{width:44px;height:44px;border:0;background:transparent;color:var(--acc-text);border-radius:12px;font-size:16px}
+table.cx tr{border-top:1px solid var(--line)}
+.wz details{border-top:1px solid var(--line)}
+.wz details>summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-size:13px;font-weight:600}
+.wz-chart{display:block;width:100%;height:auto;touch-action:none;background:var(--chip);border-radius:12px;cursor:crosshair}
+.wz-chart:focus-visible{outline:2px solid var(--accent)}
+.wz-chart text{font:10px Inter,system-ui,sans-serif;fill:var(--muted)}
+.wz-chart .ar{fill:var(--acc-soft);stroke:none}
+.wz-chart .ln{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linejoin:round}
+.wz-chart .gr{stroke:var(--line);stroke-width:1}
+.wz-chart .cur{stroke:var(--text);stroke-width:1;stroke-dasharray:3 3}
+.wz-chart .dot{fill:var(--accent);stroke:var(--card);stroke-width:2}
+.wz-tip{font-size:12.5px;min-height:18px;margin:4px 0;font-variant-numeric:tabular-nums}
+.wz table.dt{width:100%;font-size:12px;border-collapse:collapse}
+.wz table.dt th,.wz table.dt td{text-align:right;padding:2px 4px;border-top:1px solid var(--line)}
+.wz-cross{position:absolute;z-index:3;pointer-events:none;width:44px;height:44px;margin:-22px 0 0 -22px;display:none}
+.wz-cross.on{display:block}
+.wz-cross svg{width:44px;height:44px;stroke:#111;stroke-width:2.2;fill:none;filter:drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 1.5px #fff)}
+.wz-pm{width:14px;height:14px;border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.4);pointer-events:none}
+.wz-hit{width:22px;height:22px;border-radius:50%;border:3px solid #ea580c;background:rgba(234,88,12,.25);box-shadow:0 0 0 2px #fff;pointer-events:none}
+@media (max-width:640px){
+  .wz{left:0;right:0;width:auto;top:auto;bottom:0;max-height:56%;border-radius:26px 26px 0 0;border-bottom:0;padding-bottom:max(12px,env(safe-area-inset-bottom))}
+}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 
@@ -315,6 +380,93 @@ details.lg summary{cursor:pointer;font-size:13px;min-height:44px;display:flex;al
   <div class="hint" id="rtHint">Start und Ziel auf der Karte antippen; die Marker lassen sich ziehen.</div>
   <div class="attr" id="rtAttr" style="display:none"></div>
 </section>
+
+<section class="wz" id="wz" aria-label="Werkzeuge: Messen, Koordinaten, Höhenprofil, Umkreis">
+  <h2><span id="wzTitle">Werkzeuge</span> <button type="button" id="wzClose" aria-label="Werkzeuge schließen">×</button></h2>
+  <div class="seg" id="wzTabs" role="tablist" aria-label="Werkzeug">
+    <button type="button" role="tab" id="tab-m" data-t="m" aria-controls="wz-m" aria-selected="true">Messen</button>
+    <button type="button" role="tab" id="tab-k" data-t="k" aria-controls="wz-k" aria-selected="false" tabindex="-1">Koordinaten</button>
+    <button type="button" role="tab" id="tab-p" data-t="p" aria-controls="wz-p" aria-selected="false" tabindex="-1">Profil</button>
+    <button type="button" role="tab" id="tab-u" data-t="u" aria-controls="wz-u" aria-selected="false" tabindex="-1">Umkreis</button>
+  </div>
+
+  <div class="wz-bar" id="wzBar" role="toolbar" aria-label="Zeichnen">
+    <button type="button" id="wzUndo" aria-label="Rückgängig (Rücktaste)" title="Rückgängig (Rücktaste)">↶ Zurück</button>
+    <button type="button" id="wzDone" class="pri" aria-label="Fertig (Eingabetaste)" title="Fertig (Eingabetaste)">✓ Fertig</button>
+    <button type="button" id="wzCancel" aria-label="Abbrechen (Esc)" title="Abbrechen (Esc)">✕</button>
+    <button type="button" id="wzCrossBtn" aria-pressed="false" title="Fadenkreuz: Punkte per Knopf in der Kartenmitte setzen">⌖ Fadenkreuz</button>
+    <button type="button" id="wzAdd" class="pri" hidden>＋ Punkt setzen</button>
+  </div>
+  <div class="note" id="wzHint" role="status"></div>
+
+  <div role="tabpanel" id="wz-m" aria-labelledby="tab-m">
+    <div class="seg" id="mKind" role="group" aria-label="Messart">
+      <button type="button" data-k="line" aria-pressed="true">Strecke</button>
+      <button type="button" data-k="area" aria-pressed="false">Fläche</button>
+      <button type="button" data-k="circle" aria-pressed="false">Kreis</button>
+    </div>
+    <div id="mRes" aria-live="polite"></div>
+    <div class="row" id="mRad" hidden>
+      <label for="mRadV" class="note" style="margin:0">Radius</label>
+      <input type="number" id="mRadV" min="0" step="any" inputmode="decimal" aria-label="Radius">
+      <select id="mRadU" aria-label="Einheit des Radius"></select>
+      <button type="button" class="btn" id="mToU" title="Kreis als Suchbereich übernehmen">Objekte darin</button>
+    </div>
+    <ul class="wz-list" id="mList" aria-label="Messungen"></ul>
+    <div class="row"><div class="seg" id="mUnits" role="group" aria-label="Einheiten" style="flex:1;margin:0">
+      <button type="button" data-u="metric" aria-pressed="true">Metrisch</button>
+      <button type="button" data-u="imperial" aria-pressed="false">Imperial</button></div>
+      <button type="button" class="btn danger" id="mClear">Alle löschen</button></div>
+    <div class="note">Strecken auf dem WGS84-Ellipsoid (Vincenty), Flächen flächentreu auf dem Ellipsoid, horizontal gemessen (ohne Höhenunterschiede). Punkte lassen sich ziehen, Mittelpunkte einfügen, Rechtsklick oder langes Drücken löscht.</div>
+  </div>
+
+  <div role="tabpanel" id="wz-k" aria-labelledby="tab-k" hidden>
+    <div class="row"><input type="search" id="kIn" placeholder="Koordinate oder Code eingeben" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Koordinate oder Code eingeben, zum Beispiel 47.0707, 15.4395">
+      <button type="button" class="btn pri" id="kGo">Los</button></div>
+    <div class="warn" id="kErr" role="alert" hidden></div>
+    <div id="kInfo" aria-live="polite"></div>
+    <div class="row"><label for="kSys" class="note" style="margin:0">Liste in</label><select id="kSys" aria-label="Koordinatensystem der Punktliste" style="flex:1"></select></div>
+    <ol class="wz-list" id="kList" aria-label="Gesetzte Punkte"></ol>
+    <div class="row"><button type="button" class="btn" id="kCsv">CSV</button><button type="button" class="btn danger" id="kClear">Alle löschen</button><span class="note" id="kCount" style="margin:0"></span></div>
+    <div class="note" id="kNote">Karte antippen setzt einen Punkt (bis 500). ETRS89/UTM exakt; MGI-Werte sind eine Näherung mit sieben Parametern (EPSG:1618): gegenüber dem amtlichen BEV-Grid typisch 0,5 m, höchstens etwa 1,5 m, nicht für Vermessungszwecke.</div>
+  </div>
+
+  <div role="tabpanel" id="wz-p" aria-labelledby="tab-p" hidden>
+    <div class="note" id="pHint">Linie zeichnen (Doppelklick oder „Fertig“ schließt) oder die berechnete Route übernehmen. Höhen aus dem Geländemodell (Terrain-RGB), bis 200 km.</div>
+    <div class="row"><button type="button" class="btn" id="pRoute" hidden>Route übernehmen</button></div>
+    <div id="pRes" hidden>
+      <dl class="kv" id="pStats"></dl>
+      <div class="seg" id="pOv" role="group" aria-label="Überhöhung">
+        <button type="button" data-o="0" aria-pressed="true">Angepasst</button><button type="button" data-o="1" aria-pressed="false">1:1</button><button type="button" data-o="5" aria-pressed="false">1:5</button></div>
+      <svg class="wz-chart" id="pChart" role="img" tabindex="0" aria-labelledby="pChartT pChartD"><title id="pChartT">Höhenprofil</title><desc id="pChartD"></desc></svg>
+      <div class="wz-tip" id="pTip" aria-live="off">Mit Maus, Finger oder Pfeiltasten über das Diagramm fahren.</div>
+      <div class="row"><button type="button" class="btn" id="pCsv">CSV</button><button type="button" class="btn" id="pGpx">GPX</button></div>
+      <details><summary>Datentabelle</summary><table class="dt" id="pTable"></table></details>
+    </div>
+    <div class="note" id="pMsg" role="status"></div>
+  </div>
+
+  <div role="tabpanel" id="wz-u" aria-labelledby="tab-u" hidden>
+    <div class="seg" id="uMode" role="group" aria-label="Analyse">
+      <button type="button" data-m="circle" aria-pressed="true">Umkreis um Punkt</button>
+      <button type="button" data-m="buffer" aria-pressed="false">Puffer</button>
+    </div>
+    <div class="seg" id="uKind" role="group" aria-label="Puffer um" hidden>
+      <button type="button" data-k="line" aria-pressed="true">Linie</button><button type="button" data-k="area" aria-pressed="false">Fläche</button>
+    </div>
+    <div class="row"><label for="uDist" class="note" style="margin:0" id="uDistL">Radius</label>
+      <input type="number" id="uDist" min="1" step="any" inputmode="decimal" value="500" aria-label="Radius" style="flex:1">
+      <select id="uUnit" aria-label="Einheit"><option value="1">m</option><option value="1000">km</option></select></div>
+    <div class="pills" id="uQuick" aria-label="Schnellwahl"></div>
+    <fieldset style="border:0;padding:0;margin:6px 0" id="uCats"><legend class="note" style="padding:0">Objekte im Bereich</legend></fieldset>
+    <div id="uRes" aria-live="polite"></div>
+    <ol class="wz-list" id="uList" aria-label="Objekte im Bereich"></ol>
+    <div class="row"><button type="button" class="btn" id="uGeo" hidden>GeoJSON</button><button type="button" class="btn danger" id="uClear">Zurücksetzen</button></div>
+    <div class="note" id="uNote"></div>
+  </div>
+
+</section>
+<div class="wz-cross" id="wzCross" aria-hidden="true"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="7"/><path d="M22 2v10M22 32v10M2 22h10M32 22h10"/></svg></div>
 
 <div class="msg" id="msg" role="status"></div>
 
@@ -409,6 +561,484 @@ window.mapxStil = (function () {
   }
   return API;
 })();
+</script>
+<script id="mapx-geo">
+(function (root) {
+  "use strict";
+  // Reine Rechenfunktionen der Werkzeuge (Messen, Koordinaten, Profil, Umkreis/Puffer), ohne DOM und ohne Abhängigkeiten.
+  // Getestet in viewer/test/geo.cjs (Referenzwerte: PROJ cs2cs/geod mit dem BEV-Grid, Vincenty 1975, Spezifikationen).
+  var D2R = Math.PI / 180, R2D = 180 / Math.PI;
+  var WGS = { a: 6378137, f: 1 / 298.257223563 };
+  var BESSEL = { a: 6377397.155, f: 1 / 299.1528128 };
+  var GRS80 = { a: 6378137, f: 1 / 298.257222101 };
+
+  // ---------------------------------------------------------------- Geodäsie auf dem WGS84-Ellipsoid (Vincenty)
+  function haversine(lon1, lat1, lon2, lat2) {
+    var p1 = lat1 * D2R, p2 = lat2 * D2R, dp = p2 - p1, dl = (lon2 - lon1) * D2R;
+    var h = Math.sin(dp / 2) * Math.sin(dp / 2) + Math.cos(p1) * Math.cos(p2) * Math.sin(dl / 2) * Math.sin(dl / 2);
+    var s = 2 * 6371008.8 * Math.asin(Math.min(1, Math.sqrt(h)));
+    var y = Math.sin(dl) * Math.cos(p2), x = Math.cos(p1) * Math.sin(p2) - Math.sin(p1) * Math.cos(p2) * Math.cos(dl);
+    return { s: s, az1: Math.atan2(y, x) * R2D, az2: 0, approx: true };
+  }
+  // Inverse Aufgabe: Strecke s (m) und Azimute (Grad) zwischen zwei Punkten
+  function inverse(lon1, lat1, lon2, lat2) {
+    var a = WGS.a, f = WGS.f, b = a * (1 - f);
+    var L = (lon2 - lon1) * D2R;
+    var U1 = Math.atan((1 - f) * Math.tan(lat1 * D2R)), U2 = Math.atan((1 - f) * Math.tan(lat2 * D2R));
+    var sU1 = Math.sin(U1), cU1 = Math.cos(U1), sU2 = Math.sin(U2), cU2 = Math.cos(U2);
+    var lam = L, lamP, it = 0, sinL, cosL, sinS, cosS, sig, sinA, cos2A, c2sm, C;
+    do {
+      sinL = Math.sin(lam); cosL = Math.cos(lam);
+      sinS = Math.sqrt(Math.pow(cU2 * sinL, 2) + Math.pow(cU1 * sU2 - sU1 * cU2 * cosL, 2));
+      if (sinS === 0) return { s: 0, az1: 0, az2: 0 };
+      cosS = sU1 * sU2 + cU1 * cU2 * cosL;
+      sig = Math.atan2(sinS, cosS);
+      sinA = cU1 * cU2 * sinL / sinS;
+      cos2A = 1 - sinA * sinA;
+      c2sm = cos2A !== 0 ? cosS - 2 * sU1 * sU2 / cos2A : 0;
+      C = f / 16 * cos2A * (4 + f * (4 - 3 * cos2A));
+      lamP = lam;
+      lam = L + (1 - C) * f * sinA * (sig + C * sinS * (c2sm + C * cosS * (-1 + 2 * c2sm * c2sm)));
+    } while (Math.abs(lam - lamP) > 1e-12 && ++it < 200);
+    if (it >= 200 || isNaN(lam)) return haversine(lon1, lat1, lon2, lat2);   // fast gegenüberliegende Punkte: Kugel als Notnagel
+    var u2 = cos2A * (a * a - b * b) / (b * b);
+    var A = 1 + u2 / 16384 * (4096 + u2 * (-768 + u2 * (320 - 175 * u2)));
+    var B = u2 / 1024 * (256 + u2 * (-128 + u2 * (74 - 47 * u2)));
+    var dS = B * sinS * (c2sm + B / 4 * (cosS * (-1 + 2 * c2sm * c2sm) - B / 6 * c2sm * (-3 + 4 * sinS * sinS) * (-3 + 4 * c2sm * c2sm)));
+    return { s: b * A * (sig - dS),
+             az1: Math.atan2(cU2 * sinL, cU1 * sU2 - sU1 * cU2 * cosL) * R2D,
+             az2: Math.atan2(cU1 * sinL, -sU1 * cU2 + cU1 * sU2 * cosL) * R2D };
+  }
+  function dist(p, q) { return inverse(p[0], p[1], q[0], q[1]).s; }
+  // Direkte Aufgabe: Zielpunkt [lon, lat] von (lon, lat) in Richtung az (Grad) nach s Metern
+  function direct(lon1, lat1, az, s) {
+    var a = WGS.a, f = WGS.f, b = a * (1 - f), al1 = az * D2R;
+    var sA1 = Math.sin(al1), cA1 = Math.cos(al1);
+    var tU1 = (1 - f) * Math.tan(lat1 * D2R), cU1 = 1 / Math.sqrt(1 + tU1 * tU1), sU1 = tU1 * cU1;
+    var s1 = Math.atan2(tU1, cA1), sinA = cU1 * sA1, cos2A = 1 - sinA * sinA;
+    var u2 = cos2A * (a * a - b * b) / (b * b);
+    var A = 1 + u2 / 16384 * (4096 + u2 * (-768 + u2 * (320 - 175 * u2)));
+    var B = u2 / 1024 * (256 + u2 * (-128 + u2 * (74 - 47 * u2)));
+    var sig = s / (b * A), sigP, it = 0, c2sm, sinS, cosS;
+    do {
+      c2sm = Math.cos(2 * s1 + sig); sinS = Math.sin(sig); cosS = Math.cos(sig);
+      var dS = B * sinS * (c2sm + B / 4 * (cosS * (-1 + 2 * c2sm * c2sm) - B / 6 * c2sm * (-3 + 4 * sinS * sinS) * (-3 + 4 * c2sm * c2sm)));
+      sigP = sig; sig = s / (b * A) + dS;
+    } while (Math.abs(sig - sigP) > 1e-12 && ++it < 100);
+    c2sm = Math.cos(2 * s1 + sig); sinS = Math.sin(sig); cosS = Math.cos(sig);
+    var tmp = sU1 * sinS - cU1 * cosS * cA1;
+    var phi2 = Math.atan2(sU1 * cosS + cU1 * sinS * cA1, (1 - f) * Math.sqrt(sinA * sinA + tmp * tmp));
+    var lam = Math.atan2(sinS * sA1, cU1 * cosS - sU1 * sinS * cA1);
+    var C = f / 16 * cos2A * (4 + f * (4 - 3 * cos2A));
+    var L = lam - (1 - C) * f * sinA * (sig + C * sinS * (c2sm + C * cosS * (-1 + 2 * c2sm * c2sm)));
+    return [lon1 + L * R2D, phi2 * R2D];
+  }
+  function pathLength(pts) {
+    var s = 0; for (var i = 1; i < pts.length; i++) s += dist(pts[i - 1], pts[i]); return s;
+  }
+  function ringPerimeter(pts) {
+    if (pts.length < 2) return 0;
+    return pathLength(pts) + dist(pts[pts.length - 1], pts[0]);
+  }
+
+  // Fläche auf dem Ellipsoid: Breiten auf die flächentreue (authalische) Kugel abbilden, dort die Fläche des
+  // Kugelpolygons mit Großkreiskanten über die Dreieckssummen nach Van Oosterom/Strackee. Kanten sind Großkreise der
+  // flächentreuen Kugel (statt Geodäten): Unterschied bei Kanten unter 100 km weit unter 0,01 %.
+  var E2 = WGS.f * (2 - WGS.f), E = Math.sqrt(E2);
+  function qf(s) { return (1 - E2) * (s / (1 - E2 * s * s) - Math.log((1 - E * s) / (1 + E * s)) / (2 * E)); }
+  var QP = qf(1), RQ2 = WGS.a * WGS.a * QP / 2;
+  function unitVec(p) {
+    var sb = qf(Math.sin(p[1] * D2R)) / QP, cb = Math.sqrt(Math.max(0, 1 - sb * sb)), l = p[0] * D2R;
+    return [cb * Math.cos(l), cb * Math.sin(l), sb];
+  }
+  function ringArea(pts) {
+    var n = pts.length; if (n < 3) return 0;
+    var v = pts.map(unitVec), o = v[0], sum = 0;
+    for (var i = 1; i < n - 1; i++) {
+      var a = o, b = v[i], c = v[i + 1];
+      var trip = a[0] * (b[1] * c[2] - b[2] * c[1]) - a[1] * (b[0] * c[2] - b[2] * c[0]) + a[2] * (b[0] * c[1] - b[1] * c[0]);
+      var den = 1 + (a[0] * b[0] + a[1] * b[1] + a[2] * b[2]) + (b[0] * c[0] + b[1] * c[1] + b[2] * c[2]) + (c[0] * a[0] + c[1] * a[1] + c[2] * a[2]);
+      sum += 2 * Math.atan2(trip, den);
+    }
+    return Math.abs(sum) * RQ2;
+  }
+  // Geodätischer Kreis mit n Stützpunkten (offener Ring, erster Punkt ≠ letzter)
+  function circleRing(c, r, n) {
+    n = n || 128; var out = [];
+    for (var i = 0; i < n; i++) out.push(direct(c[0], c[1], 360 * i / n, r));
+    return out;
+  }
+  // Selbstüberschneidung eines Rings (geschlossen gedacht), Planarbetrachtung in lon/lat (für Messzwecke ausreichend)
+  function segX(p, q, r, s) {
+    function o(a, b, c) { return (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0]); }
+    var d1 = o(p, q, r), d2 = o(p, q, s), d3 = o(r, s, p), d4 = o(r, s, q);
+    return ((d1 > 0) !== (d2 > 0)) && ((d3 > 0) !== (d4 > 0)) && d1 !== 0 && d2 !== 0 && d3 !== 0 && d4 !== 0;
+  }
+  function selfIntersects(ring) {
+    var n = ring.length; if (n < 4) return false;
+    for (var i = 0; i < n; i++) {
+      var a = ring[i], b = ring[(i + 1) % n];
+      for (var j = i + 1; j < n; j++) {
+        if (j === i + 1 || (i === 0 && j === n - 1)) continue;
+        if (segX(a, b, ring[j], ring[(j + 1) % n])) return true;
+      }
+    }
+    return false;
+  }
+
+  // ---------------------------------------------------------------- Einheiten (alles aus Basiswerten m und m²)
+  var FT = 0.3048, MI = 1609.344, FT2 = FT * FT, AC = 4046.8564224, MI2 = MI * MI;
+  function nf(x, d) { return x.toLocaleString("de-AT", { minimumFractionDigits: d, maximumFractionDigits: d }); }
+  function fmtLen(m, sys) {
+    if (sys === "imperial") { var ft = m / FT; return ft < 1000 ? nf(ft, 0) + " ft" : nf(m / MI, 3) + " mi"; }
+    return m < 1000 ? nf(m, 1) + " m" : nf(m / 1000, 3) + " km";
+  }
+  function fmtArea(a, sys) {
+    if (sys === "imperial") { return a < AC ? nf(a / FT2, 0) + " ft²" : a < MI2 ? nf(a / AC, 2) + " ac" : nf(a / MI2, 3) + " mi²"; }
+    return a < 1e4 ? nf(a, 1) + " m²" : a < 1e6 ? nf(a / 1e4, 2) + " ha" : nf(a / 1e6, 3) + " km²";
+  }
+
+  // ---------------------------------------------------------------- Höhenprofil
+  // Punkte im festen Abstand entlang der Linie (geodätisch), Anfangs- und Endpunkt immer dabei
+  function sampleLine(pts, step) {
+    var out = [], acc = 0;
+    if (!pts.length) return out;
+    out.push({ d: 0, p: pts[0] });
+    for (var i = 1; i < pts.length; i++) {
+      var inv = inverse(pts[i - 1][0], pts[i - 1][1], pts[i][0], pts[i][1]), segLen = inv.s;
+      var k = Math.max(1, Math.ceil(segLen / step));
+      for (var j = 1; j <= k; j++) {
+        var s = segLen * j / k;
+        out.push({ d: acc + s, p: j === k ? pts[i] : direct(pts[i - 1][0], pts[i - 1][1], inv.az1, s) });
+      }
+      acc += segLen;
+    }
+    return out;
+  }
+  // Anstieg/Abstieg mit Totband (Rauschen der Höhenwerte), Mittelwert-Steigung über die Gesamtlänge
+  function elevStats(h, dead) {
+    dead = dead == null ? 2 : dead;
+    var up = 0, down = 0, ref = h[0], min = Infinity, max = -Infinity, imin = 0, imax = 0;
+    for (var i = 0; i < h.length; i++) {
+      if (h[i] < min) { min = h[i]; imin = i; }
+      if (h[i] > max) { max = h[i]; imax = i; }
+      var d = h[i] - ref;
+      if (d >= dead) { up += d; ref = h[i]; } else if (d <= -dead) { down -= d; ref = h[i]; }
+    }
+    return { up: up, down: down, min: min, max: max, imin: imin, imax: imax };
+  }
+  function decodeTerrainRGB(r, g, b) { return -10000 + (r * 65536 + g * 256 + b) * 0.1; }
+
+  // ---------------------------------------------------------------- Koordinatensysteme
+  function ecc(el) { return el.f * (2 - el.f); }
+  // Transversale Mercator (Krüger-Reihe 6. Ordnung, wie PROJ etmerc)
+  function tmerc(el, lon0, k0, fe, fn) {
+    var n = el.f / (2 - el.f), n2 = n * n, n3 = n2 * n, n4 = n3 * n, n5 = n4 * n, n6 = n5 * n, e = Math.sqrt(ecc(el));
+    var A = el.a / (1 + n) * (1 + n2 / 4 + n4 / 64 + n6 / 256);
+    var al = [n / 2 - 2 * n2 / 3 + 5 * n3 / 16 + 41 * n4 / 180 - 127 * n5 / 288 + 7891 * n6 / 37800,
+              13 * n2 / 48 - 3 * n3 / 5 + 557 * n4 / 1440 + 281 * n5 / 630 - 1983433 * n6 / 1935360,
+              61 * n3 / 240 - 103 * n4 / 140 + 15061 * n5 / 26880 + 167603 * n6 / 181440,
+              49561 * n4 / 161280 - 179 * n5 / 168 + 6601661 * n6 / 7257600,
+              34729 * n5 / 80640 - 3418889 * n6 / 1995840, 212378941 * n6 / 319334400];
+    var be = [n / 2 - 2 * n2 / 3 + 37 * n3 / 96 - n4 / 360 - 81 * n5 / 512 + 96199 * n6 / 604800,
+              n2 / 48 + n3 / 15 - 437 * n4 / 1440 + 46 * n5 / 105 - 1118711 * n6 / 3870720,
+              17 * n3 / 480 - 37 * n4 / 840 - 209 * n5 / 4480 + 5569 * n6 / 90720,
+              4397 * n4 / 161280 - 11 * n5 / 504 - 830251 * n6 / 7257600,
+              4583 * n5 / 161280 - 108847 * n6 / 3991680, 20648693 * n6 / 638668800];
+    var de = [2 * n - 2 * n2 / 3 - 2 * n3 + 116 * n4 / 45 + 26 * n5 / 45 - 2854 * n6 / 675,
+              7 * n2 / 3 - 8 * n3 / 5 - 227 * n4 / 45 + 2704 * n5 / 315 + 2323 * n6 / 945,
+              56 * n3 / 15 - 136 * n4 / 35 - 1262 * n5 / 105 + 73814 * n6 / 2835,
+              4279 * n4 / 630 - 332 * n5 / 35 - 399572 * n6 / 14175,
+              4174 * n5 / 315 - 144838 * n6 / 6237, 601676 * n6 / 22275];
+    var c = 2 * Math.sqrt(n) / (1 + n);
+    return {
+      fwd: function (lon, lat) {
+        var phi = lat * D2R, lam = (lon - lon0) * D2R, s = Math.sin(phi);
+        var t = Math.sinh(Math.atanh(s) - c * Math.atanh(c * s));
+        var xi = Math.atan2(t, Math.cos(lam)), eta = Math.atanh(Math.sin(lam) / Math.sqrt(1 + t * t));
+        var X = xi, Y = eta;
+        for (var j = 1; j <= 6; j++) {
+          X += al[j - 1] * Math.sin(2 * j * xi) * Math.cosh(2 * j * eta);
+          Y += al[j - 1] * Math.cos(2 * j * xi) * Math.sinh(2 * j * eta);
+        }
+        return [fe + k0 * A * Y, fn + k0 * A * X];
+      },
+      inv: function (x, y) {
+        var xi = (y - fn) / (k0 * A), eta = (x - fe) / (k0 * A), xp = xi, ep = eta;
+        for (var j = 1; j <= 6; j++) {
+          xp -= be[j - 1] * Math.sin(2 * j * xi) * Math.cosh(2 * j * eta);
+          ep -= be[j - 1] * Math.cos(2 * j * xi) * Math.sinh(2 * j * eta);
+        }
+        var chi = Math.asin(Math.sin(xp) / Math.cosh(ep)), phi = chi;
+        for (var k = 1; k <= 6; k++) phi += de[k - 1] * Math.sin(2 * k * chi);
+        return [lon0 + Math.atan2(Math.sinh(ep), Math.cos(xp)) * R2D, phi * R2D];
+      }
+    };
+  }
+  // Lambert konform, zwei Parallelen (EPSG:31287)
+  function lcc(el, lat0, lon0, lat1, lat2, fe, fn) {
+    var e = Math.sqrt(ecc(el)), a = el.a;
+    function m(p) { var s = Math.sin(p); return Math.cos(p) / Math.sqrt(1 - e * e * s * s); }
+    function t(p) { var s = Math.sin(p); return Math.tan(Math.PI / 4 - p / 2) / Math.pow((1 - e * s) / (1 + e * s), e / 2); }
+    var p0 = lat0 * D2R, p1 = lat1 * D2R, p2 = lat2 * D2R;
+    var n = (Math.log(m(p1)) - Math.log(m(p2))) / (Math.log(t(p1)) - Math.log(t(p2)));
+    var F = m(p1) / (n * Math.pow(t(p1), n)), r0 = a * F * Math.pow(t(p0), n);
+    return {
+      fwd: function (lon, lat) {
+        var r = a * F * Math.pow(t(lat * D2R), n), th = n * (lon - lon0) * D2R;
+        return [fe + r * Math.sin(th), fn + r0 - r * Math.cos(th)];
+      },
+      inv: function (x, y) {
+        var dx = x - fe, dy = r0 - (y - fn), r = Math.sign(n) * Math.hypot(dx, dy);
+        var th = Math.atan2(Math.sign(n) * dx, Math.sign(n) * dy), tt = Math.pow(r / (a * F), 1 / n);
+        var phi = Math.PI / 2 - 2 * Math.atan(tt);
+        for (var i = 0; i < 10; i++) { var s = Math.sin(phi); phi = Math.PI / 2 - 2 * Math.atan(tt * Math.pow((1 - e * s) / (1 + e * s), e / 2)); }
+        return [lon0 + th / n * R2D, phi * R2D];
+      }
+    };
+  }
+  // Datumsübergang MGI <-> ETRS89 mit den sieben Parametern von EPSG:1618 (wie crates/mapx-crs/src/helmert.rs; Genauigkeit
+  // laut EPSG 1,5 m). Das amtliche BEV-Grid (GeoTIFF, 13 MB) wäre im Browser zu schwer.
+  function geo2xyz(el, lon, lat) {
+    var e2 = ecc(el), p = lat * D2R, l = lon * D2R, n = el.a / Math.sqrt(1 - e2 * Math.sin(p) * Math.sin(p));
+    return [n * Math.cos(p) * Math.cos(l), n * Math.cos(p) * Math.sin(l), n * (1 - e2) * Math.sin(p)];
+  }
+  function xyz2geo(el, x, y, z) {
+    var e2 = ecc(el), p = Math.hypot(x, y), la = Math.atan2(z, p * (1 - e2));
+    for (var i = 0; i < 8; i++) { var n = el.a / Math.sqrt(1 - e2 * Math.sin(la) * Math.sin(la)); la = Math.atan2(z + e2 * n * Math.sin(la), p); }
+    return [Math.atan2(y, x) * R2D, la * R2D];
+  }
+  var AS = Math.PI / 648000, HP = { tx: 577.326, ty: 90.129, tz: 463.919, rx: 5.137 * AS, ry: 1.474 * AS, rz: 5.297 * AS, m: 1 + 2.4232e-6 };
+  function mgi2etrs(lon, lat) {
+    var v = geo2xyz(BESSEL, lon, lat), x = v[0], y = v[1], z = v[2], m = HP.m;
+    return xyz2geo(GRS80, HP.tx + m * (x - HP.rz * y + HP.ry * z), HP.ty + m * (HP.rz * x + y - HP.rx * z), HP.tz + m * (-HP.ry * x + HP.rx * y + z));
+  }
+  function etrs2mgi(lon, lat) {   // Umkehrung durch Fixpunktiteration (Differenz < 1e-10 Grad nach drei Schritten)
+    var g = [lon, lat];
+    for (var i = 0; i < 4; i++) { var f = mgi2etrs(g[0], g[1]); g = [g[0] + (lon - f[0]), g[1] + (lat - f[1])]; }
+    return g;
+  }
+  var L0 = function (d) { return d + 1 / 3; };
+  function utm(zone) { return tmerc(GRS80, zone * 6 - 183, 0.9996, 500000, 0); }
+  var gk = {};
+  [[31254, 10], [31255, 13], [31256, 16]].forEach(function (z) { gk[z[0]] = tmerc(BESSEL, L0(z[1]), 1, 0, -5e6); });
+  var lam = lcc(BESSEL, 47.5, L0(13), 49, 46, 4e5, 4e5);
+  var BMN_FE = { 31257: [31254, 150000], 31258: [31255, 450000], 31259: [31256, 750000] };
+  // Systeme: Kennung -> { name, kurz, art ('geo'|'xy'), to(lon, lat), from(x, y) }; lon/lat sind WGS84/ETRS89
+  var SYS = {
+    4326: { name: "WGS84 (EPSG:4326)", datum: "ETRS89" },
+    25832: { name: "ETRS89 / UTM 32N (EPSG:25832)", datum: "ETRS89", to: function (lo, la) { return utm(32).fwd(lo, la); }, from: function (x, y) { return utm(32).inv(x, y); } },
+    25833: { name: "ETRS89 / UTM 33N (EPSG:25833)", datum: "ETRS89", to: function (lo, la) { return utm(33).fwd(lo, la); }, from: function (x, y) { return utm(33).inv(x, y); } },
+    31287: { name: "MGI / Austria Lambert (EPSG:31287)", datum: "MGI",
+             to: function (lo, la) { var g = etrs2mgi(lo, la); return lam.fwd(g[0], g[1]); },
+             from: function (x, y) { var g = lam.inv(x, y); return mgi2etrs(g[0], g[1]); } }
+  };
+  [[31254, "West, M28"], [31255, "Mitte, M31"], [31256, "Ost, M34"]].forEach(function (z) {
+    var P = gk[z[0]];
+    SYS[z[0]] = { name: "MGI / Austria GK " + z[1] + " (EPSG:" + z[0] + ")", datum: "MGI",
+      to: function (lo, la) { var g = etrs2mgi(lo, la); return P.fwd(g[0], g[1]); },
+      from: function (x, y) { var g = P.inv(x, y); return mgi2etrs(g[0], g[1]); } };
+  });
+  Object.keys(BMN_FE).forEach(function (k) {
+    var base = SYS[BMN_FE[k][0]], fe = BMN_FE[k][1];
+    SYS[k] = { name: "MGI / BMN " + base.name.replace(/^.*GK ([^,]*), (M\d+).*$/, "$2") + " (EPSG:" + k + ")", datum: "MGI",
+      to: function (lo, la) { var r = base.to(lo, la); return [r[0] + fe, r[1]]; },
+      from: function (x, y) { return base.from(x - fe, y); } };
+  });
+  function transformTo(code, lon, lat) { return SYS[code].to(lon, lat); }
+  function transformFrom(code, x, y) { return SYS[code].from(x, y); }
+  function utmZone(lon) { return Math.min(60, Math.max(1, Math.floor((lon + 180) / 6) + 1)); }
+
+  // Grad/Minuten/Sekunden
+  function fmtDMS(v, pos, neg) {
+    var s = v < 0 ? neg : pos; v = Math.abs(v);
+    var d = Math.floor(v), m = Math.floor((v - d) * 60), sec = ((v - d) * 60 - m) * 60;
+    if (sec >= 59.9995) { sec = 0; m++; } if (m >= 60) { m = 0; d++; }
+    return s + " " + d + "° " + (m < 10 ? "0" : "") + m + "′ " + (sec < 10 ? "0" : "") + sec.toFixed(3).replace(".", ",") + "″";
+  }
+  function fmtDec(v, d) { return v.toFixed(d == null ? 6 : d); }
+
+  // ---------------------------------------------------------------- Geocodes: GeoHash, Plus Code (OLC), MGRS
+  var GH = "0123456789bcdefghjkmnpqrstuvwxyz";
+  function geohashEncode(lon, lat, len) {
+    var la = [-90, 90], lo = [-180, 180], even = true, bit = 0, ch = 0, out = "";
+    while (out.length < len) {
+      var r = even ? lo : la, v = even ? lon : lat, mid = (r[0] + r[1]) / 2;
+      if (v >= mid) { ch = ch * 2 + 1; r[0] = mid; } else { ch = ch * 2; r[1] = mid; }
+      even = !even;
+      if (++bit === 5) { out += GH[ch]; bit = 0; ch = 0; }
+    }
+    return out;
+  }
+  function geohashDecode(h) {
+    var la = [-90, 90], lo = [-180, 180], even = true;
+    h = h.toLowerCase();
+    for (var i = 0; i < h.length; i++) {
+      var c = GH.indexOf(h[i]); if (c < 0) return null;
+      for (var b = 4; b >= 0; b--) {
+        var r = even ? lo : la, mid = (r[0] + r[1]) / 2;
+        if ((c >> b) & 1) r[0] = mid; else r[1] = mid;
+        even = !even;
+      }
+    }
+    return { lon: (lo[0] + lo[1]) / 2, lat: (la[0] + la[1]) / 2, dlon: lo[1] - lo[0], dlat: la[1] - la[0] };
+  }
+  var OLC = "23456789CFGHJMPQRVWX";
+  function olcEncode(lon, lat, len) {
+    lat = Math.min(90 - 1e-9, Math.max(-90, lat)) + 90; lon = ((lon + 180) % 360 + 360) % 360;
+    // fünf Zeichenpaare, Zellgröße 20, 1, 1/20, 1/400, 1/8000 Grad: ganzzahlig in Einheiten von 1/8000 Grad (= 12,5 mm Breite × …)
+    var latV = Math.floor(lat * 8000 + 1e-9), lonV = Math.floor(lon * 8000 + 1e-9), d = [], i;
+    for (i = 0; i < 5; i++) { d.unshift([latV % 20, lonV % 20]); latV = Math.floor(latV / 20); lonV = Math.floor(lonV / 20); }
+    var code = "";
+    for (i = 0; i < (len === 8 ? 4 : 5); i++) { code += OLC[d[i][0]] + OLC[d[i][1]]; if (i === 3) code += "+"; }
+    return code;
+  }
+  // Voller Code oder Kurzcode (mit Referenzpunkt); Mittelpunkt der Zelle, size = Zellgröße in Grad
+  function olcDecode(code, ref) {
+    code = code.toUpperCase().replace(/\s/g, "");
+    var plus = code.indexOf("+");
+    if (plus < 0 || plus !== code.lastIndexOf("+") || plus > 8 || plus % 2) return null;
+    if (plus < 8) {
+      if (!ref) return null;
+      var P = 8 - plus, full = olcEncode(ref.lon, ref.lat, 10).slice(0, P) + code, r = olcDecode(full);
+      if (!r) return null;
+      var cell = 20 / Math.pow(20, P / 2 - 1);
+      if (r.lat - ref.lat > cell / 2) r.lat -= cell; else if (ref.lat - r.lat > cell / 2) r.lat += cell;
+      if (r.lon - ref.lon > cell / 2) r.lon -= cell; else if (ref.lon - r.lon > cell / 2) r.lon += cell;
+      return r;
+    }
+    var s = code.replace("+", "").replace(/0+$/, ""), lat = 0, lon = 0, res = 20, vals = [], i;
+    if (s.length < 2 || s.length % 2) return null;
+    for (i = 0; i < s.length; i++) { var dg = OLC.indexOf(s[i]); if (dg < 0) return null; vals.push(dg); }
+    var np = Math.min(5, vals.length / 2);
+    for (i = 0; i < np; i++) { lat += vals[2 * i] * res; lon += vals[2 * i + 1] * res; if (i < np - 1) res /= 20; }
+    return { lon: lon - 180 + res / 2, lat: lat - 90 + res / 2, size: res };
+  }
+  // MGRS (1 m): UTM-Zone/Band + 100-km-Quadrat + Ost/Nord auf 5 Stellen, WGS84-Gitter (Buchstabensatz AA)
+  var MB = "CDEFGHJKLMNPQRSTUVWX", ML_E = ["ABCDEFGH", "JKLMNPQR", "STUVWXYZ"], ML_N = "ABCDEFGHJKLMNPQRSTUV";
+  function mgrsEncode(lon, lat, digits) {
+    digits = digits == null ? 5 : digits;
+    var zone = utmZone(lon), xy = utm(zone).fwd(lon, lat);
+    if (lat >= 72 && lat < 84 && zone > 31 && zone < 38) {}   // Sonderzonen 31V/32V/Svalbard: nicht abgebildet, Österreich nicht betroffen
+    var band = MB[Math.min(19, Math.max(0, Math.floor((lat + 80) / 8)))];
+    var e100 = Math.floor(xy[0] / 1e5), n100 = Math.floor(xy[1] / 1e5);
+    var eL = ML_E[(zone - 1) % 3][e100 - 1], nL = ML_N[(n100 + (zone % 2 ? 0 : 5)) % 20];
+    var e = Math.floor(xy[0] % 1e5), n = Math.floor(xy[1] % 1e5), div = Math.pow(10, 5 - digits);
+    function pad(v) { return String(Math.floor(v / div)).padStart(digits, "0"); }
+    return zone + band + " " + eL + nL + " " + pad(e) + " " + pad(n);
+  }
+  function mgrsDecode(s) {
+    var m = /^\s*(\d{1,2})\s*([C-HJ-NP-X])\s*([A-HJ-NP-Z])\s*([A-HJ-NP-V])\s*((?:\d\s*){2,10})\s*$/i.exec(s);
+    if (!m) return null;
+    var zone = +m[1], band = m[2].toUpperCase(), eL = m[3].toUpperCase(), nL = m[4].toUpperCase(), dg = m[5].replace(/\s/g, "");
+    if (zone < 1 || zone > 60 || dg.length % 2) return null;
+    var h = dg.length / 2, sc = Math.pow(10, 5 - h), e = +dg.slice(0, h) * sc, n = +dg.slice(h) * sc;
+    var ei = ML_E[(zone - 1) % 3].indexOf(eL); if (ei < 0) return null;
+    var x = (ei + 1) * 1e5 + e, ni = ML_N.indexOf(nL) - (zone % 2 ? 0 : 5); ni = ((ni % 20) + 20) % 20;
+    // Nordwert: 2 000 000 m-Periode über das Band festlegen
+    var latMin = (MB.indexOf(band)) * 8 - 80, base = utm(zone).fwd((zone * 6 - 183), latMin)[1], best = null;
+    for (var k = 0; k < 6; k++) {
+      var y = ni * 1e5 + n + k * 2e6;
+      if (y >= base - 1e5 && y < base + 9.2e5) { var ll = utm(zone).inv(x, y); if (ll[1] >= latMin - 0.01 && ll[1] <= latMin + 8.01 + (band === "X" ? 4 : 0)) { best = ll; break; } }
+    }
+    if (!best) return null;
+    return { lon: best[0], lat: best[1], size: sc };
+  }
+
+  // ---------------------------------------------------------------- Eingabe: Koordinaten erkennen
+  function num(s) { return parseFloat(String(s).replace(",", ".")); }
+  function inAT(lo, la) { return lo >= -180 && lo <= 180 && la >= -90 && la <= 90; }
+  // Liefert { lon, lat, art } oder null. ref = { lon, lat } der Kartenmitte (nur für Kurz-Pluscodes)
+  function parseCoord(input, ref) {
+    var s = String(input || "").trim(), m;
+    if (!s) return null;
+    // EPSG:xxxx E N
+    if ((m = /^(?:epsg\s*:?\s*)(\d{4,5})\s*[ ;]\s*(-?\d+(?:[.,]\d+)?)\s*[ ;]\s*(-?\d+(?:[.,]\d+)?)$/i.exec(s))) {
+      var sy = SYS[+m[1]]; if (!sy || !sy.from) return null;
+      var r = sy.from(num(m[2]), num(m[3])); return inAT(r[0], r[1]) && isFinite(r[0]) ? { lon: r[0], lat: r[1], art: "EPSG:" + m[1] } : null;
+    }
+    // UTM: 33T 537450 5214850 | 33N 537450 5214850 | UTM 33 N ...
+    if ((m = /^(?:utm\s*)?(\d{1,2})\s*([C-HJ-NP-X])\s+(\d{5,7})(?:[.,]\d+)?\s+(\d{6,8})(?:[.,]\d+)?$/i.exec(s))) {
+      var z = +m[1], band = m[2].toUpperCase();
+      if (z >= 1 && z <= 60) {
+        var north = band >= "N", e = +m[3], n = +m[4];
+        var q = utm(z).inv(e, north ? n : n - 1e7);
+        return inAT(q[0], q[1]) ? { lon: q[0], lat: q[1], art: "UTM " + z + band } : null;
+      }
+    }
+    if ((m = mgrsDecode(s)) && /[A-Za-z]{2}/.test(s)) return { lon: m.lon, lat: m.lat, art: "MGRS" };
+    // Plus Code (voll mit + )
+    if (/^[23456789CFGHJMPQRVWX0]{2,8}\+[23456789CFGHJMPQRVWX]{0,3}(\s.*)?$/i.test(s)) {
+      var o = olcDecode(s.split(/\s/)[0], ref); if (o) return { lon: o.lon, lat: o.lat, art: "Plus Code" };
+    }
+    if ((m = /^(?:geohash|gh)\s*:?\s*([0-9b-hjkmnp-z]{4,12})$/i.exec(s))) {
+      var g = geohashDecode(m[1]); if (g) return { lon: g.lon, lat: g.lat, art: "GeoHash" };
+    }
+    // Grad/Minuten/Sekunden mit Himmelsrichtung oder Gradzeichen
+    if (/[°′″'"]|(^|\s|\d)[NSEOW]\b|\b[NSEOW](\s|\d|$)/i.test(s) && /\d/.test(s) && /[°′″'"NSEOWnseow]/.test(s)) {
+      var t = s.toUpperCase().replace(/,\s/g, " ").replace(/[°′″'"]/g, " ").replace(/\bO\b/g, "E").replace(/([NSEW])/g, " $1 ").replace(/\s+/g, " ").trim().split(" ");
+      var groups = [], cur = null, lead = /^[NSEW]$/.test(t[0]);
+      for (var ti = 0; ti < t.length && groups; ti++) {
+        var tok = t[ti];
+        if (/^[NSEW]$/.test(tok)) { if (lead) { cur = { h: tok, v: [] }; groups.push(cur); } else if (cur) { cur.h = tok; cur = null; } else groups = null; }
+        else if (/^-?\d+(?:[.,]\d+)?$/.test(tok)) { if (!cur) { cur = { h: null, v: [] }; groups.push(cur); } cur.v.push(num(tok)); }
+        else groups = null;
+      }
+      if (groups && groups.length === 2 && groups.every(function (g) { return g.v.length >= 1 && g.v.length <= 3; })) {
+        var vals = groups.map(function (g) {
+          var neg = g.v[0] < 0 || g.h === "S" || g.h === "W", v = Math.abs(g.v[0]) + (g.v[1] || 0) / 60 + (g.v[2] || 0) / 3600;
+          if ((g.v[1] != null && g.v[1] >= 60) || (g.v[2] != null && g.v[2] >= 60)) return NaN;
+          return neg ? -v : v;
+        });
+        var latFirst = !(groups[0].h === "E" || groups[0].h === "W"), la = latFirst ? vals[0] : vals[1], lo = latFirst ? vals[1] : vals[0];
+        var hs = groups.map(function (g) { return g.h; });
+        var okH = hs[0] === null || hs[1] === null || ((hs[0] === "N" || hs[0] === "S") !== (hs[1] === "N" || hs[1] === "S"));
+        if (okH && isFinite(la) && isFinite(lo) && Math.abs(la) <= 90 && Math.abs(lo) <= 180) return { lon: lo, lat: la, art: "WGS84 GMS" };
+      }
+    }
+    // Dezimalgrad: "47.0707, 15.4395" | "47,0707 15,4395" | "N47.07 E15.43" | "47.07;15.43"
+    var hemi = /^([NS])\s*(-?\d+(?:[.,]\d+)?)\s*[,;]?\s*([EOW])\s*(-?\d+(?:[.,]\d+)?)$/i.exec(s);
+    if (hemi) {
+      var la2 = num(hemi[2]) * (/s/i.test(hemi[1]) ? -1 : 1), lo2 = num(hemi[4]) * (/w/i.test(hemi[3]) ? -1 : 1);
+      if (Math.abs(la2) <= 90 && Math.abs(lo2) <= 180) return { lon: lo2, lat: la2, art: "WGS84" };
+    }
+    if (/^[-+]?\d{1,3}(?:[.,]\d+)?\s*[°]?\s*[,;/\s]\s*[-+]?\d{1,3}(?:[.,]\d+)?\s*[°]?$/.test(s)) {
+      var nums = s.replace("°", "").match(/-?\d+(?:[.,]\d+)?/g);
+      // "47,15" (ein Komma, keine Leerstelle) wäre eine einzelne Zahl: nur zwei erkannte Zahlen zählen
+      if (nums && nums.length === 2) {
+        var a1 = num(nums[0]), a2 = num(nums[1]);
+        if (/[.,]\d/.test(nums[0]) || /[.,]\d/.test(nums[1]) || /[ ;]/.test(s)) {
+          // Reihenfolge: Breite, Länge; vertauscht erkennen, wenn nur so gültig (Österreich: Länge 9–17, Breite 46–49)
+          if (Math.abs(a1) <= 90 && Math.abs(a2) <= 180 && !(a1 >= 9 && a1 <= 18 && a2 >= 46 && a2 <= 49.5)) return { lon: a2, lat: a1, art: "WGS84" };
+          if (Math.abs(a2) <= 90 && Math.abs(a1) <= 180) return { lon: a1, lat: a2, art: "WGS84 (Länge, Breite)" };
+        }
+      }
+    }
+    return null;
+  }
+
+  // ---------------------------------------------------------------- Export
+  function csvEscape(v) { v = String(v); return /[;"\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
+  function gpx(name, pts, time) {
+    function esc(x) { return String(x).replace(/[&<>"]/g, function (c) { return "&#" + c.charCodeAt(0) + ";"; }); }
+    var out = '<?xml version="1.0" encoding="UTF-8"?>\n<gpx version="1.1" creator="mapx.at" xmlns="http://www.topografix.com/GPX/1/1">\n' +
+      "  <metadata><name>" + esc(name) + "</name>" + (time ? "<time>" + time + "</time>" : "") + "</metadata>\n  <trk><name>" + esc(name) + "</name><trkseg>\n";
+    pts.forEach(function (p) {
+      out += '    <trkpt lat="' + p.lat.toFixed(7) + '" lon="' + p.lon.toFixed(7) + '">' + (p.ele != null ? "<ele>" + p.ele.toFixed(1) + "</ele>" : "") + "</trkpt>\n";
+    });
+    return out + "  </trkseg></trk>\n</gpx>\n";
+  }
+
+  root.mapxGeo = {
+    WGS: WGS, inverse: inverse, direct: direct, dist: dist, pathLength: pathLength, ringPerimeter: ringPerimeter, ringArea: ringArea,
+    circleRing: circleRing, selfIntersects: selfIntersects, fmtLen: fmtLen, fmtArea: fmtArea, nf: nf,
+    sampleLine: sampleLine, elevStats: elevStats, decodeTerrainRGB: decodeTerrainRGB,
+    SYS: SYS, transformTo: transformTo, transformFrom: transformFrom, utmZone: utmZone, mgi2etrs: mgi2etrs, etrs2mgi: etrs2mgi,
+    fmtDMS: fmtDMS, fmtDec: fmtDec, geohashEncode: geohashEncode, geohashDecode: geohashDecode, olcEncode: olcEncode, olcDecode: olcDecode,
+    mgrsEncode: mgrsEncode, mgrsDecode: mgrsDecode, parseCoord: parseCoord, csvEscape: csvEscape, gpx: gpx,
+    units: { FT: FT, MI: MI, AC: AC }
+  };
+})(typeof window !== "undefined" ? window : globalThis);
 </script>
 <script>
 (function () {
@@ -763,6 +1393,7 @@ window.mapxStil = (function () {
     if (d3.checked) h += "&3d=1";
     if (terr.checked) h += "&terr=1";
     if (uiMode) h += "&ui=" + uiMode;
+    if (window.mapxTools) h += window.mapxTools.hash();   // Werkzeuge (Messen, Koordinaten, Profil, Umkreis)
     if (h === lastHash) return;
     lastHash = h;
     try { history.replaceState(history.state, "", h); } catch (e) {}
@@ -780,6 +1411,7 @@ window.mapxStil = (function () {
     applyAll(); syncPoi();
   }
   readHashState(H0.kv);
+  window.mapxWriteHash = writeHash;
   map.on("moveend", writeHash);
   Object.keys(TOGGLES).concat(["bm"]).forEach(function (id) { document.getElementById(id).addEventListener("change", writeHash); });
   op.addEventListener("change", writeHash);
@@ -827,6 +1459,7 @@ window.mapxStil = (function () {
     wildlife_park: "Wildpark", historic: "historisch", forest: "Wald", pet: "Tier", synagogue: "Synagoge", buddhist: "buddhistisch", muslim: "muslimisch",
     open_air: "Freilicht", exhibition_ground: "Ausstellungsgelände", national_park: "Nationalpark", ferry: "Fähre", ship_station: "Schiffsstation",
     forest_house: "Forsthaus", hunting_lodge: "Jagdhütte", city: "Stadt", district: "Bezirk" };
+  window.mapxLabels = { poi: POI_KIND };   // für die Werkzeuge (Umkreisliste)
   var WATER_CLASS = { river: "Fluss", stream: "Bach", canal: "Kanal", ditch: "Graben", lake: "See", reservoir: "Stausee", pond: "Teich, Weiher" };
   var BOUNDARY = { country: "Staatsgrenze", state: "Landesgrenze", district: "Bezirksgrenze", municipality: "Gemeindegrenze" };
   var HR = "<hr class='pc-hr'>";
@@ -838,7 +1471,7 @@ window.mapxStil = (function () {
     return null;
   }
   map.on("click", function (e) {
-    if (!ready || (document.getElementById("rt") || {}).className === "rt open") return;
+    if (!ready || (document.getElementById("rt") || {}).className === "rt open" || (window.mapxTools && window.mapxTools.busy())) return;
     var pad = 4, box = [[e.point.x - pad, e.point.y - pad], [e.point.x + pad, e.point.y + pad]];
     var poiCat = "", poiSrc = "", parts = [], P = { h: [], poi: [], bld: [], road: [], lift: [], water: [], bd: [], land: [], tun: [] }, kinds = (LEGEND && LEGEND.kind) || {};
     var labels = (LEGEND && LEGEND.roadLabels) || {};
@@ -981,7 +1614,7 @@ window.mapxStil = (function () {
     if (p.get("searchKey")) SEARCH_KEY = p.get("searchKey");
   })();
 
-  var TYPE_LABEL = { address: "Adresse", street: "Straße", locality: "Ortschaft", place: "Ort", municipality: "Gemeinde",
+  var TYPE_LABEL = { coord: "Koordinate", address: "Adresse", street: "Straße", locality: "Ortschaft", place: "Ort", municipality: "Gemeinde",
                      district: "Bezirk", state: "Land", parcel: "Grundst.", postcode: "PLZ" };
   var CLASS_LABEL = { gipfel: "Gipfel", stadt: "Stadt", markt: "Markt", dorf: "Dorf", einzelhaus: "Haus", ried: "Ried",
                       kirche: "Kirche", schloss: "Schloss", burg: "Burg", ruine: "Ruine", huette: "Hütte", tal: "Tal",
@@ -1050,6 +1683,12 @@ window.mapxStil = (function () {
     box.classList.toggle("has-text", input.value.length > 0);
     clearTimeout(timer);
     if (q.length < 2) { hits = []; active = -1; setOpen(false); if (ctrl) ctrl.abort(); return; }
+    var cc = window.mapxTools && window.mapxTools.parse(q);   // Koordinate oder Code (WGS84, GMS, UTM, MGRS, Plus Code, EPSG:n E N): springt zum Punkt
+    if (cc) {
+      if (ctrl) ctrl.abort(); seq++;
+      hits = [{ type: "coord", label: cc.lat.toFixed(5) + ", " + cc.lon.toFixed(5), name: q, context: cc.art + " – Marker setzen, Zoom 16", _geo: { lat: cc.lat, lng: cc.lon }, zoom: 16 }];
+      active = 0; render(); return;
+    }
     timer = setTimeout(function () { search(q); }, 180);
   });
   input.addEventListener("keydown", function (e) {
@@ -1149,6 +1788,7 @@ window.mapxStil = (function () {
     clearTimeout(rtTimer); rtSeq++;
     ["a", "b"].forEach(function (k) { if (rtMk[k]) rtMk[k].remove(); rtMk[k] = null; rtPts[k] = null; rtIn[k].value = ""; });
     rtDraw(rtEmpty); rtOut.innerHTML = ""; rtAttr.style.display = "none"; rtHint.style.display = "";
+    if (window.mapxTools) window.mapxTools.routeReady(null);
   }
   document.getElementById("rtReset").addEventListener("click", rtClear);
   document.getElementById("rtSwap").addEventListener("click", function () {
@@ -1179,9 +1819,10 @@ window.mapxStil = (function () {
     var m = Math.round(s / 60); if (m < 1) return "< 1 Min.";
     return m < 60 ? m + " Min." : Math.floor(m / 60) + " Std. " + (m % 60 ? (m % 60) + " Min." : "");
   }
-  function rtError(t) { rtOut.innerHTML = '<div class="err" role="alert">' + esc(t) + "</div>"; rtAttr.style.display = "none"; rtDraw(rtEmpty); }
+  function rtError(t) { if (window.mapxTools) window.mapxTools.routeReady(null); rtOut.innerHTML = '<div class="err" role="alert">' + esc(t) + "</div>"; rtAttr.style.display = "none"; rtDraw(rtEmpty); }
   function rtSchedule() {
     clearTimeout(rtTimer);
+    if (window.mapxTools) window.mapxTools.routeReady(null);
     if (!(rtPts.a && rtPts.b)) { if (rtCtrl) rtCtrl.abort(); rtSeq++; rtDraw(rtEmpty); rtOut.innerHTML = ""; rtAttr.style.display = "none";
       rtHint.style.display = ""; return; }
     rtHint.style.display = "none";
@@ -1206,6 +1847,7 @@ window.mapxStil = (function () {
       }
       var p = o.j.properties || {};
       rtDraw({ type: "FeatureCollection", features: [o.j] });
+      if (window.mapxTools) window.mapxTools.routeReady(o.j.geometry.coordinates);
       rtOut.innerHTML = '<div class="res">' + esc(fmtDur(p.duration_s)) + ' <span>· ' + esc(fmtDist(p.distance_m)) + "</span></div>";
       rtAttr.textContent = p.attribution || "Datenquelle: GIP.at, CC BY 4.0"; rtAttr.style.display = "";
       var bb = new maplibregl.LngLatBounds();
@@ -1269,6 +1911,7 @@ window.mapxStil = (function () {
   // Rechtsklick / langes Druecken -> Reverse-Geocoding (naechste Adresse, sonst naechster Ort/Strasse)
   var lastRev = 0, revPop = null;
   function reverse(lngLat) {
+    if (window.mapxTools && window.mapxTools.busy()) return;   // Werkzeug aktiv: Rechtsklick/langes Drücken gehört dem Werkzeug
     var now = Date.now(); if (now - lastRev < 800) return; lastRev = now;
     if (revPop) revPop.remove();
     var lat = +lngLat.lat.toFixed(6), lng = +lngLat.lng.toFixed(6);
@@ -1305,6 +1948,1122 @@ window.mapxStil = (function () {
   }, { passive: true });
   mapEl.addEventListener("touchend", lpCancel, { passive: true });
   mapEl.addEventListener("touchcancel", lpCancel, { passive: true });
+})();
+</script>
+<script id="mapx-tools">
+(function () {
+  "use strict";
+  // Werkzeuge: Messen (#81), Koordinaten (#91), Höhenprofil (#99), Umkreis/Puffer (#147) auf einer gemeinsamen Zeichen-Grundlage.
+  // Rechenkern: Block <script id="mapx-geo"> (window.mapxGeo, getestet in viewer/test/geo.cjs). Kein Server, kein Login.
+  var G = window.mapxGeo, map = window.mapxMap;
+  if (!G || !map) return;
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (ch) { return "&#" + ch.charCodeAt(0) + ";"; }); }
+  function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  var wz = $("wz"), msgEl = $("msg"), toastT = null;
+  function toast(t) {
+    msgEl.textContent = t; msgEl.classList.add("ok"); msgEl.style.display = "block"; clearTimeout(toastT);
+    toastT = setTimeout(function () { msgEl.classList.remove("ok"); msgEl.style.display = "none"; }, 2200);
+  }
+  function copy(text) {
+    var done = function () { toast("Kopiert: " + text); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, function () { toast(text); }); else toast(text);
+  }
+  function download(name, mime, text) {
+    var a = document.createElement("a"), url = URL.createObjectURL(new Blob([text], { type: mime }));
+    a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+  }
+  function today() { return new Date().toISOString().slice(0, 10); }
+  function ll(e) { return [e.lngLat.lng, e.lngLat.lat]; }
+
+  // ---------------------------------------------------------------- Zustand
+  var TOOLS = { m: { name: "Messen", color: "#e11d48" }, k: { name: "Koordinaten", color: "#0d9488" }, p: { name: "Höhenprofil", color: "#7c3aed" }, u: { name: "Umkreis", color: "#ea580c" } };
+  var ST = { m: { shapes: [], sel: null, kind: "line" }, k: { shapes: [], sel: null }, p: { shapes: [], sel: null }, u: { shapes: [], sel: null, mode: "circle", kind: "line", dist: 500 } };
+  var tool = "m", isOpen = false, cur = null, cursor = null, cross = false, seq = 0, units = lsGet("mapx-units") === "imperial" ? "imperial" : "metric";
+  var hooks = {};   // pro Werkzeug: onChange(shape), onDone(shape), onSelect
+  function S() { return ST[tool]; }
+  function byId(id) { return S().shapes.filter(function (s) { return s.id === id; })[0]; }
+  function minPts(s) { return s.kind === "area" ? 3 : s.kind === "line" ? 2 : s.kind === "circle" ? 2 : 1; }
+  function colorOf() { return TOOLS[tool].color; }
+
+  // ---------------------------------------------------------------- Karte: Quelle und Ebenen
+  var EMPTY = { type: "FeatureCollection", features: [] }, LAYERS_OK = false;
+  function ensureLayers() {
+    if (map.getSource("wz")) return true;
+    if (!map.getStyle() || !map.getStyle().layers || !map.getStyle().layers.length) return false;
+    map.addSource("wz", { type: "geojson", data: EMPTY });
+    var coarse = window.matchMedia && matchMedia("(pointer:coarse)").matches, vr = coarse ? 9 : 6;
+    map.addLayer({ id: "wz-buf", type: "fill", source: "wz", filter: ["==", ["get", "t"], "buf"], paint: { "fill-color": ["get", "c"], "fill-opacity": 0.2 } });
+    map.addLayer({ id: "wz-buf-ln", type: "line", source: "wz", filter: ["==", ["get", "t"], "buf"], paint: { "line-color": ["get", "c"], "line-width": 2, "line-dasharray": [2, 1.5] } });
+    map.addLayer({ id: "wz-fill", type: "fill", source: "wz", filter: ["==", ["get", "t"], "area"], paint: { "fill-color": ["get", "c"], "fill-opacity": 0.18 } });
+    map.addLayer({ id: "wz-case", type: "line", source: "wz", filter: ["in", ["get", "t"], ["literal", ["line", "area"]]],
+                   layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#ffffff", "line-width": 6, "line-opacity": 0.85 } });
+    map.addLayer({ id: "wz-line", type: "line", source: "wz", filter: ["in", ["get", "t"], ["literal", ["line", "area"]]],
+                   layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": ["get", "c"], "line-width": 3 } });
+    map.addLayer({ id: "wz-rubber", type: "line", source: "wz", filter: ["==", ["get", "t"], "rubber"],
+                   layout: { "line-cap": "round" }, paint: { "line-color": ["get", "c"], "line-width": 2.5, "line-dasharray": [1.5, 1.5] } });
+    map.addLayer({ id: "wz-mid", type: "circle", source: "wz", filter: ["==", ["get", "t"], "m"],
+                   paint: { "circle-radius": vr - 1.5, "circle-color": "#ffffff", "circle-opacity": 0.75, "circle-stroke-color": ["get", "c"], "circle-stroke-width": 1.5 } });
+    map.addLayer({ id: "wz-vert", type: "circle", source: "wz", filter: ["in", ["get", "t"], ["literal", ["v", "pt"]]],
+                   paint: { "circle-radius": ["case", ["==", ["get", "sel"], 1], vr + 2, vr], "circle-color": "#ffffff", "circle-stroke-color": ["get", "c"], "circle-stroke-width": 2.5 } });
+    map.addLayer({ id: "wz-lab", type: "symbol", source: "wz", filter: ["has", "l"],
+                   layout: { "text-field": ["get", "l"], "text-font": ["Noto Sans Bold"], "text-size": ["case", ["==", ["get", "t"], "tot"], 13, 11],
+                             "text-allow-overlap": true, "text-ignore-placement": true, "text-anchor": ["case", ["==", ["get", "t"], "tot"], ["literal", "bottom"], ["literal", "center"]],
+                             "text-offset": ["case", ["==", ["get", "t"], "tot"], ["literal", [0, -0.9]], ["literal", [0, 0]]], "text-max-width": 14 },
+                   paint: { "text-color": "#111827", "text-halo-color": "#ffffff", "text-halo-width": 2 } });
+    LAYERS_OK = true;
+    return true;
+  }
+  function featurize() {
+    var feats = [], st = S(), col = colorOf();
+    function F(t, geom, props) { props = props || {}; props.t = t; props.c = props.c || col; feats.push({ type: "Feature", geometry: geom, properties: props }); }
+    st.shapes.forEach(function (s) {
+      var live = s === cur, sel = s.id === st.sel || live, pts = s.pts.slice();
+      if (live && cursor && s.kind !== "center" && s.kind !== "point") {
+        if (s.kind !== "circle" || pts.length < 2) pts.push(cursor);
+      }
+      var name = s.name ? s.name + " · " : "";
+      if (s.kind === "line" && pts.length >= 2) F("line", { type: "LineString", coordinates: pts });
+      else if (s.kind === "area") {
+        if (pts.length >= 3) F("area", { type: "Polygon", coordinates: [pts.concat([pts[0]])] });
+        else if (pts.length === 2) F("line", { type: "LineString", coordinates: pts });
+        if (live && pts.length >= 3 && cursor) F("rubber", { type: "LineString", coordinates: [pts[pts.length - 1], pts[0]] });
+      } else if (s.kind === "circle" && pts.length >= 2) {
+        var r = G.dist(pts[0], pts[1]);
+        F("area", { type: "Polygon", coordinates: [circlePoly(pts[0], r)] });
+        F("line", { type: "LineString", coordinates: [pts[0], pts[1]] });
+      } else if (s.kind === "center") {
+        F("area", { type: "Polygon", coordinates: [circlePoly(pts[0], s.r)] });
+      }
+      if (s.buf) s.buf.forEach(function (poly) { F("buf", { type: "Polygon", coordinates: poly }, { c: col }); });
+      // Beschriftungen
+      if (hooks[tool] && hooks[tool].labels) hooks[tool].labels(s, pts, sel, live, F, name);
+      // Stützpunkte nur bei ausgewählter/gezeichneter Form (importierte Routen: schreibgeschützt, ohne Punkte)
+      if (!s.ro && (sel || tool === "k")) {
+        s.pts.forEach(function (p, i) {
+          F(s.kind === "point" ? "pt" : "v", { type: "Point", coordinates: p }, { sid: s.id, i: i, sel: s.id === st.sel ? 1 : 0, l: s.kind === "point" ? String(S().shapes.indexOf(s) + 1) : undefined });
+        });
+        if (!live && s.done && (s.kind === "line" || s.kind === "area") && s.pts.length < 200) {
+          var n = s.pts.length;
+          for (var i = 0; i < (s.kind === "area" ? n : n - 1); i++) {
+            var a = s.pts[i], b = s.pts[(i + 1) % n];
+            F("m", { type: "Point", coordinates: [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2] }, { sid: s.id, i: i });
+          }
+        }
+      }
+    });
+    return { type: "FeatureCollection", features: feats };
+  }
+  function circlePoly(c, r) { var ring = G.circleRing(c, Math.max(r, 0.01), 128); ring.push(ring[0]); return ring; }
+  function render() {
+    if (!ensureLayers()) return;
+    // Beschriftungsebene: Textfarbe ist hell/dunkel-fest (Halo), daher kein Theme-Zweig nötig
+    map.getSource("wz").setData(featurize());
+  }
+  map.on("styledata", function () { if (isOpen && !map.getSource("wz")) render(); });
+
+  // ---------------------------------------------------------------- Zeichen-Grundlage (alle Werkzeuge)
+  var armed = null;   // Art der nächsten Form: line | area | circle | center | point
+  function newShape(kind, pts) {
+    var s = { id: ++seq, kind: kind, pts: pts, done: false, name: "" };
+    var st = S();
+    if (tool !== "m" && tool !== "k") { st.shapes = []; st.sel = null; }   // Profil und Umkreis kennen nur eine Form
+    st.shapes.push(s);
+    return s;
+  }
+  function addPoint(p) {
+    if (!armed) return;
+    if (cur) {
+      var last = cur.pts[cur.pts.length - 1];
+      if (last && G.dist(last, p) < 0.01) return;
+      cur.pts.push(p);
+      if (cur.kind === "circle" && cur.pts.length === 2) { finish(); return; }
+    } else {
+      if (armed === "point") { var pt = newShape("point", [p]); pt.done = true; S().sel = pt.id; afterChange(pt, true); return; }
+      cur = newShape(armed, [p]);
+      S().sel = cur.id;
+      if (armed === "center") { finish(); return; }
+    }
+    afterChange(cur, false);
+  }
+  function finish() {
+    if (!cur) return false;
+    if (cur.pts.length < minPts(cur)) { toastWarn(cur.kind === "area" ? "Eine Fläche braucht mindestens 3 Punkte." : "Mindestens 2 Punkte nötig."); return false; }
+    var s = cur; cur = null; s.done = true; S().sel = s.id;
+    afterChange(s, true);
+    return true;
+  }
+  function toastWarn(t) { msgEl.textContent = t; msgEl.classList.add("ok"); msgEl.style.display = "block"; clearTimeout(toastT); toastT = setTimeout(function () { msgEl.style.display = "none"; msgEl.classList.remove("ok"); }, 2600); }
+  function removeShape(s) {
+    var st = S(); st.shapes = st.shapes.filter(function (x) { return x !== s; });
+    if (cur === s) cur = null;
+    if (st.sel === s.id) st.sel = st.shapes.length ? st.shapes[st.shapes.length - 1].id : null;
+  }
+  function undo() {
+    var st = S();
+    if (cur) { cur.pts.pop(); if (!cur.pts.length) removeShape(cur); afterChange(cur || byId(st.sel), false); return; }
+    var last = st.shapes[st.shapes.length - 1];
+    if (last) { removeShape(last); afterChange(byId(st.sel), true, true); }
+  }
+  function cancel() {
+    if (cur) { var s = cur; removeShape(s); afterChange(null, false, true); return true; }
+    return false;
+  }
+  function clearAll() { var st = S(); st.shapes = []; st.sel = null; cur = null; afterChange(null, true, true); }
+  function afterChange(s, done, removed) {
+    cursor = done ? null : cursor;
+    render(); updateBar(); writeHashSoon();
+    var h = hooks[tool]; if (h && h.change) h.change(s, !!done, !!removed);
+  }
+  function movePoint(s, i, p) {
+    s.pts[i] = p;
+    if (s.kind === "circle" || s.kind === "center") { /* Radius folgt aus Punkt 2 */ }
+    render(); var h = hooks[tool]; if (h && h.change) h.change(s, false, false, true);
+  }
+  function deletePoint(s, i) {
+    if (s.pts.length <= minPts(s) || s.kind === "circle" || s.kind === "center" || s.kind === "point") {
+      if (s.kind === "point") { removeShape(s); afterChange(null, true, true); }
+      return;
+    }
+    s.pts.splice(i, 1); afterChange(s, s.done);
+  }
+
+  // Rubber-Band und Fadenkreuz
+  function crossPoint() {
+    var el = $("wzCross"), r = map.getContainer().getBoundingClientRect(), x = el.offsetLeft, y = el.offsetTop;
+    var p = map.unproject([x, y]); return [p.lng, p.lat];
+  }
+  function placeCross() {
+    var el = $("wzCross"), r = map.getContainer().getBoundingClientRect(), top = r.height / 2;
+    var narrow = window.innerWidth <= 640 && isOpen;
+    if (narrow) top = Math.max(60, (r.height - wz.offsetHeight) / 2 + 30);
+    el.style.left = (r.width / 2) + "px"; el.style.top = top + "px";
+  }
+  function setCross(on) {
+    cross = on; $("wzCross").classList.toggle("on", on && isOpen); placeCross();
+    $("wzCrossBtn").setAttribute("aria-pressed", String(on)); $("wzAdd").hidden = !on;
+    lsSet("mapx-wz-cross", on ? "1" : "0");
+    cursor = null; if (on && cur) cursor = crossPoint();
+    render(); updateBar();
+  }
+  map.on("move", function () { if (cross && isOpen && cur) { cursor = crossPoint(); render(); } });
+  map.on("mousemove", function (e) {
+    if (!isOpen || cross || !cur) return;
+    cursor = ll(e); render(); var h = hooks[tool]; if (h && h.live) h.live();
+  });
+  window.addEventListener("resize", function () { placeCross(); });
+
+  // Klick: Punkt setzen oder (auf Stützpunkt) abschließen
+  var dragEnd = 0, dragging = null;
+  function hitVertex(point) {
+    var r = 12, f = map.queryRenderedFeatures([[point.x - r, point.y - r], [point.x + r, point.y + r]], { layers: ["wz-vert"] });
+    return f[0] || null;
+  }
+  map.on("click", function (e) {
+    if (!isOpen || Date.now() - dragEnd < 350 || cross) return;
+    if (!map.getLayer("wz-vert")) return;
+    var hv = hitVertex(e.point);
+    if (hv && cur && hv.properties.sid === cur.id) {
+      var i = hv.properties.i;
+      if (i === cur.pts.length - 1 || (cur.kind === "area" && i === 0)) { finish(); return; }
+      return;
+    }
+    if (hv) { if (hv.properties.sid !== undefined && tool !== "k") { S().sel = hv.properties.sid; render(); if (hooks[tool] && hooks[tool].change) hooks[tool].change(byId(hv.properties.sid), true); } return; }
+    // Eine fertige Form antippen wählt sie (nur Messen); sonst Punkt setzen
+    if (armed) addPoint(ll(e));
+  });
+  map.on("dblclick", function (e) { if (isOpen && cur && !cross) { e.preventDefault(); finish(); } });
+
+  // Stützpunkte ziehen, Mittelpunkte einfügen, Rechtsklick / langes Drücken löscht
+  var lpTimer = null;
+  function startDrag(sid, idx, isTouch, e) {
+    var s = byId(sid); if (!s) return;
+    e.preventDefault(); dragging = { s: s, i: idx }; map.getCanvas().style.cursor = "grabbing";
+    var moved = false, x0 = e.point.x, y0 = e.point.y;
+    if (isTouch) lpTimer = setTimeout(function () {
+      lpTimer = null; if (dragging && !moved) { map.off("touchmove", onMove); map.off("touchend", onUp); dragging = null; deletePoint(s, idx); dragEnd = Date.now(); }
+    }, 600);
+    function onMove(ev) {
+      if (Math.abs(ev.point.x - x0) + Math.abs(ev.point.y - y0) > 6) { moved = true; clearTimeout(lpTimer); lpTimer = null; }
+      if (moved) movePoint(s, idx, ll(ev));
+    }
+    function onUp() {
+      clearTimeout(lpTimer); lpTimer = null;
+      map.off(isTouch ? "touchmove" : "mousemove", onMove); map.getCanvas().style.cursor = ""; dragging = null; dragEnd = Date.now();
+      if (moved) afterChange(s, s.done);
+    }
+    map.on(isTouch ? "touchmove" : "mousemove", onMove); map.once(isTouch ? "touchend" : "mouseup", onUp);
+  }
+  function bindDrag() {
+    ["mousedown", "touchstart"].forEach(function (ev) {
+      var touch = ev === "touchstart";
+      map.on(ev, "wz-vert", function (e) { if (!isOpen || (touch && e.points && e.points.length > 1) || (!touch && e.originalEvent && e.originalEvent.button !== 0)) return; var p = e.features[0].properties; startDrag(p.sid, p.i, touch, e); });
+      map.on(ev, "wz-mid", function (e) {
+        if (!isOpen || (touch && e.points && e.points.length > 1) || (!touch && e.originalEvent && e.originalEvent.button !== 0)) return;
+        var p = e.features[0].properties, s = byId(p.sid); if (!s) return;
+        var a = s.pts[p.i], b = s.pts[(p.i + 1) % s.pts.length]; s.pts.splice(p.i + 1, 0, [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]);
+        render(); startDrag(p.sid, p.i + 1, touch, e);
+      });
+    });
+    map.on("contextmenu", "wz-vert", function (e) { if (!isOpen) return; var p = e.features[0].properties, s = byId(p.sid); if (s) deletePoint(s, p.i); });
+    map.on("mouseenter", "wz-vert", function () { if (isOpen && !dragging) map.getCanvas().style.cursor = "grab"; });
+    map.on("mouseleave", "wz-vert", function () { if (isOpen && !dragging) map.getCanvas().style.cursor = armed ? "crosshair" : ""; });
+    map.on("mouseenter", "wz-mid", function () { if (isOpen) map.getCanvas().style.cursor = "copy"; });
+    map.on("mouseleave", "wz-mid", function () { if (isOpen) map.getCanvas().style.cursor = armed ? "crosshair" : ""; });
+  }
+  var bound = false;
+  function bindOnce() { if (bound || !ensureLayers()) return; bound = true; bindDrag(); }
+
+  // Zeichenleiste
+  function updateBar() {
+    var st = S(), can = !!(cur && cur.pts.length >= minPts(cur));
+    $("wzUndo").disabled = !(cur || st.shapes.length);
+    $("wzDone").disabled = !can; $("wzCancel").disabled = !cur;
+    $("wzBar").hidden = !armed && tool !== "m";
+    $("wzDone").hidden = armed === "point" || armed === "center" || (cur && cur.kind === "circle");
+    var h = $("wzHint"), t = "";
+    if (armed && !cur) t = cross ? "Karte verschieben, dann „Punkt setzen“." : (armed === "point" ? "Karte antippen setzt einen Punkt." : armed === "center" ? "Mittelpunkt antippen." : "Karte antippen: erster Punkt.");
+    else if (cur) t = cur.kind === "circle" ? "Zweiten Punkt (Radius) antippen." : (cross ? "„Punkt setzen“, „Fertig“ schließt." : "Weiter antippen; Doppelklick, Eingabetaste oder „Fertig“ schließt, Esc verwirft.");
+    h.textContent = t;
+  }
+  $("wzUndo").addEventListener("click", undo);
+  $("wzDone").addEventListener("click", finish);
+  $("wzCancel").addEventListener("click", cancel);
+  $("wzCrossBtn").addEventListener("click", function () { setCross(!cross); });
+  $("wzAdd").addEventListener("click", function () { addPoint(crossPoint()); });
+  document.addEventListener("keydown", function (e) {
+    if (!isOpen) return;
+    var tg = e.target, tn = tg && tg.tagName;
+    var typing = tn === "INPUT" || tn === "TEXTAREA" || tn === "SELECT" || (tg && tg.isContentEditable);
+    if (e.key === "Escape") { if (cancel()) { e.preventDefault(); } else if (!typing && armed) { /* nichts zu verwerfen */ } return; }
+    if (typing || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.key === "Enter" && cur) { e.preventDefault(); finish(); }
+    else if (e.key === "Backspace") { if (cur) { e.preventDefault(); undo(); } }
+  });
+
+  // ---------------------------------------------------------------- Messen (#83 #84 #86 #88 #89)
+  function midOf(a, b) { return [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]; }
+  function centroid(pts) { var x = 0, y = 0; pts.forEach(function (p) { x += p[0]; y += p[1]; }); return [x / pts.length, y / pts.length]; }
+  function measureOf(s, pts) {
+    pts = pts || s.pts; var o = { kind: s.kind };
+    if (s.kind === "line") { o.len = G.pathLength(pts); o.last = pts.length > 1 ? G.dist(pts[pts.length - 2], pts[pts.length - 1]) : 0; }
+    else if (s.kind === "area") { o.per = G.ringPerimeter(pts); o.area = pts.length >= 3 ? G.ringArea(pts) : 0; o.cross = pts.length >= 4 && G.selfIntersects(pts); o.len = G.pathLength(pts); }
+    else if (s.kind === "circle" && pts.length >= 2) { o.r = G.dist(pts[0], pts[1]); o.per = 2 * Math.PI * o.r; o.area = G.ringArea(G.circleRing(pts[0], o.r, 128)); }
+    return o;
+  }
+  function valueText(s) {
+    var m = measureOf(s);
+    if (s.kind === "line") return G.fmtLen(m.len, units);
+    if (s.kind === "area") return m.area ? G.fmtArea(m.area, units) : G.fmtLen(m.len, units);
+    if (s.kind === "circle") return m.r ? "r " + G.fmtLen(m.r, units) : "–";
+    return "";
+  }
+  hooks.m = {
+    labels: function (s, pts, sel, live, F, name) {
+      var m = measureOf(s, pts), many = pts.length <= 41;
+      if (s.kind === "line" && pts.length >= 2) {
+        F("tot", { type: "Point", coordinates: pts[pts.length - 1] }, { l: name + G.fmtLen(m.len, units) });
+        if ((sel || live) && many && pts.length > 2) for (var i = 1; i < pts.length; i++) F("seg", { type: "Point", coordinates: midOf(pts[i - 1], pts[i]) }, { l: G.fmtLen(G.dist(pts[i - 1], pts[i]), units) });
+      } else if (s.kind === "area" && pts.length >= 3) {
+        F("tot", { type: "Point", coordinates: centroid(pts) }, { l: name + G.fmtArea(m.area, units) + "\n" + G.fmtLen(m.per, units) });
+        if ((sel || live) && many) for (var j = 0; j < pts.length; j++) { var a = pts[j], b = pts[(j + 1) % pts.length]; F("seg", { type: "Point", coordinates: midOf(a, b) }, { l: G.fmtLen(G.dist(a, b), units) }); }
+      } else if (s.kind === "area" && pts.length === 2) {
+        F("tot", { type: "Point", coordinates: pts[1] }, { l: G.fmtLen(m.len, units) });
+      } else if (s.kind === "circle" && pts.length >= 2) {
+        F("tot", { type: "Point", coordinates: midOf(pts[0], pts[1]) }, { l: name + "r " + G.fmtLen(m.r, units) });
+      }
+    },
+    change: function () { renderMeasure(); },
+    live: function () { renderMeasure(true); }
+  };
+  function renderMeasure(liveOnly) {
+    var st = ST.m, s = cur || byId(st.sel), out = $("mRes"), pts;
+    if (!s) { out.innerHTML = '<div class="note">Karte antippen, um zu messen.</div>'; }
+    else {
+      pts = s.pts.slice(); if (s === cur && cursor && s.kind !== "circle") pts.push(cursor);
+      if (s === cur && s.kind === "circle" && cursor && pts.length === 1) pts.push(cursor);
+      var m = measureOf(s, pts), h = "";
+      if (s.kind === "line") h = '<div class="big">' + esc(G.fmtLen(m.len, units)) + '</div><dl class="kv"><dt>Letztes Segment</dt><dd>' + esc(G.fmtLen(m.last, units)) + "</dd><dt>Punkte</dt><dd>" + s.pts.length + "</dd></dl>";
+      else if (s.kind === "area") h = '<div class="big">' + esc(m.area ? G.fmtArea(m.area, units) : "–") + '</div><dl class="kv"><dt>Umfang</dt><dd>' + esc(G.fmtLen(m.per, units)) + "</dd><dt>Punkte</dt><dd>" + s.pts.length + "</dd></dl>" +
+        (m.cross ? '<div class="warn" role="alert">Achtung: Das Polygon überschneidet sich selbst, die Fläche ist nicht eindeutig.</div>' : "");
+      else if (s.kind === "circle") h = m.r ? '<div class="big">r ' + esc(G.fmtLen(m.r, units)) + '</div><dl class="kv"><dt>Umfang</dt><dd>' + esc(G.fmtLen(m.per, units)) + "</dd><dt>Fläche</dt><dd>" + esc(G.fmtArea(m.area, units)) + "</dd></dl>" : '<div class="note">Radiuspunkt antippen.</div>';
+      out.innerHTML = h;
+    }
+    var radBox = $("mRad"), circ = s && s.kind === "circle" && s.pts.length >= 2 && s.done;
+    radBox.hidden = !circ;
+    if (circ && !liveOnly && document.activeElement !== $("mRadV")) setRadiusInput(G.dist(s.pts[0], s.pts[1]));
+    if (liveOnly) return;
+    // Liste der Messungen
+    var list = $("mList"); list.innerHTML = "";
+    st.shapes.forEach(function (x, i) {
+      if (!x.pts.length || (x === cur && x.pts.length < 1)) return;
+      var li = document.createElement("li"); li.setAttribute("aria-current", String(x.id === st.sel));
+      var dot = document.createElement("span"); dot.className = "dot"; dot.style.background = colorOf();
+      var nm = document.createElement("input"); nm.type = "text"; nm.className = "nm"; nm.value = x.name; nm.placeholder = "Messung " + (i + 1); nm.setAttribute("aria-label", "Beschriftung Messung " + (i + 1));
+      nm.addEventListener("input", function () { x.name = nm.value; render(); writeHashSoon(); });
+      nm.addEventListener("focus", function () { if (st.sel !== x.id && x.done) { st.sel = x.id; render(); renderMeasure(); } });
+      var val = document.createElement("span"); val.className = "val"; val.textContent = valueText(x);
+      var del = document.createElement("button"); del.type = "button"; del.className = "x"; del.textContent = "×"; del.setAttribute("aria-label", "Messung " + (i + 1) + " löschen");
+      del.addEventListener("click", function () { removeShape(x); afterChange(byId(st.sel), true, true); });
+      li.appendChild(dot); li.appendChild(nm); li.appendChild(val); li.appendChild(del);
+      list.appendChild(li);
+    });
+    $("mClear").disabled = !st.shapes.length;
+  }
+  function radUnits() { return units === "imperial" ? [["ft", G.units.FT], ["mi", G.units.MI]] : [["m", 1], ["km", 1000]]; }
+  function setRadiusInput(m) {
+    var u = radUnits(), sel = $("mRadU");
+    if (!sel.options.length) u.forEach(function (x) { var o = document.createElement("option"); o.value = x[1]; o.textContent = x[0]; sel.appendChild(o); });
+    sel.selectedIndex = m >= u[1][1] ? 1 : 0;
+    var f = +sel.value; $("mRadV").value = +(m / f).toFixed(f >= 1000 ? 4 : 2);
+  }
+  function applyRadius() {
+    var s = byId(ST.m.sel); if (!s || s.kind !== "circle") return;
+    var r = parseFloat($("mRadV").value) * (+$("mRadU").value);
+    if (!(r > 0)) return;
+    var az = G.inverse(s.pts[0][0], s.pts[0][1], s.pts[1][0], s.pts[1][1]).az1;
+    s.pts[1] = G.direct(s.pts[0][0], s.pts[0][1], az, r); render(); renderMeasure(); writeHashSoon();
+  }
+  $("mRadV").addEventListener("input", applyRadius);
+  $("mToU").addEventListener("click", function () {   // Kreis als Suchbereich übernehmen: Umkreisanalyse mit gleichem Mittelpunkt und Radius
+    var s = byId(ST.m.sel); if (!s || s.kind !== "circle" || s.pts.length < 2) return;
+    var c = s.pts[0], r = Math.min(20000, G.dist(s.pts[0], s.pts[1]));
+    openTools("u"); setUMode("circle"); setDist(Math.round(r));
+    var u = newShape("center", [c.slice()]); u.done = true; u.r = UI_.dist; ST.u.sel = u.id; afterChange(u, true);
+  });
+  $("mRadU").addEventListener("change", function () { var s = byId(ST.m.sel); if (s && s.pts.length > 1) { /* Wert behalten, Einheit neu deuten */ applyRadius(); } });
+  Array.prototype.forEach.call($("mKind").querySelectorAll("button"), function (b) {
+    b.addEventListener("click", function () { setMeasureKind(b.getAttribute("data-k")); });
+  });
+  function setMeasureKind(k) {
+    if (cur) cancel();
+    ST.m.kind = k; armed = k;
+    Array.prototype.forEach.call($("mKind").querySelectorAll("button"), function (x) { x.setAttribute("aria-pressed", String(x.getAttribute("data-k") === k)); });
+    updateBar();
+  }
+  Array.prototype.forEach.call($("mUnits").querySelectorAll("button"), function (b) {
+    b.addEventListener("click", function () { setUnits(b.getAttribute("data-u")); });
+  });
+  function setUnits(u) {
+    units = u; lsSet("mapx-units", u);
+    Array.prototype.forEach.call($("mUnits").querySelectorAll("button"), function (x) { x.setAttribute("aria-pressed", String(x.getAttribute("data-u") === u)); });
+    $("mRadU").innerHTML = ""; render(); renderMeasure(); if (tool === "u") renderUmkreis(); if (tool === "p" && P.data) renderProfile();
+  }
+  $("mClear").addEventListener("click", function () { if (tool === "m") clearAll(); });
+  $("mList").addEventListener("click", function (e) {
+    var li = e.target.closest && e.target.closest("li"); if (!li || e.target.tagName === "BUTTON" || e.target.tagName === "INPUT") return;
+    var i = Array.prototype.indexOf.call(li.parentNode.children, li), s = ST.m.shapes[i]; if (!s) return;
+    ST.m.sel = s.id; render(); renderMeasure(); fitShape(s);
+  });
+  function fitShape(s) {
+    var b = new maplibregl.LngLatBounds(); s.pts.forEach(function (p) { b.extend(p); });
+    if (s.kind === "circle" && s.pts.length > 1) G.circleRing(s.pts[0], G.dist(s.pts[0], s.pts[1]), 16).forEach(function (p) { b.extend(p); });
+    if (s.kind === "center") G.circleRing(s.pts[0], s.r, 16).forEach(function (p) { b.extend(p); });
+    if (s.buf) s.buf.forEach(function (poly) { poly[0].forEach(function (p) { b.extend(p); }); });
+    var narrow = window.innerWidth <= 640;
+    map.fitBounds(b, { padding: narrow ? { top: 90, bottom: Math.round(wz.offsetHeight) + 30, left: 40, right: 40 } : { top: 90, bottom: 60, left: 360, right: 480 }, maxZoom: 18, duration: 600 });
+  }
+
+  // ---------------------------------------------------------------- Höhenmodell: Terrain-RGB-Kacheln direkt aus dem PMTiles lesen
+  var dem = {
+    pm: null, url: null, cache: new Map(), order: [],
+    source: function () {
+      var st = map.getStyle(), so = st && st.sources && (st.sources.relief || st.sources["relief-terrain"]);
+      var url = so && so.url ? so.url.replace(/^pmtiles:\/\//, "") : null;
+      if (url !== this.url) { this.url = url; this.pm = url ? new pmtiles.PMTiles(url) : null; this.cache.clear(); this.order = []; }
+      return this.pm;
+    },
+    tile: function (z, x, y) {   // Promise<{n, h: Uint16Array(Dezimeter + 1000 m, 65535 = leer)}|null>
+      var key = z + "/" + x + "/" + y, self = this;
+      if (this.cache.has(key)) return this.cache.get(key);
+      var pm = this.source(); if (!pm) return Promise.resolve(null);
+      var p = pm.getZxy(z, x, y).then(function (res) {
+        if (!res || !res.data) return null;
+        return createImageBitmap(new Blob([res.data]), { colorSpaceConversion: "none", premultiplyAlpha: "none" }).then(function (bm) {
+          var n = bm.width, cv = document.createElement("canvas"); cv.width = n; cv.height = bm.height;
+          var cx = cv.getContext("2d", { willReadFrequently: true }); cx.drawImage(bm, 0, 0);
+          var d = cx.getImageData(0, 0, n, bm.height).data, h = new Uint16Array(n * bm.height);
+          for (var i = 0; i < h.length; i++) {
+            var e = G.decodeTerrainRGB(d[4 * i], d[4 * i + 1], d[4 * i + 2]);
+            h[i] = d[4 * i + 3] < 255 || e < -500 ? 65535 : Math.min(65534, Math.round((e + 1000) * 10));
+          }
+          return { n: n, h: h };
+        });
+      }).catch(function () { return null; });
+      this.cache.set(key, p); this.order.push(key);
+      if (this.order.length > 96) this.cache.delete(this.order.shift());
+      return p;
+    },
+    // Weltpixel bei Zoom z (Kachelgröße n)
+    world: function (lon, lat, z, n) {
+      var s = n * Math.pow(2, z), sin = Math.sin(lat * Math.PI / 180);
+      return [(lon + 180) / 360 * s, (0.5 - Math.log((1 + sin) / (1 - sin)) / (4 * Math.PI)) * s];
+    },
+    // Höhen für viele Punkte [lon, lat]; Zoom nach Punktabstand, höchstens 64 Kacheln. -> Promise<{h: [m|null], z}>
+    heights: function (pts, spacing) {
+      var self = this, mid = pts[Math.floor(pts.length / 2)], N = 512;
+      var z = Math.round(Math.log2(40075016.686 * Math.cos(mid[1] * Math.PI / 180) / (N * Math.max(spacing, 1)))) + 1;
+      z = Math.max(8, Math.min(15, z));
+      function tilesAt(zz) {
+        var set = {}, keep = [];
+        pts.forEach(function (p) {
+          var w = self.world(p[0], p[1], zz, N), x0 = Math.floor((w[0] - 1) / N), x1 = Math.floor((w[0] + 1) / N), y0 = Math.floor((w[1] - 1) / N), y1 = Math.floor((w[1] + 1) / N);
+          for (var x = x0; x <= x1; x++) for (var y = y0; y <= y1; y++) { var k = x + "/" + y; if (!set[k]) { set[k] = 1; keep.push([x, y]); } }
+        });
+        return keep;
+      }
+      var tl = tilesAt(z); while (tl.length > 64 && z > 8) { z--; tl = tilesAt(z); }
+      if (tl.length > 64) return Promise.reject(new Error("Linie zu groß für die Höhenabfrage."));
+      var ZZ = z, pool = {};
+      return Promise.all(tl.map(function (t) { return self.tile(ZZ, t[0], t[1]).then(function (d) { pool[t[0] + "/" + t[1]] = d; }); })).then(function () {
+        function px(gx, gy) {
+          var tx = Math.floor(gx / N), ty = Math.floor(gy / N), t = pool[tx + "/" + ty]; if (!t) return null;
+          var v = t.h[(gy - ty * N) * t.n + (gx - tx * N)]; return v === 65535 ? null : v / 10 - 1000;
+        }
+        var out = pts.map(function (p) {
+          var w = self.world(p[0], p[1], ZZ, N), gx = w[0] - 0.5, gy = w[1] - 0.5, x0 = Math.floor(gx), y0 = Math.floor(gy), fx = gx - x0, fy = gy - y0;
+          var a = px(x0, y0), b = px(x0 + 1, y0), c = px(x0, y0 + 1), d = px(x0 + 1, y0 + 1);
+          if (a == null || b == null || c == null || d == null) { var any = [a, b, c, d].filter(function (v) { return v != null; }); return any.length ? any[0] : null; }
+          return a * (1 - fx) * (1 - fy) + b * fx * (1 - fy) + c * (1 - fx) * fy + d * fx * fy;
+        });
+        return { h: out, z: ZZ };
+      });
+    },
+    at: function (lon, lat) { return this.heights([[lon, lat]], 5).then(function (r) { return r.h[0]; }); }
+  };
+
+  // ---------------------------------------------------------------- Koordinaten (#92 #94 #96 #97)
+  var SYSKEYS = [["dec", "WGS84 dezimal"], ["dms", "WGS84 Grad, Min., Sek."], [25833, "UTM 33N (ETRS89)"], [25832, "UTM 32N (ETRS89)"], [31287, "MGI Lambert"],
+                 [31254, "MGI GK M28"], [31255, "MGI GK M31"], [31256, "MGI GK M34"], [31257, "MGI BMN M28"], [31258, "MGI BMN M31"], [31259, "MGI BMN M34"]];
+  function fx(v, d) { return v.toFixed(d == null ? 2 : d); }
+  function fmtSys(key, lon, lat) {
+    if (key === "dec") return fx(lat, 6) + ", " + fx(lon, 6);
+    if (key === "dms") return G.fmtDMS(lat, "N", "S") + "  " + G.fmtDMS(lon, "E", "W");
+    var r = G.transformTo(key, lon, lat), utm = key === 25832 || key === 25833;
+    return utm ? "E " + fx(r[0]) + "  N " + fx(r[1]) : "R " + fx(r[0]) + "  H " + fx(r[1]);
+  }
+  function csvNum(key, lon, lat) { if (key === "dec" || key === "dms") return [fx(lat, 6), fx(lon, 6)]; var r = G.transformTo(key, lon, lat); return [fx(r[0]), fx(r[1])]; }
+  function sysLabel(key) { return SYSKEYS.filter(function (s) { return s[0] === key; })[0][1]; }
+  var kSys = $("kSys");
+  SYSKEYS.forEach(function (s) { var o = document.createElement("option"); o.value = String(s[0]); o.textContent = s[1]; kSys.appendChild(o); });
+  kSys.value = lsGet("mapx-wz-sys") || "25833"; if (kSys.selectedIndex < 0) kSys.value = "25833";
+  kSys.addEventListener("change", function () { lsSet("mapx-wz-sys", kSys.value); renderCoords(); });
+  function curSys() { var v = kSys.value; return /^\d+$/.test(v) ? +v : v; }
+  function row(label, text, extra) {
+    return '<tr><th scope="row">' + esc(label) + '</th><td class="v"' + (extra ? " " + extra : "") + ">" + esc(text) + '</td><td class="c"><button type="button" data-copy="' + esc(text) + '" aria-label="Kopieren: ' + esc(label) + '" title="Kopieren">⧉</button></td></tr>';
+  }
+  function coordTable(lon, lat) {
+    var h = '<table class="cx"><tbody>';
+    h += row("WGS84 dezimal", fmtSys("dec", lon, lat)) + row("WGS84 GMS", fmtSys("dms", lon, lat));
+    h += row("UTM 33N", fmtSys(25833, lon, lat)) + row("UTM 32N", fmtSys(25832, lon, lat));
+    h += '<tr><th scope="row">Höhe ü. A.</th><td class="v" id="kEle">…</td><td class="c"><button type="button" data-copy="" id="kEleCp" aria-label="Kopieren: Höhe" title="Kopieren">⧉</button></td></tr></tbody></table>';
+    h += '<details><summary>Österreichische Systeme (MGI)</summary><table class="cx"><tbody>';
+    [31287, 31254, 31255, 31256, 31257, 31258, 31259].forEach(function (c) { h += row(sysLabel(c), fmtSys(c, lon, lat)); });
+    h += '</tbody></table><div class="note">R = Rechtswert (Y), H = Hochwert (X). Näherung mit sieben Parametern (EPSG:1618), gegenüber dem BEV-Grid typisch 0,5 m, höchstens etwa 1,5 m.</div></details>';
+    h += '<details><summary>Codes: MGRS, Plus Code, GeoHash</summary><table class="cx"><tbody>' + row("MGRS (1 m)", G.mgrsEncode(lon, lat)) + row("Plus Code", G.olcEncode(lon, lat, 10)) + row("GeoHash (9)", G.geohashEncode(lon, lat, 9)) + "</tbody></table></details>";
+    return h;
+  }
+  var eleSeq = 0;
+  function renderCoords() {
+    var st = ST.k, s = byId(st.sel) || st.shapes[st.shapes.length - 1], info = $("kInfo");
+    if (!s) { info.innerHTML = '<div class="note">Karte antippen oder oben eine Koordinate eingeben.</div>'; }
+    else {
+      var lon = s.pts[0][0], lat = s.pts[0][1];
+      info.innerHTML = '<div class="note" style="margin:2px 0"><b>Punkt ' + (st.shapes.indexOf(s) + 1) + (s.name ? " · " + esc(s.name) : "") + "</b></div>" + coordTable(lon, lat);
+      var my = ++eleSeq;
+      dem.at(lon, lat).then(function (e) {
+        if (my !== eleSeq) return; var el = $("kEle"); if (!el) return;
+        var t = e == null ? "keine Höhe" : G.nf(Math.round(e), 0) + " m"; el.textContent = t; $("kEleCp").setAttribute("data-copy", e == null ? "" : String(Math.round(e)));
+      }).catch(function () { var el = $("kEle"); if (el && my === eleSeq) el.textContent = "keine Höhe"; });
+    }
+    var list = $("kList"); list.innerHTML = "";
+    st.shapes.forEach(function (x, i) {
+      var li = document.createElement("li"); li.setAttribute("aria-current", String(x.id === st.sel));
+      var nr = document.createElement("span"); nr.className = "val"; nr.style.maxWidth = "none"; nr.textContent = String(i + 1); nr.style.minWidth = "22px"; nr.style.textAlign = "center";
+      var nm = document.createElement("input"); nm.type = "text"; nm.className = "nm"; nm.style.flex = "0 0 28%"; nm.value = x.name; nm.placeholder = "Name"; nm.setAttribute("aria-label", "Name Punkt " + (i + 1));
+      nm.addEventListener("input", function () { x.name = nm.value; writeHashSoon(); });
+      var go = document.createElement("button"); go.type = "button"; go.className = "go"; go.textContent = fmtSys(curSys(), x.pts[0][0], x.pts[0][1]); go.title = "Anzeigen";
+      go.style.fontVariantNumeric = "tabular-nums"; go.style.fontSize = "12px";
+      go.addEventListener("click", function () { st.sel = x.id; render(); renderCoords(); map.easeTo({ center: x.pts[0], zoom: Math.max(map.getZoom(), 15) }); });
+      var del = document.createElement("button"); del.type = "button"; del.className = "x"; del.textContent = "×"; del.setAttribute("aria-label", "Punkt " + (i + 1) + " löschen");
+      del.addEventListener("click", function () { removeShape(x); afterChange(null, true, true); });
+      li.appendChild(nr); li.appendChild(nm); li.appendChild(go); li.appendChild(del); list.appendChild(li);
+    });
+    $("kCount").textContent = st.shapes.length ? st.shapes.length + " / 500 Punkte" : "";
+    $("kCsv").disabled = $("kClear").disabled = !st.shapes.length;
+  }
+  hooks.k = {
+    change: function (s, done) { if (ST.k.shapes.length > 500) { ST.k.shapes.pop(); toastWarn("Höchstens 500 Punkte."); render(); } renderCoords(); },
+    labels: function () {}
+  };
+  $("kInfo").addEventListener("click", function (e) { var b = e.target.closest && e.target.closest("button[data-copy]"); if (b && b.getAttribute("data-copy")) copy(b.getAttribute("data-copy")); });
+  function goToCoord() {
+    var q = $("kIn").value, err = $("kErr"), c = G.parseCoord(q, { lon: map.getCenter().lng, lat: map.getCenter().lat });
+    if (!c) { err.hidden = false; err.textContent = "Nicht erkannt. Beispiele: 47.0707, 15.4395 · N47°04′14″ E15°26′22″ · 33T 537450 5214850 · 849VCWC8+R9 · EPSG:31287 625923 483187"; return; }
+    err.hidden = true; if (ST.k.shapes.length >= 500) { toastWarn("Höchstens 500 Punkte."); return; }
+    var p = newShape("point", [[c.lon, c.lat]]); p.done = true; ST.k.sel = p.id; afterChange(p, true);
+    map.flyTo({ center: [c.lon, c.lat], zoom: 16, speed: 1.6 });
+  }
+  $("kGo").addEventListener("click", goToCoord);
+  $("kIn").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); goToCoord(); } });
+  $("kIn").addEventListener("input", function () { $("kErr").hidden = true; });
+  $("kCsv").addEventListener("click", function () {
+    var key = curSys(), head = ["Nr", "Name", "Breite WGS84", "Länge WGS84"], two = key === "dec" || key === "dms";
+    if (!two) head.push(sysLabel(key) + (key === 25832 || key === 25833 ? " Ost" : " Rechtswert"), sysLabel(key) + (key === 25832 || key === 25833 ? " Nord" : " Hochwert"));
+    var lines = [head.map(G.csvEscape).join(";")];
+    ST.k.shapes.forEach(function (s, i) {
+      var p = s.pts[0], r = [String(i + 1), s.name, fx(p[1], 6), fx(p[0], 6)];
+      if (!two) r = r.concat(csvNum(key, p[0], p[1]));
+      lines.push(r.map(G.csvEscape).join(";"));
+    });
+    download("mapx-punkte-" + today() + ".csv", "text/csv;charset=utf-8", "﻿" + lines.join("\r\n") + "\r\n");
+  });
+  var kConfirm = false, kT = null;
+  $("kClear").addEventListener("click", function () {
+    var b = $("kClear");
+    if (!kConfirm) { kConfirm = true; b.textContent = "Wirklich löschen?"; kT = setTimeout(function () { kConfirm = false; b.textContent = "Alle löschen"; }, 4000); return; }
+    clearTimeout(kT); kConfirm = false; b.textContent = "Alle löschen"; clearAll();
+  });
+
+  // ---------------------------------------------------------------- Höhenprofil (#100 #102 #103 #105)
+  var P = { data: null }, profSeq = 0, ovMode = 0, pMarker = null, routeCoords = null;
+  function pMsg(t) { $("pMsg").textContent = t || ""; }
+  hooks.p = {
+    labels: function (s, pts, sel, live, F) { if (pts.length >= 2) F("tot", { type: "Point", coordinates: pts[pts.length - 1] }, { l: G.fmtLen(G.pathLength(pts), units) }); },
+    change: function (s, done, removed, dragging) {
+      if (dragging) return;
+      if (removed || !s) { clearProfile(); return; }
+      if (done && s.done) computeProfile(s);
+    }
+  };
+  function clearProfile() { P.data = null; profSeq++; $("pRes").hidden = true; pMsg(""); if (pMarker) { pMarker.remove(); pMarker = null; } }
+  function computeProfile(s) {
+    var my = ++profSeq, L = G.pathLength(s.pts);
+    if (!(L > 0)) { clearProfile(); return; }
+    if (L > 200000) { $("pRes").hidden = true; pMsg("Die Linie ist länger als 200 km (" + G.fmtLen(L, units) + "). Bitte kürzer zeichnen."); return; }
+    pMsg("Höhen werden berechnet …");
+    var step = Math.max(10, L / 1000), samples = G.sampleLine(s.pts, step);
+    dem.heights(samples.map(function (x) { return x.p; }), step).then(function (r) {
+      if (my !== profSeq) return;
+      var h = r.h, miss = h.filter(function (v) { return v == null; }).length;
+      if (miss > h.length * 0.3 || miss === h.length) { $("pRes").hidden = true; pMsg("Für diese Linie gibt es kaum Höhendaten (Geländemodell nur für Österreich)."); return; }
+      for (var i = 0; i < h.length; i++) if (h[i] == null) {   // Lücken linear füllen
+        var a = i - 1; while (a >= 0 && h[a] == null) a--; var b = i + 1; while (b < h.length && h[b] == null) b++;
+        h[i] = a < 0 ? h[b] : b >= h.length ? h[a] : h[a] + (h[b] - h[a]) * (samples[i].d - samples[a].d) / (samples[b].d - samples[a].d);
+      }
+      samples.forEach(function (x, k) { x.h = h[k]; });
+      P.data = { samples: samples, L: L, step: step, z: r.z, miss: miss, stats: G.elevStats(h, 2), cur: null };
+      pMsg(miss ? miss + " von " + h.length + " Punkten ohne Höhendaten, interpoliert." : "");
+      $("pRes").hidden = false; renderProfile();
+    }).catch(function (e) { if (my === profSeq) { $("pRes").hidden = true; pMsg("Höhen konnten nicht geladen werden (" + (e && e.message || "Netzwerk") + ")."); } });
+  }
+  function nice(v) { var e = Math.pow(10, Math.floor(Math.log10(v))), f = v / e; return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10) * e; }
+  function gradAt(i) {
+    var sm = P.data.samples, w = Math.max(1, Math.round(50 / P.data.step)), a = Math.max(0, i - w), b = Math.min(sm.length - 1, i + w);
+    return b > a ? (sm[b].h - sm[a].h) / (sm[b].d - sm[a].d) * 100 : 0;
+  }
+  var CH = { W: 320, ml: 40, mr: 8, mt: 8, mb: 20 };
+  function renderProfile() {
+    var D = P.data; if (!D) return;
+    var sm = D.samples, st = D.stats, L = D.L, pr = $("pStats");
+    var mean = (sm[sm.length - 1].h - sm[0].h) / L * 100;
+    pr.innerHTML = "<dt>Länge</dt><dd>" + esc(G.fmtLen(L, units)) + "</dd><dt>Anstieg</dt><dd>↑ " + esc(fmtH(st.up)) + "</dd><dt>Abstieg</dt><dd>↓ " + esc(fmtH(st.down)) + "</dd>" +
+      "<dt>Höchster Punkt</dt><dd>" + esc(fmtH(st.max)) + " bei " + esc(G.fmtLen(sm[st.imax].d, units)) + "</dd><dt>Tiefster Punkt</dt><dd>" + esc(fmtH(st.min)) + " bei " + esc(G.fmtLen(sm[st.imin].d, units)) + "</dd>" +
+      "<dt>Ø Steigung</dt><dd>" + esc(G.nf(mean, 1)) + " %</dd><dt>Abtastung</dt><dd>alle " + esc(G.nf(D.step, 0)) + " m</dd>";
+    // Diagramm
+    var plotW = CH.W - CH.ml - CH.mr, ymin = Math.floor((st.min - (st.max - st.min) * 0.05) / 10) * 10, ymax = Math.ceil((st.max + (st.max - st.min) * 0.05) / 10) * 10;
+    if (ymax - ymin < 20) { var mid = (ymax + ymin) / 2; ymin = Math.floor(mid - 10); ymax = ymin + 20; }
+    var range = ymax - ymin, plotH = 130, eff, clamped = false;
+    if (ovMode > 0) { plotH = range * ovMode / (L / plotW); clamped = plotH < 50 || plotH > 400; plotH = Math.max(50, Math.min(400, plotH)); }
+    eff = range / plotH * (plotW / L) ;   // Überhöhung = (px je m senkrecht) / (px je m waagrecht)
+    var ov = plotH / range / (plotW / L);
+    var H = CH.mt + plotH + CH.mb, xs = function (d) { return CH.ml + d / L * plotW; }, ys = function (h) { return CH.mt + plotH - (h - ymin) / range * plotH; };
+    var svg = $("pChart"), ns = "http://www.w3.org/2000/svg", html = "";
+    svg.setAttribute("viewBox", "0 0 " + CH.W + " " + H);
+    var ystep = nice(range / 4), s = "";
+    for (var y = Math.ceil(ymin / ystep) * ystep; y <= ymax; y += ystep) s += '<line class="gr" x1="' + CH.ml + '" x2="' + (CH.W - CH.mr) + '" y1="' + ys(y).toFixed(1) + '" y2="' + ys(y).toFixed(1) + '"/><text x="' + (CH.ml - 4) + '" y="' + (ys(y) + 3).toFixed(1) + '" text-anchor="end">' + Math.round(y) + "</text>";
+    var xu = units === "imperial" ? G.units.MI : 1000, xl = units === "imperial" ? "mi" : "km", xstep = nice(L / xu / 4);
+    for (var x = 0; x <= L / xu + 1e-9; x += xstep) s += '<text x="' + xs(x * xu).toFixed(1) + '" y="' + (H - 6) + '" text-anchor="' + (x === 0 ? "start" : "middle") + '">' + G.nf(x, xstep < 1 ? 1 : 0) + (x + xstep > L / xu ? " " + xl : "") + "</text>";
+    var line = sm.map(function (p, i) { return (i ? "L" : "M") + xs(p.d).toFixed(1) + " " + ys(p.h).toFixed(1); }).join("");
+    s += '<path class="ar" d="' + line + "L" + xs(L).toFixed(1) + " " + (CH.mt + plotH) + "L" + CH.ml + " " + (CH.mt + plotH) + 'Z"/><path class="ln" d="' + line + '"/>';
+    s += '<text x="' + (CH.W - CH.mr) + '" y="' + (CH.mt + 9) + '" text-anchor="end">Überhöhung ' + (ov >= 10 ? Math.round(ov) : G.nf(ov, 1)) + "×" + (clamped ? " (begrenzt)" : "") + "</text>";
+    s += '<g id="pCur" style="display:none"><line class="cur" y1="' + CH.mt + '" y2="' + (CH.mt + plotH) + '" x1="0" x2="0"/><circle class="dot" r="4" cx="0" cy="0"/></g>';
+    svg.innerHTML = '<title id="pChartT">Höhenprofil</title><desc id="pChartD"></desc>' + s;
+    $("pChartD").textContent = "Höhenprofil über " + G.fmtLen(L, units) + ": von " + fmtH(sm[0].h) + " nach " + fmtH(sm[sm.length - 1].h) + ", Anstieg " + fmtH(st.up) + ", Abstieg " + fmtH(st.down) + ", höchster Punkt " + fmtH(st.max) + ", tiefster " + fmtH(st.min) + ".";
+    CH.xs = xs; CH.ys = ys; CH.plotW = plotW; CH.plotH = plotH; CH.L = L;
+    // Datentabelle (Alternative für Screenreader)
+    var n = sm.length, k = Math.max(1, Math.ceil(n / 25)), t = "<thead><tr><th>Distanz</th><th>Höhe</th><th>Steigung</th></tr></thead><tbody>";
+    for (var i = 0; i < n; i += k) t += "<tr><td>" + esc(G.fmtLen(sm[i].d, units)) + "</td><td>" + esc(fmtH(sm[i].h)) + "</td><td>" + G.nf(gradAt(i), 1) + " %</td></tr>";
+    if ((n - 1) % k) t += "<tr><td>" + esc(G.fmtLen(sm[n - 1].d, units)) + "</td><td>" + esc(fmtH(sm[n - 1].h)) + "</td><td>" + G.nf(gradAt(n - 1), 1) + " %</td></tr>";
+    $("pTable").innerHTML = t + "</tbody>";
+    Array.prototype.forEach.call($("pOv").querySelectorAll("button"), function (b) { b.setAttribute("aria-pressed", String(+b.getAttribute("data-o") === ovMode)); });
+    if (D.cur != null) setCursorIdx(D.cur); else $("pTip").textContent = "Mit Maus, Finger oder Pfeiltasten über das Diagramm fahren.";
+  }
+  function fmtH(m) { return units === "imperial" ? G.nf(m / G.units.FT, 0) + " ft" : G.nf(m, 0) + " m"; }
+  function setCursorIdx(i) {
+    var D = P.data; if (!D) return; i = Math.max(0, Math.min(D.samples.length - 1, i)); D.cur = i;
+    var p = D.samples[i], g = $("pCur"); if (!g) return;
+    g.style.display = ""; var x = CH.xs(p.d), y = CH.ys(p.h);
+    g.querySelector("line").setAttribute("x1", x); g.querySelector("line").setAttribute("x2", x); var c = g.querySelector("circle"); c.setAttribute("cx", x); c.setAttribute("cy", y);
+    var gr = gradAt(i);
+    $("pTip").textContent = G.fmtLen(p.d, units) + " · " + fmtH(p.h) + " · Steigung " + G.nf(gr, 1) + " %";
+    $("pChart").setAttribute("aria-valuetext", $("pTip").textContent);
+    if (!pMarker) { var el = document.createElement("div"); el.className = "wz-pm"; pMarker = new maplibregl.Marker({ element: el }); }
+    pMarker.setLngLat(p.p).addTo(map);
+  }
+  function idxFromEvent(e) {
+    var svg = $("pChart"), r = svg.getBoundingClientRect(), vx = (e.clientX - r.left) / r.width * CH.W, d = (vx - CH.ml) / CH.plotW * CH.L, sm = P.data.samples;
+    var lo = 0, hi = sm.length - 1; while (hi - lo > 1) { var m = (lo + hi) >> 1; if (sm[m].d < d) lo = m; else hi = m; }
+    return Math.abs(sm[lo].d - d) <= Math.abs(sm[hi].d - d) ? lo : hi;
+  }
+  var pc = $("pChart");
+  pc.addEventListener("pointermove", function (e) { if (P.data) setCursorIdx(idxFromEvent(e)); });
+  pc.addEventListener("pointerdown", function (e) { if (P.data) { try { pc.setPointerCapture(e.pointerId); } catch (x) {} setCursorIdx(idxFromEvent(e)); } });
+  pc.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse" && P.data && pMarker) { pMarker.remove(); pMarker = null; var g = $("pCur"); if (g) g.style.display = "none"; P.data.cur = null; $("pTip").textContent = "Mit Maus, Finger oder Pfeiltasten über das Diagramm fahren."; } });
+  pc.addEventListener("keydown", function (e) {
+    if (!P.data) return; var D = P.data, c = D.cur == null ? 0 : D.cur, step = e.shiftKey ? 10 : 1;
+    if (e.key === "ArrowRight") { setCursorIdx(c + step); e.preventDefault(); } else if (e.key === "ArrowLeft") { setCursorIdx(c - step); e.preventDefault(); }
+    else if (e.key === "Home") { setCursorIdx(0); e.preventDefault(); } else if (e.key === "End") { setCursorIdx(D.samples.length - 1); e.preventDefault(); }
+  });
+  Array.prototype.forEach.call($("pOv").querySelectorAll("button"), function (b) { b.addEventListener("click", function () { ovMode = +b.getAttribute("data-o"); renderProfile(); }); });
+  $("pCsv").addEventListener("click", function () {
+    if (!P.data) return;
+    var lines = ["Distanz (m);Höhe (m);lon;lat"];
+    P.data.samples.forEach(function (x) { lines.push([x.d.toFixed(1), x.h.toFixed(1), x.p[0].toFixed(6), x.p[1].toFixed(6)].join(";")); });
+    download("mapx-profil-" + today() + ".csv", "text/csv;charset=utf-8", "﻿" + lines.join("\r\n") + "\r\n");
+  });
+  $("pGpx").addEventListener("click", function () {
+    if (!P.data) return;
+    download("mapx-profil-" + today() + ".gpx", "application/gpx+xml", G.gpx("mapx Höhenprofil " + today(), P.data.samples.map(function (x) { return { lon: x.p[0], lat: x.p[1], ele: x.h }; }), new Date().toISOString().replace(/\.\d+Z$/, "Z")));
+  });
+  function importRoute() {
+    if (!routeCoords || routeCoords.length < 2) return;
+    var coords = routeCoords.slice(); openTools("p");
+    var s = newShape("line", coords); s.done = true; s.ro = true; ST.p.sel = s.id; armed = "line";
+    afterChange(s, true); fitShape(s);
+  }
+  $("pRoute").addEventListener("click", importRoute);
+
+  // ---------------------------------------------------------------- Umkreis und Puffer (#149 #151), Objekte aus den Vektorkacheln
+  var CATS = [["poi", "Orte von Interesse", "poi_p", "pt"], ["nat", "Gipfel und Natur", "natural_p", "pt"], ["place", "Orte und Siedlungen", "place_p", "pt"], ["lift", "Lifte und Seilbahnen", "aerialway_l", "ln"]];
+  var NAT_KIND = { peak: "Gipfel", saddle: "Sattel, Pass", glacier: "Gletscher", cave_entrance: "Höhle", spring: "Quelle", volcano: "Vulkan", rock: "Fels", waterfall: "Wasserfall" };
+  var PLACE_KIND = { city: "Stadt", town: "Stadt, Markt", village: "Dorf", hamlet: "Weiler", suburb: "Stadtteil", locality: "Ortschaft", isolated_dwelling: "Einzelhaus", capital: "Hauptstadt", state_capital: "Landeshauptstadt", farm: "Hof" };
+  var UI_ = ST.u, anSeq = 0, hitMarker = null, anHits = [];
+  var catsEl = $("uCats");
+  CATS.forEach(function (c) {
+    var l = document.createElement("label"); l.className = "f"; var i = document.createElement("input"); i.type = "checkbox"; i.checked = true; i.id = "uc-" + c[0]; i.style.width = "20px"; i.style.height = "20px"; i.style.margin = "0";
+    i.addEventListener("change", function () { var s = byId(ST.u.sel); if (s && s.done) analyze(s); });
+    l.appendChild(i); l.appendChild(document.createTextNode(c[1])); catsEl.appendChild(l);
+  });
+  [[100, "100 m"], [500, "500 m"], [1000, "1 km"], [5000, "5 km"]].forEach(function (q) {
+    var b = document.createElement("button"); b.type = "button"; b.className = "pill"; b.textContent = q[1]; b.addEventListener("click", function () { setDist(q[0]); }); $("uQuick").appendChild(b);
+  });
+  function setDist(m) {
+    ST.u.dist = m; var unit = $("uUnit"); unit.value = m >= 1000 && m % 1000 === 0 ? "1000" : "1";
+    $("uDist").value = +(m / +unit.value).toFixed(3); distChanged();
+  }
+  var distT = null;
+  function distChanged() {
+    var v = parseFloat($("uDist").value) * +$("uUnit").value;
+    if (!(v > 0)) return;
+    var max = UI_.mode === "circle" ? 20000 : 10000;
+    if (v > max) { v = max; toastWarn("Höchstens " + G.fmtLen(max, "metric") + "."); $("uDist").value = +(v / +$("uUnit").value).toFixed(3); }
+    ST.u.dist = v; var s = byId(ST.u.sel);
+    if (s && s.done) { clearTimeout(distT); distT = setTimeout(function () { analyze(s); }, 350); if (s.kind === "center") { s.r = v; render(); } }
+  }
+  $("uDist").addEventListener("input", distChanged); $("uUnit").addEventListener("change", distChanged);
+  function setUMode(mode) {
+    if (cur) cancel();
+    UI_.mode = mode; clearAll_u();
+    Array.prototype.forEach.call($("uMode").querySelectorAll("button"), function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-m") === mode)); });
+    $("uKind").hidden = mode !== "buffer"; $("uDistL").textContent = mode === "circle" ? "Radius" : "Abstand";
+    $("uDist").setAttribute("aria-label", mode === "circle" ? "Radius" : "Abstand");
+    armed = mode === "circle" ? "center" : UI_.kind; updateBar(); renderUmkreis();
+  }
+  function clearAll_u() { var st = ST.u; st.shapes = []; st.sel = null; anSeq++; anHits = []; if (hitMarker) { hitMarker.remove(); hitMarker = null; } render(); }
+  Array.prototype.forEach.call($("uMode").querySelectorAll("button"), function (b) { b.addEventListener("click", function () { setUMode(b.getAttribute("data-m")); writeHashSoon(); }); });
+  Array.prototype.forEach.call($("uKind").querySelectorAll("button"), function (b) {
+    b.addEventListener("click", function () {
+      if (cur) cancel(); UI_.kind = b.getAttribute("data-k"); armed = UI_.kind; clearAll_u();
+      Array.prototype.forEach.call($("uKind").querySelectorAll("button"), function (x) { x.setAttribute("aria-pressed", String(x === b)); }); updateBar(); renderUmkreis();
+    });
+  });
+  $("uClear").addEventListener("click", function () { clearAll_u(); armed = UI_.mode === "circle" ? "center" : UI_.kind; renderUmkreis(); updateBar(); writeHashSoon(); });
+  hooks.u = {
+    labels: function (s, pts, sel, live, F, name) {
+      if (s.kind === "center") F("tot", { type: "Point", coordinates: s.pts[0] }, { l: "r " + G.fmtLen(s.r, units) });
+      else if (s.buf && s.buf.length && s.done) F("tot", { type: "Point", coordinates: pts[pts.length - 1] }, { l: "± " + G.fmtLen(UI_.dist, units) });
+    },
+    change: function (s, done, removed, dragging) {
+      if (dragging) return;
+      if (removed || !s) { anHits = []; renderUmkreis(); return; }
+      if (s.kind === "center") s.r = UI_.dist;
+      if (done && s.done) analyze(s); else renderUmkreis();
+    }
+  };
+
+  // --- Vektorkacheln lesen (Mapbox Vector Tile, nur Punkte und Linien), unabhängig vom Kartenausschnitt
+  function readVar(b, st) { var r = 0, m = 1, c; do { c = b[st.p++]; r += (c & 127) * m; m *= 128; } while (c & 128); return r; }
+  function skip(b, st, wt) { if (wt === 0) readVar(b, st); else if (wt === 2) st.p += readVar(b, st); else if (wt === 1) st.p += 8; else if (wt === 5) st.p += 4; }
+  function decodeMVT(b, want) {
+    var out = {}, st = { p: 0 }, dec = new TextDecoder();
+    while (st.p < b.length) {
+      var tag = readVar(b, st), f = tag >> 3, wt = tag & 7;
+      if (f !== 3 || wt !== 2) { skip(b, st, wt); continue; }
+      var len = readVar(b, st), end = st.p + len, start = st.p, name = null;
+      while (st.p < end) { var t2 = readVar(b, st); if (t2 >> 3 === 1 && (t2 & 7) === 2) { var l2 = readVar(b, st); name = dec.decode(b.subarray(st.p, st.p + l2)); break; } skip(b, st, t2 & 7); }
+      if (!want[name]) { st.p = end; continue; }
+      st.p = start; var keys = [], vals = [], feats = [], ext = 4096;
+      while (st.p < end) {
+        var t3 = readVar(b, st), f3 = t3 >> 3, w3 = t3 & 7;
+        if (w3 !== 2 && !(f3 === 5 && w3 === 0)) { skip(b, st, w3); continue; }
+        if (f3 === 5) { ext = readVar(b, st); continue; }
+        var l3 = readVar(b, st), e3 = st.p + l3;
+        if (f3 === 3) keys.push(dec.decode(b.subarray(st.p, e3)));
+        else if (f3 === 4) {   // Value
+          var v = null;
+          while (st.p < e3) {
+            var t4 = readVar(b, st), f4 = t4 >> 3, w4 = t4 & 7;
+            if (f4 === 1) { var l4 = readVar(b, st); v = dec.decode(b.subarray(st.p, st.p + l4)); st.p += l4; }
+            else if (f4 === 2) { v = new DataView(b.buffer, b.byteOffset + st.p, 4).getFloat32(0, true); st.p += 4; }
+            else if (f4 === 3) { v = new DataView(b.buffer, b.byteOffset + st.p, 8).getFloat64(0, true); st.p += 8; }
+            else if (f4 === 4 || f4 === 5) v = readVar(b, st);
+            else if (f4 === 6) { var z = readVar(b, st); v = (z % 2 ? -(z + 1) / 2 : z / 2); }
+            else if (f4 === 7) v = !!readVar(b, st);
+            else skip(b, st, w4);
+          }
+          vals.push(v);
+        } else if (f3 === 2) feats.push([st.p, e3]);
+        st.p = e3;
+      }
+      var res = [];
+      feats.forEach(function (fr) {
+        var q = { p: fr[0] }, tags = [], type = 0, geom = [];
+        while (q.p < fr[1]) {
+          var t5 = readVar(b, q), f5 = t5 >> 3, w5 = t5 & 7;
+          if (f5 === 3) type = readVar(b, q);
+          else if ((f5 === 2 || f5 === 4) && w5 === 2) { var l5 = readVar(b, q), e5 = q.p + l5, arr = []; while (q.p < e5) arr.push(readVar(b, q)); if (f5 === 2) tags = arr; else geom = arr; }
+          else skip(b, q, w5);
+        }
+        var props = {}; for (var i = 0; i + 1 < tags.length; i += 2) props[keys[tags[i]]] = vals[tags[i + 1]];
+        var parts = [], part = null, x = 0, y = 0, i2 = 0;
+        while (i2 < geom.length) {
+          var cmd = geom[i2++], c = cmd & 7, n = cmd >> 3;
+          for (var k = 0; k < n; k++) {
+            if (c === 7) continue;
+            var dx = geom[i2++], dy = geom[i2++]; x += (dx % 2 ? -(dx + 1) / 2 : dx / 2); y += (dy % 2 ? -(dy + 1) / 2 : dy / 2);
+            if (c === 1) { part = [[x, y]]; parts.push(part); } else part.push([x, y]);
+          }
+        }
+        res.push({ type: type, props: props, parts: parts });
+      });
+      out[name] = { ext: ext, feats: res };
+    }
+    return out;
+  }
+  function tile2ll(z, tx, ty, ext, x, y) {
+    var n = Math.pow(2, z), X = (tx + x / ext) / n, Y = (ty + y / ext) / n;
+    return [X * 360 - 180, Math.atan(Math.sinh(Math.PI * (1 - 2 * Y))) * 180 / Math.PI];
+  }
+  var basis = { url: null, pm: null };
+  function basisPM() {
+    var st = map.getStyle(), so = st && st.sources && st.sources.basis, url = so && so.url ? so.url.replace(/^pmtiles:\/\//, "") : null;
+    if (url !== basis.url) { basis.url = url; basis.pm = url ? new pmtiles.PMTiles(url) : null; }
+    return basis.pm;
+  }
+  function fetchTiles(bbox, want) {   // bbox [w,s,e,n]; -> Promise<{z, items:[{layer, props, parts:[[ [lon,lat] ]], type}]}>
+    var pm = basisPM(); if (!pm) return Promise.reject(new Error("keine Kachelquelle"));
+    var z = 16, tl;
+    function tiles(zz) {
+      var n = Math.pow(2, zz), x0 = Math.floor((bbox[0] + 180) / 360 * n), x1 = Math.floor((bbox[2] + 180) / 360 * n);
+      function ty(lat) { var s = Math.sin(lat * Math.PI / 180); return Math.floor((0.5 - Math.log((1 + s) / (1 - s)) / (4 * Math.PI)) * n); }
+      var y0 = ty(bbox[3]), y1 = ty(bbox[1]), out = [];
+      for (var x = x0; x <= x1; x++) for (var y = y0; y <= y1; y++) out.push([x, y]);
+      return out;
+    }
+    tl = tiles(z); while (tl.length > 80 && z > 13) { z--; tl = tiles(z); }
+    if (tl.length > 80) return Promise.reject(new Error("Bereich zu groß für die Abfrage (höchstens etwa 20 km Ausdehnung)."));
+    var ZZ = z, items = [], idx = 0, run = 0;
+    return new Promise(function (resolve, reject) {
+      function next() {
+        if (idx >= tl.length && run === 0) return resolve({ z: ZZ, items: items, tiles: tl.length });
+        while (run < 8 && idx < tl.length) {
+          var t = tl[idx++]; run++;
+          pm.getZxy(ZZ, t[0], t[1]).then(function (tt, res) {
+            if (res && res.data) {
+              var dec = decodeMVT(new Uint8Array(res.data), want);
+              Object.keys(dec).forEach(function (ln) {
+                dec[ln].feats.forEach(function (f) {
+                  items.push({ layer: ln, props: f.props, type: f.type, parts: f.parts.map(function (pt) { return pt.map(function (c) { return tile2ll(ZZ, tt[0], tt[1], dec[ln].ext, c[0], c[1]); }); }) });
+                });
+              });
+            }
+          }.bind(null, t)).catch(function () {}).then(function () { run--; next(); });
+        }
+      }
+      next();
+    });
+  }
+
+  // --- Abstände (lokal-planar um den Prüfpunkt; im Pufferbereich ≤ 20 km Fehler weit unter 0,1 %)
+  function scale(lat) { var p = lat * Math.PI / 180; return [111412.84 * Math.cos(p) - 93.5 * Math.cos(3 * p), 111132.954 - 559.822 * Math.cos(2 * p) + 1.175 * Math.cos(4 * p)]; }
+  function segDist(px, py, ax, ay, bx, by) {
+    var dx = bx - ax, dy = by - ay, l2 = dx * dx + dy * dy, t = l2 ? Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / l2)) : 0;
+    return Math.hypot(px - ax - t * dx, py - ay - t * dy);
+  }
+  function inRing(px, py, ring) {
+    var c = false; for (var i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+      var a = ring[i], b = ring[j]; if ((a[1] > py) !== (b[1] > py) && px < (b[0] - a[0]) * (py - a[1]) / (b[1] - a[1]) + a[0]) c = !c;
+    } return c;
+  }
+  // Abstand eines Punkts zu Referenz {k:'pt'|'ln'|'ring', c:[...]}
+  function distPoint(p, ref) {
+    if (ref.k === "pt") return G.dist(p, ref.c[0]);
+    var sc = scale(p[1]), xy = ref.c.map(function (q) { return [(q[0] - p[0]) * sc[0], (q[1] - p[1]) * sc[1]]; }), best = Infinity, n = xy.length;
+    if (ref.k === "ring" && inRing(0, 0, xy)) return 0;
+    for (var i = 0; i < (ref.k === "ring" ? n : n - 1); i++) { var a = xy[i], b = xy[(i + 1) % n]; best = Math.min(best, segDist(0, 0, a[0], a[1], b[0], b[1])); }
+    return best;
+  }
+  function distLine(parts, ref) {   // Abstand einer Objektlinie zur Referenz
+    var best = Infinity;
+    parts.forEach(function (ln) { ln.forEach(function (p) { best = Math.min(best, distPoint(p, ref)); }); });
+    if (ref.k !== "pt" && best > 0) parts.forEach(function (ln) { ref.c.forEach(function (q) { best = Math.min(best, distToLine(q, ln)); }); });
+    return best;
+  }
+  function distToLine(p, ln) { return distPoint(p, { k: "ln", c: ln }); }
+
+  // --- Pufferpolygon: Vereinigung aus Kreisen an den Stützpunkten und Rechtecken je Segment (geodätisch aufgebaut)
+  var PC_URL = "https://cdn.jsdelivr.net/npm/polygon-clipping@0.15.7/dist/polygon-clipping.umd.min.js", PC_SRI = "sha384-2gzcIyrtB96QDjrxsFcJ1O461CWiXJ8fiHgIkJLwTgy4WTktHXTOXt4dviXz9Y5Q", pcP = null;
+  function loadPC() {
+    if (window.polygonClipping) return Promise.resolve(window.polygonClipping);
+    if (pcP) return pcP;
+    pcP = new Promise(function (ok, bad) {
+      var s = document.createElement("script"); s.src = PC_URL; s.integrity = PC_SRI; s.crossOrigin = "anonymous";
+      s.onload = function () { ok(window.polygonClipping); }; s.onerror = function () { pcP = null; bad(new Error("Pufferbibliothek konnte nicht geladen werden")); };
+      document.head.appendChild(s);
+    });
+    return pcP;
+  }
+  function bufferPolys(s, d) {
+    return loadPC().then(function (pcl) {
+      var pts = s.pts, parts = [], n = pts.length;
+      pts.forEach(function (p) { var r = G.circleRing(p, d, 48); r.push(r[0]); parts.push([[r]]); });
+      var segs = s.kind === "area" ? n : n - 1;
+      for (var i = 0; i < segs; i++) {
+        var a = pts[i], b = pts[(i + 1) % n], inv = G.inverse(a[0], a[1], b[0], b[1]); if (inv.s === 0) continue;
+        var a1 = G.direct(a[0], a[1], inv.az1 + 90, d), a2 = G.direct(a[0], a[1], inv.az1 - 90, d), b1 = G.direct(b[0], b[1], inv.az2 + 90, d), b2 = G.direct(b[0], b[1], inv.az2 - 90, d);
+        parts.push([[[a1, b1, b2, a2, a1]]]);
+      }
+      if (s.kind === "area" && n >= 3) parts.push([[pts.concat([pts[0]])]]);
+      var u = pcl.union.apply(null, parts.map(function (p) { return p; }).slice(0, 1).concat(parts.slice(1)));
+      return u;   // MultiPolygon: [[ring, hole, ...], ...]
+    });
+  }
+  function bboxOf(rings) {
+    var b = [Infinity, Infinity, -Infinity, -Infinity];
+    rings.forEach(function (r) { r.forEach(function (p) { b[0] = Math.min(b[0], p[0]); b[1] = Math.min(b[1], p[1]); b[2] = Math.max(b[2], p[0]); b[3] = Math.max(b[3], p[1]); }); });
+    return b;
+  }
+  function wantedCats() { return CATS.filter(function (c) { return $("uc-" + c[0]).checked; }); }
+  function analyze(s) {
+    var my = ++anSeq, d = UI_.dist, res = $("uRes"); res.innerHTML = '<div class="note">Wird berechnet …</div>'; $("uList").innerHTML = "";
+    var p0 = s.kind === "center" ? Promise.resolve(null) : (s.pts.length > 300 ? Promise.reject(new Error("Zu viele Stützpunkte für den Puffer (höchstens 300).")) : bufferPolys(s, d));
+    p0.then(function (poly) {
+      if (my !== anSeq) return null;
+      var ref, rings;
+      if (s.kind === "center") { s.r = d; ref = { k: "pt", c: [s.pts[0]] }; rings = [G.circleRing(s.pts[0], d, 16)]; s.buf = null; }
+      else { s.buf = poly; ref = { k: s.kind === "area" ? "ring" : "ln", c: s.pts }; rings = poly.map(function (pp) { return pp[0]; }); }
+      render();
+      var bb = bboxOf(rings), cats = wantedCats(), want = {};
+      cats.forEach(function (c) { want[c[2]] = c; });
+      if (!cats.length) { showHits(s, [], null, d, poly); return null; }
+      return fetchTiles(bb, want).then(function (r) {
+        if (my !== anSeq) return;
+        var seen = {}, hits = [];
+        r.items.forEach(function (it) {
+          var c = want[it.layer], isLine = c[3] === "ln", dd, pos;
+          if (!isLine && it.type === 1) {
+            it.parts.forEach(function (pt) {
+              pt.forEach(function (p) {
+                // grobe Vorauswahl über Rechteck, dann genau
+                if (p[0] < bb[0] || p[0] > bb[2] || p[1] < bb[1] || p[1] > bb[3]) return;
+                dd = distPoint(p, ref); if (dd > d) return;
+                var key = it.layer + "|" + (it.props.kind || "") + "|" + (it.props.name || "") + "|" + p[0].toFixed(5) + "|" + p[1].toFixed(5);
+                if (seen[key]) return; seen[key] = 1; hits.push({ cat: c, props: it.props, pos: p, dist: s.kind === "center" ? G.dist(s.pts[0], p) : dd });
+              });
+            });
+          } else if (isLine) {
+            dd = distLine(it.parts, ref); if (dd > d) return;
+            var key2 = it.layer + "|" + (it.props.kind || "") + "|" + (it.props.name || "") + "|" + (it.props.ref || ""), mid = it.parts[0][Math.floor(it.parts[0].length / 2)];
+            if (seen[key2]) { if (dd < seen[key2].dist) { seen[key2].dist = dd; seen[key2].pos = mid; } return; }
+            var h = { cat: c, props: it.props, pos: mid, dist: dd }; seen[key2] = h; hits.push(h);
+          }
+        });
+        hits.sort(function (a, b) { return a.dist - b.dist; });
+        showHits(s, hits, r, d, poly);
+      });
+    }).catch(function (e) { if (my === anSeq) { $("uRes").innerHTML = '<div class="warn" role="alert">' + esc(e.message || "Fehler") + "</div>"; } });
+  }
+  function kindLabel(h) {
+    var k = h.props.kind || "";
+    if (h.cat[0] === "poi") return (window.mapxLabels && window.mapxLabels.poi[k]) || k || "Ort";
+    if (h.cat[0] === "nat") return NAT_KIND[k] || k || "Natur";
+    if (h.cat[0] === "place") return PLACE_KIND[k] || k || "Ort";
+    return "Lift, Seilbahn" + (k ? " (" + k + ")" : "");
+  }
+  function showHits(s, hits, r, d, poly) {
+    anHits = hits; var total = hits.length, shown = hits.slice(0, 500), res = $("uRes");
+    var head = '<div class="big">' + total + " Objekt" + (total === 1 ? "" : "e") + "</div>";
+    var dl = '<dl class="kv"><dt>' + (s.kind === "center" ? "Radius" : "Abstand") + "</dt><dd>" + esc(G.fmtLen(d, units)) + "</dd>";
+    if (s.kind === "center") dl += "<dt>Kreisfläche</dt><dd>" + esc(G.fmtArea(G.ringArea(G.circleRing(s.pts[0], d, 128)), units)) + "</dd>";
+    else { var A = 0; (poly || []).forEach(function (pp) { pp.forEach(function (ring, i) { var a = G.ringArea(ring.slice(0, -1)); A += i ? -a : a; }); }); dl += "<dt>Pufferfläche</dt><dd>" + esc(G.fmtArea(A, units)) + "</dd>"; s.bufArea = A; }
+    if (r) dl += "<dt>Kacheln</dt><dd>" + r.tiles + " bei Zoom " + r.z + "</dd>";
+    dl += "</dl>";
+    res.innerHTML = head + dl + (total > 500 ? '<div class="note">Gezeigt werden die 500 nächsten.</div>' : "");
+    var list = $("uList"); list.innerHTML = "";
+    shown.forEach(function (h, i) {
+      var li = document.createElement("li"), b = document.createElement("button"); b.type = "button"; b.className = "go";
+      b.innerHTML = esc(h.props.name || kindLabel(h)) + "<small>" + esc(kindLabel(h) + " · " + G.fmtLen(h.dist, units)) + "</small>";
+      b.addEventListener("click", function () { focusHit(h); });
+      li.appendChild(b); list.appendChild(li);
+    });
+    $("uGeo").hidden = false;
+    var note = "Objekte aus den Vektorkacheln (BEV DLM, Geographische Namen, GIP.at; CC BY 4.0), nicht aus dem Kartenausschnitt. ";
+    if (r && r.z < 16) note += "Bei Zoom " + r.z + " fehlen Objekte, die erst ab Zoom 16 in der Karte erscheinen; für Vollständigkeit kleineren Bereich wählen. ";
+    note += s.kind === "center" ? "Entfernung geodätisch (WGS84)." : "Abstand zur Linie bzw. Fläche, lokal gerechnet (Fehler unter 0,1 %).";
+    $("uNote").textContent = note;
+  }
+  function focusHit(h) {
+    if (hitMarker) hitMarker.remove();
+    var el = document.createElement("div"); el.className = "wz-hit";
+    var pop = new maplibregl.Popup({ offset: 16, maxWidth: "260px", closeButton: true }).setHTML("<b>" + esc(h.props.name || kindLabel(h)) + "</b><br>" + esc(kindLabel(h)) + "<br>" + esc(G.fmtLen(h.dist, units)) + (ST.u.mode === "circle" ? " vom Mittelpunkt" : " vom Pfad"));
+    hitMarker = new maplibregl.Marker({ element: el }).setLngLat(h.pos).setPopup(pop).addTo(map); hitMarker.togglePopup();
+    var narrow = window.innerWidth <= 640;
+    map.flyTo({ center: h.pos, zoom: Math.max(map.getZoom(), 16.5), speed: 1.6, padding: narrow ? { bottom: Math.round(wz.offsetHeight) } : { left: 0 } });
+  }
+  function renderUmkreis() {
+    var s = byId(ST.u.sel);
+    if (!s) { $("uRes").innerHTML = '<div class="note">' + (UI_.mode === "circle" ? "Mittelpunkt auf der Karte antippen." : UI_.kind === "line" ? "Linie zeichnen (Doppelklick oder „Fertig“ schließt)." : "Fläche zeichnen (Doppelklick oder „Fertig“ schließt).") + "</div>"; $("uList").innerHTML = ""; $("uGeo").hidden = true; $("uNote").textContent = ""; }
+  }
+  $("uGeo").addEventListener("click", function () {
+    var s = byId(ST.u.sel); if (!s) return;
+    var feats = [];
+    if (s.kind === "center") feats.push({ type: "Feature", properties: { art: "Umkreis", radius_m: Math.round(s.r) }, geometry: { type: "Polygon", coordinates: [circlePoly(s.pts[0], s.r)] } });
+    else if (s.buf) feats.push({ type: "Feature", properties: { art: "Puffer", abstand_m: Math.round(UI_.dist), flaeche_m2: Math.round(s.bufArea || 0) }, geometry: { type: "MultiPolygon", coordinates: s.buf } });
+    anHits.slice(0, 500).forEach(function (h) { feats.push({ type: "Feature", properties: { name: h.props.name || "", art: kindLabel(h), kategorie: h.cat[1], abstand_m: Math.round(h.dist) }, geometry: { type: "Point", coordinates: h.pos } }); });
+    download("mapx-analyse-" + today() + ".geojson", "application/geo+json", JSON.stringify({ type: "FeatureCollection", features: feats }));
+  });
+
+  // ---------------------------------------------------------------- Öffnen, Tabs, Hash, Anbindung an den Rest der Seite
+  var KCH = { line: "l", area: "a", circle: "c", center: "o", point: "p" }, KCH_R = { l: "line", a: "area", c: "circle", o: "center", p: "point" };
+  function encPts(pts) { return pts.map(function (p) { return p[0].toFixed(5) + "," + p[1].toFixed(5); }).join(";"); }
+  function hashState() {
+    if (!isOpen) return "";
+    var st = S(), parts = [];
+    st.shapes.forEach(function (s) {
+      if (s.ro || !s.pts.length) return;
+      var x = KCH[s.kind] + encPts(s.pts);
+      if (s.kind === "center") x += "@" + Math.round(s.r);
+      else if (tool === "u") x += "@" + Math.round(UI_.dist);
+      if (s.name) x += "#" + encodeURIComponent(s.name);
+      parts.push(x);
+    });
+    var h = "&w=" + tool + (tool === "u" ? UI_.mode.charAt(0) : "") + ":" + parts.join("~");
+    return h;
+  }
+  var hashT = null;
+  function writeHashSoon() { clearTimeout(hashT); hashT = setTimeout(function () { if (window.mapxWriteHash) window.mapxWriteHash(); }, 250); }
+  function restoreFromHash() {
+    var m = /[#&]w=([mkpu])([cb]?):([^&]*)/.exec(location.hash);
+    if (!m) return;
+    var t = m[1], body = m[3];
+    openTools(t);
+    if (t === "u" && m[2] === "b") setUMode("buffer");
+    var shapes = body ? body.split("~") : [];
+    shapes.forEach(function (x) {
+      var kind = KCH_R[x.charAt(0)]; if (!kind) return;
+      var nm = "", at = null, h = x.indexOf("#"); if (h >= 0) { try { nm = decodeURIComponent(x.slice(h + 1)); } catch (e) {} x = x.slice(0, h); }
+      var a = x.indexOf("@"); if (a >= 0) { at = parseFloat(x.slice(a + 1)); x = x.slice(0, a); }
+      var pts = x.slice(1).split(";").map(function (q) { return q.split(",").map(Number); }).filter(function (p) { return p.length === 2 && isFinite(p[0]) && isFinite(p[1]); });
+      if (!pts.length || pts.length < minPts({ kind: kind })) return;
+      if (kind === "area" && tool === "u") { UI_.kind = "area"; }
+      var s = newShape(kind, pts); s.done = true; s.name = nm; ST[t].sel = s.id;
+      if (t === "u" && at) { UI_.dist = at; setDist(at); }
+      if (t === "u" && kind === "center") s.r = UI_.dist;
+      if (t === "u" && (kind === "line" || kind === "area")) { Array.prototype.forEach.call($("uKind").querySelectorAll("button"), function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-k") === kind)); }); armed = kind; }
+      if (t === "m") { ST.m.kind = kind; setMeasureKind(kind); }
+      afterChange(s, true);
+    });
+  }
+
+  var PANELS = { m: "wz-m", k: "wz-k", p: "wz-p", u: "wz-u" };
+  function setTool(t) {
+    if (cur) cancel();
+    tool = t; cursor = null;
+    Object.keys(PANELS).forEach(function (k) {
+      var on = k === t; $(PANELS[k]).hidden = !on; var tb = $("tab-" + k); tb.setAttribute("aria-selected", String(on)); tb.tabIndex = on ? 0 : -1;
+    });
+    armed = t === "m" ? ST.m.kind : t === "k" ? "point" : t === "p" ? "line" : (UI_.mode === "circle" ? "center" : UI_.kind);
+    wz.setAttribute("aria-label", "Werkzeuge: " + TOOLS[t].name);
+    if (t === "m") { setMeasureKind(ST.m.kind); renderMeasure(); }
+    if (t === "k") renderCoords();
+    if (t === "u") renderUmkreis();
+    if (t !== "p" && pMarker) { pMarker.remove(); pMarker = null; }
+    if (t === "p") { $("pRoute").hidden = !routeCoords; if (P.data) setTimeout(function () { renderProfile(); }, 0); }
+    map.getCanvas().style.cursor = isOpen ? "crosshair" : "";
+    render(); updateBar(); writeHashSoon();
+  }
+  Array.prototype.forEach.call($("wzTabs").querySelectorAll("button"), function (b, i, all) {
+    b.addEventListener("click", function () { setTool(b.getAttribute("data-t")); });
+    b.addEventListener("keydown", function (e) {
+      var n = all.length, j = e.key === "ArrowRight" ? (i + 1) % n : e.key === "ArrowLeft" ? (i + n - 1) % n : e.key === "Home" ? 0 : e.key === "End" ? n - 1 : -1;
+      if (j >= 0) { e.preventDefault(); all[j].focus(); setTool(all[j].getAttribute("data-t")); }
+    });
+  });
+  var tbtn = document.createElement("button");
+  tbtn.type = "button"; tbtn.className = "btnwz"; tbtn.title = "Werkzeuge: Messen, Koordinaten, Höhenprofil, Umkreis"; tbtn.setAttribute("aria-label", "Werkzeuge: Messen, Koordinaten, Höhenprofil, Umkreis");
+  tbtn.setAttribute("aria-pressed", "false"); tbtn.setAttribute("aria-controls", "wz"); tbtn.setAttribute("aria-expanded", "false");
+  tbtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.5L17.5 3l3.5 3.5L6.5 21z"/><path d="M7.5 13.5l2 2M10.5 10.5l1.5 1.5M13.5 7.5l2 2"/></svg>';
+  tbtn.id = "wzBtn";
+  map.addControl({ onAdd: function () { var c = document.createElement("div"); c.className = "maplibregl-ctrl maplibregl-ctrl-group"; c.appendChild(tbtn); return c; },
+                   onRemove: function () { tbtn.parentNode && tbtn.parentNode.remove(); } }, "top-right");
+  tbtn.addEventListener("click", function () { if (isOpen) closeTools(); else openTools(tool); });
+  $("wzClose").addEventListener("click", closeTools);
+
+  function openTools(t) {
+    var rt = $("rt"); if (rt && rt.classList.contains("open")) $("rtClose").click();
+    var pm = document.querySelector(".maplibregl-popup"); if (pm) { var cb = pm.querySelector(".maplibregl-popup-close-button"); if (cb) cb.click(); }
+    isOpen = true; wz.classList.add("open"); tbtn.setAttribute("aria-pressed", "true"); tbtn.setAttribute("aria-expanded", "true");
+    map.doubleClickZoom.disable(); ensureLayers(); bindOnce();
+    var c = lsGet("mapx-wz-cross"); setCross(c === null ? (window.matchMedia && matchMedia("(pointer:coarse)").matches) : c === "1");
+    setTool(t || tool);
+    if (!$("mUnits").dataset.init) { $("mUnits").dataset.init = "1"; setUnits(units); }
+  }
+  function closeTools() {
+    if (cur) cancel();
+    isOpen = false; wz.classList.remove("open"); tbtn.setAttribute("aria-pressed", "false"); tbtn.setAttribute("aria-expanded", "false");
+    map.doubleClickZoom.enable(); map.getCanvas().style.cursor = ""; $("wzCross").classList.remove("on");
+    if (map.getSource("wz")) map.getSource("wz").setData(EMPTY);
+    if (pMarker) { pMarker.remove(); pMarker = null; } if (hitMarker) { hitMarker.remove(); hitMarker = null; }
+    writeHashSoon(); tbtn.focus();
+  }
+  new ResizeObserver(function () { placeCross(); }).observe(wz);
+
+  // Route in Profil übernehmen (#105): Routenfeld bietet den Knopf, sobald eine Route berechnet ist
+  var rtBtn = document.createElement("button"); rtBtn.type = "button"; rtBtn.id = "rtProfil"; rtBtn.textContent = "Höhenprofil"; rtBtn.hidden = true;
+  (function () { var acts = document.querySelector("#rt .acts"); if (acts) acts.appendChild(rtBtn); })();
+  rtBtn.addEventListener("click", importRoute);
+  var rtGo = $("rtGo"); if (rtGo) rtGo.addEventListener("click", function () { if (isOpen && $("rt").classList.contains("open")) closeTools(); });
+
+  window.mapxTools = {
+    busy: function () { return isOpen; },
+    hash: hashState,
+    parse: function (q) { var c = G.parseCoord(q, { lon: map.getCenter().lng, lat: map.getCenter().lat }); return c; },
+    routeReady: function (coords) { routeCoords = coords && coords.length > 1 ? coords : null; rtBtn.hidden = !routeCoords; $("pRoute").hidden = !routeCoords; },
+    open: openTools, close: closeTools, _render: render, _feat: featurize, _state: function () { return { tool: tool, isOpen: isOpen, ST: ST, cur: cur, armed: armed, cross: cross, profile: P.data, hits: anHits }; }
+  };
+  restoreFromHash();
 })();
 </script>
 </body>
