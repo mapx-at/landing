@@ -48,13 +48,14 @@ button{font:inherit;color:inherit;cursor:pointer}
 /* Panel */
 .panel{position:absolute;z-index:2;left:max(18px,env(safe-area-inset-left));top:max(18px,env(safe-area-inset-top));bottom:18px;width:316px;display:flex;flex-direction:column;border-radius:22px;overflow:hidden;
   background:var(--glass);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid var(--border);box-shadow:var(--shadow)}
-.panel header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:16px 16px 12px 20px;user-select:none;flex:none}
-.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.panel header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:16px 10px 12px 14px;user-select:none;flex:none}
+.brand{display:flex;align-items:center;gap:8px;min-width:0}
+.brand>div:last-child{min-width:0}
 .logo{width:34px;height:34px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex:none}
 .logo svg{width:18px;height:18px;fill:none;stroke:var(--on-accent);stroke-width:2.2;stroke-linejoin:round}
 .wm{font:700 19px/1.1 "Space Grotesk",Inter,sans-serif;letter-spacing:-.01em}
-.sub{font-size:12px;color:var(--muted)}
-.hbtns{display:flex;gap:6px;flex:none}
+.sub{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbtns{display:flex;gap:4px;flex:none}
 .toggle svg{transition:transform .2s}
 .panel.collapsed .toggle svg{transform:rotate(180deg)}
 .body{flex:1;overflow:auto;padding:4px 20px 8px;display:flex;flex-direction:column;gap:20px;overscroll-behavior:contain}
@@ -152,8 +153,9 @@ details.lg summary{cursor:pointer;font-size:13px;min-height:44px;display:flex;al
 .maplibregl-ctrl-attrib-button,.maplibregl-ctrl-attrib-button:hover,.maplibregl-ctrl-attrib-button:focus{background-color:transparent!important}
 .maplibregl-ctrl-attrib-button{width:44px!important;height:44px!important;right:0;top:0;position:absolute;background-image:none!important;border-radius:22px!important;display:flex;align-items:center;justify-content:center}
 .maplibregl-ctrl-attrib-button::before{content:"\24D8";font-size:20px;line-height:1;color:var(--text)}
-.maplibregl-ctrl-attrib.maplibregl-compact-show{max-width:calc(100vw - 400px);max-height:45vh;overflow:auto}
-@media (min-width:641px){.maplibregl-ctrl-attrib.maplibregl-compact-show{max-height:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.maplibregl-ctrl-attrib.maplibregl-compact-show{box-sizing:border-box;padding:0 48px 0 14px!important;max-width:calc(100vw - 400px);max-height:45vh;overflow:auto}
+/* Desktop: rechts vom Panel (352 px) umbrechen und scrollen statt abschneiden; nichts überlagert Panel oder Maßstab (#235) */
+@media (min-width:641px){.maplibregl-ctrl-attrib.maplibregl-compact-show{max-width:calc(100vw - 352px - 18px - 110px);max-height:40vh}}
 /* Popup als Karte */
 .maplibregl-popup-content{font:13px/1.45 Inter,system-ui,sans-serif;color:var(--text);background:var(--card);padding:14px 16px;border-radius:18px;box-shadow:var(--shadow2);border:1px solid var(--border);overflow:hidden}
 .maplibregl-popup-content.pcp,.pc-popup .maplibregl-popup-content{padding:0}
@@ -838,7 +840,7 @@ window.mapxStil = (function () {
   map.on("click", function (e) {
     if (!ready || (document.getElementById("rt") || {}).className === "rt open") return;
     var pad = 4, box = [[e.point.x - pad, e.point.y - pad], [e.point.x + pad, e.point.y + pad]];
-    var poiCat = "", parts = [], P = { h: [], poi: [], bld: [], road: [], lift: [], water: [], bd: [], land: [], tun: [] }, kinds = (LEGEND && LEGEND.kind) || {};
+    var poiCat = "", poiSrc = "", parts = [], P = { h: [], poi: [], bld: [], road: [], lift: [], water: [], bd: [], land: [], tun: [] }, kinds = (LEGEND && LEGEND.kind) || {};
     var labels = (LEGEND && LEGEND.roadLabels) || {};
     var h = first(box, visible("housenumbers"));
     if (h) {
@@ -868,7 +870,11 @@ window.mapxStil = (function () {
     var sy = first([[e.point.x - 10, e.point.y - 10], [e.point.x + 10, e.point.y + 10]], visible("symbols"));
     if (sy) {
       var yp = sy.properties || {}, yt = POI_KIND[yp.kind] || "Symbol", yd = POI_DETAIL[yp.kind_detail];
-      poiCat = yt; P.poi.push("<b>" + esc(yp.name || yt) + "</b>" + (yp.name || yd ? "<br>" + esc(yt) + (yd ? " · " + yd : "") : ""));
+      poiCat = yt;
+      var sl = sy.layer["source-layer"];   // Quelle je Symbol-Layer: transit_p GIP, airport_p Wikidata, natural_p/place_p/geonamen-* Geographische Namen, poi_p DLM/Wien
+      poiSrc = sl === "transit_p" ? "GIP.at" : sl === "airport_p" ? "Wikidata, CC0" : (sl === "natural_p" || sl === "place_p" || sy.layer.id === "geonamen-kirche") ? "BEV Geographische Namen"
+             : yp.kind_detail === "aerialway_station" ? "BEV DLM Verkehr" : "BEV DLM Bauten und Verkehr, Wien OGD";
+      P.poi.push("<b>" + esc(yp.name || yt) + "</b>" + (yp.name || yd ? "<br>" + esc(yt) + (yd ? " · " + yd : "") : ""));
     }
     var w = first(box, visible("water").filter(function (id) { return id !== "water-dkm"; }));
     if (w) {
@@ -917,15 +923,15 @@ window.mapxStil = (function () {
     }
     if (!parts.length && ez == null) return;
     // Kopf der Karte: Kategorie des ersten Treffers, Quellenfuß je Datenart
-    var CATS = [["h", "Adresse", "BEV Adressregister"], ["poi", poiCat || "Ort", "BEV DLM, Wien OGD, Geographische Namen"], ["bld", "Gebäude", "BEV DKM"],
-                ["road", "Straße", "GIP.at"], ["lift", "Lift", "GIP.at"], ["water", "Gewässer", "GGN"], ["bd", "Grenze", "BEV Verwaltungsgrenzen"],
+    var CATS = [["h", "Adresse", "BEV Adressregister"], ["poi", poiCat || "Ort", poiSrc || "BEV DLM, Wien OGD, Geographische Namen"], ["bld", "Gebäude", "BEV DKM, DLM Bauwerke"],
+                ["road", "Straße", "GIP.at"], ["lift", "Lift", "BEV DLM Verkehr"], ["water", "Gewässer", "GGN"], ["bd", "Grenze", "BEV Verwaltungsgrenzen"],
                 ["land", "Nutzung", "BEV DKM"], ["tun", "Tunnel", "GIP.at"]];
     var cat = CATS.filter(function (c) { return P[c[0]].length; })[0] || ["", "Ort", "BEV, GIP.at"];
     var html = '<div class="pc-body"><span class="pc-pill">' + esc(cat[1]) + "</span>" + parts.join(HR) +
       (wantAdmin ? '<div class="adm d"></div>' : "") + '</div>' +
       '<div class="pc-acts"><button type="button" data-a="route">Route</button><button type="button" data-a="share">Teilen</button>' +
       '<button type="button" data-a="ele">' + (ez != null ? ez.toLocaleString("de-AT") + " m ü. A." : "Höhe") + "</button></div>" +
-      '<div class="pc-src">Quelle: ' + esc(cat[2]) + ", CC BY 4.0</div>";
+      '<div class="pc-src">Quelle: ' + esc(cat[2]) + (/CC0/.test(cat[2]) ? "" : ", CC BY 4.0") + "</div>";
     var pop = new maplibregl.Popup({ closeButton: true, maxWidth: "300px", className: "rev pc-popup" }).setLngLat(e.lngLat).setHTML(html).addTo(map);
     var pel = pop.getElement();
     pel.querySelector(".pc-acts").addEventListener("click", function (ev) {
