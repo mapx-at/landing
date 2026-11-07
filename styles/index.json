@@ -80,6 +80,16 @@
   ]
  },
  {
+  "id": "satellit-aktuell",
+  "name": "Satellit aktuell (Sentinel-2) + Straßen",
+  "gruppe": "Klassisch",
+  "vorschau": [
+   "#efefee",
+   "#47B312",
+   "#b3d9ff"
+  ]
+ },
+ {
   "id": "hybrid",
   "name": "Hybrid (BEV-Luftbild)",
   "gruppe": "Klassisch",
