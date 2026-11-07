@@ -86,5 +86,5 @@ den Origin `https://mapx.at` (lokal also „Suche gerade nicht erreichbar“). Q
 https://map.mapx.at/ weiter. `style.json`, `styles/`, `legacy/`, `tools/` bleiben unberührt.
 
 Pages liefert weiter den Branch `main` aus. Das Build-Ergebnis (`index.html`, `lp/`) ist eingecheckt:
-nach Änderungen in `site/` `site/build.sh` ausführen (Hugo extended 0.169.0) und committen; die CI
-prüft mit `site/build.sh --check`, dass beides übereinstimmt.
+nach Änderungen in `site/` `site/build.sh` ausführen (Hugo extended 0.169.0) und committen
+kann man mit `site/build.sh --check` prüfen (keine CI: das öffentliche Repo hat keinen Zugriff auf die self-hosted Runner).
