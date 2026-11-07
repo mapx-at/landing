@@ -390,6 +390,7 @@ table.cx tr{border-top:1px solid var(--line)}
         <label><input type="checkbox" id="lifts" checked autocomplete="off"> Lifte</label>
         <label><input type="checkbox" id="sym" checked autocomplete="off"> Symbole</label>
         <label><input type="checkbox" id="rel" checked autocomplete="off"> Relief</label>
+        <label title="Baustellen, Sperren und Ereignisse (EVIS.AT/ASFINAG), live"><input type="checkbox" id="trf" autocomplete="off"> Verkehr</label>
         <label id="fbgL" hidden><input type="checkbox" id="fbg" autocomplete="off"> Flugblock-Grenzen</label>
       </div>
       <label class="op" id="hsL" hidden>Schummerung
@@ -1228,7 +1229,7 @@ window.mapxStil = (function () {
     probeTiles();
   });
 
-  var GROUPS = {}, HIDDEN = {}, LEGEND = null, ready = false;
+  var GROUPS = {}, HIDDEN = {}, LEGEND = null, ready = false, OVERLAYS = {};
   fetch(STYLE_URL).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(function (style) {
     SOURCE_PARAMS.forEach(function (k) {
       var v = params.get(k);
@@ -1245,6 +1246,7 @@ window.mapxStil = (function () {
     if (/^\d+$/.test(params.get("reliefmax") || "") && style.sources.relief) MAXZOOM[style.sources.relief.url] = +params.get("reliefmax");
     var md = style.metadata || {};
     GROUPS = md["mapx:groups"] || {};
+    OVERLAYS = md["mapx:overlays"] || {};
     // Layer, die der Style selbst ausschaltet (z. B. grenzen-label-gemeinde), bleiben aus
     // (building-3d ist von Haus aus aus und wird vom Schalter „3D“ gesteuert)
     style.layers.forEach(function (l) { if (l.layout && l.layout.visibility === "none" && l.id !== "building-3d") HIDDEN[l.id] = true; });
@@ -1315,7 +1317,24 @@ window.mapxStil = (function () {
     applyTerrain();
     applyHousenumbers3d(d3.checked);
     applyLuftbild();
+    applyVerkehr();
   }
+  // Ebene „Verkehr“: Live-Kacheln der API, Definition aus style.json metadata["mapx:overlays"] (build_style.py), erst beim
+  // Einschalten geladen; nach einem Stilwechsel neu hinzugefügt (applyAll läuft nach jedem setStyle)
+  var trf = document.getElementById("trf");
+  function applyVerkehr() {
+    var o = OVERLAYS.verkehr; if (!o) { trf.parentNode.hidden = true; return; }
+    trf.parentNode.hidden = false;
+    if (trf.checked && !map.getSource("verkehr")) {
+      map.addSource("verkehr", o.source);
+      var lab = map.getStyle().layers.filter(function (l) { return l.type === "symbol"; })[0];
+      o.layers.forEach(function (l) { map.addLayer(l, lab ? lab.id : undefined); });
+    }
+    o.layers.forEach(function (l) {
+      if (map.getLayer(l.id)) map.setLayoutProperty(l.id, "visibility", trf.checked ? "visible" : "none");
+    });
+  }
+  trf.addEventListener("change", function () { if (ready) applyVerkehr(); });
   // 3D: Grundstücksnummern aus, Hausnummern erst ab z17 (am Boden liegende Zahlen überdecken sonst die Gebäude)
   var HN_ORIG = {};
   function applyHousenumbers3d(on) {
@@ -1561,6 +1580,7 @@ window.mapxStil = (function () {
     var pad = 4, box = [[e.point.x - pad, e.point.y - pad], [e.point.x + pad, e.point.y + pad]];
     var poiCat = "", poiSrc = "", parts = [], P = { h: [], poi: [], bld: [], road: [], lift: [], water: [], bd: [], land: [], tun: [] }, kinds = (LEGEND && LEGEND.kind) || {};
     P.dop = lbFlugblock(e.point);
+    P.trf = verkehrInfo(box);
     var labels = (LEGEND && LEGEND.roadLabels) || {};
     var h = first(box, visible("housenumbers"));
     if (h) {
@@ -1633,7 +1653,7 @@ window.mapxStil = (function () {
     if (pc && pc.properties && pc.properties.gstnr) low += "<br>Grenze Grundstück " + esc(pc.properties.gstnr) + " (KG " + esc(pc.properties.kgnr) + ")";
     if (low) P.land.push(low.replace(/^<br>/, ""));
     // Reihenfolge: Hausnummer/Adresse, POI, Gebäude, Straße, Lift, Gewässer, Grenze, Nutzung, zuletzt Tunnel/Unterführung
-    ["h", "poi", "bld", "road", "lift", "water", "bd", "land", "tun", "dop"].forEach(function (k) { parts = parts.concat(P[k]); });
+    ["trf", "h", "poi", "bld", "road", "lift", "water", "bd", "land", "tun", "dop"].forEach(function (k) { parts = parts.concat(P[k]); });
     // Gemeinde/Bezirk am Klickpunkt aus der naechsten Adresse (Suchindex), bei Grenzen und Hausnummern
     var wantAdmin = !!(bd || h);
     var ez = null;
@@ -1646,6 +1666,7 @@ window.mapxStil = (function () {
     var CATS = [["h", "Adresse", "BEV Adressregister"], ["poi", poiCat || "Ort", poiSrc || "BEV DLM, Wien OGD, Geographische Namen"], ["bld", "Gebäude", "BEV DKM, DLM Bauwerke"],
                 ["road", "Straße", "GIP.at"], ["lift", "Lift", "BEV DLM Verkehr"], ["water", "Gewässer", "GGN"], ["bd", "Grenze", "BEV Verwaltungsgrenzen"],
                 ["land", "Nutzung", "BEV DKM"], ["tun", "Tunnel", "GIP.at"], ["dop", "Luftbild", "BEV DOP"]];
+    CATS = [["trf", "Verkehrsmeldung", "ASFINAG / EVIS.AT"]].concat(CATS);
     var cat = CATS.filter(function (c) { return P[c[0]].length; })[0] || ["", "Ort", "BEV, GIP.at"];
     var html = '<div class="pc-body"><span class="pc-pill">' + esc(cat[1]) + "</span>" + parts.join(HR) +
       (wantAdmin ? '<div class="adm d"></div>' : "") + '</div>' +
@@ -1695,6 +1716,19 @@ window.mapxStil = (function () {
   function lbDate(v) {
     var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(v || "");
     return m ? +m[3] + "." + +m[2] + "." + m[1] : (v ? String(v) : "");
+  }
+  // Verkehrsmeldung im Popup: Text unverändert (EVIS-Lizenz, verbindliche Meldungen nicht abschwächen)
+  function verkehrInfo(box) {
+    if (!trf.checked || !map.getLayer("verkehr-meldung")) return [];
+    var fs = map.queryRenderedFeatures(box, { layers: ["verkehr-meldung", "verkehr-meldung-strecke"] }), seen = {}, out = [];
+    fs.forEach(function (f) {
+      var p = f.properties || {}, k = p.kind + "|" + p.text;
+      if (seen[k] || out.length >= 3) return; seen[k] = true;
+      out.push("<b>" + esc(p.kind || "Meldung") + (p.road ? " · " + esc(p.road) : "") + "</b>" +
+        (p.closed === true || p.closed === "true" ? " (gesperrt)" : "") +
+        (p.mandatory === true || p.mandatory === "true" ? " (verbindlich)" : "") + "<br>" + esc(p.text || ""));
+    });
+    return out;
   }
   function lbFlugblock(pt) {
     if (!map.getLayer("dop-flugblock-flaeche") || map.getLayoutProperty("dop", "visibility") === "none") return [];
