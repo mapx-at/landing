@@ -77,3 +77,14 @@ Lokal: `python3 -m http.server` im Repo und `http://localhost:8000/` öffnen. Di
 den Origin `https://mapx.at` (lokal also „Suche gerade nicht erreichbar“). Quellen per Query-Parameter
 überschreibbar: `?dkm=`, `?gip=`, `?ggn=`, `?grenzen=`, `?geonamen=`, `?adr=` (je volle `https://…pmtiles`-URL),
 `?style=` (anderes style.json), `?search=` / `?searchKey=` (Suchendpunkt).
+
+
+## Neue Landing (seit 07.11.2026)
+
+`index.html` ist jetzt die Landing (Hugo, Quelle `site/`). Der frühere Viewer liegt unverändert als
+`legacy-viewer.html`; alte Hash-Links (`#zoom/lat/lon`) leitet `lp/legacy-redirect.js` auf
+https://map.mapx.at/ weiter. `style.json`, `styles/`, `legacy/`, `tools/` bleiben unberührt.
+
+Pages liefert weiter den Branch `main` aus. Das Build-Ergebnis (`index.html`, `lp/`) ist eingecheckt:
+nach Änderungen in `site/` `site/build.sh` ausführen (Hugo extended 0.169.0) und committen
+kann man mit `site/build.sh --check` prüfen (keine CI: das öffentliche Repo hat keinen Zugriff auf die self-hosted Runner).
