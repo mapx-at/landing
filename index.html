@@ -86,6 +86,15 @@ details.lg summary{cursor:pointer;font-size:13px;min-height:44px;display:flex;al
 .rsw{width:18px;height:6px;border-radius:3px;flex:none;border:1.5px solid}
 .rsw.dash{height:0;border-width:0;border-top:2px dashed;border-radius:0}
 .note{font-size:12px;line-height:1.35;color:var(--muted)}
+.bmsw{position:absolute;z-index:3;left:96px;bottom:54px;width:76px;height:76px;padding:0;border:2px solid var(--card);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;cursor:pointer;display:block;color:#fff;background:var(--glass)}
+.bmsw .th{position:absolute;inset:0}
+.bmsw .lb{position:absolute;left:0;right:0;bottom:0;padding:14px 4px 4px;font:700 12px/1.1 Inter,system-ui,sans-serif;text-align:center;background:linear-gradient(transparent,rgba(0,0,0,.65));text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.bmsw:hover{border-color:var(--accent)}
+.bmsw:focus-visible,.qaluft:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+body:has(.panel:not(.collapsed),.rt.open,.wz.open) .bmsw{left:464px}
+.qaluft{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;padding:6px 12px 6px 6px;border:1px solid var(--border);border-radius:14px;background:var(--card);color:var(--text);font:600 14px Inter,system-ui,sans-serif;cursor:pointer;text-align:left}
+.qaluft .th{flex:none;width:44px;height:44px;border-radius:10px;box-shadow:inset 0 0 0 1px rgba(17,24,39,.12)}
+.qaluft:hover{border-color:var(--accent)}
 .msg{position:absolute;z-index:6;left:50%;transform:translateX(-50%);bottom:64px;max-width:calc(100% - 32px);background:#7f1d1d;color:#fff;padding:8px 14px;border-radius:14px;font-size:13px;display:none}
 .msg.ok{background:#14532d}
 /* Suche als Pille oben Mitte */
@@ -292,9 +301,10 @@ table.cx tr{border-top:1px solid var(--line)}
   .rbtn{flex:1;max-width:84px;height:56px}
   .mobonly{display:flex!important}
   .panel,.rt,.wz{left:0;right:0;width:auto;top:auto;bottom:var(--tab-h);border-radius:26px 26px 0 0;border-bottom:0;box-shadow:0 -10px 40px rgba(17,24,39,.2)}
-  .panel{max-height:calc(100% - 150px)}
-  .rt{max-height:calc(100% - 150px);padding-bottom:16px}
-  .wz{max-height:56%}
+  /* Blatt höchstens bis unter den rechten Knopfstapel (Zoom/Neigung/Ort, endet ca. 334 px), damit nichts verdeckt wird */
+  .panel{max-height:max(220px,calc(100% - var(--tab-h) - 400px))}
+  .rt{max-height:max(220px,calc(100% - var(--tab-h) - 400px));padding-bottom:16px}
+  .wz{max-height:max(220px,calc(100% - var(--tab-h) - 400px))}
   .panel::before{content:"";align-self:center;width:40px;height:5px;border-radius:3px;background:var(--off);margin-top:8px;flex:none}
   .fh{padding:6px 12px 4px 20px}
   .tiles{display:flex;overflow-x:auto;gap:10px;padding:2px;scroll-snap-type:x proximity}
@@ -306,6 +316,12 @@ table.cx tr{border-top:1px solid var(--line)}
   .maplibregl-ctrl-top-right{top:calc(max(12px,env(safe-area-inset-top)) + 66px);right:12px}
   .maplibregl-ctrl-bottom-left,body:has(.panel:not(.collapsed),.rt.open,.wz.open) .maplibregl-ctrl-bottom-left{left:12px;bottom:calc(var(--tab-h) + 12px)}
   .maplibregl-ctrl-bottom-right{right:12px;bottom:calc(var(--tab-h) + 12px)}
+  .bmsw,body:has(.panel:not(.collapsed),.rt.open,.wz.open) .bmsw{left:12px;bottom:calc(var(--tab-h) + 12px + 36px)}
+  /* offenes Blatt: Kartenknöpfe und Umschalter wandern mit der Blatthöhe (--sheet-h, per JS) nach oben */
+  .maplibregl-ctrl-bottom-right,.maplibregl-ctrl-bottom-left,body:has(.panel:not(.collapsed),.rt.open,.wz.open) .maplibregl-ctrl-bottom-left{transition:bottom .2s}
+  body:has(.panel:not(.collapsed),.rt.open,.wz.open) .maplibregl-ctrl-bottom-right{bottom:calc(var(--tab-h) + var(--sheet-h,0px) + 12px)}
+  body:has(.panel:not(.collapsed),.rt.open,.wz.open) .maplibregl-ctrl-bottom-left{bottom:calc(var(--tab-h) + var(--sheet-h,0px) + 12px)}
+  body:has(.panel:not(.collapsed),.rt.open,.wz.open) .bmsw{bottom:calc(var(--tab-h) + var(--sheet-h,0px) + 12px + 36px)}
   .maplibregl-ctrl-attrib.maplibregl-compact-show{max-width:calc(100vw - 24px)}
   .msg{bottom:calc(var(--tab-h) + 70px)}
 }
@@ -339,6 +355,7 @@ table.cx tr{border-top:1px solid var(--line)}
   <header class="fh"><h2 id="panelTitle">Kartenstil</h2><button type="button" class="ibtn" id="panelClose" aria-label="Schließen" title="Schließen (Esc)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
   <div class="body">
    <div class="view v-stil">
+    <button type="button" class="qaluft" id="stilLuft"><span class="th"></span><span class="t"></span></button>
     <div class="sec" id="secStil">
       <div class="sec-h"><b>Kartenstil</b><span id="stilCount"></span></div>
       <div class="seg" id="stilSeg" role="group" aria-label="Stilgruppe"></div>
@@ -513,6 +530,8 @@ table.cx tr{border-top:1px solid var(--line)}
   <ul id="results" role="listbox" aria-label="Suchergebnisse"></ul>
 </div>
 
+<button type="button" class="bmsw" id="bmsw"><span class="th"></span><span class="lb"></span></button>
+
 <script>
 // Stilwahl: ?stil=<id> (Stile in styles/<id>.json, Liste in styles/index.json); Wechsel lädt die Seite neu (Hash bleibt).
 // Oberfläche: Segment Standard/Klassisch/Weitere + Kacheln mit Farbvorschau (Hintergrund/Wald/Wasser aus index.json "vorschau"),
@@ -544,6 +563,19 @@ window.mapxStil = (function () {
     var a = v[0] || "#e5e7eb", b = v[1] || a, c = v[2] || a;
     return "linear-gradient(160deg," + a + " 0 38%," + b + " 38% 64%," + a + " 64%)," + c;
   }
+  // Karte <-> Luftbild: Schnellschalter (Vorschau-Kachel unten links + Knopf in der Stil-Ansicht); letzter Kartenstil in localStorage
+  var AERIAL = /^(luftbild|hybrid|satellit)$/, LAST = "mapx-letzter-stil", isAir = AERIAL.test(cur);
+  function lastGet() { try { var v = localStorage.getItem(LAST); return v !== null && /^[a-z0-9-]*$/.test(v) ? v : STD; } catch (e) { return STD; } }
+  if (!isAir) { try { localStorage.setItem(LAST, std ? STD : cur); } catch (e) {} }
+  function quick() {
+    var tgt = isAir ? lastGet() : "hybrid", name = isAir ? "Karte" : "Luftbild";
+    var bg = isAir ? swatch(["#efefee", "#d3e8c2", "#b3d9ff"]) : swatch(FIX.hybrid);
+    var label = isAir ? "Zur Karte wechseln" : "Zum Luftbild wechseln";
+    var b = document.getElementById("bmsw"), q = document.getElementById("stilLuft");
+    if (b) { b.querySelector(".lb").textContent = name; b.querySelector(".th").style.background = bg; b.setAttribute("aria-label", label); b.title = label; b.onclick = function () { go(tgt); }; }
+    if (q) { q.querySelector(".th").style.background = bg; q.querySelector(".t").textContent = name + (isAir ? " (zurück zur Karte)" : " (Satellitenbild)"); q.setAttribute("aria-label", label); q.onclick = function () { go(tgt); }; }
+  }
+  quick();
   function render(list) {
     var all = [BASE].concat(list);
     var groups = ["Standard", "Klassisch", "Weitere"].filter(function (g) { return all.some(function (s) { return s.gruppe === g; }); });
@@ -1361,6 +1393,17 @@ window.mapxStil = (function () {
   });
   document.getElementById("panelClose").addEventListener("click", function () { var v = viewOf(); setView("", true); if (v) document.getElementById(VIEWS[v][0]).focus(); });
   window.mapxRail = { closeView: function () { setView(""); } };
+  // Handy: Höhe des offenen Blatts als --sheet-h (Kartenknöpfe und Umschalter bleiben darüber)
+  (function () {
+    var els = [panel, document.getElementById("rt"), document.getElementById("wz")].filter(Boolean);
+    function upd() {
+      var h = 0; els.forEach(function (e) { if (e.offsetParent !== null || getComputedStyle(e).display !== "none") h = Math.max(h, e.getBoundingClientRect().height); });
+      document.documentElement.style.setProperty("--sheet-h", Math.round(h) + "px");
+    }
+    if (window.ResizeObserver) { var ro = new ResizeObserver(upd); els.forEach(function (e) { ro.observe(e); }); }
+    new MutationObserver(upd).observe(document.body, { attributes: true, subtree: true, attributeFilter: ["class"] });
+    window.addEventListener("resize", upd); upd();
+  })();
   var mobile = window.matchMedia("(max-width: 699px)").matches;
   setView(mobile ? "" : (VIEWS[UI.view] ? UI.view : (UI.view === "none" ? "" : "stil")));
   document.getElementById("railSearch").addEventListener("click", function () { document.getElementById("q").focus(); });
