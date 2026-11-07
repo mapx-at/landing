@@ -59,6 +59,7 @@ h2{font-size:clamp(28px,3.6vw,44px);line-height:1.1;letter-spacing:-.03em;margin
 .card .meta{margin-top:auto;padding-top:10px;font-size:13px;color:#6b7079}
 .card .more{font-size:14px;font-weight:600;color:var(--accent)}
 /* Entwickler (dunkel + Code) */
+.dev>*{min-width:0}
 .dev{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
 .dev ul{padding:0;margin:0 0 28px;list-style:none;display:grid;gap:14px}
 .dev li{display:flex;gap:12px;color:var(--on-dark-muted)}.dev li:before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--teal);margin-top:9px}
