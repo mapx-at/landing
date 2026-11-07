@@ -1230,7 +1230,23 @@ window.mapxStil = (function () {
   });
 
   var GROUPS = {}, HIDDEN = {}, LEGEND = null, ready = false, OVERLAYS = {};
-  fetch(STYLE_URL).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(function (style) {
+  // Optionale Quellen (Sentinel-2: Datei fehlt bis zum Ende des Erstlaufs, 404): erst aufnehmen, wenn HEAD 200 liefert,
+  // sonst entfallen Quelle und Layer (kein Konsolenfehler bei jedem Laden).
+  var OPTIONAL_SOURCES = ["s2"];
+  function dropMissingSources(style) {
+    return Promise.all(OPTIONAL_SOURCES.map(function (k) {
+      var so = style.sources && style.sources[k], u = so && so.url;
+      if (!/^pmtiles:\/\//.test(u || "")) return null;
+      return fetch(u.replace(/^pmtiles:\/\//, ""), { method: "HEAD", cache: "no-store" })
+        .then(function (r) { return r.ok; }, function () { return false; })
+        .then(function (ok) {
+          if (ok) return;
+          delete style.sources[k];
+          style.layers = style.layers.filter(function (l) { return l.source !== k; });
+        });
+    })).then(function () { return style; });
+  }
+  fetch(STYLE_URL).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(dropMissingSources).then(function (style) {
     SOURCE_PARAMS.forEach(function (k) {
       var v = params.get(k);
       if (v && /^https?:\/\//.test(v) && style.sources[k]) style.sources[k].url = "pmtiles://" + v;
