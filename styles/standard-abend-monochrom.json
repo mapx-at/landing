@@ -378,6 +378,14 @@
    "dop_flugblock": {
     "datei": "dop-flugblock-20251003-0d0d122e.pmtiles",
     "stand": "2025-10-03"
+   },
+   "sharing": {
+    "datei": "sharing-20261107-14fbcb86.pmtiles",
+    "stand": "20261107"
+   },
+   "rastanlagen": {
+    "datei": "rastanlagen-20261107-ec1af813.pmtiles",
+    "stand": "20261107"
    }
   }
  },
@@ -461,6 +469,20 @@
    "url": "pmtiles://https://tiles.mapx.at/dop-flugblock-20251003-0d0d122e.pmtiles",
    "minzoom": 6,
    "maxzoom": 17
+  },
+  "sharing": {
+   "type": "vector",
+   "url": "pmtiles://https://tiles.mapx.at/sharing-20261107-14fbcb86.pmtiles",
+   "minzoom": 8,
+   "maxzoom": 14,
+   "attribution": "<a href=\"https://data.oebb.at/de/datensaetze~shared-mobility-standorte~\" target=\"_blank\" rel=\"noopener\">ÖBB-Personenverkehr AG – Shared-Mobility Standorte</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
+  },
+  "rastanlagen": {
+   "type": "vector",
+   "url": "pmtiles://https://tiles.mapx.at/rastanlagen-20261107-ec1af813.pmtiles",
+   "minzoom": 7,
+   "maxzoom": 14,
+   "attribution": "<a href=\"https://www.asfinag.at\" target=\"_blank\" rel=\"noopener\">ASFINAG – Rastanlagen</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   }
  },
  "layers": [
@@ -10074,6 +10096,159 @@
      "#304050",
      "#30404f"
     ],
+    "text-halo-color": "rgba(255, 255, 255, 0.85)",
+    "text-halo-width": 1.3
+   }
+  },
+  {
+   "source": "sharing",
+   "source-layer": "sharing",
+   "layout": {
+    "visibility": "none"
+   },
+   "id": "sharing-punkt",
+   "type": "circle",
+   "minzoom": 10,
+   "paint": {
+    "circle-color": "#d8c9c1",
+    "circle-radius": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     3,
+     16,
+     7
+    ],
+    "circle-stroke-color": "#9d9899",
+    "circle-stroke-width": 1.2
+   }
+  },
+  {
+   "source": "sharing",
+   "source-layer": "sharing",
+   "layout": {
+    "visibility": "none",
+    "text-field": [
+     "coalesce",
+     [
+      "get",
+      "name"
+     ],
+     ""
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": 11,
+    "text-offset": [
+     0,
+     1.1
+    ],
+    "text-optional": true,
+    "text-max-width": 8
+   },
+   "id": "sharing-name",
+   "type": "symbol",
+   "minzoom": 14,
+   "paint": {
+    "text-color": "#30404f",
+    "text-halo-color": "rgba(255, 255, 255, 0.85)",
+    "text-halo-width": 1.3
+   }
+  },
+  {
+   "source": "rastanlagen",
+   "source-layer": "rastanlagen",
+   "layout": {
+    "visibility": "none"
+   },
+   "filter": [
+    "<=",
+    [
+     "get",
+     "min_zoom"
+    ],
+    [
+     "zoom"
+    ]
+   ],
+   "id": "rastanlagen-punkt",
+   "type": "circle",
+   "paint": {
+    "circle-color": [
+     "case",
+     [
+      ">",
+      [
+       "get",
+       "lorry"
+      ],
+      0
+     ],
+     "#d4c6bf",
+     "#d7c8c1"
+    ],
+    "circle-radius": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     9,
+     3,
+     14,
+     6
+    ],
+    "circle-stroke-color": "#9d9899",
+    "circle-stroke-width": 1.2
+   }
+  },
+  {
+   "source": "rastanlagen",
+   "source-layer": "rastanlagen",
+   "layout": {
+    "visibility": "none",
+    "text-field": [
+     "coalesce",
+     [
+      "get",
+      "name"
+     ],
+     ""
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": 11,
+    "text-offset": [
+     0,
+     1.1
+    ],
+    "text-optional": true,
+    "text-max-width": 8
+   },
+   "filter": [
+    "<=",
+    [
+     "get",
+     "min_zoom"
+    ],
+    [
+     "zoom"
+    ]
+   ],
+   "id": "rastanlagen-name",
+   "type": "symbol",
+   "minzoom": 12,
+   "paint": {
+    "text-color": "#2f3f4e",
     "text-halo-color": "rgba(255, 255, 255, 0.85)",
     "text-halo-width": 1.3
    }
