@@ -173,6 +173,7 @@
    ],
    "relief": [
     "relief-hillshade",
+    "relief-hillshade-dsm",
     "hoehenlinien",
     "hoehenlinien-index",
     "hoehenlinien-label"
@@ -346,16 +347,28 @@
     "stand": "2026-04-01"
    },
    "relief": {
-    "datei": "relief-terrainrgb-20250915-ecf3295d.pmtiles",
+    "datei": "relief-terrainrgb-20250915-ed2e4341.pmtiles",
     "stand": "20250915"
    },
    "relief-terrain": {
-    "datei": "relief-terrainrgb-20250915-ecf3295d.pmtiles",
+    "datei": "relief-terrainrgb-20250915-ed2e4341.pmtiles",
+    "stand": "20250915"
+   },
+   "dsm": {
+    "datei": "relief-dsm-terrainrgb-20250915-d19cb434.pmtiles",
     "stand": "20250915"
    },
    "hoehenlinien": {
-    "datei": "hoehenlinien-20250915-a8476756.pmtiles",
+    "datei": "hoehenlinien-20250915-2037a3df.pmtiles",
     "stand": "20250915"
+   },
+   "dop": {
+    "datei": "dop-ortho-20251003-272a54b3.pmtiles",
+    "stand": "2025-10-03"
+   },
+   "dop_flugblock": {
+    "datei": "dop-flugblock-20251003-0d0d122e.pmtiles",
+    "stand": "2025-10-03"
    }
   }
  },
@@ -392,7 +405,7 @@
   },
   "relief": {
    "type": "raster-dem",
-   "url": "pmtiles://https://tiles.mapx.at/relief-terrainrgb-20250915-ecf3295d.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/relief-terrainrgb-20250915-ed2e4341.pmtiles",
    "attribution": "<a href=\"https://data.bev.gv.at/geonetwork/srv/ger/catalog.search#/metadata/5ce253fc-b7c5-4362-97af-6556c18a45d9\" target=\"_blank\" rel=\"noopener\">BEV – ALS-DTM 1 m</a> (Stichtag 15.09.2025), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>",
    "encoding": "mapbox",
    "tileSize": 512,
@@ -400,16 +413,37 @@
   },
   "relief-terrain": {
    "type": "raster-dem",
-   "url": "pmtiles://https://tiles.mapx.at/relief-terrainrgb-20250915-ecf3295d.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/relief-terrainrgb-20250915-ed2e4341.pmtiles",
    "attribution": "<a href=\"https://data.bev.gv.at/geonetwork/srv/ger/catalog.search#/metadata/5ce253fc-b7c5-4362-97af-6556c18a45d9\" target=\"_blank\" rel=\"noopener\">BEV – ALS-DTM 1 m</a> (Stichtag 15.09.2025), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>",
+   "encoding": "mapbox",
+   "tileSize": 512,
+   "maxzoom": 15
+  },
+  "dsm": {
+   "type": "raster-dem",
+   "url": "pmtiles://https://tiles.mapx.at/relief-dsm-terrainrgb-20250915-d19cb434.pmtiles",
+   "attribution": "<a href=\"https://data.bev.gv.at/geonetwork/srv/ger/catalog.search#/metadata/5ce253fc-b7c5-4362-97af-6556c18a45d9\" target=\"_blank\" rel=\"noopener\">BEV – ALS-DOM 1 m</a> (Stichtag 15.09.2025), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>",
    "encoding": "mapbox",
    "tileSize": 512,
    "maxzoom": 15
   },
   "hoehenlinien": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/hoehenlinien-20250915-a8476756.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/hoehenlinien-20250915-2037a3df.pmtiles",
    "attribution": "<a href=\"https://data.bev.gv.at/geonetwork/srv/ger/catalog.search#/metadata/5ce253fc-b7c5-4362-97af-6556c18a45d9\" target=\"_blank\" rel=\"noopener\">BEV – ALS-DTM 1 m</a> (Stichtag 15.09.2025), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
+  },
+  "dop": {
+   "type": "raster",
+   "url": "pmtiles://https://tiles.mapx.at/dop-ortho-20251003-272a54b3.pmtiles",
+   "tileSize": 512,
+   "maxzoom": 18,
+   "attribution": "Orthophoto: <a href=\"https://data.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Digitales Orthophoto (DOP)</a>, Befliegung 2022–2025 (Flugjahr beim Antippen), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
+  },
+  "dop_flugblock": {
+   "type": "vector",
+   "url": "pmtiles://https://tiles.mapx.at/dop-flugblock-20251003-0d0d122e.pmtiles",
+   "minzoom": 6,
+   "maxzoom": 17
   }
  },
  "layers": [
@@ -439,6 +473,43 @@
     "hillshade-illumination-direction": 315,
     "hillshade-illumination-anchor": "map",
     "hillshade-exaggeration": 0.25,
+    "hillshade-shadow-color": "#828282",
+    "hillshade-highlight-color": "#ffffff",
+    "hillshade-accent-color": "#9b9b9b"
+   }
+  },
+  {
+   "id": "relief-hillshade-dsm",
+   "type": "hillshade",
+   "source": "dsm",
+   "layout": {
+    "visibility": "none"
+   },
+   "metadata": {
+    "mapx:note": "Alternative zu relief-hillshade (DTM); der Viewer schaltet zwischen beiden (Ebenen > Schummerung)"
+   },
+   "paint": {
+    "hillshade-illumination-direction": 315,
+    "hillshade-illumination-anchor": "map",
+    "hillshade-exaggeration": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     5,
+     0.5,
+     12,
+     0.45,
+     15,
+     0.4,
+     16,
+     0.25,
+     17,
+     0.12
+    ],
     "hillshade-shadow-color": "#828282",
     "hillshade-highlight-color": "#ffffff",
     "hillshade-accent-color": "#9b9b9b"

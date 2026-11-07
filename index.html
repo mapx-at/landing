@@ -91,6 +91,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .chk2 label{display:flex;align-items:center;gap:8px;min-height:44px;font-size:13px;cursor:pointer}
 .op{display:flex;flex-direction:column;gap:2px;font-size:13px}
 .op input[type=range]{width:100%;height:44px;margin:0;accent-color:var(--accent)}
+.op select{min-height:44px;font:inherit;color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:12px;padding:0 10px}
+#fbgL[hidden],#hsL[hidden]{display:none}
+.pc-body .hoehe{font-size:12px;color:var(--muted);line-height:1.5}
 ul.legend{list-style:none;margin:4px 0 10px;padding:0;font-size:13px}
 ul.legend li{display:flex;align-items:center;gap:8px;padding:2px 0}
 .sw{width:18px;height:12px;border-radius:3px;border:1px solid rgba(0,0,0,.3);flex:none}
@@ -349,7 +352,10 @@ table.cx tr{border-top:1px solid var(--line)}
         <label><input type="checkbox" id="lifts" checked autocomplete="off"> Lifte</label>
         <label><input type="checkbox" id="sym" checked autocomplete="off"> Symbole</label>
         <label><input type="checkbox" id="rel" checked autocomplete="off"> Relief</label>
+        <label id="fbgL" hidden><input type="checkbox" id="fbg" autocomplete="off"> Flugblock-Grenzen</label>
       </div>
+      <label class="op" id="hsL" hidden>Schummerung
+        <select id="hs" aria-label="Schummerung aus Gelände- oder Oberflächenmodell"><option value="dtm">Gelände (DTM)</option><option value="dsm">Oberfläche (DSM: Wald, Gebäude)</option></select></label>
       <label class="swrow">basemap.at als Hintergrund<input type="checkbox" id="bm" role="switch" autocomplete="off"></label>
       <label class="op">Deckkraft Nutzung
         <input type="range" id="op" min="0" max="100" value="100" aria-label="Deckkraft der Nutzungsflächen"></label>
@@ -501,7 +507,7 @@ window.mapxStil = (function () {
   var sel = document.getElementById("stil"), segEl = document.getElementById("stilSeg"), tilesEl = document.getElementById("stilTiles");
   var BASE = { id: "", name: "Basis", gruppe: "Standard", vorschau: ["#efefee", "#d3e8c2", "#b3d9ff"] };
   var STD = "standard-tag-normal", LICHTS = ["morgen", "tag", "abend", "nacht"], THEMEN = ["normal", "verblasst", "monochrom"];
-  var FIX = { satellit: ["#4d5a3f", "#3c4a33", "#2f4a5c"] };
+  var FIX = { satellit: ["#4d5a3f", "#3c4a33", "#2f4a5c"], hybrid: ["#4d5a3f", "#3c4a33", "#2f4a5c"], luftbild: ["#4d5a3f", "#3c4a33", "#2f4a5c"] };
   var LICHT = { morgen: "Morgen", tag: "Tag", abend: "Abend", nacht: "Nacht" };
   function go(v) {
     var u = new URL(location.href);
@@ -1050,7 +1056,7 @@ window.mapxStil = (function () {
   //   ?basis=http://localhost:8000/mapx-basis.pmtiles&kataster=...&relief=...&hoehenlinien=...
   //   ?style=http://localhost:8000/style.json
   var params = new URLSearchParams(location.search);
-  var SOURCE_PARAMS = ["basis", "kataster", "relief", "hoehenlinien"];
+  var SOURCE_PARAMS = ["basis", "kataster", "relief", "hoehenlinien", "dsm", "dop", "dop_flugblock"];
   var STYLE_URL = /^https?:\/\//.test(params.get("style") || "") ? params.get("style") : ((window.mapxStil && window.mapxStil.url) || "style.json");
 
   function esc(s) { return String(s).replace(/[&<>"']/g, function (ch) { return "&#" + ch.charCodeAt(0) + ";"; }); }
@@ -1251,6 +1257,7 @@ window.mapxStil = (function () {
     applyOpacity();
     applyTerrain();
     applyHousenumbers3d(d3.checked);
+    applyLuftbild();
   }
   // 3D: Grundstücksnummern aus, Hausnummern erst ab z17 (am Boden liegende Zahlen überdecken sonst die Gebäude)
   var HN_ORIG = {};
@@ -1474,6 +1481,7 @@ window.mapxStil = (function () {
     if (!ready || (document.getElementById("rt") || {}).className === "rt open" || (window.mapxTools && window.mapxTools.busy())) return;
     var pad = 4, box = [[e.point.x - pad, e.point.y - pad], [e.point.x + pad, e.point.y + pad]];
     var poiCat = "", poiSrc = "", parts = [], P = { h: [], poi: [], bld: [], road: [], lift: [], water: [], bd: [], land: [], tun: [] }, kinds = (LEGEND && LEGEND.kind) || {};
+    P.dop = lbFlugblock(e.point);
     var labels = (LEGEND && LEGEND.roadLabels) || {};
     var h = first(box, visible("housenumbers"));
     if (h) {
@@ -1546,7 +1554,7 @@ window.mapxStil = (function () {
     if (pc && pc.properties && pc.properties.gstnr) low += "<br>Grenze Grundstück " + esc(pc.properties.gstnr) + " (KG " + esc(pc.properties.kgnr) + ")";
     if (low) P.land.push(low.replace(/^<br>/, ""));
     // Reihenfolge: Hausnummer/Adresse, POI, Gebäude, Straße, Lift, Gewässer, Grenze, Nutzung, zuletzt Tunnel/Unterführung
-    ["h", "poi", "bld", "road", "lift", "water", "bd", "land", "tun"].forEach(function (k) { parts = parts.concat(P[k]); });
+    ["h", "poi", "bld", "road", "lift", "water", "bd", "land", "tun", "dop"].forEach(function (k) { parts = parts.concat(P[k]); });
     // Gemeinde/Bezirk am Klickpunkt aus der naechsten Adresse (Suchindex), bei Grenzen und Hausnummern
     var wantAdmin = !!(bd || h);
     var ez = null;
@@ -1558,7 +1566,7 @@ window.mapxStil = (function () {
     // Kopf der Karte: Kategorie des ersten Treffers, Quellenfuß je Datenart
     var CATS = [["h", "Adresse", "BEV Adressregister"], ["poi", poiCat || "Ort", poiSrc || "BEV DLM, Wien OGD, Geographische Namen"], ["bld", "Gebäude", "BEV DKM, DLM Bauwerke"],
                 ["road", "Straße", "GIP.at"], ["lift", "Lift", "BEV DLM Verkehr"], ["water", "Gewässer", "GGN"], ["bd", "Grenze", "BEV Verwaltungsgrenzen"],
-                ["land", "Nutzung", "BEV DKM"], ["tun", "Tunnel", "GIP.at"]];
+                ["land", "Nutzung", "BEV DKM"], ["tun", "Tunnel", "GIP.at"], ["dop", "Luftbild", "BEV DOP"]];
     var cat = CATS.filter(function (c) { return P[c[0]].length; })[0] || ["", "Ort", "BEV, GIP.at"];
     var html = '<div class="pc-body"><span class="pc-pill">' + esc(cat[1]) + "</span>" + parts.join(HR) +
       (wantAdmin ? '<div class="adm d"></div>' : "") + '</div>' +
@@ -1567,6 +1575,7 @@ window.mapxStil = (function () {
       '<div class="pc-src">Quelle: ' + esc(cat[2]) + (/CC0/.test(cat[2]) ? "" : ", CC BY 4.0") + "</div>";
     var pop = new maplibregl.Popup({ closeButton: true, maxWidth: "300px", className: "rev pc-popup" }).setLngLat(e.lngLat).setHTML(html).addTo(map);
     var pel = pop.getElement();
+    lbHoehe(pop, e.lngLat);
     pel.querySelector(".pc-acts").addEventListener("click", function (ev) {
       var a = ev.target.getAttribute && ev.target.getAttribute("data-a");
       if (a === "route") {
@@ -1600,6 +1609,92 @@ window.mapxStil = (function () {
     var ids = visible("housenumbers").concat(visible("roads"), visible("lifts"), visible("symbols"), visible("water"), ["landuse"]).filter(function (id) { return map.getLayer(id); });
     map.getCanvas().style.cursor = map.queryRenderedFeatures(e.point, { layers: ids }).length ? "pointer" : "";
   });
+
+  // ---------------------------------------------------------------- Luftbild (BEV DOP) und Höhenmodelle (DTM/DSM)
+  // Flugblock-Info im Popup (Quelle dop-flugblock, nur in den Stilen Luftbild/Hybrid und erst nach dem Release im Manifest),
+  // Schalter Flugblock-Grenzen, Schummerung Gelände/Oberfläche, Höhen aus den Terrain-RGB-Kacheln (Mapbox-Encoding, 0,1 m).
+  function lbDate(v) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(v || "");
+    return m ? +m[3] + "." + +m[2] + "." + m[1] : (v ? String(v) : "");
+  }
+  function lbFlugblock(pt) {
+    if (!map.getLayer("dop-flugblock-flaeche") || map.getLayoutProperty("dop", "visibility") === "none") return [];
+    var f = map.queryRenderedFeatures([[pt.x - 1, pt.y - 1], [pt.x + 1, pt.y + 1]], { layers: ["dop-flugblock-flaeche"] })[0];
+    if (!f) return [];
+    var p = f.properties || {}, von = lbDate(p.flug_von), bis = lbDate(p.flug_bis || p.flugdatum), x = [];
+    x.push(von && bis && von !== bis ? "Flugzeitraum " + von + " – " + bis : "Flug " + (bis || von || "unbekannt"));
+    if (p.flugjahr) x.push("Flugjahr " + esc(p.flugjahr));
+    if (p.archivnr) x.push("Archivnr. " + esc(p.archivnr));
+    return ["<b>Luftbild" + (p.operat ? ": Operat " + esc(p.operat) : "") + "</b><br>" + x.join(" · ")];
+  }
+  var lbHs = document.getElementById("hs"), lbFbg = document.getElementById("fbg");
+  function applyLuftbild() {
+    var fb = !!map.getLayer("dop-flugblock-grenze"), dsm = !!map.getLayer("relief-hillshade-dsm");
+    var dtmOn = map.getLayer("relief-hillshade") && !HIDDEN["relief-hillshade"];
+    document.getElementById("fbgL").hidden = !fb;
+    document.getElementById("hsL").hidden = !(dsm && dtmOn);
+    if (fb) map.setLayoutProperty("dop-flugblock-grenze", "visibility", lbFbg.checked ? "visible" : "none");
+    if (dsm && dtmOn) {
+      var rel = document.getElementById("rel").checked, useDsm = lbHs.value === "dsm";
+      map.setLayoutProperty("relief-hillshade", "visibility", rel && !useDsm ? "visible" : "none");
+      map.setLayoutProperty("relief-hillshade-dsm", "visibility", rel && useDsm ? "visible" : "none");
+    }
+  }
+  lbFbg.addEventListener("change", applyLuftbild);
+  lbHs.addEventListener("change", applyLuftbild);
+  if (params.get("schummerung") === "dsm") lbHs.value = "dsm";
+  map.on("style.load", function () { if (ready) applyLuftbild(); });
+
+  // Höhe an einem Punkt: Terrain-RGB-Kachel (512 px, z <= 15) direkt aus dem PMTiles lesen, bilinear interpolieren.
+  // Unabhängig vom 3D-Gelände. DTM = Quelle "relief", DSM = "dsm" (entfällt, solange die Datei nicht im Manifest steht).
+  var LB_PM = {}, LB_TILES = [];
+  function lbTile(src, z, x, y) {
+    var s = map.getStyle().sources[src]; if (!s || !s.url) return Promise.resolve(null);
+    var key = src + "/" + z + "/" + x + "/" + y, hit = LB_TILES.filter(function (t) { return t.k === key; })[0];
+    if (hit) return hit.p;
+    var url = s.url.replace(/^pmtiles:\/\//, "");
+    var pm = LB_PM[url] || (LB_PM[url] = new pmtiles.PMTiles(url));
+    var pr = pm.getZxy(z, x, y).then(function (r) {
+      if (!r || !r.data) return null;
+      return createImageBitmap(new Blob([r.data], { type: "image/webp" }), { colorSpaceConversion: "none", premultiplyAlpha: "none" }).then(function (bmp) {
+        var c = document.createElement("canvas"); c.width = bmp.width; c.height = bmp.height;
+        var g = c.getContext("2d", { willReadFrequently: true }); g.drawImage(bmp, 0, 0);
+        return { d: g.getImageData(0, 0, bmp.width, bmp.height).data, n: bmp.width };
+      });
+    }).catch(function () { return null; });
+    LB_TILES.push({ k: key, p: pr }); if (LB_TILES.length > 8) LB_TILES.shift();
+    return pr;
+  }
+  function lbHeight(src, ll, z) {
+    var n = Math.pow(2, z), fx = (ll.lng + 180) / 360 * n, sl = Math.sin(ll.lat * Math.PI / 180);
+    var fy = (0.5 - Math.log((1 + sl) / (1 - sl)) / (4 * Math.PI)) * n, tx = Math.floor(fx), ty = Math.floor(fy);
+    return lbTile(src, z, tx, ty).then(function (t) {
+      if (!t) return null;
+      var px = (fx - tx) * t.n - 0.5, py = (fy - ty) * t.n - 0.5, x0 = Math.floor(px), y0 = Math.floor(py), ax = px - x0, ay = py - y0, v = 0;
+      function h(x, y) {
+        x = Math.max(0, Math.min(t.n - 1, x)); y = Math.max(0, Math.min(t.n - 1, y));
+        var i = (y * t.n + x) * 4; return -10000 + (t.d[i] * 65536 + t.d[i + 1] * 256 + t.d[i + 2]) * 0.1;
+      }
+      v = h(x0, y0) * (1 - ax) * (1 - ay) + h(x0 + 1, y0) * ax * (1 - ay) + h(x0, y0 + 1) * (1 - ax) * ay + h(x0 + 1, y0 + 1) * ax * ay;
+      return v;
+    });
+  }
+  window.mapxLuftbild = { height: lbHeight };   // Tests
+  function lbHoehe(pop, ll) {
+    var z = Math.max(8, Math.min(15, Math.round(map.getZoom())));
+    var dsm = map.getStyle().sources["dsm"] ? lbHeight("dsm", ll, z) : Promise.resolve(null);
+    Promise.all([lbHeight("relief", ll, z), dsm]).then(function (r) {
+      var el = pop.getElement(), body = el && el.querySelector(".pc-body"); if (!body || r[0] == null) return;
+      var f = function (v) { return Math.round(v).toLocaleString("de-AT") + " m"; };
+      var t = "Gelände (DTM) " + f(r[0]) + " ü. A.";
+      if (r[1] != null) {
+        t += " · Oberfläche (DSM) ca. " + f(r[1]);
+        var d = r[1] - r[0];
+        t += d >= 1 ? " · Objekthöhe ca. " + f(d) : " · kein Objekt über dem Gelände";
+      }
+      var div = document.createElement("div"); div.className = "hoehe"; div.textContent = t; body.appendChild(div);
+    });
+  }
 
   // ---------------------------------------------------------------- Suche (Meilisearch, Index "places")
   // Endpoint und oeffentlicher Search-only-Key (darf nur /indexes/places/search, siehe

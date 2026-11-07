@@ -80,6 +80,26 @@
   ]
  },
  {
+  "id": "hybrid",
+  "name": "Hybrid (BEV-Luftbild)",
+  "gruppe": "Klassisch",
+  "vorschau": [
+   "#efefee",
+   "#47B312",
+   "#b3d9ff"
+  ]
+ },
+ {
+  "id": "luftbild",
+  "name": "Luftbild (BEV)",
+  "gruppe": "Klassisch",
+  "vorschau": [
+   "#efefee",
+   "#47B312",
+   "#b3d9ff"
+  ]
+ },
+ {
   "id": "reise",
   "name": "Reise",
   "gruppe": "Weitere",
