@@ -46,21 +46,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .ibtn{width:44px;height:44px;border:0;border-radius:12px;background:var(--chip);color:var(--text);display:inline-flex;align-items:center;justify-content:center;padding:0;flex:none}
 .ibtn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 /* Panel */
-.panel{position:absolute;z-index:2;left:max(18px,env(safe-area-inset-left));top:max(18px,env(safe-area-inset-top));bottom:18px;width:316px;display:flex;flex-direction:column;border-radius:22px;overflow:hidden;
-  background:var(--glass);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid var(--border);box-shadow:var(--shadow)}
-.panel header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:16px 10px 12px 14px;user-select:none;flex:none}
-.brand{display:flex;align-items:center;gap:8px;min-width:0}
-.brand>div:last-child{min-width:0}
-.logo{width:34px;height:34px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex:none}
-.logo svg{width:18px;height:18px;fill:none;stroke:var(--on-accent);stroke-width:2.2;stroke-linejoin:round}
-.wm{font:700 19px/1.1 "Space Grotesk",Inter,sans-serif;letter-spacing:-.01em}
-.sub{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hbtns{display:flex;gap:4px;flex:none}
-.toggle svg{transition:transform .2s}
-.panel.collapsed .toggle svg{transform:rotate(180deg)}
-.body{flex:1;overflow:auto;padding:4px 20px 8px;display:flex;flex-direction:column;gap:20px;overscroll-behavior:contain}
-.panel.collapsed{bottom:auto}
-.panel.collapsed .body,.panel.collapsed .pfoot,.panel.collapsed .secs{display:none}
+.body{flex:1;overflow:auto;padding:4px 20px 20px;display:flex;flex-direction:column;gap:20px;overscroll-behavior:contain}
 .sec{display:flex;flex-direction:column;gap:10px}
 .sec-h{display:flex;justify-content:space-between;align-items:baseline}
 .sec-h b{font-size:13px;font-weight:600}
@@ -82,8 +68,6 @@ button{font:inherit;color:inherit;cursor:pointer}
 .pill{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border-radius:999px;font-size:12px;border:0;background:var(--chip);color:var(--text)}
 .pill[aria-pressed=true]{background:var(--pill-on);color:var(--pill-on-text)}
 .pill i{width:8px;height:8px;border-radius:50%;display:inline-block}
-.secs{padding:0 20px;display:flex;flex-direction:column;gap:14px}
-.secs .sec{padding:12px 0;border-top:1px solid var(--line)}
 .secs[hidden],.sec[hidden]{display:none}
 .chk{display:grid;grid-template-columns:1fr 1fr;gap:0 8px}
 .chk label{display:flex;align-items:center;gap:8px;min-height:44px;font-size:13px;cursor:pointer}
@@ -102,13 +86,10 @@ details.lg summary{cursor:pointer;font-size:13px;min-height:44px;display:flex;al
 .rsw{width:18px;height:6px;border-radius:3px;flex:none;border:1.5px solid}
 .rsw.dash{height:0;border-width:0;border-top:2px dashed;border-radius:0}
 .note{font-size:12px;line-height:1.35;color:var(--muted)}
-.pfoot{flex:none;display:flex;justify-content:space-between;border-top:1px solid var(--line);margin:0 20px;padding:6px 0 10px}
-.pfoot button{border:0;background:transparent;font-size:13px;min-height:44px;padding:0 10px;border-radius:10px;color:var(--text)}
-.pfoot button[aria-pressed=true]{background:var(--acc-soft);color:var(--acc-text);font-weight:600}
 .msg{position:absolute;z-index:6;left:50%;transform:translateX(-50%);bottom:64px;max-width:calc(100% - 32px);background:#7f1d1d;color:#fff;padding:8px 14px;border-radius:14px;font-size:13px;display:none}
 .msg.ok{background:#14532d}
 /* Suche als Pille oben Mitte */
-.search{position:absolute;z-index:4;top:max(18px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(460px,calc(100% - 800px))}
+.search{position:absolute;z-index:4;top:max(16px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(460px,calc(100% - 1000px))}
 .search .field{display:flex;align-items:center;gap:6px;min-height:52px;border-radius:26px;padding:4px 6px 4px 18px;background:var(--glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--border);box-shadow:var(--shadow)}
 .search .field svg.lens{width:18px;height:18px;flex:none;fill:none;stroke:var(--muted);stroke-width:2;stroke-linecap:round}
 .search input{flex:1;min-width:0;height:44px;border:0;outline:0;background:transparent;color:var(--text);font:15px Inter,system-ui,sans-serif;-webkit-appearance:none;appearance:none}
@@ -118,8 +99,6 @@ details.lg summary{cursor:pointer;font-size:13px;min-height:44px;display:flex;al
 .search .clear{width:44px;height:44px;border:0;background:none;color:var(--muted);font-size:20px;display:none;flex:none;padding:0}
 .search.has-text .clear{display:block}
 .routebtn{height:44px;padding:0 16px;border:0;border-radius:22px;background:var(--accent);color:var(--on-accent);font-size:13px;font-weight:600;flex:none}
-.menubtn{display:none;width:44px;height:44px;border:0;border-radius:22px;background:var(--accent);color:var(--on-accent);padding:0;align-items:center;justify-content:center;flex:none}
-.menubtn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
 .search ul{list-style:none;margin:8px 0 0;padding:6px;background:var(--card);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow2);max-height:min(60vh,420px);overflow:auto;display:none}
 .search.open ul{display:block}
 .search li{padding:8px 12px;border-radius:12px;cursor:pointer;display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:baseline;min-height:44px}
@@ -145,7 +124,8 @@ details.lg summary{cursor:pointer;font-size:13px;min-height:44px;display:flex;al
 .btn3d[aria-pressed=true]{background:var(--accent)!important;color:var(--on-accent)}
 .maplibregl-ctrl-group.g3d:has(.btn3d[aria-pressed=true]){background:var(--accent)!important}
 /* Maßstab und Quellen unten als Glas-Pillen */
-.maplibregl-ctrl-bottom-left{left:max(352px,env(safe-area-inset-left));bottom:18px}
+.maplibregl-ctrl-bottom-left{left:96px;bottom:18px}
+body:has(.panel:not(.collapsed),.rt.open,.wz.open) .maplibregl-ctrl-bottom-left{left:464px}
 .maplibregl-ctrl-bottom-right{right:max(18px,env(safe-area-inset-right));bottom:18px}
 .maplibregl-ctrl-bottom-left .maplibregl-ctrl,.maplibregl-ctrl-bottom-right .maplibregl-ctrl{margin:0}
 .maplibregl-ctrl-scale{background:var(--glass)!important;border:0!important;border-radius:10px;padding:4px 10px!important;font-size:11px;color:var(--text)!important;box-shadow:var(--shadow);height:auto;line-height:1.3}
@@ -156,9 +136,9 @@ details.lg summary{cursor:pointer;font-size:13px;min-height:44px;display:flex;al
 .maplibregl-ctrl-attrib-button,.maplibregl-ctrl-attrib-button:hover,.maplibregl-ctrl-attrib-button:focus{background-color:transparent!important}
 .maplibregl-ctrl-attrib-button{width:44px!important;height:44px!important;right:0;top:0;position:absolute;background-image:none!important;border-radius:22px!important;display:flex;align-items:center;justify-content:center}
 .maplibregl-ctrl-attrib-button::before{content:"\24D8";font-size:20px;line-height:1;color:var(--text)}
-.maplibregl-ctrl-attrib.maplibregl-compact-show{box-sizing:border-box;padding:0 48px 0 14px!important;max-width:calc(100vw - 400px);max-height:45vh;overflow:auto}
+.maplibregl-ctrl-attrib.maplibregl-compact-show{box-sizing:border-box;padding:0 48px 0 14px!important;max-width:calc(100vw - 24px);max-height:45vh;overflow:auto}
 /* Desktop: rechts vom Panel (352 px) umbrechen und scrollen statt abschneiden; nichts überlagert Panel oder Maßstab (#235) */
-@media (min-width:641px){.maplibregl-ctrl-attrib.maplibregl-compact-show{max-width:calc(100vw - 352px - 18px - 110px);max-height:40vh}}
+@media (min-width:700px){.maplibregl-ctrl-attrib.maplibregl-compact-show{max-width:calc(100vw - 464px - 18px - 110px);max-height:40vh}}
 /* Popup als Karte */
 .maplibregl-popup-content{font:13px/1.45 Inter,system-ui,sans-serif;color:var(--text);background:var(--card);padding:14px 16px;border-radius:18px;box-shadow:var(--shadow2);border:1px solid var(--border);overflow:hidden}
 .maplibregl-popup-content.pcp,.pc-popup .maplibregl-popup-content{padding:0}
@@ -181,8 +161,7 @@ details.lg summary{cursor:pointer;font-size:13px;min-height:44px;display:flex;al
 .pc-acts button:hover{background:var(--hover)}
 .pc-src{font-size:11px;color:var(--muted);padding:8px 16px;background:var(--foot)}
 /* Routenplanung */
-.rtbtn-dummy{display:none}
-.rt{position:absolute;z-index:4;top:calc(max(18px,env(safe-area-inset-top)) + 66px);right:82px;width:330px;max-height:calc(100% - 100px);overflow:auto;background:var(--card);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:22px;box-shadow:var(--shadow2);padding:16px 18px;display:none}
+.rt{position:absolute;z-index:4;top:16px;left:92px;width:360px;max-height:calc(100% - 32px);overflow:auto;background:var(--card);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:22px;box-shadow:var(--shadow2);padding:16px 18px;display:none}
 .rt.open{display:block}
 .rt h2{margin:0 0 10px;font-size:17px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
 .rt h2 button{border:0;background:var(--chip);color:var(--text);width:44px;height:44px;border-radius:12px;font-size:18px;padding:0}
@@ -205,35 +184,10 @@ details.lg summary{cursor:pointer;font-size:13px;min-height:44px;display:flex;al
 .rt .res span{color:var(--muted);font-weight:400;font-size:13px}
 .rt .err{color:var(--err);font-size:13px;margin-top:8px}
 .rt .hint,.rt .attr{font-size:12px;color:var(--muted);margin-top:8px}
-/* Mittlere Breite: Suche rechts neben dem Panel */
-@media (max-width:1240px){.search{left:352px;transform:none;width:calc(100% - 352px - 82px)}}
-/* Handy: Panel als Blatt von unten */
-@media (max-width:640px){
-  .panel{left:0;right:0;bottom:0;top:auto;width:auto;max-height:80%;border-radius:26px 26px 0 0;border-bottom:0;padding-bottom:env(safe-area-inset-bottom);transition:transform .25s;box-shadow:0 -10px 40px rgba(17,24,39,.2)}
-  .panel::before{content:"";align-self:center;width:40px;height:5px;border-radius:3px;background:var(--off);margin-top:10px;flex:none}
-  .panel header{padding:8px 16px 8px 20px}
-  .panel.collapsed{transform:translateY(110%);visibility:hidden;transition:transform .25s,visibility 0s .25s;bottom:0}
-  .panel .toggle svg{transform:rotate(-90deg)}
-  .panel.collapsed .toggle svg{transform:rotate(-90deg)}
-  .tiles{display:flex;overflow-x:auto;gap:10px;padding:2px;scroll-snap-type:x proximity}
-  .tile{flex:0 0 88px;border-radius:16px}.tile .swatch{height:60px;border-radius:12px}
-  .search{left:12px;right:12px;width:auto;transform:none;top:max(12px,env(safe-area-inset-top))}
-  .search .field{padding-left:16px}
-  .routebtn{width:44px;padding:0;font-size:0;position:relative}
-  .routebtn::before{content:"";position:absolute;inset:0;margin:auto;width:18px;height:18px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat}
-  .menubtn{display:inline-flex}
-  .search input{font-size:16px}
-  .maplibregl-ctrl-top-right{top:calc(max(12px,env(safe-area-inset-top)) + 66px);right:12px}
-  .maplibregl-ctrl-bottom-left{left:12px;bottom:12px}
-  .maplibregl-ctrl-bottom-right{right:12px;bottom:12px}
-  .maplibregl-ctrl-attrib.maplibregl-compact-show{max-width:calc(100vw - 24px)}
-  .rt{left:0;right:0;width:auto;top:auto;bottom:0;max-height:70%;border-radius:26px 26px 0 0;border-bottom:0;padding-bottom:max(16px,env(safe-area-inset-bottom))}
-  .msg{bottom:76px}
-}
 /* Werkzeuge: Messen, Koordinaten, Höhenprofil, Umkreis/Puffer (#81 #91 #99 #147). Karte wie .rt (rechts), Handy als Blatt von unten. */
 .btnwz svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:block;margin:auto}
 .btnwz[aria-pressed=true]{background:var(--accent)!important;color:var(--on-accent)}
-.wz{position:absolute;z-index:4;top:calc(max(18px,env(safe-area-inset-top)) + 66px);right:82px;width:352px;max-height:calc(100% - 100px);overflow:auto;background:var(--card);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:22px;box-shadow:var(--shadow2);padding:14px 16px 12px;display:none;overscroll-behavior:contain}
+.wz{position:absolute;z-index:4;top:16px;left:92px;width:360px;max-height:calc(100% - 32px);overflow:auto;background:var(--card);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:22px;box-shadow:var(--shadow2);padding:14px 16px 12px;display:none;overscroll-behavior:contain}
 .wz.open{display:block}
 .wz h2{margin:0 0 10px;font-size:17px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
 .wz h2 button{border:0;background:var(--chip);color:var(--text);width:44px;height:44px;border-radius:12px;font-size:18px;padding:0}
@@ -292,8 +246,68 @@ table.cx tr{border-top:1px solid var(--line)}
 .wz-cross svg{width:44px;height:44px;stroke:#111;stroke-width:2.2;fill:none;filter:drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 1.5px #fff)}
 .wz-pm{width:14px;height:14px;border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.4);pointer-events:none}
 .wz-hit{width:22px;height:22px;border-radius:50%;border:3px solid #ea580c;background:rgba(234,88,12,.25);box-shadow:0 0 0 2px #fff;pointer-events:none}
-@media (max-width:640px){
-  .wz{left:0;right:0;width:auto;top:auto;bottom:0;max-height:56%;border-radius:26px 26px 0 0;border-bottom:0;padding-bottom:max(12px,env(safe-area-inset-bottom))}
+
+/* Icon-Leiste links + Flyout (Variante A): Leiste = .rail, Flyout = .panel/.rt/.wz, immer nur eins offen */
+.rail{position:absolute;z-index:5;left:max(16px,env(safe-area-inset-left));top:16px;bottom:16px;width:64px;border-radius:20px;display:flex;flex-direction:column;align-items:center;padding:12px 0;gap:6px;overflow:auto;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.rail .logo{width:40px;height:40px;border-radius:12px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex:none;margin-bottom:10px}
+.rail .logo svg{width:20px;height:20px;fill:none;stroke:var(--on-accent);stroke-width:2.2;stroke-linejoin:round}
+.rgrp{display:flex;flex-direction:column;align-items:center;gap:6px}
+.rbot{margin-top:auto}
+.rbtn{width:56px;min-height:56px;flex:none;border:0;border-radius:14px;background:transparent;color:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:0;font-size:10px;letter-spacing:-.01em;line-height:1.1}
+.rbtn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:block}
+.rbtn:hover{background:var(--hover);color:var(--text)}
+.rbtn[aria-pressed=true]{background:var(--acc-soft);color:var(--acc-text)}
+.rbot .rbtn[aria-pressed=true]{background:transparent;color:var(--muted)}
+.rbtn.icononly{min-height:44px;width:44px}
+.rbtn.icononly span{display:none}
+.panel{position:absolute;z-index:3;left:92px;top:16px;width:360px;max-height:calc(100% - 32px);display:flex;flex-direction:column;border-radius:20px;overflow:hidden;
+  background:var(--glass);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1px solid var(--border);box-shadow:var(--shadow)}
+.panel.collapsed{display:none}
+.fh{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:14px 12px 8px 20px;flex:none}
+.fh h2,.rt h2,.wz h2{margin:0;font:700 18px/1.2 Inter,system-ui,sans-serif}
+.panel .view{display:none;flex-direction:column;gap:20px}
+.panel[data-view=stil] .v-stil,.panel[data-view=ebenen] .v-ebenen,.panel[data-view=info] .v-info{display:flex}
+.sec[hidden]{display:none}
+.v-ebenen .sec+.sec{border-top:1px solid var(--line);padding-top:12px}
+.v-info .note a,#infoSrc a{color:var(--acc-text)}
+#infoSrc{font-size:12px;line-height:1.5;color:var(--text)}
+.mobonly{display:none!important}
+.search .routebtn{display:inline-flex;align-items:center}
+@media (max-width:1240px){.search{left:464px;transform:none;width:calc(100% - 464px - 82px)}}
+@media (max-width:899px) and (min-width:700px){
+  .search{left:96px;width:calc(100% - 96px - 82px)}
+  .panel,.rt,.wz{top:78px;max-height:calc(100% - 94px)}
+}
+.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+.tile .swatch{height:64px}
+.tile .nm{font-size:13px;font-weight:600;padding:2px 4px 4px}
+.maplibregl-ctrl-top-right{top:max(16px,env(safe-area-inset-top))}
+/* Handy (< 700 px): Leiste = Tab-Leiste unten, Flyouts = Blatt darüber */
+@media (max-width:699px){
+  :root{--tab-h:calc(64px + env(safe-area-inset-bottom))}
+  .rail{left:0;right:0;top:auto;bottom:0;width:auto;height:var(--tab-h);flex-direction:row;justify-content:space-around;align-items:flex-start;padding:4px 4px env(safe-area-inset-bottom);gap:0;border-radius:20px 20px 0 0;border-bottom:0;overflow:hidden}
+  .rail .logo,.rail .rbot,.rail .deskonly{display:none}
+  .rgrp{flex-direction:row;flex:1;justify-content:space-around;align-items:flex-start;gap:0}
+  .rbtn{flex:1;max-width:84px;height:56px}
+  .mobonly{display:flex!important}
+  .panel,.rt,.wz{left:0;right:0;width:auto;top:auto;bottom:var(--tab-h);border-radius:26px 26px 0 0;border-bottom:0;box-shadow:0 -10px 40px rgba(17,24,39,.2)}
+  .panel{max-height:calc(100% - 150px)}
+  .rt{max-height:calc(100% - 150px);padding-bottom:16px}
+  .wz{max-height:56%}
+  .panel::before{content:"";align-self:center;width:40px;height:5px;border-radius:3px;background:var(--off);margin-top:8px;flex:none}
+  .fh{padding:6px 12px 4px 20px}
+  .tiles{display:flex;overflow-x:auto;gap:10px;padding:2px;scroll-snap-type:x proximity}
+  .tile{flex:0 0 112px;border-radius:16px}.tile .swatch{height:60px;border-radius:12px}
+  .search{left:12px;right:12px;width:auto;transform:none;top:max(12px,env(safe-area-inset-top))}
+  .search .field{padding-left:16px}
+  .routebtn{display:none!important}
+  .search input{font-size:16px}
+  .maplibregl-ctrl-top-right{top:calc(max(12px,env(safe-area-inset-top)) + 66px);right:12px}
+  .maplibregl-ctrl-bottom-left,body:has(.panel:not(.collapsed),.rt.open,.wz.open) .maplibregl-ctrl-bottom-left{left:12px;bottom:calc(var(--tab-h) + 12px)}
+  .maplibregl-ctrl-bottom-right{right:12px;bottom:calc(var(--tab-h) + 12px)}
+  .maplibregl-ctrl-attrib.maplibregl-compact-show{max-width:calc(100vw - 24px)}
+  .msg{bottom:calc(var(--tab-h) + 70px)}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -302,21 +316,29 @@ table.cx tr{border-top:1px solid var(--line)}
 <body>
 <div id="map" role="region" aria-label="Vektor-Basemap"></div>
 
-<section class="panel" id="panel" aria-label="Kartenoptionen">
-  <header id="panelHead">
-    <div class="brand">
-      <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 18l6-12 4 7 3-4 5 9z"/></svg></div>
-      <div><div class="wm">mapx</div><div class="sub">Österreich · amtliche Daten</div></div>
-    </div>
-    <div class="hbtns">
-      <button type="button" class="ibtn" id="themeBtn" aria-label="Hell/Dunkel umschalten" title="Hell/Dunkel">
-        <svg id="icoSun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-        <svg id="icoMoon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z"/></svg>
-      </button>
-      <button type="button" class="ibtn toggle" id="toggle" aria-label="Panel ein-/ausklappen" aria-expanded="true" title="Panel ein-/ausklappen"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
-    </div>
-  </header>
+<nav class="rail glass" id="rail" aria-label="Hauptmenü">
+  <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 18l6-12 4 7 3-4 5 9z"/></svg></div>
+  <div class="rgrp">
+    <button type="button" class="rbtn deskonly" id="railSearch" aria-label="Suche" title="Suche (Taste /)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>Suche</span></button>
+    <button type="button" class="rbtn" id="btnStil" aria-pressed="false" aria-expanded="false" aria-controls="panel" aria-label="Kartenstil" title="Kartenstil"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 100 18c1.4 0 2-.9 2-1.8 0-1.2-1-1.5-1-2.7 0-1 .8-1.5 1.8-1.5H18a3 3 0 003-3c0-5-4-9-9-9z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/></svg><span>Stil</span></button>
+    <button type="button" class="rbtn" id="btnEbenen" aria-pressed="false" aria-expanded="false" aria-controls="panel" aria-label="Ebenen und Legende" title="Ebenen und Legende"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 16.5l9 5 9-5"/></svg><span>Ebenen</span></button>
+    <button type="button" class="rbtn" id="wzBtn" aria-pressed="false" aria-expanded="false" aria-controls="wz" aria-label="Werkzeuge: Messen, Koordinaten, Höhenprofil, Umkreis" title="Werkzeuge: Messen, Koordinaten, Höhenprofil, Umkreis"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.5L17.5 3l3.5 3.5L6.5 21z"/><path d="M7.5 13.5l2 2M10.5 10.5l1.5 1.5M13.5 7.5l2 2"/></svg><span>Werkzeuge</span></button>
+    <button type="button" class="rbtn" id="railRoute" aria-pressed="false" aria-expanded="false" aria-controls="rt" aria-label="Route planen" title="Route planen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H15a3 3 0 000-6H9a3 3 0 010-6h6.5"/></svg><span>Route</span></button>
+    <button type="button" class="rbtn" id="btnInfo" aria-pressed="false" aria-expanded="false" aria-controls="panel" aria-label="Info und Quellen" title="Info und Quellen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.01"/></svg><span>Info</span></button>
+  </div>
+  <div class="rgrp rbot">
+    <button type="button" class="rbtn icononly" id="btnTeilen" aria-label="Link teilen" title="Link teilen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/></svg><span>Teilen</span></button>
+    <button type="button" class="rbtn icononly" id="themeBtn" aria-label="Hell/Dunkel umschalten" title="Hell/Dunkel">
+      <svg id="icoSun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg id="icoMoon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<section class="panel" id="panel" data-view="stil" aria-labelledby="panelTitle">
+  <header class="fh"><h2 id="panelTitle">Kartenstil</h2><button type="button" class="ibtn" id="panelClose" aria-label="Schließen" title="Schließen (Esc)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
   <div class="body">
+   <div class="view v-stil">
     <div class="sec" id="secStil">
       <div class="sec-h"><b>Kartenstil</b><span id="stilCount"></span></div>
       <div class="seg" id="stilSeg" role="group" aria-label="Stilgruppe"></div>
@@ -337,10 +359,9 @@ table.cx tr{border-top:1px solid var(--line)}
       <b style="font-size:13px;font-weight:600">Orte von Interesse</b>
       <div class="pills" id="poiPills"></div>
     </div>
-    <div class="note">Antippen für Details, lange drücken/Rechtsklick für die nächste Adresse. Gebäude ab Zoom 12, 3D-Gebäude ab 15, Grundstücke und Hausnummern ab 16.</div>
-  </div>
-  <div class="secs" id="secs" hidden>
-    <div class="sec" id="secEbenen" hidden>
+   </div>
+   <div class="view v-ebenen">
+    <div class="sec" id="secEbenen">
       <div class="sec-h"><b>Ebenen</b></div>
       <div class="chk">
         <label><input type="checkbox" id="bld" checked autocomplete="off"> Gebäude</label>
@@ -360,15 +381,20 @@ table.cx tr{border-top:1px solid var(--line)}
       <label class="op">Deckkraft Nutzung
         <input type="range" id="op" min="0" max="100" value="100" aria-label="Deckkraft der Nutzungsflächen"></label>
     </div>
-    <div class="sec" id="secLegende" hidden>
+    <div class="sec" id="secLegende">
       <details class="lg" id="lg1"><summary>Legende Nutzung</summary><ul class="legend" id="legend"></ul></details>
       <details class="lg" id="lg2"><summary>Legende Straßen</summary><ul class="legend" id="roadLegend"></ul></details>
     </div>
-  </div>
-  <div class="pfoot">
-    <button type="button" id="btnEbenen" aria-pressed="false" aria-controls="secEbenen">Ebenen</button>
-    <button type="button" id="btnLegende" aria-pressed="false" aria-controls="secLegende">Legende</button>
-    <button type="button" id="btnTeilen">Teilen</button>
+   </div>
+   <div class="view v-info">
+    <div class="sec"><b style="font-size:13px;font-weight:600">Bedienung</b>
+      <div class="note">Antippen für Details, lange drücken/Rechtsklick für die nächste Adresse. Gebäude ab Zoom 12, 3D-Gebäude ab 15, Grundstücke und Hausnummern ab 16.</div></div>
+    <div class="sec"><b style="font-size:13px;font-weight:600">Quellenangaben</b><div id="infoSrc"></div></div>
+    <div class="sec mobonly" style="gap:6px">
+      <button type="button" class="pill" id="infoTheme" aria-label="Hell/Dunkel umschalten">Hell/Dunkel umschalten</button>
+      <button type="button" class="pill" id="infoShare" aria-label="Link teilen">Link teilen</button>
+    </div>
+   </div>
   </div>
 </section>
 
@@ -483,7 +509,6 @@ table.cx tr{border-top:1px solid var(--line)}
            role="combobox" aria-label="Suche" aria-autocomplete="list" aria-expanded="false" aria-controls="results">
     <button class="clear" id="qclear" type="button" aria-label="Suche leeren">×</button>
     <button class="routebtn" id="rtGo" type="button" aria-label="Route planen" aria-expanded="false">Route</button>
-    <button class="menubtn" id="menuBtn" type="button" aria-label="Menü: Kartenstil und Ebenen" aria-controls="panel"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
   <ul id="results" role="listbox" aria-label="Suchergebnisse"></ul>
 </div>
@@ -1311,41 +1336,52 @@ window.mapxStil = (function () {
   });
   op.addEventListener("input", applyOpacity);
 
-  // Panel (Desktop: einklappbar, Handy: Blatt von unten, standardmäßig zu)
-  var panel = document.getElementById("panel"), tg = document.getElementById("toggle");
+  // Icon-Leiste + Flyout: Stil / Ebenen / Info teilen sich das Panel, dazu Werkzeuge (#wz) und Route (#rt); immer nur eins offen
+  var panel = document.getElementById("panel"), rtEl0 = document.getElementById("rt");
   // Zustand (Panel, Legenden, Hell/Dunkel) merken; localStorage kann fehlen oder werfen (privates Fenster)
   var UI = {};
   try { UI = JSON.parse(localStorage.getItem("mapx-ui") || "{}") || {}; } catch (e) { UI = {}; }
   function saveUI() { try { localStorage.setItem("mapx-ui", JSON.stringify(UI)); } catch (e) {} }
-  function setCollapsed(c) { panel.classList.toggle("collapsed", c); tg.setAttribute("aria-expanded", String(!c)); }
-  function toggleCollapsed() { var c = !panel.classList.contains("collapsed"); setCollapsed(c); UI.collapsed = c; saveUI(); }
-  tg.addEventListener("click", toggleCollapsed);
-  document.getElementById("menuBtn").addEventListener("click", toggleCollapsed);
-  setCollapsed(UI.collapsed != null && !window.matchMedia("(max-width: 640px)").matches ? !!UI.collapsed : window.matchMedia("(max-width: 640px)").matches);
+  var VIEWS = { stil: ["btnStil", "Kartenstil"], ebenen: ["btnEbenen", "Ebenen und Legende"], info: ["btnInfo", "Info und Quellen"] };
+  function viewOf() { return panel.classList.contains("collapsed") ? "" : panel.getAttribute("data-view"); }
+  function setView(v, persist) {
+    if (v) {
+      if (rtEl0.classList.contains("open")) document.getElementById("rtClose").click();
+      if (window.mapxTools && window.mapxTools.busy()) window.mapxTools.close();
+      panel.setAttribute("data-view", v); document.getElementById("panelTitle").textContent = VIEWS[v][1];
+      if (v === "info") { var inner = document.querySelector(".maplibregl-ctrl-attrib-inner"); document.getElementById("infoSrc").innerHTML = inner ? inner.innerHTML : ""; }
+    }
+    panel.classList.toggle("collapsed", !v);
+    Object.keys(VIEWS).forEach(function (k) { var b = document.getElementById(VIEWS[k][0]); b.setAttribute("aria-pressed", String(k === v)); b.setAttribute("aria-expanded", String(k === v)); });
+    if (persist) { UI.view = v || "none"; saveUI(); }
+  }
+  Object.keys(VIEWS).forEach(function (k) {
+    var b = document.getElementById(VIEWS[k][0]);
+    b.addEventListener("click", function () { setView(viewOf() === k ? "" : k, true); b.focus(); });
+  });
+  document.getElementById("panelClose").addEventListener("click", function () { var v = viewOf(); setView("", true); if (v) document.getElementById(VIEWS[v][0]).focus(); });
+  window.mapxRail = { closeView: function () { setView(""); } };
+  var mobile = window.matchMedia("(max-width: 699px)").matches;
+  setView(mobile ? "" : (VIEWS[UI.view] ? UI.view : (UI.view === "none" ? "" : "stil")));
+  document.getElementById("railSearch").addEventListener("click", function () { document.getElementById("q").focus(); });
+  document.getElementById("railRoute").addEventListener("click", function () { document.getElementById("rtGo").click(); });
+  document.getElementById("infoTheme").addEventListener("click", function () { document.getElementById("themeBtn").click(); });
+  document.getElementById("infoShare").addEventListener("click", function () { document.getElementById("btnTeilen").click(); });
+  new MutationObserver(function () { var o = rtEl0.classList.contains("open"); var b = document.getElementById("railRoute"); b.setAttribute("aria-pressed", String(o)); b.setAttribute("aria-expanded", String(o)); })
+    .observe(rtEl0, { attributes: true, attributeFilter: ["class"] });
+  // Esc schliesst das Flyout, in dem der Fokus steht, und gibt ihn an die Leistentaste zurueck
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape" || e.defaultPrevented) return;
+    var a = document.activeElement, wzEl = document.getElementById("wz");
+    if (panel.contains(a) && viewOf()) { var v = viewOf(); setView("", true); document.getElementById(VIEWS[v][0]).focus(); }
+    else if (rtEl0.contains(a) && rtEl0.classList.contains("open")) { document.getElementById("rtClose").click(); document.getElementById("railRoute").focus(); }
+    else if (wzEl.contains(a)) setTimeout(function () { if (!e.defaultPrevented && window.mapxTools && window.mapxTools.busy()) window.mapxTools.close(); }, 0);
+  });
   ["lg1", "lg2"].forEach(function (id) {
     var d = document.getElementById(id);
     d.open = !!UI[id];   // Legenden standardmäßig zugeklappt
     d.addEventListener("toggle", function () { UI[id] = d.open; saveUI(); });
   });
-  // Fuß: Ebenen und Legende klappen als eigene Bereiche auf, Teilen kopiert den Link
-  var SECS = { btnEbenen: "secEbenen", btnLegende: "secLegende" };
-  function showSecs() {
-    var any = false;
-    Object.keys(SECS).forEach(function (b) {
-      var on = !!UI[SECS[b]]; any = any || on;
-      document.getElementById(b).setAttribute("aria-pressed", String(on)); document.getElementById(SECS[b]).hidden = !on;
-    });
-    var box = document.getElementById("secs"); box.hidden = !any;
-    if (any) document.getElementById("panel").querySelector(".body").style.flex = "0 1 auto";
-    else document.getElementById("panel").querySelector(".body").style.flex = "";
-  }
-  Object.keys(SECS).forEach(function (b) {
-    document.getElementById(b).addEventListener("click", function () {
-      var k = SECS[b], on = !UI[k]; Object.keys(SECS).forEach(function (x) { UI[SECS[x]] = false; }); UI[k] = on; saveUI(); showSecs();
-      if (on) document.getElementById(k).scrollIntoView({ block: "nearest" });
-    });
-  });
-  showSecs();
   var toastT = null;
   function toast(t) { msg.textContent = t; msg.classList.add("ok"); msg.style.display = "block"; clearTimeout(toastT);
     toastT = setTimeout(function () { msg.classList.remove("ok"); if (shown) msg.textContent = TILES_DOWN; else msg.style.display = "none"; }, 2200); }
@@ -1840,6 +1876,7 @@ window.mapxStil = (function () {
   var rtEmpty = { type: "FeatureCollection", features: [] };
 
   function rtOpen(o) {
+    if (o && window.mapxRail) window.mapxRail.closeView();
     rtEl.classList.toggle("open", o); rtBtn.setAttribute("aria-expanded", String(o));
     map.getCanvas().style.cursor = o ? "crosshair" : "";
     if (!o) { rtClear(); }
@@ -1948,7 +1985,7 @@ window.mapxStil = (function () {
       var bb = new maplibregl.LngLatBounds();
       o.j.geometry.coordinates.forEach(function (c) { bb.extend(c); });
       var narrow = window.innerWidth <= 520;
-      map.fitBounds(bb, { padding: narrow ? { top: 60, bottom: 260, left: 30, right: 30 } : { top: 60, bottom: 60, left: 280, right: 380 }, maxZoom: 17, duration: 600 });
+      map.fitBounds(bb, { padding: narrow ? { top: 60, bottom: 260, left: 30, right: 30 } : { top: 60, bottom: 60, left: 470, right: 100 }, maxZoom: 17, duration: 600 });
     }).catch(function (e) {
       if (e.name === "AbortError" || my !== rtSeq) return;
       rtError("Routing gerade nicht erreichbar.");
@@ -2231,7 +2268,7 @@ window.mapxStil = (function () {
   }
   function placeCross() {
     var el = $("wzCross"), r = map.getContainer().getBoundingClientRect(), top = r.height / 2;
-    var narrow = window.innerWidth <= 640 && isOpen;
+    var narrow = window.innerWidth <= 699 && isOpen;
     if (narrow) top = Math.max(60, (r.height - wz.offsetHeight) / 2 + 30);
     el.style.left = (r.width / 2) + "px"; el.style.top = top + "px";
   }
@@ -2456,8 +2493,8 @@ window.mapxStil = (function () {
     if (s.kind === "circle" && s.pts.length > 1) G.circleRing(s.pts[0], G.dist(s.pts[0], s.pts[1]), 16).forEach(function (p) { b.extend(p); });
     if (s.kind === "center") G.circleRing(s.pts[0], s.r, 16).forEach(function (p) { b.extend(p); });
     if (s.buf) s.buf.forEach(function (poly) { poly[0].forEach(function (p) { b.extend(p); }); });
-    var narrow = window.innerWidth <= 640;
-    map.fitBounds(b, { padding: narrow ? { top: 90, bottom: Math.round(wz.offsetHeight) + 30, left: 40, right: 40 } : { top: 90, bottom: 60, left: 360, right: 480 }, maxZoom: 18, duration: 600 });
+    var narrow = window.innerWidth <= 699;
+    map.fitBounds(b, { padding: narrow ? { top: 90, bottom: Math.round(wz.offsetHeight) + 30, left: 40, right: 40 } : { top: 90, bottom: 60, left: 470, right: 100 }, maxZoom: 18, duration: 600 });
   }
 
   // ---------------------------------------------------------------- Höhenmodell: Terrain-RGB-Kacheln direkt aus dem PMTiles lesen
@@ -3034,7 +3071,7 @@ window.mapxStil = (function () {
     var el = document.createElement("div"); el.className = "wz-hit";
     var pop = new maplibregl.Popup({ offset: 16, maxWidth: "260px", closeButton: true }).setHTML("<b>" + esc(h.props.name || kindLabel(h)) + "</b><br>" + esc(kindLabel(h)) + "<br>" + esc(G.fmtLen(h.dist, units)) + (ST.u.mode === "circle" ? " vom Mittelpunkt" : " vom Pfad"));
     hitMarker = new maplibregl.Marker({ element: el }).setLngLat(h.pos).setPopup(pop).addTo(map); hitMarker.togglePopup();
-    var narrow = window.innerWidth <= 640;
+    var narrow = window.innerWidth <= 699;
     map.flyTo({ center: h.pos, zoom: Math.max(map.getZoom(), 16.5), speed: 1.6, padding: narrow ? { bottom: Math.round(wz.offsetHeight) } : { left: 0 } });
   }
   function renderUmkreis() {
@@ -3116,19 +3153,14 @@ window.mapxStil = (function () {
       if (j >= 0) { e.preventDefault(); all[j].focus(); setTool(all[j].getAttribute("data-t")); }
     });
   });
-  var tbtn = document.createElement("button");
-  tbtn.type = "button"; tbtn.className = "btnwz"; tbtn.title = "Werkzeuge: Messen, Koordinaten, Höhenprofil, Umkreis"; tbtn.setAttribute("aria-label", "Werkzeuge: Messen, Koordinaten, Höhenprofil, Umkreis");
-  tbtn.setAttribute("aria-pressed", "false"); tbtn.setAttribute("aria-controls", "wz"); tbtn.setAttribute("aria-expanded", "false");
-  tbtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.5L17.5 3l3.5 3.5L6.5 21z"/><path d="M7.5 13.5l2 2M10.5 10.5l1.5 1.5M13.5 7.5l2 2"/></svg>';
-  tbtn.id = "wzBtn";
-  map.addControl({ onAdd: function () { var c = document.createElement("div"); c.className = "maplibregl-ctrl maplibregl-ctrl-group"; c.appendChild(tbtn); return c; },
-                   onRemove: function () { tbtn.parentNode && tbtn.parentNode.remove(); } }, "top-right");
+  var tbtn = $("wzBtn");
   tbtn.addEventListener("click", function () { if (isOpen) closeTools(); else openTools(tool); });
   $("wzClose").addEventListener("click", closeTools);
 
   function openTools(t) {
     var rt = $("rt"); if (rt && rt.classList.contains("open")) $("rtClose").click();
     var pm = document.querySelector(".maplibregl-popup"); if (pm) { var cb = pm.querySelector(".maplibregl-popup-close-button"); if (cb) cb.click(); }
+    if (window.mapxRail) window.mapxRail.closeView();
     isOpen = true; wz.classList.add("open"); tbtn.setAttribute("aria-pressed", "true"); tbtn.setAttribute("aria-expanded", "true");
     map.doubleClickZoom.disable(); ensureLayers(); bindOnce();
     var c = lsGet("mapx-wz-cross"); setCross(c === null ? (window.matchMedia && matchMedia("(pointer:coarse)").matches) : c === "1");
