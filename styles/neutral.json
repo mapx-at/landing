@@ -177,6 +177,15 @@
     "hoehenlinien",
     "hoehenlinien-index",
     "hoehenlinien-label"
+   ],
+   "chargers": [],
+   "sharing": [
+    "sharing-punkt",
+    "sharing-name"
+   ],
+   "rest_areas": [
+    "rastanlagen-punkt",
+    "rastanlagen-name"
    ]
   },
   "mapx:legend": {
