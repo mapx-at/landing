@@ -107,6 +107,7 @@
     "oev-ferry-klein",
     "oev-ferry",
     "oev-station",
+    "oev-airport",
     "road-low-casing-primary",
     "road-low-casing-motorway_link",
     "road-low-casing-motorway",
@@ -550,7 +551,7 @@
   },
   "mapx:tiles": {
    "basis": {
-    "datei": "mapx-basis-20260401-6ae3c128.pmtiles",
+    "datei": "mapx-basis-20260401-5d50f56b.pmtiles",
     "stand": "2026-04-01"
    },
    "kataster": {
@@ -618,7 +619,7 @@
   },
   "basis": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/mapx-basis-20260401-6ae3c128.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/mapx-basis-20260401-5d50f56b.pmtiles",
    "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – DKM</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Verwaltungsgrenzen</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.data.gv.at/katalog/datasets/c2287ccb-f44c-48cd-bf7c-ac107b771246\" target=\"_blank\" rel=\"noopener\">BMLUK – GGN v19</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Geographische Namen</a> (Gipfel- und Ortsauswahl, Tiroler Weiler: <a href=\"https://basemap.at\" target=\"_blank\" rel=\"noopener\">basemap.at</a>), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Adressregister</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>, © Österreichisches Adressregister, Stichtagsdaten vom 01.10.2026; <a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at</a> (Bahn, Fähren), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; Seilbahnen und Lifte: <a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – DLM Verkehr</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; Skigebiete: <a href=\"https://www.umweltbundesamt.at\" target=\"_blank\" rel=\"noopener\">Umweltbundesamt</a> 2017, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – DLM Bauten und Verkehr</a> (Orte von Interesse), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; Wien: <a href=\"https://data.wien.gv.at\" target=\"_blank\" rel=\"noopener\">Stadt Wien – data.wien.gv.at</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
   "kataster": {
@@ -9969,6 +9970,155 @@
      13.27,
      1.33
     ]
+   }
+  },
+  {
+   "id": "oev-airport",
+   "type": "symbol",
+   "source": "basis",
+   "source-layer": "airport_p",
+   "minzoom": 11,
+   "layout": {
+    "icon-image": [
+     "match",
+     [
+      "get",
+      "kind"
+     ],
+     "airport",
+     "airport",
+     "airfield"
+    ],
+    "icon-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     [
+      "match",
+      [
+       "get",
+       "kind"
+      ],
+      "airport",
+      0.8,
+      0.6
+     ],
+     12,
+     [
+      "match",
+      [
+       "get",
+       "kind"
+      ],
+      [
+       "airfield",
+       "military"
+      ],
+      0.8,
+      "airport",
+      1.0,
+      0.65
+     ],
+     16,
+     [
+      "match",
+      [
+       "get",
+       "kind"
+      ],
+      [
+       "airfield",
+       "military"
+      ],
+      1.0,
+      "airport",
+      1.3,
+      0.8
+     ]
+    ],
+    "icon-allow-overlap": true,
+    "icon-ignore-placement": true,
+    "symbol-sort-key": [
+     "get",
+     "min_zoom"
+    ],
+    "text-field": [
+     "step",
+     [
+      "zoom"
+     ],
+     "",
+     9,
+     [
+      "case",
+      [
+       "==",
+       [
+        "get",
+        "kind"
+       ],
+       "airport"
+      ],
+      [
+       "get",
+       "name"
+      ],
+      ""
+     ],
+     11,
+     [
+      "case",
+      [
+       "!=",
+       [
+        "get",
+        "kind"
+       ],
+       "heliport"
+      ],
+      [
+       "get",
+       "name"
+      ],
+      ""
+     ],
+     14,
+     [
+      "get",
+      "name"
+     ]
+    ],
+    "text-font": [
+     "Noto Sans Bold Italic"
+    ],
+    "text-size": [
+     "step",
+     [
+      "zoom"
+     ],
+     9.33,
+     16,
+     13.33
+    ],
+    "text-anchor": "bottom",
+    "text-offset": [
+     0,
+     -0.9
+    ],
+    "text-max-width": 9,
+    "text-letter-spacing": 0.1,
+    "text-optional": true,
+    "visibility": "none"
+   },
+   "paint": {
+    "text-color": "#730000",
+    "text-halo-color": "#FAFAFA",
+    "text-halo-width": 1.07
    }
   },
   {
