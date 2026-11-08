@@ -194,6 +194,15 @@
     "bike-routes-road",
     "bike-routes-mtb",
     "bike-routes-label"
+   ],
+   "gip_poi": [
+    "gip-poi-crosswalk",
+    "gip-poi-block",
+    "gip-poi-crossing",
+    "gip-poi-crossing-label",
+    "gip-poi-br",
+    "gip-poi-br-label",
+    "gip-poi-pr"
    ]
   },
   "mapx:overlays": {
