@@ -55,6 +55,8 @@
     "road-primary",
     "road-motorway_link",
     "road-motorway",
+    "way-track-unpaved",
+    "way-cycleway-bike",
     "road-bridge-casing-pedestrian",
     "road-bridge-pedestrian",
     "road-bridge-casing-minor",
@@ -186,6 +188,12 @@
    "rest_areas": [
     "rastanlagen-punkt",
     "rastanlagen-name"
+   ],
+   "bike_routes": [
+    "bike-routes-casing",
+    "bike-routes-road",
+    "bike-routes-mtb",
+    "bike-routes-label"
    ]
   },
   "mapx:overlays": {
@@ -578,6 +586,10 @@
    "rastanlagen": {
     "datei": "rastanlagen-20261107-ec1af813.pmtiles",
     "stand": "20261107"
+   },
+   "bike_routes": {
+    "datei": "bike-routes-20260708-25a7be97.pmtiles",
+    "stand": "20260708"
    }
   }
  },
@@ -667,6 +679,13 @@
    "minzoom": 7,
    "maxzoom": 14,
    "attribution": "<a href=\"https://www.asfinag.at\" target=\"_blank\" rel=\"noopener\">ASFINAG – Rastanlagen</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
+  },
+  "bike_routes": {
+   "type": "vector",
+   "url": "pmtiles://https://tiles.mapx.at/bike-routes-20260708-25a7be97.pmtiles",
+   "minzoom": 5,
+   "maxzoom": 14,
+   "attribution": "<a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at – Radrouten</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   }
  },
  "layers": [
@@ -5702,6 +5721,106 @@
    }
   },
   {
+   "id": "way-track-unpaved",
+   "type": "line",
+   "source": "basis",
+   "source-layer": "road_l",
+   "minzoom": 12,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "kind_detail"
+     ],
+     "track"
+    ],
+    [
+     "!=",
+     [
+      "get",
+      "structure"
+     ],
+     "tunnel"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#5c4a38",
+    "line-opacity": 0.7,
+    "line-dasharray": [
+     3,
+     1.5
+    ],
+    "line-width": [
+     "step",
+     [
+      "zoom"
+     ],
+     0.667,
+     14,
+     1.333,
+     16,
+     2,
+     18,
+     5.333
+    ]
+   }
+  },
+  {
+   "id": "way-cycleway-bike",
+   "type": "line",
+   "source": "basis",
+   "source-layer": "road_l",
+   "minzoom": 14,
+   "filter": [
+    "all",
+    [
+     "==",
+     [
+      "get",
+      "kind_detail"
+     ],
+     "cycleway"
+    ],
+    [
+     "!=",
+     [
+      "get",
+      "structure"
+     ],
+     "tunnel"
+    ]
+   ],
+   "layout": {
+    "line-cap": "butt",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#5c4a38",
+    "line-opacity": 0.55,
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     14,
+     1,
+     16,
+     1.8,
+     18,
+     3
+    ]
+   }
+  },
+  {
    "id": "oev-rail-siding",
    "type": "line",
    "source": "basis",
@@ -10271,6 +10390,232 @@
      "#5d4a38",
      "#444444"
     ],
+    "text-halo-color": "rgba(255,255,255,0.95)",
+    "text-halo-width": 1.3
+   }
+  },
+  {
+   "source": "bike_routes",
+   "source-layer": "bike_routes",
+   "layout": {
+    "visibility": "none",
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "filter": [
+    "all",
+    [
+     "<=",
+     [
+      "get",
+      "min_zoom"
+     ],
+     [
+      "zoom"
+     ]
+    ],
+    [
+     "==",
+     [
+      "get",
+      "type"
+     ],
+     "road"
+    ]
+   ],
+   "id": "bike-routes-casing",
+   "type": "line",
+   "paint": {
+    "line-color": "rgba(181, 174, 160, 0.8)",
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     5,
+     2,
+     10,
+     4,
+     14,
+     6
+    ]
+   }
+  },
+  {
+   "source": "bike_routes",
+   "source-layer": "bike_routes",
+   "layout": {
+    "visibility": "none",
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "filter": [
+    "all",
+    [
+     "<=",
+     [
+      "get",
+      "min_zoom"
+     ],
+     [
+      "zoom"
+     ]
+    ],
+    [
+     "==",
+     [
+      "get",
+      "type"
+     ],
+     "road"
+    ]
+   ],
+   "id": "bike-routes-road",
+   "type": "line",
+   "paint": {
+    "line-color": [
+     "match",
+     [
+      "get",
+      "network"
+     ],
+     "international",
+     "#1d4e9e",
+     "national",
+     "#b3246a",
+     "regional",
+     "#d6451f",
+     "#e07b00"
+    ],
+    "line-opacity": 0.9,
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     5,
+     1,
+     10,
+     2,
+     14,
+     3
+    ]
+   }
+  },
+  {
+   "source": "bike_routes",
+   "source-layer": "bike_routes",
+   "layout": {
+    "visibility": "none",
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "filter": [
+    "all",
+    [
+     "<=",
+     [
+      "get",
+      "min_zoom"
+     ],
+     [
+      "zoom"
+     ]
+    ],
+    [
+     "==",
+     [
+      "get",
+      "type"
+     ],
+     "mtb"
+    ]
+   ],
+   "id": "bike-routes-mtb",
+   "type": "line",
+   "minzoom": 10,
+   "paint": {
+    "line-color": [
+     "match",
+     [
+      "get",
+      "difficulty"
+     ],
+     "easy",
+     "#1f78c8",
+     "medium",
+     "#d63a2f",
+     "hard",
+     "#1f1f1f",
+     "#8a5a2b"
+    ],
+    "line-opacity": 0.9,
+    "line-dasharray": [
+     2,
+     1.5
+    ],
+    "line-width": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     10,
+     1,
+     14,
+     2.2
+    ]
+   }
+  },
+  {
+   "source": "bike_routes",
+   "source-layer": "bike_routes",
+   "layout": {
+    "visibility": "none",
+    "symbol-placement": "line",
+    "symbol-spacing": 400,
+    "text-field": [
+     "coalesce",
+     [
+      "get",
+      "ref"
+     ],
+     [
+      "get",
+      "name"
+     ],
+     ""
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": 10,
+    "text-max-angle": 30,
+    "text-optional": true
+   },
+   "filter": [
+    "<=",
+    [
+     "get",
+     "min_zoom"
+    ],
+    [
+     "zoom"
+    ]
+   ],
+   "id": "bike-routes-label",
+   "type": "symbol",
+   "minzoom": 11,
+   "paint": {
+    "text-color": "#3a3a3a",
     "text-halo-color": "rgba(255,255,255,0.95)",
     "text-halo-width": 1.3
    }
