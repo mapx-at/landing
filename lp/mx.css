@@ -117,8 +117,28 @@ footer .about{max-width:300px;margin:14px 0 0}
  .menu{display:inline-flex;margin-left:auto;background:none;border:1px solid rgba(255,255,255,.22);color:#fff;border-radius:8px;padding:8px 12px;font:600 14px 'Inter Variable',sans-serif}
  .nav .sp,.nav .btn-s{display:none}
  .nav ul{display:none;flex-basis:100%;flex-direction:column;margin:0 0 8px}.nav.open ul{display:flex}
- .nav.open .btn-s{display:inline-flex;flex-basis:100%;justify-content:center}
  section{padding:60px 0}.grid,.posts{grid-template-columns:1fr}.hero:after{background:linear-gradient(180deg,rgba(10,15,32,.9),rgba(10,15,32,.6))}
  .hero .wrap{padding-top:40px;padding-bottom:40px}.fgrid{grid-template-columns:1fr 1fr}.article p,.article li{font-size:17px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+/* Konto-Links, Sprachumschalter, API-Zugang */
+.nav .signin,.nav .langsw{color:var(--on-dark-muted);text-decoration:none;font-size:15px;font-weight:500;padding:8px 10px;border-radius:8px}
+.nav .signin:hover,.nav .langsw:hover{color:#fff;background:rgba(255,255,255,.08)}
+.nav .langsw{font-size:13px;border:1px solid rgba(255,255,255,.22);padding:6px 9px}
+.nav .signup-m,.nav .m-only{display:none}
+.btn-o{background:transparent;color:var(--accent);border-color:var(--accent)}.btn-o:hover{background:#eef1fd}
+.steps{grid-template-columns:repeat(3,1fr);margin-bottom:44px}
+.kinds{margin:0;font-size:20px;letter-spacing:-.01em}
+.soft .facts{max-width:760px}
+.note{color:var(--muted);margin:20px 0 28px;max-width:760px}
+.fgrid{grid-template-columns:1.4fr repeat(6,1fr)}
+@media (max-width:1100px){.fgrid{grid-template-columns:repeat(3,1fr)}.fgrid>:first-child{grid-column:1/-1}}
+@media (max-width:960px){.steps{grid-template-columns:1fr}}
+@media (max-width:700px){
+ .nav .signin,.nav .langsw,.nav .signup,.nav .openmap{display:none}
+ .nav .signup-m{display:inline-flex;margin-left:auto}.nav .signup-m+.menu{margin-left:0}
+ .nav.open .m-only{display:list-item}
+ .fgrid{grid-template-columns:1fr 1fr}
+}
+.nav a,.nav .btn{white-space:nowrap}
+@media (min-width:701px) and (max-width:1100px){.nav .wrap{gap:10px}.nav ul{margin-left:0;gap:0}.nav ul a{padding:8px 8px;font-size:14px}.nav .openmap{display:none}}

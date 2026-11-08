@@ -1,9 +1,15 @@
-# mapx Landing (mapx.at). Hugo extended 0.169.0. Build: ./build.sh (schreibt index.html + lp/ ins Repo-Wurzel).
+# mapx Landing (mapx.at). Hugo extended 0.169.0. Build: ./build.sh (schreibt index.html + en/index.html + lp/ ins Repo-Wurzel).
+# Texte je Sprache: data/de.yaml, data/en.yaml (Template layouts/index.html ist für beide gleich).
 baseURL = "https://mapx.at/"
-locale = "de"
 defaultContentLanguage = "de"
+defaultContentLanguageInSubdir = false
 title = "mapx"
 disableKinds = ["taxonomy", "term", "RSS", "sitemap", "robotsTXT", "section", "page"]
 disableHugoGeneratorInject = true
-[params]
-  description = "mapx: Karten für Österreich aus amtlichen Daten. Kataster, Gelände, Höhenlinien, Orthofoto, Adressen, Routing und Höhen-API."
+[languages]
+  [languages.de]
+    weight = 1
+    locale = "de"
+  [languages.en]
+    weight = 2
+    locale = "en"
