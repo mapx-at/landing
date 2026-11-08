@@ -1,55 +1,65 @@
 <!doctype html>
-<html lang="de">
+{{ $t := index hugo.Data .Language.Lang }}{{ $a := printf "%s/" $t.acct }}{{ $q := printf "?lang=%s" $t.lang }}
+<html lang="{{ $t.lang }}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>mapx – Karten für Österreich aus amtlichen Daten</title>
-<meta name="description" content="{{ .Site.Params.description }}">
+<title>{{ $t.htmlTitle }}</title>
+<meta name="description" content="{{ $t.description }}">
 <meta name="theme-color" content="#0a0f20">
-<link rel="canonical" href="https://mapx.at/">
-<meta property="og:title" content="mapx – Karten für Österreich aus amtlichen Daten">
-<meta property="og:description" content="{{ .Site.Params.description }}">
-<meta property="og:type" content="website"><meta property="og:url" content="https://mapx.at/">
+<link rel="canonical" href="{{ $t.canonical }}">
+<link rel="alternate" hreflang="de" href="https://mapx.at/"><link rel="alternate" hreflang="en" href="https://mapx.at/en/"><link rel="alternate" hreflang="x-default" href="https://mapx.at/">
+<meta property="og:title" content="{{ $t.htmlTitle }}">
+<meta property="og:description" content="{{ $t.description }}">
+<meta property="og:type" content="website"><meta property="og:url" content="{{ $t.canonical }}">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232346d8'/%3E%3Cpath d='M16 7c-3.600 0-6 2.600-6 6 0 4.400 6 11 6 11s6-6.600 6-11c0-3.400-2.400-6-6-6Z' fill='none' stroke='white' stroke-width='2.200'/%3E%3Ccircle cx='16' cy='13' r='2.200' fill='white'/%3E%3C/svg%3E">
 <script src="/lp/legacy-redirect.js"></script>
 <link rel="preload" href="/lp/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/lp/mx.css">
 </head>
 <body>
-<a class="skip" href="#produkte">Zum Inhalt</a>
+<a class="skip" href="#produkte">{{ $t.skip }}</a>
 <header class="nav" id="nav"><div class="wrap">
-  <a class="logo" href="/">{{ partial "logo.html" . }}mapx</a>
-  <button class="menu" type="button" aria-expanded="false" aria-controls="menu" id="menubtn">Menü</button>
+  <a class="logo" href="{{ if eq $t.lang "en" }}/en/{{ else }}/{{ end }}">{{ partial "logo.html" . }}mapx</a>
+  <a class="btn btn-p btn-s signup-m" href="{{ $a }}register{{ $q }}">{{ $t.nav.signup }}</a>
+  <button class="menu" type="button" aria-expanded="false" aria-controls="menu" id="menubtn">{{ $t.menu }}</button>
   <ul id="menu">
-    <li><a href="#produkte">Produkte</a></li>
-    <li><a href="#entwickler">Entwickler</a></li>
-    <li><a href="#daten">Daten</a></li>
-    <li><a href="https://docs.mapx.at">Doku</a></li>
-    <li><a href="https://blog.mapx.at">Blog</a></li>
+    <li><a href="#produkte">{{ $t.nav.products }}</a></li>
+    <li><a href="#entwickler">{{ $t.nav.dev }}</a></li>
+    <li><a href="#zugang">{{ $t.nav.access }}</a></li>
+    <li><a href="#daten">{{ $t.nav.data }}</a></li>
+    <li><a href="https://docs.mapx.at">{{ $t.nav.docs }}</a></li>
+    <li><a href="https://blog.mapx.at">{{ $t.nav.blog }}</a></li>
+    <li class="m-only"><a href="{{ $a }}login{{ $q }}">{{ $t.nav.signin }}</a></li>
+    <li class="m-only"><a href="https://map.mapx.at">{{ $t.nav.openmap }}</a></li>
+    <li class="m-only"><a href="{{ $t.otherHref }}" hreflang="{{ $t.otherLang }}" lang="{{ $t.otherLang }}">{{ $t.otherLabel }}</a></li>
   </ul>
   <span class="sp"></span>
-  <a class="btn btn-p btn-s" href="https://map.mapx.at">Karte öffnen</a>
+  <a class="langsw" href="{{ $t.otherHref }}" hreflang="{{ $t.otherLang }}" lang="{{ $t.otherLang }}">{{ $t.otherLabel }}</a>
+  <a class="signin" href="{{ $a }}login{{ $q }}">{{ $t.nav.signin }}</a>
+  <a class="btn btn-p btn-s signup" href="{{ $a }}register{{ $q }}">{{ $t.nav.signup }}</a>
+  <a class="btn btn-g btn-s openmap" href="https://map.mapx.at">{{ $t.nav.openmap }}</a>
 </div></header>
 
 <main>
 <div class="hero"><div class="wrap">
   <div>
-    <span class="eyebrow">Österreich · amtliche Daten</span>
-    <h1>Die Karte Österreichs, gebaut aus amtlichen Daten.</h1>
-    <p class="lead">Grundstücke, Gelände, Höhenlinien, Orthofoto, Adressen und Routing – aus Katastermappe, Laserscan und Verkehrsgraph der Behörden, als offene Kacheln und APIs für eigene Karten.</p>
-    <div class="cta"><a class="btn btn-p" href="https://map.mapx.at">Karte öffnen</a><a class="btn btn-g" href="https://docs.mapx.at">Entwicklerdoku</a></div>
+    <span class="eyebrow">{{ $t.eyebrow }}</span>
+    <h1>{{ $t.h1 }}</h1>
+    <p class="lead">{{ $t.lead }}</p>
+    <div class="cta"><a class="btn btn-p" href="https://map.mapx.at">{{ $t.cta.map }}</a><a class="btn btn-g" href="#zugang">{{ $t.cta.token }}</a></div>
   </div>
   <div class="mock" aria-hidden="true">
-    <div class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/></svg>Ort, Adresse, Gipfel oder Grundstück</div>
-    <div class="chips"><span>Messen</span><span>Höhenprofil</span><span>Koordinaten</span><span>Route</span></div>
-    <div class="info"><b>Höhe (DTM, 1 m)</b><code>GET /v1/elevation?points=12.694,47.074</code></div>
+    <div class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/></svg>{{ $t.mock.search }}</div>
+    <div class="chips">{{ range $t.mock.chips }}<span>{{ . }}</span>{{ end }}</div>
+    <div class="info"><b>{{ $t.mock.info }}</b><code>{{ $t.mock.code }}</code></div>
   </div>
 </div></div>
-<div class="strip"><div class="wrap"><strong>Datenquellen</strong><span class="t">BEV</span><span class="t">GIP.at</span><span class="t">Umweltbundesamt (GGN)</span><span class="t">Statistik Austria</span><span>Offene Lizenzen, überwiegend CC BY 4.0</span></div></div>
+<div class="strip"><div class="wrap"><strong>{{ $t.strip.title }}</strong>{{ range $t.strip.sources }}<span class="t">{{ . }}</span>{{ end }}<span>{{ $t.strip.lic }}</span></div></div>
 
 <section id="produkte"><div class="wrap">
-  <h2>Was mapx liefert</h2>
-  <p class="sub">Je Produkt ein eigener Datensatz mit Stichtag und Quelle. Alles, was auf der Karte zu sehen ist, lässt sich auch direkt einbinden.</p>
+  <h2>{{ $t.products.h2 }}</h2>
+  <p class="sub">{{ $t.products.sub }}</p>
   <div class="grid">
     {{ $ico := dict
       "map" `<path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/>`
@@ -60,36 +70,25 @@
       "pin" `<path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.500"/>`
       "route" `<circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h6a3 3 0 000-6h-4a3 3 0 010-6h6"/>`
       "api" `<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/>` }}
-    {{ $items := slice
-      (dict "i" "map" "t" "Vektor-Basiskarte" "d" "Straßen, Gebäude, Gewässer, Grenzen und Beschriftung als Vektorkacheln, gestaltet nach dem Vorbild von basemap.at." "m" "PMTiles · MapLibre")
-      (dict "i" "parcel" "t" "Kataster" "d" "Grundstücksgrenzen und Nutzungsflächen aus der Digitalen Katastralmappe des BEV." "m" "BEV DKM · CC BY 4.0")
-      (dict "i" "dtm" "t" "Geländemodell" "d" "DTM und DSM aus dem 1-m-Laserscan des BEV, als Terrain-RGB für Schummerung und 3D-Gelände." "m" "Stichtag 15.09.2025")
-      (dict "i" "contour" "t" "Höhenlinien" "d" "Höhenlinien, aus dem Geländemodell gerechnet, als Vektorkacheln für Wander- und Planungskarten." "m" "Zoom 10–16")
-      (dict "i" "photo" "t" "Orthofoto" "d" "Luftbilder des BEV als Rasterkacheln, mit Metadaten zu Befliegung und Flugjahr." "m" "BEV · CC BY 4.0")
-      (dict "i" "pin" "t" "Adressen und Suche" "d" "Adressregister, Orte, Straßen und Grundstücke in einem Suchindex, für Geocoding in eigenen Anwendungen." "m" "Adressregister, Stichtag 01.10.2026")
-      (dict "i" "route" "t" "Routing" "d" "Eigene Routing-Engine auf dem GIP-Routingexport für Auto, Rad und zu Fuß, mit Abbiegeverboten." "m" "GIP.at · CC BY 4.0")
-      (dict "i" "api" "t" "Höhen-API" "d" "Höhe für Punkte und Profile entlang einer Linie, wahlweise aus Gelände- oder Oberflächenmodell." "m" "REST · JSON")
-    }}
-    {{ range $items }}
-    <a class="card" href="https://docs.mapx.at"><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{{ index $ico .i | safeHTML }}</svg></span><h3>{{ .t }}</h3><p>{{ .d }}</p><span class="meta">{{ .m }}</span><span class="more">In der Doku →</span></a>
+    {{ range $t.cards }}
+    <a class="card" href="https://docs.mapx.at"><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{{ index $ico .i | safeHTML }}</svg></span><h3>{{ .t }}</h3><p>{{ .d }}</p><span class="meta">{{ .m }}</span><span class="more">{{ $t.products.more }}</span></a>
     {{ end }}
   </div>
 </div></section>
 
 <section id="entwickler" class="dark"><div class="wrap dev">
   <div>
-    <span class="eyebrow">Für Entwickler</span>
-    <h2>Einbinden in fünf Minuten.</h2>
-    <p class="sub" style="margin-bottom:24px">Kacheln sind PMTiles-Dateien mit HTTP-Range-Zugriff, ohne eigenen Kartenserver. Die Höhen-API antwortet mit GeoJSON.</p>
+    <span class="eyebrow">{{ $t.devsec.eyebrow }}</span>
+    <h2>{{ $t.devsec.h2 }}</h2>
+    <p class="sub" style="margin-bottom:24px">{{ $t.devsec.sub }}</p>
     <ul>
-      <li><span><b>MapLibre und PMTiles.</b> Der Stil der Demo-Karte ist öffentlich und lässt sich direkt laden.</span></li>
-      <li><span><b>Keine Schlüssel für offene Daten.</b> Herkunft, Stichtag und Attribution stehen je Produkt in der Doku.</span></li>
-      <li><span><b>Maschinenlesbar.</b> OpenAPI-Beschreibung und <code>llms.txt</code> für die Höhen-API und die Kacheln.</span></li>
+      {{ range $t.devsec.items }}<li><span>{{ . | safeHTML }}</span></li>
+      {{ end }}
     </ul>
-    <div class="cta"><a class="btn btn-p" href="https://docs.mapx.at">Zur Entwicklerdoku</a><a class="btn btn-g" href="https://map.mapx.at">Demo ansehen</a></div>
+    <div class="cta"><a class="btn btn-p" href="https://docs.mapx.at">{{ $t.devsec.doc }}</a><a class="btn btn-g" href="https://map.mapx.at">{{ $t.devsec.demo }}</a></div>
   </div>
   <div>
-    <div class="code"><div class="bar"><i></i><i></i><i></i><span>Karte mit MapLibre</span></div>
+    <div class="code"><div class="bar"><i></i><i></i><i></i><span>{{ $t.devsec.bar1 }}</span></div>
 <pre><span class="k">import</span> maplibregl <span class="k">from</span> <span class="s">'maplibre-gl'</span>;
 <span class="k">import</span> { Protocol } <span class="k">from</span> <span class="s">'pmtiles'</span>;
 
@@ -99,50 +98,69 @@ maplibregl.addProtocol(<span class="s">'pmtiles'</span>, <span class="k">new</sp
   container: <span class="s">'map'</span>,
   style: <span class="s">'https://mapx.at/style.json'</span>,
   center: [<span class="n">15.33</span>, <span class="n">48.23</span>],
-  zoom: <span class="n">13</span>
+  zoom: <span class="n">13</span>,
+  transformRequest: (url) =&gt; url.includes(<span class="s">'mapx.at'</span>)
+    ? { url, headers: { Authorization: <span class="s">`Bearer ${TOKEN}`</span> } }
+    : <span class="k">undefined</span>
 });</pre></div>
-    <div class="code"><div class="bar"><i></i><i></i><i></i><span>Höhe abfragen</span></div>
-<pre><span class="c">// Gipfelhöhe aus dem Geländemodell (DTM, 1 m)</span>
+    <div class="code"><div class="bar"><i></i><i></i><i></i><span>{{ $t.devsec.bar2 }}</span></div>
+<pre><span class="c">{{ $t.devsec.comment }}</span>
 <span class="k">const</span> r = <span class="k">await</span> fetch(
-  <span class="s">'https://api.mapx.at/v1/elevation?points=12.694,47.074'</span>
+  <span class="s">'https://api.mapx.at/v1/elevation?points=12.694,47.074'</span>,
+  { headers: { Authorization: <span class="s">`Bearer ${TOKEN}`</span> } }
 );
 <span class="k">const</span> { features } = <span class="k">await</span> r.json();
 console.log(features[<span class="n">0</span>].properties.elevation);</pre></div>
   </div>
 </div></section>
 
+<section id="zugang" class="soft"><div class="wrap">
+  <span class="eyebrow" style="color:var(--accent)">{{ $t.access.eyebrow }}</span>
+  <h2>{{ $t.access.h2 }}</h2>
+  <p class="sub">{{ $t.access.sub }}</p>
+  <div class="grid steps">
+    {{ range $t.access.steps }}<div class="card"><h3>{{ .t }}</h3><p>{{ .d }}</p></div>
+    {{ end }}
+  </div>
+  <h3 class="kinds">{{ $t.access.kinds }}</h3>
+  <ul class="facts"><li>{{ $t.access.pk | safeHTML }}</li><li>{{ $t.access.sk | safeHTML }}</li></ul>
+  <p class="note">{{ $t.access.note }}</p>
+  <div class="cta"><a class="btn btn-b" href="{{ $a }}register{{ $q }}">{{ $t.access.signup }}</a><a class="btn btn-o" href="{{ $a }}login{{ $q }}">{{ $t.access.signin }}</a><a class="btn btn-o" href="{{ $t.access.docsHref }}">{{ $t.access.docs }}</a></div>
+</div></section>
+
 <section id="daten"><div class="wrap split">
   <div>
-    <span class="eyebrow" style="color:var(--accent)">Warum amtliche Daten</span>
-    <h2>Eine Quelle, die man benennen kann.</h2>
-    <p class="sub" style="margin-bottom:0">mapx baut Karten ausschließlich aus Daten von Behörden mit klarer offener Lizenz. Jeder Datensatz ist mit Herausgeber, Stichtag und Lizenz dokumentiert.</p>
+    <span class="eyebrow" style="color:var(--accent)">{{ $t.data.eyebrow }}</span>
+    <h2>{{ $t.data.h2 }}</h2>
+    <p class="sub" style="margin-bottom:0">{{ $t.data.sub }}</p>
     <ul class="facts">
-      <li><b>Kataster, Gelände, Orthofoto:</b> Bundesamt für Eich- und Vermessungswesen (BEV).</li>
-      <li><b>Straßen, Bahn, Routing:</b> Graphenintegrations-Plattform GIP.at.</li>
-      <li><b>Gewässer:</b> Gesamtgewässernetz des Umweltbundesamts.</li>
-      <li><b>Kein OpenStreetMap:</b> Punkte von Interesse kommen ebenfalls aus amtlichen Quellen.</li>
+      {{ range $t.data.facts }}<li>{{ . | safeHTML }}</li>
+      {{ end }}
     </ul>
-    <p style="margin-top:28px"><a class="btn btn-b" href="https://blog.mapx.at">Mehr im Blog</a></p>
+    <p style="margin-top:28px"><a class="btn btn-b" href="https://blog.mapx.at">{{ $t.data.blog }}</a></p>
   </div>
-  <div class="vis"><img src="/lp/img/hero-map.svg" alt="Stilisierte Karte mit Höhenlinien, Parzellen, Straßen und Fluss" width="1600" height="900" loading="lazy"></div>
+  <div class="vis"><img src="/lp/img/hero-map.svg" alt="{{ $t.data.alt }}" width="1600" height="900" loading="lazy"></div>
 </div></section>
 
 <section class="band"><div class="wrap">
-  <h2>Probiere die Karte aus.</h2>
-  <p>Suche eine Adresse, miss eine Strecke oder lass dir ein Höhenprofil zeigen.</p>
-  <div class="cta"><a class="btn btn-p" href="https://map.mapx.at">Karte öffnen</a><a class="btn btn-g" href="https://docs.mapx.at">Doku lesen</a></div>
+  <h2>{{ $t.band.h2 }}</h2>
+  <p>{{ $t.band.p }}</p>
+  <div class="cta"><a class="btn btn-p" href="https://map.mapx.at">{{ $t.cta.map }}</a><a class="btn btn-g" href="https://docs.mapx.at">{{ $t.band.docs }}</a></div>
 </div></section>
 </main>
 
 <footer><div class="wrap">
+  {{ $f := $t.footer }}
   <div class="fgrid">
-    <div><a class="logo" href="/">{{ partial "logo.html" . }}mapx</a><p class="about">Karten für Österreich aus amtlichen Daten.</p></div>
-    <div><h4>Produkte</h4><ul><li><a href="https://map.mapx.at">Karte</a></li><li><a href="https://docs.mapx.at">Geländemodell</a></li><li><a href="https://docs.mapx.at">Höhenlinien</a></li><li><a href="https://docs.mapx.at">Orthofoto</a></li></ul></div>
-    <div><h4>Entwickler</h4><ul><li><a href="https://docs.mapx.at/start/">Schnellstart</a></li><li><a href="https://docs.mapx.at/api/">API</a></li><li><a href="https://docs.mapx.at/lizenz/">Lizenz</a></li><li><a href="https://docs.mapx.at/changelog/">Changelog</a></li></ul></div>
-    <div><h4>Mehr</h4><ul><li><a href="https://blog.mapx.at">Blog</a></li><li><a href="https://map.mapx.at">Demo</a></li><li><a href="https://github.com/mapx-at/landing">GitHub</a></li></ul></div>
-    <div><h4>Rechtliches</h4><ul><li>Impressum: folgt</li><li>Datenschutz: folgt</li></ul></div>
+    <div><a class="logo" href="{{ if eq $t.lang "en" }}/en/{{ else }}/{{ end }}">{{ partial "logo.html" . }}mapx</a><p class="about">{{ $f.about }}</p></div>
+    <div><h4>{{ $f.products }}</h4><ul><li><a href="https://map.mapx.at">{{ $f.mapl }}</a></li><li><a href="https://docs.mapx.at">{{ $f.dtm }}</a></li><li><a href="https://docs.mapx.at">{{ $f.contour }}</a></li><li><a href="https://docs.mapx.at">{{ $f.ortho }}</a></li></ul></div>
+    <div><h4>{{ $f.dev }}</h4><ul><li><a href="https://docs.mapx.at/start/">{{ $f.quick }}</a></li><li><a href="https://docs.mapx.at/api/">{{ $f.api }}</a></li><li><a href="https://docs.mapx.at/lizenz/">{{ $f.license }}</a></li><li><a href="https://docs.mapx.at/changelog/">{{ $f.changelog }}</a></li></ul></div>
+    <div><h4>{{ $f.account }}</h4><ul><li><a href="{{ $a }}login{{ $q }}">{{ index $f.accountlinks 0 }}</a></li><li><a href="{{ $a }}register{{ $q }}">{{ index $f.accountlinks 1 }}</a></li><li><a href="{{ $a }}tokens{{ $q }}">{{ index $f.accountlinks 2 }}</a></li><li><a href="{{ $a }}usage{{ $q }}">{{ index $f.accountlinks 3 }}</a></li></ul></div>
+    <div><h4>{{ $f.more }}</h4><ul><li><a href="https://blog.mapx.at">Blog</a></li><li><a href="https://map.mapx.at">{{ $f.demo }}</a></li><li><a href="https://github.com/mapx-at/landing">GitHub</a></li></ul></div>
+    <div><h4>{{ $f.legal }}</h4><ul><li>{{ $f.imprint }}</li><li>{{ $f.privacy }}</li></ul></div>
+    <div><h4>{{ $f.contact }}</h4><ul><li><a href="mailto:info@mapx.at">info@mapx.at</a></li><li><a href="mailto:support@mapx.at">support@mapx.at</a></li></ul></div>
   </div>
-  <div class="legal"><span>© mapx · Karten- und Geodaten: BEV, GIP.at, Umweltbundesamt, Statistik Austria (überwiegend CC BY 4.0)</span><span>Gebaut mit Hugo</span></div>
+  <div class="legal"><span>{{ $f.copy }}</span><span>{{ $f.built }}</span></div>
 </div></footer>
 <script src="/lp/nav.js" defer></script>
 </body>

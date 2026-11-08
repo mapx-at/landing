@@ -88,3 +88,11 @@ https://map.mapx.at/ weiter. `style.json`, `styles/`, `legacy/`, `tools/` bleibe
 Pages liefert weiter den Branch `main` aus. Das Build-Ergebnis (`index.html`, `lp/`) ist eingecheckt:
 nach Änderungen in `site/` `site/build.sh` ausführen (Hugo extended 0.169.0) und committen
 kann man mit `site/build.sh --check` prüfen (keine CI: das öffentliche Repo hat keinen Zugriff auf die self-hosted Runner).
+
+## Zweisprachig und Konto-Links (seit 08.11.2026)
+
+Die Landing gibt es auf Deutsch (`/`) und Englisch (`/en/`). Ein Template (`site/layouts/index.html`), Texte je Sprache in
+`site/data/de.yaml` und `site/data/en.yaml`; `site/build.sh` schreibt `index.html`, `en/index.html` und `lp/`.
+Navigation und Abschnitt „API-Zugang“ verlinken auf https://account.mapx.at (`/login`, `/register`, `/tokens`, `/usage`, `?lang=`).
+Die Seite ruft selbst keine mapx-APIs auf (nur Codebeispiele), ein Token-Platzhalter ist daher nicht nötig.
+`legacy-viewer.html` (alter Viewer, ruft tiles.mapx.at direkt auf) ist unverändert und funktioniert ohne Token nicht mehr.
