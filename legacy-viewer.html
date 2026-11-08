@@ -1627,8 +1627,8 @@ window.mapxStil = (function () {
     if (sy) {
       var yp = sy.properties || {}, yt = POI_KIND[yp.kind] || "Symbol", yd = POI_DETAIL[yp.kind_detail];
       poiCat = yt;
-      var sl = sy.layer["source-layer"];   // Quelle je Symbol-Layer: transit_p GIP, airport_p Wikidata, natural_p/place_p/geonamen-* Geographische Namen, poi_p DLM/Wien
-      poiSrc = sl === "transit_p" ? "GIP.at" : sl === "airport_p" ? "Wikidata, CC0" : (sl === "natural_p" || sl === "place_p" || sy.layer.id === "geonamen-kirche") ? "BEV Geographische Namen"
+      var sl = sy.layer["source-layer"];   // Quelle je Symbol-Layer: transit_p GIP, airport_p DLM Verkehr, natural_p/place_p/geonamen-* Geographische Namen, poi_p DLM/Wien
+      poiSrc = sl === "transit_p" ? "GIP.at" : sl === "airport_p" ? "BEV DLM Verkehr, CC BY 4.0" : (sl === "natural_p" || sl === "place_p" || sy.layer.id === "geonamen-kirche") ? "BEV Geographische Namen"
              : yp.kind_detail === "aerialway_station" ? "BEV DLM Verkehr" : "BEV DLM Bauten und Verkehr, Wien OGD";
       P.poi.push("<b>" + esc(yp.name || yt) + "</b>" + (yp.name || yd ? "<br>" + esc(yt) + (yd ? " · " + yd : "") : ""));
     }
