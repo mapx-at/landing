@@ -5,7 +5,7 @@ defaultContentLanguage = "de"
 defaultContentLanguageInSubdir = false
 title = "mapx"
 theme = "hextra"
-disableKinds = ["taxonomy", "term", "RSS", "sitemap", "robotsTXT", "section", "page"]
+disableKinds = ["taxonomy", "term", "RSS", "sitemap", "robotsTXT", "section"]
 enableRobotsTXT = false
 disableHugoGeneratorInject = true
 
