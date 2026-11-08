@@ -4,32 +4,37 @@ description: "mapx: Karten für Österreich aus amtlichen Daten. Kataster, Gelä
 layout: hextra-home
 ---
 
-{{< hextra/hero-container >}}
+<div class="mx-hero"><div class="mx-hero-text">
+
+<div>
 {{< hextra/hero-badge link="https://docs.mapx.at" >}}
   Österreich · amtliche Daten
   {{< icon name="arrow-circle-right" attributes="height=14" >}}
 {{< /hextra/hero-badge >}}
+</div>
 
-<div class="hx-mt-6 hx-mb-6">
+<div>
 {{< hextra/hero-headline >}}
   Die Karte Österreichs, gebaut aus amtlichen Daten.
 {{< /hextra/hero-headline >}}
 </div>
 
-<div class="hx-mb-12">
+<div>
 {{< hextra/hero-subtitle >}}
   Grundstücke, Gelände, Höhenlinien, Orthofoto, Adressen und Routing – aus Katastermappe, Laserscan und Verkehrsgraph der Behörden, als offene Kacheln und APIs für eigene Karten.
 {{< /hextra/hero-subtitle >}}
 </div>
 
-<div class="hx-mb-6 hx-flex hx-flex-wrap hx-gap-3">
+<div class="mx-btns">
 {{< hextra/hero-button text="Karte öffnen" link="https://map.mapx.at" >}}
 {{< hextra/hero-button text="Kostenlosen Zugang holen" link="#zugang" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
+</div>
 
-{{< /hextra/hero-container >}}
+<div class="mx-hero-img"><img src="/lp/img/hero-map.svg" alt="Stilisierte Karte mit Höhenlinien, Parzellen, Straßen und Fluss" width="1600" height="900"></div>
+</div>
 
-<p class="hx-text-sm hx-text-gray-500 dark:hx-text-gray-400 hx-mt-4 hx-mb-0"><strong>Datenquellen:</strong> BEV · GIP.at · Umweltbundesamt (GGN) · Statistik Austria · Offene Lizenzen, überwiegend CC BY 4.0</p>
+<p class="mx-note"><strong>Datenquellen:</strong> BEV · GIP.at · Umweltbundesamt (GGN) · Statistik Austria · Offene Lizenzen, überwiegend CC BY 4.0</p>
 
 ## Was mapx liefert {#produkte}
 
@@ -104,7 +109,7 @@ console.log(features[0].properties.elevation);
 
 Zum Schutz vor Missbrauch gibt es Rate-Limits je Token. Die Nutzung selbst ist kostenlos.
 
-<div class="hx-mb-6 hx-flex hx-flex-wrap hx-gap-3">
+<div class="mx-btns">
 {{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
 {{< hextra/hero-button text="Anmelden" link="https://account.mapx.at/login?lang=de" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 {{< hextra/hero-button text="Details in der Doku" link="https://docs.mapx.at/de/start/access-and-limits/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
@@ -121,13 +126,11 @@ Zum Schutz vor Missbrauch gibt es Rate-Limits je Token. Die Nutzung selbst ist k
 
 [Mehr im Blog](https://blog.mapx.at)
 
-![Stilisierte Karte mit Höhenlinien, Parzellen, Straßen und Fluss](/lp/img/hero-map.svg)
-
 ## Probiere die Karte aus.
 
 Suche eine Adresse, miss eine Strecke oder lass dir ein Höhenprofil zeigen.
 
-<div class="hx-mb-6 hx-flex hx-flex-wrap hx-gap-3">
+<div class="mx-btns">
 {{< hextra/hero-button text="Karte öffnen" link="https://map.mapx.at" >}}
 {{< hextra/hero-button text="Doku lesen" link="https://docs.mapx.at" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>

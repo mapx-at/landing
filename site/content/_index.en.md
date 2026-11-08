@@ -4,32 +4,37 @@ description: "mapx: maps of Austria built from official data. Cadastre, terrain,
 layout: hextra-home
 ---
 
-{{< hextra/hero-container >}}
+<div class="mx-hero"><div class="mx-hero-text">
+
+<div>
 {{< hextra/hero-badge link="https://docs.mapx.at" >}}
   Austria · official data
   {{< icon name="arrow-circle-right" attributes="height=14" >}}
 {{< /hextra/hero-badge >}}
+</div>
 
-<div class="hx-mt-6 hx-mb-6">
+<div>
 {{< hextra/hero-headline >}}
   The map of Austria, built from official data.
 {{< /hextra/hero-headline >}}
 </div>
 
-<div class="hx-mb-12">
+<div>
 {{< hextra/hero-subtitle >}}
   Parcels, terrain, contours, orthophoto, addresses and routing – from the cadastral map, laser scan and traffic graph of the authorities, as open tiles and APIs for your own maps.
 {{< /hextra/hero-subtitle >}}
 </div>
 
-<div class="hx-mb-6 hx-flex hx-flex-wrap hx-gap-3">
+<div class="mx-btns">
 {{< hextra/hero-button text="Open map" link="https://map.mapx.at" >}}
 {{< hextra/hero-button text="Get free access" link="#zugang" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
+</div>
 
-{{< /hextra/hero-container >}}
+<div class="mx-hero-img"><img src="/lp/img/hero-map.svg" alt="Stylised map with contours, parcels, roads and a river" width="1600" height="900"></div>
+</div>
 
-<p class="hx-text-sm hx-text-gray-500 dark:hx-text-gray-400 hx-mt-4 hx-mb-0"><strong>Data sources:</strong> BEV · GIP.at · Umweltbundesamt (GGN) · Statistik Austria · Open licences, mostly CC BY 4.0</p>
+<p class="mx-note"><strong>Data sources:</strong> BEV · GIP.at · Umweltbundesamt (GGN) · Statistik Austria · Open licences, mostly CC BY 4.0</p>
 
 ## What mapx delivers {#produkte}
 
@@ -104,7 +109,7 @@ console.log(features[0].properties.elevation);
 
 To protect against abuse there are rate limits per token. Usage itself is free of charge.
 
-<div class="hx-mb-6 hx-flex hx-flex-wrap hx-gap-3">
+<div class="mx-btns">
 {{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
 {{< hextra/hero-button text="Sign in" link="https://account.mapx.at/login?lang=en" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 {{< hextra/hero-button text="Details in the docs" link="https://docs.mapx.at/start/access-and-limits/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
@@ -121,13 +126,11 @@ To protect against abuse there are rate limits per token. Usage itself is free o
 
 [More on the blog](https://blog.mapx.at)
 
-![Stylised map with contours, parcels, roads and a river](/lp/img/hero-map.svg)
-
 ## Try the map.
 
 Search an address, measure a distance or show an elevation profile.
 
-<div class="hx-mb-6 hx-flex hx-flex-wrap hx-gap-3">
+<div class="mx-btns">
 {{< hextra/hero-button text="Open map" link="https://map.mapx.at" >}}
 {{< hextra/hero-button text="Read the docs" link="https://docs.mapx.at" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
