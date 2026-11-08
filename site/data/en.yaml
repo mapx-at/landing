@@ -1,90 +1,30 @@
+# Nur Footer-Texte (Rest steht in content/_index.<lang>.md)
 lang: en
-htmlTitle: "mapx – Maps of Austria built from official data"
-description: "mapx: maps of Austria built from official data. Cadastre, terrain, contours, orthophoto, addresses, routing and an elevation API. Free API access with an account and token."
-canonical: "https://mapx.at/en/"
-otherLang: de
-otherLabel: DE
-otherHref: "/"
-acct: "https://account.mapx.at"
-skip: "Skip to content"
-menu: "Menu"
-nav: {products: Products, dev: Developers, access: API access, data: Data, docs: Docs, blog: Blog, signin: "Sign in", signup: "Sign up", openmap: "Open map"}
-eyebrow: "Austria · official data"
-h1: "The map of Austria, built from official data."
-lead: "Parcels, terrain, contours, orthophoto, addresses and routing – from the cadastral map, laser scan and traffic graph of the authorities, as open tiles and APIs for your own maps."
-cta: {map: "Open map", devdoc: "Developer docs", token: "Get free access"}
-mock: {search: "Place, address, summit or parcel", chips: [Measure, "Elevation profile", Coordinates, Route], info: "Elevation (DTM, 1 m)", code: "GET /v1/elevation?points=12.694,47.074"}
-strip: {title: "Data sources", sources: [BEV, GIP.at, "Umweltbundesamt (GGN)", "Statistik Austria"], lic: "Open licences, mostly CC BY 4.0"}
-products: {h2: "What mapx delivers", sub: "Each product is its own dataset with a reference date and source. Everything you see on the map can also be embedded directly.", more: "In the docs →"}
-cards:
-  - {i: map, t: "Vector basemap", d: "Roads, buildings, water, boundaries and labels as vector tiles, styled after basemap.at.", m: "PMTiles · MapLibre"}
-  - {i: parcel, t: Cadastre, d: "Parcel boundaries and land-use areas from the BEV digital cadastral map.", m: "BEV DKM · CC BY 4.0"}
-  - {i: dtm, t: "Terrain model", d: "DTM and DSM from the BEV 1 m laser scan, as Terrain-RGB for hillshade and 3D terrain.", m: "Reference date 15.09.2025"}
-  - {i: contour, t: Contours, d: "Contour lines computed from the terrain model, as vector tiles for hiking and planning maps.", m: "Zoom 10–16"}
-  - {i: photo, t: Orthophoto, d: "BEV aerial imagery as raster tiles, with metadata on survey and flight year.", m: "BEV · CC BY 4.0"}
-  - {i: pin, t: "Addresses and search", d: "Address register, places, streets and parcels in one search index, for geocoding in your own applications.", m: "Address register, as of 01.10.2026"}
-  - {i: route, t: Routing, d: "Our own routing engine on the GIP routing export for car, bike and foot, with turn restrictions.", m: "GIP.at · CC BY 4.0"}
-  - {i: api, t: "Elevation API", d: "Elevation for points and profiles along a line, from the terrain or the surface model.", m: "REST · JSON"}
-devsec:
-  eyebrow: "For developers"
-  h2: "Embed it in five minutes."
-  sub: "Tiles are PMTiles files with HTTP range access, no map server of your own needed. The elevation API answers with GeoJSON."
-  items:
-    - "<b>MapLibre and PMTiles.</b> The style of the demo map is public and can be loaded directly."
-    - "<b>A free account is all you need.</b> Sign in, create a token, get going. Origin, reference date and attribution are listed per product in the docs."
-    - "<b>Machine-readable.</b> OpenAPI description and <code>llms.txt</code> for the elevation API and the tiles."
-  doc: "Go to the developer docs"
-  demo: "See the demo"
-  bar1: "Map with MapLibre"
-  bar2: "Query elevation"
-  comment: "// Summit elevation from the terrain model (DTM, 1 m); token from your account"
-access:
-  eyebrow: "API access"
-  h2: "Free, with your own account."
-  sub: "The mapx APIs (tiles, search, routing, elevation) require an account with an API token as of 8 November 2026. It costs nothing: sign up, sign in, create a token."
-  steps:
-    - {t: "1. Sign up", d: "With your email address. Sign-in uses an 8-digit code we send you by email. There is no password."}
-    - {t: "2. Create tokens", d: "As many as you like, each with its own name. Block, renew or delete them at any time."}
-    - {t: "3. See your usage", d: "For every token you can see usage per product and day. Nothing is billed."}
-  kinds: "Two kinds of tokens"
-  pk: "<b>Public token (<code>mx_pk_…</code>).</b> For websites and apps. It is read-only and bound to your domains or your Android app, so nobody else can use it."
-  sk: "<b>Secret token (<code>mx_sk_…</code>).</b> For your server or scripts. Never put it in a web page or an app."
-  note: "To protect against abuse there are rate limits per token. Usage itself is free of charge."
-  signup: "Sign up for free"
-  signin: "Sign in"
-  docs: "Details in the docs"
-  docsHref: "https://docs.mapx.at/start/access-and-limits/"
-data:
-  eyebrow: "Why official data"
-  h2: "A source you can name."
-  sub: "mapx builds maps exclusively from data of public authorities under a clear open licence. Every dataset is documented with publisher, reference date and licence."
-  facts:
-    - "<b>Cadastre, terrain, orthophoto:</b> Federal Office of Metrology and Surveying (BEV)."
-    - "<b>Roads, rail, routing:</b> Graph Integration Platform GIP.at."
-    - "<b>Water:</b> national water network of the Umweltbundesamt."
-    - "<b>No OpenStreetMap:</b> points of interest also come from official sources."
-  blog: "More on the blog"
-  alt: "Stylised map with contours, parcels, roads and a river"
-band: {h2: "Try the map.", p: "Search an address, measure a distance or show an elevation profile.", docs: "Read the docs"}
+acct: https://account.mapx.at
 footer:
-  about: "Maps of Austria built from official data."
+  about: Maps of Austria built from official data.
   products: Products
   mapl: Map
-  dtm: "Terrain model"
+  dtm: Terrain model
   contour: Contours
   ortho: Orthophoto
   dev: Developers
-  quick: "Quick start"
+  quick: Quick start
   api: API
   license: Licence
   changelog: Changelog
   more: More
   demo: Demo
   account: Account
-  accountlinks: ["Sign in", "Sign up", "API tokens", Usage]
+  accountlinks:
+  - Sign in
+  - Sign up
+  - API tokens
+  - Usage
   legal: Legal
-  imprint: "Imprint: coming soon"
-  privacy: "Privacy: coming soon"
+  imprint: 'Imprint: coming soon'
+  privacy: 'Privacy: coming soon'
   contact: Contact
-  copy: "© mapx · Map and geodata: BEV, GIP.at, Umweltbundesamt, Statistik Austria (mostly CC BY 4.0)"
-  built: "Built with Hugo"
+  copy: '© mapx · Map and geodata: BEV, GIP.at, Umweltbundesamt, Statistik Austria
+    (mostly CC BY 4.0)'
+  built: Built with Hugo

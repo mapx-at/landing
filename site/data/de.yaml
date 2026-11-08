@@ -1,73 +1,8 @@
+# Nur Footer-Texte (Rest steht in content/_index.<lang>.md)
 lang: de
-htmlTitle: "mapx – Karten für Österreich aus amtlichen Daten"
-description: "mapx: Karten für Österreich aus amtlichen Daten. Kataster, Gelände, Höhenlinien, Orthofoto, Adressen, Routing und Höhen-API. Kostenloser API-Zugang mit Konto und Token."
-canonical: "https://mapx.at/"
-otherLang: en
-otherLabel: EN
-otherHref: "/en/"
-acct: "https://account.mapx.at"
-skip: "Zum Inhalt"
-menu: "Menü"
-nav: {products: Produkte, dev: Entwickler, access: API-Zugang, data: Daten, docs: Doku, blog: Blog, signin: Anmelden, signup: Registrieren, openmap: Karte öffnen}
-eyebrow: "Österreich · amtliche Daten"
-h1: "Die Karte Österreichs, gebaut aus amtlichen Daten."
-lead: "Grundstücke, Gelände, Höhenlinien, Orthofoto, Adressen und Routing – aus Katastermappe, Laserscan und Verkehrsgraph der Behörden, als offene Kacheln und APIs für eigene Karten."
-cta: {map: Karte öffnen, devdoc: Entwicklerdoku, token: Kostenlosen Zugang holen}
-mock: {search: "Ort, Adresse, Gipfel oder Grundstück", chips: [Messen, Höhenprofil, Koordinaten, Route], info: "Höhe (DTM, 1 m)", code: "GET /v1/elevation?points=12.694,47.074"}
-strip: {title: Datenquellen, sources: [BEV, GIP.at, Umweltbundesamt (GGN), Statistik Austria], lic: "Offene Lizenzen, überwiegend CC BY 4.0"}
-products: {h2: "Was mapx liefert", sub: "Je Produkt ein eigener Datensatz mit Stichtag und Quelle. Alles, was auf der Karte zu sehen ist, lässt sich auch direkt einbinden.", more: "In der Doku →"}
-cards:
-  - {i: map, t: "Vektor-Basiskarte", d: "Straßen, Gebäude, Gewässer, Grenzen und Beschriftung als Vektorkacheln, gestaltet nach dem Vorbild von basemap.at.", m: "PMTiles · MapLibre"}
-  - {i: parcel, t: Kataster, d: "Grundstücksgrenzen und Nutzungsflächen aus der Digitalen Katastralmappe des BEV.", m: "BEV DKM · CC BY 4.0"}
-  - {i: dtm, t: Geländemodell, d: "DTM und DSM aus dem 1-m-Laserscan des BEV, als Terrain-RGB für Schummerung und 3D-Gelände.", m: "Stichtag 15.09.2025"}
-  - {i: contour, t: Höhenlinien, d: "Höhenlinien, aus dem Geländemodell gerechnet, als Vektorkacheln für Wander- und Planungskarten.", m: "Zoom 10–16"}
-  - {i: photo, t: Orthofoto, d: "Luftbilder des BEV als Rasterkacheln, mit Metadaten zu Befliegung und Flugjahr.", m: "BEV · CC BY 4.0"}
-  - {i: pin, t: "Adressen und Suche", d: "Adressregister, Orte, Straßen und Grundstücke in einem Suchindex, für Geocoding in eigenen Anwendungen.", m: "Adressregister, Stichtag 01.10.2026"}
-  - {i: route, t: Routing, d: "Eigene Routing-Engine auf dem GIP-Routingexport für Auto, Rad und zu Fuß, mit Abbiegeverboten.", m: "GIP.at · CC BY 4.0"}
-  - {i: api, t: Höhen-API, d: "Höhe für Punkte und Profile entlang einer Linie, wahlweise aus Gelände- oder Oberflächenmodell.", m: "REST · JSON"}
-devsec:
-  eyebrow: "Für Entwickler"
-  h2: "Einbinden in fünf Minuten."
-  sub: "Kacheln sind PMTiles-Dateien mit HTTP-Range-Zugriff, ohne eigenen Kartenserver. Die Höhen-API antwortet mit GeoJSON."
-  items:
-    - "<b>MapLibre und PMTiles.</b> Der Stil der Demo-Karte ist öffentlich und lässt sich direkt laden."
-    - "<b>Ein kostenloses Konto genügt.</b> Anmelden, Token anlegen, loslegen. Herkunft, Stichtag und Attribution stehen je Produkt in der Doku."
-    - "<b>Maschinenlesbar.</b> OpenAPI-Beschreibung und <code>llms.txt</code> für die Höhen-API und die Kacheln."
-  doc: "Zur Entwicklerdoku"
-  demo: "Demo ansehen"
-  bar1: "Karte mit MapLibre"
-  bar2: "Höhe abfragen"
-  comment: "// Gipfelhöhe aus dem Geländemodell (DTM, 1 m); Token vom Konto"
-access:
-  eyebrow: "API-Zugang"
-  h2: "Kostenlos, mit eigenem Konto."
-  sub: "Die mapx-APIs (Kacheln, Suche, Routing, Höhe) brauchen seit dem 08.11.2026 ein Konto mit API-Token. Das kostet nichts: Registrieren, anmelden, Token anlegen."
-  steps:
-    - {t: "1. Registrieren", d: "Mit deiner E-Mail-Adresse. Die Anmeldung läuft über einen 8-stelligen Code, den wir dir per Mail schicken. Ein Passwort gibt es nicht."}
-    - {t: "2. Tokens anlegen", d: "Beliebig viele, jeweils mit eigenem Namen. Du kannst sie jederzeit sperren, erneuern oder löschen."}
-    - {t: "3. Nutzung einsehen", d: "Für jeden Token siehst du die Nutzung je Produkt und Tag. Abgerechnet wird nichts."}
-  kinds: "Zwei Arten von Tokens"
-  pk: "<b>Öffentlicher Token (<code>mx_pk_…</code>).</b> Für Webseiten und Apps. Er darf nur lesen und ist an deine Domains oder an deine Android-App gebunden, so kann ihn niemand sonst verwenden."
-  sk: "<b>Geheimer Token (<code>mx_sk_…</code>).</b> Für deinen Server oder Skripte. Nie in eine Webseite oder App einbauen."
-  note: "Zum Schutz vor Missbrauch gibt es Rate-Limits je Token. Die Nutzung selbst ist kostenlos."
-  signup: "Kostenlos registrieren"
-  signin: "Anmelden"
-  docs: "Details in der Doku"
-  docsHref: "https://docs.mapx.at/de/start/access-and-limits/"
-data:
-  eyebrow: "Warum amtliche Daten"
-  h2: "Eine Quelle, die man benennen kann."
-  sub: "mapx baut Karten ausschließlich aus Daten von Behörden mit klarer offener Lizenz. Jeder Datensatz ist mit Herausgeber, Stichtag und Lizenz dokumentiert."
-  facts:
-    - "<b>Kataster, Gelände, Orthofoto:</b> Bundesamt für Eich- und Vermessungswesen (BEV)."
-    - "<b>Straßen, Bahn, Routing:</b> Graphenintegrations-Plattform GIP.at."
-    - "<b>Gewässer:</b> Gesamtgewässernetz des Umweltbundesamts."
-    - "<b>Kein OpenStreetMap:</b> Punkte von Interesse kommen ebenfalls aus amtlichen Quellen."
-  blog: "Mehr im Blog"
-  alt: "Stilisierte Karte mit Höhenlinien, Parzellen, Straßen und Fluss"
-band: {h2: "Probiere die Karte aus.", p: "Suche eine Adresse, miss eine Strecke oder lass dir ein Höhenprofil zeigen.", docs: "Doku lesen"}
+acct: https://account.mapx.at
 footer:
-  about: "Karten für Österreich aus amtlichen Daten."
+  about: Karten für Österreich aus amtlichen Daten.
   products: Produkte
   mapl: Karte
   dtm: Geländemodell
@@ -81,10 +16,15 @@ footer:
   more: Mehr
   demo: Demo
   account: Konto
-  accountlinks: [Anmelden, Registrieren, API-Tokens, Nutzung]
+  accountlinks:
+  - Anmelden
+  - Registrieren
+  - API-Tokens
+  - Nutzung
   legal: Rechtliches
-  imprint: "Impressum: folgt"
-  privacy: "Datenschutz: folgt"
+  imprint: 'Impressum: folgt'
+  privacy: 'Datenschutz: folgt'
   contact: Kontakt
-  copy: "© mapx · Karten- und Geodaten: BEV, GIP.at, Umweltbundesamt, Statistik Austria (überwiegend CC BY 4.0)"
-  built: "Gebaut mit Hugo"
+  copy: '© mapx · Karten- und Geodaten: BEV, GIP.at, Umweltbundesamt, Statistik Austria
+    (überwiegend CC BY 4.0)'
+  built: Gebaut mit Hugo
