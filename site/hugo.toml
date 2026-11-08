@@ -1,15 +1,119 @@
-# mapx Landing (mapx.at). Hugo extended 0.169.0. Build: ./build.sh (schreibt index.html + en/index.html + lp/ ins Repo-Wurzel).
-# Texte je Sprache: data/de.yaml, data/en.yaml (Template layouts/index.html ist für beide gleich).
+# mapx Landing (mapx.at). Hugo extended >= 0.169, Theme Hextra v0.13.0 (git-Submodule site/themes/hextra, gepinnt).
+# Build: ./build.sh (schreibt index.html, en/ und die Theme-Assets ins Repo-Wurzel). Texte: content/_index.<lang>.md, Footer: data/<lang>.yaml.
 baseURL = "https://mapx.at/"
 defaultContentLanguage = "de"
 defaultContentLanguageInSubdir = false
 title = "mapx"
+theme = "hextra"
 disableKinds = ["taxonomy", "term", "RSS", "sitemap", "robotsTXT", "section", "page"]
+enableRobotsTXT = false
 disableHugoGeneratorInject = true
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[params]
+  [params.theme]
+    default = "system"
+    displayToggle = true
+  [params.navbar]
+    displayTitle = true
+    displayLogo = true
+    width = "normal"
+    [params.navbar.logo]
+      path = "img/logo.svg"
+      dark = "img/logo.svg"
+      width = 28
+      height = 28
+  [params.footer]
+    displayCopyright = false
+    displayPoweredBy = true
+    width = "normal"
+  [params.search]
+    enable = false
+  [params.page]
+    width = "normal"
+  [params.editURL]
+    enable = false
+
 [languages]
   [languages.de]
+    label = "Deutsch"
     weight = 1
     locale = "de"
+    [[languages.de.menus.main]]
+      name = "Produkte"
+      url = "/#produkte"
+      weight = 1
+    [[languages.de.menus.main]]
+      name = "Entwickler"
+      url = "/#entwickler"
+      weight = 2
+    [[languages.de.menus.main]]
+      name = "Doku"
+      url = "https://docs.mapx.at"
+      weight = 3
+    [[languages.de.menus.main]]
+      name = "Blog"
+      url = "https://blog.mapx.at"
+      weight = 4
+    [[languages.de.menus.main]]
+      identifier = "lang"
+      weight = 5
+      [languages.de.menus.main.params]
+        type = "language-switch"
+    [[languages.de.menus.main]]
+      identifier = "theme"
+      weight = 6
+      [languages.de.menus.main.params]
+        type = "theme-toggle"
+    [[languages.de.menus.main]]
+      name = "Anmelden"
+      url = "https://account.mapx.at/login?lang=de"
+      weight = 7
+    [[languages.de.menus.main]]
+      name = "Registrieren"
+      url = "https://account.mapx.at/register?lang=de"
+      weight = 8
+      [languages.de.menus.main.params]
+        type = "button"
   [languages.en]
+    label = "English"
     weight = 2
     locale = "en"
+    [[languages.en.menus.main]]
+      name = "Products"
+      url = "/en/#produkte"
+      weight = 1
+    [[languages.en.menus.main]]
+      name = "Developers"
+      url = "/en/#entwickler"
+      weight = 2
+    [[languages.en.menus.main]]
+      name = "Docs"
+      url = "https://docs.mapx.at"
+      weight = 3
+    [[languages.en.menus.main]]
+      name = "Blog"
+      url = "https://blog.mapx.at"
+      weight = 4
+    [[languages.en.menus.main]]
+      identifier = "lang"
+      weight = 5
+      [languages.en.menus.main.params]
+        type = "language-switch"
+    [[languages.en.menus.main]]
+      identifier = "theme"
+      weight = 6
+      [languages.en.menus.main.params]
+        type = "theme-toggle"
+    [[languages.en.menus.main]]
+      name = "Sign in"
+      url = "https://account.mapx.at/login?lang=en"
+      weight = 7
+    [[languages.en.menus.main]]
+      name = "Sign up"
+      url = "https://account.mapx.at/register?lang=en"
+      weight = 8
+      [languages.en.menus.main.params]
+        type = "button"
