@@ -1119,6 +1119,15 @@ window.mapxStil = (function () {
 
   function esc(s) { return String(s).replace(/[&<>"']/g, function (ch) { return "&#" + ch.charCodeAt(0) + ";"; }); }
 
+  // mapx-Token (mx_pk_…, an mapx.at gebunden): viewer.yml ersetzt den Platzhalter beim Bau durch die Repo-Variable MAPX_PUBLIC_TOKEN.
+  // Ungesetzt (lokal, Übergangsphase) bleibt die Zeichenkette leer und alles läuft wie bisher ohne Token. Der Token geht nur an mapx.at-Hosts.
+  var MAPX_TOKEN = "__MAPX_PUBLIC_TOKEN__";
+  if (MAPX_TOKEN.indexOf("__") === 0) MAPX_TOKEN = "";
+  function tk(u) {
+    if (!MAPX_TOKEN || !/^(pmtiles:\/\/)?https:\/\/([^\/?#:]+\.)?mapx\.at(?=[\/?#:]|$)/i.test(u) || /[?&]access_token=/.test(u)) return u;
+    var m = /^(pmtiles:\/\/.+?)(\/\d+\/\d+\/\d+)$/.exec(u), b = m ? m[1] : u;
+    return b + (b.indexOf("?") < 0 ? "?" : "&") + "access_token=" + encodeURIComponent(MAPX_TOKEN) + (m ? m[2] : "");
+  }
   var protocol = new pmtiles.Protocol();
   // Fehlt eine Rasterkachel im PMTiles (Relief ist nur über Land vorhanden, die bounds sind aber ein
   // Rechteck), liefert pmtiles {data: null}. Der Bildpfad von MapLibre 4.7.1 (in 5.x unverändert abgesichert) löst dann sein Promise nie
@@ -1159,6 +1168,7 @@ window.mapxStil = (function () {
 
   var map = new maplibregl.Map({
     container: "map",
+    transformRequest: function (u) { return { url: tk(u) }; },
     center: H0.lat != null ? [H0.lon, H0.lat] : [15.33, 48.23],
     zoom: H0.zoom != null ? H0.zoom : 12,
     bearing: (want3d || wantTerr) && H0.bearing || 0,
@@ -1237,7 +1247,7 @@ window.mapxStil = (function () {
     return Promise.all(OPTIONAL_SOURCES.map(function (k) {
       var so = style.sources && style.sources[k], u = so && so.url;
       if (!/^pmtiles:\/\//.test(u || "")) return null;
-      return fetch(u.replace(/^pmtiles:\/\//, ""), { method: "HEAD", cache: "no-store" })
+      return fetch(tk(u.replace(/^pmtiles:\/\//, "")), { method: "HEAD", cache: "no-store" })
         .then(function (r) { return r.ok; }, function () { return false; })
         .then(function (ok) {
           if (ok) return;
@@ -1247,6 +1257,8 @@ window.mapxStil = (function () {
     })).then(function () { return style; });
   }
   fetch(STYLE_URL).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(dropMissingSources).then(function (style) {
+    // pmtiles-Quellen auf mapx.at tragen den Token in der Archiv-URL; alle abgeleiteten Zugriffe (Kacheln, Lupe, Relief) erben ihn
+    Object.keys(style.sources).forEach(function (k) { var so = style.sources[k]; if (so && /^pmtiles:\/\//.test(so.url || "")) so.url = tk(so.url); });
     SOURCE_PARAMS.forEach(function (k) {
       var v = params.get(k);
       if (v && /^https?:\/\//.test(v) && style.sources[k]) style.sources[k].url = "pmtiles://" + v;
@@ -1857,7 +1869,7 @@ window.mapxStil = (function () {
     }
     var h = { "Content-Type": "application/json" };
     if (SEARCH_KEY) h.Authorization = "Bearer " + SEARCH_KEY;
-    return fetch(SEARCH_URL + "/indexes/" + SEARCH_INDEX + "/search", {
+    return fetch(tk(SEARCH_URL + "/indexes/" + SEARCH_INDEX + "/search"), {
       method: "POST", headers: h, body: JSON.stringify(body), signal: signal
     }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });
   }
@@ -2060,7 +2072,7 @@ window.mapxStil = (function () {
     var my = ++rtSeq, a = rtPts.a, b = rtPts.b;
     var url = ROUTING_URL + "/route?profile=" + rtProfile + "&from=" + a[0].toFixed(6) + "," + a[1].toFixed(6) +
               "&to=" + b[0].toFixed(6) + "," + b[1].toFixed(6);
-    fetch(url, { signal: rtCtrl.signal }).then(function (r) {
+    fetch(tk(url), { signal: rtCtrl.signal }).then(function (r) {
       return r.json().catch(function () { return null; }).then(function (j) { return { r: r, j: j }; });
     }).then(function (o) {
       if (my !== rtSeq) return;
