@@ -673,14 +673,6 @@
    "maxzoom": 18,
    "attribution": "Orthophoto: <a href=\"https://data.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Digitales Orthophoto (DOP)</a>, Befliegung 2022–2025 (Flugjahr beim Antippen), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
-  "s2": {
-   "type": "raster",
-   "url": "pmtiles://https://tiles.mapx.at/sentinel2.pmtiles",
-   "tileSize": 512,
-   "minzoom": 5,
-   "maxzoom": 13,
-   "attribution": "Contains modified Copernicus Sentinel data (<a href=\"https://dataspace.copernicus.eu\" target=\"_blank\" rel=\"noopener\">ESA/Copernicus</a>, Stand je Pixel siehe Aufnahmedatum)"
-  },
   "dop_flugblock": {
    "type": "vector",
    "url": "pmtiles://https://tiles.mapx.at/dop-flugblock-20251003-0d0d122e.pmtiles",
@@ -722,14 +714,6 @@
    "type": "background",
    "paint": {
     "background-color": "#efefee"
-   }
-  },
-  {
-   "id": "s2",
-   "type": "raster",
-   "source": "s2",
-   "paint": {
-    "raster-fade-duration": 0
    }
   },
   {

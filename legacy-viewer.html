@@ -1121,7 +1121,7 @@ window.mapxStil = (function () {
 
   // mapx-Token (mx_pk_…, an mapx.at gebunden): viewer.yml ersetzt den Platzhalter beim Bau durch die Repo-Variable MAPX_PUBLIC_TOKEN.
   // Ungesetzt (lokal, Übergangsphase) bleibt die Zeichenkette leer und alles läuft wie bisher ohne Token. Der Token geht nur an mapx.at-Hosts.
-  var MAPX_TOKEN = "__MAPX_PUBLIC_TOKEN__";
+  var MAPX_TOKEN = "mx_pk_e7d60554_ccd16bfabed594a4ccf6a1f1f758beef78847f6318af4c2c50c205e818b5e18f";
   if (MAPX_TOKEN.indexOf("__") === 0) MAPX_TOKEN = "";
   function tk(u) {
     if (!MAPX_TOKEN || !/^(pmtiles:\/\/)?https:\/\/([^\/?#:]+\.)?mapx\.at(?=[\/?#:]|$)/i.test(u) || /[?&]access_token=/.test(u)) return u;
