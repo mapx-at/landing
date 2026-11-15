@@ -1149,7 +1149,7 @@
        ],
        "Donau"
       ],
-      3,
+      2.2,
       [
        "match",
        [
@@ -1157,7 +1157,7 @@
         "sort_rank"
        ],
        1,
-       0,
+       0.933,
        2,
        0,
        3,
@@ -1184,7 +1184,7 @@
        ],
        "Donau"
       ],
-      3,
+      2.2,
       [
        "match",
        [
@@ -1192,7 +1192,7 @@
         "sort_rank"
        ],
        1,
-       0,
+       0.933,
        2,
        0,
        3,
@@ -2059,7 +2059,7 @@
        ],
        "Donau"
       ],
-      3,
+      2.2,
       [
        "match",
        [
@@ -2067,7 +2067,7 @@
         "sort_rank"
        ],
        1,
-       0,
+       0.933,
        2,
        0,
        3,
@@ -2094,7 +2094,7 @@
        ],
        "Donau"
       ],
-      3,
+      2.2,
       [
        "match",
        [
@@ -2102,7 +2102,7 @@
         "sort_rank"
        ],
        1,
-       0,
+       0.933,
        2,
        0,
        3,
@@ -2925,7 +2925,7 @@
      ]
     ]
    },
-   "minzoom": 7
+   "minzoom": 6
   },
   {
    "id": "hoehenlinien",
@@ -4335,6 +4335,32 @@
        "kind_detail"
       ],
       "main",
+      0.667,
+      "siding",
+      1.333,
+      0.667
+     ],
+     7,
+     [
+      "match",
+      [
+       "get",
+       "kind_detail"
+      ],
+      "main",
+      0.8,
+      "siding",
+      1.333,
+      0.667
+     ],
+     8,
+     [
+      "match",
+      [
+       "get",
+       "kind_detail"
+      ],
+      "main",
       1.067,
       "siding",
       1.333,
@@ -4394,7 +4420,7 @@
      ]
     ]
    },
-   "minzoom": 8
+   "minzoom": 6
   },
   {
    "id": "oev-subway-tunnel",
@@ -5992,6 +6018,32 @@
        "kind_detail"
       ],
       "main",
+      0.667,
+      "siding",
+      1.333,
+      0.667
+     ],
+     7,
+     [
+      "match",
+      [
+       "get",
+       "kind_detail"
+      ],
+      "main",
+      0.8,
+      "siding",
+      1.333,
+      0.667
+     ],
+     8,
+     [
+      "match",
+      [
+       "get",
+       "kind_detail"
+      ],
+      "main",
       1.067,
       "siding",
       1.333,
@@ -6051,7 +6103,7 @@
      ]
     ]
    },
-   "minzoom": 9
+   "minzoom": 6
   },
   {
    "id": "oev-rail-construction",
@@ -7357,6 +7409,32 @@
      [
       "zoom"
      ],
+     [
+      "match",
+      [
+       "get",
+       "kind_detail"
+      ],
+      "main",
+      0.667,
+      "siding",
+      1.333,
+      0.667
+     ],
+     7,
+     [
+      "match",
+      [
+       "get",
+       "kind_detail"
+      ],
+      "main",
+      0.8,
+      "siding",
+      1.333,
+      0.667
+     ],
+     8,
      [
       "match",
       [
