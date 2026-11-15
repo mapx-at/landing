@@ -557,7 +557,7 @@
   "mapx:style": "oev",
   "mapx:tiles": {
    "basis": {
-    "datei": "mapx-basis-20260401-5d50f56b.pmtiles",
+    "datei": "mapx-basis-20260401-611355ce.pmtiles",
     "stand": "2026-04-01"
    },
    "kataster": {
@@ -629,7 +629,7 @@
   },
   "basis": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/mapx-basis-20260401-5d50f56b.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/mapx-basis-20260401-611355ce.pmtiles",
    "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – DKM</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Verwaltungsgrenzen</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.data.gv.at/katalog/datasets/c2287ccb-f44c-48cd-bf7c-ac107b771246\" target=\"_blank\" rel=\"noopener\">BMLUK – GGN v19</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Geographische Namen</a> (Gipfel- und Ortsauswahl, Tiroler Weiler: <a href=\"https://basemap.at\" target=\"_blank\" rel=\"noopener\">basemap.at</a>), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Adressregister</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>, © Österreichisches Adressregister, Stichtagsdaten vom 01.10.2026; <a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at</a> (Bahn, Fähren), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; Seilbahnen und Lifte: <a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – DLM Verkehr</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; Skigebiete: <a href=\"https://www.umweltbundesamt.at\" target=\"_blank\" rel=\"noopener\">Umweltbundesamt</a> 2017, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – DLM Bauten und Verkehr</a> (Orte von Interesse), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; Wien: <a href=\"https://data.wien.gv.at\" target=\"_blank\" rel=\"noopener\">Stadt Wien – data.wien.gv.at</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
   "kataster": {
