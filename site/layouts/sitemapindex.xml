@@ -1,0 +1,16 @@
+{{- /* Eine einzige sitemap.xml fuer alle Sprachen (statt Index mit /de/ und /en/), mit hreflang-Alternativen. Seiten mit sitemap.disable (z. B. Impressum, noindex) fehlen. */ -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+{{- range hugo.Sites }}{{ range .Pages }}{{ if and (not .Params.noindex) (not .Sitemap.Disable) (not .Params.sitemap.disable) }}
+  <url>
+    <loc>{{ .Permalink }}</loc>{{ if not .Lastmod.IsZero }}
+    <lastmod>{{ .Lastmod.Format "2006-01-02" }}</lastmod>{{ end }}
+{{- $home := . }}{{ $xdef := "" }}
+{{- range .AllTranslations }}
+    <xhtml:link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}"/>
+{{- if eq .Language.Lang site.Language.Lang }}{{ $xdef = .Permalink }}{{ end }}{{ end }}
+{{- with $xdef }}
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ . }}"/>{{ end }}
+  </url>
+{{- end }}{{ end }}{{ end }}
+</urlset>

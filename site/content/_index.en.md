@@ -1,5 +1,7 @@
 ---
-title: "mapx – Maps of Austria built from official data"
+title: "mapx – Maps and geo APIs for Austria from official data"
+lastmod: 2026-11-17
+images: ["/img/og-image.png"]
 description: "mapx: maps of Austria built from official data. Cadastre, terrain, contours, orthophoto, addresses, routing and an elevation API. Free API access with an account and token."
 layout: hextra-home
 ---

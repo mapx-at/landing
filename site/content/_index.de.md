@@ -1,5 +1,7 @@
 ---
-title: "mapx – Karten für Österreich aus amtlichen Daten"
+title: "mapx – Karten und Geo-APIs für Österreich aus amtlichen Daten"
+lastmod: 2026-11-17
+images: ["/img/og-image.png"]
 description: "mapx: Karten für Österreich aus amtlichen Daten. Kataster, Gelände, Höhenlinien, Orthofoto, Adressen, Routing und Höhen-API. Kostenloser API-Zugang mit Konto und Token."
 layout: hextra-home
 ---
