@@ -1,0 +1,30 @@
+# mapx
+
+> mapx provides maps and location APIs for Austria, built exclusively from official open data (BEV, GIP.at, Umweltbundesamt, Statistik Austria; mostly CC BY 4.0). It does not use OpenStreetMap. Products: vector map tiles and styles, search and geocoding, routing, elevation, public transit departures, traffic, static map images and cadastre (parcels). Access is free with an account and an API token.
+
+Contact: support@mapx.at. The website is available in German (https://mapx.at/) and English (https://mapx.at/en/).
+
+## Get started
+
+- [What is mapx](https://docs.mapx.at/start/what-is-mapx/): overview of the products and data sources
+- [Access and limits](https://docs.mapx.at/start/access-and-limits/): free account, public and secret tokens, rate limits
+- [First map in 5 minutes](https://docs.mapx.at/start/first-map/): embed a map with MapLibre GL JS
+- [First search](https://docs.mapx.at/start/first-search/): geocoding and place search request
+- [First route](https://docs.mapx.at/start/first-route/): routing request
+- [Account and tokens](https://account.mapx.at): sign up, create API tokens, see usage (free)
+
+## Machine-readable sources
+
+- [Documentation index for LLMs](https://docs.mapx.at/llms.txt): llms.txt of the full documentation
+- [OpenAPI description](https://api.mapx.at/v1/openapi.json): the mapx API in OpenAPI format
+- [API reference](https://docs.mapx.at/api/): endpoints, parameters, responses
+
+## Try it
+
+- [Interactive map](https://map.mapx.at): demo map of Austria
+- [Blog](https://blog.mapx.at): background on data and products
+
+## Optional
+
+- [Website (German)](https://mapx.at/): landing page
+- [Website (English)](https://mapx.at/en/): landing page

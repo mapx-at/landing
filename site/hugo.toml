@@ -5,9 +5,17 @@ defaultContentLanguage = "de"
 defaultContentLanguageInSubdir = false
 title = "mapx"
 theme = "hextra"
-disableKinds = ["taxonomy", "term", "RSS", "sitemap", "robotsTXT", "section"]
+disableKinds = ["taxonomy", "term", "RSS", "robotsTXT", "section"]
 enableRobotsTXT = false
 disableHugoGeneratorInject = true
+
+[sitemap]
+  changeFreq = ""
+  priority = -1
+  filename = "sitemap.xml"
+
+
+
 
 [markup.goldmark.renderer]
   unsafe = true
