@@ -1,6 +1,6 @@
 # mapx
 
-> mapx provides maps and location APIs for Austria, built exclusively from official open data (BEV, GIP.at, Umweltbundesamt, Statistik Austria; mostly CC BY 4.0). It does not use OpenStreetMap. Products: vector map tiles and styles, search and geocoding, routing, elevation, public transit departures, traffic, static map images and cadastre (parcels). Access is free with an account and an API token.
+> mapx provides maps and location APIs for Austria, built exclusively from official open data (BEV, GIP.at, Umweltbundesamt, Statistik Austria; mostly CC BY 4.0). It does not use OpenStreetMap. Products: vector map tiles and styles, search and geocoding, routing, elevation, public transit departures, traffic, static map images, weather and climate, and cadastre (parcels). Access is free with an account and an API token.
 
 Contact: support@mapx.at. The website is available in German (https://mapx.at/) and English (https://mapx.at/en/).
 
@@ -12,6 +12,19 @@ Contact: support@mapx.at. The website is available in German (https://mapx.at/) 
 - [First search](https://docs.mapx.at/start/first-search/): geocoding and place search request
 - [First route](https://docs.mapx.at/start/first-route/): routing request
 - [Account and tokens](https://account.mapx.at): sign up, create API tokens, see usage (free)
+
+## Topics (one page per product, with example, data source and limitations)
+
+- [Cadastre and parcels](https://mapx.at/en/cadastre-api/): parcel at a point, parcel dossier, parcel search, parcel boundaries as tiles (German: https://mapx.at/kataster-api/)
+- [Geocoding and address search](https://mapx.at/en/geocoding-api/): geocoding, reverse geocoding, type-ahead search, address autofill and validation (German: https://mapx.at/geocoding-api/)
+- [Routing](https://mapx.at/en/routing-api/): routes for car, truck, bike and foot, isochrones, travel-time matrix, tour optimization (German: https://mapx.at/routing-api/)
+- [Elevation and terrain](https://mapx.at/en/elevation-api/): elevation API, elevation profile, 1 m terrain model, contour lines (German: https://mapx.at/hoehen-api/)
+- [Maps, tiles and styles](https://mapx.at/en/maps-api/): vector tiles, map styles for MapLibre, orthophoto tiles (German: https://mapx.at/karten-api/)
+- [Public transport](https://mapx.at/en/transit-api/): journeys, stops and departures from the timetable (German: https://mapx.at/oev-api/)
+- [Traffic](https://mapx.at/en/traffic-api/): traffic reports, roadworks, closures, speed limits on motorway signs (German: https://mapx.at/verkehr-api/)
+- [Static map images](https://mapx.at/en/static-maps/): a map as PNG or WebP with pins, paths and GeoJSON (German: https://mapx.at/statische-karten/)
+- [Weather and climate](https://mapx.at/en/weather-api/): observations, forecast, nowcast, warnings, air quality, climate (German: https://mapx.at/wetter-api/)
+- [FAQ](https://mapx.at/en/faq/): token, cost, license, data, errors (German: https://mapx.at/faq/)
 
 ## Machine-readable sources
 

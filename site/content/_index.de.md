@@ -2,7 +2,7 @@
 title: "mapx – Karten und Geo-APIs für Österreich aus amtlichen Daten"
 lastmod: 2026-11-17
 images: ["/img/og-image.png"]
-description: "mapx: Karten für Österreich aus amtlichen Daten. Kataster, Gelände, Höhenlinien, Orthofoto, Adressen, Routing und Höhen-API. Kostenloser API-Zugang mit Konto und Token."
+description: "mapx: Karten und Geo-APIs für Österreich aus amtlichen Daten. Kataster, Geocoding, Routing, Höhen, Karten, ÖV, Verkehr, Wetter. Kostenlos mit Konto und Token."
 layout: hextra-home
 ---
 
@@ -23,7 +23,7 @@ layout: hextra-home
 
 <div>
 {{< hextra/hero-subtitle >}}
-  Grundstücke, Gelände, Höhenlinien, Orthofoto, Adressen und Routing – aus Katastermappe, Laserscan und Verkehrsgraph der Behörden, als offene Kacheln und APIs für eigene Karten.
+  Grundstücke, Adressen, Routing, Gelände, Orthofoto, öffentlicher Verkehr, Verkehrsmeldungen und Wetter – aus Katastermappe, Laserscan, Verkehrsgraph und Fahrplan der Behörden, als offene Kacheln und APIs für eigene Karten.
 {{< /hextra/hero-subtitle >}}
 </div>
 
@@ -36,30 +36,31 @@ layout: hextra-home
 <div class="mx-hero-img"><img src="/lp/img/hero-map.svg" alt="Stilisierte Karte mit Höhenlinien, Parzellen, Straßen und Fluss" width="1600" height="900"></div>
 </div>
 
-<p class="mx-note"><strong>Datenquellen:</strong> BEV · GIP.at · Umweltbundesamt (GGN) · Statistik Austria · Offene Lizenzen, überwiegend CC BY 4.0</p>
+<p class="mx-note"><strong>Datenquellen:</strong> BEV · GIP.at · ASFINAG · GeoSphere Austria · ÖBB · Umweltbundesamt (GGN) · Statistik Austria · Offene Lizenzen, überwiegend CC BY 4.0</p>
 
 ## Was mapx liefert {#produkte}
 
-Je Produkt ein eigener Datensatz mit Stichtag und Quelle. Alles, was auf der Karte zu sehen ist, lässt sich auch direkt einbinden.
+Je Produkt ein eigener Datensatz mit Stichtag und Quelle. Jedes Produkt hat eine eigene Seite mit Beispiel, Datenquelle und Einschränkungen. Alles, was auf der Karte zu sehen ist, lässt sich auch direkt einbinden.
 
-{{< hextra/feature-grid cols="4" >}}
-  {{< hextra/feature-card title="Vektor-Basiskarte" subtitle="Straßen, Gebäude, Gewässer, Grenzen und Beschriftung als Vektorkacheln, gestaltet nach dem Vorbild von basemap.at. · *PMTiles · MapLibre*" icon="map" link="https://docs.mapx.at" >}}
-  {{< hextra/feature-card title="Kataster" subtitle="Grundstücksgrenzen und Nutzungsflächen aus der Digitalen Katastralmappe des BEV. · *BEV DKM · CC BY 4.0*" icon="view-grid" link="https://docs.mapx.at" >}}
-  {{< hextra/feature-card title="Geländemodell" subtitle="DTM und DSM aus dem 1-m-Laserscan des BEV, als Terrain-RGB für Schummerung und 3D-Gelände. · *Stichtag 15.09.2025*" icon="trending-up" link="https://docs.mapx.at" >}}
-  {{< hextra/feature-card title="Höhenlinien" subtitle="Höhenlinien, aus dem Geländemodell gerechnet, als Vektorkacheln für Wander- und Planungskarten. · *Zoom 10–16*" icon="chart-square-bar" link="https://docs.mapx.at" >}}
-  {{< hextra/feature-card title="Orthofoto" subtitle="Luftbilder des BEV als Rasterkacheln, mit Metadaten zu Befliegung und Flugjahr. · *BEV · CC BY 4.0*" icon="photograph" link="https://docs.mapx.at" >}}
-  {{< hextra/feature-card title="Adressen und Suche" subtitle="Adressregister, Orte, Straßen und Grundstücke in einem Suchindex, für Geocoding in eigenen Anwendungen. · *Adressregister, Stichtag 01.10.2026*" icon="location-marker" link="https://docs.mapx.at" >}}
-  {{< hextra/feature-card title="Routing" subtitle="Eigene Routing-Engine auf dem GIP-Routingexport für Auto, Rad und zu Fuß, mit Abbiegeverboten. · *GIP.at · CC BY 4.0*" icon="switch-horizontal" link="https://docs.mapx.at" >}}
-  {{< hextra/feature-card title="Höhen-API" subtitle="Höhe für Punkte und Profile entlang einer Linie, wahlweise aus Gelände- oder Oberflächenmodell. · *REST · JSON*" icon="code" link="https://docs.mapx.at" >}}
+{{< hextra/feature-grid cols="3" >}}
+  {{< hextra/feature-card title="Karten, Kacheln und Stile" subtitle="Vektor-Basiskarte, fertige Kartenstile, Höhenlinien und Orthofoto als Vektor- und Rasterkacheln für MapLibre. · *PMTiles · TileJSON*" icon="map" link="/karten-api/" >}}
+  {{< hextra/feature-card title="Kataster und Grundstücke" subtitle="Grundstücksgrenzen als Kacheln, Grundstück an einem Punkt und Grundstücks-Dossier aus der Digitalen Katastralmappe des BEV. · *BEV DKM · CC BY 4.0*" icon="view-grid" link="/kataster-api/" >}}
+  {{< hextra/feature-card title="Geocoding und Adresssuche" subtitle="Adressregister, Orte, Straßen und Grundstücke: Geocoding, Reverse Geocoding, Suche beim Tippen, Autofill und Adressprüfung. · *Adressregister, Stichtag 01.10.2026*" icon="location-marker" link="/geocoding-api/" >}}
+  {{< hextra/feature-card title="Routing" subtitle="Routen für Auto, Lkw, Rad und zu Fuß, Isochronen, Fahrzeitmatrix und Tourenplanung auf dem GIP-Straßengraphen. · *GIP.at · CC BY 4.0*" icon="switch-horizontal" link="/routing-api/" >}}
+  {{< hextra/feature-card title="Höhe und Gelände" subtitle="Höhen-API für Punkte und Profile, Geländemodell (DTM) und Oberflächenmodell (DSM) mit 1 m Auflösung, Höhenlinien. · *BEV · Stichtag 15.09.2025*" icon="trending-up" link="/hoehen-api/" >}}
+  {{< hextra/feature-card title="Öffentlicher Verkehr" subtitle="Verbindungen, Haltestellen und Abfahrten aus dem Soll-Fahrplan, Erreichbarkeit mit öffentlichem Verkehr als Isochrone. · *ÖBB-Personenverkehr AG · CC BY 4.0*" icon="ticket" link="/oev-api/" >}}
+  {{< hextra/feature-card title="Verkehr" subtitle="Verkehrsmeldungen, Baustellen und Sperren, Tempolimits auf Wechselverkehrszeichen der Autobahnen und eine Verkehrsebene für die Karte. · *ASFINAG / EVIS.AT · CC BY 4.0*" icon="exclamation-circle" link="/verkehr-api/" >}}
+  {{< hextra/feature-card title="Statische Kartenbilder" subtitle="Karte als PNG oder WebP mit Pins, Pfaden und GeoJSON, für Berichte, E-Mails und Exposés. · *bis 1280 × 1280 Pixel*" icon="photograph" link="/statische-karten/" >}}
+  {{< hextra/feature-card title="Wetter und Klima" subtitle="Messwerte, Stundenvorhersage, Niederschlags-Nowcast, Warnungen, Luftqualität und Klima für einen Punkt. · *GeoSphere Austria · CC BY 4.0*" icon="cloud" link="/wetter-api/" >}}
 {{< /hextra/feature-grid >}}
 
 ## Einbinden in fünf Minuten. {#entwickler}
 
-*Für Entwickler* – Kacheln sind PMTiles-Dateien mit HTTP-Range-Zugriff, ohne eigenen Kartenserver. Die Höhen-API antwortet mit GeoJSON.
+*Für Entwickler* – Kacheln sind PMTiles-Dateien mit HTTP-Range-Zugriff, ohne eigenen Kartenserver. Die APIs antworten mit JSON bzw. GeoJSON.
 
 - **MapLibre und PMTiles.** Der Stil der Demo-Karte ist öffentlich und lässt sich direkt laden.
 - **Ein kostenloses Konto genügt.** Anmelden, Token anlegen, loslegen. Herkunft, Stichtag und Attribution stehen je Produkt in der Doku.
-- **Maschinenlesbar.** OpenAPI-Beschreibung und `llms.txt` für die Höhen-API und die Kacheln.
+- **Maschinenlesbar.** OpenAPI-Beschreibung und `llms.txt` für alle APIs und die Kacheln.
 
 [Zur Entwicklerdoku](https://docs.mapx.at) · [Demo ansehen](https://map.mapx.at)
 
@@ -96,7 +97,7 @@ console.log(features[0].properties.elevation);
 
 ## Kostenlos, mit eigenem Konto. {#zugang}
 
-*API-Zugang* – Die mapx-APIs (Kacheln, Suche, Routing, Höhe) brauchen seit dem 08.11.2026 ein Konto mit API-Token. Das kostet nichts: Registrieren, anmelden, Token anlegen.
+*API-Zugang* – Die mapx-APIs (Kacheln, Suche, Routing, Höhe, ÖV, Verkehr, Bilder, Wetter) brauchen seit dem 08.11.2026 ein Konto mit API-Token. Das kostet nichts: Registrieren, anmelden, Token anlegen.
 
 {{< hextra/feature-grid cols="3" >}}
   {{< hextra/feature-card title="1. Registrieren" subtitle="Mit deiner E-Mail-Adresse. Die Anmeldung läuft über einen 8-stelligen Code, den wir dir per Mail schicken. Ein Passwort gibt es nicht." >}}
@@ -124,6 +125,9 @@ Zum Schutz vor Missbrauch gibt es Rate-Limits je Token. Die Nutzung selbst ist k
 - **Kataster, Gelände, Orthofoto:** Bundesamt für Eich- und Vermessungswesen (BEV).
 - **Straßen, Bahn, Routing:** Graphenintegrations-Plattform GIP.at.
 - **Gewässer:** Gesamtgewässernetz des Umweltbundesamts.
+- **Fahrplan:** ÖBB-Personenverkehr AG, Datenquelle Mobilitätsverbünde Österreich OG.
+- **Verkehrsmeldungen:** ASFINAG / EVIS.AT.
+- **Wetter, Klima, Luftqualität:** GeoSphere Austria.
 - **Kein OpenStreetMap:** Punkte von Interesse kommen ebenfalls aus amtlichen Quellen.
 
 [Mehr im Blog](https://blog.mapx.at)

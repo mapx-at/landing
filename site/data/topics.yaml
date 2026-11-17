@@ -1,0 +1,28 @@
+# Themenseiten (Reihenfolge = Reihenfolge in Fußzeile und "Weitere Themen"). Texte der Seiten: content/<key>.<lang>.md
+- key: kataster
+  de: {path: /kataster-api/, name: Kataster und Grundstücke}
+  en: {path: /en/cadastre-api/, name: Cadastre and parcels}
+- key: geocoding
+  de: {path: /geocoding-api/, name: Geocoding und Adresssuche}
+  en: {path: /en/geocoding-api/, name: Geocoding and address search}
+- key: routing
+  de: {path: /routing-api/, name: Routing}
+  en: {path: /en/routing-api/, name: Routing}
+- key: hoehe
+  de: {path: /hoehen-api/, name: Höhe und Gelände}
+  en: {path: /en/elevation-api/, name: Elevation and terrain}
+- key: karten
+  de: {path: /karten-api/, name: 'Karten, Kacheln und Stile'}
+  en: {path: /en/maps-api/, name: 'Maps, tiles and styles'}
+- key: oev
+  de: {path: /oev-api/, name: Öffentlicher Verkehr}
+  en: {path: /en/transit-api/, name: Public transport}
+- key: verkehr
+  de: {path: /verkehr-api/, name: Verkehr}
+  en: {path: /en/traffic-api/, name: Traffic}
+- key: statisch
+  de: {path: /statische-karten/, name: Statische Kartenbilder}
+  en: {path: /en/static-maps/, name: Static map images}
+- key: wetter
+  de: {path: /wetter-api/, name: Wetter und Klima}
+  en: {path: /en/weather-api/, name: Weather and climate}

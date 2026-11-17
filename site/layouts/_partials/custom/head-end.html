@@ -1,11 +1,26 @@
 {{ if .Params.noindex }}<meta name="robots" content="noindex">{{ else }}<script src="/lp/legacy-redirect.js"></script>
-<link rel="alternate" hreflang="de" href="https://mapx.at/"><link rel="alternate" hreflang="en" href="https://mapx.at/en/"><link rel="alternate" hreflang="x-default" href="https://mapx.at/">
-{{- if .IsHome }}
-<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="{{ if eq .Language.Lang "en" }}mapx – maps and geo APIs for Austria from official data{{ else }}mapx – Karten und Geo-APIs für Österreich aus amtlichen Daten{{ end }}">
 {{- $en := eq .Language.Lang "en" }}
+{{- /* hreflang: de, en (jeweils die Uebersetzung der Seite), x-default = deutsche Fassung */ -}}
+{{- $de := . }}{{ $enp := . }}
+{{- range .AllTranslations }}{{ if eq .Language.Lang "de" }}{{ $de = . }}{{ else if eq .Language.Lang "en" }}{{ $enp = . }}{{ end }}{{ end }}
+<link rel="alternate" hreflang="de" href="{{ $de.Permalink }}"><link rel="alternate" hreflang="en" href="{{ $enp.Permalink }}"><link rel="alternate" hreflang="x-default" href="{{ $de.Permalink }}">
+{{- if or .IsHome .Params.key }}
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="{{ if $en }}mapx – maps and geo APIs for Austria from official data{{ else }}mapx – Karten und Geo-APIs für Österreich aus amtlichen Daten{{ end }}">
+{{- end }}
+{{- if .IsHome }}
 {{- $org := dict "@type" "Organization" "@id" "https://mapx.at/#organization" "name" "mapx" "url" "https://mapx.at/" "logo" "https://mapx.at/img/logo.svg" "email" "support@mapx.at" }}
 {{- $site := dict "@type" "WebSite" "@id" "https://mapx.at/#website" "name" "mapx" "url" (.Permalink) "inLanguage" .Language.Lang "description" .Description "publisher" (dict "@id" "https://mapx.at/#organization") }}
 {{- $offer := dict "@type" "Offer" "price" "0" "priceCurrency" "EUR" "url" "https://account.mapx.at/register" }}
-{{- $api := dict "@type" "WebAPI" "@id" "https://mapx.at/#api" "name" (cond $en "mapx APIs for Austria" "mapx-APIs für Österreich") "description" (cond $en "Vector tiles, search and geocoding, routing and an elevation API for Austria, built from official open data. Free access with an account and token." "Vektorkacheln, Suche und Geocoding, Routing und Höhen-API für Österreich aus amtlichen offenen Daten. Kostenloser Zugang mit Konto und Token.") "url" "https://mapx.at/" "documentation" "https://docs.mapx.at" "provider" (dict "@id" "https://mapx.at/#organization") "areaServed" (dict "@type" "Country" "name" (cond $en "Austria" "Österreich")) "inLanguage" .Language.Lang "offers" $offer }}
+{{- $api := dict "@type" "WebAPI" "@id" "https://mapx.at/#api" "name" (cond $en "mapx APIs for Austria" "mapx-APIs für Österreich") "description" (cond $en "Vector tiles, search and geocoding, routing, elevation API, public transport, traffic, static map images and weather for Austria, built from official open data. Free access with an account and token." "Vektorkacheln, Suche und Geocoding, Routing, Höhen-API, öffentlicher Verkehr, Verkehr, statische Kartenbilder und Wetter für Österreich aus amtlichen offenen Daten. Kostenloser Zugang mit Konto und Token.") "url" "https://mapx.at/" "documentation" "https://docs.mapx.at" "provider" (dict "@id" "https://mapx.at/#organization") "areaServed" (dict "@type" "Country" "name" (cond $en "Austria" "Österreich")) "inLanguage" .Language.Lang "offers" $offer }}
 <script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" (slice $org $site $api) | jsonify | safeJS }}</script>
+{{- else if .Params.key }}
+{{- $homeURL := cond $en "https://mapx.at/en/" "https://mapx.at/" }}
+{{- $crumb := .Params.crumb | default .Title }}
+{{- $bc := dict "@type" "BreadcrumbList" "@id" (printf "%s#breadcrumb" .Permalink) "itemListElement" (slice (dict "@type" "ListItem" "position" 1 "name" "mapx" "item" $homeURL) (dict "@type" "ListItem" "position" 2 "name" $crumb "item" .Permalink)) }}
+{{- $page := dict "@type" "WebPage" "@id" (printf "%s#webpage" .Permalink) "url" .Permalink "name" .Title "description" .Description "inLanguage" .Language.Lang "isPartOf" (dict "@id" "https://mapx.at/#website") "publisher" (dict "@id" "https://mapx.at/#organization") "breadcrumb" (dict "@id" (printf "%s#breadcrumb" .Permalink)) "dateModified" (.Lastmod.Format "2006-01-02") }}
+{{- if .Params.faq }}
+{{- $qs := slice }}{{ range .Params.faq }}{{ $qs = $qs | append (dict "@type" "Question" "name" .q "acceptedAnswer" (dict "@type" "Answer" "text" (.a | markdownify | plainify))) }}{{ end }}
+{{- $page = merge $page (dict "@type" "FAQPage" "mainEntity" $qs) }}
+{{- end }}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" (slice $page $bc) | jsonify | safeJS }}</script>
 {{- end }}{{ end }}

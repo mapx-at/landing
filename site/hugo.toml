@@ -58,6 +58,10 @@ disableHugoGeneratorInject = true
       url = "/#entwickler"
       weight = 2
     [[languages.de.menus.main]]
+      name = "FAQ"
+      url = "/faq/"
+      weight = 3
+    [[languages.de.menus.main]]
       name = "Doku"
       url = "https://docs.mapx.at"
       weight = 3
@@ -97,6 +101,10 @@ disableHugoGeneratorInject = true
       name = "Developers"
       url = "/en/#entwickler"
       weight = 2
+    [[languages.en.menus.main]]
+      name = "FAQ"
+      url = "/en/faq/"
+      weight = 3
     [[languages.en.menus.main]]
       name = "Docs"
       url = "https://docs.mapx.at"

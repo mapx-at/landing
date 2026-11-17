@@ -1,0 +1,38 @@
+{{- /* Themenseite: gleiche Kopf-/Fusszeile wie die Startseite, schmale Lesespalte, Brotkrumen, "Weitere Themen". Auch fuer die FAQ (Params.faq). */ -}}
+{{ define "main" }}
+  {{- $lang := .Language.Lang -}}
+  {{- $en := eq $lang "en" -}}
+  {{- $home := cond $en "/en/" "/" -}}
+  <div class="hx:mx-auto hx:flex hextra-max-page-width">
+    {{ partial "sidebar.html" (dict "context" . "disableSidebar" true) }}
+    <main
+      id="content"
+      class="hx:w-full hx:break-words hx:min-h-[calc(100vh-var(--hextra-navbar-height))] hx:min-w-0 hx:pb-8 hx:pt-8 hx:md:pt-12 hx:pl-[max(env(safe-area-inset-left),1.5rem)] hx:pr-[max(env(safe-area-inset-right),1.5rem)]"
+    >
+      <div class="mx-topic">
+        <nav class="mx-crumbs" aria-label="{{ cond $en "Breadcrumb" "Brotkrumen" }}"><a href="{{ $home }}">mapx</a><span aria-hidden="true">›</span><span>{{ .Params.crumb | default .Title }}</span></nav>
+        <div class="content">
+          {{ .Content }}
+          {{ with .Params.faq }}
+            {{ range . }}
+              <h2>{{ .q }}</h2>
+              <p>{{ .a | markdownify }}</p>
+            {{ end }}
+          {{ end }}
+        </div>
+        {{- $topics := index hugo.Data "topics" -}}
+        <aside class="mx-related" aria-labelledby="mx-related-h">
+          <h2 id="mx-related-h">{{ cond $en "More topics" "Weitere Themen" }}</h2>
+          <ul>
+            {{- range $topics }}{{ $t := index . $lang }}{{ if ne $t.path $.RelPermalink }}
+            <li><a href="{{ $t.path }}">{{ $t.name }}</a></li>
+            {{- end }}{{ end }}
+            {{- if ne .Params.key "faq" }}
+            <li><a href="{{ cond $en "/en/faq/" "/faq/" }}">FAQ</a></li>
+            {{- end }}
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </div>
+{{ end }}
