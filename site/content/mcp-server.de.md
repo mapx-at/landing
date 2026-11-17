@@ -25,7 +25,7 @@ faq:
 
 # MCP-Server für Österreich-Geodaten
 
-<p class="mx-lead">Mit dem gehosteten MCP-Server von mapx kann dein KI-Assistent Adressen suchen, Routen berechnen, Grundstücke abfragen und das Wetter nachsehen, ohne dass du selbst API-Aufrufe schreibst. Er richtet sich an alle, die Fragen zu Österreich direkt im Assistenten (Claude Code, Cursor, VS Code, Gemini CLI) beantworten wollen, und an Entwickler, die einen Assistenten mit Geodaten ausstatten. Der Endpunkt ist `https://mcp.mapx.at/mcp` (Model Context Protocol, Streamable HTTP).</p>
+<p class="mx-lead">Mit dem gehosteten MCP-Server von mapx kann dein KI-Assistent Adressen suchen, Routen berechnen, Grundstücke abfragen und das Wetter nachsehen, ohne dass du selbst API-Aufrufe schreibst. Er richtet sich an alle, die Fragen zu Österreich direkt im Assistenten (Claude Code, Cursor, VS Code, Gemini CLI) beantworten wollen, und an Entwickler, die einen Assistenten mit Geodaten ausstatten. Der Endpunkt ist https://mcp.mapx.at/mcp (Model Context Protocol, Streamable HTTP).</p>
 
 <div class="mx-btns">
 {{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}

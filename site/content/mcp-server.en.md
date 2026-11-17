@@ -25,7 +25,7 @@ faq:
 
 # MCP server for Austrian geodata
 
-<p class="mx-lead">With the hosted mapx MCP server your AI assistant can look up addresses, calculate routes, query parcels and check the weather without you writing API calls. It is meant for anyone who wants to answer questions about Austria directly in an assistant (Claude Code, Cursor, VS Code, Gemini CLI), and for developers who give an assistant geodata. The endpoint is `https://mcp.mapx.at/mcp` (Model Context Protocol, Streamable HTTP).</p>
+<p class="mx-lead">With the hosted mapx MCP server your AI assistant can look up addresses, calculate routes, query parcels and check the weather without you writing API calls. It is meant for anyone who wants to answer questions about Austria directly in an assistant (Claude Code, Cursor, VS Code, Gemini CLI), and for developers who give an assistant geodata. The endpoint is https://mcp.mapx.at/mcp (Model Context Protocol, Streamable HTTP).</p>
 
 <div class="mx-btns">
 {{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
