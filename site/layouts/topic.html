@@ -11,12 +11,12 @@
     >
       <div class="mx-topic">
         <nav class="mx-crumbs" aria-label="{{ cond $en "Breadcrumb" "Brotkrumen" }}"><a href="{{ $home }}">mapx</a><span aria-hidden="true">›</span><span>{{ .Params.crumb | default .Title }}</span></nav>
-        <div class="hx:flex hx:flex-col hx:items-start content">
+        <div class="content">
           {{ .Content }}
           {{ with .Params.faq }}
             {{ range . }}
               <h2>{{ .q }}</h2>
-              {{ .a | markdownify }}
+              <p>{{ .a | markdownify }}</p>
             {{ end }}
           {{ end }}
         </div>
