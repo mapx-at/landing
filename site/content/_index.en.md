@@ -2,7 +2,7 @@
 title: "mapx – Maps and geo APIs for Austria from official data"
 lastmod: 2026-11-17
 images: ["/img/og-image.png"]
-description: "mapx: maps of Austria built from official data. Cadastre, terrain, contours, orthophoto, addresses, routing and an elevation API. Free API access with an account and token."
+description: "mapx: maps and geo APIs for Austria from official data. Cadastre, geocoding, routing, elevation, maps, transit, traffic, weather. Free with account and token."
 layout: hextra-home
 ---
 
@@ -23,7 +23,7 @@ layout: hextra-home
 
 <div>
 {{< hextra/hero-subtitle >}}
-  Parcels, terrain, contours, orthophoto, addresses and routing – from the cadastral map, laser scan and traffic graph of the authorities, as open tiles and APIs for your own maps.
+  Parcels, addresses, routing, terrain, orthophoto, public transport, traffic reports and weather – from the cadastral map, laser scan, road graph and timetable of the authorities, as open tiles and APIs for your own maps.
 {{< /hextra/hero-subtitle >}}
 </div>
 
@@ -36,30 +36,31 @@ layout: hextra-home
 <div class="mx-hero-img"><img src="/lp/img/hero-map.svg" alt="Stylised map with contours, parcels, roads and a river" width="1600" height="900"></div>
 </div>
 
-<p class="mx-note"><strong>Data sources:</strong> BEV · GIP.at · Umweltbundesamt (GGN) · Statistik Austria · Open licences, mostly CC BY 4.0</p>
+<p class="mx-note"><strong>Data sources:</strong> BEV · GIP.at · ASFINAG · GeoSphere Austria · ÖBB · Umweltbundesamt (GGN) · Statistik Austria · Open licences, mostly CC BY 4.0</p>
 
 ## What mapx delivers {#produkte}
 
-Each product is its own dataset with a reference date and source. Everything you see on the map can also be embedded directly.
+Each product is its own dataset with a reference date and source. Each product has its own page with an example, the data source and limitations. Everything you see on the map can also be embedded directly.
 
-{{< hextra/feature-grid cols="4" >}}
-  {{< hextra/feature-card title="Vector basemap" subtitle="Roads, buildings, water, boundaries and labels as vector tiles, styled after basemap.at. · *PMTiles · MapLibre*" icon="map" link="https://docs.mapx.at" >}}
-  {{< hextra/feature-card title="Cadastre" subtitle="Parcel boundaries and land-use areas from the BEV digital cadastral map. · *BEV DKM · CC BY 4.0*" icon="view-grid" link="https://docs.mapx.at" >}}
-  {{< hextra/feature-card title="Terrain model" subtitle="DTM and DSM from the BEV 1 m laser scan, as Terrain-RGB for hillshade and 3D terrain. · *Reference date 15.09.2025*" icon="trending-up" link="https://docs.mapx.at" >}}
-  {{< hextra/feature-card title="Contours" subtitle="Contour lines computed from the terrain model, as vector tiles for hiking and planning maps. · *Zoom 10–16*" icon="chart-square-bar" link="https://docs.mapx.at" >}}
-  {{< hextra/feature-card title="Orthophoto" subtitle="BEV aerial imagery as raster tiles, with metadata on survey and flight year. · *BEV · CC BY 4.0*" icon="photograph" link="https://docs.mapx.at" >}}
-  {{< hextra/feature-card title="Addresses and search" subtitle="Address register, places, streets and parcels in one search index, for geocoding in your own applications. · *Address register, as of 01.10.2026*" icon="location-marker" link="https://docs.mapx.at" >}}
-  {{< hextra/feature-card title="Routing" subtitle="Our own routing engine on the GIP routing export for car, bike and foot, with turn restrictions. · *GIP.at · CC BY 4.0*" icon="switch-horizontal" link="https://docs.mapx.at" >}}
-  {{< hextra/feature-card title="Elevation API" subtitle="Elevation for points and profiles along a line, from the terrain or the surface model. · *REST · JSON*" icon="code" link="https://docs.mapx.at" >}}
+{{< hextra/feature-grid cols="3" >}}
+  {{< hextra/feature-card title="Maps, tiles and styles" subtitle="Vector basemap, ready-made map styles, contours and orthophoto as vector and raster tiles for MapLibre. · *PMTiles · TileJSON*" icon="map" link="/en/maps-api/" >}}
+  {{< hextra/feature-card title="Cadastre and parcels" subtitle="Parcel boundaries as tiles, the parcel at a point and a parcel dossier, from the BEV digital cadastral map. · *BEV DKM · CC BY 4.0*" icon="view-grid" link="/en/cadastre-api/" >}}
+  {{< hextra/feature-card title="Geocoding and address search" subtitle="Address register, places, streets and parcels: geocoding, reverse geocoding, type-ahead search, autofill and address validation. · *Address register, as of 01.10.2026*" icon="location-marker" link="/en/geocoding-api/" >}}
+  {{< hextra/feature-card title="Routing" subtitle="Routes for car, truck, bike and foot, isochrones, travel-time matrices and tour planning on the GIP road graph. · *GIP.at · CC BY 4.0*" icon="switch-horizontal" link="/en/routing-api/" >}}
+  {{< hextra/feature-card title="Elevation and terrain" subtitle="Elevation API for points and profiles, terrain model (DTM) and surface model (DSM) at 1 m resolution, contour lines. · *BEV · reference date 15.09.2025*" icon="trending-up" link="/en/elevation-api/" >}}
+  {{< hextra/feature-card title="Public transport" subtitle="Journeys, stops and departures from the scheduled timetable, reachability by public transport as an isochrone. · *ÖBB-Personenverkehr AG · CC BY 4.0*" icon="ticket" link="/en/transit-api/" >}}
+  {{< hextra/feature-card title="Traffic" subtitle="Traffic reports, roadworks and closures, speed limits on variable message signs on motorways and a traffic layer for the map. · *ASFINAG / EVIS.AT · CC BY 4.0*" icon="exclamation-circle" link="/en/traffic-api/" >}}
+  {{< hextra/feature-card title="Static map images" subtitle="A map as PNG or WebP with pins, paths and GeoJSON, for reports, e-mails and property listings. · *up to 1280 × 1280 pixels*" icon="photograph" link="/en/static-maps/" >}}
+  {{< hextra/feature-card title="Weather and climate" subtitle="Observations, hourly forecast, precipitation nowcast, warnings, air quality and climate for a point. · *GeoSphere Austria · CC BY 4.0*" icon="cloud" link="/en/weather-api/" >}}
 {{< /hextra/feature-grid >}}
 
 ## Embed it in five minutes. {#entwickler}
 
-*For developers* – Tiles are PMTiles files with HTTP range access, no map server of your own needed. The elevation API answers with GeoJSON.
+*For developers* – Tiles are PMTiles files with HTTP range access, no map server of your own needed. The APIs answer with JSON or GeoJSON.
 
 - **MapLibre and PMTiles.** The style of the demo map is public and can be loaded directly.
 - **A free account is all you need.** Sign in, create a token, get going. Origin, reference date and attribution are listed per product in the docs.
-- **Machine-readable.** OpenAPI description and `llms.txt` for the elevation API and the tiles.
+- **Machine-readable.** OpenAPI description and `llms.txt` for all APIs and the tiles.
 
 [Go to the developer docs](https://docs.mapx.at) · [See the demo](https://map.mapx.at)
 
@@ -96,7 +97,7 @@ console.log(features[0].properties.elevation);
 
 ## Free, with your own account. {#zugang}
 
-*API access* – The mapx APIs (tiles, search, routing, elevation) require an account with an API token as of 8 November 2026. It costs nothing: sign up, sign in, create a token.
+*API access* – The mapx APIs (tiles, search, routing, elevation, transit, traffic, images, weather) require an account with an API token as of 8 November 2026. It costs nothing: sign up, sign in, create a token.
 
 {{< hextra/feature-grid cols="3" >}}
   {{< hextra/feature-card title="1. Sign up" subtitle="With your email address. Sign-in uses an 8-digit code we send you by email. There is no password." >}}
@@ -124,6 +125,9 @@ To protect against abuse there are rate limits per token. Usage itself is free o
 - **Cadastre, terrain, orthophoto:** Federal Office of Metrology and Surveying (BEV).
 - **Roads, rail, routing:** Graph Integration Platform GIP.at.
 - **Water:** national water network of the Umweltbundesamt.
+- **Timetable:** ÖBB-Personenverkehr AG, data source Mobilitätsverbünde Österreich OG.
+- **Traffic reports:** ASFINAG / EVIS.AT.
+- **Weather, climate, air quality:** GeoSphere Austria.
 - **No OpenStreetMap:** points of interest also come from official sources.
 
 [More on the blog](https://blog.mapx.at)
