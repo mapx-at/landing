@@ -27,6 +27,8 @@ faq:
     a: "Ja. Lade eine PMTiles-Datei herunter und liefere sie selbst aus, siehe [PMTiles selbst hosten](https://docs.mapx.at/de/guides/self-host-pmtiles/) und [QGIS](https://docs.mapx.at/de/guides/qgis/)."
   - q: "Ist der Kataster rechtsverbindlich?"
     a: "Nein. Er zeigt Grundstücksgrenzen zur Orientierung und ersetzt weder einen Grundbuchauszug noch eine Vermessung. Mehr auf der Seite [Kataster und Grundstücke](/kataster-api/)."
+  - q: "Kann ich mapx in einem KI-Assistenten nutzen?"
+    a: "Ja, über den gehosteten MCP-Server `https://mcp.mapx.at/mcp` mit 23 nur lesenden Werkzeugen. Du brauchst ein Konto und einen Token vom Typ „KI-Assistent (MCP)“. Mehr auf der Seite [MCP-Server](/mcp-server/)."
   - q: "Was ist der Unterschied zwischen DTM und DSM?"
     a: "Das DTM ist der nackte Boden, das DSM enthält Bäume und Gebäude. Nimm das DTM für Steigungen und Profile, das DSM für Sichtbarkeit und Gebäudehöhen. Mehr auf der Seite [Höhe und Gelände](/hoehen-api/)."
   - q: "Warum bekomme ich 401 oder 403?"

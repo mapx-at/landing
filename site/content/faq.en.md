@@ -27,6 +27,8 @@ faq:
     a: "Yes. Download a PMTiles file and serve it yourself, see [Self-host PMTiles](https://docs.mapx.at/guides/self-host-pmtiles/) and [QGIS](https://docs.mapx.at/guides/qgis/)."
   - q: "Is the cadastre legally binding?"
     a: "No. It shows parcel boundaries for orientation and replaces neither a land register extract nor a survey. More on the page [Cadastre and parcels](/en/cadastre-api/)."
+  - q: "Can I use mapx in an AI assistant?"
+    a: "Yes, through the hosted MCP server `https://mcp.mapx.at/mcp` with 23 read-only tools. You need an account and a token of the type \"AI assistant (MCP)\". More on the [MCP server](/en/mcp-server/) page."
   - q: "What is the difference between DTM and DSM?"
     a: "The DTM is bare ground, the DSM includes trees and buildings. Use the DTM for gradients and profiles, the DSM for visibility and building heights. More on the page [Elevation and terrain](/en/elevation-api/)."
   - q: "Why do I get 401 or 403?"

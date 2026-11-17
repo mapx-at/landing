@@ -52,6 +52,7 @@ Each product is its own dataset with a reference date and source. Each product h
   {{< hextra/feature-card title="Traffic" subtitle="Traffic reports, roadworks and closures, speed limits on variable message signs on motorways and a traffic layer for the map. · *ASFINAG / EVIS.AT · CC BY 4.0*" icon="exclamation-circle" link="/en/traffic-api/" >}}
   {{< hextra/feature-card title="Static map images" subtitle="A map as PNG or WebP with pins, paths and GeoJSON, for reports, e-mails and property listings. · *up to 1280 × 1280 pixels*" icon="photograph" link="/en/static-maps/" >}}
   {{< hextra/feature-card title="Weather and climate" subtitle="Observations, hourly forecast, precipitation nowcast, warnings, air quality and climate for a point. · *GeoSphere Austria · CC BY 4.0*" icon="cloud" link="/en/weather-api/" >}}
+  {{< hextra/feature-card title="MCP server for AI assistants" subtitle="23 read-only tools for addresses, routes, parcels, weather and more, directly in Claude Code, Cursor and VS Code. · *MCP · Streamable HTTP*" icon="chip" link="/en/mcp-server/" >}}
 {{< /hextra/feature-grid >}}
 
 ## Embed it in five minutes. {#entwickler}
