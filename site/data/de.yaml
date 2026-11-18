@@ -23,7 +23,11 @@ footer:
   - Nutzung
   legal: Rechtliches
   imprint: Impressum
-  privacy: 'Datenschutz: folgt'
+  terms: Nutzungsbedingungen
+  termsurl: https://mapx.at/nutzungsbedingungen/
+  disclaimer: 'Alle Angaben ohne Gewähr. Nutzung auf eigenes Risiko, keine Haftung für Richtigkeit, Vollständigkeit und Aktualität. Details:'
+  privacy: Datenschutz
+  privacyurl: https://account.mapx.at/datenschutz
   contact: Kontakt
   copy: '© mapx · Karten- und Geodaten: BEV, GIP.at, Umweltbundesamt, Statistik Austria
     (überwiegend CC BY 4.0)'

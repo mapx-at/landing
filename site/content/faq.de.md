@@ -41,6 +41,8 @@ faq:
     a: "Rasterkacheln haben 512 Pixel. Setze im Client `tileSize: 512`."
   - q: "Wo melde ich ein Problem?"
     a: "Schreibe an [support@mapx.at](mailto:support@mapx.at) für technische Fragen und Fehler oder an [info@mapx.at](mailto:info@mapx.at) für alles andere."
+  - q: "Haftet mapx für falsche Ergebnisse?"
+    a: "Nein, soweit gesetzlich zulässig. mapx ist ein kostenloser Dienst im Aufbau; alle Angaben sind ohne Gewähr, die Nutzung erfolgt auf eigenes Risiko. Prüfe Ergebnisse selbst, besonders bei Adressen, Routen, Abfahrten, Wetter und Kataster. Details: [Nutzungsbedingungen](/nutzungsbedingungen/)."
 ---
 
 # FAQ: Häufige Fragen zu mapx
