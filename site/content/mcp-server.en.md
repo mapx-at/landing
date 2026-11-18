@@ -38,7 +38,7 @@ faq:
 - "Which parcel is at 15.3294, 48.2272, and which cadastral municipality does it belong to?"
 - "Which places can I reach from Linz Hauptbahnhof by train in 30 minutes?"
 - "Are there traffic reports on the A1 between Salzburg and Vienna today?"
-- "How is the air quality in Graz, and are there weather warnings for Styria?"
+- "How is the air quality in Graz, and what will the weather be like tomorrow in Styria?"
 
 The assistant picks the matching tools itself and combines the results into an answer.
 
@@ -46,7 +46,7 @@ The assistant picks the matching tools itself and combines the results into an a
 
 There are 23 tools, all read-only, in eight groups:
 
-- **Addresses and places:** `geocode`, `reverse_geocode`, `validate_address`, `search_places`.
+- **Addresses and places:** `geocode`, `reverse_geocode`, `validate_address`, `search_places`, `list_place_categories`.
 - **Routes and reachability:** `route` for car, truck, bike and foot, `isochrone`, `travel_matrix`, `optimize_stops`.
 - **Public transport:** `transit_route`, `departures`, `find_stops`. Based on the timetable, not real time.
 - **Elevation:** `elevation`, `elevation_profile`.
