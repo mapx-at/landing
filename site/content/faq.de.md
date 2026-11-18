@@ -7,7 +7,7 @@ translationKey: faq
 url: /faq/
 lastmod: 2026-11-17
 images: ["/img/og-image.png"]
-description: "Häufige Fragen zu mapx: Token und Konto, Kosten, kommerzielle Nutzung unter CC BY 4.0, Aktualität der Daten, Offline-Karten, Kataster und Fehler 401, 403, 429."
+description: "Häufige Fragen zu mapx: Token und Konto, Kosten, kommerzielle Nutzung unter CC BY 4.0, Aktualität der Daten, Kachel-Download, Kataster und Fehler 401, 403, 429."
 faq:
   - q: "Brauche ich einen Token oder ein Konto?"
     a: "Ja, ein kostenloses Konto und einen API-Token. Registriere dich auf [account.mapx.at](https://account.mapx.at/register?lang=de), lege einen Token an und sende ihn als `Authorization: Bearer` (Server) oder als `access_token` (Browser, Bilder) mit. CORS ist offen. Details: [Zugang und Limits](https://docs.mapx.at/de/start/access-and-limits/)."
@@ -20,11 +20,11 @@ faq:
   - q: "Wie aktuell sind die Daten?"
     a: "Jedes Tileset hat ein Quelldatum. Es steht auf seiner Seite unter [Tilesets](https://docs.mapx.at/de/tilesets/) und im Feld `stand` von `GET /v1/tiles`."
   - q: "Ändert sich eine URL, wenn es neue Daten gibt?"
-    a: "Nein. API-URLs und TileJSON bleiben gleich. PMTiles-Dateinamen enthalten das Datum, alte Dateien bleiben also gültig. Über das TileJSON erreichst du immer die aktuelle Datei."
+    a: "Nein. API-URLs und TileJSON bleiben gleich. Über Stil und TileJSON bekommst du immer die aktuellen Daten."
   - q: "Gibt es Daten außerhalb Österreichs?"
     a: "Nein, nur Österreich. Orthofoto und Basiskarte reichen an der Grenze ein Stück in die Nachbarländer."
-  - q: "Kann ich die Karten offline nutzen?"
-    a: "Ja. Lade eine PMTiles-Datei herunter und liefere sie selbst aus, siehe [PMTiles selbst hosten](https://docs.mapx.at/de/guides/self-host-pmtiles/) und [QGIS](https://docs.mapx.at/de/guides/qgis/)."
+  - q: "Kann ich die Kacheln herunterladen?"
+    a: "Nein. Karten und Kacheln bekommst du über die API: Stil, TileJSON oder `{z}/{x}/{y}`, siehe [Karten](https://docs.mapx.at/de/guides/maps/) und [QGIS](https://docs.mapx.at/de/guides/qgis/)."
   - q: "Ist der Kataster rechtsverbindlich?"
     a: "Nein. Er zeigt Grundstücksgrenzen zur Orientierung und ersetzt weder einen Grundbuchauszug noch eine Vermessung. Mehr auf der Seite [Kataster und Grundstücke](/kataster-api/)."
   - q: "Kann ich mapx in einem KI-Assistenten nutzen?"
@@ -34,7 +34,7 @@ faq:
   - q: "Warum bekomme ich 401 oder 403?"
     a: "`401` heißt: Der Token fehlt, ist ungültig oder abgelaufen. `403` heißt: Der Token ist gesperrt oder ein öffentlicher Token wird von einer nicht erlaubten Origin oder App verwendet (`origin-not-allowed`). Der `code` im Fehlertext nennt den Grund."
   - q: "Warum bekomme ich 429?"
-    a: "Du hast das Rate-Limit der Zone überschritten. Warte die Sekunden aus `Retry-After` ab und versuche es mit wachsender Pause erneut. Bei hoher Last helfen [PMTiles](https://docs.mapx.at/de/guides/self-host-pmtiles/)."
+    a: "Du hast das Rate-Limit der Zone überschritten. Warte die Sekunden aus `Retry-After` ab und versuche es mit wachsender Pause erneut. Bei hoher Last hilft es, Kacheln im Client zu cachen."
   - q: "Meine Punkte landen im falschen Land."
     a: "Längen- und Breitengrad sind vertauscht. mapx und GeoJSON verwenden `lon,lat`, die Länge kommt zuerst."
   - q: "Meine Karte ist unscharf."

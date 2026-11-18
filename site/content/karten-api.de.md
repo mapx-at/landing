@@ -28,7 +28,7 @@ description: "Karten-API für Österreich: Vektorkacheln, fertige Kartenstile f�
 - `GET /v1/tiles/{tileset}/{z}/{x}/{y}.{ext}`: Kacheln im XYZ-Schema.
 - `GET /v1/styles/{id}/tiles/{tilesize}/{z}/{x}/{y}`: gerenderte Rasterkacheln eines Stils für Clients ohne Vektorunterstützung.
 - Tilesets: `streets` (Basiskarte, Zoom 0 bis 16), `orthophoto` (Luftbild, Zoom 5 bis 18, 20 cm), `cadastre`, `contours`, `terrain-rgb` und `dsm`.
-- Jedes Tileset gibt es auch als einzelne PMTiles-Datei zum Selbsthosten und Offline-Nutzen.
+- Zugriff über Stil, TileJSON oder `{z}/{x}/{y}`; ganze Tileset-Dateien zum Herunterladen gibt es nicht.
 
 ## Beispiel
 

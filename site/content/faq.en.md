@@ -7,7 +7,7 @@ translationKey: faq
 url: /en/faq/
 lastmod: 2026-11-17
 images: ["/img/og-image.png"]
-description: "Frequently asked questions about mapx: token and account, cost, commercial use under CC BY 4.0, data freshness, offline maps, cadastre and errors 401, 403, 429."
+description: "Frequently asked questions about mapx: token and account, cost, commercial use under CC BY 4.0, data freshness, tile downloads, cadastre and errors 401, 403, 429."
 faq:
   - q: "Do I need a token or an account?"
     a: "Yes, a free account and an API token. Register at [account.mapx.at](https://account.mapx.at/register?lang=en), create a token and send it as `Authorization: Bearer` (servers) or `access_token` (browsers, images). CORS is open. Details: [Access and limits](https://docs.mapx.at/start/access-and-limits/)."
@@ -20,11 +20,11 @@ faq:
   - q: "How current is the data?"
     a: "Each tileset has a source date. It is shown on its page under [Tilesets](https://docs.mapx.at/tilesets/) and in the `stand` field of `GET /v1/tiles`."
   - q: "Does a URL change when there is new data?"
-    a: "No. API URLs and TileJSON stay the same. PMTiles file names contain the date, so old files stay valid. Through the TileJSON you always reach the current file."
+    a: "No. API URLs and TileJSON stay the same. Styles and TileJSON always give you the current data."
   - q: "Is there data outside Austria?"
     a: "No, Austria only. Orthophoto and basemap extend a little into the neighboring countries at the border."
-  - q: "Can I use the maps offline?"
-    a: "Yes. Download a PMTiles file and serve it yourself, see [Self-host PMTiles](https://docs.mapx.at/guides/self-host-pmtiles/) and [QGIS](https://docs.mapx.at/guides/qgis/)."
+  - q: "Can I download the tiles?"
+    a: "No. You get maps and tiles through the API: style, TileJSON or `{z}/{x}/{y}`, see [Maps](https://docs.mapx.at/guides/maps/) and [QGIS](https://docs.mapx.at/guides/qgis/)."
   - q: "Is the cadastre legally binding?"
     a: "No. It shows parcel boundaries for orientation and replaces neither a land register extract nor a survey. More on the page [Cadastre and parcels](/en/cadastre-api/)."
   - q: "Can I use mapx in an AI assistant?"
@@ -34,7 +34,7 @@ faq:
   - q: "Why do I get 401 or 403?"
     a: "`401` means the token is missing, invalid or expired. `403` means the token is blocked, or a public token is used from an origin or app that is not allowed (`origin-not-allowed`). The `code` in the error body names the reason."
   - q: "Why do I get 429?"
-    a: "You exceeded the rate limit of the zone. Wait the seconds given in `Retry-After` and retry with a growing delay. For heavy loads [PMTiles](https://docs.mapx.at/guides/self-host-pmtiles/) help."
+    a: "You exceeded the rate limit of the zone. Wait the seconds given in `Retry-After` and retry with a growing delay. For heavy loads, cache tiles in the client."
   - q: "My points land in the wrong country."
     a: "Longitude and latitude are swapped. mapx and GeoJSON use `lon,lat`, longitude comes first."
   - q: "My map is blurry."
