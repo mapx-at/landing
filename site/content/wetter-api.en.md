@@ -1,5 +1,5 @@
 ---
-title: "Weather API Austria: nowcast, warnings, climate"
+title: "Weather API Austria: forecast, nowcast, climate"
 crumb: "Weather and climate"
 key: wetter
 layout: topic
@@ -10,7 +10,7 @@ images: ["/img/og-image.png"]
 description: "Weather API for Austria: observations, hourly forecast, precipitation nowcast, warnings, air quality and climate from GeoSphere Austria. Free with a token."
 ---
 
-# Weather API for Austria: forecast, nowcast, warnings, air quality and climate
+# Weather API for Austria: forecast, nowcast, air quality and climate
 
 <p class="mx-lead">The weather API returns current observations, the hourly forecast and the precipitation nowcast for a point, plus official weather warnings, air quality and climate figures. Weather tiles can be laid over the map as a layer. It is meant for developers of weather, tourism, logistics and site-analysis applications in Austria.</p>
 

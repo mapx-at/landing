@@ -1,5 +1,5 @@
 ---
-title: "Wetter-API Österreich: Nowcast, Warnungen, Klima"
+title: "Wetter-API Österreich: Vorhersage, Nowcast, Klima"
 crumb: "Wetter und Klima"
 key: wetter
 layout: topic
@@ -10,7 +10,7 @@ images: ["/img/og-image.png"]
 description: "Wetter-API für Österreich: Messwerte, Stundenvorhersage, Niederschlags-Nowcast, Warnungen, Luftqualität und Klima von GeoSphere Austria. Kostenlos mit Token."
 ---
 
-# Wetter-API für Österreich: Vorhersage, Nowcast, Warnungen, Luftqualität und Klima
+# Wetter-API für Österreich: Vorhersage, Nowcast, Luftqualität und Klima
 
 <p class="mx-lead">Die Wetter-API liefert aktuelle Messwerte, die Stundenvorhersage und den Niederschlags-Nowcast für einen Punkt, dazu amtliche Wetterwarnungen, die Luftqualität und Klimakennwerte. Wetterkacheln lassen sich als Ebene auf die Karte legen. Sie richtet sich an Entwickler von Wetter-, Tourismus-, Logistik- und Standortanwendungen in Österreich.</p>
 

@@ -38,7 +38,7 @@ faq:
 - „Welches Grundstück liegt bei 15.3294, 48.2272, und zu welcher Katastralgemeinde gehört es?“
 - „Welche Orte erreiche ich von Linz Hauptbahnhof in 30 Minuten mit dem Zug?“
 - „Gibt es heute Verkehrsmeldungen auf der A1 zwischen Salzburg und Wien?“
-- „Wie ist die Luftqualität in Graz, und gibt es Wetterwarnungen für die Steiermark?“
+- „Wie ist die Luftqualität in Graz, und wie wird das Wetter morgen in der Steiermark?“
 
 Der Assistent wählt dazu selbst die passenden Werkzeuge und verbindet die Ergebnisse zu einer Antwort.
 
@@ -46,7 +46,7 @@ Der Assistent wählt dazu selbst die passenden Werkzeuge und verbindet die Ergeb
 
 Es sind 23 Werkzeuge, alle nur lesend, in acht Gruppen:
 
-- **Adressen und Orte:** `geocode`, `reverse_geocode`, `validate_address`, `search_places`.
+- **Adressen und Orte:** `geocode`, `reverse_geocode`, `validate_address`, `search_places`, `list_place_categories`.
 - **Routen und Erreichbarkeit:** `route` für Auto, Lkw, Rad und zu Fuß, `isochrone`, `travel_matrix`, `optimize_stops`.
 - **Öffentlicher Verkehr:** `transit_route`, `departures`, `find_stops`. Grundlage ist der Fahrplan, keine Echtzeit.
 - **Höhe:** `elevation`, `elevation_profile`.
