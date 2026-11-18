@@ -5,7 +5,7 @@ key: mcp
 layout: topic
 translationKey: mcp
 url: /en/mcp-server/
-lastmod: 2026-11-17
+lastmod: 2026-11-18
 images: ["/img/og-image.png"]
 description: "MCP server for Austrian geodata: AI assistants such as Claude Code, Cursor and VS Code use mapx addresses, routes, parcels, weather and traffic directly."
 faq:
@@ -14,9 +14,9 @@ faq:
   - q: "Can the assistant change anything?"
     a: "No. All 23 tools are read-only. The assistant can query data, but cannot create, change or delete anything."
   - q: "Which assistants work?"
-    a: "Claude Code, Cursor, VS Code and Gemini CLI, as well as the Anthropic and OpenAI APIs. Sign-in for claude.ai and ChatGPT without a token, through your account, is coming."
+    a: "claude.ai, ChatGPT and Claude Code sign in directly through your mapx account, without a token. Cursor, VS Code, Gemini CLI and other clients, as well as the Anthropic and OpenAI APIs, use a token."
   - q: "What does it cost?"
-    a: "Access goes through your mapx account. Calls count like API calls and are visible in your account under usage. You can block a token at any time."
+    a: "Access goes through your mapx account. Calls count like API calls and are visible in your account under usage. You can disconnect a connection or block a token at any time in your account."
   - q: "Are there real-time departures?"
     a: "No. The public transport tools work with the timetable, not with real-time data."
   - q: "Does the MCP server cover places outside Austria?"
@@ -25,7 +25,7 @@ faq:
 
 # MCP server for Austrian geodata
 
-<p class="mx-lead">With the hosted mapx MCP server your AI assistant can look up addresses, calculate routes, query parcels and check the weather without you writing API calls. It is meant for anyone who wants to answer questions about Austria directly in an assistant (Claude Code, Cursor, VS Code, Gemini CLI), and for developers who give an assistant geodata. The endpoint is https://mcp.mapx.at/mcp (Model Context Protocol, Streamable HTTP).</p>
+<p class="mx-lead">With the hosted mapx MCP server your AI assistant can look up addresses, calculate routes, query parcels and check the weather without you writing API calls. It is meant for anyone who wants to answer questions about Austria directly in an assistant (claude.ai, ChatGPT, Claude Code, Cursor, VS Code, Gemini CLI), and for developers who give an assistant geodata. The endpoint is https://mcp.mapx.at/mcp (Model Context Protocol, Streamable HTTP).</p>
 
 <div class="mx-btns">
 {{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
@@ -57,15 +57,21 @@ There are 23 tools, all read-only, in eight groups:
 
 ## Set up in three steps
 
-1. Create an account at [account.mapx.at](https://account.mapx.at/register?lang=en).
-2. Create a token of the type "AI assistant (MCP)" there. It starts with `mx_mcp_`.
-3. Add the server to your assistant. In Claude Code:
+The simplest way is to sign in with your mapx account, without a token:
+
+1. Add `https://mcp.mapx.at/mcp` as an MCP server in your assistant: in claude.ai as a custom connector, in Claude Code with `claude mcp add --transport http mapx https://mcp.mapx.at/mcp` and then `/mcp`, in ChatGPT as a connector or app with your own MCP address (available depending on plan and settings).
+2. Sign in at account.mapx.at or create an [account](https://account.mapx.at/register?lang=en) there.
+3. On the consent page, check what the access allows (read-only tools, no access to your account or other tokens) and confirm.
+
+The connection appears in your account under Tokens and can be disconnected there at any time. This sign-in applies to known applications; the support can enable further ones on request.
+
+**Alternative with a token:** Create a token of the type "AI assistant (MCP)" in your account (it starts with `mx_mcp_`) and enter it in the assistant. In Claude Code:
 
 ```bash
 claude mcp add --transport http mapx https://mcp.mapx.at/mcp --header "Authorization: Bearer YOUR_MCP_TOKEN"
 ```
 
-This works with Claude Code, Cursor, VS Code and Gemini CLI, as well as through the Anthropic and OpenAI APIs. Sign-in for claude.ai and ChatGPT without a token, through your account, is coming. The steps for each assistant are in the [MCP server docs](https://docs.mapx.at/guides/mcp/).
+The token way works with any MCP client, including Cursor, VS Code and Gemini CLI, as well as through the Anthropic and OpenAI APIs. The steps for each assistant are in the [MCP server docs](https://docs.mapx.at/guides/mcp/).
 
 ## Where the data comes from
 
@@ -77,12 +83,12 @@ The tools use the same datasets as the mapx APIs: cadastre and elevation from th
 - All tools are read-only, the assistant changes nothing.
 - Public transport is based on the timetable, not on real-time data.
 - Parcel data is for orientation and not legally binding.
-- Calls count like API calls and are visible in your account under usage. You can block a token at any time.
+- Calls count like API calls and are visible in your account under usage. You can disconnect a connection or block a token at any time in your account.
 - The assistant words the answers itself. Check important details against the named source.
 
 ## Get started
 
-Access goes through an account with a token. All details are in the [MCP server docs](https://docs.mapx.at/guides/mcp/).
+Access goes through your account, by signing in or with a token. All details are in the [MCP server docs](https://docs.mapx.at/guides/mcp/).
 
 <div class="mx-btns">
 {{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}

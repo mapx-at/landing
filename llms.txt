@@ -29,7 +29,7 @@ Contact: support@mapx.at. The website is available in German (https://mapx.at/) 
 
 ## Machine-readable sources
 
-- [MCP endpoint](https://mcp.mapx.at/mcp): Model Context Protocol server (Streamable HTTP), token type "AI assistant (MCP)", docs: https://docs.mapx.at/guides/mcp/
+- [MCP endpoint](https://mcp.mapx.at/mcp): Model Context Protocol server (Streamable HTTP), sign-in with the mapx account (OAuth 2.1, claude.ai, ChatGPT, Claude Code) or token type "AI assistant (MCP)", docs: https://docs.mapx.at/guides/mcp/
 - [Documentation index for LLMs](https://docs.mapx.at/llms.txt): llms.txt of the full documentation
 - [OpenAPI description](https://api.mapx.at/v1/openapi.json): the mapx API in OpenAPI format
 - [API reference](https://docs.mapx.at/api/): endpoints, parameters, responses
