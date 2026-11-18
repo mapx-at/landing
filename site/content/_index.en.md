@@ -33,7 +33,7 @@ layout: hextra-home
 </div>
 </div>
 
-<div class="mx-hero-img"><img src="/lp/img/hero-map.svg" alt="Stylised map with contours, parcels, roads and a river" width="1600" height="900"></div>
+<div class="mx-hero-img"><img src="/lp/img/hero-map.webp" alt="Dark mapx map of Innsbruck with roads, the river Inn and contours" width="1600" height="900" fetchpriority="high"><p class="mx-hero-cap">Style <code>streets-night</code>, Innsbruck. Data: BEV, GIP.at, CC BY 4.0</p></div>
 </div>
 
 <p class="mx-note"><strong>Data sources:</strong> BEV · GIP.at · ASFINAG · GeoSphere Austria · ÖBB · Umweltbundesamt (GGN) · Statistik Austria · Open licences, mostly CC BY 4.0</p>

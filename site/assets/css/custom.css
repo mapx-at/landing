@@ -45,3 +45,4 @@ nav a[href*="account.mapx.at/register"]:hover{background:#0853c4}
 .mx-related a:hover{background:rgb(156 163 175 / .15)}
 @media(max-width:640px){.mx-topic .content h1{font-size:1.75rem}}
 .mx-topic .mx-btns{margin:1.25rem 0 .5rem}.mx-topic .content p.mx-lead{margin-bottom:0}
+.mx-hero-cap{margin:.5rem .25rem 0;font-size:.75rem;opacity:.65;text-align:right}
