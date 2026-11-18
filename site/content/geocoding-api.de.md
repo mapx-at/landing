@@ -19,6 +19,8 @@ description: "Geocoding-API für Österreich: Adresssuche, Reverse Geocoding, Ad
 {{< hextra/hero-button text="Doku: Adresssuche" link="https://docs.mapx.at/de/guides/search/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
+{{< demo id="geocoding" >}}
+
 ## Was die Schnittstelle kann
 
 - `GET /v1/geocode`: Vorwärts-Geocoding von Adressen, Straßen, Orten, Postleitzahlen, Bezirken und Grundstücken. Auch Straßenkilometer wie `A1 km 41` lassen sich suchen.

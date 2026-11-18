@@ -19,6 +19,8 @@ description: "Wetter-API für Österreich: Messwerte, Stundenvorhersage, Nieders
 {{< hextra/hero-button text="Doku: Wetter" link="https://docs.mapx.at/de/api/weather/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
+{{< demo id="wetter" >}}
+
 ## Was die Schnittstelle kann
 
 - `GET /v1/weather/current`: Messwerte der nächsten Stationen im 10-Minuten-Raster (Temperatur, Feuchte, Wind, Böen, Niederschlag, Luftdruck).

@@ -19,6 +19,8 @@ description: "Statische Karten für Österreich als PNG oder WebP mit Pins, Pfad
 {{< hextra/hero-button text="Doku: Statische Bilder" link="https://docs.mapx.at/de/guides/static-images/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
+{{< demo id="statisch" >}}
+
 ## Was die Schnittstelle kann
 
 - `GET /v1/static/{style}/{view}/{size}`: Kartenbild ohne Overlay. `view` ist `lon,lat,zoom[,bearing]`, `size` ist Breite mal Höhe, zum Beispiel `600x400`, mit optionalem `@2x` und Endung `.png` oder `.webp`.

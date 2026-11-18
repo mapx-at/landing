@@ -19,6 +19,8 @@ description: "Routing-API für Österreich: Routen für Auto, Lkw, Rad und zu Fu
 {{< hextra/hero-button text="Doku: Routing" link="https://docs.mapx.at/de/guides/navigation/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
+{{< demo id="routing" >}}
+
 ## Was die Schnittstelle kann
 
 - `GET /v1/directions/{profile}/{coordinates}`: Routen mit 2 bis 25 Punkten, optional mit Abbiegeschritten, Alternativen sowie Sprach- und Bannerhinweisen. Profile: `driving`, `driving-traffic`, `driving-truck`, `cycling`, `cycling-mtb`, `walking`.

@@ -19,6 +19,8 @@ description: "Verkehrs-API für Österreich: Verkehrsmeldungen, Baustellen, Sper
 {{< hextra/hero-button text="Doku: Verkehr" link="https://docs.mapx.at/de/guides/traffic/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
+{{< demo id="verkehr" >}}
+
 ## Was die Schnittstelle kann
 
 - `GET /v1/traffic/incidents`: Meldungen, filterbar nach Kartenausschnitt (`bbox`), Straße (`road`, `road_class`), Art (`type`, zum Beispiel `construction` oder `road_closure`), Zeitfenster und geplant oder ungeplant. Baustellen auf Autobahnen und Schnellstraßen tragen Fahrstreifen-Details.

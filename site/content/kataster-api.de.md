@@ -19,6 +19,8 @@ description: "Kataster-API für Österreich: Grundstück an einem Punkt abfragen
 {{< hextra/hero-button text="Doku: Grundstücke" link="https://docs.mapx.at/de/guides/parcels/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
+{{< demo id="kataster" >}}
+
 ## Was die Schnittstelle kann
 
 - `GET /v1/parcel/{lon},{lat}`: das Grundstück an einem Punkt als Polygon, mit Grundstücksnummer, Katastralgemeinde und Fläche. Gebäude liefern ihr Baugrundstück.

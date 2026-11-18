@@ -19,6 +19,8 @@ description: "Geocoding API for Austria: address search, reverse geocoding, addr
 {{< hextra/hero-button text="Docs: address search" link="https://docs.mapx.at/guides/search/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
+{{< demo id="geocoding" >}}
+
 ## What the API can do
 
 - `GET /v1/geocode`: forward geocoding of addresses, streets, places, postcodes, districts and parcels. Road kilometers such as `A1 km 41` can be searched as well.

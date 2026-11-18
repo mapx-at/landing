@@ -19,6 +19,8 @@ description: "Traffic API for Austria: traffic reports, roadworks, closures and 
 {{< hextra/hero-button text="Docs: traffic" link="https://docs.mapx.at/guides/traffic/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
+{{< demo id="verkehr" >}}
+
 ## What the API can do
 
 - `GET /v1/traffic/incidents`: reports, filterable by map extent (`bbox`), road (`road`, `road_class`), type (`type`, for example `construction` or `road_closure`), time window and planned or unplanned. Roadworks on motorways and expressways carry lane details.

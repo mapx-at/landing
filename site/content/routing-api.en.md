@@ -19,6 +19,8 @@ description: "Routing API for Austria: routes for car, truck, bike and foot, iso
 {{< hextra/hero-button text="Docs: routing" link="https://docs.mapx.at/guides/navigation/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
+{{< demo id="routing" >}}
+
 ## What the API can do
 
 - `GET /v1/directions/{profile}/{coordinates}`: routes with 2 to 25 points, optionally with turn-by-turn steps, alternatives and voice and banner instructions. Profiles: `driving`, `driving-traffic`, `driving-truck`, `cycling`, `cycling-mtb`, `walking`.

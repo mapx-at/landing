@@ -19,6 +19,8 @@ description: "Karten-API für Österreich: Vektorkacheln, fertige Kartenstile f�
 {{< hextra/hero-button text="Doku: Karten" link="https://docs.mapx.at/de/guides/maps/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
+{{< demo id="karten" >}}
+
 ## Was die Schnittstelle kann
 
 - `GET /v1/styles` und `GET /v1/styles/{id}`: fertige MapLibre-Stile `streets`, `streets-dawn`, `streets-dusk`, `streets-night`, `traffic-day`, `satellite`, `satellite-streets` und `outdoors`, dazu Schriften und Sprites.

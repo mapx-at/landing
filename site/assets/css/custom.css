@@ -46,3 +46,45 @@ nav a[href*="account.mapx.at/register"]:hover{background:#0853c4}
 @media(max-width:640px){.mx-topic .content h1{font-size:1.75rem}}
 .mx-topic .mx-btns{margin:1.25rem 0 .5rem}.mx-topic .content p.mx-lead{margin-bottom:0}
 .mx-hero-cap{margin:.5rem .25rem 0;font-size:.75rem;opacity:.65;text-align:right}
+/* Interaktive Produktbeispiele (Shortcode demo, Skripte /lp/demo/) */
+.mx-demo{--mx-line:#2346d8;margin:2rem 0 1rem;max-width:56rem}
+.dark .mx-demo{--mx-line:#8aa2ff}
+.mx-topic .content .mx-demo h2{margin-top:0}
+.mx-demo-p{margin:.25rem 0 .75rem;max-width:48rem}
+.mx-demo-stage{position:relative;border:1px solid rgb(156 163 175 / .35);border-radius:1rem;overflow:hidden;background:rgb(156 163 175 / .12)}
+.mx-topic .content .mx-demo-stage>img{display:block;margin:0;max-width:none;width:100%;height:auto;aspect-ratio:2/1;object-fit:cover}
+.mx-demo-start{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#0a64e8;color:#fff;font-weight:600;border-radius:9999px;padding:.7rem 1.4rem;box-shadow:0 4px 18px rgb(0 0 0 / .25)}
+.mx-demo-start:hover{background:#0853c4}
+.mx-demo-start:focus-visible,.mx-demo button:focus-visible,.mx-demo select:focus-visible,.mx-demo input:focus-visible,.mx-demo-map:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
+.mx-demo-map{height:26rem;width:100%}
+.mx-demo-hint{position:absolute;left:3.25rem;top:.6rem;margin:0;padding:.2rem .5rem;font-size:.75rem;border-radius:.4rem;background:rgb(255 255 255 / .85);color:#111827;z-index:500;pointer-events:none;max-width:calc(100% - 4rem)}
+.mx-demo-map:focus{outline:none}
+.mx-demo-panel{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:0 0 .6rem}
+.mx-demo-panel label{display:flex;gap:.4rem;align-items:center;font-size:.875rem}
+.mx-demo select,.mx-demo input[type=search]{border:1px solid rgb(156 163 175 / .6);border-radius:.5rem;padding:.35rem .5rem;background:transparent;color:inherit;font-size:1rem}
+.mx-demo select option{color:#111827}
+.mx-demo-btn,.mx-demo-seg button{border:1px solid rgb(156 163 175 / .6);border-radius:9999px;padding:.35rem .8rem;font-size:.875rem}
+.mx-demo-btn:hover,.mx-demo-seg button:hover{background:rgb(156 163 175 / .15)}
+.mx-demo-seg{display:flex;flex-wrap:wrap;gap:.4rem}
+.mx-demo-seg button[aria-pressed=true],.mx-demo-primary{background:#0a64e8;color:#fff;border-color:#0a64e8}
+.mx-demo-search{flex:1 1 18rem;position:relative}
+.mx-demo-search input{width:100%}
+.mx-demo-list{list-style:none;margin:.4rem 0 0;padding:0;font-size:.875rem}
+.mx-demo-list button{display:block;width:100%;text-align:left;padding:.35rem .5rem;border-radius:.4rem}
+.mx-demo-list button:hover{background:rgb(156 163 175 / .15)}
+.mx-demo-dep li,.mx-demo-inc li{padding:.15rem 0}
+.mx-demo-dep b{display:inline-block;min-width:3.2rem;font-variant-numeric:tabular-nums}
+.mx-demo-range{flex:1 1 20rem;min-width:0;flex-wrap:wrap}.mx-demo-range input{flex:1 1 8rem;min-width:0;max-width:18rem}
+.mx-demo-range output{font-variant-numeric:tabular-nums}
+.mx-demo-info{min-height:1.5rem;margin:.5rem 0 0;font-size:.9375rem}
+.mx-demo-bad{color:#c8372d}.dark .mx-demo-bad{color:#ff8a80}
+.mx-demo-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem;font-size:.8125rem;opacity:.8;margin:.4rem 0 0}
+.mx-demo-foot a{text-decoration:underline;text-underline-offset:2px}
+.mx-demo-chart{display:block;width:100%;height:auto;margin-top:.6rem;color:inherit}
+.mx-demo-url{white-space:pre-wrap;word-break:break-all;font-size:.75rem;padding:.5rem .7rem;border-radius:.5rem;background:rgb(156 163 175 / .15);margin:0 0 .6rem}
+.mx-topic .content .mx-demo-static{display:block;max-width:100%;height:auto;margin:0 auto}
+.mx-demo .leaflet-container{font:inherit;font-size:.75rem}
+.dark .mx-demo .leaflet-bar a{background:#1f2937;color:#f3f4f6;border-color:#374151}
+.dark .mx-demo .leaflet-control-attribution{background:rgb(17 24 39 / .8);color:#e5e7eb}.dark .mx-demo .leaflet-control-attribution a{color:#8aa2ff}
+@media(max-width:640px){.mx-demo-map{height:20rem}}
+@media(prefers-reduced-motion:reduce){.mx-demo *{transition:none!important;animation:none!important}}
