@@ -19,6 +19,8 @@ description: "Maps API for Austria: vector tiles, ready-made map styles for MapL
 {{< hextra/hero-button text="Docs: maps" link="https://docs.mapx.at/guides/maps/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
+{{< demo id="karten" >}}
+
 ## What the API can do
 
 - `GET /v1/styles` and `GET /v1/styles/{id}`: ready-made MapLibre styles `streets`, `streets-dawn`, `streets-dusk`, `streets-night`, `traffic-day`, `satellite`, `satellite-streets` and `outdoors`, plus fonts and sprites.

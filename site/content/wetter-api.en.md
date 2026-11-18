@@ -19,6 +19,8 @@ description: "Weather API for Austria: observations, hourly forecast, precipitat
 {{< hextra/hero-button text="Docs: weather" link="https://docs.mapx.at/api/weather/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
+{{< demo id="wetter" >}}
+
 ## What the API can do
 
 - `GET /v1/weather/current`: observations of the nearest stations in a 10-minute grid (temperature, humidity, wind, gusts, precipitation, pressure).

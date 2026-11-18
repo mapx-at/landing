@@ -19,6 +19,8 @@ description: "Cadastre API for Austria: look up the parcel at a point, show parc
 {{< hextra/hero-button text="Docs: parcels" link="https://docs.mapx.at/guides/parcels/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
+{{< demo id="kataster" >}}
+
 ## What the API can do
 
 - `GET /v1/parcel/{lon},{lat}`: the parcel at a point as a polygon, with parcel number, cadastral municipality and area. Buildings return their building parcel.

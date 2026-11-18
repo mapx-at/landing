@@ -19,6 +19,8 @@ description: "Höhen-API für Österreich: Höhe für Punkte, Höhenprofil entla
 {{< hextra/hero-button text="Doku: Höhen" link="https://docs.mapx.at/de/guides/elevation/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
+{{< demo id="hoehe" >}}
+
 ## Was die Schnittstelle kann
 
 - `GET /v1/elevation`: Höhen für bis zu 512 Punkte (`points`) oder entlang eines Linienzugs (`path`, mit `samples`), wahlweise aus dem Geländemodell `dtm` oder dem Oberflächenmodell `dsm`.

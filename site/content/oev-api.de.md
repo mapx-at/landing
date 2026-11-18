@@ -19,6 +19,8 @@ description: "ÖV-API für Österreich: Verbindungen, Haltestellen und Abfahrtst
 {{< hextra/hero-button text="Doku: ÖV" link="https://docs.mapx.at/de/guides/transit/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
+{{< demo id="oev" >}}
+
 ## Was die Schnittstelle kann
 
 - `GET /v1/directions/transit/{coordinates}`: Verbindungen von einem Start zu einem Ziel, mit Fußwegen auf dem Straßennetz und Fahrten mit Linie, Haltestellen und Zeiten. Mit `depart_at` oder `arrive_by` legst du die Zeit fest.

@@ -1,0 +1,18 @@
+{{- /* Interaktives Produktbeispiel. Vor dem Klick nur Vorschaubild + Knopf, keine Anfrage an api.mapx.at. Texte: data/demos.yaml, Token: params.demoToken */ -}}
+{{- $id := .Get "id" -}}
+{{- $d := index hugo.Data.demos $id -}}
+{{- $en := eq .Page.Language.Lang "en" -}}
+{{- $x := index $d (cond $en "en" "de") -}}
+{{- $file := cond (eq $id "hoehe") "hoehen" $id -}}
+<section class="mx-demo" data-demo="{{ $file }}" data-token="{{ site.Params.demoToken }}" data-leaflet="{{ if eq $d.leaflet false }}false{{ else }}true{{ end }}" aria-labelledby="mx-demo-h">
+  <h2 id="mx-demo-h">{{ $x.h }}</h2>
+  <p class="mx-demo-p">{{ $x.p }}</p>
+  <div class="mx-demo-panel" hidden></div>
+  <div class="mx-demo-stage">
+    <img src="/lp/img/demo/{{ $file }}.webp" width="800" height="400" alt="{{ $x.alt }}" loading="lazy" decoding="async">
+    <button type="button" class="mx-demo-start">{{ cond $en "Try it" "Ausprobieren" }}</button>
+  </div>
+  <p class="mx-demo-info" aria-live="polite"></p>
+  <p class="mx-demo-foot"><span>{{ cond $en "Example with live data. Loads the map only after the click." "Beispiel mit Live-Daten. Die Karte lädt erst nach dem Klick." }}</span> <a href="https://docs.mapx.at{{ if not $en }}/de{{ end }}/examples/{{ $d.docs }}/">{{ cond $en "View code" "Code ansehen" }} →</a></p>
+  <script src="/lp/demo/demo.js" defer></script>
+</section>

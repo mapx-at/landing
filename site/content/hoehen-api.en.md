@@ -19,6 +19,8 @@ description: "Elevation API for Austria: height for points, elevation profile al
 {{< hextra/hero-button text="Docs: elevation" link="https://docs.mapx.at/guides/elevation/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
+{{< demo id="hoehe" >}}
+
 ## What the API can do
 
 - `GET /v1/elevation`: heights for up to 512 points (`points`) or along a polyline (`path`, with `samples`), from the terrain model `dtm` or the surface model `dsm`.

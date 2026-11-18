@@ -19,6 +19,8 @@ description: "Static maps for Austria as PNG or WebP with pins, paths and GeoJSO
 {{< hextra/hero-button text="Docs: static images" link="https://docs.mapx.at/guides/static-images/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
+{{< demo id="statisch" >}}
+
 ## What the API can do
 
 - `GET /v1/static/{style}/{view}/{size}`: a map image without overlay. `view` is `lon,lat,zoom[,bearing]`, `size` is width times height, for example `600x400`, with optional `@2x` and the extension `.png` or `.webp`.
