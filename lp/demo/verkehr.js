@@ -23,7 +23,7 @@ window.mxDemo = (c) => {
         bt.addEventListener('click', () => show(f));
         return el('li', {}, bt);
       }));
-      const nn = fc.features.length >= 50 ? t('mindestens 50', 'at least 50') : fc.features.length;
+      const nn = fc.features.length >= 50 ? t('Mindestens 50', 'At least 50') : fc.features.length;
       c.say(t(`${nn} aktive Meldung(en) im Ausschnitt${fc.features.length > 6 ? ', die ersten sechs unten' : ''}. Verschieben lädt neu.`, `${nn} active report(s) in view${fc.features.length > 6 ? ', the first six below' : ''}. Panning reloads.`));
     } catch (e) { c.fail(e); }
   }

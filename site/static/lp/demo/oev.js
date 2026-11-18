@@ -24,5 +24,5 @@ window.mxDemo = (c) => {
   }
   map.on('click', query);
   c.centerButton(t('Kartenmitte abfragen', 'Look up map centre'), query);
-  c.say(t('Tippen Sie in die Nähe einer Haltestelle.', 'Tap near a stop.'));
+  c.say(t('Tipp in die Nähe einer Haltestelle.', 'Tap near a stop.'));
 };

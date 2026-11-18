@@ -35,6 +35,6 @@ window.mxDemo = (c) => {
     } catch (e) { c.fail(e); }
     session = crypto.randomUUID(); // die Sitzung endet mit retrieve
   }
-  c.say(t('Geben Sie mindestens drei Zeichen ein.', 'Type at least three characters.'));
+  c.say(t('Gib mindestens drei Zeichen ein.', 'Type at least three characters.'));
   input.focus({ preventScroll: true });
 };

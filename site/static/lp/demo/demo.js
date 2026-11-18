@@ -30,7 +30,7 @@
       401: t('Der Beispiel-Token fehlt oder ist ungültig (401).', 'The example token is missing or invalid (401).'),
       403: t('Der Beispiel-Token gilt für diese Seite nicht (403).', 'The example token is not valid for this page (403).'),
       404: t('Nichts gefunden (404).', 'Nothing found (404).'),
-      429: t('Gerade zu viele Anfragen (429). Bitte kurz warten und noch einmal versuchen.', 'Too many requests right now (429). Please wait a moment and try again.'),
+      429: t('Gerade zu viele Anfragen (429). Warte kurz und versuch es noch einmal.', 'Too many requests right now (429). Please wait a moment and try again.'),
     }[status];
     return m || (detail ? `${detail} (${status})` : t(`Die Anfrage ist fehlgeschlagen (${status}).`, `The request failed (${status}).`));
   }
@@ -77,8 +77,8 @@
     map = L.map(mapEl, { scrollWheelZoom: false, dragging: !touch, tap: false, zoomAnimation: !reduce, fadeAnimation: !reduce, markerZoomAnimation: !reduce, attributionControl: false }).setView(center, zoom);
     L.control.attribution({ prefix: 'mapx' }).addTo(map);
     base = tiles(style).addTo(map);
-    if (touch) stage.append(el('p', { className: 'mx-demo-hint', textContent: t('Mit zwei Fingern zoomen und verschieben, mit einem Finger tippen.', 'Use two fingers to zoom and pan, one finger to tap.') }));
-    else stage.append(el('p', { className: 'mx-demo-hint', textContent: t('Ziehen verschiebt, + und − zoomen; Pfeiltasten, wenn die Karte den Fokus hat.', 'Drag to pan, + and − to zoom; arrow keys when the map has focus.') }));
+    if (touch) stage.append(el('p', { className: 'mx-demo-hint', textContent: t('Zwei Finger: zoomen und verschieben', 'Two fingers: zoom and pan') }));
+    else stage.append(el('p', { className: 'mx-demo-hint', textContent: t('Ziehen verschiebt, + und − zoomen', 'Drag to pan, + and − to zoom') }));
     return map;
   }
   function setStyle(style) { base.remove(); tileErr = false; base = tiles(style).addTo(map); }

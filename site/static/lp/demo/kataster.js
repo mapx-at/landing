@@ -19,5 +19,5 @@ window.mxDemo = (c) => {
   }
   map.on('click', query);
   c.centerButton(t('Kartenmitte abfragen', 'Look up map centre'), query);
-  c.say(t('Tippen oder klicken Sie auf ein Grundstück im Luftbild.', 'Tap or click a parcel in the aerial image.'));
+  c.say(t('Tipp oder klick auf ein Grundstück im Luftbild.', 'Tap or click a parcel in the aerial image.'));
 };

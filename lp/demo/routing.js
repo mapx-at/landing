@@ -26,5 +26,5 @@ window.mxDemo = (c) => {
   map.on('click', set);
   profile.addEventListener('change', route);
   c.centerButton(t('Kartenmitte als Punkt', 'Use map centre'), set);
-  c.say(t('Tippen Sie auf den Start, dann auf das Ziel.', 'Tap the start, then the destination.'));
+  c.say(t('Tipp auf den Start, dann auf das Ziel.', 'Tap the start, then the destination.'));
 };

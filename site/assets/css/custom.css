@@ -57,7 +57,7 @@ nav a[href*="account.mapx.at/register"]:hover{background:#0853c4}
 .mx-demo-start:hover{background:#0853c4}
 .mx-demo-start:focus-visible,.mx-demo button:focus-visible,.mx-demo select:focus-visible,.mx-demo input:focus-visible,.mx-demo-map:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
 .mx-demo-map{height:26rem;width:100%}
-.mx-demo-hint{position:absolute;left:3.25rem;top:.6rem;margin:0;padding:.2rem .5rem;font-size:.75rem;border-radius:.4rem;background:rgb(255 255 255 / .85);color:#111827;z-index:500;pointer-events:none;max-width:calc(100% - 4rem)}
+.mx-demo-hint{position:absolute;left:3.5rem;top:.65rem;margin:0;padding:.2rem .5rem;font-size:.75rem;border-radius:.4rem;background:rgb(255 255 255 / .85);color:#111827;z-index:500;pointer-events:none;max-width:calc(100% - 4rem)}
 .mx-demo-map:focus{outline:none}
 .mx-demo-panel{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:0 0 .6rem}
 .mx-demo-panel label{display:flex;gap:.4rem;align-items:center;font-size:.875rem}
