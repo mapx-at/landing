@@ -33,7 +33,7 @@ layout: hextra-home
 </div>
 </div>
 
-<div class="mx-hero-img"><img src="/lp/img/hero-map.svg" alt="Stilisierte Karte mit Höhenlinien, Parzellen, Straßen und Fluss" width="1600" height="900"></div>
+<div class="mx-hero-img"><img src="/lp/img/hero-map.webp" alt="Dunkle mapx-Karte von Innsbruck mit Straßen, Inn und Höhenlinien" width="1600" height="900" fetchpriority="high"><p class="mx-hero-cap">Stil <code>streets-night</code>, Innsbruck. Daten: BEV, GIP.at, CC BY 4.0</p></div>
 </div>
 
 <p class="mx-note"><strong>Datenquellen:</strong> BEV · GIP.at · ASFINAG · GeoSphere Austria · ÖBB · Umweltbundesamt (GGN) · Statistik Austria · Offene Lizenzen, überwiegend CC BY 4.0</p>
