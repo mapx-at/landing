@@ -8,8 +8,8 @@ set -euo pipefail
 cd "$(dirname "$0")"
 HUGO=${HUGO:-hugo}
 # Themenseiten (Verzeichnisse; Quelle content/<key>.<lang>.md, Liste in data/topics.yaml, plus faq)
-PAGES_DE="kataster-api geocoding-api routing-api hoehen-api karten-api oev-api verkehr-api statische-karten wetter-api faq"
-PAGES_EN="cadastre-api geocoding-api routing-api elevation-api maps-api transit-api traffic-api static-maps weather-api faq"
+PAGES_DE="kataster-api geocoding-api routing-api hoehen-api karten-api oev-api verkehr-api statische-karten wetter-api mcp-server faq"
+PAGES_EN="cadastre-api geocoding-api routing-api elevation-api maps-api transit-api traffic-api static-maps weather-api mcp-server faq"
 OUT=$(mktemp -d); trap 'rm -rf "$OUT"' EXIT
 "$HUGO" --minify --cleanDestinationDir -d "$OUT" >/dev/null
 for p in $PAGES_DE; do [ -f "$OUT/$p/index.html" ]; done

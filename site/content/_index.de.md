@@ -52,6 +52,7 @@ Je Produkt ein eigener Datensatz mit Stichtag und Quelle. Jedes Produkt hat eine
   {{< hextra/feature-card title="Verkehr" subtitle="Verkehrsmeldungen, Baustellen und Sperren, Tempolimits auf Wechselverkehrszeichen der Autobahnen und eine Verkehrsebene für die Karte. · *ASFINAG / EVIS.AT · CC BY 4.0*" icon="exclamation-circle" link="/verkehr-api/" >}}
   {{< hextra/feature-card title="Statische Kartenbilder" subtitle="Karte als PNG oder WebP mit Pins, Pfaden und GeoJSON, für Berichte, E-Mails und Exposés. · *bis 1280 × 1280 Pixel*" icon="photograph" link="/statische-karten/" >}}
   {{< hextra/feature-card title="Wetter und Klima" subtitle="Messwerte, Stundenvorhersage, Niederschlags-Nowcast, Warnungen, Luftqualität und Klima für einen Punkt. · *GeoSphere Austria · CC BY 4.0*" icon="cloud" link="/wetter-api/" >}}
+  {{< hextra/feature-card title="MCP-Server für KI-Assistenten" subtitle="23 lesende Werkzeuge für Adressen, Routen, Grundstücke, Wetter und mehr, direkt in Claude Code, Cursor und VS Code. · *MCP · Streamable HTTP*" icon="chip" link="/mcp-server/" >}}
 {{< /hextra/feature-grid >}}
 
 ## Einbinden in fünf Minuten. {#entwickler}

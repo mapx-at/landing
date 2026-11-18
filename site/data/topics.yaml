@@ -26,3 +26,6 @@
 - key: wetter
   de: {path: /wetter-api/, name: Wetter und Klima}
   en: {path: /en/weather-api/, name: Weather and climate}
+- key: mcp
+  de: {path: /mcp-server/, name: MCP-Server für KI-Assistenten}
+  en: {path: /en/mcp-server/, name: MCP server for AI assistants}

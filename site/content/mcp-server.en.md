@@ -1,0 +1,89 @@
+---
+title: "MCP server for Austrian geodata"
+crumb: "MCP server for AI assistants"
+key: mcp
+layout: topic
+translationKey: mcp
+url: /en/mcp-server/
+lastmod: 2026-11-17
+images: ["/img/og-image.png"]
+description: "MCP server for Austrian geodata: AI assistants such as Claude Code, Cursor and VS Code use mapx addresses, routes, parcels, weather and traffic directly."
+faq:
+  - q: "What is an MCP server?"
+    a: "MCP stands for Model Context Protocol, an open standard through which AI assistants call external tools. The mapx MCP server provides 23 tools for Austrian geodata. The assistant picks them itself and fills them in from your question."
+  - q: "Can the assistant change anything?"
+    a: "No. All 23 tools are read-only. The assistant can query data, but cannot create, change or delete anything."
+  - q: "Which assistants work?"
+    a: "Claude Code, Cursor, VS Code and Gemini CLI, as well as the Anthropic and OpenAI APIs. Sign-in for claude.ai and ChatGPT without a token, through your account, is coming."
+  - q: "What does it cost?"
+    a: "Access goes through your mapx account. Calls count like API calls and are visible in your account under usage. You can block a token at any time."
+  - q: "Are there real-time departures?"
+    a: "No. The public transport tools work with the timetable, not with real-time data."
+  - q: "Does the MCP server cover places outside Austria?"
+    a: "No, Austria only. Every answer names its source."
+---
+
+# MCP server for Austrian geodata
+
+<p class="mx-lead">With the hosted mapx MCP server your AI assistant can look up addresses, calculate routes, query parcels and check the weather without you writing API calls. It is meant for anyone who wants to answer questions about Austria directly in an assistant (Claude Code, Cursor, VS Code, Gemini CLI), and for developers who give an assistant geodata. The endpoint is https://mcp.mapx.at/mcp (Model Context Protocol, Streamable HTTP).</p>
+
+<div class="mx-btns">
+{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Docs: MCP" link="https://docs.mapx.at/guides/mcp/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
+</div>
+
+## Example questions
+
+- "How long does it take to cycle from Krems to Melk, and how much climbing is that?"
+- "Which parcel is at 15.3294, 48.2272, and which cadastral municipality does it belong to?"
+- "Which places can I reach from Linz Hauptbahnhof by train in 30 minutes?"
+- "Are there traffic reports on the A1 between Salzburg and Vienna today?"
+- "How is the air quality in Graz, and are there weather warnings for Styria?"
+
+The assistant picks the matching tools itself and combines the results into an answer.
+
+## The tools
+
+There are 23 tools, all read-only, in eight groups:
+
+- **Addresses and places:** `geocode`, `reverse_geocode`, `validate_address`, `search_places`.
+- **Routes and reachability:** `route` for car, truck, bike and foot, `isochrone`, `travel_matrix`, `optimize_stops`.
+- **Public transport:** `transit_route`, `departures`, `find_stops`. Based on the timetable, not real time.
+- **Elevation:** `elevation`, `elevation_profile`.
+- **Parcels:** `parcel_at_point`, `parcel_details` from the BEV cadastre.
+- **Traffic:** `traffic_incidents`, `speed_limits`.
+- **Weather and climate:** `weather`, `weather_warnings`, `climate`, `air_quality`.
+- **Map image:** `static_map`.
+
+## Set up in three steps
+
+1. Create an account at [account.mapx.at](https://account.mapx.at/register?lang=en).
+2. Create a token of the type "AI assistant (MCP)" there. It starts with `mx_mcp_`.
+3. Add the server to your assistant. In Claude Code:
+
+```bash
+claude mcp add --transport http mapx https://mcp.mapx.at/mcp --header "Authorization: Bearer YOUR_MCP_TOKEN"
+```
+
+This works with Claude Code, Cursor, VS Code and Gemini CLI, as well as through the Anthropic and OpenAI APIs. Sign-in for claude.ai and ChatGPT without a token, through your account, is coming. The steps for each assistant are in the [MCP server docs](https://docs.mapx.at/guides/mcp/).
+
+## Where the data comes from
+
+The tools use the same datasets as the mapx APIs: cadastre and elevation from the BEV, road graph from GIP.at, timetable from ÖBB-Personenverkehr AG, traffic reports from ASFINAG / EVIS.AT, weather, climate and air quality from GeoSphere Austria. Only official open data is used, no OpenStreetMap. Every answer names its source; pass it on when you publish results.
+
+## Limitations
+
+- Austria only.
+- All tools are read-only, the assistant changes nothing.
+- Public transport is based on the timetable, not on real-time data.
+- Parcel data is for orientation and not legally binding.
+- Calls count like API calls and are visible in your account under usage. You can block a token at any time.
+- The assistant words the answers itself. Check important details against the named source.
+
+## Get started
+
+Access goes through an account with a token. All details are in the [MCP server docs](https://docs.mapx.at/guides/mcp/).
+
+<div class="mx-btns">
+{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+</div>
