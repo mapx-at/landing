@@ -28,7 +28,7 @@ description: "Maps API for Austria: vector tiles, ready-made map styles for MapL
 - `GET /v1/tiles/{tileset}/{z}/{x}/{y}.{ext}`: tiles in the XYZ scheme.
 - `GET /v1/styles/{id}/tiles/{tilesize}/{z}/{x}/{y}`: rendered raster tiles of a style for clients without vector support.
 - Tilesets: `streets` (basemap, zoom 0 to 16), `orthophoto` (aerial imagery, zoom 5 to 18, 20 cm), `cadastre`, `contours`, `terrain-rgb` and `dsm`.
-- Every tileset is also available as a single PMTiles file for self-hosting and offline use.
+- Access through style, TileJSON or `{z}/{x}/{y}`; whole tileset files are not offered for download.
 
 ## Example
 
