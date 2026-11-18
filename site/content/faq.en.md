@@ -41,6 +41,8 @@ faq:
     a: "Raster tiles are 512 pixels. Set `tileSize: 512` in your client."
   - q: "Where do I report a problem?"
     a: "Write to [support@mapx.at](mailto:support@mapx.at) for technical questions and bugs or to [info@mapx.at](mailto:info@mapx.at) for everything else."
+  - q: "Is mapx liable for wrong results?"
+    a: "No, to the extent permitted by law. mapx is a free service under development; all information is provided without guarantee and use is at your own risk. Check results yourself, especially for addresses, routes, departures, weather and cadastre. Details: [Terms of use](/en/terms/)."
 ---
 
 # FAQ: frequently asked questions about mapx

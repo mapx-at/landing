@@ -23,6 +23,9 @@ footer:
   - Usage
   legal: Legal
   imprint: Imprint
+  terms: Terms
+  termsurl: https://mapx.at/en/terms/
+  disclaimer: 'All information without guarantee. Use at your own risk; no liability for correctness, completeness or timeliness. Details:'
   privacy: 'Privacy: coming soon'
   contact: Contact
   copy: '© mapx · Map and geodata: BEV, GIP.at, Umweltbundesamt, Statistik Austria

@@ -20,6 +20,7 @@ html,body{font-family:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",R
 .mx-fgrid a:hover{text-decoration:underline}
 .mx-fabout,.mx-fcopy{grid-column:1/-1}
 .mx-fcopy{font-size:.75rem;padding-top:.5rem}
+.mx-fdisc{padding-top:1rem}
 @media(max-width:900px){.mx-hero{grid-template-columns:1fr;gap:2rem}.mx-fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 /* "Registrieren" in der Navbar als Button */
 nav a[href*="account.mapx.at/register"]{background:#0a64e8;color:#fff!important;border-radius:9999px;padding:.35rem .9rem!important;margin-left:.25rem;font-weight:500}

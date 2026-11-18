@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Baut die Landing mit Hugo (Theme Hextra, Submodul site/themes/hextra) und legt das Ergebnis in die Repo-Wurzel
-# (GitHub Pages liefert den Branch main aus). Geschrieben bzw. ersetzt werden nur: index.html, en/, impressum/, die Themenseiten (PAGES_DE, unter en/ PAGES_EN), lp/, css/, js/, img/, fonts/, favicon.svg, sitemap.xml, robots.txt, llms.txt.
+# (GitHub Pages liefert den Branch main aus). Geschrieben bzw. ersetzt werden nur: index.html, en/, impressum/, die Themenseiten (inkl. nutzungsbedingungen, en/terms) (PAGES_DE, unter en/ PAGES_EN), lp/, css/, js/, img/, fonts/, favicon.svg, sitemap.xml, robots.txt, llms.txt.
 # style.json, styles/, legacy/, tools/, legacy-viewer.html, CNAME bleiben unberührt.
 # Aufruf: site/build.sh [--check]   (--check: nichts schreiben, Abweichung = Exit 1; für CI)
 # Voraussetzung: git submodule update --init; Hugo extended >= 0.134.
@@ -8,8 +8,8 @@ set -euo pipefail
 cd "$(dirname "$0")"
 HUGO=${HUGO:-hugo}
 # Themenseiten (Verzeichnisse; Quelle content/<key>.<lang>.md, Liste in data/topics.yaml, plus faq)
-PAGES_DE="kataster-api geocoding-api routing-api hoehen-api karten-api oev-api verkehr-api statische-karten wetter-api mcp-server faq"
-PAGES_EN="cadastre-api geocoding-api routing-api elevation-api maps-api transit-api traffic-api static-maps weather-api mcp-server faq"
+PAGES_DE="kataster-api geocoding-api routing-api hoehen-api karten-api oev-api verkehr-api statische-karten wetter-api mcp-server faq nutzungsbedingungen"
+PAGES_EN="cadastre-api geocoding-api routing-api elevation-api maps-api transit-api traffic-api static-maps weather-api mcp-server faq terms"
 OUT=$(mktemp -d); trap 'rm -rf "$OUT"' EXIT
 "$HUGO" --minify --cleanDestinationDir -d "$OUT" >/dev/null
 for p in $PAGES_DE; do [ -f "$OUT/$p/index.html" ]; done
