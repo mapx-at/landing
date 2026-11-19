@@ -89,25 +89,25 @@
     "road-ref-primary",
     "road-ref-primary-l",
     "road-ref-motorway",
-    "oev-rail-tunnel",
-    "oev-subway-tunnel",
-    "oev-rail-siding",
-    "oev-rail-bridge-casing",
-    "oev-rail-bridge-fill",
-    "oev-rail-bridge-line",
-    "oev-rail",
-    "oev-rail-construction",
-    "oev-narrow-gauge",
-    "oev-narrow-gauge-ticks",
-    "oev-subway",
-    "oev-tram",
-    "oev-funicular",
-    "oev-funicular-mast",
-    "oev-funicular-mast-gross",
-    "oev-ferry-klein",
-    "oev-ferry",
-    "oev-station",
-    "oev-airport",
+    "transit-rail-tunnel",
+    "transit-subway-tunnel",
+    "transit-rail-siding",
+    "transit-rail-bridge-casing",
+    "transit-rail-bridge-fill",
+    "transit-rail-bridge-line",
+    "transit-rail",
+    "transit-rail-construction",
+    "transit-narrow-gauge",
+    "transit-narrow-gauge-ticks",
+    "transit-subway",
+    "transit-tram",
+    "transit-funicular",
+    "transit-funicular-mast",
+    "transit-funicular-mast-gross",
+    "transit-ferry-klein",
+    "transit-ferry",
+    "transit-station",
+    "transit-airport",
     "road-low-casing-primary",
     "road-low-casing-motorway_link",
     "road-low-casing-motorway",
@@ -118,13 +118,13 @@
     "road-ref-motorway-low-s"
    ],
    "lifts": [
-    "oev-aerialway",
-    "oev-aerialway-mast",
-    "oev-aerialway-mast-gross",
-    "oev-aerialway-label"
+    "transit-aerialway",
+    "transit-aerialway-mast",
+    "transit-aerialway-mast-gross",
+    "transit-aerialway-label"
    ],
    "symbols": [
-    "geonamen-kirche",
+    "place-kirche",
     "poi-icon",
     "poi-label"
    ],
@@ -132,16 +132,16 @@
     "building-3d"
    ],
    "boundaries": [
-    "grenzen-country-outline",
-    "grenzen-district-outline",
-    "grenzen-municipality-outline",
-    "grenzen-country",
-    "grenzen-district",
-    "grenzen-municipality",
-    "grenzen-state-outline",
-    "grenzen-state",
-    "grenzen-label-bezirk",
-    "grenzen-label-gemeinde"
+    "boundary-country-outline",
+    "boundary-district-outline",
+    "boundary-municipality-outline",
+    "boundary-country",
+    "boundary-district",
+    "boundary-municipality",
+    "boundary-state-outline",
+    "boundary-state",
+    "boundary-label-bezirk",
+    "boundary-label-gemeinde"
    ],
    "housenumbers": [
     "housenumber-parcel",
@@ -152,33 +152,33 @@
     "ggn-water-l-label",
     "ggn-water-l-label-abschnitt",
     "ggn-water-label",
-    "geonamen-ried",
-    "geonamen-gebiet",
-    "geonamen-gelaende",
-    "geonamen-gletscher",
-    "geonamen-objekt",
-    "geonamen-objekt-text",
-    "geonamen-gipfel-z8",
-    "geonamen-gipfel",
-    "geonamen-einzelhaus",
-    "geonamen-stadtteil",
-    "geonamen-ort",
-    "geonamen-bezirkshauptort-punkt",
-    "geonamen-bezirkshauptort",
-    "geonamen-hauptstadt-punkt",
-    "geonamen-hauptstadt",
-    "geonamen-hauptstadt-low-punkt",
-    "geonamen-bezirkshauptort-low-punkt",
-    "geonamen-hauptstadt-low",
-    "geonamen-hauptstadt-wien-low",
-    "geonamen-bezirkshauptort-low"
+    "place-ried",
+    "place-gebiet",
+    "place-gelaende",
+    "place-gletscher",
+    "place-objekt",
+    "place-objekt-text",
+    "place-gipfel-z8",
+    "place-gipfel",
+    "place-einzelhaus",
+    "place-stadtteil",
+    "place-ort",
+    "place-bezirkshauptort-punkt",
+    "place-bezirkshauptort",
+    "place-hauptstadt-punkt",
+    "place-hauptstadt",
+    "place-hauptstadt-low-punkt",
+    "place-bezirkshauptort-low-punkt",
+    "place-hauptstadt-low",
+    "place-hauptstadt-wien-low",
+    "place-bezirkshauptort-low"
    ],
    "relief": [
     "relief-hillshade",
     "relief-hillshade-dsm",
-    "hoehenlinien",
-    "hoehenlinien-index",
-    "hoehenlinien-label"
+    "contours",
+    "contours-index",
+    "contours-label"
    ],
    "chargers": [],
    "sharing": [
@@ -186,8 +186,8 @@
     "sharing-name"
    ],
    "rest_areas": [
-    "rastanlagen-punkt",
-    "rastanlagen-name"
+    "rest-areas-punkt",
+    "rest-areas-name"
    ],
    "bike_routes": [
     "bike-routes-casing",
@@ -214,9 +214,9 @@
     },
     "layers": [
      {
-      "id": "verkehr-lage-rand",
+      "id": "traffic-lage-rand",
       "type": "line",
-      "source": "verkehr",
+      "source": "traffic",
       "source-layer": "traffic",
       "minzoom": 6,
       "layout": {
@@ -247,13 +247,13 @@
        ]
       },
       "metadata": {
-       "mapx:gruppe": "Verkehr"
+       "mapx:group": "Verkehr"
       }
      },
      {
-      "id": "verkehr-lage",
+      "id": "traffic-lage",
       "type": "line",
-      "source": "verkehr",
+      "source": "traffic",
       "source-layer": "traffic",
       "minzoom": 6,
       "layout": {
@@ -296,13 +296,13 @@
        ]
       },
       "metadata": {
-       "mapx:gruppe": "Verkehr"
+       "mapx:group": "Verkehr"
       }
      },
      {
-      "id": "verkehr-meldung-strecke",
+      "id": "traffic-meldung-strecke",
       "type": "line",
-      "source": "verkehr",
+      "source": "traffic",
       "source-layer": "incidents",
       "minzoom": 7,
       "filter": [
@@ -340,13 +340,13 @@
        ]
       },
       "metadata": {
-       "mapx:gruppe": "Verkehr"
+       "mapx:group": "Verkehr"
       }
      },
      {
-      "id": "verkehr-meldung",
+      "id": "traffic-meldung",
       "type": "circle",
-      "source": "verkehr",
+      "source": "traffic",
       "source-layer": "incidents",
       "minzoom": 7,
       "filter": [
@@ -391,7 +391,7 @@
        "circle-stroke-width": 2
       },
       "metadata": {
-       "mapx:gruppe": "Verkehr"
+       "mapx:group": "Verkehr"
       }
      }
     ]
@@ -556,53 +556,53 @@
   },
   "mapx:style": "satellit",
   "mapx:tiles": {
-   "basis": {
-    "datei": "mapx-basis-20260401-611355ce.pmtiles",
-    "stand": "2026-04-01"
+   "streets": {
+    "file": "streets-20260401-611355ce.pmtiles",
+    "data_date": "2026-04-01"
    },
-   "kataster": {
-    "datei": "mapx-kataster-20260401-e4504d72.pmtiles",
-    "stand": "2026-04-01"
+   "cadastre": {
+    "file": "cadastre-20260401-e4504d72.pmtiles",
+    "data_date": "2026-04-01"
    },
-   "relief": {
-    "datei": "relief-terrainrgb-20250915-ed2e4341.pmtiles",
-    "stand": "20250915"
+   "terrain-rgb": {
+    "file": "terrain-rgb-20250915-ed2e4341.pmtiles",
+    "data_date": "20250915"
    },
    "relief-terrain": {
-    "datei": "relief-terrainrgb-20250915-ed2e4341.pmtiles",
-    "stand": "20250915"
+    "file": "terrain-rgb-20250915-ed2e4341.pmtiles",
+    "data_date": "20250915"
    },
    "dsm": {
-    "datei": "relief-dsm-terrainrgb-20250915-d19cb434.pmtiles",
-    "stand": "20250915"
+    "file": "dsm-20250915-d19cb434.pmtiles",
+    "data_date": "20250915"
    },
-   "hoehenlinien": {
-    "datei": "hoehenlinien-20250915-2037a3df.pmtiles",
-    "stand": "20250915"
+   "contours": {
+    "file": "contours-20250915-2037a3df.pmtiles",
+    "data_date": "20250915"
    },
-   "dop": {
-    "datei": "dop-ortho-20251003-272a54b3.pmtiles",
-    "stand": "2025-10-03"
+   "orthophoto": {
+    "file": "orthophoto-20251003-272a54b3.pmtiles",
+    "data_date": "2025-10-03"
    },
-   "dop_flugblock": {
-    "datei": "dop-flugblock-20251003-0d0d122e.pmtiles",
-    "stand": "2025-10-03"
+   "orthophoto-flight-blocks": {
+    "file": "orthophoto-flight-blocks-20251003-0d0d122e.pmtiles",
+    "data_date": "2025-10-03"
    },
    "sharing": {
-    "datei": "sharing-20261107-14fbcb86.pmtiles",
-    "stand": "20261107"
+    "file": "sharing-20261107-14fbcb86.pmtiles",
+    "data_date": "20261107"
    },
-   "rastanlagen": {
-    "datei": "rastanlagen-20261107-ec1af813.pmtiles",
-    "stand": "20261107"
+   "rest-areas": {
+    "file": "rest-areas-20261107-ec1af813.pmtiles",
+    "data_date": "20261107"
    },
-   "bike_routes": {
-    "datei": "bike-routes-20260708-25a7be97.pmtiles",
-    "stand": "20260708"
+   "bike-routes": {
+    "file": "bike-routes-20260708-25a7be97.pmtiles",
+    "data_date": "20260708"
    },
-   "gip_poi": {
-    "datei": "gip-poi-20260708-6395beb5.pmtiles",
-    "stand": "20260708"
+   "gip-poi": {
+    "file": "gip-poi-20260708-6395beb5.pmtiles",
+    "data_date": "20260708"
    }
   }
  },
@@ -627,19 +627,19 @@
    "maxzoom": 19,
    "attribution": "<a href=\"https://basemap.at\" target=\"_blank\" rel=\"noopener\">basemap.at</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
-  "basis": {
+  "streets": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/mapx-basis-20260401-611355ce.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/streets-20260401-611355ce.pmtiles",
    "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – DKM</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Verwaltungsgrenzen</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.data.gv.at/katalog/datasets/c2287ccb-f44c-48cd-bf7c-ac107b771246\" target=\"_blank\" rel=\"noopener\">BMLUK – GGN v19</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Geographische Namen</a> (Gipfel- und Ortsauswahl, Tiroler Weiler: <a href=\"https://basemap.at\" target=\"_blank\" rel=\"noopener\">basemap.at</a>), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Adressregister</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>, © Österreichisches Adressregister, Stichtagsdaten vom 01.10.2026; <a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at</a> (Bahn, Fähren), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; Seilbahnen und Lifte: <a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – DLM Verkehr</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; Skigebiete: <a href=\"https://www.umweltbundesamt.at\" target=\"_blank\" rel=\"noopener\">Umweltbundesamt</a> 2017, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; <a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – DLM Bauten und Verkehr</a> (Orte von Interesse), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>; Wien: <a href=\"https://data.wien.gv.at\" target=\"_blank\" rel=\"noopener\">Stadt Wien – data.wien.gv.at</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
-  "kataster": {
+  "cadastre": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/mapx-kataster-20260401-e4504d72.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/cadastre-20260401-e4504d72.pmtiles",
    "attribution": "<a href=\"https://www.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – DKM</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
-  "relief": {
+  "terrain-rgb": {
    "type": "raster-dem",
-   "url": "pmtiles://https://tiles.mapx.at/relief-terrainrgb-20250915-ed2e4341.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/terrain-rgb-20250915-ed2e4341.pmtiles",
    "attribution": "<a href=\"https://data.bev.gv.at/geonetwork/srv/ger/catalog.search#/metadata/5ce253fc-b7c5-4362-97af-6556c18a45d9\" target=\"_blank\" rel=\"noopener\">BEV – ALS-DTM 1 m</a> (Stichtag 15.09.2025), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>",
    "encoding": "mapbox",
    "tileSize": 512,
@@ -647,7 +647,7 @@
   },
   "relief-terrain": {
    "type": "raster-dem",
-   "url": "pmtiles://https://tiles.mapx.at/relief-terrainrgb-20250915-ed2e4341.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/terrain-rgb-20250915-ed2e4341.pmtiles",
    "attribution": "<a href=\"https://data.bev.gv.at/geonetwork/srv/ger/catalog.search#/metadata/5ce253fc-b7c5-4362-97af-6556c18a45d9\" target=\"_blank\" rel=\"noopener\">BEV – ALS-DTM 1 m</a> (Stichtag 15.09.2025), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>",
    "encoding": "mapbox",
    "tileSize": 512,
@@ -655,20 +655,20 @@
   },
   "dsm": {
    "type": "raster-dem",
-   "url": "pmtiles://https://tiles.mapx.at/relief-dsm-terrainrgb-20250915-d19cb434.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/dsm-20250915-d19cb434.pmtiles",
    "attribution": "<a href=\"https://data.bev.gv.at/geonetwork/srv/ger/catalog.search#/metadata/5ce253fc-b7c5-4362-97af-6556c18a45d9\" target=\"_blank\" rel=\"noopener\">BEV – ALS-DOM 1 m</a> (Stichtag 15.09.2025), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>",
    "encoding": "mapbox",
    "tileSize": 512,
    "maxzoom": 15
   },
-  "hoehenlinien": {
+  "contours": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/hoehenlinien-20250915-2037a3df.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/contours-20250915-2037a3df.pmtiles",
    "attribution": "<a href=\"https://data.bev.gv.at/geonetwork/srv/ger/catalog.search#/metadata/5ce253fc-b7c5-4362-97af-6556c18a45d9\" target=\"_blank\" rel=\"noopener\">BEV – ALS-DTM 1 m</a> (Stichtag 15.09.2025), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
-  "dop": {
+  "orthophoto": {
    "type": "raster",
-   "url": "pmtiles://https://tiles.mapx.at/dop-ortho-20251003-272a54b3.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/orthophoto-20251003-272a54b3.pmtiles",
    "tileSize": 512,
    "maxzoom": 18,
    "attribution": "Orthophoto: <a href=\"https://data.bev.gv.at\" target=\"_blank\" rel=\"noopener\">BEV – Digitales Orthophoto (DOP)</a>, Befliegung 2022–2025 (Flugjahr beim Antippen), <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
@@ -681,9 +681,9 @@
    "maxzoom": 13,
    "attribution": "Contains modified Copernicus Sentinel data (<a href=\"https://dataspace.copernicus.eu\" target=\"_blank\" rel=\"noopener\">ESA/Copernicus</a>, Stand je Pixel siehe Aufnahmedatum)"
   },
-  "dop_flugblock": {
+  "orthophoto-flight-blocks": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/dop-flugblock-20251003-0d0d122e.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/orthophoto-flight-blocks-20251003-0d0d122e.pmtiles",
    "minzoom": 6,
    "maxzoom": 17
   },
@@ -694,21 +694,21 @@
    "maxzoom": 14,
    "attribution": "<a href=\"https://data.oebb.at/de/datensaetze~shared-mobility-standorte~\" target=\"_blank\" rel=\"noopener\">ÖBB-Personenverkehr AG – Shared-Mobility Standorte</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
-  "rastanlagen": {
+  "rest-areas": {
    "type": "vector",
-   "url": "pmtiles://https://tiles.mapx.at/rastanlagen-20261107-ec1af813.pmtiles",
+   "url": "pmtiles://https://tiles.mapx.at/rest-areas-20261107-ec1af813.pmtiles",
    "minzoom": 7,
    "maxzoom": 14,
    "attribution": "<a href=\"https://www.asfinag.at\" target=\"_blank\" rel=\"noopener\">ASFINAG – Rastanlagen</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
-  "bike_routes": {
+  "bike-routes": {
    "type": "vector",
    "url": "pmtiles://https://tiles.mapx.at/bike-routes-20260708-25a7be97.pmtiles",
    "minzoom": 5,
    "maxzoom": 14,
    "attribution": "<a href=\"https://www.gip.gv.at\" target=\"_blank\" rel=\"noopener\">GIP.at – Radrouten</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>"
   },
-  "gip_poi": {
+  "gip-poi": {
    "type": "vector",
    "url": "pmtiles://https://tiles.mapx.at/gip-poi-20260708-6395beb5.pmtiles",
    "minzoom": 12,
@@ -744,7 +744,7 @@
   {
    "id": "land-hell",
    "type": "fill",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "landuse_a",
    "minzoom": 7,
    "paint": {
@@ -758,7 +758,7 @@
   {
    "id": "relief-hillshade",
    "type": "hillshade",
-   "source": "relief",
+   "source": "terrain-rgb",
    "paint": {
     "hillshade-illumination-direction": 315,
     "hillshade-illumination-anchor": "map",
@@ -840,7 +840,7 @@
   {
    "id": "landuse",
    "type": "fill",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "landuse_a",
    "filter": [
     "all",
@@ -970,7 +970,7 @@
   {
    "id": "ski",
    "type": "fill",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "ski_a",
    "minzoom": 10,
    "paint": {
@@ -985,7 +985,7 @@
   {
    "id": "landuse-siedlung",
    "type": "fill",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "landuse_a",
    "filter": [
     "all",
@@ -1029,7 +1029,7 @@
   {
    "id": "landuse-siedlung-line",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "landuse_a",
    "minzoom": 15,
    "filter": [
@@ -1063,7 +1063,7 @@
   {
    "id": "water-dkm",
    "type": "fill",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "landuse_a",
    "filter": [
     "all",
@@ -1112,7 +1112,7 @@
   {
    "id": "water-rand-line",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "landuse_a",
    "minzoom": 17,
    "filter": [
@@ -1145,7 +1145,7 @@
   {
    "id": "ggn-water-a",
    "type": "fill",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "water_a",
    "paint": {
     "fill-color": "rgba(179, 217, 255, 1)",
@@ -1158,7 +1158,7 @@
   {
    "id": "ggn-water-l-tunnel",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "water_l",
    "filter": [
     "==",
@@ -2068,7 +2068,7 @@
   {
    "id": "ggn-water-l",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "water_l",
    "filter": [
     "!=",
@@ -2972,9 +2972,9 @@
    "minzoom": 6
   },
   {
-   "id": "hoehenlinien",
+   "id": "contours",
    "type": "line",
-   "source": "hoehenlinien",
+   "source": "contours",
    "source-layer": "contour_l",
    "minzoom": 10,
    "filter": [
@@ -3041,9 +3041,9 @@
    }
   },
   {
-   "id": "hoehenlinien-index",
+   "id": "contours-index",
    "type": "line",
-   "source": "hoehenlinien",
+   "source": "contours",
    "source-layer": "contour_l",
    "minzoom": 10,
    "filter": [
@@ -3125,7 +3125,7 @@
   {
    "id": "parcel",
    "type": "line",
-   "source": "kataster",
+   "source": "cadastre",
    "source-layer": "parcel_l",
    "minzoom": 16,
    "paint": {
@@ -3148,7 +3148,7 @@
   {
    "id": "building",
    "type": "fill",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "building_a",
    "minzoom": 12,
    "filter": [
@@ -3197,7 +3197,7 @@
   {
    "id": "building-line",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "building_a",
    "minzoom": 18,
    "paint": {
@@ -3223,7 +3223,7 @@
   {
    "id": "road-tunnel-casing-motorway",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 11,
    "filter": [
@@ -3313,7 +3313,7 @@
   {
    "id": "road-tunnel-casing-motorway_link",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 11,
    "filter": [
@@ -3403,7 +3403,7 @@
   {
    "id": "road-tunnel-casing-primary",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 11,
    "filter": [
@@ -3493,7 +3493,7 @@
   {
    "id": "road-tunnel-casing-secondary",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 11,
    "filter": [
@@ -3583,7 +3583,7 @@
   {
    "id": "road-tunnel-casing-minor",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 13,
    "filter": [
@@ -3663,7 +3663,7 @@
   {
    "id": "road-tunnel-casing-pedestrian",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 13,
    "filter": [
@@ -3743,7 +3743,7 @@
   {
    "id": "road-tunnel-motorway",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 11,
    "filter": [
@@ -3791,7 +3791,7 @@
   {
    "id": "road-tunnel-motorway_link",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 11,
    "filter": [
@@ -3839,7 +3839,7 @@
   {
    "id": "road-tunnel-primary",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 11,
    "filter": [
@@ -3887,7 +3887,7 @@
   {
    "id": "road-tunnel-secondary",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 11,
    "filter": [
@@ -3935,7 +3935,7 @@
   {
    "id": "road-tunnel-minor",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 13,
    "filter": [
@@ -3981,7 +3981,7 @@
   {
    "id": "road-tunnel-pedestrian",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 13,
    "filter": [
@@ -4027,7 +4027,7 @@
   {
    "id": "way-tunnel-service",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 12,
    "filter": [
@@ -4073,7 +4073,7 @@
   {
    "id": "way-tunnel-track",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 12,
    "filter": [
@@ -4119,7 +4119,7 @@
   {
    "id": "way-tunnel-path",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
@@ -4171,7 +4171,7 @@
   {
    "id": "way-tunnel-cycleway",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
@@ -4223,7 +4223,7 @@
   {
    "id": "way-tunnel-steps",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 15,
    "filter": [
@@ -4273,7 +4273,7 @@
   {
    "id": "way-tunnel-trail",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
@@ -4323,9 +4323,9 @@
    }
   },
   {
-   "id": "oev-rail-tunnel",
+   "id": "transit-rail-tunnel",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "rail_l",
    "filter": [
     "all",
@@ -4479,9 +4479,9 @@
    "minzoom": 6
   },
   {
-   "id": "oev-subway-tunnel",
+   "id": "transit-subway-tunnel",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "rail_l",
    "minzoom": 13,
    "filter": [
@@ -4522,9 +4522,9 @@
    }
   },
   {
-   "id": "grenzen-country-outline",
+   "id": "boundary-country-outline",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "boundary_l",
    "layout": {
     "line-join": "round",
@@ -4559,9 +4559,9 @@
    "minzoom": 5
   },
   {
-   "id": "grenzen-district-outline",
+   "id": "boundary-district-outline",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "boundary_l",
    "layout": {
     "line-join": "round",
@@ -4590,9 +4590,9 @@
    ]
   },
   {
-   "id": "grenzen-municipality-outline",
+   "id": "boundary-municipality-outline",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "boundary_l",
    "layout": {
     "line-join": "round",
@@ -4613,9 +4613,9 @@
    ]
   },
   {
-   "id": "grenzen-country",
+   "id": "boundary-country",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "boundary_l",
    "layout": {
     "line-join": "round",
@@ -4646,9 +4646,9 @@
    "minzoom": 5
   },
   {
-   "id": "grenzen-district",
+   "id": "boundary-district",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "boundary_l",
    "layout": {
     "line-join": "round",
@@ -4677,9 +4677,9 @@
    ]
   },
   {
-   "id": "grenzen-municipality",
+   "id": "boundary-municipality",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "boundary_l",
    "layout": {
     "line-join": "round",
@@ -4708,9 +4708,9 @@
    ]
   },
   {
-   "id": "grenzen-state-outline",
+   "id": "boundary-state-outline",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "boundary_l",
    "layout": {
     "line-join": "round",
@@ -4749,9 +4749,9 @@
    ]
   },
   {
-   "id": "grenzen-state",
+   "id": "boundary-state",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "boundary_l",
    "layout": {
     "line-join": "round",
@@ -4783,7 +4783,7 @@
   {
    "id": "road-low-casing-primary",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 7,
    "maxzoom": 8,
@@ -4807,7 +4807,7 @@
   {
    "id": "road-low-casing-motorway_link",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 6,
    "maxzoom": 8,
@@ -4831,7 +4831,7 @@
   {
    "id": "road-low-casing-motorway",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 6,
    "maxzoom": 8,
@@ -4855,7 +4855,7 @@
   {
    "id": "road-low-primary",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 7,
    "maxzoom": 8,
@@ -4879,7 +4879,7 @@
   {
    "id": "road-low-motorway_link",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 6,
    "maxzoom": 8,
@@ -4903,7 +4903,7 @@
   {
    "id": "road-low-motorway",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 6,
    "maxzoom": 8,
@@ -4927,7 +4927,7 @@
   {
    "id": "way-service",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 12,
    "filter": [
@@ -4973,7 +4973,7 @@
   {
    "id": "way-track",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 12,
    "filter": [
@@ -5019,7 +5019,7 @@
   {
    "id": "way-path",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
@@ -5075,7 +5075,7 @@
   {
    "id": "way-cycleway",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
@@ -5131,7 +5131,7 @@
   {
    "id": "way-steps",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 15,
    "filter": [
@@ -5185,7 +5185,7 @@
   {
    "id": "way-trail",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
@@ -5241,7 +5241,7 @@
   {
    "id": "road-casing-pedestrian",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 12,
    "filter": [
@@ -5288,7 +5288,7 @@
   {
    "id": "road-casing-minor",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 12,
    "filter": [
@@ -5335,7 +5335,7 @@
   {
    "id": "road-casing-secondary",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 10,
    "filter": [
@@ -5384,7 +5384,7 @@
   {
    "id": "road-casing-primary",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 8,
    "filter": [
@@ -5435,7 +5435,7 @@
   {
    "id": "road-casing-motorway_link",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 8,
    "filter": [
@@ -5486,7 +5486,7 @@
   {
    "id": "road-casing-motorway",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 8,
    "filter": [
@@ -5537,7 +5537,7 @@
   {
    "id": "road-pedestrian",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 12,
    "filter": [
@@ -5584,7 +5584,7 @@
   {
    "id": "road-minor",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 12,
    "filter": [
@@ -5631,7 +5631,7 @@
   {
    "id": "road-secondary",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 10,
    "filter": [
@@ -5680,7 +5680,7 @@
   {
    "id": "road-primary",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 8,
    "filter": [
@@ -5731,7 +5731,7 @@
   {
    "id": "road-motorway_link",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 8,
    "filter": [
@@ -5782,7 +5782,7 @@
   {
    "id": "road-motorway",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 8,
    "filter": [
@@ -5833,7 +5833,7 @@
   {
    "id": "way-track-unpaved",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 12,
    "filter": [
@@ -5884,7 +5884,7 @@
   {
    "id": "way-cycleway-bike",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
@@ -5931,9 +5931,9 @@
    }
   },
   {
-   "id": "oev-rail-siding",
+   "id": "transit-rail-siding",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "rail_l",
    "minzoom": 12,
    "filter": [
@@ -5993,9 +5993,9 @@
    }
   },
   {
-   "id": "oev-rail",
+   "id": "transit-rail",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "rail_l",
    "filter": [
     "all",
@@ -6162,9 +6162,9 @@
    "minzoom": 6
   },
   {
-   "id": "oev-rail-construction",
+   "id": "transit-rail-construction",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "rail_l",
    "minzoom": 10,
    "filter": [
@@ -6374,9 +6374,9 @@
    }
   },
   {
-   "id": "oev-narrow-gauge",
+   "id": "transit-narrow-gauge",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "rail_l",
    "minzoom": 10,
    "filter": [
@@ -6438,9 +6438,9 @@
    }
   },
   {
-   "id": "oev-narrow-gauge-ticks",
+   "id": "transit-narrow-gauge-ticks",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "rail_l",
    "minzoom": 14,
    "filter": [
@@ -6508,9 +6508,9 @@
    }
   },
   {
-   "id": "oev-subway",
+   "id": "transit-subway",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "rail_l",
    "minzoom": 13,
    "filter": [
@@ -6546,9 +6546,9 @@
    }
   },
   {
-   "id": "oev-tram",
+   "id": "transit-tram",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "rail_l",
    "minzoom": 14,
    "filter": [
@@ -6592,9 +6592,9 @@
    }
   },
   {
-   "id": "oev-funicular",
+   "id": "transit-funicular",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "rail_l",
    "minzoom": 12,
    "filter": [
@@ -6629,9 +6629,9 @@
    }
   },
   {
-   "id": "oev-funicular-mast",
+   "id": "transit-funicular-mast",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "rail_l",
    "minzoom": 12,
    "maxzoom": 15,
@@ -6661,9 +6661,9 @@
    }
   },
   {
-   "id": "oev-funicular-mast-gross",
+   "id": "transit-funicular-mast-gross",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "rail_l",
    "minzoom": 15,
    "filter": [
@@ -6692,9 +6692,9 @@
    }
   },
   {
-   "id": "oev-aerialway",
+   "id": "transit-aerialway",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "aerialway_l",
    "minzoom": 12,
    "filter": [
@@ -6721,9 +6721,9 @@
    }
   },
   {
-   "id": "oev-aerialway-mast",
+   "id": "transit-aerialway-mast",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "aerialway_l",
    "minzoom": 12,
    "maxzoom": 15,
@@ -6745,9 +6745,9 @@
    }
   },
   {
-   "id": "oev-aerialway-mast-gross",
+   "id": "transit-aerialway-mast-gross",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "aerialway_l",
    "minzoom": 15,
    "filter": [
@@ -6768,9 +6768,9 @@
    }
   },
   {
-   "id": "oev-ferry-klein",
+   "id": "transit-ferry-klein",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "rail_l",
    "minzoom": 11,
    "maxzoom": 14,
@@ -6800,9 +6800,9 @@
    }
   },
   {
-   "id": "oev-ferry",
+   "id": "transit-ferry",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "rail_l",
    "minzoom": 14,
    "filter": [
@@ -6833,7 +6833,7 @@
   {
    "id": "road-bridge-casing-pedestrian",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
@@ -6867,7 +6867,7 @@
   {
    "id": "road-bridge-pedestrian",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
@@ -6901,7 +6901,7 @@
   {
    "id": "road-bridge-casing-minor",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
@@ -6935,7 +6935,7 @@
   {
    "id": "road-bridge-minor",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
@@ -6969,7 +6969,7 @@
   {
    "id": "road-bridge-casing-secondary",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
@@ -7003,7 +7003,7 @@
   {
    "id": "road-bridge-secondary",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
@@ -7037,7 +7037,7 @@
   {
    "id": "road-bridge-casing-primary",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
@@ -7079,7 +7079,7 @@
   {
    "id": "road-bridge-primary",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
@@ -7121,7 +7121,7 @@
   {
    "id": "road-bridge-casing-motorway_link",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
@@ -7163,7 +7163,7 @@
   {
    "id": "road-bridge-motorway_link",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
@@ -7205,7 +7205,7 @@
   {
    "id": "road-bridge-casing-motorway",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
@@ -7247,7 +7247,7 @@
   {
    "id": "road-bridge-motorway",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
@@ -7287,9 +7287,9 @@
    }
   },
   {
-   "id": "oev-rail-bridge-casing",
+   "id": "transit-rail-bridge-casing",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "rail_l",
    "minzoom": 16,
    "filter": [
@@ -7351,9 +7351,9 @@
    }
   },
   {
-   "id": "oev-rail-bridge-fill",
+   "id": "transit-rail-bridge-fill",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "rail_l",
    "minzoom": 16,
    "filter": [
@@ -7415,9 +7415,9 @@
    }
   },
   {
-   "id": "oev-rail-bridge-line",
+   "id": "transit-rail-bridge-line",
    "type": "line",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "rail_l",
    "filter": [
     "all",
@@ -7562,7 +7562,7 @@
   {
    "id": "building-3d",
    "type": "fill-extrusion",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "building_a",
    "minzoom": 15,
    "filter": [
@@ -7599,7 +7599,7 @@
   {
    "id": "housenumber-parcel",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "housenumber_p",
    "minzoom": 16,
    "filter": [
@@ -7669,7 +7669,7 @@
   {
    "id": "housenumber",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "housenumber_p",
    "minzoom": 16,
    "filter": [
@@ -7739,7 +7739,7 @@
   {
    "id": "road-ref-motorway-low",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 7,
    "filter": [
@@ -7799,7 +7799,7 @@
   {
    "id": "road-ref-motorway-low-s",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 7,
    "filter": [
@@ -7857,9 +7857,9 @@
    "maxzoom": 8
   },
   {
-   "id": "hoehenlinien-label",
+   "id": "contours-label",
    "type": "symbol",
-   "source": "hoehenlinien",
+   "source": "contours",
    "source-layer": "contour_l",
    "minzoom": 10,
    "filter": [
@@ -7927,7 +7927,7 @@
   {
    "id": "road-name-weg",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
@@ -7995,7 +7995,7 @@
   {
    "id": "road-name-fuss",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
@@ -8061,9 +8061,9 @@
    "maxzoom": 15
   },
   {
-   "id": "geonamen-ried",
+   "id": "place-ried",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "natural_p",
    "minzoom": 14,
    "layout": {
@@ -8113,7 +8113,7 @@
   {
    "id": "road-ref-secondary",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 15,
    "filter": [
@@ -8187,7 +8187,7 @@
   {
    "id": "road-name-minor",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 12,
    "filter": [
@@ -8256,7 +8256,7 @@
   {
    "id": "road-name-minor-z14",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
@@ -8325,7 +8325,7 @@
   {
    "id": "road-name-minor-z16",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
@@ -8378,7 +8378,7 @@
   {
    "id": "road-name-weg-z15",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 15,
    "filter": [
@@ -8432,7 +8432,7 @@
   {
    "id": "road-name-weg-z16",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
@@ -8484,7 +8484,7 @@
   {
    "id": "road-name-fuss-z15",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 15,
    "filter": [
@@ -8538,7 +8538,7 @@
   {
    "id": "road-name-fuss-z16",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
@@ -8590,7 +8590,7 @@
   {
    "id": "road-name-primary",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 11,
    "filter": [
@@ -8658,7 +8658,7 @@
   {
    "id": "road-name-primary-z14",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
@@ -8726,7 +8726,7 @@
   {
    "id": "road-name-primary-z16",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
@@ -8778,7 +8778,7 @@
   {
    "id": "road-name-motorway",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 10,
    "filter": [
@@ -8832,7 +8832,7 @@
   {
    "id": "road-name-motorway-z14",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 14,
    "filter": [
@@ -8886,7 +8886,7 @@
   {
    "id": "road-name-motorway-z16",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 16,
    "filter": [
@@ -8938,7 +8938,7 @@
   {
    "id": "road-ref-primary-z9",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 9,
    "filter": [
@@ -8998,7 +8998,7 @@
   {
    "id": "road-ref-primary",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 10,
    "filter": [
@@ -9074,7 +9074,7 @@
   {
    "id": "road-ref-primary-l",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 15,
    "filter": [
@@ -9150,7 +9150,7 @@
   {
    "id": "road-ref-motorway",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "road_l",
    "minzoom": 8,
    "filter": [
@@ -9215,7 +9215,7 @@
   {
    "id": "ggn-water-l-label-donau",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "water_l",
    "minzoom": 7,
    "filter": [
@@ -9276,7 +9276,7 @@
   {
    "id": "ggn-water-l-label",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "water_l",
    "minzoom": 9,
    "filter": [
@@ -9402,7 +9402,7 @@
   {
    "id": "ggn-water-l-label-abschnitt",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "water_label_l",
    "minzoom": 9,
    "filter": [
@@ -9510,7 +9510,7 @@
   {
    "id": "ggn-water-label",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "water_label_p",
    "minzoom": 7,
    "filter": [
@@ -9599,9 +9599,9 @@
    }
   },
   {
-   "id": "grenzen-label-bezirk",
+   "id": "boundary-label-bezirk",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "boundary_label_p",
    "minzoom": 9,
    "maxzoom": 12,
@@ -9645,9 +9645,9 @@
    }
   },
   {
-   "id": "grenzen-label-gemeinde",
+   "id": "boundary-label-gemeinde",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "boundary_label_p",
    "minzoom": 12,
    "filter": [
@@ -9689,9 +9689,9 @@
    }
   },
   {
-   "id": "oev-aerialway-label",
+   "id": "transit-aerialway-label",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "aerialway_l",
    "minzoom": 14,
    "filter": [
@@ -9729,9 +9729,9 @@
    }
   },
   {
-   "id": "oev-station",
+   "id": "transit-station",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "transit_p",
    "minzoom": 10.53,
    "filter": [
@@ -9888,9 +9888,9 @@
    }
   },
   {
-   "id": "oev-airport",
+   "id": "transit-airport",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "airport_p",
    "minzoom": 11,
    "layout": {
@@ -10037,7 +10037,7 @@
   },
   {
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "poi_p",
    "minzoom": 15,
    "id": "poi-icon",
@@ -10222,7 +10222,7 @@
   },
   {
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "poi_p",
    "minzoom": 13,
    "id": "poi-label",
@@ -10560,7 +10560,7 @@
    }
   },
   {
-   "source": "bike_routes",
+   "source": "bike-routes",
    "source-layer": "bike_routes",
    "layout": {
     "visibility": "none",
@@ -10610,7 +10610,7 @@
    }
   },
   {
-   "source": "bike_routes",
+   "source": "bike-routes",
    "source-layer": "bike_routes",
    "layout": {
     "visibility": "none",
@@ -10674,7 +10674,7 @@
    }
   },
   {
-   "source": "bike_routes",
+   "source": "bike-routes",
    "source-layer": "bike_routes",
    "layout": {
     "visibility": "none",
@@ -10741,7 +10741,7 @@
    }
   },
   {
-   "source": "bike_routes",
+   "source": "bike-routes",
    "source-layer": "bike_routes",
    "layout": {
     "visibility": "none",
@@ -10786,7 +10786,7 @@
    }
   },
   {
-   "source": "gip_poi",
+   "source": "gip-poi",
    "source-layer": "gip_poi",
    "layout": {
     "visibility": "none"
@@ -10835,7 +10835,7 @@
    }
   },
   {
-   "source": "gip_poi",
+   "source": "gip-poi",
    "source-layer": "gip_poi",
    "layout": {
     "visibility": "none"
@@ -10902,7 +10902,7 @@
    }
   },
   {
-   "source": "gip_poi",
+   "source": "gip-poi",
    "source-layer": "gip_poi",
    "layout": {
     "visibility": "none"
@@ -10951,7 +10951,7 @@
    }
   },
   {
-   "source": "gip_poi",
+   "source": "gip-poi",
    "source-layer": "gip_poi",
    "layout": {
     "visibility": "none",
@@ -11005,7 +11005,7 @@
    }
   },
   {
-   "source": "gip_poi",
+   "source": "gip-poi",
    "source-layer": "gip_poi",
    "layout": {
     "visibility": "none"
@@ -11054,7 +11054,7 @@
    }
   },
   {
-   "source": "gip_poi",
+   "source": "gip-poi",
    "source-layer": "gip_poi",
    "layout": {
     "visibility": "none",
@@ -11112,7 +11112,7 @@
    }
   },
   {
-   "source": "gip_poi",
+   "source": "gip-poi",
    "source-layer": "gip_poi",
    "layout": {
     "visibility": "none",
@@ -11265,7 +11265,7 @@
    }
   },
   {
-   "source": "rastanlagen",
+   "source": "rest-areas",
    "source-layer": "rastanlagen",
    "layout": {
     "visibility": "none"
@@ -11280,7 +11280,7 @@
      "zoom"
     ]
    ],
-   "id": "rastanlagen-punkt",
+   "id": "rest-areas-punkt",
    "type": "circle",
    "paint": {
     "circle-color": [
@@ -11314,7 +11314,7 @@
    }
   },
   {
-   "source": "rastanlagen",
+   "source": "rest-areas",
    "source-layer": "rastanlagen",
    "layout": {
     "visibility": "none",
@@ -11347,7 +11347,7 @@
      "zoom"
     ]
    ],
-   "id": "rastanlagen-name",
+   "id": "rest-areas-name",
    "type": "symbol",
    "minzoom": 12,
    "paint": {
@@ -11357,9 +11357,9 @@
    }
   },
   {
-   "id": "geonamen-gebiet",
+   "id": "place-gebiet",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "natural_p",
    "minzoom": 8,
    "layout": {
@@ -11480,9 +11480,9 @@
    ]
   },
   {
-   "id": "geonamen-gelaende",
+   "id": "place-gelaende",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "natural_p",
    "minzoom": 8,
    "layout": {
@@ -11591,9 +11591,9 @@
    ]
   },
   {
-   "id": "geonamen-gletscher",
+   "id": "place-gletscher",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "natural_p",
    "minzoom": 11,
    "layout": {
@@ -11642,9 +11642,9 @@
    ]
   },
   {
-   "id": "geonamen-objekt",
+   "id": "place-objekt",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "natural_p",
    "minzoom": 15,
    "layout": {
@@ -11773,9 +11773,9 @@
    ]
   },
   {
-   "id": "geonamen-objekt-text",
+   "id": "place-objekt-text",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "natural_p",
    "minzoom": 15,
    "layout": {
@@ -11857,9 +11857,9 @@
    ]
   },
   {
-   "id": "geonamen-kirche",
+   "id": "place-kirche",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "poi_p",
    "minzoom": 13,
    "layout": {
@@ -11938,9 +11938,9 @@
    ]
   },
   {
-   "id": "geonamen-gipfel-z8",
+   "id": "place-gipfel-z8",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "natural_p",
    "minzoom": 8,
    "layout": {
@@ -12023,9 +12023,9 @@
    "maxzoom": 9
   },
   {
-   "id": "geonamen-gipfel",
+   "id": "place-gipfel",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "natural_p",
    "minzoom": 9,
    "layout": {
@@ -12247,9 +12247,9 @@
    ]
   },
   {
-   "id": "geonamen-einzelhaus",
+   "id": "place-einzelhaus",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "place_p",
    "minzoom": 15,
    "layout": {
@@ -12300,9 +12300,9 @@
    ]
   },
   {
-   "id": "geonamen-stadtteil",
+   "id": "place-stadtteil",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "place_p",
    "minzoom": 12,
    "layout": {
@@ -12352,9 +12352,9 @@
    "maxzoom": 16
   },
   {
-   "id": "geonamen-ort",
+   "id": "place-ort",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "place_p",
    "minzoom": 8,
    "layout": {
@@ -12632,9 +12632,9 @@
    ]
   },
   {
-   "id": "geonamen-bezirkshauptort-punkt",
+   "id": "place-bezirkshauptort-punkt",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "place_p",
    "minzoom": 8,
    "layout": {
@@ -12726,9 +12726,9 @@
    "maxzoom": 11
   },
   {
-   "id": "geonamen-bezirkshauptort",
+   "id": "place-bezirkshauptort",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "place_p",
    "minzoom": 11,
    "layout": {
@@ -12812,9 +12812,9 @@
    "maxzoom": 16
   },
   {
-   "id": "geonamen-hauptstadt-punkt",
+   "id": "place-hauptstadt-punkt",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "place_p",
    "minzoom": 8,
    "layout": {
@@ -12897,9 +12897,9 @@
    "maxzoom": 12
   },
   {
-   "id": "geonamen-hauptstadt",
+   "id": "place-hauptstadt",
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "place_p",
    "minzoom": 12,
    "layout": {
@@ -12974,9 +12974,9 @@
    "maxzoom": 16
   },
   {
-   "id": "geonamen-hauptstadt-low-punkt",
+   "id": "place-hauptstadt-low-punkt",
    "type": "circle",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "place_p",
    "minzoom": 5,
    "maxzoom": 8,
@@ -13030,9 +13030,9 @@
    }
   },
   {
-   "id": "geonamen-bezirkshauptort-low-punkt",
+   "id": "place-bezirkshauptort-low-punkt",
    "type": "circle",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "place_p",
    "minzoom": 7,
    "maxzoom": 8,
@@ -13081,7 +13081,7 @@
   },
   {
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "place_p",
    "minzoom": 5,
    "maxzoom": 8,
@@ -13141,11 +13141,11 @@
     "text-halo-color": "rgba(0, 0, 0, 0.7)",
     "text-halo-width": 2
    },
-   "id": "geonamen-hauptstadt-low"
+   "id": "place-hauptstadt-low"
   },
   {
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "place_p",
    "minzoom": 5,
    "maxzoom": 8,
@@ -13205,11 +13205,11 @@
     "text-halo-color": "rgba(0, 0, 0, 0.7)",
     "text-halo-width": 2
    },
-   "id": "geonamen-hauptstadt-wien-low"
+   "id": "place-hauptstadt-wien-low"
   },
   {
    "type": "symbol",
-   "source": "basis",
+   "source": "streets",
    "source-layer": "place_p",
    "minzoom": 7,
    "maxzoom": 8,
@@ -13244,7 +13244,7 @@
     "text-halo-color": "rgba(0, 0, 0, 0.7)",
     "text-halo-width": 2.67
    },
-   "id": "geonamen-bezirkshauptort-low"
+   "id": "place-bezirkshauptort-low"
   }
  ],
  "sky": {

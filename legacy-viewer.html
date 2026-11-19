@@ -1111,10 +1111,10 @@ window.mapxStil = (function () {
   // Der Kartenstil (alle Layer, Glyphs, Sprites, Legende) steht in style.json und wird mit
   // tools/build_style.py aus den Style-Fragmenten von mapx-at/vector-tiles erzeugt (siehe README).
   // Kachelquellen per Query-Parameter ueberschreibbar (Tests), z. B.
-  //   ?basis=http://localhost:8000/mapx-basis.pmtiles&kataster=...&relief=...&hoehenlinien=...
+  //   ?streets=http://localhost:8000/streets.pmtiles&cadastre=...&terrain-rgb=...&contours=...
   //   ?style=http://localhost:8000/style.json
   var params = new URLSearchParams(location.search);
-  var SOURCE_PARAMS = ["basis", "kataster", "relief", "hoehenlinien", "dsm", "dop", "dop_flugblock"];
+  var SOURCE_PARAMS = ["streets", "cadastre", "terrain-rgb", "contours", "dsm", "orthophoto", "orthophoto-flight-blocks"];
   var STYLE_URL = /^https?:\/\//.test(params.get("style") || "") ? params.get("style") : ((window.mapxStil && window.mapxStil.url) || "style.json");
 
   function esc(s) { return String(s).replace(/[&<>"']/g, function (ch) { return "&#" + ch.charCodeAt(0) + ";"; }); }
@@ -1262,7 +1262,7 @@ window.mapxStil = (function () {
     SOURCE_PARAMS.forEach(function (k) {
       var v = params.get(k);
       if (v && /^https?:\/\//.test(v) && style.sources[k]) style.sources[k].url = "pmtiles://" + v;
-      if (k === "relief" && v && /^https?:\/\//.test(v) && style.sources["relief-terrain"]) style.sources["relief-terrain"].url = "pmtiles://" + v;
+      if (k === "terrain-rgb" && v && /^https?:\/\//.test(v) && style.sources["relief-terrain"]) style.sources["relief-terrain"].url = "pmtiles://" + v;
     });
     Object.keys(style.sources).forEach(function (k) {
       var so = style.sources[k], u = so.url;
@@ -1271,11 +1271,11 @@ window.mapxStil = (function () {
       if (!probeUrl) probeUrl = u.replace(/^pmtiles:\/\//, "");
     });
     // Nur für Vergleiche (#209): ?reliefmax=14
-    if (/^\d+$/.test(params.get("reliefmax") || "") && style.sources.relief) MAXZOOM[style.sources.relief.url] = +params.get("reliefmax");
+    if (/^\d+$/.test(params.get("reliefmax") || "") && style.sources["terrain-rgb"]) MAXZOOM[style.sources["terrain-rgb"].url] = +params.get("reliefmax");
     var md = style.metadata || {};
     GROUPS = md["mapx:groups"] || {};
     OVERLAYS = md["mapx:overlays"] || {};
-    // Layer, die der Style selbst ausschaltet (z. B. grenzen-label-gemeinde), bleiben aus
+    // Layer, die der Style selbst ausschaltet (z. B. boundary-label-gemeinde), bleiben aus
     // (building-3d ist von Haus aus aus und wird vom Schalter „3D“ gesteuert)
     style.layers.forEach(function (l) { if (l.layout && l.layout.visibility === "none" && l.id !== "building-3d") HIDDEN[l.id] = true; });
     LEGEND = md["mapx:legend"] || null;
@@ -1353,8 +1353,8 @@ window.mapxStil = (function () {
   function applyVerkehr() {
     var o = OVERLAYS.verkehr; if (!o) { trf.parentNode.hidden = true; return; }
     trf.parentNode.hidden = false;
-    if (trf.checked && !map.getSource("verkehr")) {
-      map.addSource("verkehr", o.source);
+    if (trf.checked && !map.getSource("traffic")) {
+      map.addSource("traffic", o.source);
       var lab = map.getStyle().layers.filter(function (l) { return l.type === "symbol"; })[0];
       o.layers.forEach(function (l) { map.addLayer(l, lab ? lab.id : undefined); });
     }
@@ -1639,8 +1639,8 @@ window.mapxStil = (function () {
     if (sy) {
       var yp = sy.properties || {}, yt = POI_KIND[yp.kind] || "Symbol", yd = POI_DETAIL[yp.kind_detail];
       poiCat = yt;
-      var sl = sy.layer["source-layer"];   // Quelle je Symbol-Layer: transit_p GIP, airport_p DLM Verkehr, natural_p/place_p/geonamen-* Geographische Namen, poi_p DLM/Wien
-      poiSrc = sl === "transit_p" ? "GIP.at" : sl === "airport_p" ? "BEV DLM Verkehr, CC BY 4.0" : (sl === "natural_p" || sl === "place_p" || sy.layer.id === "geonamen-kirche") ? "BEV Geographische Namen"
+      var sl = sy.layer["source-layer"];   // Quelle je Symbol-Layer: transit_p GIP, airport_p DLM Verkehr, natural_p/place_p/place-* Geographische Namen, poi_p DLM/Wien
+      poiSrc = sl === "transit_p" ? "GIP.at" : sl === "airport_p" ? "BEV DLM Verkehr, CC BY 4.0" : (sl === "natural_p" || sl === "place_p" || sy.layer.id === "place-kirche") ? "BEV Geographische Namen"
              : yp.kind_detail === "aerialway_station" ? "BEV DLM Verkehr" : "BEV DLM Bauten und Verkehr, Wien OGD";
       P.poi.push("<b>" + esc(yp.name || yt) + "</b>" + (yp.name || yd ? "<br>" + esc(yt) + (yd ? " · " + yd : "") : ""));
     }
@@ -1739,7 +1739,7 @@ window.mapxStil = (function () {
   });
 
   // ---------------------------------------------------------------- Luftbild (BEV DOP) und Höhenmodelle (DTM/DSM)
-  // Flugblock-Info im Popup (Quelle dop-flugblock, nur in den Stilen Luftbild/Hybrid und erst nach dem Release im Manifest),
+  // Flugblock-Info im Popup (Quelle orthophoto-flight-blocks, nur in den Stilen Luftbild/Hybrid und erst nach dem Release im Manifest),
   // Schalter Flugblock-Grenzen, Schummerung Gelände/Oberfläche, Höhen aus den Terrain-RGB-Kacheln (Mapbox-Encoding, 0,1 m).
   function lbDate(v) {
     var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(v || "");
@@ -1747,8 +1747,8 @@ window.mapxStil = (function () {
   }
   // Verkehrsmeldung im Popup: Text unverändert (EVIS-Lizenz, verbindliche Meldungen nicht abschwächen)
   function verkehrInfo(box) {
-    if (!trf.checked || !map.getLayer("verkehr-meldung")) return [];
-    var fs = map.queryRenderedFeatures(box, { layers: ["verkehr-meldung", "verkehr-meldung-strecke"] }), seen = {}, out = [];
+    if (!trf.checked || !map.getLayer("traffic-meldung")) return [];
+    var fs = map.queryRenderedFeatures(box, { layers: ["traffic-meldung", "traffic-meldung-strecke"] }), seen = {}, out = [];
     fs.forEach(function (f) {
       var p = f.properties || {}, k = p.kind + "|" + p.text;
       if (seen[k] || out.length >= 3) return; seen[k] = true;
@@ -1759,8 +1759,8 @@ window.mapxStil = (function () {
     return out;
   }
   function lbFlugblock(pt) {
-    if (!map.getLayer("dop-flugblock-flaeche") || map.getLayoutProperty("dop", "visibility") === "none") return [];
-    var f = map.queryRenderedFeatures([[pt.x - 1, pt.y - 1], [pt.x + 1, pt.y + 1]], { layers: ["dop-flugblock-flaeche"] })[0];
+    if (!map.getLayer("orthophoto-flight-blocks-flaeche") || map.getLayoutProperty("dop", "visibility") === "none") return [];
+    var f = map.queryRenderedFeatures([[pt.x - 1, pt.y - 1], [pt.x + 1, pt.y + 1]], { layers: ["orthophoto-flight-blocks-flaeche"] })[0];
     if (!f) return [];
     var p = f.properties || {}, von = lbDate(p.flug_von), bis = lbDate(p.flug_bis || p.flugdatum), x = [];
     x.push(von && bis && von !== bis ? "Flugzeitraum " + von + " – " + bis : "Flug " + (bis || von || "unbekannt"));
@@ -1770,11 +1770,11 @@ window.mapxStil = (function () {
   }
   var lbHs = document.getElementById("hs"), lbFbg = document.getElementById("fbg");
   function applyLuftbild() {
-    var fb = !!map.getLayer("dop-flugblock-grenze"), dsm = !!map.getLayer("relief-hillshade-dsm");
+    var fb = !!map.getLayer("orthophoto-flight-blocks-grenze"), dsm = !!map.getLayer("relief-hillshade-dsm");
     var dtmOn = map.getLayer("relief-hillshade") && !HIDDEN["relief-hillshade"];
     document.getElementById("fbgL").hidden = !fb;
     document.getElementById("hsL").hidden = !(dsm && dtmOn);
-    if (fb) map.setLayoutProperty("dop-flugblock-grenze", "visibility", lbFbg.checked ? "visible" : "none");
+    if (fb) map.setLayoutProperty("orthophoto-flight-blocks-grenze", "visibility", lbFbg.checked ? "visible" : "none");
     if (dsm && dtmOn) {
       var rel = document.getElementById("rel").checked, useDsm = lbHs.value === "dsm";
       map.setLayoutProperty("relief-hillshade", "visibility", rel && !useDsm ? "visible" : "none");
@@ -1787,7 +1787,7 @@ window.mapxStil = (function () {
   map.on("style.load", function () { if (ready) applyLuftbild(); });
 
   // Höhe an einem Punkt: Terrain-RGB-Kachel (512 px, z <= 15) direkt aus dem PMTiles lesen, bilinear interpolieren.
-  // Unabhängig vom 3D-Gelände. DTM = Quelle "relief", DSM = "dsm" (entfällt, solange die Datei nicht im Manifest steht).
+  // Unabhängig vom 3D-Gelände. DTM = Quelle "terrain-rgb", DSM = "dsm" (entfällt, solange die Datei nicht im Manifest steht).
   var LB_PM = {}, LB_TILES = [];
   function lbTile(src, z, x, y) {
     var s = map.getStyle().sources[src]; if (!s || !s.url) return Promise.resolve(null);
@@ -1824,7 +1824,7 @@ window.mapxStil = (function () {
   function lbHoehe(pop, ll) {
     var z = Math.max(8, Math.min(15, Math.round(map.getZoom())));
     var dsm = map.getStyle().sources["dsm"] ? lbHeight("dsm", ll, z) : Promise.resolve(null);
-    Promise.all([lbHeight("relief", ll, z), dsm]).then(function (r) {
+    Promise.all([lbHeight("terrain-rgb", ll, z), dsm]).then(function (r) {
       var el = pop.getElement(), body = el && el.querySelector(".pc-body"); if (!body || r[0] == null) return;
       var f = function (v) { return Math.round(v).toLocaleString("de-AT") + " m"; };
       var t = "Gelände (DTM) " + f(r[0]) + " ü. A.";
@@ -2606,7 +2606,7 @@ window.mapxStil = (function () {
   var dem = {
     pm: null, url: null, cache: new Map(), order: [],
     source: function () {
-      var st = map.getStyle(), so = st && st.sources && (st.sources.relief || st.sources["relief-terrain"]);
+      var st = map.getStyle(), so = st && st.sources && (st.sources["terrain-rgb"] || st.sources["relief-terrain"]);
       var url = so && so.url ? so.url.replace(/^pmtiles:\/\//, "") : null;
       if (url !== this.url) { this.url = url; this.pm = url ? new pmtiles.PMTiles(url) : null; this.cache.clear(); this.order = []; }
       return this.pm;
@@ -3005,7 +3005,7 @@ window.mapxStil = (function () {
   }
   var basis = { url: null, pm: null };
   function basisPM() {
-    var st = map.getStyle(), so = st && st.sources && st.sources.basis, url = so && so.url ? so.url.replace(/^pmtiles:\/\//, "") : null;
+    var st = map.getStyle(), so = st && st.sources && st.sources.streets, url = so && so.url ? so.url.replace(/^pmtiles:\/\//, "") : null;
     if (url !== basis.url) { basis.url = url; basis.pm = url ? new pmtiles.PMTiles(url) : null; }
     return basis.pm;
   }
