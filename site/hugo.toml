@@ -69,10 +69,6 @@ disableHugoGeneratorInject = true
       url = "https://docs.mapx.at"
       weight = 3
     [[languages.de.menus.main]]
-      name = "Blog"
-      url = "https://blog.mapx.at"
-      weight = 4
-    [[languages.de.menus.main]]
       identifier = "lang"
       weight = 5
       [languages.de.menus.main.params]
@@ -112,10 +108,6 @@ disableHugoGeneratorInject = true
       name = "Docs"
       url = "https://docs.mapx.at"
       weight = 3
-    [[languages.en.menus.main]]
-      name = "Blog"
-      url = "https://blog.mapx.at"
-      weight = 4
     [[languages.en.menus.main]]
       identifier = "lang"
       weight = 5

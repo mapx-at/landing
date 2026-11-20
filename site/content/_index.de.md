@@ -131,8 +131,6 @@ Zum Schutz vor Missbrauch gibt es Rate-Limits je Token. Die Nutzung selbst ist k
 - **Wetter, Klima, Luftqualität:** GeoSphere Austria.
 - **Kein OpenStreetMap:** Punkte von Interesse kommen ebenfalls aus amtlichen Quellen.
 
-[Mehr im Blog](https://blog.mapx.at)
-
 ## Probiere die Karte aus.
 
 Suche eine Adresse, miss eine Strecke oder lass dir ein Höhenprofil zeigen.

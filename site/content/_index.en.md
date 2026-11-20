@@ -131,8 +131,6 @@ To protect against abuse there are rate limits per token. Usage itself is free o
 - **Weather, climate, air quality:** GeoSphere Austria.
 - **No OpenStreetMap:** points of interest also come from official sources.
 
-[More on the blog](https://blog.mapx.at)
-
 ## Try the map.
 
 Search an address, measure a distance or show an elevation profile.
