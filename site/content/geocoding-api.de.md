@@ -23,7 +23,7 @@ description: "Geocoding-API für Österreich: Adresssuche, Reverse Geocoding, Ad
 
 ## Was die Schnittstelle kann
 
-- `GET /v1/geocode`: Vorwärts-Geocoding von Adressen, Straßen, Orten, Postleitzahlen, Bezirken und Grundstücken. Auch Straßenkilometer wie `A1 km 41` lassen sich suchen.
+- `GET /v1/geocode`: Vorwärts-Geocoding von Adressen, Straßen, Orten, Postleitzahlen, und Bezirken. Auch Straßenkilometer wie `A1 km 41` lassen sich suchen.
 - `GET /v1/reverse`: Reverse Geocoding, die nächste Adresse, Straße oder der nächste Ort zu einem Punkt.
 - `POST /v1/geocode/batch`: bis zu 1000 Anfragen in einem Aufruf.
 - `GET /v1/searchbox/suggest` und `/v1/searchbox/retrieve/{id}`: Vorschläge beim Tippen und Details des gewählten Treffers.
@@ -57,7 +57,7 @@ curl -s -H "Authorization: Bearer YOUR_TOKEN" "https://api.mapx.at/v1/address/va
 
 ## Woher die Daten kommen
 
-Adressen, Geographische Namen, Verwaltungsgrenzen und Kataster stammen vom Bundesamt für Eich- und Vermessungswesen (BEV) und stehen unter CC BY 4.0. Der Autofill verwendet ausschließlich das amtliche Adressregister des BEV. Orte von Interesse in der Suche stammen aus amtlichen Quellen, nicht aus OpenStreetMap.
+Adressen, Geographische Namen, und Verwaltungsgrenzen stammen vom Bundesamt für Eich- und Vermessungswesen (BEV) und stehen unter CC BY 4.0. Der Autofill verwendet ausschließlich das amtliche Adressregister des BEV. Orte von Interesse in der Suche stammen aus amtlichen Quellen, nicht aus OpenStreetMap.
 
 ## Einschränkungen
 

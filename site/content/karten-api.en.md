@@ -12,7 +12,7 @@ description: "Maps API for Austria: vector tiles, ready-made map styles for MapL
 
 # Maps API for Austria: vector tiles, map styles and orthophoto
 
-<p class="mx-lead">mapx delivers the map of Austria as ready-made styles for MapLibre GL JS and as tiles: a vector basemap, orthophoto and aerial imagery, terrain model, contour lines and parcel boundaries. You can embed a style with one line or build your own map style from the vector tiles. It is meant for developers of web and mobile maps who want to do without a map server of their own.</p>
+<p class="mx-lead">mapx delivers the map of Austria as ready-made styles for MapLibre GL JS and as tiles: a vector basemap, orthophoto and aerial imagery, terrain model and contour lines. You can embed a style with one line or build your own map style from the vector tiles. It is meant for developers of web and mobile maps who want to do without a map server of their own.</p>
 
 <div class="mx-btns">
 {{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
@@ -27,7 +27,7 @@ description: "Maps API for Austria: vector tiles, ready-made map styles for MapL
 - `GET /v1/tiles` and `GET /v1/tiles/{tileset}.json`: list of tilesets and TileJSON.
 - `GET /v1/tiles/{tileset}/{z}/{x}/{y}.{ext}`: tiles in the XYZ scheme.
 - `GET /v1/styles/{id}/tiles/{tilesize}/{z}/{x}/{y}`: rendered raster tiles of a style for clients without vector support.
-- Tilesets: `streets` (basemap, zoom 0 to 16), `orthophoto` (aerial imagery, zoom 5 to 18, 20 cm), `cadastre`, `contours`, `terrain-rgb` and `dsm`.
+- Tilesets: `streets` (basemap, zoom 0 to 16), `orthophoto` (aerial imagery, zoom 5 to 18, 20 cm), `contours`, `terrain-rgb` and `dsm`.
 - Access through style, TileJSON or `{z}/{x}/{y}`; whole tileset files are not offered for download.
 
 ## Example

@@ -1,6 +1,6 @@
 # mapx
 
-> mapx provides maps and location APIs for Austria, built exclusively from official open data (BEV, GIP.at, Umweltbundesamt, Statistik Austria; mostly CC BY 4.0). It does not use OpenStreetMap. Products: vector map tiles and styles, search and geocoding, routing, elevation, public transit departures, traffic, static map images, weather and climate, and cadastre (parcels). Access is free with an account and an API token.
+> mapx provides maps and location APIs for Austria, built exclusively from official open data (BEV, GIP.at, Umweltbundesamt, Statistik Austria; mostly CC BY 4.0). It does not use OpenStreetMap. Products: vector map tiles and styles, search and geocoding, routing, elevation, public transit departures, traffic, static map images, and weather and climate. Access is free with an account and an API token.
 
 Contact: support@mapx.at. The website is available in German (https://mapx.at/) and English (https://mapx.at/en/).
 
@@ -15,7 +15,6 @@ Contact: support@mapx.at. The website is available in German (https://mapx.at/) 
 
 ## Topics (one page per product, with example, data source and limitations)
 
-- [Cadastre and parcels](https://mapx.at/en/cadastre-api/): parcel at a point, parcel dossier, parcel search, parcel boundaries as tiles (German: https://mapx.at/kataster-api/)
 - [Geocoding and address search](https://mapx.at/en/geocoding-api/): geocoding, reverse geocoding, type-ahead search, address autofill and validation (German: https://mapx.at/geocoding-api/)
 - [Routing](https://mapx.at/en/routing-api/): routes for car, truck, bike and foot, isochrones, travel-time matrix, tour optimization (German: https://mapx.at/routing-api/)
 - [Elevation and terrain](https://mapx.at/en/elevation-api/): elevation API, elevation profile, 1 m terrain model, contour lines (German: https://mapx.at/hoehen-api/)
@@ -24,7 +23,7 @@ Contact: support@mapx.at. The website is available in German (https://mapx.at/) 
 - [Traffic](https://mapx.at/en/traffic-api/): traffic reports, roadworks, closures, speed limits on motorway signs (German: https://mapx.at/verkehr-api/)
 - [Static map images](https://mapx.at/en/static-maps/): a map as PNG or WebP with pins, paths and GeoJSON (German: https://mapx.at/statische-karten/)
 - [Weather and climate](https://mapx.at/en/weather-api/): observations, forecast, nowcast, warnings, air quality, climate (German: https://mapx.at/wetter-api/)
-- [MCP server for AI assistants](https://mapx.at/en/mcp-server/): hosted MCP server with 23 read-only tools for addresses, routes, transit, elevation, parcels, traffic, weather and static maps (German: https://mapx.at/mcp-server/)
+- [MCP server for AI assistants](https://mapx.at/en/mcp-server/): hosted MCP server with 21 read-only tools for addresses, routes, transit, elevation, traffic, weather and static maps (German: https://mapx.at/mcp-server/)
 - [FAQ](https://mapx.at/en/faq/): token, cost, license, data, errors (German: https://mapx.at/faq/)
 
 ## Machine-readable sources
