@@ -61,13 +61,17 @@ disableHugoGeneratorInject = true
       url = "/#entwickler"
       weight = 2
     [[languages.de.menus.main]]
+      name = "Galerie"
+      url = "/galerie/"
+      weight = 3
+    [[languages.de.menus.main]]
       name = "FAQ"
       url = "/faq/"
-      weight = 3
+      weight = 4
     [[languages.de.menus.main]]
       name = "Doku"
       url = "https://docs.mapx.at"
-      weight = 3
+      weight = 4
     [[languages.de.menus.main]]
       identifier = "lang"
       weight = 5
@@ -95,13 +99,17 @@ disableHugoGeneratorInject = true
       url = "/en/#entwickler"
       weight = 2
     [[languages.en.menus.main]]
+      name = "Gallery"
+      url = "/en/gallery/"
+      weight = 3
+    [[languages.en.menus.main]]
       name = "FAQ"
       url = "/en/faq/"
-      weight = 3
+      weight = 4
     [[languages.en.menus.main]]
       name = "Docs"
       url = "https://docs.mapx.at"
-      weight = 3
+      weight = 4
     [[languages.en.menus.main]]
       identifier = "lang"
       weight = 5

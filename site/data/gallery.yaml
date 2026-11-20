@@ -1,0 +1,81 @@
+# Galerie der Kartenstile (/galerie/, /en/gallery/), Layout layouts/gallery.html, Skript /lp/gallery.js.
+# Je Karte ein oder mehrere Stile (variants, erster = Standard im Raster ist "img"). map: Hash für https://map.mapx.at
+# (leer = kein Link, weil der Viewer diesen Stil nicht als eigene Ansicht hat). Bilder: static/lp/img/gallery/<id>.webp,
+# neu erzeugen mit site/tools/gallery-shots.mjs. Ausschnitt der Live-Karte im Fenster: center/zoom.
+- key: streets
+  img: streets
+  center: [16.3725, 48.2085]
+  zoom: 14.5
+  variants:
+    - {id: streets-dawn, de: Morgen, en: Dawn, map: ""}
+    - {id: streets, de: Tag, en: Day, map: "c=16.3725,48.2085,14.5&l=l", default: true}
+    - {id: streets-dusk, de: Abend, en: Dusk, map: ""}
+    - {id: streets-night, de: Nacht, en: Night, map: "c=16.3725,48.2085,14.5&l=d"}
+  de:
+    name: Straßen
+    place: Wien Innenstadt
+    alt: "Stil streets: Wiener Innenstadt mit Straßen, Gebäuden und Namen"
+    short: "Die Basiskarte mit Straßen, Orten und Gebäuden, in vier Tageszeiten."
+    text: "Baut auf der Vektor-Basiskarte aus amtlichen Daten auf: Straßen und Bahn aus GIP.at, Gebäude, Adressen und Namen des BEV, Gewässer des Umweltbundesamts. Gedacht als ruhiger Hintergrund zum Suchen, Orientieren und für eigene Punkte. Morgen, Abend und Nacht färben dieselbe Karte nach dem Licht um; die Nacht passt zu Seiten mit dunklem Design."
+  en:
+    name: Streets
+    place: Vienna city centre
+    alt: "Style streets: Vienna city centre with roads, buildings and names"
+    short: "The base map with roads, places and buildings, in four times of day."
+    text: "Built on the vector base map from official data: roads and rail from GIP.at, buildings, addresses and names from BEV, water bodies from the Environment Agency Austria. Meant as a calm background for search, orientation and your own points. Dawn, dusk and night recolour the same map to match the light; night suits pages with a dark design."
+- key: satellite
+  img: satellite-streets
+  center: [15.333, 48.228]
+  zoom: 15.2
+  variants:
+    - {id: satellite, de: Luftbild, en: Aerial, map: ""}
+    - {id: satellite-streets, de: Mit Straßen, en: With streets, map: "c=15.333,48.228,15.2&a=luftbild&l=l", default: true}
+    - {id: satellite-current, de: Satellit aktuell, en: Current satellite, map: "c=15.333,48.228,12&a=luftbild&b=e&l=l"}
+  de:
+    name: Luftbild
+    place: Melk mit Stift
+    alt: "Stil satellite-streets: Orthofoto von Melk mit Stift, Straßen und Namen"
+    short: "Orthofoto des BEV, auf Wunsch mit Straßen, oder ein aktuelles Satellitenbild."
+    text: "Baut auf dem Digitalen Orthofoto des BEV auf (20 cm, Befliegung 2022–2025); „Satellit aktuell“ nutzt stattdessen Sentinel-2-Aufnahmen von Copernicus mit 10 m, täglich fortgeschrieben. Gedacht für Lagepläne, Standortansichten und überall dort, wo man sehen will, wie es vor Ort aussieht. „Mit Straßen“ und „Satellit aktuell“ legen Straßen, Namen und Grenzen der Basiskarte darüber."
+  en:
+    name: Aerial
+    place: Melk abbey
+    alt: "Style satellite-streets: orthophoto of Melk abbey with roads and names"
+    short: "BEV orthophoto, optionally with streets, or a current satellite image."
+    text: "Built on the BEV digital orthophoto (20 cm, flown 2022–2025); “Current satellite” uses Copernicus Sentinel-2 imagery at 10 m instead, updated daily. Meant for site plans, location views and anywhere you want to see what a place looks like. “With streets” and “Current satellite” add roads, names and boundaries from the base map on top."
+- key: outdoors
+  img: outdoors
+  center: [12.694, 47.074]
+  zoom: 12.5
+  variants:
+    - {id: outdoors, de: Gelände, en: Outdoors, map: "c=12.694,47.074,12.5&a=outdoor&l=l", default: true}
+  de:
+    name: Gelände
+    place: Großglockner
+    alt: "Stil outdoors: Großglockner mit Höhenlinien, Schummerung, Gipfeln und Gletschern"
+    short: "Höhenlinien, Schummerung, Gipfel und Wege für Karten im Gebirge."
+    text: "Baut auf der Basiskarte und dem Geländemodell des BEV aus Laserscan (1 m) auf. Gedacht für Karten zum Wandern, für Touren und alles, wo das Gelände zählt. Zeigt zusätzlich Höhenlinien mit Höhenangaben, Schummerung, Gipfel mit Höhe, Gletscher, Wege und Steige, Seilbahnen und Skigebiete."
+  en:
+    name: Outdoors
+    place: Grossglockner
+    alt: "Style outdoors: Grossglockner with contour lines, hillshading, peaks and glaciers"
+    short: "Contours, hillshading, peaks and paths for maps in the mountains."
+    text: "Built on the base map and the BEV terrain model from laser scanning (1 m). Meant for hiking maps, tours and anything where the terrain matters. Adds contour lines with heights, hillshading, peaks with elevation, glaciers, paths and trails, cable cars and ski areas."
+- key: traffic
+  img: traffic-day
+  center: [16.37, 48.175]
+  zoom: 11.6
+  variants:
+    - {id: traffic-day, de: Verkehr, en: Traffic, map: "c=16.37,48.175,11.6&a=verkehr&l=l", default: true}
+  de:
+    name: Verkehr
+    place: Wien, A23 und A4
+    alt: "Stil traffic-day: Wien mit eingefärbter Verkehrslage auf Autobahnen und Verkehrsmeldungen"
+    short: "Die Basiskarte mit Verkehrslage und Verkehrsmeldungen auf Autobahnen und Schnellstraßen."
+    text: "Baut auf der Basiskarte „Straßen“ (Tag) auf. Gedacht für Karten rund um Anfahrt, Logistik und Unterwegssein. Zeigt zusätzlich die gemeldete Verkehrslage auf Autobahnen und Schnellstraßen in vier Stufen von frei bis Stau sowie Strecken mit Verkehrsmeldungen, beides aus Daten der ASFINAG / EVIS.AT."
+  en:
+    name: Traffic
+    place: Vienna, A23 and A4
+    alt: "Style traffic-day: Vienna with colour-coded traffic flow on motorways and traffic reports"
+    short: "The base map with traffic flow and traffic reports on motorways and expressways."
+    text: "Built on the “Streets” base map (day). Meant for maps about getting there, logistics and being on the road. Adds the reported traffic flow on motorways and expressways in four levels from free to jammed, plus road sections with traffic reports, both from ASFINAG / EVIS.AT data."

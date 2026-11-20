@@ -1,0 +1,101 @@
+{{- /* Galerie der Kartenstile: Raster aus data/gallery.yaml. Ohne JavaScript lesbar (Bild, Name, Text, Stil-Adresse);
+       mit /lp/gallery.js öffnet ein Klick ein Fenster mit Live-Karte (MapLibre, lokal unter /lp/vendor/, erst beim Öffnen geladen). */ -}}
+{{ define "main" }}
+  {{- $lang := .Language.Lang -}}
+  {{- $en := eq $lang "en" -}}
+  {{- $home := cond $en "/en/" "/" -}}
+  {{- $api := "https://api.mapx.at/v1/styles/" -}}
+  {{- $docs := cond $en "https://docs.mapx.at/guides/maps/" "https://docs.mapx.at/de/guides/maps/" -}}
+  {{- $cards := slice -}}
+  <div class="hx:mx-auto hx:flex hextra-max-page-width">
+    {{ partial "sidebar.html" (dict "context" . "disableSidebar" true) }}
+    <main
+      id="content"
+      class="hx:w-full hx:break-words hx:min-h-[calc(100vh-var(--hextra-navbar-height))] hx:min-w-0 hx:pb-8 hx:pt-8 hx:md:pt-12 hx:pl-[max(env(safe-area-inset-left),1.5rem)] hx:pr-[max(env(safe-area-inset-right),1.5rem)]"
+    >
+      <div class="mx-topic">
+        <nav class="mx-crumbs" aria-label="{{ cond $en "Breadcrumb" "Brotkrumen" }}"><a href="{{ $home }}">mapx</a><span aria-hidden="true">›</span><span>{{ .Params.crumb | default .Title }}</span></nav>
+        <div class="content">
+          {{ .Content }}
+        </div>
+        <ul class="mx-gal" role="list">
+          {{- range hugo.Data.gallery }}
+          {{- $t := index . $lang -}}
+          {{- $def := index .variants 0 -}}{{ range .variants }}{{ if .default }}{{ $def = . }}{{ end }}{{ end }}
+          {{- $vs := slice -}}{{ range .variants }}{{ $vs = $vs | append (dict "id" .id "label" (index . $lang) "map" .map) }}{{ end }}
+          {{- $cards = $cards | append (dict "key" .key "name" $t.name "place" $t.place "text" $t.text "center" .center "zoom" .zoom "def" $def.id "variants" $vs) }}
+          <li class="mx-gcard" id="{{ .key }}">
+            <button type="button" class="mx-gbtn" data-key="{{ .key }}" aria-haspopup="dialog" disabled>
+              <span class="mx-gimg">
+                <img src="/lp/img/gallery/{{ .img }}.webp" width="960" height="540" alt="{{ $t.alt }}" loading="lazy" decoding="async">
+                <span class="mx-gpill" aria-hidden="true">{{ cond $en "Preview" "Vorschau" }}</span>
+              </span>
+              <span class="mx-gname">{{ $t.name }}</span>
+              <span class="mx-gplace">{{ $t.place }}</span>
+            </button>
+            {{- if gt (len .variants) 1 }}
+            <ul class="mx-gstrip" aria-label="{{ cond $en "Variants" "Varianten" }}">
+              {{- range .variants }}
+              <li><img src="/lp/img/gallery/{{ .id }}.webp" width="960" height="540" alt="" loading="lazy" decoding="async"><span>{{ index . $lang }}</span></li>
+              {{- end }}
+            </ul>
+            {{- end }}
+            <p class="mx-gshort">{{ $t.short }}</p>
+            <details class="mx-gdet">
+              <summary>{{ cond $en "Style URLs" "Stil-Adressen" }}</summary>
+              <div class="mx-gurls">
+                {{- range .variants }}
+                <div class="mx-gurl"><code>{{ $api }}{{ .id }}</code><button type="button" class="mx-gcopy" data-copy="{{ $api }}{{ .id }}" hidden>{{ cond $en "Copy" "Kopieren" }}</button></div>
+                {{- end }}
+              </div>
+              <p class="mx-glinks">
+                {{- with $def.map }}<a href="{{ printf "https://map.mapx.at/#%s" . | safeURL }}">{{ cond $en "Open in the map" "In der Karte öffnen" }} →</a>{{ end }}
+                <a href="{{ $docs }}">{{ cond $en "Docs: maps" "Doku: Karten" }} →</a>
+              </p>
+            </details>
+          </li>
+          {{- end }}
+        </ul>
+        <p class="mx-note mx-gnote">{{ cond $en "Previews and live maps use the same styles as the API. Data: BEV, GIP.at, Environment Agency Austria, ASFINAG / EVIS.AT, Copernicus Sentinel-2, mostly CC BY 4.0; the full attribution is shown on each map." "Vorschauen und Live-Karten nutzen dieselben Stile wie die API. Daten: BEV, GIP.at, Umweltbundesamt, ASFINAG / EVIS.AT, Copernicus Sentinel-2, überwiegend CC BY 4.0; die vollständige Quellenangabe steht auf jeder Karte." }}
+          {{ cond $en "Your own style from the vector tiles:" "Eigener Stil aus den Vektorkacheln:" }} <a href="{{ cond $en "https://docs.mapx.at/guides/style-the-basemap/" "https://docs.mapx.at/de/guides/style-the-basemap/" }}">{{ cond $en "Style the base map" "Basiskarte gestalten" }}</a>.</p>
+        <dialog class="mx-gdlg" aria-labelledby="mx-gdlg-h">
+          <div class="mx-gdlg-in">
+            <div class="mx-gdlg-text">
+              <span class="mx-gtag">{{ cond $en "mapx style" "mapx-Stil" }}</span>
+              <h2 id="mx-gdlg-h"></h2>
+              <p class="mx-gdlg-place"></p>
+              <hr>
+              <p class="mx-gdlg-p"></p>
+              <p class="mx-gdlg-lbl">{{ cond $en "Style URL" "Stil-Adresse" }}</p>
+              <div class="mx-gurl"><code class="mx-gdlg-url"></code><button type="button" class="mx-gcopy">{{ cond $en "Copy" "Kopieren" }}</button></div>
+              <details class="mx-gsnip"><summary>{{ cond $en "Embed with MapLibre" "Einbinden mit MapLibre" }}</summary><pre><code></code></pre><button type="button" class="mx-gcopy">{{ cond $en "Copy" "Kopieren" }}</button></details>
+              <div class="mx-gdlg-actions">
+                <a class="mx-gprimary" href="https://account.mapx.at/login?lang={{ $lang }}">{{ cond $en "Get started free" "Kostenlos starten" }}</a>
+                <a class="mx-gdlg-map" href="https://map.mapx.at/">{{ cond $en "Open in the map" "In der Karte öffnen" }} →</a>
+                <a href="{{ $docs }}">{{ cond $en "Docs" "Doku" }} →</a>
+              </div>
+            </div>
+            <div class="mx-gdlg-stage">
+              <div class="mx-gseg" role="group" aria-label="{{ cond $en "Variant" "Variante" }}"></div>
+              <div class="mx-gmap" aria-label="{{ cond $en "Live map" "Live-Karte" }}" role="region"></div>
+              <p class="mx-ginfo" aria-live="polite"></p>
+            </div>
+            <form method="dialog" class="mx-gclose-f"><button class="mx-gclose" aria-label="{{ cond $en "Close" "Schließen" }}">×</button></form>
+          </div>
+        </dialog>
+        <script type="application/json" id="mx-gdata">{{ dict "token" site.Params.demoToken "api" $api "cards" $cards | jsonify | safeJS }}</script>
+        <script src="/lp/gallery.js" defer></script>
+        {{- $topics := index hugo.Data "topics" -}}
+        <aside class="mx-related" aria-labelledby="mx-related-h">
+          <h2 id="mx-related-h">{{ cond $en "More topics" "Weitere Themen" }}</h2>
+          <ul>
+            {{- range $topics }}{{ $t := index . $lang }}
+            <li><a href="{{ $t.path }}">{{ $t.name }}</a></li>
+            {{- end }}
+            <li><a href="{{ cond $en "/en/faq/" "/faq/" }}">FAQ</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </div>
+{{ end }}
