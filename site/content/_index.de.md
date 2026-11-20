@@ -59,7 +59,7 @@ Je Produkt ein eigener Datensatz mit Stichtag und Quelle. Jedes Produkt hat eine
 
 *Für Entwickler* – Kacheln sind PMTiles-Dateien mit HTTP-Range-Zugriff, ohne eigenen Kartenserver. Die APIs antworten mit JSON bzw. GeoJSON.
 
-- **MapLibre und PMTiles.** Der Stil der Demo-Karte ist öffentlich und lässt sich direkt laden.
+- **MapLibre und PMTiles.** Fertige Kartenstile kommen über die Karten-API (`/v1/styles`).
 - **Ein kostenloses Konto genügt.** Anmelden, Token anlegen, loslegen. Herkunft, Stichtag und Attribution stehen je Produkt in der Doku.
 - **Maschinenlesbar.** OpenAPI-Beschreibung und `llms.txt` für alle APIs und die Kacheln.
 
@@ -71,16 +71,17 @@ Je Produkt ein eigener Datensatz mit Stichtag und Quelle. Jedes Produkt hat eine
 import maplibregl from 'maplibre-gl';
 import { Protocol } from 'pmtiles';
 
+const TOKEN = 'YOUR_TOKEN'; // öffentlicher Token mx_pk_… vom Konto
 maplibregl.addProtocol('pmtiles', new Protocol().tile);
 
 const map = new maplibregl.Map({
   container: 'map',
-  style: 'https://mapx.at/style.json',
+  style: 'https://api.mapx.at/v1/styles/streets',
+  // hängt den Token an jede Anfrage an mapx.at (Style, Tiles, Schriften, Sprites)
+  transformRequest: (url) => ({ url: /^https:\/\/([\w-]+\.)?mapx\.at\//.test(url)
+    ? url + (url.includes('?') ? '&' : '?') + 'access_token=' + TOKEN : url }),
   center: [15.33, 48.23],
-  zoom: 13,
-  transformRequest: (url) => url.includes('mapx.at')
-    ? { url, headers: { Authorization: `Bearer ${TOKEN}` } }
-    : undefined
+  zoom: 13
 });
 ```
 

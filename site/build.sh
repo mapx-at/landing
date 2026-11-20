@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Baut die Landing mit Hugo (Theme Hextra, Submodul site/themes/hextra) und legt das Ergebnis in die Repo-Wurzel
 # (GitHub Pages liefert den Branch main aus). Geschrieben bzw. ersetzt werden nur: index.html, en/, impressum/, die Themenseiten (inkl. nutzungsbedingungen, en/terms) (PAGES_DE, unter en/ PAGES_EN), lp/, css/, js/, img/, fonts/, favicon.svg, sitemap.xml, robots.txt, llms.txt.
-# style.json, styles/ (kommen aus vector-tiles, viewer.yml), tools/, legacy-viewer.html (Weiterleitung), CNAME bleiben unberührt.
+# CNAME bleibt unberührt. (style.json, styles/, tools/ und legacy-viewer.html sind seit 20.11.2026 entfernt, Stile nur noch über die API.)
 # Aufruf: site/build.sh [--check]   (--check: nichts schreiben, Abweichung = Exit 1; für CI)
 # Voraussetzung: git submodule update --init; Hugo extended >= 0.134.
 set -euo pipefail
