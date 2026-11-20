@@ -2,11 +2,12 @@
 > [mapx-at/vector-tiles](https://github.com/mapx-at/vector-tiles) enthalten. Weiterentwicklung dort; dieses Repo wird nach
 > der Umstellung archiviert.
 
-# mapx.at – Landing/Viewer
+# mapx.at – Landing und Kartenstile
 
-GitHub Pages (`CNAME` = mapx.at). Eine statische Seite: `index.html` (MapLibre GL JS 4.7.1 + pmtiles 3.2.1)
-lädt den Kartenstil `style.json`. Kacheln, Glyphs und Sprites kommen von `https://tiles.mapx.at/`,
-die Suche von `https://search.mapx.at` (Meilisearch, öffentlicher Search-only-Key).
+GitHub Pages (`CNAME` = mapx.at). `index.html` ist die Landing (Hugo, Quelle `site/`). Dazu liegen hier die Kartenstile
+`style.json` und `styles/*.json` (https://mapx.at/style.json), die `viewer.yml` in mapx-at/vector-tiles schreibt.
+Die frühere Viewer-Seite ist seit 20.11.2026 entfernt (Nachfolger https://map.mapx.at); die Abschnitte zu `style.json`
+unten beschreiben den Stand vor dem Umzug ins Monorepo.
 
 ## style.json erzeugen
 
@@ -34,7 +35,7 @@ Das Skript
   - Attribution je Quelle einheitlich (Pflichtvermerk Adressregister),
 - setzt Glyphs (`/fonts/{fontstack}/{range}.pbf`) und Sprites (`default` + `sdf`) auf tiles.mapx.at,
 - schreibt Legende und Layergruppen der Checkboxen nach `metadata["mapx:legend"]` / `["mapx:groups"]`;
-  `index.html` liest sie von dort.
+  die frühere Viewer-Seite las sie von dort.
 
 Es bricht ab bei fehlendem Fragment, unbekanntem Fontstack, fehlendem Icon oder doppelter Layer-ID.
 Nach Änderungen an den Fragmenten in vector-tiles: neu generieren, `style.json` committen.
@@ -69,21 +70,12 @@ Dafür gibt es eigene Layer `*-low` mit `maxzoom: 8`; bestehende Layer bekommen 
 | Bundeslandnamen | gibt es nicht | `grenzen-label-land` minzoom 5 → 8 (z8 unverändert) |
 | Relief | graues Rasterrelief überall | nur Melk (relief-terrainrgb z5–16), nicht nachgebaut |
 
-Hinweis: `index.html` begrenzt den Viewer auf `minZoom: 6`; z0–5 sind erst nach einer Anpassung dort erreichbar.
-
-## Testen
-
-Lokal: `python3 -m http.server` im Repo und `http://localhost:8000/` öffnen. Die Suche erlaubt per CORS nur
-den Origin `https://mapx.at` (lokal also „Suche gerade nicht erreichbar“). Quellen per Query-Parameter
-überschreibbar: `?dkm=`, `?gip=`, `?ggn=`, `?grenzen=`, `?geonamen=`, `?adr=` (je volle `https://…pmtiles`-URL),
-`?style=` (anderes style.json), `?search=` / `?searchKey=` (Suchendpunkt).
-
-
 ## Neue Landing (seit 07.11.2026)
 
-`index.html` ist jetzt die Landing (Hugo, Quelle `site/`). Der frühere Viewer liegt unverändert als
-`legacy-viewer.html`; alte Hash-Links (`#zoom/lat/lon`) leitet `lp/legacy-redirect.js` auf
-https://map.mapx.at/ weiter. `style.json`, `styles/`, `legacy/`, `tools/` bleiben unberührt.
+`index.html` ist jetzt die Landing (Hugo, Quelle `site/`). Der frühere Viewer ist seit 20.11.2026 entfernt;
+`legacy-viewer.html` ist nur noch eine Weiterleitung auf https://map.mapx.at/ (Hash bleibt erhalten, noindex). Alte Hash-Links
+auf die Wurzel (`mapx.at/#zoom/lat/lon`) leitet `lp/legacy-redirect.js` auf https://map.mapx.at/ weiter. `style.json` und
+`styles/` schreibt der Workflow `viewer.yml` in mapx-at/vector-tiles, `tools/` bleibt unberührt.
 
 Pages liefert weiter den Branch `main` aus. Das Build-Ergebnis (`index.html`, `lp/`) ist eingecheckt:
 nach Änderungen in `site/` `site/build.sh` ausführen (Hugo extended 0.169.0) und committen
@@ -95,4 +87,4 @@ Die Landing gibt es auf Deutsch (`/`) und Englisch (`/en/`). Ein Template (`site
 `site/data/de.yaml` und `site/data/en.yaml`; `site/build.sh` schreibt `index.html`, `en/index.html` und `lp/`.
 Navigation und Abschnitt „API-Zugang“ verlinken auf https://account.mapx.at (`/login`, `/register`, `/tokens`, `/usage`, `?lang=`).
 Die Seite ruft selbst keine mapx-APIs auf (nur Codebeispiele), ein Token-Platzhalter ist daher nicht nötig.
-`legacy-viewer.html` (alter Viewer, ruft tiles.mapx.at direkt auf) ist unverändert und funktioniert ohne Token nicht mehr.
+`legacy-viewer.html` leitet seit 20.11.2026 nur noch auf https://map.mapx.at/ weiter.
