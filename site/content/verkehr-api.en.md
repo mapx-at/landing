@@ -15,7 +15,7 @@ description: "Traffic API for Austria: traffic reports, roadworks, closures and 
 <p class="mx-lead">The traffic API returns active traffic reports such as accidents, roadworks and closures, speed limits on motorway signs and a traffic layer for the map. You can query reports for a map extent, a road or along a route. It is meant for developers of route planners, fleet applications and traffic information in Austria.</p>
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 {{< hextra/hero-button text="Docs: traffic" link="https://docs.mapx.at/guides/traffic/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
@@ -67,5 +67,5 @@ The reports come from ASFINAG and EVIS.AT (CC BY 4.0), the road network from GIP
 Access is free with an account and a token. All parameters are in the [traffic guide](https://docs.mapx.at/guides/traffic/) and the [traffic API reference](https://docs.mapx.at/api/traffic/).
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 </div>

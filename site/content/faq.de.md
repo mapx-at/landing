@@ -10,7 +10,7 @@ images: ["/img/og-image.png"]
 description: "Häufige Fragen zu mapx: Token und Konto, Kosten, kommerzielle Nutzung unter CC BY 4.0, Aktualität der Daten, Kachel-Download, Kataster und Fehler 401, 403, 429."
 faq:
   - q: "Brauche ich einen Token oder ein Konto?"
-    a: "Ja, ein kostenloses Konto und einen API-Token. Registriere dich auf [account.mapx.at](https://account.mapx.at/register?lang=de), lege einen Token an und sende ihn als `Authorization: Bearer` (Server) oder als `access_token` (Browser, Bilder) mit. CORS ist offen. Details: [Zugang und Limits](https://docs.mapx.at/de/start/access-and-limits/)."
+    a: "Ja, ein kostenloses Konto und einen API-Token. Melde dich auf [account.mapx.at](https://account.mapx.at/login?lang=de) mit deiner E-Mail-Adresse an (beim ersten Mal entsteht dabei das Konto), lege einen Token an und sende ihn als `Authorization: Bearer` (Server) oder als `access_token` (Browser, Bilder) mit. CORS ist offen. Details: [Zugang und Limits](https://docs.mapx.at/de/start/access-and-limits/)."
   - q: "Was kostet mapx?"
     a: "Nichts. Der Zugang ist kostenlos, es gibt Rate-Limits pro Token und Zone."
   - q: "Ist kommerzielle Nutzung erlaubt?"

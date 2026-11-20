@@ -15,7 +15,7 @@ description: "Elevation API for Austria: height for points, elevation profile al
 <p class="mx-lead">The elevation API returns the height above sea level for points and elevation profiles along a line, from the terrain model or the surface model of the laser scan. The terrain is also available as tiles for hillshade and 3D views, and contour lines as vector tiles. It is meant for developers of hiking, cycling, planning and site-analysis applications in Austria.</p>
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 {{< hextra/hero-button text="Docs: elevation" link="https://docs.mapx.at/guides/elevation/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
@@ -69,5 +69,5 @@ The models come from the laser scanning of the Federal Office of Metrology and S
 Access is free with an account and a token. All parameters are in the [elevation API reference](https://docs.mapx.at/api/elevation/), the data sheet of the terrain model is in the [tileset docs](https://docs.mapx.at/tilesets/terrain-rgb/).
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 </div>

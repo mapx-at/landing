@@ -15,7 +15,7 @@ description: "Geocoding-API für Österreich: Adresssuche, Reverse Geocoding, Ad
 <p class="mx-lead">Die Geocoding-API wandelt Adressen und Ortsnamen in Koordinaten um und Koordinaten in die nächste Adresse. Dazu kommen Vorschläge beim Tippen, Adress-Autofill für Formulare und eine Adressprüfung. Sie richtet sich an Entwickler, die in Webseiten, Apps und Backends Adressen in Österreich suchen, ergänzen oder prüfen wollen.</p>
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 {{< hextra/hero-button text="Doku: Adresssuche" link="https://docs.mapx.at/de/guides/search/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
@@ -73,5 +73,5 @@ Adressen, Geographische Namen, Verwaltungsgrenzen und Kataster stammen vom Bunde
 Der Zugang ist kostenlos mit Konto und Token. Alle Endpunkte und Parameter stehen in der [Referenz zur Geocoding-API](https://docs.mapx.at/de/api/geocoding/), im [Adresssuche-Guide](https://docs.mapx.at/de/guides/search/) und in der [Referenz zu Autofill und Adressprüfung](https://docs.mapx.at/de/api/address/).
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 </div>

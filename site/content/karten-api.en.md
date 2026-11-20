@@ -15,7 +15,7 @@ description: "Maps API for Austria: vector tiles, ready-made map styles for MapL
 <p class="mx-lead">mapx delivers the map of Austria as ready-made styles for MapLibre GL JS and as tiles: a vector basemap, orthophoto and aerial imagery, terrain model, contour lines and parcel boundaries. You can embed a style with one line or build your own map style from the vector tiles. It is meant for developers of web and mobile maps who want to do without a map server of their own.</p>
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 {{< hextra/hero-button text="Docs: maps" link="https://docs.mapx.at/guides/maps/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
@@ -75,5 +75,5 @@ The basemap combines open data from BEV, GIP.at, Umweltbundesamt and BMLUK in 18
 Access is free with an account and a token. Your account creates public tokens for web pages and secret tokens for servers. Continue with the [maps guide](https://docs.mapx.at/guides/maps/), the [map styles reference](https://docs.mapx.at/api/styles/) and the [list of tilesets](https://docs.mapx.at/tilesets/).
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 </div>

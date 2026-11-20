@@ -11,7 +11,7 @@ Contact: support@mapx.at. The website is available in German (https://mapx.at/) 
 - [First map in 5 minutes](https://docs.mapx.at/start/first-map/): embed a map with MapLibre GL JS
 - [First search](https://docs.mapx.at/start/first-search/): geocoding and place search request
 - [First route](https://docs.mapx.at/start/first-route/): routing request
-- [Account and tokens](https://account.mapx.at): sign up, create API tokens, see usage (free)
+- [Account and tokens](https://account.mapx.at): sign in with your email address (the account is created on first sign-in), create API tokens, see usage (free)
 
 ## Topics (one page per product, with example, data source and limitations)
 

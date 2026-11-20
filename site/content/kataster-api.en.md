@@ -15,7 +15,7 @@ description: "Cadastre API for Austria: look up the parcel at a point, show parc
 <p class="mx-lead">With the cadastre API you look up the parcel at a coordinate, search parcels by cadastral municipality and number and draw parcel boundaries on a map. It is meant for developers of real estate, planning and municipal applications who need data from the digital cadastral map (DKM) without preparing cadastre data themselves.</p>
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 {{< hextra/hero-button text="Docs: parcels" link="https://docs.mapx.at/guides/parcels/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
@@ -77,5 +77,5 @@ The source is the digital cadastral map (DKM) of the Federal Office of Metrology
 Access is free with an account and a token. All details are in the [docs on parcels](https://docs.mapx.at/guides/parcels/) and in the [Tilequery and Parcel reference](https://docs.mapx.at/api/tilequery/).
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 </div>

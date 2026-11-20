@@ -28,7 +28,7 @@ faq:
 <p class="mx-lead">With the hosted mapx MCP server your AI assistant can look up addresses, calculate routes, query parcels and check the weather without you writing API calls. It is meant for anyone who wants to answer questions about Austria directly in an assistant (claude.ai, ChatGPT, Claude Code, Cursor, VS Code, Gemini CLI), and for developers who give an assistant geodata. The endpoint is https://mcp.mapx.at/mcp (Model Context Protocol, Streamable HTTP).</p>
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 {{< hextra/hero-button text="Docs: MCP" link="https://docs.mapx.at/guides/mcp/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
@@ -60,7 +60,7 @@ There are 23 tools, all read-only, in eight groups:
 The simplest way is to sign in with your mapx account, without a token:
 
 1. Add `https://mcp.mapx.at/mcp` as an MCP server in your assistant: in claude.ai as a custom connector, in Claude Code with `claude mcp add --transport http mapx https://mcp.mapx.at/mcp` and then `/mcp`, in ChatGPT as a connector or app with your own MCP address (available depending on plan and settings).
-2. Sign in at account.mapx.at or create an [account](https://account.mapx.at/register?lang=en) there.
+2. Sign in at [account.mapx.at](https://account.mapx.at/login?lang=en). If you have no account yet, one is created the first time you sign in.
 3. On the consent page, check what the access allows (read-only tools, no access to your account or other tokens) and confirm.
 
 The connection appears in your account under Tokens and can be disconnected there at any time. This sign-in applies to known applications; the support can enable further ones on request.
@@ -91,5 +91,5 @@ The tools use the same datasets as the mapx APIs: cadastre and elevation from th
 Access goes through your account, by signing in or with a token. All details are in the [MCP server docs](https://docs.mapx.at/guides/mcp/).
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 </div>

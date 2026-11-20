@@ -15,7 +15,7 @@ description: "Routing API for Austria: routes for car, truck, bike and foot, iso
 <p class="mx-lead">The routing API calculates routes for car, truck, bike and foot on the Austrian road graph. It also returns isochrones, travel-time matrices, map matching and tour optimization. It is meant for developers of route planners and of logistics, tourism and site-analysis applications in Austria.</p>
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 {{< hextra/hero-button text="Docs: routing" link="https://docs.mapx.at/guides/navigation/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
@@ -75,5 +75,5 @@ Routing runs on the routing export of the Graph Integration Platform GIP.at (CC 
 Access is free with an account and a token. Parameters and responses are in the [routing guide](https://docs.mapx.at/guides/navigation/) and the [routing API reference](https://docs.mapx.at/api/directions/).
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 </div>
