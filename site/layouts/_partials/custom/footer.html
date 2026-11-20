@@ -3,7 +3,7 @@
 {{- $f := $t.footer -}}{{- $t0 := $t -}}{{- $a := printf "%s/" $t.acct -}}{{- $q := printf "?lang=%s" $t.lang -}}
 <div class="mx-fgrid">
   <div class="mx-fabout"><strong>mapx</strong><p>{{ $f.about }}</p></div>
-  <div><h4>{{ $f.products }}</h4><ul><li><a href="https://map.mapx.at">{{ $f.mapl }}</a></li>{{ range index hugo.Data "topics" }}{{ $t := index . $t0.lang }}<li><a href="{{ $t.path }}">{{ $t.name }}</a></li>{{ end }}</ul></div>
+  <div><h4>{{ $f.products }}</h4><ul><li><a href="https://map.mapx.at">{{ $f.mapl }}</a></li><li><a href="{{ cond (eq $t0.lang "en") "/en/gallery/" "/galerie/" }}">{{ $f.gallery }}</a></li>{{ range index hugo.Data "topics" }}{{ $t := index . $t0.lang }}<li><a href="{{ $t.path }}">{{ $t.name }}</a></li>{{ end }}</ul></div>
   <div><h4>{{ $f.dev }}</h4><ul><li><a href="https://docs.mapx.at/start/">{{ $f.quick }}</a></li><li><a href="https://docs.mapx.at/api/">{{ $f.api }}</a></li><li><a href="https://docs.mapx.at/lizenz/">{{ $f.license }}</a></li></ul></div>
   <div><h4>{{ $f.account }}</h4><ul><li><a href="{{ $a }}login{{ $q }}">{{ index $f.accountlinks 0 }}</a></li><li><a href="{{ $a }}tokens{{ $q }}">{{ index $f.accountlinks 1 }}</a></li><li><a href="{{ $a }}usage{{ $q }}">{{ index $f.accountlinks 2 }}</a></li></ul></div>
   <div><h4>{{ $f.more }}</h4><ul><li><a href="{{ cond (eq $t0.lang "en") "/en/faq/" "/faq/" }}">FAQ</a></li><li><a href="https://map.mapx.at">{{ $f.demo }}</a></li><li><a href="https://github.com/mapx-at/landing">GitHub</a></li></ul></div>

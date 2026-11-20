@@ -54,6 +54,8 @@ Je Produkt ein eigener Datensatz mit Stichtag und Quelle. Jedes Produkt hat eine
   {{< hextra/feature-card title="MCP-Server für KI-Assistenten" subtitle="21 lesende Werkzeuge für Adressen, Routen, Wetter und mehr, direkt in Claude Code, Cursor und VS Code. · *MCP · Streamable HTTP*" icon="chip" link="/mcp-server/" >}}
 {{< /hextra/feature-grid >}}
 
+Alle fertigen Kartenstile mit Vorschau und Live-Karte: [Galerie der Kartenstile](/galerie/) →
+
 ## Einbinden in fünf Minuten. {#entwickler}
 
 *Für Entwickler* – Kacheln sind PMTiles-Dateien mit HTTP-Range-Zugriff, ohne eigenen Kartenserver. Die APIs antworten mit JSON bzw. GeoJSON.

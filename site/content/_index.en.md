@@ -54,6 +54,8 @@ Each product is its own dataset with a reference date and source. Each product h
   {{< hextra/feature-card title="MCP server for AI assistants" subtitle="21 read-only tools for addresses, routes, weather and more, directly in Claude Code, Cursor and VS Code. · *MCP · Streamable HTTP*" icon="chip" link="/en/mcp-server/" >}}
 {{< /hextra/feature-grid >}}
 
+All ready-made map styles with preview and live map: [map style gallery](/en/gallery/) →
+
 ## Embed it in five minutes. {#entwickler}
 
 *For developers* – Tiles are PMTiles files with HTTP range access, no map server of your own needed. The APIs answer with JSON or GeoJSON.

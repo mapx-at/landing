@@ -23,3 +23,16 @@ Die Landing gibt es auf Deutsch (`/`) und Englisch (`/en/`). Ein Template (`site
 `site/data/de.yaml` und `site/data/en.yaml`; `site/build.sh` schreibt `index.html`, `en/index.html` und `lp/`.
 Navigation und Abschnitt „API-Zugang“ verlinken auf https://account.mapx.at (`/login`, `/register`, `/tokens`, `/usage`, `?lang=`).
 Die Seite ruft selbst keine mapx-APIs auf (nur Codebeispiele), ein Token-Platzhalter ist daher nicht nötig.
+
+## Galerie der Kartenstile (seit 21.11.2026)
+
+`/galerie/` bzw. `/en/gallery/`: Raster der API-Stile, Klick öffnet ein Fenster mit Live-Karte (MapLibre 6.18.0 und pmtiles 4.5.0
+lokal unter `site/static/lp/vendor/`, erst beim Öffnen geladen). Texte und Varianten: `site/data/gallery.yaml`, Layout
+`site/layouts/gallery.html`, Skript `site/static/lp/gallery.js`. Direktlink je Stil: `/galerie/#streets-night`.
+
+Vorschaubilder (`site/static/lp/img/gallery/<id>.webp`, 960 × 540) neu erzeugen, Orte/Zoom stehen im Skript:
+
+    PATH=~/.nvm/versions/node/v24.13.1/bin:$PATH web-browse run site/tools/gallery-shots.mjs   # einzelne: GALLERY_ONLY=streets,outdoors
+
+Das Skript liefert eine Minimalseite unter der Herkunft `https://mapx.at` aus (dafür gilt der öffentliche Token aus `site/hugo.toml`)
+und nimmt die echte MapLibre-Darstellung samt Quellenangabe auf. Danach `bash site/build.sh`.
