@@ -12,7 +12,7 @@ description: "Karten-API für Österreich: Vektorkacheln, fertige Kartenstile f�
 
 # Karten-API für Österreich: Vektorkacheln, Kartenstile und Orthofoto
 
-<p class="mx-lead">mapx liefert die Karte Österreichs als fertige Kartenstile für MapLibre GL JS und als Kacheln: eine Vektor-Basiskarte, Orthofoto und Luftbild, Geländemodell, Höhenlinien und Grundstücksgrenzen. Du kannst einen Stil mit einer Zeile einbinden oder aus den Vektorkacheln einen eigenen Kartenstil bauen. Das richtet sich an Entwickler von Web- und Mobil-Karten, die ohne eigenen Kartenserver auskommen wollen.</p>
+<p class="mx-lead">mapx liefert die Karte Österreichs als fertige Kartenstile für MapLibre GL JS und als Kacheln: eine Vektor-Basiskarte, Orthofoto und Luftbild, Geländemodell und Höhenlinien. Du kannst einen Stil mit einer Zeile einbinden oder aus den Vektorkacheln einen eigenen Kartenstil bauen. Das richtet sich an Entwickler von Web- und Mobil-Karten, die ohne eigenen Kartenserver auskommen wollen.</p>
 
 <div class="mx-btns">
 {{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
@@ -27,7 +27,7 @@ description: "Karten-API für Österreich: Vektorkacheln, fertige Kartenstile f�
 - `GET /v1/tiles` und `GET /v1/tiles/{tileset}.json`: Liste der Tilesets und TileJSON.
 - `GET /v1/tiles/{tileset}/{z}/{x}/{y}.{ext}`: Kacheln im XYZ-Schema.
 - `GET /v1/styles/{id}/tiles/{tilesize}/{z}/{x}/{y}`: gerenderte Rasterkacheln eines Stils für Clients ohne Vektorunterstützung.
-- Tilesets: `streets` (Basiskarte, Zoom 0 bis 16), `orthophoto` (Luftbild, Zoom 5 bis 18, 20 cm), `cadastre`, `contours`, `terrain-rgb` und `dsm`.
+- Tilesets: `streets` (Basiskarte, Zoom 0 bis 16), `orthophoto` (Luftbild, Zoom 5 bis 18, 20 cm), `contours`, `terrain-rgb` und `dsm`.
 - Zugriff über Stil, TileJSON oder `{z}/{x}/{y}`; ganze Tileset-Dateien zum Herunterladen gibt es nicht.
 
 ## Beispiel

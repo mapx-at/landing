@@ -7,12 +7,12 @@ translationKey: mcp
 url: /mcp-server/
 lastmod: 2026-11-18
 images: ["/img/og-image.png"]
-description: "MCP-Server für Österreich-Geodaten: KI-Assistenten wie Claude Code, Cursor und VS Code nutzen Adressen, Routen, Grundstücke, Wetter und Verkehr von mapx direkt."
+description: "MCP-Server für Österreich-Geodaten: KI-Assistenten wie Claude Code, Cursor und VS Code nutzen Adressen, Routen, Wetter und Verkehr von mapx direkt."
 faq:
   - q: "Was ist ein MCP-Server?"
-    a: "MCP steht für Model Context Protocol, einen offenen Standard, über den KI-Assistenten externe Werkzeuge aufrufen. Der mapx-MCP-Server stellt 23 Werkzeuge für Österreich-Geodaten bereit, die der Assistent selbst auswählt und mit den Angaben aus deiner Frage füllt."
+    a: "MCP steht für Model Context Protocol, einen offenen Standard, über den KI-Assistenten externe Werkzeuge aufrufen. Der mapx-MCP-Server stellt 21 Werkzeuge für Österreich-Geodaten bereit, die der Assistent selbst auswählt und mit den Angaben aus deiner Frage füllt."
   - q: "Kann der Assistent etwas verändern?"
-    a: "Nein. Alle 23 Werkzeuge lesen nur. Der Assistent kann Daten abfragen, aber nichts anlegen, ändern oder löschen."
+    a: "Nein. Alle 21 Werkzeuge lesen nur. Der Assistent kann Daten abfragen, aber nichts anlegen, ändern oder löschen."
   - q: "Welche Assistenten funktionieren?"
     a: "claude.ai, ChatGPT und Claude Code melden sich direkt über dein mapx-Konto an, ohne Token. Cursor, VS Code, Gemini CLI und andere Clients sowie die APIs von Anthropic und OpenAI nutzen einen Token."
   - q: "Was kostet die Nutzung?"
@@ -25,7 +25,7 @@ faq:
 
 # MCP-Server für Österreich-Geodaten
 
-<p class="mx-lead">Mit dem gehosteten MCP-Server von mapx kann dein KI-Assistent Adressen suchen, Routen berechnen, Grundstücke abfragen und das Wetter nachsehen, ohne dass du selbst API-Aufrufe schreibst. Er richtet sich an alle, die Fragen zu Österreich direkt im Assistenten (claude.ai, ChatGPT, Claude Code, Cursor, VS Code, Gemini CLI) beantworten wollen, und an Entwickler, die einen Assistenten mit Geodaten ausstatten. Der Endpunkt ist https://mcp.mapx.at/mcp (Model Context Protocol, Streamable HTTP).</p>
+<p class="mx-lead">Mit dem gehosteten MCP-Server von mapx kann dein KI-Assistent Adressen suchen, Routen berechnen, Abfahrten nachschlagen und das Wetter nachsehen, ohne dass du selbst API-Aufrufe schreibst. Er richtet sich an alle, die Fragen zu Österreich direkt im Assistenten (claude.ai, ChatGPT, Claude Code, Cursor, VS Code, Gemini CLI) beantworten wollen, und an Entwickler, die einen Assistenten mit Geodaten ausstatten. Der Endpunkt ist https://mcp.mapx.at/mcp (Model Context Protocol, Streamable HTTP).</p>
 
 <div class="mx-btns">
 {{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
@@ -35,7 +35,7 @@ faq:
 ## Beispielfragen
 
 - „Wie lange fahre ich mit dem Rad von Krems nach Melk, und wie viele Höhenmeter sind das?“
-- „Welches Grundstück liegt bei 15.3294, 48.2272, und zu welcher Katastralgemeinde gehört es?“
+- „Wie hoch liegt der Hauptplatz von Melk, und wie sieht das Höhenprofil bis zum Stift aus?“
 - „Welche Orte erreiche ich von Linz Hauptbahnhof in 30 Minuten mit dem Zug?“
 - „Gibt es heute Verkehrsmeldungen auf der A1 zwischen Salzburg und Wien?“
 - „Wie ist die Luftqualität in Graz, und wie wird das Wetter morgen in der Steiermark?“
@@ -44,13 +44,12 @@ Der Assistent wählt dazu selbst die passenden Werkzeuge und verbindet die Ergeb
 
 ## Die Werkzeuge
 
-Es sind 23 Werkzeuge, alle nur lesend, in acht Gruppen:
+Es sind 21 Werkzeuge, alle nur lesend, in sieben Gruppen:
 
 - **Adressen und Orte:** `geocode`, `reverse_geocode`, `validate_address`, `search_places`, `list_place_categories`.
 - **Routen und Erreichbarkeit:** `route` für Auto, Lkw, Rad und zu Fuß, `isochrone`, `travel_matrix`, `optimize_stops`.
 - **Öffentlicher Verkehr:** `transit_route`, `departures`, `find_stops`. Grundlage ist der Fahrplan, keine Echtzeit.
 - **Höhe:** `elevation`, `elevation_profile`.
-- **Grundstücke:** `parcel_at_point`, `parcel_details` aus dem Kataster des BEV.
 - **Verkehr:** `traffic_incidents`, `speed_limits`.
 - **Wetter und Klima:** `weather`, `weather_warnings`, `climate`, `air_quality`.
 - **Kartenbild:** `static_map`.
@@ -75,14 +74,13 @@ Der Token-Weg funktioniert mit jedem MCP-Client, auch mit Cursor, VS Code und Ge
 
 ## Woher die Daten kommen
 
-Die Werkzeuge greifen auf dieselben Datensätze zu wie die mapx-APIs: Kataster und Höhen vom BEV, Straßengraph von GIP.at, Fahrplan der ÖBB-Personenverkehr AG, Verkehrsmeldungen von ASFINAG / EVIS.AT, Wetter, Klima und Luftqualität von GeoSphere Austria. Es kommen nur amtliche offene Daten zum Einsatz, kein OpenStreetMap. Jede Antwort nennt ihre Quelle, gib sie weiter, wenn du Ergebnisse veröffentlichst.
+Die Werkzeuge greifen auf dieselben Datensätze zu wie die mapx-APIs: Adressen und Höhen vom BEV, Straßengraph von GIP.at, Fahrplan der ÖBB-Personenverkehr AG, Verkehrsmeldungen von ASFINAG / EVIS.AT, Wetter, Klima und Luftqualität von GeoSphere Austria. Es kommen nur amtliche offene Daten zum Einsatz, kein OpenStreetMap. Jede Antwort nennt ihre Quelle, gib sie weiter, wenn du Ergebnisse veröffentlichst.
 
 ## Einschränkungen
 
 - Nur Österreich.
 - Alle Werkzeuge lesen nur, der Assistent ändert nichts.
 - Der öffentliche Verkehr beruht auf dem Fahrplan, nicht auf Echtzeitdaten.
-- Grundstücksdaten dienen der Orientierung und sind nicht rechtsverbindlich.
 - Aufrufe zählen wie API-Aufrufe und sind im Konto unter Nutzung sichtbar. Eine Verbindung oder einen Token kannst du jederzeit im Konto trennen oder sperren.
 - Der Assistent formuliert die Antworten selbst. Prüfe wichtige Angaben an der genannten Quelle.
 

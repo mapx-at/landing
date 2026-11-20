@@ -23,7 +23,7 @@ description: "Geocoding API for Austria: address search, reverse geocoding, addr
 
 ## What the API can do
 
-- `GET /v1/geocode`: forward geocoding of addresses, streets, places, postcodes, districts and parcels. Road kilometers such as `A1 km 41` can be searched as well.
+- `GET /v1/geocode`: forward geocoding of addresses, streets, places, postcodes and districts. Road kilometers such as `A1 km 41` can be searched as well.
 - `GET /v1/reverse`: reverse geocoding, the nearest address, street or place to a point.
 - `POST /v1/geocode/batch`: up to 1000 requests in one call.
 - `GET /v1/searchbox/suggest` and `/v1/searchbox/retrieve/{id}`: suggestions while typing and details of the chosen result.
@@ -57,7 +57,7 @@ curl -s -H "Authorization: Bearer YOUR_TOKEN" "https://api.mapx.at/v1/address/va
 
 ## Where the data comes from
 
-Addresses, geographic names, administrative boundaries and cadastre come from the Federal Office of Metrology and Surveying (BEV) and are licensed under CC BY 4.0. The autofill uses only the official address register of the BEV. Points of interest in the search come from official sources, not from OpenStreetMap.
+Addresses, geographic names, and administrative boundaries come from the Federal Office of Metrology and Surveying (BEV) and are licensed under CC BY 4.0. The autofill uses only the official address register of the BEV. Points of interest in the search come from official sources, not from OpenStreetMap.
 
 ## Limitations
 

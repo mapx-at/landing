@@ -7,7 +7,7 @@ translationKey: faq
 url: /faq/
 lastmod: 2026-11-17
 images: ["/img/og-image.png"]
-description: "Häufige Fragen zu mapx: Token und Konto, Kosten, kommerzielle Nutzung unter CC BY 4.0, Aktualität der Daten, Kachel-Download, Kataster und Fehler 401, 403, 429."
+description: "Häufige Fragen zu mapx: Token und Konto, Kosten, kommerzielle Nutzung unter CC BY 4.0, Aktualität der Daten, Kachel-Download und Fehler 401, 403, 429."
 faq:
   - q: "Brauche ich einen Token oder ein Konto?"
     a: "Ja, ein kostenloses Konto und einen API-Token. Melde dich auf [account.mapx.at](https://account.mapx.at/login?lang=de) mit deiner E-Mail-Adresse an (beim ersten Mal entsteht dabei das Konto), lege einen Token an und sende ihn als `Authorization: Bearer` (Server) oder als `access_token` (Browser, Bilder) mit. CORS ist offen. Details: [Zugang und Limits](https://docs.mapx.at/de/start/access-and-limits/)."
@@ -25,10 +25,8 @@ faq:
     a: "Nein, nur Österreich. Orthofoto und Basiskarte reichen an der Grenze ein Stück in die Nachbarländer."
   - q: "Kann ich die Kacheln herunterladen?"
     a: "Nein. Karten und Kacheln bekommst du über die API: Stil, TileJSON oder `{z}/{x}/{y}`, siehe [Karten](https://docs.mapx.at/de/guides/maps/) und [QGIS](https://docs.mapx.at/de/guides/qgis/)."
-  - q: "Ist der Kataster rechtsverbindlich?"
-    a: "Nein. Er zeigt Grundstücksgrenzen zur Orientierung und ersetzt weder einen Grundbuchauszug noch eine Vermessung. Mehr auf der Seite [Kataster und Grundstücke](/kataster-api/)."
   - q: "Kann ich mapx in einem KI-Assistenten nutzen?"
-    a: "Ja, über den gehosteten MCP-Server `https://mcp.mapx.at/mcp` mit 23 nur lesenden Werkzeugen. In claude.ai, ChatGPT und Claude Code trägst du nur die Adresse ein und meldest dich mit deinem Konto an; für andere Clients brauchst du einen Token vom Typ „KI-Assistent (MCP)“. Mehr auf der Seite [MCP-Server](/mcp-server/)."
+    a: "Ja, über den gehosteten MCP-Server `https://mcp.mapx.at/mcp` mit 21 nur lesenden Werkzeugen. In claude.ai, ChatGPT und Claude Code trägst du nur die Adresse ein und meldest dich mit deinem Konto an; für andere Clients brauchst du einen Token vom Typ „KI-Assistent (MCP)“. Mehr auf der Seite [MCP-Server](/mcp-server/)."
   - q: "Was ist der Unterschied zwischen DTM und DSM?"
     a: "Das DTM ist der nackte Boden, das DSM enthält Bäume und Gebäude. Nimm das DTM für Steigungen und Profile, das DSM für Sichtbarkeit und Gebäudehöhen. Mehr auf der Seite [Höhe und Gelände](/hoehen-api/)."
   - q: "Warum bekomme ich 401 oder 403?"
@@ -42,7 +40,7 @@ faq:
   - q: "Wo melde ich ein Problem?"
     a: "Schreibe an [support@mapx.at](mailto:support@mapx.at) für technische Fragen und Fehler oder an [info@mapx.at](mailto:info@mapx.at) für alles andere."
   - q: "Haftet mapx für falsche Ergebnisse?"
-    a: "Nein, soweit gesetzlich zulässig. mapx ist ein kostenloser Dienst im Aufbau; alle Angaben sind ohne Gewähr, die Nutzung erfolgt auf eigenes Risiko. Prüfe Ergebnisse selbst, besonders bei Adressen, Routen, Abfahrten, Wetter und Kataster. Details: [Nutzungsbedingungen](/nutzungsbedingungen/)."
+    a: "Nein, soweit gesetzlich zulässig. mapx ist ein kostenloser Dienst im Aufbau; alle Angaben sind ohne Gewähr, die Nutzung erfolgt auf eigenes Risiko. Prüfe Ergebnisse selbst, besonders bei Adressen, Routen, Abfahrten und Wetter. Details: [Nutzungsbedingungen](/nutzungsbedingungen/)."
 ---
 
 # FAQ: Häufige Fragen zu mapx

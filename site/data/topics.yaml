@@ -1,7 +1,4 @@
 # Themenseiten (Reihenfolge = Reihenfolge in Fußzeile und "Weitere Themen"). Texte der Seiten: content/<key>.<lang>.md
-- key: kataster
-  de: {path: /kataster-api/, name: Kataster und Grundstücke}
-  en: {path: /en/cadastre-api/, name: Cadastre and parcels}
 - key: geocoding
   de: {path: /geocoding-api/, name: Geocoding und Adresssuche}
   en: {path: /en/geocoding-api/, name: Geocoding and address search}

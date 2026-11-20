@@ -2,7 +2,7 @@
 title: "mapx – Maps and geo APIs for Austria from official data"
 lastmod: 2026-11-17
 images: ["/img/og-image.png"]
-description: "mapx: maps and geo APIs for Austria from official data. Cadastre, geocoding, routing, elevation, maps, transit, traffic, weather. Free with account and token."
+description: "mapx: maps and geo APIs for Austria from official data. Geocoding, routing, elevation, maps, transit, traffic, weather. Free with account and token."
 layout: hextra-home
 ---
 
@@ -23,7 +23,7 @@ layout: hextra-home
 
 <div>
 {{< hextra/hero-subtitle >}}
-  Parcels, addresses, routing, terrain, orthophoto, public transport, traffic reports and weather – from the cadastral map, laser scan, road graph and timetable of the authorities, as open tiles and APIs for your own maps.
+  Addresses, routing, terrain, orthophoto, public transport, traffic reports and weather – from the cadastral map, laser scan, road graph and timetable of the authorities, as open tiles and APIs for your own maps.
 {{< /hextra/hero-subtitle >}}
 </div>
 
@@ -44,15 +44,14 @@ Each product is its own dataset with a reference date and source. Each product h
 
 {{< hextra/feature-grid cols="3" >}}
   {{< hextra/feature-card title="Maps, tiles and styles" subtitle="Vector basemap, ready-made map styles, contours and orthophoto as vector and raster tiles for MapLibre. · *PMTiles · TileJSON*" icon="map" link="/en/maps-api/" >}}
-  {{< hextra/feature-card title="Cadastre and parcels" subtitle="Parcel boundaries as tiles, the parcel at a point and a parcel dossier, from the BEV digital cadastral map. · *BEV DKM · CC BY 4.0*" icon="view-grid" link="/en/cadastre-api/" >}}
-  {{< hextra/feature-card title="Geocoding and address search" subtitle="Address register, places, streets and parcels: geocoding, reverse geocoding, type-ahead search, autofill and address validation. · *Address register, as of 01.10.2026*" icon="location-marker" link="/en/geocoding-api/" >}}
+  {{< hextra/feature-card title="Geocoding and address search" subtitle="Address register, places and streets: geocoding, reverse geocoding, type-ahead search, autofill and address validation. · *Address register, as of 01.10.2026*" icon="location-marker" link="/en/geocoding-api/" >}}
   {{< hextra/feature-card title="Routing" subtitle="Routes for car, truck, bike and foot, isochrones, travel-time matrices and tour planning on the GIP road graph. · *GIP.at · CC BY 4.0*" icon="switch-horizontal" link="/en/routing-api/" >}}
   {{< hextra/feature-card title="Elevation and terrain" subtitle="Elevation API for points and profiles, terrain model (DTM) and surface model (DSM) at 1 m resolution, contour lines. · *BEV · reference date 15.09.2025*" icon="trending-up" link="/en/elevation-api/" >}}
   {{< hextra/feature-card title="Public transport" subtitle="Journeys, stops and departures from the scheduled timetable, reachability by public transport as an isochrone. · *ÖBB-Personenverkehr AG · CC BY 4.0*" icon="ticket" link="/en/transit-api/" >}}
   {{< hextra/feature-card title="Traffic" subtitle="Traffic reports, roadworks and closures, speed limits on variable message signs on motorways and a traffic layer for the map. · *ASFINAG / EVIS.AT · CC BY 4.0*" icon="exclamation-circle" link="/en/traffic-api/" >}}
   {{< hextra/feature-card title="Static map images" subtitle="A map as PNG or WebP with pins, paths and GeoJSON, for reports, e-mails and property listings. · *up to 1280 × 1280 pixels*" icon="photograph" link="/en/static-maps/" >}}
   {{< hextra/feature-card title="Weather and climate" subtitle="Observations, hourly forecast, precipitation nowcast, warnings, air quality and climate for a point. · *GeoSphere Austria · CC BY 4.0*" icon="cloud" link="/en/weather-api/" >}}
-  {{< hextra/feature-card title="MCP server for AI assistants" subtitle="23 read-only tools for addresses, routes, parcels, weather and more, directly in Claude Code, Cursor and VS Code. · *MCP · Streamable HTTP*" icon="chip" link="/en/mcp-server/" >}}
+  {{< hextra/feature-card title="MCP server for AI assistants" subtitle="21 read-only tools for addresses, routes, weather and more, directly in Claude Code, Cursor and VS Code. · *MCP · Streamable HTTP*" icon="chip" link="/en/mcp-server/" >}}
 {{< /hextra/feature-grid >}}
 
 ## Embed it in five minutes. {#entwickler}
@@ -123,7 +122,7 @@ To protect against abuse there are rate limits per token. Usage itself is free o
 
 *Why official data* – mapx builds maps exclusively from data of public authorities under a clear open licence. Every dataset is documented with publisher, reference date and licence.
 
-- **Cadastre, terrain, orthophoto:** Federal Office of Metrology and Surveying (BEV).
+- **Addresses, cadastral map (buildings, land use), terrain, orthophoto:** Federal Office of Metrology and Surveying (BEV).
 - **Roads, rail, routing:** Graph Integration Platform GIP.at.
 - **Water:** national water network of the Umweltbundesamt.
 - **Timetable:** ÖBB-Personenverkehr AG, data source Mobilitätsverbünde Österreich OG.

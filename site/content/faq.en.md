@@ -7,7 +7,7 @@ translationKey: faq
 url: /en/faq/
 lastmod: 2026-11-17
 images: ["/img/og-image.png"]
-description: "Frequently asked questions about mapx: token and account, cost, commercial use under CC BY 4.0, data freshness, tile downloads, cadastre and errors 401, 403, 429."
+description: "Frequently asked questions about mapx: token and account, cost, commercial use under CC BY 4.0, data freshness, tile downloads and errors 401, 403, 429."
 faq:
   - q: "Do I need a token or an account?"
     a: "Yes, a free account and an API token. Sign in at [account.mapx.at](https://account.mapx.at/login?lang=en) with your email address (the first time, this creates the account), create a token and send it as `Authorization: Bearer` (servers) or `access_token` (browsers, images). CORS is open. Details: [Access and limits](https://docs.mapx.at/start/access-and-limits/)."
@@ -25,10 +25,8 @@ faq:
     a: "No, Austria only. Orthophoto and basemap extend a little into the neighboring countries at the border."
   - q: "Can I download the tiles?"
     a: "No. You get maps and tiles through the API: style, TileJSON or `{z}/{x}/{y}`, see [Maps](https://docs.mapx.at/guides/maps/) and [QGIS](https://docs.mapx.at/guides/qgis/)."
-  - q: "Is the cadastre legally binding?"
-    a: "No. It shows parcel boundaries for orientation and replaces neither a land register extract nor a survey. More on the page [Cadastre and parcels](/en/cadastre-api/)."
   - q: "Can I use mapx in an AI assistant?"
-    a: "Yes, through the hosted MCP server `https://mcp.mapx.at/mcp` with 23 read-only tools. In claude.ai, ChatGPT and Claude Code you only enter the address and sign in with your account; other clients need a token of the type \"AI assistant (MCP)\". More on the [MCP server](/en/mcp-server/) page."
+    a: "Yes, through the hosted MCP server `https://mcp.mapx.at/mcp` with 21 read-only tools. In claude.ai, ChatGPT and Claude Code you only enter the address and sign in with your account; other clients need a token of the type \"AI assistant (MCP)\". More on the [MCP server](/en/mcp-server/) page."
   - q: "What is the difference between DTM and DSM?"
     a: "The DTM is bare ground, the DSM includes trees and buildings. Use the DTM for gradients and profiles, the DSM for visibility and building heights. More on the page [Elevation and terrain](/en/elevation-api/)."
   - q: "Why do I get 401 or 403?"
@@ -42,7 +40,7 @@ faq:
   - q: "Where do I report a problem?"
     a: "Write to [support@mapx.at](mailto:support@mapx.at) for technical questions and bugs or to [info@mapx.at](mailto:info@mapx.at) for everything else."
   - q: "Is mapx liable for wrong results?"
-    a: "No, to the extent permitted by law. mapx is a free service under development; all information is provided without guarantee and use is at your own risk. Check results yourself, especially for addresses, routes, departures, weather and cadastre. Details: [Terms of use](/en/terms/)."
+    a: "No, to the extent permitted by law. mapx is a free service under development; all information is provided without guarantee and use is at your own risk. Check results yourself, especially for addresses, routes, departures and weather. Details: [Terms of use](/en/terms/)."
 ---
 
 # FAQ: frequently asked questions about mapx
