@@ -1,5 +1,5 @@
-# Alle Crawler (Suchmaschinen und KI) sind erlaubt. legacy-viewer.html ist per <meta name=robots content=noindex> ausgenommen
-# (kein Disallow, damit der Crawler das noindex lesen kann).
+# Alle Crawler (Suchmaschinen und KI) sind erlaubt. legacy-viewer.html (nur noch Weiterleitung auf map.mapx.at) ist per
+# <meta name=robots content=noindex> ausgenommen (kein Disallow, damit der Crawler das noindex lesen kann).
 
 User-agent: *
 Allow: /
