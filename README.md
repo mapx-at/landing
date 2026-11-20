@@ -26,7 +26,7 @@ Die Seite ruft selbst keine mapx-APIs auf (nur Codebeispiele), ein Token-Platzha
 
 ## Galerie der Kartenstile (seit 21.11.2026)
 
-`/galerie/` bzw. `/en/gallery/`: Raster der API-Stile, Klick öffnet ein Fenster mit Live-Karte (MapLibre 6.18.0 und pmtiles 4.5.0
+`/galerie/` bzw. `/en/gallery/`: Raster der API-Stile, Klick öffnet ein Fenster mit Live-Karte (MapLibre 6.19.0 und pmtiles 4.5.0
 lokal unter `site/static/lp/vendor/`, erst beim Öffnen geladen). Texte und Varianten: `site/data/gallery.yaml`, Layout
 `site/layouts/gallery.html`, Skript `site/static/lp/gallery.js`. Direktlink je Stil: `/galerie/#streets-night`.
 

@@ -41,15 +41,18 @@
             </ul>
             {{- end }}
             <p class="mx-gshort">{{ $t.short }}</p>
-            <div class="mx-gurls">
-              {{- range .variants }}
-              <div class="mx-gurl"><code>{{ $api }}{{ .id }}</code><button type="button" class="mx-gcopy" data-copy="{{ $api }}{{ .id }}" hidden>{{ cond $en "Copy" "Kopieren" }}</button></div>
-              {{- end }}
-            </div>
-            <p class="mx-glinks">
-              {{- with $def.map }}<a href="https://map.mapx.at/#{{ . }}">{{ cond $en "Open in the map" "In der Karte öffnen" }} →</a>{{ end }}
-              <a href="{{ $docs }}">{{ cond $en "Docs: maps" "Doku: Karten" }} →</a>
-            </p>
+            <details class="mx-gdet">
+              <summary>{{ cond $en "Style URLs" "Stil-Adressen" }}</summary>
+              <div class="mx-gurls">
+                {{- range .variants }}
+                <div class="mx-gurl"><code>{{ $api }}{{ .id }}</code><button type="button" class="mx-gcopy" data-copy="{{ $api }}{{ .id }}" hidden>{{ cond $en "Copy" "Kopieren" }}</button></div>
+                {{- end }}
+              </div>
+              <p class="mx-glinks">
+                {{- with $def.map }}<a href="{{ printf "https://map.mapx.at/#%s" . | safeURL }}">{{ cond $en "Open in the map" "In der Karte öffnen" }} →</a>{{ end }}
+                <a href="{{ $docs }}">{{ cond $en "Docs: maps" "Doku: Karten" }} →</a>
+              </p>
+            </details>
           </li>
           {{- end }}
         </ul>

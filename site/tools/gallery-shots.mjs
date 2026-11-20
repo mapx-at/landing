@@ -1,5 +1,6 @@
 // Vorschaubilder der Galerie neu erzeugen (site/static/lp/img/gallery/<id>.webp, 960 x 540).
-// Echte MapLibre-Darstellung der API-Stile; die Minimalseite wird unter der Herkunft https://mapx.at ausgeliefert,
+// Echte MapLibre-Darstellung der API-Stile, ohne Bedienelemente und ohne Quellenangabe im Bild (die steht als Zeile unter dem Raster
+// der Galerie, die Live-Karte im Fenster trägt die volle Angabe); die Minimalseite wird unter der Herkunft https://mapx.at ausgeliefert,
 // damit der öffentliche Token aus site/hugo.toml gilt. Orte und Zoomstufen: Liste items unten.
 // Aufruf (Repo-Wurzel): web-browse run site/tools/gallery-shots.mjs   [nur einzelne Stile: GALLERY_ONLY=streets,outdoors]
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
@@ -25,24 +26,30 @@ const OUT = join(SITE, 'static/lp/img/gallery');
 mkdirSync(OUT, { recursive: true });
 
 const html = (s) => `<!doctype html><meta charset="utf-8">
-<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@6.18.0/dist/maplibre-gl.css">
+<link rel="stylesheet" href="/lp/vendor/maplibre-gl-6.19.0/maplibre-gl.css">
 <style>html,body,#m{margin:0;width:960px;height:540px;overflow:hidden}.maplibregl-ctrl-attrib{font:11px/1.4 system-ui,sans-serif}</style>
 <div id="m"></div>
-<script src="https://unpkg.com/pmtiles@4.5.0/dist/pmtiles.js"></script>
+<script src="/lp/vendor/pmtiles-4.5.0/pmtiles.js"></script>
 <script type="module">
-import * as maplibregl from 'https://unpkg.com/maplibre-gl@6.18.0/dist/maplibre-gl.mjs';
+import * as maplibregl from '/lp/vendor/maplibre-gl-6.19.0/maplibre-gl.mjs';
 const TOKEN = ${JSON.stringify(TOKEN)};
 maplibregl.addProtocol('pmtiles', new pmtiles.Protocol().tile);
 const map = new maplibregl.Map({ container: 'm', style: 'https://api.mapx.at/v1/styles/${s.id}',
   center: ${JSON.stringify(s.center)}, zoom: ${s.zoom}, bearing: ${s.bearing || 0}, pitch: ${s.pitch || 0},
   attributionControl: false, interactive: false, fadeDuration: 0,
   transformRequest: (url) => ({ url: /^https:\\/\\/([\\w-]+\\.)?mapx\\.at\\//.test(url) ? url + (url.includes('?') ? '&' : '?') + 'access_token=' + TOKEN : url }) });
-map.addControl(new maplibregl.AttributionControl({ compact: false }), 'bottom-right');
 map.on('error', (e) => { window.__err = String(e.error?.message || e.error || e); });
 map.once('load', () => map.once('idle', () => setTimeout(() => { window.__idle = true; }, 1500)));
 </script>`;
 
+const VENDOR = join(SITE, 'static');
+const TYPES = { mjs: 'text/javascript', js: 'text/javascript', css: 'text/css' };
 export default async (page) => {
+  // MapLibre und pmtiles lokal aus site/static/lp/vendor (wie die Galerie selbst)
+  await page.route('https://mapx.at/lp/vendor/**', (r) => {
+    const p = join(VENDOR, new URL(r.request().url()).pathname);
+    r.fulfill({ contentType: TYPES[p.split('.').pop()] || 'application/octet-stream', body: readFileSync(p) });
+  });
   await page.setViewportSize({ width: 960, height: 540 });
   const done = [];
   page.on("pageerror", (e) => console.error("Seitenfehler: " + e.message));

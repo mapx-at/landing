@@ -30,10 +30,10 @@
   let ml;
   function lib() {
     if (!ml) {
-      const css = Object.assign(document.createElement('link'), { rel: 'stylesheet', href: V + 'maplibre-gl-6.18.0/maplibre-gl.css' });
+      const css = Object.assign(document.createElement('link'), { rel: 'stylesheet', href: V + 'maplibre-gl-6.19.0/maplibre-gl.css' });
       document.head.append(css);
       const pm = new Promise((ok, bad) => { const s = Object.assign(document.createElement('script'), { src: V + 'pmtiles-4.5.0/pmtiles.js', onload: ok, onerror: bad }); document.head.append(s); });
-      ml = Promise.all([import(V + 'maplibre-gl-6.18.0/maplibre-gl.mjs'), pm]).then(([m]) => {
+      ml = Promise.all([import(V + 'maplibre-gl-6.19.0/maplibre-gl.mjs'), pm]).then(([m]) => {
         m.addProtocol('pmtiles', new window.pmtiles.Protocol().tile);
         return m;
       });
@@ -43,7 +43,7 @@
   const auth = (url) => ({ url: /^https:\/\/([\w-]+\.)?mapx\.at\//.test(url) ? url + (url.includes('?') ? '&' : '?') + 'access_token=' + data.token : url });
   const snippet = (id, c) => `const map = new maplibregl.Map({\n  container: "map",\n  style: "${data.api}${id}?access_token=YOUR_TOKEN",\n  center: [${c.center.join(', ')}], zoom: ${c.zoom},\n});`;
 
-  let map = null, card = null, opener = null, style = '';
+  let map = null, card = null, opener = null, style = '', pushed = false;
   const info = $('.mx-ginfo');
   function setStyle(id) {
     style = id;
@@ -54,7 +54,7 @@
     a.hidden = !v.map; if (v.map) a.href = 'https://map.mapx.at/#' + v.map;
     for (const b of $('.mx-gseg').children) b.setAttribute('aria-pressed', String(b.dataset.id === id));
     if (map) map.setStyle(data.api + id);
-    if (location.hash.slice(1) !== id && location.hash.slice(1) !== card.key) history.replaceState(null, '', '#' + id);
+    if (location.hash.slice(1) !== id && !(id === card.def && location.hash.slice(1) === card.key)) history.replaceState(null, '', '#' + id);
   }
 
   async function open(key, styleId, from) {
@@ -69,9 +69,10 @@
       b.dataset.id = v.id; b.addEventListener('click', () => setStyle(v.id)); seg.append(b);
     }
     info.textContent = '';
+    // Klick: eigener Verlaufseintrag, damit der Zurück-Knopf das Fenster schließt
+    if (from && location.hash.slice(1) !== key) { history.pushState(null, '', '#' + key); pushed = true; }
     if (!dlg.open) dlg.showModal();
     setStyle(styleId || c.def);
-    if (location.hash.slice(1) !== style) history.replaceState(null, '', '#' + (styleId || key));
     try {
       const m = await lib();
       if (!dlg.open || card !== c) return;
@@ -80,18 +81,29 @@
         container: $('.mx-gmap'), style: data.api + style, center: c.center, zoom: c.zoom,
         transformRequest: auth, attributionControl: false, fadeDuration: reduce ? 0 : 300, cooperativeGestures: false,
       });
+      dlg.mxMap = map; // für Tests und Konsole
       map.addControl(new m.NavigationControl({ showCompass: false }), 'top-right');
       map.addControl(new m.AttributionControl({ compact: true }), 'bottom-right');
-      // Am Handy Quellenangabe eingeklappt starten (Knopf „i“ bleibt sichtbar), sonst verdeckt sie die halbe Karte
-      if (matchMedia('(max-width: 800px)').matches) map.once('load', () => map.getContainer().querySelector('.maplibregl-compact-show')?.classList.remove('maplibregl-compact-show'));
+      // Quellenangabe eingeklappt starten (Knopf „i“ bleibt sichtbar), sonst verdeckt sie einen Teil der Karte
+      map.once('load', () => map.getContainer().querySelector('.maplibregl-compact-show')?.classList.remove('maplibregl-compact-show'));
       map.on('error', (e) => { const s = e?.error?.status; if (s === 401 || s === 403) info.textContent = t('Der Beispiel-Token gilt für diese Seite nicht.', 'The example token is not valid for this page.'); });
     } catch { info.textContent = t('Die Karte ließ sich nicht laden.', 'The map could not be loaded.'); }
   }
   function close() { if (dlg.open) dlg.close(); }
   dlg.addEventListener('close', () => {
     if (map) { map.remove(); map = null; }
-    if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+    if (pushed) { pushed = false; history.back(); }
+    else if (location.hash) history.replaceState(null, '', location.pathname + location.search);
     opener?.focus();
+  });
+  // Fokusfalle: Tab und Umschalt+Tab bleiben im Fenster (auch wenn der Browser sonst in seine eigene Leiste springt)
+  dlg.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+    const f = [...dlg.querySelectorAll('a[href],button:not([disabled]),summary,[tabindex]:not([tabindex="-1"]),canvas')].filter((n) => n.offsetParent !== null || n === document.activeElement);
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   });
   dlg.addEventListener('click', (e) => { if (e.target === dlg) close(); }); // Klick auf den abgedunkelten Hintergrund
   dlg.querySelector('.mx-gdlg-in').addEventListener('click', (e) => e.stopPropagation());
@@ -106,6 +118,7 @@
   function fromHash() {
     const h = decodeURIComponent(location.hash.slice(1));
     if (byKey[h]) open(h); else if (byStyle[h]) open(byStyle[h].key, h);
+    else if (dlg.open) { pushed = false; close(); } // Zurück-Knopf oder unbekannter Hash
   }
   window.addEventListener('hashchange', fromHash);
   fromHash();
