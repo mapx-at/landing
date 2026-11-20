@@ -37,7 +37,6 @@ Contact: support@mapx.at. The website is available in German (https://mapx.at/) 
 ## Try it
 
 - [Interactive map](https://map.mapx.at): demo map of Austria
-- [Blog](https://blog.mapx.at): background on data and products
 
 ## Optional
 
