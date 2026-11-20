@@ -1,4 +1,4 @@
-{{ if .Params.noindex }}<meta name="robots" content="noindex">{{ else }}<script src="/lp/legacy-redirect.js"></script>
+{{ if .Params.noindex }}<meta name="robots" content="noindex">{{ else }}
 {{- $en := eq .Language.Lang "en" }}
 {{- /* hreflang: de, en (jeweils die Uebersetzung der Seite), x-default = deutsche Fassung */ -}}
 {{- $de := . }}{{ $enp := . }}

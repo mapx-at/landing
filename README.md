@@ -11,8 +11,7 @@ mit Token; Generator in mapx-at/vector-tiles, `viewer/tools/`).
 
 ## Neue Landing (seit 07.11.2026)
 
-`index.html` ist jetzt die Landing (Hugo, Quelle `site/`). Alte Hash-Links auf die Wurzel (`mapx.at/#zoom/lat/lon`) leitet
-`lp/legacy-redirect.js` auf https://map.mapx.at/ weiter.
+`index.html` ist jetzt die Landing (Hugo, Quelle `site/`).
 
 Pages liefert weiter den Branch `main` aus. Das Build-Ergebnis (`index.html`, `lp/`) ist eingecheckt:
 nach Änderungen in `site/` `site/build.sh` ausführen (Hugo extended 0.169.0) und committen
