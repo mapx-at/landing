@@ -59,7 +59,7 @@ Each product is its own dataset with a reference date and source. Each product h
 
 *For developers* – Tiles are PMTiles files with HTTP range access, no map server of your own needed. The APIs answer with JSON or GeoJSON.
 
-- **MapLibre and PMTiles.** The style of the demo map is public and can be loaded directly.
+- **MapLibre and PMTiles.** Ready-made map styles come from the maps API (`/v1/styles`).
 - **A free account is all you need.** Sign in, create a token, get going. Origin, reference date and attribution are listed per product in the docs.
 - **Machine-readable.** OpenAPI description and `llms.txt` for all APIs and the tiles.
 
@@ -71,16 +71,17 @@ Each product is its own dataset with a reference date and source. Each product h
 import maplibregl from 'maplibre-gl';
 import { Protocol } from 'pmtiles';
 
+const TOKEN = 'YOUR_TOKEN'; // public token mx_pk_… from your account
 maplibregl.addProtocol('pmtiles', new Protocol().tile);
 
 const map = new maplibregl.Map({
   container: 'map',
-  style: 'https://mapx.at/style.json',
+  style: 'https://api.mapx.at/v1/styles/streets',
+  // appends the token to every request to mapx.at (style, tiles, fonts, sprites)
+  transformRequest: (url) => ({ url: /^https:\/\/([\w-]+\.)?mapx\.at\//.test(url)
+    ? url + (url.includes('?') ? '&' : '?') + 'access_token=' + TOKEN : url }),
   center: [15.33, 48.23],
-  zoom: 13,
-  transformRequest: (url) => url.includes('mapx.at')
-    ? { url, headers: { Authorization: `Bearer ${TOKEN}` } }
-    : undefined
+  zoom: 13
 });
 ```
 
