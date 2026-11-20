@@ -15,7 +15,7 @@ description: "Routing-API für Österreich: Routen für Auto, Lkw, Rad und zu Fu
 <p class="mx-lead">Die Routing-API berechnet Routen für Auto, Lkw, Rad und zu Fuß auf dem österreichischen Straßengraphen. Sie liefert außerdem Isochronen, Fahrzeitmatrizen, Map Matching und Tourenoptimierung. Sie richtet sich an Entwickler von Routenplanern, Logistik-, Tourismus- und Standortanwendungen in Österreich.</p>
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 {{< hextra/hero-button text="Doku: Routing" link="https://docs.mapx.at/de/guides/navigation/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
@@ -75,5 +75,5 @@ Das Routing rechnet auf dem Routingexport der Graphenintegrations-Plattform GIP.
 Der Zugang ist kostenlos mit Konto und Token. Parameter und Antworten stehen im [Routing-Guide](https://docs.mapx.at/de/guides/navigation/) und in der [Referenz zur Routing-API](https://docs.mapx.at/de/api/directions/).
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 </div>

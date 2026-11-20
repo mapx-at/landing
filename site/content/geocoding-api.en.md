@@ -15,7 +15,7 @@ description: "Geocoding API for Austria: address search, reverse geocoding, addr
 <p class="mx-lead">The geocoding API turns addresses and place names into coordinates and coordinates into the nearest address. It also offers suggestions while typing, address autofill for forms and address validation. It is meant for developers who want to search, complete or check addresses in Austria in websites, apps and backends.</p>
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 {{< hextra/hero-button text="Docs: address search" link="https://docs.mapx.at/guides/search/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
@@ -73,5 +73,5 @@ Addresses, geographic names, administrative boundaries and cadastre come from th
 Access is free with an account and a token. All endpoints and parameters are in the [geocoding API reference](https://docs.mapx.at/api/geocoding/), the [address search guide](https://docs.mapx.at/guides/search/) and the [autofill and validation reference](https://docs.mapx.at/api/address/).
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 </div>

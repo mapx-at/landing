@@ -15,7 +15,7 @@ description: "Transit API for Austria: journeys, stops and departure boards from
 <p class="mx-lead">The transit API returns public transport journeys, stops near a point and departure boards, all from the timetable. You can use it to bring stops and next departures into an app or onto a municipal web page, or to calculate how far a place can be reached by rail and bus. It is meant for developers of mobility, site and administration applications in Austria.</p>
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 {{< hextra/hero-button text="Docs: transit" link="https://docs.mapx.at/guides/transit/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
@@ -71,5 +71,5 @@ The timetable data comes from ÖBB-Personenverkehr AG (CC BY 4.0), the data sour
 Access is free with an account and a token. All parameters are in the [transit guide](https://docs.mapx.at/guides/transit/) and the [transit API reference](https://docs.mapx.at/api/transit/).
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 </div>

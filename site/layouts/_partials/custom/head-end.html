@@ -10,7 +10,7 @@
 {{- if .IsHome }}
 {{- $org := dict "@type" "Organization" "@id" "https://mapx.at/#organization" "name" "mapx" "url" "https://mapx.at/" "logo" "https://mapx.at/img/logo.svg" "email" "support@mapx.at" }}
 {{- $site := dict "@type" "WebSite" "@id" "https://mapx.at/#website" "name" "mapx" "url" (.Permalink) "inLanguage" .Language.Lang "description" .Description "publisher" (dict "@id" "https://mapx.at/#organization") }}
-{{- $offer := dict "@type" "Offer" "price" "0" "priceCurrency" "EUR" "url" "https://account.mapx.at/register" }}
+{{- $offer := dict "@type" "Offer" "price" "0" "priceCurrency" "EUR" "url" "https://account.mapx.at/login" }}
 {{- $api := dict "@type" "WebAPI" "@id" "https://mapx.at/#api" "name" (cond $en "mapx APIs for Austria" "mapx-APIs für Österreich") "description" (cond $en "Vector tiles, search and geocoding, routing, elevation API, public transport, traffic, static map images and weather for Austria, built from official open data. Free access with an account and token." "Vektorkacheln, Suche und Geocoding, Routing, Höhen-API, öffentlicher Verkehr, Verkehr, statische Kartenbilder und Wetter für Österreich aus amtlichen offenen Daten. Kostenloser Zugang mit Konto und Token.") "url" "https://mapx.at/" "documentation" "https://docs.mapx.at" "provider" (dict "@id" "https://mapx.at/#organization") "areaServed" (dict "@type" "Country" "name" (cond $en "Austria" "Österreich")) "inLanguage" .Language.Lang "offers" $offer }}
 <script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" (slice $org $site $api) | jsonify | safeJS }}</script>
 {{- else if .Params.key }}

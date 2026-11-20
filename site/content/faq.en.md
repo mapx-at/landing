@@ -10,7 +10,7 @@ images: ["/img/og-image.png"]
 description: "Frequently asked questions about mapx: token and account, cost, commercial use under CC BY 4.0, data freshness, tile downloads, cadastre and errors 401, 403, 429."
 faq:
   - q: "Do I need a token or an account?"
-    a: "Yes, a free account and an API token. Register at [account.mapx.at](https://account.mapx.at/register?lang=en), create a token and send it as `Authorization: Bearer` (servers) or `access_token` (browsers, images). CORS is open. Details: [Access and limits](https://docs.mapx.at/start/access-and-limits/)."
+    a: "Yes, a free account and an API token. Sign in at [account.mapx.at](https://account.mapx.at/login?lang=en) with your email address (the first time, this creates the account), create a token and send it as `Authorization: Bearer` (servers) or `access_token` (browsers, images). CORS is open. Details: [Access and limits](https://docs.mapx.at/start/access-and-limits/)."
   - q: "What does mapx cost?"
     a: "Nothing. Access is free, rate limits apply per token and zone."
   - q: "May I use it commercially?"

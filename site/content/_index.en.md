@@ -99,10 +99,10 @@ console.log(features[0].properties.elevation);
 
 ## Free, with your own account. {#zugang}
 
-*API access* – The mapx APIs (tiles, search, routing, elevation, transit, traffic, images, weather) require an account with an API token as of 8 November 2026. It costs nothing: sign up, sign in, create a token.
+*API access* – The mapx APIs (tiles, search, routing, elevation, transit, traffic, images, weather) require an account with an API token as of 8 November 2026. It costs nothing: sign in, create a token, get going.
 
 {{< hextra/feature-grid cols="3" >}}
-  {{< hextra/feature-card title="1. Sign up" subtitle="With your email address. Sign-in uses an 8-digit code we send you by email. There is no password." >}}
+  {{< hextra/feature-card title="1. Sign in" subtitle="With your email address and an 8-digit code we send you by email. The first time, this creates your account. There is no password." >}}
   {{< hextra/feature-card title="2. Create tokens" subtitle="As many as you like, each with its own name. Block, renew or delete them at any time." >}}
   {{< hextra/feature-card title="3. See your usage" subtitle="For every token you can see usage per product and day. Nothing is billed." >}}
 {{< /hextra/feature-grid >}}
@@ -115,8 +115,7 @@ console.log(features[0].properties.elevation);
 To protect against abuse there are rate limits per token. Usage itself is free of charge.
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
-{{< hextra/hero-button text="Sign in" link="https://account.mapx.at/login?lang=en" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 {{< hextra/hero-button text="Details in the docs" link="https://docs.mapx.at/start/access-and-limits/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 

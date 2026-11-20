@@ -15,7 +15,7 @@ description: "Verkehrs-API für Österreich: Verkehrsmeldungen, Baustellen, Sper
 <p class="mx-lead">Die Verkehrs-API liefert aktive Verkehrsmeldungen wie Unfälle, Baustellen und Sperren, Tempolimits auf den Anzeigen der Autobahnen und eine Verkehrsebene für die Karte. Du kannst Meldungen für einen Kartenausschnitt, eine Straße oder entlang einer Route abfragen. Sie richtet sich an Entwickler von Routenplanern, Flottenanwendungen und Verkehrsinformation in Österreich.</p>
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 {{< hextra/hero-button text="Doku: Verkehr" link="https://docs.mapx.at/de/guides/traffic/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
@@ -67,5 +67,5 @@ Die Meldungen stammen von der ASFINAG und EVIS.AT (CC BY 4.0), das Straßennetz 
 Der Zugang ist kostenlos mit Konto und Token. Alle Parameter stehen im [Verkehrs-Guide](https://docs.mapx.at/de/guides/traffic/) und in der [Referenz zur Verkehrs-API](https://docs.mapx.at/de/api/traffic/).
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 </div>

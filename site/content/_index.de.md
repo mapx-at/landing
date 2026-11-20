@@ -99,10 +99,10 @@ console.log(features[0].properties.elevation);
 
 ## Kostenlos, mit eigenem Konto. {#zugang}
 
-*API-Zugang* – Die mapx-APIs (Kacheln, Suche, Routing, Höhe, ÖV, Verkehr, Bilder, Wetter) brauchen seit dem 08.11.2026 ein Konto mit API-Token. Das kostet nichts: Registrieren, anmelden, Token anlegen.
+*API-Zugang* – Die mapx-APIs (Kacheln, Suche, Routing, Höhe, ÖV, Verkehr, Bilder, Wetter) brauchen seit dem 08.11.2026 ein Konto mit API-Token. Das kostet nichts: anmelden, Token anlegen, loslegen.
 
 {{< hextra/feature-grid cols="3" >}}
-  {{< hextra/feature-card title="1. Registrieren" subtitle="Mit deiner E-Mail-Adresse. Die Anmeldung läuft über einen 8-stelligen Code, den wir dir per Mail schicken. Ein Passwort gibt es nicht." >}}
+  {{< hextra/feature-card title="1. Anmelden" subtitle="Mit deiner E-Mail-Adresse und einem 8-stelligen Code, den wir dir per Mail schicken. Beim ersten Mal entsteht dabei dein Konto. Ein Passwort gibt es nicht." >}}
   {{< hextra/feature-card title="2. Tokens anlegen" subtitle="Beliebig viele, jeweils mit eigenem Namen. Du kannst sie jederzeit sperren, erneuern oder löschen." >}}
   {{< hextra/feature-card title="3. Nutzung einsehen" subtitle="Für jeden Token siehst du die Nutzung je Produkt und Tag. Abgerechnet wird nichts." >}}
 {{< /hextra/feature-grid >}}
@@ -115,8 +115,7 @@ console.log(features[0].properties.elevation);
 Zum Schutz vor Missbrauch gibt es Rate-Limits je Token. Die Nutzung selbst ist kostenlos.
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
-{{< hextra/hero-button text="Anmelden" link="https://account.mapx.at/login?lang=de" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 {{< hextra/hero-button text="Details in der Doku" link="https://docs.mapx.at/de/start/access-and-limits/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 

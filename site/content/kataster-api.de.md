@@ -15,7 +15,7 @@ description: "Kataster-API für Österreich: Grundstück an einem Punkt abfragen
 <p class="mx-lead">Mit der Kataster-API fragst du das Grundstück an einer Koordinate ab, suchst Grundstücke nach Katastralgemeinde und Nummer und zeichnest Grundstücksgrenzen auf eine Karte. Sie richtet sich an Entwickler von Immobilien-, Planungs- und Gemeindeanwendungen, die Daten der Digitalen Katastralmappe (DKM) brauchen, ohne selbst Katasterdaten aufzubereiten.</p>
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 {{< hextra/hero-button text="Doku: Grundstücke" link="https://docs.mapx.at/de/guides/parcels/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
@@ -77,5 +77,5 @@ Quelle ist die Digitale Katastralmappe (DKM) des Bundesamts für Eich- und Verme
 Der Zugang ist kostenlos mit Konto und Token. Alle Details stehen in der [Doku zu Grundstücken](https://docs.mapx.at/de/guides/parcels/) und in der [Referenz zu Tilequery und Parcel](https://docs.mapx.at/de/api/tilequery/).
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 </div>

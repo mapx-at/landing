@@ -15,7 +15,7 @@ description: "Höhen-API für Österreich: Höhe für Punkte, Höhenprofil entla
 <p class="mx-lead">Die Höhen-API liefert die Höhe über Meer für Punkte und Höhenprofile entlang einer Linie, aus dem Geländemodell oder dem Oberflächenmodell des Laserscans. Dazu gibt es das Gelände als Kacheln für Schummerung und 3D-Ansichten und Höhenlinien als Vektorkacheln. Sie richtet sich an Entwickler von Wander-, Rad-, Planungs- und Standortanwendungen in Österreich.</p>
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 {{< hextra/hero-button text="Doku: Höhen" link="https://docs.mapx.at/de/guides/elevation/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
@@ -69,5 +69,5 @@ Die Modelle stammen aus dem Laserscanning des Bundesamts für Eich- und Vermessu
 Der Zugang ist kostenlos mit Konto und Token. Alle Parameter stehen in der [Referenz zur Höhen-API](https://docs.mapx.at/de/api/elevation/), das Datenblatt des Geländemodells in der [Doku zum Tileset](https://docs.mapx.at/de/tilesets/terrain-rgb/).
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 </div>

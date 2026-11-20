@@ -28,7 +28,7 @@ faq:
 <p class="mx-lead">Mit dem gehosteten MCP-Server von mapx kann dein KI-Assistent Adressen suchen, Routen berechnen, Grundstücke abfragen und das Wetter nachsehen, ohne dass du selbst API-Aufrufe schreibst. Er richtet sich an alle, die Fragen zu Österreich direkt im Assistenten (claude.ai, ChatGPT, Claude Code, Cursor, VS Code, Gemini CLI) beantworten wollen, und an Entwickler, die einen Assistenten mit Geodaten ausstatten. Der Endpunkt ist https://mcp.mapx.at/mcp (Model Context Protocol, Streamable HTTP).</p>
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 {{< hextra/hero-button text="Doku: MCP" link="https://docs.mapx.at/de/guides/mcp/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
@@ -60,7 +60,7 @@ Es sind 23 Werkzeuge, alle nur lesend, in acht Gruppen:
 Am einfachsten meldest du dich über dein mapx-Konto an, ohne Token:
 
 1. Trage `https://mcp.mapx.at/mcp` als MCP-Server in deinem Assistenten ein: in claude.ai als eigenen Connector, in Claude Code mit `claude mcp add --transport http mapx https://mcp.mapx.at/mcp` und danach `/mcp`, in ChatGPT als Connector bzw. App mit eigener MCP-Adresse (je nach Tarif und Einstellung verfügbar).
-2. Melde dich auf account.mapx.at an oder lege dort ein [Konto](https://account.mapx.at/register?lang=de) an.
+2. Melde dich auf [account.mapx.at](https://account.mapx.at/login?lang=de) an. Hast du noch kein Konto, entsteht es bei der ersten Anmeldung.
 3. Prüfe auf der Zustimmungsseite, was der Zugriff erlaubt (nur lesende Werkzeuge, kein Zugriff auf Konto oder andere Tokens), und bestätige.
 
 Die Verbindung erscheint im Konto unter Tokens und lässt sich dort jederzeit trennen. Diese Anmeldung gilt für bekannte Anwendungen; weitere schaltet der Support auf Anfrage frei.
@@ -91,5 +91,5 @@ Die Werkzeuge greifen auf dieselben Datensätze zu wie die mapx-APIs: Kataster u
 Der Zugang läuft über dein Konto, per Anmeldung oder mit Token. Alle Details stehen in der [Doku zum MCP-Server](https://docs.mapx.at/de/guides/mcp/).
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 </div>

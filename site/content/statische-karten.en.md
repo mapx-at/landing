@@ -15,7 +15,7 @@ description: "Static maps for Austria as PNG or WebP with pins, paths and GeoJSO
 <p class="mx-lead">The static images API renders a map image for an extent and a size, optionally with pins, lines and areas. The result is a PNG or WebP that you embed by URL in PDFs, e-mails, property listings or previews. It is meant for developers who need a map where an interactive map is not possible.</p>
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 {{< hextra/hero-button text="Docs: static images" link="https://docs.mapx.at/guides/static-images/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
@@ -66,5 +66,5 @@ The images are rendered from the same official data as the interactive map: the 
 Access is free with an account and a token. All parameters and overlay formats are in the [static images guide](https://docs.mapx.at/guides/static-images/) and the [static images API reference](https://docs.mapx.at/api/static-images/).
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 </div>

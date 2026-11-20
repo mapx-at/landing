@@ -15,7 +15,7 @@ description: "Karten-API für Österreich: Vektorkacheln, fertige Kartenstile f�
 <p class="mx-lead">mapx liefert die Karte Österreichs als fertige Kartenstile für MapLibre GL JS und als Kacheln: eine Vektor-Basiskarte, Orthofoto und Luftbild, Geländemodell, Höhenlinien und Grundstücksgrenzen. Du kannst einen Stil mit einer Zeile einbinden oder aus den Vektorkacheln einen eigenen Kartenstil bauen. Das richtet sich an Entwickler von Web- und Mobil-Karten, die ohne eigenen Kartenserver auskommen wollen.</p>
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 {{< hextra/hero-button text="Doku: Karten" link="https://docs.mapx.at/de/guides/maps/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
@@ -75,5 +75,5 @@ Die Basiskarte vereint offene Daten von BEV, GIP.at, Umweltbundesamt und BMLUK i
 Der Zugang ist kostenlos mit Konto und Token. Dein Konto erzeugt öffentliche Tokens für Webseiten und geheime Tokens für Server. Weiter geht es im [Karten-Guide](https://docs.mapx.at/de/guides/maps/), in der [Referenz zu Kartenstilen](https://docs.mapx.at/de/api/styles/) und in der [Liste der Tilesets](https://docs.mapx.at/de/tilesets/).
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 </div>

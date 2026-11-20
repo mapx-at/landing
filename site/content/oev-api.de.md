@@ -15,7 +15,7 @@ description: "ÖV-API für Österreich: Verbindungen, Haltestellen und Abfahrtst
 <p class="mx-lead">Die ÖV-API liefert Verbindungen mit öffentlichem Verkehr, Haltestellen in der Nähe eines Punkts und Abfahrtstafeln, jeweils aus dem Fahrplan. Du kannst damit Haltestellen und nächste Abfahrten in eine App oder auf eine Gemeindeseite bringen oder die Erreichbarkeit eines Orts mit Bahn und Bus berechnen. Sie richtet sich an Entwickler von Mobilitäts-, Standort- und Verwaltungsanwendungen in Österreich.</p>
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 {{< hextra/hero-button text="Doku: ÖV" link="https://docs.mapx.at/de/guides/transit/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
@@ -71,5 +71,5 @@ Die Fahrplandaten stammen von der ÖBB-Personenverkehr AG (CC BY 4.0), Datenquel
 Der Zugang ist kostenlos mit Konto und Token. Alle Parameter stehen im [ÖV-Guide](https://docs.mapx.at/de/guides/transit/) und in der [Referenz zur ÖV-API](https://docs.mapx.at/de/api/transit/).
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 </div>

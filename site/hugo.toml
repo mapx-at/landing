@@ -82,12 +82,6 @@ disableHugoGeneratorInject = true
       name = "Anmelden"
       url = "https://account.mapx.at/login?lang=de"
       weight = 7
-    [[languages.de.menus.main]]
-      name = "Registrieren"
-      url = "https://account.mapx.at/register?lang=de"
-      weight = 8
-      [languages.de.menus.main.params]
-        type = "button"
   [languages.en]
     label = "English"
     weight = 2
@@ -122,9 +116,3 @@ disableHugoGeneratorInject = true
       name = "Sign in"
       url = "https://account.mapx.at/login?lang=en"
       weight = 7
-    [[languages.en.menus.main]]
-      name = "Sign up"
-      url = "https://account.mapx.at/register?lang=en"
-      weight = 8
-      [languages.en.menus.main.params]
-        type = "button"

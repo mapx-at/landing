@@ -15,7 +15,7 @@ description: "Weather API for Austria: observations, hourly forecast, precipitat
 <p class="mx-lead">The weather API returns current observations, the hourly forecast and the precipitation nowcast for a point, plus official weather warnings, air quality and climate figures. Weather tiles can be laid over the map as a layer. It is meant for developers of weather, tourism, logistics and site-analysis applications in Austria.</p>
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 {{< hextra/hero-button text="Docs: weather" link="https://docs.mapx.at/api/weather/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
@@ -74,5 +74,5 @@ All weather, air quality and climate data comes from GeoSphere Austria (CC BY 4.
 Access is free with an account and a token. All parameters are in the [weather API reference](https://docs.mapx.at/api/weather/), the [air quality API](https://docs.mapx.at/api/air-quality/) and the [climate API](https://docs.mapx.at/api/climate/).
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Sign up for free" link="https://account.mapx.at/register?lang=en" >}}
+{{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
 </div>

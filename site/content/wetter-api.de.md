@@ -15,7 +15,7 @@ description: "Wetter-API für Österreich: Messwerte, Stundenvorhersage, Nieders
 <p class="mx-lead">Die Wetter-API liefert aktuelle Messwerte, die Stundenvorhersage und den Niederschlags-Nowcast für einen Punkt, dazu amtliche Wetterwarnungen, die Luftqualität und Klimakennwerte. Wetterkacheln lassen sich als Ebene auf die Karte legen. Sie richtet sich an Entwickler von Wetter-, Tourismus-, Logistik- und Standortanwendungen in Österreich.</p>
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 {{< hextra/hero-button text="Doku: Wetter" link="https://docs.mapx.at/de/api/weather/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
@@ -74,5 +74,5 @@ Alle Wetter-, Luftqualitäts- und Klimadaten stammen von GeoSphere Austria (CC B
 Der Zugang ist kostenlos mit Konto und Token. Alle Parameter stehen in der [Referenz zur Wetter-API](https://docs.mapx.at/de/api/weather/), der [Luftqualitäts-API](https://docs.mapx.at/de/api/air-quality/) und der [Klima-API](https://docs.mapx.at/de/api/climate/).
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 </div>

@@ -15,7 +15,7 @@ description: "Statische Karten für Österreich als PNG oder WebP mit Pins, Pfad
 <p class="mx-lead">Die Static-Images-API rendert ein Kartenbild für einen Ausschnitt und eine Größe, auf Wunsch mit Pins, Linien und Flächen. Das Ergebnis ist ein PNG oder WebP, das du per URL in PDFs, E-Mails, Exposés oder Vorschauen einbindest. Sie richtet sich an Entwickler, die dort eine Karte brauchen, wo keine interaktive Karte möglich ist.</p>
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 {{< hextra/hero-button text="Doku: Statische Bilder" link="https://docs.mapx.at/de/guides/static-images/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
 </div>
 
@@ -66,5 +66,5 @@ Die Bilder werden aus denselben amtlichen Daten gerendert wie die interaktive Ka
 Der Zugang ist kostenlos mit Konto und Token. Alle Parameter und Overlay-Formate stehen im [Guide zu statischen Bildern](https://docs.mapx.at/de/guides/static-images/) und in der [Referenz zur Static-Images-API](https://docs.mapx.at/de/api/static-images/).
 
 <div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos registrieren" link="https://account.mapx.at/register?lang=de" >}}
+{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
 </div>
