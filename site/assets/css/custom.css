@@ -288,11 +288,8 @@ nav a[href*="account.mapx.at/login"]:hover{background:#0853c4}
   .mx-hgrid{gap:1.25rem .75rem}
   .mx-hname{font-size:.9375rem}.mx-hvars{font-size:.75rem}
   .mx-hprods{grid-template-columns:1fr;gap:.75rem}
-  .mx-hprod{display:grid;grid-template-columns:7.5rem minmax(0,1fr);align-items:stretch}
-  .mx-hprod img,.mx-hprod .mx-hmcp{aspect-ratio:auto;height:100%;min-height:7rem;border-bottom:0!important;border-right:1px solid var(--mx-line)!important}
-  .mx-hprod-b{padding:.75rem .9rem}
-  .mx-hprod-t{font-size:.9375rem}.mx-hprod-p{font-size:.8125rem;line-height:1.45}.mx-hprod-m{display:none}.mx-hprod-l{margin-top:.4rem;font-size:.8125rem}
-  .mx-hmcp{padding:.5rem;gap:.3rem;font-size:.625rem}.mx-hmcp-t,.mx-hmcp-a{display:none}
+  .mx-hprod-b{padding:.85rem 1rem 1rem}
+  .mx-hprod-m{display:none}
   .mx-hband{padding:2.5rem 0;margin-top:3rem}
   .mx-hhero h1{font-size:1.75rem}
   .mx-hgo{right:.5rem;bottom:.5rem;padding:.4rem .85rem;font-size:.8125rem}
