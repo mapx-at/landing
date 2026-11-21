@@ -23,7 +23,7 @@
           {{- $t := index . $lang -}}
           {{- $def := index .variants 0 -}}{{ range .variants }}{{ if .default }}{{ $def = . }}{{ end }}{{ end }}
           {{- $vs := slice -}}{{ range .variants }}{{ $vs = $vs | append (dict "id" .id "label" (index . $lang) "map" .map "text" (cond (isset . "text") (index (.text | default dict) $lang) "")) }}{{ end }}
-          {{- $cards = $cards | append (dict "key" .key "name" $t.name "place" $t.place "text" $t.text "center" .center "zoom" .zoom "pitch" (.pitch | default 0) "bearing" (.bearing | default 0) "def" $def.id "variants" $vs) }}
+          {{- $cards = $cards | append (dict "key" .key "name" $t.name "place" $t.place "text" $t.text "center" .center "zoom" .zoom "pitch" (.pitch | default 0) "bearing" (.bearing | default 0) "lod" (.lod | default slice) "def" $def.id "variants" $vs) }}
           <li class="mx-gcard" id="{{ .key }}">
             <button type="button" class="mx-gbtn" data-key="{{ .key }}" aria-haspopup="dialog" disabled>
               <span class="mx-gimg">
@@ -71,7 +71,7 @@
           </div>
         </dialog>
         <script type="application/json" id="mx-gdata">{{ dict "token" site.Params.demoToken "api" $api "cards" $cards | jsonify | safeJS }}</script>
-        <script src="/lp/gallery.js?v=10" defer></script>
+        <script src="/lp/gallery.js?v=11" defer></script>
         {{- $topics := index hugo.Data "topics" -}}
         <aside class="mx-related" aria-labelledby="mx-related-h">
           <h2 id="mx-related-h">{{ cond $en "More topics" "Weitere Themen" }}</h2>

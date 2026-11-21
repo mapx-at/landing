@@ -222,6 +222,7 @@
   zoom: 15.4
   pitch: 70
   bearing: -20
+  lod: [3, 6]   # höchstens drei Zoomstufen im Bild: sonst lädt MapLibre für die Ferne z11/z12-Kacheln ohne Gebäude
   variants:
     - {id: streets-3d, de: Tag, en: Day, map: "", default: true}
     - {id: streets-night-3d, de: Nacht, en: Night, map: ""}
