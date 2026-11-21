@@ -70,19 +70,20 @@
     setStyle(styleId || c.def);
     try {
       const m = await lib();
+      const d3 = c.pitch > 0; // 3D-Karten (Gelände, Luftbild, Stadt)
       if (!dlg.open || card !== c) return;
       if (map) map.remove();
       map = new m.Map({
-        container: $('.mx-gmap'), style: data.api + style, center: c.center, zoom: c.zoom,
+        container: $('.mx-gmap'), style: data.api + style, center: c.center, zoom: c.zoom, pitch: c.pitch, bearing: c.bearing, maxPitch: d3 ? 75 : 60,
         transformRequest: auth, attributionControl: false,
-        locale: de ? { 'FullscreenControl.Enter': 'Vollbild', 'FullscreenControl.Exit': 'Vollbild beenden', 'NavigationControl.ZoomIn': 'Hineinzoomen', 'NavigationControl.ZoomOut': 'Herauszoomen' } : {}, fadeDuration: reduce ? 0 : 300, cooperativeGestures: false,
-        dragRotate: false, pitchWithRotate: false, touchPitch: false, // Karte bleibt genordet und flach
+        locale: de ? { 'FullscreenControl.Enter': 'Vollbild', 'FullscreenControl.Exit': 'Vollbild beenden', 'NavigationControl.ZoomIn': 'Hineinzoomen', 'NavigationControl.ZoomOut': 'Herauszoomen', 'NavigationControl.ResetBearing': 'Nach Norden ausrichten' } : {}, fadeDuration: reduce ? 0 : 300, cooperativeGestures: false,
+        dragRotate: d3, pitchWithRotate: d3, touchPitch: d3, // flache Karten bleiben genordet, 3D-Karten lassen sich drehen und neigen
       });
       dlg.mxMap = map; // für Tests und Konsole
-      map.addControl(new m.NavigationControl({ showCompass: false }), 'top-right');
+      map.addControl(new m.NavigationControl({ showCompass: d3, visualizePitch: d3 }), 'top-right');
       // Vollbild unter dem Zoom; die ganze Bühne geht mit, damit der Umschalter der Varianten sichtbar bleibt
       map.addControl(new m.FullscreenControl({ container: $('.mx-gdlg-stage') }), 'top-right');
-      map.touchZoomRotate.disableRotation(); map.keyboard.disableRotation();
+      if (!d3) { map.touchZoomRotate.disableRotation(); map.keyboard.disableRotation(); }
       map.addControl(new m.AttributionControl({ compact: true }), 'bottom-right');
       // Quellenangabe von Anfang an eingeklappt (Knopf „i“ bleibt sichtbar): MapLibre klappt sie beim Einhängen und beim ersten Laden auf
       const zu = () => { const a = map.getContainer().querySelector('.maplibregl-ctrl-attrib'); if (!a) return; a.classList.add('maplibregl-compact'); a.classList.remove('maplibregl-compact-show'); a.removeAttribute('open'); };

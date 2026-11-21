@@ -26,6 +26,16 @@ const items = [
   { id: 'relief-contours', center: [12.694, 47.074], zoom: 11.5 },
   { id: 'relief-light', center: [12.694, 47.074], zoom: 11.5 },
   { id: 'relief-dark', center: [12.694, 47.074], zoom: 11.5 },
+  // 3D-Stile: geneigt, Ausschnitt wie in site/data/gallery.yaml
+  { id: 'relief-3d', center: [12.694, 47.074], zoom: 12.5, pitch: 60, bearing: 0 },
+  { id: 'outdoors-3d', center: [12.694, 47.074], zoom: 12.5, pitch: 60, bearing: 0 },
+  { id: 'outdoors-winter-3d', center: [12.694, 47.074], zoom: 12.5, pitch: 60, bearing: 0 },
+  { id: 'satellite-3d', center: [13.6455, 47.5605], zoom: 14.7, pitch: 60, bearing: 250 },
+  { id: 'satellite-streets-3d', center: [13.6455, 47.5605], zoom: 14.7, pitch: 60, bearing: 250 },
+  { id: 'streets-3d', center: [16.3725, 48.2085], zoom: 15.6, pitch: 60, bearing: -20 },
+  { id: 'streets-night-3d', center: [16.3725, 48.2085], zoom: 15.6, pitch: 60, bearing: -20 },
+  { id: 'light-3d', center: [16.3725, 48.2085], zoom: 15.6, pitch: 60, bearing: -20 },
+  { id: 'dark-3d', center: [16.3725, 48.2085], zoom: 15.6, pitch: 60, bearing: -20 },
   { id: 'light', center: [15.4385, 47.071], zoom: 13.5 },            // Graz
   { id: 'dark', center: [15.4385, 47.071], zoom: 13.5 },
 ];
@@ -47,7 +57,7 @@ const map = new maplibregl.Map({ container: 'm', style: 'https://api.mapx.at/v1/
   attributionControl: false, interactive: false, fadeDuration: 0,
   transformRequest: (url) => ({ url: /^https:\\/\\/([\\w-]+\\.)?mapx\\.at\\//.test(url) ? url + (url.includes('?') ? '&' : '?') + 'access_token=' + TOKEN : url }) });
 map.on('error', (e) => { window.__err = String(e.error?.message || e.error || e); });
-map.once('load', () => map.once('idle', () => setTimeout(() => { window.__idle = true; }, 1500)));
+map.once('load', () => map.once('idle', () => setTimeout(() => { window.__idle = true; }, 3000)));
 </script>`;
 
 const VENDOR = join(SITE, 'static');
@@ -68,7 +78,7 @@ export default async (page) => {
     if (only.length && !only.includes(s.id)) continue;
     await page.route('https://mapx.at/__vorschau.html', (r) => r.fulfill({ contentType: 'text/html', body: html(s) }));
     await page.goto('https://mapx.at/__vorschau.html', { waitUntil: 'load', timeout: 60000 });
-    await page.waitForFunction(() => window.__idle === true, null, { timeout: 90000 });
+    await page.waitForFunction(() => window.__idle === true, null, { timeout: 240000 });
     const png = await page.screenshot({ type: 'png' });   // 1920 x 1080 (doppelte Pixeldichte)
     // PNG im Browser zu WebP umwandeln (keine weiteren Werkzeuge nötig): großes Bild 1440 x 810, Minikarte 480 x 270.
     // Verkleinert wird in Halbierungsschritten, das bleibt schärfer als ein einzelner großer Sprung.

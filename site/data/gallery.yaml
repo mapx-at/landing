@@ -1,7 +1,8 @@
 # Galerie der Kartenstile (/galerie/, /en/gallery/), Layout layouts/gallery.html, Skript /lp/gallery.js.
 # Je Karte ein oder mehrere Stile (variants, erster = Standard im Raster ist "img"). map: Hash für https://map.mapx.at
 # (leer = kein Link, weil der Viewer diesen Stil nicht als eigene Ansicht hat). Bilder: static/lp/img/gallery/<id>.webp,
-# neu erzeugen mit site/tools/gallery-shots.mjs. Ausschnitt der Live-Karte im Fenster: center/zoom.
+# neu erzeugen mit site/tools/gallery-shots.mjs. Ausschnitt der Live-Karte im Fenster: center/zoom, bei 3D-Karten dazu pitch/bearing
+# (pitch > 0 macht die Karte im Fenster dreh- und neigbar).
 - key: streets
   img: streets
   center: [16.3725, 48.2085]
@@ -172,3 +173,69 @@
     alt: "Style traffic-day: Vienna with colour-coded traffic flow on motorways and traffic reports"
     short: "The base map with traffic flow and traffic reports on motorways and expressways, for day and night."
     text: "Built on the “Streets” base map, in its day or night version. Meant for maps about getting there, logistics and being on the road. Adds the reported traffic flow on motorways and expressways in four levels from free to jammed, plus road sections with traffic reports, both from ASFINAG / EVIS.AT data."
+- key: terrain3d
+  img: relief-3d
+  center: [12.694, 47.074]
+  zoom: 12.5
+  pitch: 60
+  bearing: 0
+  variants:
+    - {id: relief-3d, de: Relief, en: Relief, map: "", default: true}
+    - {id: outdoors-3d, de: Sommer, en: Summer, map: ""}
+    - {id: outdoors-winter-3d, de: Winter, en: Winter, map: ""}
+  de:
+    name: 3D-Gelände
+    place: Großglockner
+    alt: "Stil relief-3d: Großglockner als geneigte 3D-Ansicht mit Gletschern, Gipfeln und Tälern"
+    short: "Die Geländekarten geneigt über dem echten Geländemodell, als Relief, im Sommer oder im Winter."
+    text: "Legt die Karte über das Geländemodell des BEV aus Laserscan (1 m), sodass Berge und Täler als Körper erscheinen. Gedacht für Tourenplanung, Präsentationen und überall dort, wo man das Gelände begreifen will. Im Fenster lässt sich die Karte drehen und neigen (rechte Maustaste oder zwei Finger). Braucht MapLibre mit 3D-Gelände; Bildkacheln und Kartenbilder gibt es für 3D-Stile nicht."
+  en:
+    name: 3D terrain
+    place: Grossglockner
+    alt: "Style relief-3d: Grossglockner as a tilted 3D view with glaciers, peaks and valleys"
+    short: "The terrain maps tilted over the real terrain model, as relief, in summer or in winter."
+    text: "Drapes the map over the BEV terrain model from laser scanning (1 m), so mountains and valleys appear as solid shapes. Meant for tour planning, presentations and anywhere you want to grasp the terrain. In this window you can rotate and tilt the map (right mouse button or two fingers). Needs MapLibre with 3D terrain; raster tiles and static images are not available for 3D styles."
+- key: aerial3d
+  img: satellite-3d
+  center: [13.6455, 47.5605]
+  zoom: 14.7
+  pitch: 60
+  bearing: 250
+  variants:
+    - {id: satellite-3d, de: Luftbild, en: Aerial, map: "", default: true}
+    - {id: satellite-streets-3d, de: Mit Straßen, en: With streets, map: ""}
+  de:
+    name: 3D-Luftbild
+    place: Hallstatt
+    alt: "Stil satellite-3d: Hallstatt am See mit der Bergwand dahinter als 3D-Ansicht aus dem Orthofoto"
+    short: "Das Orthofoto des BEV über dem Geländemodell, pur oder mit Straßen und Namen."
+    text: "Legt das Digitale Orthofoto des BEV (20 cm) über das Geländemodell. Gedacht für Standortansichten, Tourismus und alles, wo ein Ort so aussehen soll wie in Wirklichkeit. „Mit Straßen“ ergänzt Straßen, Namen und Grenzen der Basiskarte. Im Fenster lässt sich die Karte drehen und neigen."
+  en:
+    name: 3D aerial
+    place: Hallstatt
+    alt: "Style satellite-3d: Hallstatt on the lake with the rock face behind as a 3D view from the orthophoto"
+    short: "The BEV orthophoto over the terrain model, plain or with streets and names."
+    text: "Drapes the BEV digital orthophoto (20 cm) over the terrain model. Meant for location views, tourism and anything where a place should look as it does in reality. “With streets” adds roads, names and boundaries from the base map. In this window you can rotate and tilt the map."
+- key: city3d
+  img: streets-3d
+  center: [16.3725, 48.2085]
+  zoom: 15.6
+  pitch: 60
+  bearing: -20
+  variants:
+    - {id: streets-3d, de: Tag, en: Day, map: "", default: true}
+    - {id: streets-night-3d, de: Nacht, en: Night, map: ""}
+    - {id: light-3d, de: Hell, en: Light, map: ""}
+    - {id: dark-3d, de: Dunkel, en: Dark, map: ""}
+  de:
+    name: 3D-Stadt
+    place: Wien Innenstadt
+    alt: "Stil streets-3d: Wiener Innenstadt schräg von oben mit Gebäuden als Körper in ihrer Höhe"
+    short: "Gebäude als Körper in ihrer Höhe, bei Tag, bei Nacht oder neutral in Hell und Dunkel."
+    text: "Zeigt die Gebäude der Basiskarte als Körper mit ihrer Höhe aus den Daten des BEV. Gedacht für Stadtansichten, Standortkarten und eigene Daten im städtischen Raum. Die Körper erscheinen ab etwa Zoomstufe 15; einzelne große Bauten haben in den Daten keine Höhe und bleiben flach. Im Fenster lässt sich die Karte drehen und neigen."
+  en:
+    name: 3D city
+    place: Vienna city centre
+    alt: "Style streets-3d: Vienna city centre from above at an angle with buildings as solid shapes at their height"
+    short: "Buildings as solid shapes at their height, by day, by night, or neutral in light and dark."
+    text: "Shows the buildings of the base map as solid shapes with their height from BEV data. Meant for city views, location maps and your own data in urban areas. The shapes appear from about zoom level 15; a few large buildings have no height in the data and stay flat. In this window you can rotate and tilt the map."
