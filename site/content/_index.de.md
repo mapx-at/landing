@@ -31,7 +31,7 @@ home:
     all: "Alle Stile in der Galerie"
   d3:
     h2: "Österreich in 3D"
-    p: "Das Gelände kommt aus dem Laserscan des BEV mit 1 m Auflösung, jedes Gebäude steht mit seiner Höhe auf der Karte. In Wien zeigen wir zusätzlich Gebäudeteile aus dem Baukörpermodell der Stadt Wien."
+    p: "Das Gelände kommt aus dem Laserscan des BEV mit 1 m Auflösung, die Gebäude stehen als Körper mit ihrer Höhe auf der Karte. In Wien kommen die Gebäudeteile, etwa der Turm des Stephansdoms, aus dem Baukörpermodell der Stadt Wien."
     imgs: [streets-3d, relief-3d, satellite-3d]
     link: "In der Galerie drehen und neigen"
   products:

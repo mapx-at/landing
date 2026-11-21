@@ -29,7 +29,7 @@ home:
     all: "All styles in the gallery"
   d3:
     h2: "Austria in 3D"
-    p: "Terrain comes from the BEV laser scan at 1 m resolution, and every building stands at its real height. In Vienna we add building parts from the City of Vienna's building model."
+    p: "Terrain comes from the BEV laser scan at 1 m resolution, and buildings stand as solid shapes at their height. In Vienna the building parts, such as the spire of St. Stephen's, come from the City of Vienna's building model."
     imgs: [streets-3d, relief-3d, satellite-3d]
     link: "Rotate and tilt in the gallery"
   products:
