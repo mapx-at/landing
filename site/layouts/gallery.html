@@ -71,7 +71,7 @@
           </div>
         </dialog>
         <script type="application/json" id="mx-gdata">{{ dict "token" site.Params.demoToken "api" $api "cards" $cards | jsonify | safeJS }}</script>
-        <script src="/lp/gallery.js?v=4" defer></script>
+        <script src="/lp/gallery.js?v=5" defer></script>
         {{- $topics := index hugo.Data "topics" -}}
         <aside class="mx-related" aria-labelledby="mx-related-h">
           <h2 id="mx-related-h">{{ cond $en "More topics" "Weitere Themen" }}</h2>

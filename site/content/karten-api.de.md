@@ -23,7 +23,7 @@ description: "Karten-API für Österreich: Vektorkacheln, fertige Kartenstile f�
 
 ## Was die Schnittstelle kann
 
-- `GET /v1/styles` und `GET /v1/styles/{id}`: fertige MapLibre-Stile `streets`, `streets-dawn`, `streets-dusk`, `streets-night`, `traffic-day`, `satellite`, `satellite-streets` und `outdoors`, dazu Schriften und Sprites.
+- `GET /v1/styles` und `GET /v1/styles/{id}`: fertige MapLibre-Stile `streets`, `streets-dawn`, `streets-dusk`, `streets-night`, `traffic-day`, `traffic-night`, `light`, `dark`, `satellite`, `satellite-streets`, `satellite-current`, `outdoors` und `outdoors-winter`, dazu Schriften und Sprites.
 - `GET /v1/tiles` und `GET /v1/tiles/{tileset}.json`: Liste der Tilesets und TileJSON.
 - `GET /v1/tiles/{tileset}/{z}/{x}/{y}.{ext}`: Kacheln im XYZ-Schema.
 - `GET /v1/styles/{id}/tiles/{tilesize}/{z}/{x}/{y}`: gerenderte Rasterkacheln eines Stils für Clients ohne Vektorunterstützung.
