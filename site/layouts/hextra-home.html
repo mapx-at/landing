@@ -27,9 +27,10 @@
           </div>
         </div>
         <figure class="mx-hshow">
-          <div class="mx-hstage">
-            <img class="mx-hlayer mx-hon" data-id="{{ $s0.id }}" src="{{ $img }}{{ $s0.id }}.webp" srcset="{{ $img }}{{ $s0.id }}-s.webp 480w, {{ $img }}{{ $s0.id }}.webp 1440w" sizes="(max-width: 900px) 100vw, 860px" width="1440" height="810" alt="{{ $s0.alt | default (index $c0 $lang).alt }}" fetchpriority="high" decoding="async">
-          </div>
+          <a class="mx-hstage" href="{{ $gal }}#{{ $s0.id }}">
+            <img class="mx-hlayer mx-hon" data-id="{{ $s0.id }}" src="{{ $img }}{{ $s0.id }}-m.webp" srcset="{{ $img }}{{ $s0.id }}-s.webp 480w, {{ $img }}{{ $s0.id }}-m.webp 960w, {{ $img }}{{ $s0.id }}.webp 1440w" sizes="(max-width: 900px) calc(100vw - 3rem), 62vw" width="1440" height="810" alt="{{ $s0.alt | default (index $c0 $lang).alt }}" fetchpriority="high" decoding="async">
+            <span class="mx-hgo"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ $h.hero.move }}</span>
+          </a>
           <div class="mx-hchips" role="group" aria-label="{{ $h.hero.chips_label }}">
             {{- range $i, $s := $h.hero.styles }}
             {{- $c := index $cards $s.key }}{{ $t := index $c $lang }}
@@ -49,8 +50,8 @@
         <ul class="mx-hgrid" role="list">
           {{- range hugo.Data.gallery }}{{ $t := index . $lang }}{{ $vs := slice }}{{ range .variants }}{{ $vs = $vs | append (index . $lang) }}{{ end }}
           <li><a class="mx-hcard" href="{{ $gal }}#{{ .key }}">
-            <img src="{{ $img }}{{ .img }}-s.webp" width="480" height="270" alt="{{ $t.alt }}" loading="lazy" decoding="async">
-            <span class="mx-hname">{{ $t.name }}</span>
+            <img src="{{ $img }}{{ .img }}-s.webp" srcset="{{ $img }}{{ .img }}-s.webp 480w, {{ $img }}{{ .img }}-m.webp 960w" sizes="(max-width: 640px) 50vw, (max-width: 1000px) 45vw, 400px" width="480" height="270" alt="{{ $t.alt }}" loading="lazy" decoding="async">
+            <span class="mx-hname">{{ $t.name }} <span class="mx-harr" aria-hidden="true">→</span></span>
             <span class="mx-hvars">{{ if gt (len $vs) 1 }}{{ delimit $vs " · " }}{{ else }}{{ $t.place }}{{ end }}</span>
           </a></li>
           {{- end }}
@@ -59,13 +60,13 @@
       </section>
 
       {{- /* 4. Österreich in 3D */}}
-      <section class="mx-hsec" aria-labelledby="mx-h3d-h">
+      <section class="mx-hsec mx-hband" aria-labelledby="mx-h3d-h">
         <div class="mx-hhead"><h2 id="mx-h3d-h">{{ $h.d3.h2 }}</h2><p>{{ $h.d3.p }}</p></div>
         <div class="mx-h3d">
           {{- range $h.d3.imgs }}{{ $id := . }}
           {{- range hugo.Data.gallery }}{{ if eq .img $id }}{{ $t := index . $lang }}
           <a class="mx-h3dimg" href="{{ $gal }}#{{ $id }}">
-            <img src="{{ $img }}{{ $id }}.webp" srcset="{{ $img }}{{ $id }}-s.webp 480w, {{ $img }}{{ $id }}.webp 1440w" sizes="(max-width: 900px) 100vw, 840px" width="1440" height="810" alt="{{ $t.alt }}" loading="lazy" decoding="async">
+            <img src="{{ $img }}{{ $id }}.webp" srcset="{{ $img }}{{ $id }}-s.webp 480w, {{ $img }}{{ $id }}-m.webp 960w, {{ $img }}{{ $id }}.webp 1440w" sizes="(max-width: 900px) calc(100vw - 3rem), 760px" width="1440" height="810" alt="{{ $t.alt }}" loading="lazy" decoding="async">
             <span class="mx-h3dcap">{{ $t.name }} · {{ $t.place }}</span>
           </a>
           {{- end }}{{ end }}{{ end }}
@@ -88,9 +89,12 @@
               <span class="mx-hmcp-a">{{ $h.products.mcp_a }}</span>
             </span>
             {{- end }}
-            <span class="mx-hprod-t">{{ .t }}</span>
-            <span class="mx-hprod-p">{{ .p }}</span>
-            <span class="mx-hprod-m">{{ .m }}</span>
+            <span class="mx-hprod-b">
+              <span class="mx-hprod-t">{{ .t }}</span>
+              <span class="mx-hprod-p">{{ .p }}</span>
+              <span class="mx-hprod-m">{{ .m }}</span>
+              <span class="mx-hprod-l">{{ $h.products.more }} <span aria-hidden="true">→</span></span>
+            </span>
           </a></li>
           {{- end }}
         </ul>
@@ -109,8 +113,8 @@ const map = new maplibregl.Map({
   // %s
   transformRequest: (url) => ({ url: /^https:\/\/([\w-]+\.)?mapx\.at\//.test(url)
     ? url + (url.includes('?') ? '&' : '?') + 'access_token=' + TOKEN : url }),
-  center: [15.33, 48.23],
-  zoom: 13
+  center: [16.3725, 48.2085],
+  zoom: 14.5
 });` $h.dev.code_c1 $h.dev.code_c2 }}
       {{- $code2 := printf "// %s\nconst r = await fetch(\n  'https://api.mapx.at/v1/elevation?points=12.694,47.074',\n  { headers: { Authorization: `Bearer ${TOKEN}` } }\n);\nconst { features } = await r.json();\nconsole.log(features[0].properties.elevation);" $h.dev.more_c }}
       <section class="mx-hsec" aria-labelledby="entwickler">
@@ -123,7 +127,7 @@ const map = new maplibregl.Map({
           </div>
           <div class="mx-hdev-side">
             <figure class="mx-hdev-fig">
-              <img src="/lp/img/demo/routing.webp" width="800" height="400" alt="{{ $h.dev.result_alt }}" loading="lazy" decoding="async">
+              <a href="{{ $gal }}#streets"><img src="{{ $img }}streets-m.webp" srcset="{{ $img }}streets-s.webp 480w, {{ $img }}streets-m.webp 960w" sizes="(max-width: 900px) calc(100vw - 3rem), 520px" width="960" height="540" alt="{{ $h.dev.result_alt }}" loading="lazy" decoding="async"></a>
               <figcaption>{{ $h.dev.result }}</figcaption>
             </figure>
             <ul class="mx-hpoints">{{ range $h.dev.points }}<li>{{ . | safeHTML }}</li>{{ end }}</ul>
@@ -133,7 +137,7 @@ const map = new maplibregl.Map({
       </section>
 
       {{- /* 7. Zugang */}}
-      <section class="mx-hsec" aria-labelledby="zugang">
+      <section class="mx-hsec mx-hband" aria-labelledby="zugang">
         <div class="mx-hhead"><h2 id="zugang">{{ $h.access.h2 }}</h2><p>{{ $h.access.p }}</p></div>
         <ol class="mx-hsteps">
           {{- range $i, $s := $h.access.steps }}
@@ -158,7 +162,7 @@ const map = new maplibregl.Map({
       {{- /* 9. Abschluss */}}
       {{- $ce := index $cards $h.end.key }}
       <section class="mx-hend" aria-labelledby="mx-hend-h">
-        <img src="{{ $img }}{{ $h.end.img }}.webp" srcset="{{ $img }}{{ $h.end.img }}-s.webp 480w, {{ $img }}{{ $h.end.img }}.webp 1440w" sizes="(max-width: 900px) 100vw, 1280px" width="1440" height="810" alt="{{ (index $ce $lang).alt }}" loading="lazy" decoding="async">
+        <img src="{{ $img }}{{ $h.end.img }}.webp" srcset="{{ $img }}{{ $h.end.img }}-s.webp 480w, {{ $img }}{{ $h.end.img }}-m.webp 960w, {{ $img }}{{ $h.end.img }}.webp 1440w" sizes="(max-width: 900px) calc(100vw - 3rem), 1280px" width="1440" height="810" alt="{{ (index $ce $lang).alt }}" loading="lazy" decoding="async">
         <div class="mx-hend-text">
           <h2 id="mx-hend-h">{{ $h.end.h2 }}</h2>
           <p>{{ $h.end.p }}</p>
@@ -170,5 +174,5 @@ const map = new maplibregl.Map({
       </section>
     </main>
   </div>
-  <script src="/lp/home.js?v=1" defer></script>
+  <script src="/lp/home.js?v=2" defer></script>
 {{ end }}

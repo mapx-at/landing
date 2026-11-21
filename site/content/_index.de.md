@@ -9,12 +9,13 @@ layout: hextra-home
 home:
   hero:
     h1: "Die Karte Österreichs, gebaut aus amtlichen Daten."
-    p: "Karten, Adresssuche, Routing, Gelände, öffentlicher Verkehr und Wetter als APIs für deine eigenen Anwendungen, kostenlos mit Konto."
+    p: "Karten, Adressen, Routen, Gelände, öffentlicher Verkehr und Wetter als API für deine Anwendung. Kostenlos mit Konto."
     start: "Kostenlos starten"
     map: "Karte öffnen"
     chips_label: "Kartenstil der Vorschau wählen"
     style: "Stil"
     live: "Live ansehen"
+    move: "Live-Karte öffnen"
     # Stile im Schaufenster: id = Bild in static/lp/img/gallery/, key = Karte in data/gallery.yaml (Ort, Alt-Text); alt nur, wenn der Stil dort keinen eigenen hat
     styles:
       - {id: streets-3d, key: city3d, label: "3D-Stadt"}
@@ -26,18 +27,18 @@ home:
       - {id: traffic-day, key: traffic, label: "Verkehr"}
   sources: "<strong>Datenquellen:</strong> BEV · GIP.at · ASFINAG · GeoSphere Austria · ÖBB · Umweltbundesamt · Stadt Wien · Statistik Austria · offene Lizenzen, überwiegend CC BY 4.0"
   styles:
-    h2: "Kartenstile"
-    p: "Neun Karten in 26 Stilen, alle über dieselbe Karten-API. Ein Klick öffnet die Live-Karte in der Galerie."
+    h2: "26 fertige Kartenstile für deine Anwendung"
+    p: "Von der ruhigen Straßenkarte bis zum Luftbild in 3D, alle über dieselbe Karten-API. Tipp auf eine Karte, um sie live zu bewegen."
     all: "Alle Stile in der Galerie"
   d3:
-    h2: "Österreich in 3D"
-    p: "Das Gelände kommt aus dem Laserscan des BEV mit 1 m Auflösung, die Gebäude stehen als Körper mit ihrer Höhe auf der Karte. In Wien kommen die Gebäudeteile, etwa der Turm des Stephansdoms, aus dem Baukörpermodell der Stadt Wien."
+    h2: "Österreich in 3D, mit Gelände in 1 m Auflösung"
+    p: "Das Gelände kommt aus dem Laserscan des BEV, die Gebäude stehen als Körper mit ihrer Höhe auf der Karte. In Wien kommen die Gebäudeteile, etwa der Turm des Stephansdoms, aus dem Baukörpermodell der Stadt Wien."
     imgs: [streets-3d, relief-3d, satellite-3d]
     link: "In der Galerie drehen und neigen"
   products:
-    h2: "Was mapx liefert"
-    p: "Jedes Produkt hat eine eigene Seite mit Beispiel, Datenquelle und Einschränkungen."
-    more: "Mehr dazu"
+    h2: "Eine API für Karte, Adresse, Route und Wetter"
+    p: "Jedes Produkt hat eine eigene Seite mit Beispiel zum Ausprobieren, Datenquelle und Grenzen."
+    more: "Beispiel ansehen"
     items:
       - {key: karten, img: karten, t: "Karten, Kacheln und Stile", p: "Vektor-Basiskarte, fertige Stile, Höhenlinien und Orthofoto als Kacheln für MapLibre.", m: "PMTiles · TileJSON"}
       - {key: geocoding, img: geocoding, t: "Geocoding und Adresssuche", p: "Adressen, Orte und Straßen finden, beim Tippen vorschlagen und prüfen.", m: "Adressregister, Stichtag 01.10.2026"}
@@ -53,13 +54,13 @@ home:
     mcp_tool: "transit_route"
     mcp_a: "Verbindung laut Fahrplan mit Umstieg und Ankunftszeit, dazu die Quellenangabe."
   dev:
-    h2: "Für Entwickler"
-    p: "Ein paar Zeilen genügen für eine Karte mit MapLibre. Die APIs antworten mit JSON bzw. GeoJSON."
+    h2: "Deine erste Karte in fünf Minuten"
+    p: "Für eine Karte mit MapLibre genügen ein Stil-Link und dein Token. Alle anderen APIs antworten mit JSON oder GeoJSON."
     code_h: "Karte mit MapLibre"
     code_c1: "öffentlicher Token mx_pk_… vom Konto"
     code_c2: "hängt den Token an jede Anfrage an mapx.at"
-    result: "Das Ergebnis: Stil streets, Melk."
-    result_alt: "Ergebnis des Beispiels: Straßenkarte von Melk mit Donau"
+    result: "Das Ergebnis: Stil streets, Wiener Innenstadt."
+    result_alt: "Ergebnis des Beispiels: Straßenkarte der Wiener Innenstadt mit Gebäuden und Namen"
     points:
       - "<strong>MapLibre und PMTiles.</strong> Kacheln mit HTTP-Range-Zugriff, ohne eigenen Kartenserver."
       - "<strong>Fertige Stile.</strong> Alle Stile der Galerie kommen über <code>/v1/styles</code>."
@@ -68,10 +69,10 @@ home:
     more_c: "Gipfelhöhe aus dem Geländemodell (DTM, 1 m)"
     docs: "Zur Entwicklerdoku"
     docs_url: "https://docs.mapx.at/de/"
-    first: "Erste Karte in fünf Minuten"
+    first: "Schritt für Schritt zur ersten Karte"
     first_url: "https://docs.mapx.at/de/start/first-map/"
   access:
-    h2: "Kostenlos, mit eigenem Konto"
+    h2: "Kostenlos, mit eigenem Konto und Token"
     p: "Die APIs brauchen ein Konto mit Token. Das kostet nichts, zum Schutz vor Missbrauch gibt es Rate-Limits je Token."
     steps:
       - {t: "Anmelden", p: "Mit deiner E-Mail-Adresse und einem Code, den wir dir schicken. Ein Passwort gibt es nicht."}
@@ -82,8 +83,8 @@ home:
     details: "Details in der Doku"
     details_url: "https://docs.mapx.at/de/start/access-and-limits/"
   data:
-    h2: "Eine Quelle, die man benennen kann"
-    p: "mapx baut Karten ausschließlich aus Daten von Behörden mit offener Lizenz, jeder Datensatz mit Herausgeber, Stichtag und Lizenz. OpenStreetMap verwenden wir nicht, auch Punkte von Interesse kommen aus amtlichen Quellen."
+    h2: "Jede Angabe mit Quelle und Stichtag"
+    p: "mapx nutzt ausschließlich offene Daten österreichischer Behörden. So kannst du in deiner Anwendung für jeden Datensatz Herausgeber, Stichtag und Lizenz nennen. OpenStreetMap verwenden wir nicht."
     items:
       - {t: "BEV", p: "Adressen, Gebäude und Bodennutzung, Gelände, Orthofoto"}
       - {t: "GIP.at", p: "Straßen, Bahn, Routing"}
@@ -95,7 +96,7 @@ home:
   end:
     img: relief
     key: relief
-    h2: "Probiere die Karte aus."
+    h2: "Probier die Karte aus."
     p: "Such eine Adresse, miss eine Strecke oder lass dir ein Höhenprofil zeigen."
     docs: "Doku lesen"
 ---
