@@ -22,6 +22,10 @@ const items = [
   { id: 'satellite-current', center: [16.77, 47.84], zoom: 10.4 },  // Neusiedler See
   { id: 'outdoors', center: [10.985, 46.958], zoom: 13 },           // Sölden, wie outdoors-winter
   { id: 'outdoors-winter', center: [10.985, 46.958], zoom: 13 },    // Sölden
+  { id: 'relief', center: [12.694, 47.074], zoom: 11.5 },           // Großglockner
+  { id: 'relief-contours', center: [12.694, 47.074], zoom: 11.5 },
+  { id: 'relief-light', center: [12.694, 47.074], zoom: 11.5 },
+  { id: 'relief-dark', center: [12.694, 47.074], zoom: 11.5 },
   { id: 'light', center: [15.4385, 47.071], zoom: 13.5 },            // Graz
   { id: 'dark', center: [15.4385, 47.071], zoom: 13.5 },
 ];
