@@ -107,6 +107,52 @@
     alt: "Style outdoors: Sölden with contour lines, hillshading, peaks, trails and cable cars"
     short: "Contours, hillshading, peaks and paths for maps in the mountains, in summer or in snow colours."
     text: ""
+- key: relief
+  img: relief
+  center: [12.694, 47.074]
+  zoom: 11.5
+  variants:
+    - id: relief
+      de: Farbe
+      en: Colour
+      map: ""
+      default: true
+      text:
+        de: "Eine reine Reliefkarte aus dem Geländemodell des BEV aus Laserscan (1 m): Höhenstufen von grünen Tälern über Ocker und Braun bis zu weißen Gipfeln, dazu kräftige Schummerung. Gedacht für Übersichten, Poster und überall dort, wo die Landschaft selbst das Thema ist. Straßen, Gebäude und Symbole fehlen bewusst; Gewässer, Gipfel mit Höhe und wenige Ortsnamen bleiben."
+        en: "A pure relief map from the BEV terrain model from laser scanning (1 m): elevation tints from green valleys through ochre and brown to white summits, with strong hillshading. Meant for overviews, posters and anywhere the landscape itself is the subject. Roads, buildings and icons are deliberately left out; water, peaks with elevation and a few place names remain."
+    - id: relief-contours
+      de: Höhenlinien
+      en: Contours
+      map: ""
+      text:
+        de: "Die farbige Reliefkarte mit Höhenlinien und Höhenangaben. Gedacht für alle, die Höhen ablesen wollen, ohne Straßen und Wege im Bild zu haben."
+        en: "The coloured relief map with contour lines and heights. Meant for reading elevations without roads and paths in the picture."
+    - id: relief-light
+      de: Hell
+      en: Light
+      map: ""
+      text:
+        de: "Nur graue Schummerung auf hellem Grund, mit hellen Gewässern und wenigen grauen Namen. Gedacht als plastischer Hintergrund für eigene Daten, die farbig darauf stehen."
+        en: "Grey hillshading only on a light ground, with pale water and a few grey names. Meant as a sculpted backdrop for your own data shown in colour on top."
+    - id: relief-dark
+      de: Dunkel
+      en: Dark
+      map: ""
+      text:
+        de: "Dieselbe Schummerung als Licht auf dunklem Anthrazit, passend zum Stil „Dunkel“. Gedacht für Dashboards und dunkle Oberflächen, auf denen das Gelände dezent mitläuft."
+        en: "The same hillshading as light on dark charcoal, matching the “Dark” style. Meant for dashboards and dark interfaces where the terrain stays quietly in the background."
+  de:
+    name: Relief
+    place: Großglockner
+    alt: "Stil relief: Großglockner als farbige Reliefkarte mit Höhenstufen, Schummerung, Gletschern und Gipfelnamen"
+    short: "Reine Reliefkarte aus dem Geländemodell: farbige Höhenstufen, mit Höhenlinien oder nur als Schummerung in Hell und Dunkel."
+    text: ""
+  en:
+    name: Relief
+    place: Grossglockner
+    alt: "Style relief: Grossglockner as a coloured relief map with elevation tints, hillshading, glaciers and peak names"
+    short: "Pure relief map from the terrain model: elevation tints, with contours, or hillshade only in light and dark."
+    text: ""
 - key: traffic
   img: traffic-day
   center: [16.37, 48.175]
