@@ -34,9 +34,9 @@
               <span class="mx-gplace">{{ $t.place }}</span>
             </button>
             {{- if gt (len .variants) 1 }}
-            <ul class="mx-gstrip" aria-label="{{ cond $en "Variants" "Varianten" }}">
+            <ul class="mx-gstrip" aria-label="{{ cond $en "Variants: switch the preview" "Varianten: Vorschau umschalten" }}">
               {{- range .variants }}
-              <li><img src="/lp/img/gallery/{{ .id }}.webp" width="960" height="540" alt="" loading="lazy" decoding="async"><span>{{ index . $lang }}</span></li>
+              <li><button type="button" class="mx-gvar" data-style="{{ .id }}" aria-pressed="{{ cond (eq .id $def.id) "true" "false" }}" disabled><img src="/lp/img/gallery/{{ .id }}.webp" width="960" height="540" alt="" loading="lazy" decoding="async"><span>{{ index . $lang }}</span></button></li>
               {{- end }}
             </ul>
             {{- end }}
@@ -84,7 +84,7 @@
           </div>
         </dialog>
         <script type="application/json" id="mx-gdata">{{ dict "token" site.Params.demoToken "api" $api "cards" $cards | jsonify | safeJS }}</script>
-        <script src="/lp/gallery.js" defer></script>
+        <script src="/lp/gallery.js?v=2" defer></script>
         {{- $topics := index hugo.Data "topics" -}}
         <aside class="mx-related" aria-labelledby="mx-related-h">
           <h2 id="mx-related-h">{{ cond $en "More topics" "Weitere Themen" }}</h2>

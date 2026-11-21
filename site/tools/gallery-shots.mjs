@@ -12,11 +12,11 @@ const TOKEN = /demoToken\s*=\s*"([^"]+)"/.exec(readFileSync(join(SITE, 'hugo.tom
 // Ausschnitt je Stil (Mitte [lon, lat], Zoom). Die Texte der Galerie stehen in site/data/gallery.yaml.
 const items = [
   { id: 'streets', center: [16.3725, 48.2085], zoom: 15 },          // Wien Innenstadt
-  { id: 'streets-dawn', center: [13.0445, 47.7995], zoom: 14.6 },   // Salzburg
-  { id: 'streets-dusk', center: [15.4385, 47.071], zoom: 14.4 },    // Graz
-  { id: 'streets-night', center: [11.394, 47.266], zoom: 13.2 },    // Innsbruck
+  { id: 'streets-dawn', center: [16.3725, 48.2085], zoom: 15 },     // wie streets: die Minikarten schalten das große Bild um
+  { id: 'streets-dusk', center: [16.3725, 48.2085], zoom: 15 },
+  { id: 'streets-night', center: [16.3725, 48.2085], zoom: 15 },
   { id: 'traffic-day', center: [16.37, 48.175], zoom: 11.6 },       // Wien, A23/A2/A4
-  { id: 'satellite', center: [13.649, 47.5615], zoom: 15.4 },       // Hallstatt
+  { id: 'satellite', center: [15.333, 48.228], zoom: 15.6 },        // Melk, wie satellite-streets
   { id: 'satellite-streets', center: [15.333, 48.228], zoom: 15.6 },// Melk
   { id: 'satellite-current', center: [16.77, 47.84], zoom: 10.4 },  // Neusiedler See
   { id: 'outdoors', center: [12.694, 47.074], zoom: 13 },           // Großglockner

@@ -113,7 +113,20 @@
 
   for (const b of document.querySelectorAll('.mx-gbtn')) {
     b.disabled = false;
-    b.addEventListener('click', () => open(b.dataset.key, null, b));
+    b.addEventListener('click', () => open(b.dataset.key, b.dataset.style || null, b));
+    // Minikarten unter der Vorschau: schalten das große Bild der Karte um; das Fenster öffnet dann mit diesem Stil
+    const c = byKey[b.dataset.key], img = b.querySelector('.mx-gimg img'), vars = b.parentElement.querySelectorAll('.mx-gvar');
+    const base = img.alt;
+    for (const v of vars) {
+      v.disabled = false;
+      v.addEventListener('click', () => {
+        const id = v.dataset.style;
+        b.dataset.style = id;
+        img.src = v.querySelector('img').src;
+        img.alt = id === c.def ? base : c.name + ', ' + c.variants.find((x) => x.id === id).label + ' (' + id + ')';
+        for (const o of vars) o.setAttribute('aria-pressed', String(o === v));
+      });
+    }
   }
   document.documentElement.classList.add('mx-gjs');
   function fromHash() {
