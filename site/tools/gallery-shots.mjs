@@ -1,4 +1,4 @@
-// Vorschaubilder der Galerie neu erzeugen (site/static/lp/img/gallery/<id>.webp mit 1440 x 810, Minikarte <id>-s.webp mit 480 x 270).
+// Vorschaubilder der Galerie neu erzeugen (site/static/lp/img/gallery/<id>.webp mit 1440 x 810, mittlere Fassung <id>-m.webp mit 960 x 540, Minikarte <id>-s.webp mit 480 x 270).
 // Echte MapLibre-Darstellung der API-Stile, ohne Bedienelemente und ohne Quellenangabe im Bild (die steht als Zeile unter dem Raster
 // der Galerie, die Live-Karte im Fenster trägt die volle Angabe); die Minimalseite wird unter der Herkunft https://mapx.at ausgeliefert,
 // damit der öffentliche Token aus site/hugo.toml gilt. Orte und Zoomstufen: Liste items unten.
@@ -95,6 +95,7 @@ export default async (page) => {
     }, [png.toString('base64'), w, h, max]);
     const buf = Buffer.from(await conv(1440, 810, 230000), 'base64');
     writeFileSync(join(OUT, s.id + '.webp'), buf);
+    writeFileSync(join(OUT, s.id + '-m.webp'), Buffer.from(await conv(960, 540, 110000), 'base64')); // Startseite und Raster am Handy
     writeFileSync(join(OUT, s.id + '-s.webp'), Buffer.from(await conv(480, 270, 45000), 'base64'));
     done.push(`${s.id}: ${Math.round(buf.length / 1024)} KB${await page.evaluate(() => window.__err ? ' (Fehler: ' + window.__err + ')' : '')}`);
     await page.unroute('https://mapx.at/__vorschau.html');
