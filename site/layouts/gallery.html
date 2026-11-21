@@ -41,18 +41,6 @@
             </ul>
             {{- end }}
             <p class="mx-gshort">{{ $t.short }}</p>
-            <details class="mx-gdet">
-              <summary>{{ cond $en "Style URLs" "Stil-Adressen" }}</summary>
-              <div class="mx-gurls">
-                {{- range .variants }}
-                <div class="mx-gurl"><code>{{ $api }}{{ .id }}</code><button type="button" class="mx-gcopy" data-copy="{{ $api }}{{ .id }}" hidden>{{ cond $en "Copy" "Kopieren" }}</button></div>
-                {{- end }}
-              </div>
-              <p class="mx-glinks">
-                {{- with $def.map }}<a href="{{ printf "https://map.mapx.at/#%s" . | safeURL }}">{{ cond $en "Open in the map" "In der Karte öffnen" }} →</a>{{ end }}
-                <a href="{{ $docs }}">{{ cond $en "Docs: maps" "Doku: Karten" }} →</a>
-              </p>
-            </details>
           </li>
           {{- end }}
         </ul>
@@ -83,7 +71,7 @@
           </div>
         </dialog>
         <script type="application/json" id="mx-gdata">{{ dict "token" site.Params.demoToken "api" $api "cards" $cards | jsonify | safeJS }}</script>
-        <script src="/lp/gallery.js?v=3" defer></script>
+        <script src="/lp/gallery.js?v=4" defer></script>
         {{- $topics := index hugo.Data "topics" -}}
         <aside class="mx-related" aria-labelledby="mx-related-h">
           <h2 id="mx-related-h">{{ cond $en "More topics" "Weitere Themen" }}</h2>
