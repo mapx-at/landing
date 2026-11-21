@@ -114,15 +114,11 @@ nav a[href*="account.mapx.at/login"]:hover{background:#0853c4}
 .mx-gstrip:has(li:nth-child(2):last-child){grid-template-columns:repeat(2,minmax(0,1fr))}
 .mx-gstrip:has(li:nth-child(3):last-child){grid-template-columns:repeat(3,minmax(0,1fr))}
 .mx-gshort{margin:0;font-size:.9375rem;line-height:1.55}
-.mx-gdet{font-size:.875rem}.mx-gdet summary{cursor:pointer;color:#6b7280;padding:.15rem 0}.dark .mx-gdet summary{color:#9ca3af}.mx-gdet[open] summary{margin-bottom:.5rem}.mx-gdet .mx-glinks{margin-top:.5rem}
-.mx-gurls{display:flex;flex-direction:column;gap:.3rem}
 .mx-gurl{display:flex;align-items:center;gap:.4rem;min-width:0;font-size:.75rem;border-radius:.5rem;background:rgb(156 163 175 / .15);padding:.3rem .3rem .3rem .6rem}
 .mx-gurl code{flex:1;min-width:0;overflow-wrap:anywhere;user-select:all;background:none;padding:0;font-size:.75rem}
 .mx-gcopy{flex:none;border:1px solid rgb(156 163 175 / .6);border-radius:9999px;padding:.15rem .6rem;font-size:.75rem}
 .mx-gcopy:hover{background:rgb(156 163 175 / .2)}
 .mx-gcopy:focus-visible,.mx-gdet summary:focus-visible,.mx-gdlg button:focus-visible,.mx-gdlg a:focus-visible,.mx-gdlg summary:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
-.mx-glinks{display:flex;flex-wrap:wrap;gap:.4rem 1rem;margin:0;font-size:.875rem}
-.mx-glinks a{text-decoration:underline;text-underline-offset:2px}
 .mx-gnote{margin-top:2.5rem;max-width:48rem}.mx-gnote a{text-decoration:underline;text-underline-offset:2px}
 @media(max-width:640px){.mx-gal{grid-template-columns:1fr}}
 /* Fenster */

@@ -21,10 +21,6 @@
     catch { const r = document.createRange(); r.selectNodeContents(node); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = t('Markiert', 'Selected'); }
     setTimeout(() => { btn.textContent = old; }, 1600);
   }
-  for (const b of document.querySelectorAll('.mx-gcard .mx-gcopy')) {
-    b.hidden = false;
-    b.addEventListener('click', () => copy(b, b.dataset.copy, b.previousElementSibling));
-  }
 
   // MapLibre erst beim ersten Öffnen laden
   let ml;
