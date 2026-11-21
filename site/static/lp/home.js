@@ -5,10 +5,12 @@
   const show = document.querySelector('.mx-hshow');
   if (!show) return;
   const stage = show.querySelector('.mx-hstage');
+  const row = show.querySelector('.mx-hchips');
   const chips = [...show.querySelectorAll('.mx-hchip')];
   const first = stage.querySelector('.mx-hlayer');
   const cap = { id: show.querySelector('.mx-hid'), place: show.querySelector('.mx-hplace'), link: show.querySelector('.mx-hlive') };
   const base = first.getAttribute('src').replace(/[^/]+$/, '');
+  const gal = stage.getAttribute('href').replace(/#.*$/, '');
   const layers = { [first.dataset.id]: first };
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let cur = 0, timer = null, stopped = reduce, token = 0;
@@ -20,8 +22,8 @@
     img.dataset.id = id;
     img.decoding = 'async';
     img.sizes = first.sizes;
-    img.srcset = base + id + '-s.webp 480w, ' + base + id + '.webp 1440w';
-    img.src = base + id + '.webp';
+    img.srcset = base + id + '-s.webp 480w, ' + base + id + '-m.webp 960w, ' + base + id + '.webp 1440w';
+    img.src = base + id + '-m.webp';
     img.alt = '';
     img.setAttribute('aria-hidden', 'true');
     stage.appendChild(img);
@@ -36,7 +38,8 @@
     chips.forEach((o, j) => o.setAttribute('aria-pressed', String(j === i)));
     cap.id.textContent = id;
     cap.place.textContent = c.dataset.place;
-    cap.link.href = cap.link.getAttribute('href').replace(/#.*$/, '') + '#' + id;
+    cap.link.href = stage.href = gal + '#' + id;
+    reveal(c);
     const img = layer(id);
     ready(img).then(() => {
       if (my !== token) return;
@@ -48,6 +51,17 @@
       }
     });
   }
+  // aktiven Knopf in den sichtbaren Teil der Reihe schieben; nur die Reihe scrollt, nie die Seite
+  function reveal(c) {
+    const l = c.offsetLeft, pad = 48;
+    let x = row.scrollLeft;
+    if (l - pad < x) x = l - pad;
+    else if (l + c.offsetWidth + pad > x + row.clientWidth) x = l + c.offsetWidth + pad - row.clientWidth;
+    if (x !== row.scrollLeft) row.scrollTo({ left: Math.max(0, x), behavior: reduce ? 'auto' : 'smooth' });
+  }
+  function edge() { row.classList.toggle('mx-hend-r', row.scrollLeft + row.clientWidth >= row.scrollWidth - 2); }
+  row.addEventListener('scroll', edge, { passive: true });
+  addEventListener('resize', edge, { passive: true });
   function stop() { stopped = true; clearTimeout(timer); }
   function tick() {
     if (stopped) return;
@@ -72,6 +86,7 @@
   });
   for (const ev of ['pointerenter', 'focusin', 'touchstart']) show.addEventListener(ev, stop, { passive: true });
   document.documentElement.classList.add('mx-hjs');
+  edge();
 
   let visible = true;
   if ('IntersectionObserver' in window) new IntersectionObserver((es) => { visible = es[0].isIntersecting; }).observe(stage);
