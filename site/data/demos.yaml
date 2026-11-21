@@ -1,36 +1,36 @@
 # Interaktive Produktbeispiele der Themenseiten (Shortcode {{< demo id="…" >}}, Skripte static/lp/demo/<id>.js,
-# Vorschaubild static/lp/img/demo/<id>.webp, einmal über /v1/static gerendert). docs = Beispiel-ID auf docs.mapx.at/examples/.
+# Vorschaubild static/lp/img/demo/<id>.webp, erzeugt von tools/demo-shots.mjs). docs = Beispiel-ID auf docs.mapx.at/examples/.
 # leaflet: false = das Beispiel braucht keine Kartenbibliothek.
 karten:
   docs: switch-basemap
-  de: {h: Ausprobieren, p: 'Dieselbe Stelle in Innsbruck in vier fertigen Stilen: Tag, Nacht, Luftbild und Gelände.', alt: 'Vorschau: Straßenkarte von Innsbruck'}
-  en: {h: Try it, p: 'The same spot in Innsbruck in four ready-made styles: day, night, aerial and terrain.', alt: 'Preview: street map of Innsbruck'}
+  de: {h: Ausprobieren, p: 'Dieselbe Stelle in Innsbruck in vier fertigen Stilen: Tag, Nacht, Luftbild und Gelände.', alt: 'Innsbruck in vier Kartenstilen nebeneinander: Straßen, Nacht, Luftbild, Gelände'}
+  en: {h: Try it, p: 'The same spot in Innsbruck in four ready-made styles: day, night, aerial and terrain.', alt: 'Innsbruck in four map styles side by side: streets, night, aerial, terrain'}
 geocoding:
   docs: search-box
-  de: {h: Ausprobieren, p: 'Such eine Adresse oder einen Ort in Österreich: Du bekommst Vorschläge beim Tippen, der Treffer erscheint auf der Karte.', alt: 'Vorschau: Karte von Österreich'}
-  en: {h: Try it, p: 'Search for an address or place in Austria: suggestions while you type, the result appears on the map.', alt: 'Preview: map of Austria'}
+  de: {h: Ausprobieren, p: 'Such eine Adresse oder einen Ort in Österreich: Du bekommst Vorschläge beim Tippen, der Treffer erscheint auf der Karte.', alt: 'Suchfeld mit „Hauptplatz 1, Li“, Vorschläge Linz und Traun, Treffer am Linzer Hauptplatz auf der Karte'}
+  en: {h: Try it, p: 'Search for an address or place in Austria: suggestions while you type, the result appears on the map.', alt: 'Search box with “Hauptplatz 1, Li”, suggestions Linz and Traun, result on Linz main square on the map'}
 routing:
   docs: route
-  de: {h: Ausprobieren, p: 'Tipp in Melk Start und Ziel an und wähl Auto, Rad oder zu Fuß: Du siehst Route, Länge und Dauer.', alt: 'Vorschau: Straßenkarte von Melk'}
-  en: {h: Try it, p: 'Tap a start and a destination in Melk and choose car, bike or walking to see the route, length and duration.', alt: 'Preview: street map of Melk'}
+  de: {h: Ausprobieren, p: 'Tipp in Melk Start und Ziel an und wähl Auto, Rad oder zu Fuß: Du siehst Route, Länge und Dauer.', alt: 'Autoroute von Melk nach St. Pölten mit Dauer und Länge, dazu die 10-Minuten-Fläche um Melk'}
+  en: {h: Try it, p: 'Tap a start and a destination in Melk and choose car, bike or walking to see the route, length and duration.', alt: 'Car route from Melk to St. Pölten with duration and length, plus the 10-minute area around Melk'}
 hoehe:
   docs: elevation-profile
-  de: {h: Ausprobieren, p: 'Setz Punkte in den Hohen Tauern: Aus der Linie wird ein Höhenprofil mit Auf- und Abstieg.', alt: 'Vorschau: Geländekarte der Hohen Tauern'}
-  en: {h: Try it, p: 'Set points in the Hohe Tauern: the line becomes an elevation profile with ascent and descent.', alt: 'Preview: terrain map of the Hohe Tauern'}
+  de: {h: Ausprobieren, p: 'Setz Punkte in den Hohen Tauern: Aus der Linie wird ein Höhenprofil mit Auf- und Abstieg.', alt: 'Linie vom Lucknerhaus auf den Großglockner und ihr Höhenprofil mit höchstem Punkt, Auf- und Abstieg'}
+  en: {h: Try it, p: 'Set points in the Hohe Tauern: the line becomes an elevation profile with ascent and descent.', alt: 'Line from Lucknerhaus up the Großglockner and its elevation profile with highest point, ascent and descent'}
 oev:
   docs: departures
-  de: {h: Ausprobieren, p: 'Tipp in Salzburg in die Nähe einer Haltestelle: Du siehst die nächsten Abfahrten laut Fahrplan.', alt: 'Vorschau: Straßenkarte rund um den Salzburger Hauptbahnhof'}
-  en: {h: Try it, p: 'Tap near a stop in Salzburg to see the next departures according to the timetable.', alt: 'Preview: street map around Salzburg main station'}
+  de: {h: Ausprobieren, p: 'Tipp in Salzburg in die Nähe einer Haltestelle: Du siehst die nächsten Abfahrten laut Fahrplan.', alt: 'Abfahrtstafel des Salzburger Hauptbahnhofs mit drei Abfahrten laut Fahrplan, darunter die Haltestelle auf der Karte'}
+  en: {h: Try it, p: 'Tap near a stop in Salzburg to see the next departures according to the timetable.', alt: 'Departure board of Salzburg main station with three timetable departures, the stop on the map below'}
 verkehr:
   docs: traffic
-  de: {h: Ausprobieren, p: 'Die aktiven Verkehrsmeldungen im Kartenausschnitt, Sperren in Rot. Verschieb die Karte, um andere Gegenden zu sehen.', alt: 'Vorschau: Straßenkarte von Wien und Umgebung'}
-  en: {h: Try it, p: 'The active traffic reports in the visible area, closures in red. Pan the map to see other areas.', alt: 'Preview: street map of Vienna and surroundings'}
+  de: {h: Ausprobieren, p: 'Die aktiven Verkehrsmeldungen im Kartenausschnitt, Sperren in Rot. Verschieb die Karte, um andere Gegenden zu sehen.', alt: 'Verkehrskarte von Wien mit Sperren in Rot und Baustellen in Orange, eine Sperre hervorgehoben'}
+  en: {h: Try it, p: 'The active traffic reports in the visible area, closures in red. Pan the map to see other areas.', alt: 'Traffic map of Vienna with closures in red and roadworks in orange, one closure highlighted'}
 statisch:
   docs: static-image
   leaflet: false
-  de: {h: Ausprobieren, p: 'Wähl Ort, Stil und Größe: Daraus entsteht die Bild-URL. Das Bild lädt erst, wenn du es erzeugst.', alt: 'Vorschau: Kartenbild von Melk mit Markierung'}
-  en: {h: Try it, p: 'Choose a place, style and size to build the image URL. The image loads only when you create it.', alt: 'Preview: map image of Melk with a pin'}
+  de: {h: Ausprobieren, p: 'Wähl Ort, Stil und Größe: Daraus entsteht die Bild-URL. Das Bild lädt erst, wenn du es erzeugst.', alt: 'Fertiges Kartenbild von Melk mit Weg und Markierung, darunter die Bild-URL'}
+  en: {h: Try it, p: 'Choose a place, style and size to build the image URL. The image loads only when you create it.', alt: 'Finished map image of Melk with a path and a pin, the image URL below'}
 wetter:
   docs: weather-overlay
-  de: {h: Ausprobieren, p: 'Temperatur oder Niederschlag der nächsten Stunden über Österreich: Mit dem Regler wählst du die Stunde.', alt: 'Vorschau: Karte von Österreich'}
-  en: {h: Try it, p: 'Temperature or precipitation for the coming hours over Austria: use the slider to pick the hour.', alt: 'Preview: map of Austria'}
+  de: {h: Ausprobieren, p: 'Temperatur oder Niederschlag der nächsten Stunden über Österreich: Mit dem Regler wählst du die Stunde.', alt: 'Temperaturfläche über Österreich mit Farbskala und Messwerten für Wien und Innsbruck'}
+  en: {h: Try it, p: 'Temperature or precipitation for the coming hours over Austria: use the slider to pick the hour.', alt: 'Temperature layer over Austria with colour scale and readings for Vienna and Innsbruck'}
