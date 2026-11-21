@@ -27,7 +27,7 @@ description: "Verkehrs-API für Österreich: Verkehrsmeldungen, Baustellen, Sper
 - `POST /v1/traffic/incidents`: dieselbe Abfrage mit JSON-Body, etwa für lange Routen. Die Meldungen entlang einer Route sind nach der Position auf der Route sortiert.
 - `GET /v1/traffic/flow`: Tempolimits auf Wechselverkehrszeichen der Autobahnen in einem Kartenausschnitt.
 - `GET /v1/traffic/signs`: aktueller Zustand von Anzeigen mit Position.
-- `/v1/traffic/tiles.json`: Verkehrsebene als Vektorkacheln für die Karte. Der Stil `traffic-day` zeigt sie fertig.
+- `/v1/traffic/tiles.json`: Verkehrsebene als Vektorkacheln für die Karte. Die Stile `traffic-day` und `traffic-night` zeigen sie fertig.
 - Routing mit dem Profil `driving-traffic` umfährt verbindliche Totalsperren.
 
 ## Beispiel

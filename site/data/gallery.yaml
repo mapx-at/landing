@@ -77,55 +77,52 @@
     text: "Built on the BEV digital orthophoto (20 cm, flown 2022–2025); “Current satellite” uses Copernicus Sentinel-2 imagery at 10 m instead, updated daily. Meant for site plans, location views and anywhere you want to see what a place looks like. “With streets” and “Current satellite” add roads, names and boundaries from the base map on top."
 - key: outdoors
   img: outdoors
-  center: [12.694, 47.074]
-  zoom: 12.5
-  variants:
-    - {id: outdoors, de: Gelände, en: Outdoors, map: "c=12.694,47.074,12.5&a=outdoor&l=l", default: true}
-  de:
-    name: Gelände
-    place: Großglockner
-    alt: "Stil outdoors: Großglockner mit Höhenlinien, Schummerung, Gipfeln und Gletschern"
-    short: "Höhenlinien, Schummerung, Gipfel und Wege für Karten im Gebirge."
-    text: "Baut auf der Basiskarte und dem Geländemodell des BEV aus Laserscan (1 m) auf. Gedacht für Karten zum Wandern, für Touren und alles, wo das Gelände zählt. Zeigt zusätzlich Höhenlinien mit Höhenangaben, Schummerung, Gipfel mit Höhe, Gletscher, Wege und Steige, Seilbahnen und Skigebiete."
-  en:
-    name: Outdoors
-    place: Grossglockner
-    alt: "Style outdoors: Grossglockner with contour lines, hillshading, peaks and glaciers"
-    short: "Contours, hillshading, peaks and paths for maps in the mountains."
-    text: "Built on the base map and the BEV terrain model from laser scanning (1 m). Meant for hiking maps, tours and anything where the terrain matters. Adds contour lines with heights, hillshading, peaks with elevation, glaciers, paths and trails, cable cars and ski areas."
-- key: outdoors-winter
-  img: outdoors-winter
   center: [10.985, 46.958]
   zoom: 13
   variants:
-    - {id: outdoors-winter, de: Gelände Winter, en: Outdoors Winter, map: "", default: true}
+    - id: outdoors
+      de: Sommer
+      en: Summer
+      map: "c=10.985,46.958,13&a=outdoor&l=l"
+      default: true
+      text:
+        de: "Baut auf der Basiskarte und dem Geländemodell des BEV aus Laserscan (1 m) auf. Gedacht für Karten zum Wandern, für Touren und alles, wo das Gelände zählt. Zeigt zusätzlich Höhenlinien mit Höhenangaben, Schummerung, Gipfel mit Höhe, Gletscher, Wege und Steige, Seilbahnen und Skigebiete."
+        en: "Built on the base map and the BEV terrain model from laser scanning (1 m). Meant for hiking maps, tours and anything where the terrain matters. Adds contour lines with heights, hillshading, peaks with elevation, glaciers, paths and trails, cable cars and ski areas."
+    - id: outdoors-winter
+      de: Winter
+      en: Winter
+      map: ""
+      text:
+        de: "Dieselbe Geländekarte für die Wintersaison: Schummerung und Höhenlinien aus dem amtlichen Geländemodell, Gipfel und Wege bleiben, die Palette wechselt auf Weiß und Blaugrau mit eisblauen Gletschern. Zusätzlich hervorgehoben sind Skigebiete sowie Seilbahnen und Lifte."
+        en: "The same terrain map for the winter season: hillshade and contours from the official terrain model, peaks and trails remain, the palette changes to white and blue-grey with icy glaciers. Ski areas, cable cars and lifts are additionally highlighted."
   de:
-    name: Gelände Winter
+    name: Gelände
     place: Sölden
-    alt: "Stil outdoors-winter: Skigebiet Sölden in Schneefarben mit Pisten, Seilbahnen und Liften"
-    short: "Gelände in Schneefarben mit Skigebieten und Liften."
-    text: "Baut auf Gelände auf: Schummerung und Höhenlinien aus dem amtlichen Geländemodell, Gipfel und Wege bleiben. Gedacht für die Wintersaison, mit kühler Palette aus Weiß und Blaugrau und eisblauen Gletschern. Zusätzlich hervorgehoben sind Skigebiete sowie Seilbahnen und Lifte."
+    alt: "Stil outdoors: Sölden mit Höhenlinien, Schummerung, Gipfeln, Wegen und Seilbahnen"
+    short: "Höhenlinien, Schummerung, Gipfel und Wege für Karten im Gebirge, im Sommer oder in Schneefarben."
+    text: ""
   en:
-    name: Outdoors Winter
+    name: Outdoors
     place: Sölden
-    alt: "Style outdoors-winter: Sölden ski area in snow colours with ski areas, cable cars and lifts"
-    short: "Terrain in snow colours with ski areas and lifts."
-    text: "Builds on Outdoors: hillshade and contours from the official terrain model, peaks and trails remain. Meant for the winter season, with a cool palette of white and blue-grey and icy glaciers. Ski areas, cable cars and lifts are additionally highlighted."
+    alt: "Style outdoors: Sölden with contour lines, hillshading, peaks, trails and cable cars"
+    short: "Contours, hillshading, peaks and paths for maps in the mountains, in summer or in snow colours."
+    text: ""
 - key: traffic
   img: traffic-day
   center: [16.37, 48.175]
   zoom: 11.6
   variants:
-    - {id: traffic-day, de: Verkehr, en: Traffic, map: "c=16.37,48.175,11.6&a=verkehr&l=l", default: true}
+    - {id: traffic-day, de: Tag, en: Day, map: "c=16.37,48.175,11.6&a=verkehr&l=l", default: true}
+    - {id: traffic-night, de: Nacht, en: Night, map: ""}
   de:
     name: Verkehr
     place: Wien, A23 und A4
     alt: "Stil traffic-day: Wien mit eingefärbter Verkehrslage auf Autobahnen und Verkehrsmeldungen"
-    short: "Die Basiskarte mit Verkehrslage und Verkehrsmeldungen auf Autobahnen und Schnellstraßen."
-    text: "Baut auf der Basiskarte „Straßen“ (Tag) auf. Gedacht für Karten rund um Anfahrt, Logistik und Unterwegssein. Zeigt zusätzlich die gemeldete Verkehrslage auf Autobahnen und Schnellstraßen in vier Stufen von frei bis Stau sowie Strecken mit Verkehrsmeldungen, beides aus Daten der ASFINAG / EVIS.AT."
+    short: "Die Basiskarte mit Verkehrslage und Verkehrsmeldungen auf Autobahnen und Schnellstraßen, für Tag und Nacht."
+    text: "Baut auf der Basiskarte „Straßen“ auf, wahlweise in der Tag- oder der Nachtfassung. Gedacht für Karten rund um Anfahrt, Logistik und Unterwegssein. Zeigt zusätzlich die gemeldete Verkehrslage auf Autobahnen und Schnellstraßen in vier Stufen von frei bis Stau sowie Strecken mit Verkehrsmeldungen, beides aus Daten der ASFINAG / EVIS.AT."
   en:
     name: Traffic
     place: Vienna, A23 and A4
     alt: "Style traffic-day: Vienna with colour-coded traffic flow on motorways and traffic reports"
-    short: "The base map with traffic flow and traffic reports on motorways and expressways."
-    text: "Built on the “Streets” base map (day). Meant for maps about getting there, logistics and being on the road. Adds the reported traffic flow on motorways and expressways in four levels from free to jammed, plus road sections with traffic reports, both from ASFINAG / EVIS.AT data."
+    short: "The base map with traffic flow and traffic reports on motorways and expressways, for day and night."
+    text: "Built on the “Streets” base map, in its day or night version. Meant for maps about getting there, logistics and being on the road. Adds the reported traffic flow on motorways and expressways in four levels from free to jammed, plus road sections with traffic reports, both from ASFINAG / EVIS.AT data."

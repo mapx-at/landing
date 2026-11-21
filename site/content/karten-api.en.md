@@ -23,7 +23,7 @@ description: "Maps API for Austria: vector tiles, ready-made map styles for MapL
 
 ## What the API can do
 
-- `GET /v1/styles` and `GET /v1/styles/{id}`: ready-made MapLibre styles `streets`, `streets-dawn`, `streets-dusk`, `streets-night`, `traffic-day`, `satellite`, `satellite-streets` and `outdoors`, plus fonts and sprites.
+- `GET /v1/styles` and `GET /v1/styles/{id}`: ready-made MapLibre styles `streets`, `streets-dawn`, `streets-dusk`, `streets-night`, `traffic-day`, `traffic-night`, `light`, `dark`, `satellite`, `satellite-streets`, `satellite-current`, `outdoors` and `outdoors-winter`, plus fonts and sprites.
 - `GET /v1/tiles` and `GET /v1/tiles/{tileset}.json`: list of tilesets and TileJSON.
 - `GET /v1/tiles/{tileset}/{z}/{x}/{y}.{ext}`: tiles in the XYZ scheme.
 - `GET /v1/styles/{id}/tiles/{tilesize}/{z}/{x}/{y}`: rendered raster tiles of a style for clients without vector support.

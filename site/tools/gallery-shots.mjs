@@ -16,10 +16,11 @@ const items = [
   { id: 'streets-dusk', center: [16.3725, 48.2085], zoom: 15 },
   { id: 'streets-night', center: [16.3725, 48.2085], zoom: 15 },
   { id: 'traffic-day', center: [16.37, 48.175], zoom: 11.6 },       // Wien, A23/A2/A4
+  { id: 'traffic-night', center: [16.37, 48.175], zoom: 11.6 },
   { id: 'satellite', center: [15.333, 48.228], zoom: 15.6 },        // Melk, wie satellite-streets
   { id: 'satellite-streets', center: [15.333, 48.228], zoom: 15.6 },// Melk
   { id: 'satellite-current', center: [16.77, 47.84], zoom: 10.4 },  // Neusiedler See
-  { id: 'outdoors', center: [12.694, 47.074], zoom: 13 },           // Großglockner
+  { id: 'outdoors', center: [10.985, 46.958], zoom: 13 },           // Sölden, wie outdoors-winter
   { id: 'outdoors-winter', center: [10.985, 46.958], zoom: 13 },    // Sölden
   { id: 'light', center: [15.4385, 47.071], zoom: 13.5 },            // Graz
   { id: 'dark', center: [15.4385, 47.071], zoom: 13.5 },
