@@ -32,10 +32,10 @@ const items = [
   { id: 'outdoors-winter-3d', center: [12.694, 47.074], zoom: 12.8, pitch: 74, bearing: 0 },
   { id: 'satellite-3d', center: [15.5205, 48.3945], zoom: 14.6, pitch: 74, bearing: 300 },
   { id: 'satellite-streets-3d', center: [15.5205, 48.3945], zoom: 14.6, pitch: 74, bearing: 300 },
-  { id: 'streets-3d', center: [16.3725, 48.2085], zoom: 15.6, pitch: 60, bearing: -20 },
-  { id: 'streets-night-3d', center: [16.3725, 48.2085], zoom: 15.6, pitch: 60, bearing: -20 },
-  { id: 'light-3d', center: [16.3725, 48.2085], zoom: 15.6, pitch: 60, bearing: -20 },
-  { id: 'dark-3d', center: [16.3725, 48.2085], zoom: 15.6, pitch: 60, bearing: -20 },
+  { id: 'streets-3d', center: [16.3725, 48.2085], zoom: 15.4, pitch: 70, bearing: -20 },
+  { id: 'streets-night-3d', center: [16.3725, 48.2085], zoom: 15.4, pitch: 70, bearing: -20 },
+  { id: 'light-3d', center: [16.3725, 48.2085], zoom: 15.4, pitch: 70, bearing: -20 },
+  { id: 'dark-3d', center: [16.3725, 48.2085], zoom: 15.4, pitch: 70, bearing: -20 },
   { id: 'light', center: [15.4385, 47.071], zoom: 13.5 },            // Graz
   { id: 'dark', center: [15.4385, 47.071], zoom: 13.5 },
 ];
