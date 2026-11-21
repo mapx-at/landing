@@ -11,12 +11,12 @@ geocoding:
   en: {h: Try it, p: 'Search for an address or place in Austria: suggestions while you type, the result appears on the map.', alt: 'Search box with “Hauptplatz 1, Li”, suggestions Linz and Traun, result on Linz main square on the map'}
 routing:
   docs: route
-  de: {h: Ausprobieren, p: 'Tipp in Melk Start und Ziel an und wähl Auto, Rad oder zu Fuß: Du siehst Route, Länge und Dauer.', alt: 'Autoroute von Melk nach St. Pölten mit Dauer und Länge, dazu die 10-Minuten-Fläche um Melk'}
-  en: {h: Try it, p: 'Tap a start and a destination in Melk and choose car, bike or walking to see the route, length and duration.', alt: 'Car route from Melk to St. Pölten with duration and length, plus the 10-minute area around Melk'}
+  de: {h: Ausprobieren, p: 'Tipp in Melk Start und Ziel an und wähl Auto, Rad oder zu Fuß: Du siehst Route, Länge und Dauer.', alt: 'Autoroute von Melk nach St. Pölten mit Dauer und Länge'}
+  en: {h: Try it, p: 'Tap a start and a destination in Melk and choose car, bike or walking to see the route, length and duration.', alt: 'Car route from Melk to St. Pölten with duration and length'}
 hoehe:
   docs: elevation-profile
-  de: {h: Ausprobieren, p: 'Setz Punkte in den Hohen Tauern: Aus der Linie wird ein Höhenprofil mit Auf- und Abstieg.', alt: 'Linie vom Lucknerhaus auf den Großglockner und ihr Höhenprofil mit höchstem Punkt, Auf- und Abstieg'}
-  en: {h: Try it, p: 'Set points in the Hohe Tauern: the line becomes an elevation profile with ascent and descent.', alt: 'Line from Lucknerhaus up the Großglockner and its elevation profile with highest point, ascent and descent'}
+  de: {h: Ausprobieren, p: 'Setz Punkte in den Hohen Tauern: Aus der Linie wird ein Höhenprofil mit Auf- und Abstieg.', alt: 'Großglockner-Hochalpenstraße von Heiligenblut zur Kaiser-Franz-Josefs-Höhe und ihr Höhenprofil mit höchstem Punkt, Anstieg und Länge'}
+  en: {h: Try it, p: 'Set points in the Hohe Tauern: the line becomes an elevation profile with ascent and descent.', alt: 'Grossglockner High Alpine Road from Heiligenblut to Kaiser-Franz-Josefs-Höhe and its elevation profile with highest point, ascent and length'}
 oev:
   docs: departures
   de: {h: Ausprobieren, p: 'Tipp in Salzburg in die Nähe einer Haltestelle: Du siehst die nächsten Abfahrten laut Fahrplan.', alt: 'Abfahrtstafel des Salzburger Hauptbahnhofs mit drei Abfahrten laut Fahrplan, darunter die Haltestelle auf der Karte'}

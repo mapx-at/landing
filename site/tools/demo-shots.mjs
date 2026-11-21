@@ -24,6 +24,7 @@ const items = [
       clip: `polygon(${[i * 200 - 60 - (i === 0 ? 400 : 0), (i + 1) * 200 - 60 + (i === 3 ? 400 : 0), (i + 1) * 200 + 60 + (i === 3 ? 400 : 0), i * 200 + 60 - (i === 0 ? 400 : 0)].map((x, k) => `${x}px ${k < 2 ? 400 : 0}px`).join(',')})` })),
     run: async (c) => {
       const names = ['streets', 'streets-night', 'satellite', 'outdoors'];
+      await c.hideNear([], 0, [[[0, 310], [800, 400]]]);
       c.add(`<div class="seams"><svg width="800" height="400">${[1, 2, 3].map((i) => `<line x1="${i * 200 - 60}" y1="400" x2="${i * 200 + 60}" y2="0" stroke="#fff" stroke-width="3"/>`).join('')}</svg></div>`);
       c.add(names.map((n, i) => `<div class="chip ${i === 1 || i === 2 ? 'dark' : ''}" style="left:${i * 200 + 78}px;top:326px;transform:translateX(-50%)">${n}</div>`).join(''));
     },
@@ -51,37 +52,42 @@ const items = [
     run: async (c) => {
       const a = [15.3317, 48.2276], b = [15.6246, 48.2083]; // Stift Melk -> St. Pölten Hbf
       const r = (await c.api(`/directions/driving/${a.join(',')};${b.join(',')}?geometries=geojson&overview=full&steps=false`)).routes[0];
-      const iso = await c.api(`/isochrone/driving/${a.join(',')}?contours_minutes=10&polygons=true`);
-      c.map.addSource('iso', { type: 'geojson', data: iso });
-      c.map.addLayer({ id: 'iso', type: 'fill', source: 'iso', paint: { 'fill-color': '#0a64e8', 'fill-opacity': 0.1 } });
-      c.map.addLayer({ id: 'iso-l', type: 'line', source: 'iso', paint: { 'line-color': '#0a64e8', 'line-opacity': 0.35, 'line-width': 1.5, 'line-dasharray': [2, 2] } });
       c.line(r.geometry, '#0a64e8', 7);
       c.map.fitBounds(c.bbox(r.geometry.coordinates), { padding: { top: 110, bottom: 120, left: 110, right: 110 }, duration: 0 });
       c.pin(a, 'start'); c.pin(b, 'pin');
-      
+      // eigene Ortsschilder; gleichnamige Kartenbeschriftungen unter den Schildern ausblenden
+      await c.hideNear([a, b], 60, [[[230, 330], [570, 400]]]);
+      c.label(a, 'Melk', 'up'); c.label(b, 'St. Pölten', 'upPin');
       const km = c.num(r.distance / 1000, 1), min = Math.round(r.duration / 60);
-      c.note(`directions/driving Stift Melk -> St. Pölten Hbf: ${km} km, ${min} min; Isochrone 10 min ab Melk`);
+      c.note(`directions/driving Stift Melk -> St. Pölten Hbf: ${km} km, ${min} min`);
       c.add(`<div class="card big" style="left:50%;bottom:26px;transform:translateX(-50%)">${c.icon('car')}<b>${min} min</b><span class="sep"></span><span>${km} km</span></div>`);
     },
   },
   {
     id: 'hoehen',
-    maps: [{ style: 'outdoors', center: [12.69, 47.04], zoom: 12 }],
+    maps: [{ style: 'outdoors', center: [12.80, 47.06], zoom: 11.5 }],
     run: async (c) => {
-      // Kals Lucknerhaus -> Stüdlhütte -> Großglockner
-      const pts = [[12.6878, 47.0076], [12.6925, 47.0305], [12.6872, 47.0582], [12.6942, 47.0745]];
-      const p = (await c.api(`/elevation/profile?coordinates=${pts.map((q) => q.join(',')).join(';')}&samples=120`));
+      // echte Strecke aus der Routing-API: Großglockner-Hochalpenstraße, Heiligenblut -> Kaiser-Franz-Josefs-Höhe (Gletscherstraße).
+      // Nicht über das Hochtor: dort führt die Straße durch einen Tunnel, das Geländemodell liefert darüber den Berg statt der Straße.
+      const a = [12.8420, 47.0420], b = [12.7517, 47.0757];
+      const r = (await c.api(`/directions/driving/${a.join(',')};${b.join(',')}?geometries=geojson&overview=full&steps=false`)).routes[0];
+      const g = r.geometry.coordinates, step = Math.ceil(g.length / 150);
+      const pts = g.filter((_, i) => i % step === 0 || i === g.length - 1).map((q) => q.map((v) => +v.toFixed(5)));
+      const p = await c.api(`/elevation/profile?coordinates=${pts.map((q) => q.join(',')).join(';')}&samples=160`);
       const { distances: d, elevations: e } = p.properties;
-      c.line({ type: 'LineString', coordinates: pts }, '#0a64e8', 6);
-      c.map.fitBounds(c.bbox(pts), { padding: { top: 75, bottom: 190, left: 300, right: 300 }, duration: 0 });
-      c.pin(pts[0], 'start'); c.pin(pts[3], 'pin');
-      let up = 0, down = 0, im = 0; e.forEach((h, i) => { if (i) { const dh = h - e[i - 1]; dh > 0 ? (up += dh) : (down -= dh); } if (h > e[im]) im = i; });
-      const W = 440, H = 96, lo = Math.min(...e), hi = Math.max(...e), X = (v) => (v / d[d.length - 1]) * W, Y = (h) => H - ((h - lo) / (hi - lo)) * (H - 8);
+      c.line(r.geometry, '#0a64e8', 6);
+      c.map.fitBounds(c.bbox(g), { padding: { top: 40, bottom: 175, left: 250, right: 250 }, duration: 0 });
+      const end = g[g.length - 1];
+      c.pin(g[0], 'start'); c.pin(end, 'pin');
+      await c.hideNear([g[0], end], 80, [[[170, 245], [630, 400]]]);
+      c.label(g[0], 'Heiligenblut', 'left'); c.label(end, 'Franz-Josefs-Höhe', 'left');
+      let up = 0, im = 0; e.forEach((h, i) => { if (i && h > e[i - 1]) up += h - e[i - 1]; if (h > e[im]) im = i; });
+      const W = 440, H = 74, lo = Math.min(...e), hi = Math.max(...e), X = (v) => (v / d[d.length - 1]) * W, Y = (h) => H - ((h - lo) / (hi - lo)) * (H - 10);
       const path = e.map((h, i) => `${i ? 'L' : 'M'}${X(d[i]).toFixed(1)},${Y(h).toFixed(1)}`).join('');
-      c.note(`elevation/profile 4 Punkte, 120 samples: ${c.num(d[d.length - 1] / 1000, 1)} km, max ${Math.round(hi)} m, min ${Math.round(lo)} m, auf ${Math.round(up)} m, ab ${Math.round(down)} m`);
-      c.add(`<div class="card prof" style="left:50%;bottom:18px;transform:translateX(-50%)">
-        <div class="ph"><b>▲ ${c.num(Math.round(hi), 0)} m</b><span>↑ ${c.num(Math.round(up), 0)} m</span><span>↓ ${c.num(Math.round(down), 0)} m</span><span>${c.num(d[d.length - 1] / 1000, 1)} km</span></div>
-        <svg width="${W}" height="${H}" style="overflow:visible"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a64e8" stop-opacity=".45"/><stop offset="1" stop-color="#0a64e8" stop-opacity=".05"/></linearGradient></defs>
+      c.note(`directions/driving Heiligenblut -> Kaiser-Franz-Josefs-Höhe: ${c.num(r.distance / 1000, 1)} km, ${Math.round(r.duration / 60)} min; elevation/profile ${pts.length} Punkte: ${c.num(d[d.length - 1] / 1000, 1)} km, ${Math.round(lo)} -> ${Math.round(hi)} m, auf ${Math.round(up)} m`);
+      c.add(`<div class="card prof" style="left:50%;bottom:12px;transform:translateX(-50%)">
+        <div class="ph"><b>▲ ${c.num(Math.round(hi), 0)} m</b><span>↑ ${c.num(Math.round(up), 0)} m</span><span>${c.num(r.distance / 1000, 1)} km</span></div>
+        <svg width="${W}" height="${H}" style="overflow:visible"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a64e8" stop-opacity=".40"/><stop offset="1" stop-color="#0a64e8" stop-opacity=".04"/></linearGradient></defs>
         <path d="${path}L${W},${H}L0,${H}Z" fill="url(#g)"/><path d="${path}" fill="none" stroke="#0a64e8" stroke-width="3" stroke-linejoin="round"/>
         <circle cx="${X(d[im])}" cy="${Y(e[im])}" r="5.5" fill="#fff" stroke="#0a64e8" stroke-width="3"/></svg></div>`);
     },
@@ -99,6 +105,7 @@ const items = [
       rows.sort((x, y) => Date.parse(x.scheduled) - Date.parse(y.scheduled));
       c.map.jumpTo({ center: stop.location, zoom: 15.8, padding: { top: 215, bottom: 0 } });
       c.pin(stop.location, 'stop');
+      await c.hideNear([stop.location], 34, [[[180, 10], [620, 215]]]);
       const hm = (t) => new Intl.DateTimeFormat('de-AT', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Vienna' }).format(new Date(t));
       c.note(`stops near Salzburg Hbf -> ${stop.name} (${stop.id}); departures: ${rows.map((x) => `${hm(x.scheduled)} ${x.line.short_name} ${x.headsign}`).join(' | ')} (Soll-Fahrplan)`);
       c.add(`<div class="card dark board" style="left:50%;top:18px;transform:translateX(-50%)">
@@ -124,6 +131,7 @@ const items = [
       const pick = fc.features.filter((f) => f.properties.closed && /\S/.test(f.properties.text || '')).sort((x, y) => dist(mid(x)) - dist(mid(y)))[0];
       const street = pick.properties.text.split(/:| von | zwischen | bei /)[0].trim();
       c.ring(mid(pick)); c.map.jumpTo({ center: mid(pick), padding: { bottom: 130, top: 0 } });
+      await c.hideNear([], 0, [[[150, 300], [650, 400]]]);
       const nC = fc.features.filter((f) => f.properties.closed).length, nO = fc.features.length - nC;
       c.note(`traffic/incidents im Ausschnitt: ${fc.features.length} (${nC} Sperren, ${nO} sonstige); Schild: ${pick.properties.category}: ${street}`);
       c.add(`<div class="card big" style="left:50%;bottom:26px;transform:translateX(-50%)">${c.icon('closed')}<span><b>${street}</b><small>${pick.properties.category}</small></span></div>`);
@@ -162,6 +170,7 @@ const items = [
       for (const [name, lon, lat] of [['Wien', 16.3738, 48.2082], ['Innsbruck', 11.3933, 47.2692]]) {
         const f = (await c.api(`/weather/current?lon=${lon}&lat=${lat}&limit=1`)).features[0];
         st.push(`${name} ${f.properties.temperature_c} °C (${f.properties.name}, ${f.properties.time})`);
+        await c.hideNear([f.geometry.coordinates], 36, [[[180, 310], [620, 400]]]);
         c.label(f.geometry.coordinates, `${name} <b>${c.num(f.properties.temperature_c, 1)} °C</b>`, 'up', true);
       }
       const L = tj['mapx:legend'].stops.filter((s) => s.value >= -15 && s.value <= 30), lo = L[0].value, hi = L[L.length - 1].value;
@@ -173,6 +182,8 @@ const items = [
     },
   },
 ];
+// Ergebnisbild des Code-Beispiels der Startseite (Abschnitt Entwickler): genau der Stil und Ausschnitt aus dem Code
+items.push({ id: 'erste-karte', maps: [{ style: 'light', center: [13.0455, 47.7990], zoom: 14.2 }], run: async () => {} });
 const only = (process.env.DEMO_ONLY || '').split(',').filter(Boolean);
 const OUT = join(SITE, 'static/lp/img/demo');
 mkdirSync(OUT, { recursive: true });
@@ -199,8 +210,8 @@ body.desk{background:radial-gradient(120% 120% at 50% 0%,#f4f8ff 0%,#dfe8f7 100%
 .search .sg.on{background:#eaf2fe}.search .sg b{font-weight:650}.search .sg span{color:#64748b}
 .lbl{position:absolute;background:#fff;border-radius:10px;padding:6px 12px;font-size:21px;font-weight:600;box-shadow:0 1px 2px rgb(15 23 42/.10),0 6px 18px rgb(15 23 42/.22);white-space:nowrap}
 .lbl b{color:#0a64e8;font-weight:700}
-.prof{padding:14px 20px 16px}
-.prof .ph{display:flex;gap:20px;align-items:baseline;font-size:22px;margin-bottom:10px;color:#475569;font-weight:500}
+.prof{padding:10px 20px 12px}
+.prof .ph{display:flex;gap:20px;align-items:baseline;font-size:22px;margin-bottom:6px;color:#475569;font-weight:500}
 .prof .ph b{color:#0f172a;font-weight:700}
 .board{padding:12px 18px 10px;min-width:400px}
 .board .bh{display:flex;align-items:center;gap:10px;font-size:23px;padding-bottom:8px;border-bottom:1px solid rgb(255 255 255/.16);margin-bottom:4px}
@@ -261,9 +272,19 @@ const c = {
   ring: (ll) => { const e = document.createElement('div'); e.innerHTML = '<svg width="64" height="64"><circle cx="32" cy="32" r="26" fill="#d92d20" fill-opacity=".12" stroke="#d92d20" stroke-width="4"/></svg>';
     new maplibregl.Marker({ element: e }).setLngLat(ll).addTo(c.map); },
   label: (ll, text, side, dot) => { const e = document.createElement('div'); e.className = 'lbl'; e.innerHTML = text;
-    const off = { left: [-22, 0], right: [22, 0], up: [0, -14] }[side];
+    const off = { left: [-22, 0], right: [22, 0], up: [0, -16], upPin: [0, -58], down: [0, 16] }[side];
     if (dot) { const d = document.createElement('div'); d.innerHTML = '<svg width="16" height="16"><circle cx="8" cy="8" r="5.5" fill="#0f172a" stroke="#fff" stroke-width="2.5"/></svg>'; new maplibregl.Marker({ element: d }).setLngLat(ll).addTo(c.map); }
-    new maplibregl.Marker({ element: e, anchor: { left: 'right', right: 'left', up: 'bottom' }[side], offset: off }).setLngLat(ll).addTo(c.map); },
+    new maplibregl.Marker({ element: e, anchor: { left: 'right', right: 'left', up: 'bottom', upPin: 'bottom', down: 'top' }[side], offset: off }).setLngLat(ll).addTo(c.map); },
+  // Kartenbeschriftungen (alle Symbolebenen) im Umkreis r px um die Punkte ausblenden, damit eigene Schilder nichts doppeln
+  hideNear: async (lls, r, boxes = []) => { const m = c.map; await new Promise((ok) => { m.once('idle', ok); m.triggerRepaint(); });
+    const ids = m.getStyle().layers.filter((l) => l.type === 'symbol').map((l) => l.id), names = new Set();
+    for (const ll of lls) { const p = m.project(ll);
+      m.queryRenderedFeatures([[p.x - r, p.y - r], [p.x + r, p.y + r]], { layers: ids }).forEach((f) => { const n = f.properties.name; if (n) names.add(n); }); }
+    // zusätzlich Kartenbeschriftungen unter Karten (Schildern) ausblenden: boxes in Bildpunkten [[x0, y0], [x1, y1]]
+    for (const bx of boxes) m.queryRenderedFeatures(bx, { layers: ids }).forEach((f) => { const n = f.properties.name; if (n) names.add(n); });
+    const ex = ['!', ['in', ['coalesce', ['get', 'name'], ''], ['literal', [...names]]]];
+    for (const id of ids) { const f = m.getFilter(id); m.setFilter(id, f ? ['all', f, ex] : ex); }
+    notes.push('ausgeblendet: ' + [...names].join(', ')); },
 };
 const run = ${s.run.toString()};
 const loaded = Promise.all(maps.map((m) => new Promise((ok) => m.loaded() ? ok() : m.once('load', ok))));
