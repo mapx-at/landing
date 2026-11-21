@@ -157,9 +157,15 @@ nav a[href*="account.mapx.at/login"]:hover{background:#0853c4}
 .mx-gdlg .maplibregl-ctrl-attrib{font-size:.6875rem}
 @media(max-width:800px){
   .mx-gdlg{width:100vw;height:100dvh;border-radius:0}
-  .mx-gdlg-in{grid-template-columns:1fr;grid-template-rows:auto minmax(18rem,1fr);gap:1rem;padding:1rem;overflow-y:auto}
-  .mx-gdlg-text{overflow:visible}
-  .mx-gdlg h2{font-size:1.5rem}
-  .mx-gdlg-stage{min-height:18rem}
+  /* Schmal (Handy): kurzer Titel, dann gleich die Karte, darunter Knöpfe, Beschreibung, Stil-Adresse */
+  .mx-gdlg-in{display:flex;flex-direction:column;gap:.75rem;padding:1rem;overflow-y:auto}
+  .mx-gdlg-text{display:contents}
+  .mx-gtag,.mx-gdlg hr{display:none}
+  .mx-gdlg h2{order:1;margin:0;padding-right:2.5rem;font-size:1.375rem}
+  .mx-gdlg-place{order:2;margin-top:-.5rem}
+  .mx-gdlg-stage{order:3;flex:none;height:min(58dvh,32rem);min-height:16rem}
+  .mx-gdlg-actions{order:4;margin-top:0;padding-top:0}
+  .mx-gdlg-p{order:5}
+  .mx-gadr{order:6;margin-top:0;padding-bottom:.5rem}
 }
 @media(prefers-reduced-motion:reduce){.mx-gimg img,.mx-gpill{transition:none}}
