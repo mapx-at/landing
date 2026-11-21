@@ -27,16 +27,16 @@
           <li class="mx-gcard" id="{{ .key }}">
             <button type="button" class="mx-gbtn" data-key="{{ .key }}" aria-haspopup="dialog" disabled>
               <span class="mx-gimg">
-                <img src="/lp/img/gallery/{{ .img }}.webp" width="960" height="540" alt="{{ $t.alt }}" loading="lazy" decoding="async">
+                <img src="/lp/img/gallery/{{ .img }}.webp" width="1440" height="810" alt="{{ $t.alt }}" loading="lazy" decoding="async">
                 <span class="mx-gpill" aria-hidden="true">{{ cond $en "Preview" "Vorschau" }}</span>
               </span>
               <span class="mx-gname">{{ $t.name }}</span>
               <span class="mx-gplace">{{ $t.place }}</span>
             </button>
             {{- if gt (len .variants) 1 }}
-            <ul class="mx-gstrip" aria-label="{{ cond $en "Variants" "Varianten" }}">
+            <ul class="mx-gstrip" aria-label="{{ cond $en "Variants: switch the preview" "Varianten: Vorschau umschalten" }}">
               {{- range .variants }}
-              <li><img src="/lp/img/gallery/{{ .id }}.webp" width="960" height="540" alt="" loading="lazy" decoding="async"><span>{{ index . $lang }}</span></li>
+              <li><button type="button" class="mx-gvar" data-style="{{ .id }}" aria-pressed="{{ cond (eq .id $def.id) "true" "false" }}" disabled><img src="/lp/img/gallery/{{ .id }}-s.webp" width="480" height="270" alt="" loading="lazy" decoding="async"><span>{{ index . $lang }}</span></button></li>
               {{- end }}
             </ul>
             {{- end }}
@@ -66,13 +66,12 @@
               <p class="mx-gdlg-place"></p>
               <hr>
               <p class="mx-gdlg-p"></p>
-              <p class="mx-gdlg-lbl">{{ cond $en "Style URL" "Stil-Adresse" }}</p>
-              <div class="mx-gurl"><code class="mx-gdlg-url"></code><button type="button" class="mx-gcopy">{{ cond $en "Copy" "Kopieren" }}</button></div>
-              <details class="mx-gsnip"><summary>{{ cond $en "Embed with MapLibre" "Einbinden mit MapLibre" }}</summary><pre><code></code></pre><button type="button" class="mx-gcopy">{{ cond $en "Copy" "Kopieren" }}</button></details>
+              <details class="mx-gadr"><summary>{{ cond $en "Style URL" "Stil-Adresse" }}</summary>
+                <div class="mx-gurl"><code class="mx-gdlg-url"></code><button type="button" class="mx-gcopy">{{ cond $en "Copy" "Kopieren" }}</button></div></details>
               <div class="mx-gdlg-actions">
                 <a class="mx-gprimary" href="https://account.mapx.at/login?lang={{ $lang }}">{{ cond $en "Get started free" "Kostenlos starten" }}</a>
+                <a class="mx-gsecondary" href="{{ $docs }}">{{ cond $en "Docs: maps" "Doku: Karten" }}</a>
                 <a class="mx-gdlg-map" href="https://map.mapx.at/">{{ cond $en "Open in the map" "In der Karte öffnen" }} →</a>
-                <a href="{{ $docs }}">{{ cond $en "Docs" "Doku" }} →</a>
               </div>
             </div>
             <div class="mx-gdlg-stage">
@@ -84,7 +83,7 @@
           </div>
         </dialog>
         <script type="application/json" id="mx-gdata">{{ dict "token" site.Params.demoToken "api" $api "cards" $cards | jsonify | safeJS }}</script>
-        <script src="/lp/gallery.js" defer></script>
+        <script src="/lp/gallery.js?v=3" defer></script>
         {{- $topics := index hugo.Data "topics" -}}
         <aside class="mx-related" aria-labelledby="mx-related-h">
           <h2 id="mx-related-h">{{ cond $en "More topics" "Weitere Themen" }}</h2>

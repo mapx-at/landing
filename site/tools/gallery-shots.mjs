@@ -1,4 +1,4 @@
-// Vorschaubilder der Galerie neu erzeugen (site/static/lp/img/gallery/<id>.webp, 960 x 540).
+// Vorschaubilder der Galerie neu erzeugen (site/static/lp/img/gallery/<id>.webp mit 1440 x 810, Minikarte <id>-s.webp mit 480 x 270).
 // Echte MapLibre-Darstellung der API-Stile, ohne Bedienelemente und ohne Quellenangabe im Bild (die steht als Zeile unter dem Raster
 // der Galerie, die Live-Karte im Fenster trägt die volle Angabe); die Minimalseite wird unter der Herkunft https://mapx.at ausgeliefert,
 // damit der öffentliche Token aus site/hugo.toml gilt. Orte und Zoomstufen: Liste items unten.
@@ -12,17 +12,17 @@ const TOKEN = /demoToken\s*=\s*"([^"]+)"/.exec(readFileSync(join(SITE, 'hugo.tom
 // Ausschnitt je Stil (Mitte [lon, lat], Zoom). Die Texte der Galerie stehen in site/data/gallery.yaml.
 const items = [
   { id: 'streets', center: [16.3725, 48.2085], zoom: 15 },          // Wien Innenstadt
-  { id: 'streets-dawn', center: [13.0445, 47.7995], zoom: 14.6 },   // Salzburg
-  { id: 'streets-dusk', center: [15.4385, 47.071], zoom: 14.4 },    // Graz
-  { id: 'streets-night', center: [11.394, 47.266], zoom: 13.2 },    // Innsbruck
+  { id: 'streets-dawn', center: [16.3725, 48.2085], zoom: 15 },     // wie streets: die Minikarten schalten das große Bild um
+  { id: 'streets-dusk', center: [16.3725, 48.2085], zoom: 15 },
+  { id: 'streets-night', center: [16.3725, 48.2085], zoom: 15 },
   { id: 'traffic-day', center: [16.37, 48.175], zoom: 11.6 },       // Wien, A23/A2/A4
-  { id: 'satellite', center: [13.649, 47.5615], zoom: 15.4 },       // Hallstatt
+  { id: 'satellite', center: [15.333, 48.228], zoom: 15.6 },        // Melk, wie satellite-streets
   { id: 'satellite-streets', center: [15.333, 48.228], zoom: 15.6 },// Melk
   { id: 'satellite-current', center: [16.77, 47.84], zoom: 10.4 },  // Neusiedler See
   { id: 'outdoors', center: [12.694, 47.074], zoom: 13 },           // Großglockner
   { id: 'outdoors-winter', center: [10.985, 46.958], zoom: 13 },    // Sölden
-  { id: 'light', center: [15.4385, 47.071], zoom: 13.5, sample: ['#0a64e8', '#e8542f'] }, // Graz, mit Beispieldaten
-  { id: 'dark', center: [15.4385, 47.071], zoom: 13.5, sample: ['#4cc3ff', '#ffb020'] },
+  { id: 'light', center: [15.4385, 47.071], zoom: 13.5 },            // Graz
+  { id: 'dark', center: [15.4385, 47.071], zoom: 13.5 },
 ];
 const only = (process.env.GALLERY_ONLY || '').split(',').filter(Boolean);
 const OUT = join(SITE, 'static/lp/img/gallery');
@@ -42,16 +42,6 @@ const map = new maplibregl.Map({ container: 'm', style: 'https://api.mapx.at/v1/
   attributionControl: false, interactive: false, fadeDuration: 0,
   transformRequest: (url) => ({ url: /^https:\\/\\/([\\w-]+\\.)?mapx\\.at\\//.test(url) ? url + (url.includes('?') ? '&' : '?') + 'access_token=' + TOKEN : url }) });
 map.on('error', (e) => { window.__err = String(e.error?.message || e.error || e); });
-// Neutrale Beispieldaten (keine Bedeutung): ein paar Punkte und eine Linie, zeigen den Zweck von light/dark
-const SAMPLE = ${JSON.stringify(s.sample || null)};
-if (SAMPLE) map.once('load', () => {
-  const c = ${JSON.stringify(s.center)}, d = (x, y) => [c[0] + x * 0.004, c[1] + y * 0.0027];
-  const pts = [[-3, 2], [-1.5, -1.8], [0.8, 1.2], [2.6, -0.6], [3.4, 2.4], [-2.8, -3.1], [1.2, -3.4], [-0.4, 3.6]].map(([x, y]) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: d(x, y) } }));
-  const line = { type: 'Feature', geometry: { type: 'LineString', coordinates: [[-5, -2.5], [-3, -0.8], [-1, -0.2], [1, 0.6], [2.8, 0.3], [5, 1.8]].map(([x, y]) => d(x, y)) } };
-  map.addSource('beispiel', { type: 'geojson', data: { type: 'FeatureCollection', features: [line, ...pts] } });
-  map.addLayer({ id: 'beispiel-linie', type: 'line', source: 'beispiel', filter: ['==', ['geometry-type'], 'LineString'], paint: { 'line-color': SAMPLE[1], 'line-width': 4, 'line-opacity': .9 }, layout: { 'line-cap': 'round', 'line-join': 'round' } });
-  map.addLayer({ id: 'beispiel-punkte', type: 'circle', source: 'beispiel', filter: ['==', ['geometry-type'], 'Point'], paint: { 'circle-color': SAMPLE[0], 'circle-radius': 8, 'circle-stroke-color': '#fff', 'circle-stroke-width': 2 } });
-});
 map.once('load', () => map.once('idle', () => setTimeout(() => { window.__idle = true; }, 1500)));
 </script>`;
 
@@ -64,6 +54,9 @@ export default async (page) => {
     r.fulfill({ contentType: TYPES[p.split('.').pop()] || 'application/octet-stream', body: readFileSync(p) });
   });
   await page.setViewportSize({ width: 960, height: 540 });
+  // doppelte Pixeldichte: die Bilder sind auf Handys und in den Minikarten sonst unscharf
+  const cdp = await page.context().newCDPSession(page);
+  await cdp.send('Emulation.setDeviceMetricsOverride', { width: 960, height: 540, deviceScaleFactor: 2, mobile: false });
   const done = [];
   page.on("pageerror", (e) => console.error("Seitenfehler: " + e.message));
   for (const s of items) {
@@ -71,20 +64,22 @@ export default async (page) => {
     await page.route('https://mapx.at/__vorschau.html', (r) => r.fulfill({ contentType: 'text/html', body: html(s) }));
     await page.goto('https://mapx.at/__vorschau.html', { waitUntil: 'load', timeout: 60000 });
     await page.waitForFunction(() => window.__idle === true, null, { timeout: 90000 });
-    const png = await page.screenshot({ type: 'png' });
-    // PNG im Browser zu WebP umwandeln (keine weiteren Werkzeuge nötig); Qualität senken, bis das Bild unter 120 KB liegt
-    let q = 0.8, webp;
-    do {
-      webp = await page.evaluate(async ([b64, q]) => {
-        const img = new Image(); img.src = 'data:image/png;base64,' + b64; await img.decode();
-        const c = Object.assign(document.createElement('canvas'), { width: 960, height: 540 });
-        c.getContext('2d').drawImage(img, 0, 0);
-        return c.toDataURL('image/webp', q).split(',')[1];
-      }, [png.toString('base64'), q]);
-      q -= 0.08;
-    } while (Buffer.byteLength(webp, 'base64') > 120000 && q > 0.4);
-    const buf = Buffer.from(webp, 'base64');
+    const png = await page.screenshot({ type: 'png' });   // 1920 x 1080 (doppelte Pixeldichte)
+    // PNG im Browser zu WebP umwandeln (keine weiteren Werkzeuge nötig): großes Bild 1440 x 810, Minikarte 480 x 270.
+    // Verkleinert wird in Halbierungsschritten, das bleibt schärfer als ein einzelner großer Sprung.
+    const conv = (w, h, max) => page.evaluate(async ([b64, w, h, max]) => {
+      const img = new Image(); img.src = 'data:image/png;base64,' + b64; await img.decode();
+      let src = img, sw = img.naturalWidth, sh = img.naturalHeight;
+      const draw = (tw, th) => { const c = Object.assign(document.createElement('canvas'), { width: tw, height: th }); const x = c.getContext('2d'); x.imageSmoothingQuality = 'high'; x.drawImage(src, 0, 0, tw, th); src = c; sw = tw; sh = th; };
+      while (sw / 2 >= w) draw(sw / 2, sh / 2);
+      if (sw !== w) draw(w, h);
+      let q = 0.86, out;
+      do { out = src.toDataURL('image/webp', q).split(',')[1]; q -= 0.06; } while (out.length * 0.75 > max && q > 0.4);
+      return out;
+    }, [png.toString('base64'), w, h, max]);
+    const buf = Buffer.from(await conv(1440, 810, 230000), 'base64');
     writeFileSync(join(OUT, s.id + '.webp'), buf);
+    writeFileSync(join(OUT, s.id + '-s.webp'), Buffer.from(await conv(480, 270, 45000), 'base64'));
     done.push(`${s.id}: ${Math.round(buf.length / 1024)} KB${await page.evaluate(() => window.__err ? ' (Fehler: ' + window.__err + ')' : '')}`);
     await page.unroute('https://mapx.at/__vorschau.html');
   }
