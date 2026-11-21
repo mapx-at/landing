@@ -89,7 +89,8 @@ nav a[href*="account.mapx.at/login"]:hover{background:#0853c4}
 @media(max-width:640px){.mx-demo-map{height:20rem}}
 @media(prefers-reduced-motion:reduce){.mx-demo *{transition:none!important;animation:none!important}}
 /* Galerie der Kartenstile (layouts/gallery.html, /lp/gallery.js) */
-.mx-gal{list-style:none;margin:2.5rem 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3rem 2rem;align-items:start}
+.mx-gal{list-style:none;margin:2.5rem 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3rem 1.75rem;align-items:start}
+@media(max-width:1000px){.mx-gal{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .mx-gcard{min-width:0;display:flex;flex-direction:column;gap:.6rem;scroll-margin-top:5rem}
 .mx-gbtn{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:.15rem;padding:0;border-radius:1rem;color:inherit;cursor:pointer}
 .mx-gbtn:disabled{cursor:default}
@@ -104,6 +105,7 @@ nav a[href*="account.mapx.at/login"]:hover{background:#0853c4}
 .mx-gstrip{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.4rem}
 .mx-gstrip li{display:flex;flex-direction:column;gap:.15rem;font-size:.75rem;color:#6b7280;min-width:0}.dark .mx-gstrip li{color:#9ca3af}
 .mx-gstrip img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:.4rem;border:1px solid rgb(156 163 175 / .35)}
+.mx-gstrip:has(li:nth-child(2):last-child){grid-template-columns:repeat(2,minmax(0,1fr))}
 .mx-gstrip:has(li:nth-child(3):last-child){grid-template-columns:repeat(3,minmax(0,1fr))}
 .mx-gshort{margin:0;font-size:.9375rem;line-height:1.55}
 .mx-gdet{font-size:.875rem}.mx-gdet summary{cursor:pointer;color:#6b7280;padding:.15rem 0}.dark .mx-gdet summary{color:#9ca3af}.mx-gdet[open] summary{margin-bottom:.5rem}.mx-gdet .mx-glinks{margin-top:.5rem}

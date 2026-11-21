@@ -23,6 +23,38 @@
     alt: "Style streets: Vienna city centre with roads, buildings and names"
     short: "The base map with roads, places and buildings, in four times of day."
     text: "Built on the vector base map from official data: roads and rail from GIP.at, buildings, addresses and names from BEV, water bodies from the Environment Agency Austria. Meant as a calm background for search, orientation and your own points. Dawn, dusk and night recolour the same map to match the light; night suits pages with a dark design."
+- key: light
+  img: light
+  center: [15.4385, 47.0710]
+  zoom: 13.5
+  variants:
+    - id: light
+      de: Hell
+      en: Light
+      map: ""
+      default: true
+      text:
+        de: "Baut auf der Basiskarte auf, nimmt ihr aber fast alle Farbe und blendet Symbole, Hausnummern und Straßenschilder aus. Gedacht als Hintergrund für eigene Punkte, Linien und Flächen, die darauf klar hervortreten. Orte, Straßen und Gewässer bleiben in Grautönen lesbar."
+        en: "Builds on the base map but removes almost all colour and hides icons, house numbers and road shields. Meant as a backdrop for your own points, lines and areas, which stand out clearly. Places, roads and water remain legible in shades of grey."
+    - id: dark
+      de: Dunkel
+      en: Dark
+      map: ""
+      text:
+        de: "Die dunkle Schwester von Hell: neutrales Anthrazit statt Nachtblau, Straßen als hellere Linien, Schrift hellgrau. Gedacht für Dashboards, Leitstände und dunkle Oberflächen, auf denen eigene Daten in kräftigen Farben leuchten. Wasser liegt etwas dunkler als das Land."
+        en: "The dark sibling of Light: neutral charcoal instead of night blue, roads as lighter lines, labels in light grey. Meant for dashboards, control rooms and dark interfaces where your own data shows in strong colours. Water sits slightly darker than land."
+  de:
+    name: Hell und Dunkel
+    place: Graz
+    alt: "Stile light und dark: ruhige graue Karte von Graz mit farbigen Beispielpunkten und einer Linie"
+    short: "Ruhige, fast farblose Grundkarte für eigene Daten, hell oder auf dunklem Anthrazit."
+    text: ""
+  en:
+    name: Light and Dark
+    place: Graz
+    alt: "Styles light and dark: calm grey map of Graz with coloured sample points and a line"
+    short: "Calm, almost colourless base map for your own data, light or on dark charcoal."
+    text: ""
 - key: satellite
   img: satellite-streets
   center: [15.333, 48.228]
@@ -61,6 +93,24 @@
     alt: "Style outdoors: Grossglockner with contour lines, hillshading, peaks and glaciers"
     short: "Contours, hillshading, peaks and paths for maps in the mountains."
     text: "Built on the base map and the BEV terrain model from laser scanning (1 m). Meant for hiking maps, tours and anything where the terrain matters. Adds contour lines with heights, hillshading, peaks with elevation, glaciers, paths and trails, cable cars and ski areas."
+- key: outdoors-winter
+  img: outdoors-winter
+  center: [10.985, 46.958]
+  zoom: 13
+  variants:
+    - {id: outdoors-winter, de: Gelände Winter, en: Outdoors Winter, map: "", default: true}
+  de:
+    name: Gelände Winter
+    place: Sölden
+    alt: "Stil outdoors-winter: Skigebiet Sölden in Schneefarben mit Pisten, Seilbahnen und Liften"
+    short: "Gelände in Schneefarben mit Skigebieten und Liften."
+    text: "Baut auf Gelände auf: Schummerung und Höhenlinien aus dem amtlichen Geländemodell, Gipfel und Wege bleiben. Gedacht für die Wintersaison, mit kühler Palette aus Weiß und Blaugrau und eisblauen Gletschern. Zusätzlich hervorgehoben sind Skigebiete sowie Seilbahnen und Lifte."
+  en:
+    name: Outdoors Winter
+    place: Sölden
+    alt: "Style outdoors-winter: Sölden ski area in snow colours with ski areas, cable cars and lifts"
+    short: "Terrain in snow colours with ski areas and lifts."
+    text: "Builds on Outdoors: hillshade and contours from the official terrain model, peaks and trails remain. Meant for the winter season, with a cool palette of white and blue-grey and icy glaciers. Ski areas, cable cars and lifts are additionally highlighted."
 - key: traffic
   img: traffic-day
   center: [16.37, 48.175]
