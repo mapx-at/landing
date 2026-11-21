@@ -32,10 +32,10 @@ const items = [
   { id: 'outdoors-winter-3d', center: [12.694, 47.074], zoom: 12.8, pitch: 74, bearing: 0 },
   { id: 'satellite-3d', center: [15.5205, 48.3945], zoom: 14.6, pitch: 74, bearing: 300 },
   { id: 'satellite-streets-3d', center: [15.5205, 48.3945], zoom: 14.6, pitch: 74, bearing: 300 },
-  { id: 'streets-3d', center: [16.3725, 48.2085], zoom: 15.4, pitch: 70, bearing: -20 },
-  { id: 'streets-night-3d', center: [16.3725, 48.2085], zoom: 15.4, pitch: 70, bearing: -20 },
-  { id: 'light-3d', center: [16.3725, 48.2085], zoom: 15.4, pitch: 70, bearing: -20 },
-  { id: 'dark-3d', center: [16.3725, 48.2085], zoom: 15.4, pitch: 70, bearing: -20 },
+  { id: 'streets-3d', center: [16.3725, 48.2085], zoom: 15.4, pitch: 70, bearing: -20, lod: [3, 6] },
+  { id: 'streets-night-3d', center: [16.3725, 48.2085], zoom: 15.4, pitch: 70, bearing: -20, lod: [3, 6] },
+  { id: 'light-3d', center: [16.3725, 48.2085], zoom: 15.4, pitch: 70, bearing: -20, lod: [3, 6] },
+  { id: 'dark-3d', center: [16.3725, 48.2085], zoom: 15.4, pitch: 70, bearing: -20, lod: [3, 6] },
   { id: 'light', center: [15.4385, 47.071], zoom: 13.5 },            // Graz
   { id: 'dark', center: [15.4385, 47.071], zoom: 13.5 },
 ];
@@ -56,6 +56,7 @@ const map = new maplibregl.Map({ container: 'm', style: 'https://api.mapx.at/v1/
   center: ${JSON.stringify(s.center)}, zoom: ${s.zoom}, bearing: ${s.bearing || 0}, pitch: ${s.pitch || 0}, maxPitch: 85,
   attributionControl: false, interactive: false, fadeDuration: 0,
   transformRequest: (url) => ({ url: /^https:\\/\\/([\\w-]+\\.)?mapx\\.at\\//.test(url) ? url + (url.includes('?') ? '&' : '?') + 'access_token=' + TOKEN : url }) });
+if (${JSON.stringify(s.lod || null)}) map.on('style.load', () => map.setSourceTileLodParams(...${JSON.stringify(s.lod || [4, 3])}));
 map.on('error', (e) => { window.__err = String(e.error?.message || e.error || e); });
 map.once('load', () => map.once('idle', () => setTimeout(() => { window.__idle = true; }, 3000)));
 </script>`;

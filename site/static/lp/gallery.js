@@ -80,6 +80,9 @@
         dragRotate: d3, pitchWithRotate: d3, touchPitch: d3, // flache Karten bleiben genordet, 3D-Karten lassen sich drehen und neigen
       });
       dlg.mxMap = map; // für Tests und Konsole
+      // 3D-Stadt: Kacheln auch in der Ferne aus höheren Zoomstufen laden, damit die Gebäude bis zum Horizont reichen
+      // (gilt je Quelle, deshalb nach jedem Laden eines Stils neu setzen)
+      if (c.lod && c.lod.length === 2 && map.setSourceTileLodParams) map.on('style.load', () => map.setSourceTileLodParams(c.lod[0], c.lod[1]));
       map.addControl(new m.NavigationControl({ showCompass: d3, visualizePitch: d3 }), 'top-right');
       // Vollbild unter dem Zoom; die ganze Bühne geht mit, damit der Umschalter der Varianten sichtbar bleibt
       map.addControl(new m.FullscreenControl({ container: $('.mx-gdlg-stage') }), 'top-right');
