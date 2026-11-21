@@ -1,98 +1,119 @@
-// Startseite: Schaufenster-Umschalter (layouts/hextra-home.html). Tauscht nur vorgerenderte Bilder aus /lp/img/gallery/,
-// keine Anfrage an api.mapx.at. Automatischer Wechsel nur ohne prefers-reduced-motion, endet bei Hover, Fokus, Berührung
-// oder eigener Auswahl. Ohne dieses Skript bleibt das erste Bild stehen und die Knöpfe sind ausgeblendet.
+// Startseite (layouts/hextra-home.html). Schaufenster: wischbare Reihe (scroll-snap), die ohne dieses Skript von Hand
+// wischbar bleibt. Das Skript ergänzt Chips, Punkte mit Fortschritt, Bildunterschrift und den automatischen Wechsel.
+// Keine Anfrage an api.mapx.at. Der Wechsel läuft nur ohne prefers-reduced-motion und endet bei Berührung, Wischen,
+// Mausrad, Hover, Fokus oder eigener Auswahl. Dazu der Kopierknopf im Code-Beispiel.
 (function () {
   const show = document.querySelector('.mx-hshow');
-  if (!show) return;
-  const stage = show.querySelector('.mx-hstage');
-  const row = show.querySelector('.mx-hchips');
-  const chips = [...show.querySelectorAll('.mx-hchip')];
-  const first = stage.querySelector('.mx-hlayer');
-  const cap = { id: show.querySelector('.mx-hid'), place: show.querySelector('.mx-hplace'), link: show.querySelector('.mx-hlive') };
-  const base = first.getAttribute('src').replace(/[^/]+$/, '');
-  const gal = stage.getAttribute('href').replace(/#.*$/, '');
-  const layers = { [first.dataset.id]: first };
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let cur = 0, timer = null, stopped = reduce, token = 0;
+  if (show) carousel(show);
+  copy();
 
-  function layer(id) {
-    if (layers[id]) return layers[id];
-    const img = new Image(1440, 810);
-    img.className = 'mx-hlayer';
-    img.dataset.id = id;
-    img.decoding = 'async';
-    img.sizes = first.sizes;
-    img.srcset = base + id + '-s.webp 480w, ' + base + id + '-m.webp 960w, ' + base + id + '.webp 1440w';
-    img.src = base + id + '-m.webp';
-    img.alt = '';
-    img.setAttribute('aria-hidden', 'true');
-    stage.appendChild(img);
-    return (layers[id] = img);
-  }
-  function ready(img) {
-    return img.complete && img.naturalWidth ? Promise.resolve() : (img.decode ? img.decode() : new Promise((r) => { img.onload = r; })).catch(() => {});
-  }
-  function select(i) {
-    const c = chips[i], id = c.dataset.id, my = ++token;
-    cur = i;
-    chips.forEach((o, j) => o.setAttribute('aria-pressed', String(j === i)));
-    cap.id.textContent = id;
-    cap.place.textContent = c.dataset.place;
-    cap.link.href = stage.href = gal + '#' + id;
-    reveal(c);
-    const img = layer(id);
-    ready(img).then(() => {
-      if (my !== token) return;
-      for (const k in layers) {
-        const l = layers[k], on = l === img;
-        l.classList.toggle('mx-hon', on);
-        l.alt = on ? c.dataset.alt : '';
-        if (on) l.removeAttribute('aria-hidden'); else l.setAttribute('aria-hidden', 'true');
+  function carousel(show) {
+    const track = show.querySelector('.mx-htrack');
+    const slides = [...track.querySelectorAll('.mx-hslide')];
+    const chips = [...show.querySelectorAll('.mx-hchip')];
+    const dots = show.querySelector('.mx-hdots');
+    const dot = dots ? [...dots.children] : [];
+    const go = show.querySelector('.mx-hgo');
+    const cap = { id: show.querySelector('.mx-hid'), place: show.querySelector('.mx-hplace') };
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const N = slides.length;
+    let cur = -1, timer = null, stopped = reduce, visible = true, ready = false;
+
+    // Bild i laden lassen (lazy -> eager); vorab nur das jeweils nächste
+    function warm(i) { const img = slides[i % N].querySelector('img'); if (img.dataset.src) { img.srcset = img.dataset.srcset; img.src = img.dataset.src; delete img.dataset.src; } return img; }
+    function active(i) {
+      if (i === cur) return;
+      cur = i;
+      const c = chips[i];
+      chips.forEach((o, j) => o.setAttribute('aria-pressed', String(j === i)));
+      dot.forEach((d, j) => d.classList.toggle('on', j === i));
+      slides.forEach((s, j) => s.toggleAttribute('aria-hidden', j !== i));
+      if (c) {
+        cap.id.textContent = c.dataset.id;
+        cap.place.textContent = c.dataset.place;
+        go.href = slides[i].querySelector('a').href;
+        reveal(c);
       }
-    });
-  }
-  // aktiven Knopf in den sichtbaren Teil der Reihe schieben; nur die Reihe scrollt, nie die Seite
-  function reveal(c) {
-    const l = c.offsetLeft, pad = 48;
-    let x = row.scrollLeft;
-    if (l - pad < x) x = l - pad;
-    else if (l + c.offsetWidth + pad > x + row.clientWidth) x = l + c.offsetWidth + pad - row.clientWidth;
-    if (x !== row.scrollLeft) row.scrollTo({ left: Math.max(0, x), behavior: reduce ? 'auto' : 'smooth' });
-  }
-  function edge() { row.classList.toggle('mx-hend-r', row.scrollLeft + row.clientWidth >= row.scrollWidth - 2); }
-  row.addEventListener('scroll', edge, { passive: true });
-  addEventListener('resize', edge, { passive: true });
-  function stop() { stopped = true; clearTimeout(timer); }
-  function tick() {
-    if (stopped) return;
-    timer = setTimeout(() => {
+      if (ready) warm(i + 1);
+      restart();
+    }
+    function to(i, smooth) {
+      warm(i);
+      track.scrollTo({ left: i * track.clientWidth, behavior: smooth && !reduce ? 'smooth' : 'auto' });
+      active(i);
+    }
+    // aktiven Chip in den sichtbaren Teil seiner Reihe schieben; nur die Reihe scrollt, nie die Seite
+    function reveal(c) {
+      const row = c.parentElement, l = c.offsetLeft - row.offsetLeft, pad = 40;
+      let x = row.scrollLeft;
+      if (l - pad < x) x = l - pad;
+      else if (l + c.offsetWidth + pad > x + row.clientWidth) x = l + c.offsetWidth + pad - row.clientWidth;
+      if (x !== row.scrollLeft) row.scrollTo({ left: Math.max(0, x), behavior: reduce ? 'auto' : 'smooth' });
+    }
+    // Fortschrittsstrich im aktiven Punkt neu starten
+    function restart() {
+      if (!dots) return;
+      dots.classList.remove('run');
+      if (!stopped) { void dots.offsetWidth; dots.classList.add('run'); }
+    }
+    function stop() { if (stopped) return; stopped = true; clearTimeout(timer); if (dots) dots.classList.remove('run'); }
+    function tick() {
       if (stopped) return;
-      if (document.hidden || !visible) return tick();
-      const n = (cur + 1) % chips.length;
-      ready(layer(chips[n].dataset.id)).then(() => { if (!stopped) { select(n); tick(); } });
-    }, 5000);
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        if (stopped) return;
+        if (document.hidden || !visible) return tick();
+        to((cur + 1) % N, true);
+        tick();
+      }, 5000);
+    }
+
+    let raf = 0;
+    track.addEventListener('scroll', () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => active(Math.max(0, Math.min(N - 1, Math.round(track.scrollLeft / track.clientWidth)))));
+    }, { passive: true });
+    chips.forEach((c, i) => { c.disabled = false; c.addEventListener('click', () => { stop(); to(i, true); }); });
+    show.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      const k = chips.indexOf(document.activeElement);
+      if (k < 0 && document.activeElement !== track) return;
+      const step = e.key === 'ArrowRight' ? 1 : N - 1;
+      e.preventDefault();
+      stop();
+      const n = ((k >= 0 ? k : cur) + step) % N;
+      if (k >= 0) chips[n].focus();
+      to(n, true);
+    });
+    // Benutzer greift ein: Wechsel endet
+    for (const ev of ['touchstart', 'wheel', 'focusin']) show.addEventListener(ev, stop, { passive: true });
+    show.addEventListener('pointerdown', stop);
+    show.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') stop(); });
+    addEventListener('resize', () => track.scrollTo({ left: cur * track.clientWidth }), { passive: true });
+
+    document.documentElement.classList.add('mx-hjs');
+    active(0);
+    if ('IntersectionObserver' in window) new IntersectionObserver((es) => { visible = es[0].isIntersecting; }).observe(track);
+    // erst nach dem Laden der Seite das nächste Bild holen und weiterschalten
+    const start = () => { ready = true; warm(cur + 1); if (!stopped) { restart(); tick(); } };
+    if (document.readyState === 'complete') start(); else addEventListener('load', start, { once: true });
+    // wer zu wischen beginnt, bekommt die Nachbarn sofort
+    for (const ev of ['touchstart', 'pointerdown']) track.addEventListener(ev, () => { warm(cur + 1); warm(cur + N - 1); }, { passive: true });
   }
 
-  chips.forEach((c, i) => {
-    c.disabled = false;
-    c.addEventListener('click', () => { stop(); select(i); });
-  });
-  show.addEventListener('keydown', (e) => {
-    const k = chips.indexOf(document.activeElement);
-    if (k < 0 || (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft')) return;
-    e.preventDefault();
-    const n = (k + (e.key === 'ArrowRight' ? 1 : chips.length - 1)) % chips.length;
-    chips[n].focus();
-  });
-  for (const ev of ['pointerenter', 'focusin', 'touchstart']) show.addEventListener(ev, stop, { passive: true });
-  document.documentElement.classList.add('mx-hjs');
-  edge();
-
-  let visible = true;
-  if ('IntersectionObserver' in window) new IntersectionObserver((es) => { visible = es[0].isIntersecting; }).observe(stage);
-  if (!stopped) {
-    // das nächste Bild erst nach dem Laden der Seite holen, nicht vorher
-    const go = () => { layer(chips[1].dataset.id); tick(); };
-    if (document.readyState === 'complete') go(); else addEventListener('load', go, { once: true });
+  function copy() {
+    document.querySelectorAll('.mx-hcopy').forEach((b) => {
+      const label = b.querySelector('span'), text = label.textContent;
+      b.hidden = false;
+      b.setAttribute('aria-live', 'polite');
+      b.addEventListener('click', async () => {
+        const pre = b.closest('.mx-hcodebox').querySelector('pre');
+        let ok = false;
+        try { await navigator.clipboard.writeText(pre.innerText.replace(/\n+$/, '')); ok = true; } catch (e) { ok = false; }
+        label.textContent = ok ? b.dataset.ok : b.dataset.fail;
+        if (!ok) { const r = document.createRange(); r.selectNodeContents(pre); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+        setTimeout(() => { label.textContent = text; }, 2000);
+      });
+    });
   }
 })();
