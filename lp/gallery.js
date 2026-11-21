@@ -41,7 +41,6 @@
     return ml;
   }
   const auth = (url) => ({ url: /^https:\/\/([\w-]+\.)?mapx\.at\//.test(url) ? url + (url.includes('?') ? '&' : '?') + 'access_token=' + data.token : url });
-  const snippet = (id, c) => `const map = new maplibregl.Map({\n  container: "map",\n  style: "${data.api}${id}?access_token=YOUR_TOKEN",\n  center: [${c.center.join(', ')}], zoom: ${c.zoom},\n});`;
 
   let map = null, card = null, opener = null, style = '', pushed = false;
   const info = $('.mx-ginfo');
@@ -50,7 +49,6 @@
     const v = card.variants.find((x) => x.id === id);
     $('.mx-gdlg-url').textContent = data.api + id;
     $('.mx-gdlg-p').textContent = v.text || card.text; // Varianten mit eigenem Absatz (Hell/Dunkel)
-    $('.mx-gsnip code').textContent = snippet(id, card);
     const a = $('.mx-gdlg-map');
     a.hidden = !v.map; if (v.map) a.href = 'https://map.mapx.at/#' + v.map;
     for (const b of $('.mx-gseg').children) b.setAttribute('aria-pressed', String(b.dataset.id === id));
@@ -109,7 +107,6 @@
   dlg.addEventListener('click', (e) => { if (e.target === dlg) close(); }); // Klick auf den abgedunkelten Hintergrund
   dlg.querySelector('.mx-gdlg-in').addEventListener('click', (e) => e.stopPropagation());
   $('.mx-gdlg-text .mx-gcopy').addEventListener('click', (e) => copy(e.currentTarget, $('.mx-gdlg-url').textContent, $('.mx-gdlg-url')));
-  $('.mx-gsnip .mx-gcopy').addEventListener('click', (e) => copy(e.currentTarget, $('.mx-gsnip code').textContent, $('.mx-gsnip code')));
 
   for (const b of document.querySelectorAll('.mx-gbtn')) {
     b.disabled = false;
@@ -122,7 +119,7 @@
       v.addEventListener('click', () => {
         const id = v.dataset.style;
         b.dataset.style = id;
-        img.src = v.querySelector('img').src;
+        img.src = '/lp/img/gallery/' + id + '.webp';
         img.alt = id === c.def ? base : c.name + ', ' + c.variants.find((x) => x.id === id).label + ' (' + id + ')';
         for (const o of vars) o.setAttribute('aria-pressed', String(o === v));
       });
