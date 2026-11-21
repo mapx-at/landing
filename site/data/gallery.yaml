@@ -219,8 +219,8 @@
 - key: city3d
   img: streets-3d
   center: [16.3725, 48.2085]
-  zoom: 15.6
-  pitch: 60
+  zoom: 15.4
+  pitch: 70
   bearing: -20
   variants:
     - {id: streets-3d, de: Tag, en: Day, map: "", default: true}
@@ -230,12 +230,12 @@
   de:
     name: 3D-Stadt
     place: Wien Innenstadt
-    alt: "Stil streets-3d: Wiener Innenstadt schräg von oben mit Gebäuden als Körper in ihrer Höhe"
+    alt: "Stil streets-3d: Wiener Innenstadt schräg von oben mit Gebäuden als Körper, Stephansturm und Himmel am Horizont"
     short: "Gebäude als Körper in ihrer Höhe, bei Tag, bei Nacht oder neutral in Hell und Dunkel."
-    text: "Zeigt die Gebäude der Basiskarte als Körper mit ihrer Höhe aus den Daten des BEV. Gedacht für Stadtansichten, Standortkarten und eigene Daten im städtischen Raum. Die Körper erscheinen ab etwa Zoomstufe 15; einzelne große Bauten haben in den Daten keine Höhe und bleiben flach. Im Fenster lässt sich die Karte drehen und neigen."
+    text: "Zeigt die Gebäude der Basiskarte als Körper mit ihrer Höhe, über dem Geländemodell. Die Höhen stammen aus den Daten des BEV, Türme und fehlende Höhen aus dem Oberflächenmodell; in Wien kommen die Gebäudeteile aus dem Baukörpermodell der Stadt Wien. Gedacht für Stadtansichten, Standortkarten und eigene Daten im städtischen Raum. Die Körper erscheinen ab etwa Zoomstufe 13. Im Fenster lässt sich die Karte drehen und neigen."
   en:
     name: 3D city
     place: Vienna city centre
-    alt: "Style streets-3d: Vienna city centre from above at an angle with buildings as solid shapes at their height"
+    alt: "Style streets-3d: Vienna city centre from above at an angle with buildings as solid shapes, the spire of St. Stephen's and sky at the horizon"
     short: "Buildings as solid shapes at their height, by day, by night, or neutral in light and dark."
-    text: "Shows the buildings of the base map as solid shapes with their height from BEV data. Meant for city views, location maps and your own data in urban areas. The shapes appear from about zoom level 15; a few large buildings have no height in the data and stay flat. In this window you can rotate and tilt the map."
+    text: "Shows the buildings of the base map as solid shapes with their height, over the terrain model. Heights come from BEV data, towers and missing heights from the surface model; in Vienna the building parts come from the City of Vienna building model. Meant for city views, location maps and your own data in urban areas. The shapes appear from about zoom level 13. In this window you can rotate and tilt the map."
