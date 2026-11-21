@@ -76,14 +76,17 @@
         container: $('.mx-gmap'), style: data.api + style, center: c.center, zoom: c.zoom,
         transformRequest: auth, attributionControl: false,
         locale: de ? { 'FullscreenControl.Enter': 'Vollbild', 'FullscreenControl.Exit': 'Vollbild beenden', 'NavigationControl.ZoomIn': 'Hineinzoomen', 'NavigationControl.ZoomOut': 'Herauszoomen' } : {}, fadeDuration: reduce ? 0 : 300, cooperativeGestures: false,
+        dragRotate: false, pitchWithRotate: false, touchPitch: false, // Karte bleibt genordet und flach
       });
       dlg.mxMap = map; // für Tests und Konsole
       map.addControl(new m.NavigationControl({ showCompass: false }), 'top-right');
       // Vollbild unter dem Zoom; die ganze Bühne geht mit, damit der Umschalter der Varianten sichtbar bleibt
       map.addControl(new m.FullscreenControl({ container: $('.mx-gdlg-stage') }), 'top-right');
+      map.touchZoomRotate.disableRotation(); map.keyboard.disableRotation();
       map.addControl(new m.AttributionControl({ compact: true }), 'bottom-right');
-      // Quellenangabe eingeklappt starten (Knopf „i“ bleibt sichtbar), sonst verdeckt sie einen Teil der Karte
-      map.once('load', () => map.getContainer().querySelector('.maplibregl-compact-show')?.classList.remove('maplibregl-compact-show'));
+      // Quellenangabe von Anfang an eingeklappt (Knopf „i“ bleibt sichtbar): MapLibre klappt sie beim Einhängen und beim ersten Laden auf
+      const zu = () => { const a = map.getContainer().querySelector('.maplibregl-ctrl-attrib'); if (!a) return; a.classList.add('maplibregl-compact'); a.classList.remove('maplibregl-compact-show'); a.removeAttribute('open'); };
+      zu(); map.once('styledata', zu); map.once('load', zu);
       map.on('error', (e) => { const s = e?.error?.status; if (s === 401 || s === 403) info.textContent = t('Der Beispiel-Token gilt für diese Seite nicht.', 'The example token is not valid for this page.'); });
     } catch { info.textContent = t('Die Karte ließ sich nicht laden.', 'The map could not be loaded.'); }
   }
