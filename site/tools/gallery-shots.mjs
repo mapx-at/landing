@@ -20,6 +20,9 @@ const items = [
   { id: 'satellite-streets', center: [15.333, 48.228], zoom: 15.6 },// Melk
   { id: 'satellite-current', center: [16.77, 47.84], zoom: 10.4 },  // Neusiedler See
   { id: 'outdoors', center: [12.694, 47.074], zoom: 13 },           // Großglockner
+  { id: 'outdoors-winter', center: [10.985, 46.958], zoom: 13 },    // Sölden
+  { id: 'light', center: [15.4385, 47.071], zoom: 13.5, sample: ['#0a64e8', '#e8542f'] }, // Graz, mit Beispieldaten
+  { id: 'dark', center: [15.4385, 47.071], zoom: 13.5, sample: ['#4cc3ff', '#ffb020'] },
 ];
 const only = (process.env.GALLERY_ONLY || '').split(',').filter(Boolean);
 const OUT = join(SITE, 'static/lp/img/gallery');
@@ -39,6 +42,16 @@ const map = new maplibregl.Map({ container: 'm', style: 'https://api.mapx.at/v1/
   attributionControl: false, interactive: false, fadeDuration: 0,
   transformRequest: (url) => ({ url: /^https:\\/\\/([\\w-]+\\.)?mapx\\.at\\//.test(url) ? url + (url.includes('?') ? '&' : '?') + 'access_token=' + TOKEN : url }) });
 map.on('error', (e) => { window.__err = String(e.error?.message || e.error || e); });
+// Neutrale Beispieldaten (keine Bedeutung): ein paar Punkte und eine Linie, zeigen den Zweck von light/dark
+const SAMPLE = ${JSON.stringify(s.sample || null)};
+if (SAMPLE) map.once('load', () => {
+  const c = ${JSON.stringify(s.center)}, d = (x, y) => [c[0] + x * 0.004, c[1] + y * 0.0027];
+  const pts = [[-3, 2], [-1.5, -1.8], [0.8, 1.2], [2.6, -0.6], [3.4, 2.4], [-2.8, -3.1], [1.2, -3.4], [-0.4, 3.6]].map(([x, y]) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: d(x, y) } }));
+  const line = { type: 'Feature', geometry: { type: 'LineString', coordinates: [[-5, -2.5], [-3, -0.8], [-1, -0.2], [1, 0.6], [2.8, 0.3], [5, 1.8]].map(([x, y]) => d(x, y)) } };
+  map.addSource('beispiel', { type: 'geojson', data: { type: 'FeatureCollection', features: [line, ...pts] } });
+  map.addLayer({ id: 'beispiel-linie', type: 'line', source: 'beispiel', filter: ['==', ['geometry-type'], 'LineString'], paint: { 'line-color': SAMPLE[1], 'line-width': 4, 'line-opacity': .9 }, layout: { 'line-cap': 'round', 'line-join': 'round' } });
+  map.addLayer({ id: 'beispiel-punkte', type: 'circle', source: 'beispiel', filter: ['==', ['geometry-type'], 'Point'], paint: { 'circle-color': SAMPLE[0], 'circle-radius': 8, 'circle-stroke-color': '#fff', 'circle-stroke-width': 2 } });
+});
 map.once('load', () => map.once('idle', () => setTimeout(() => { window.__idle = true; }, 1500)));
 </script>`;
 

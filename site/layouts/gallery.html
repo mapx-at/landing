@@ -22,7 +22,7 @@
           {{- range hugo.Data.gallery }}
           {{- $t := index . $lang -}}
           {{- $def := index .variants 0 -}}{{ range .variants }}{{ if .default }}{{ $def = . }}{{ end }}{{ end }}
-          {{- $vs := slice -}}{{ range .variants }}{{ $vs = $vs | append (dict "id" .id "label" (index . $lang) "map" .map) }}{{ end }}
+          {{- $vs := slice -}}{{ range .variants }}{{ $vs = $vs | append (dict "id" .id "label" (index . $lang) "map" .map "text" (cond (isset . "text") (index (.text | default dict) $lang) "")) }}{{ end }}
           {{- $cards = $cards | append (dict "key" .key "name" $t.name "place" $t.place "text" $t.text "center" .center "zoom" .zoom "def" $def.id "variants" $vs) }}
           <li class="mx-gcard" id="{{ .key }}">
             <button type="button" class="mx-gbtn" data-key="{{ .key }}" aria-haspopup="dialog" disabled>

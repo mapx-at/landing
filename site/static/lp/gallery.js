@@ -49,6 +49,7 @@
     style = id;
     const v = card.variants.find((x) => x.id === id);
     $('.mx-gdlg-url').textContent = data.api + id;
+    $('.mx-gdlg-p').textContent = v.text || card.text; // Varianten mit eigenem Absatz (Hell/Dunkel)
     $('.mx-gsnip code').textContent = snippet(id, card);
     const a = $('.mx-gdlg-map');
     a.hidden = !v.map; if (v.map) a.href = 'https://map.mapx.at/#' + v.map;
