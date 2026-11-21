@@ -74,10 +74,13 @@
       if (map) map.remove();
       map = new m.Map({
         container: $('.mx-gmap'), style: data.api + style, center: c.center, zoom: c.zoom,
-        transformRequest: auth, attributionControl: false, fadeDuration: reduce ? 0 : 300, cooperativeGestures: false,
+        transformRequest: auth, attributionControl: false,
+        locale: de ? { 'FullscreenControl.Enter': 'Vollbild', 'FullscreenControl.Exit': 'Vollbild beenden', 'NavigationControl.ZoomIn': 'Hineinzoomen', 'NavigationControl.ZoomOut': 'Herauszoomen' } : {}, fadeDuration: reduce ? 0 : 300, cooperativeGestures: false,
       });
       dlg.mxMap = map; // für Tests und Konsole
       map.addControl(new m.NavigationControl({ showCompass: false }), 'top-right');
+      // Vollbild unter dem Zoom; die ganze Bühne geht mit, damit der Umschalter der Varianten sichtbar bleibt
+      map.addControl(new m.FullscreenControl({ container: $('.mx-gdlg-stage') }), 'top-right');
       map.addControl(new m.AttributionControl({ compact: true }), 'bottom-right');
       // Quellenangabe eingeklappt starten (Knopf „i“ bleibt sichtbar), sonst verdeckt sie einen Teil der Karte
       map.once('load', () => map.getContainer().querySelector('.maplibregl-compact-show')?.classList.remove('maplibregl-compact-show'));
