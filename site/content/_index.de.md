@@ -1,142 +1,101 @@
 ---
 title: "mapx – Karten und Geo-APIs für Österreich aus amtlichen Daten"
-lastmod: 2026-11-17
+lastmod: 2026-11-21
 images: ["/img/og-image.png"]
 description: "mapx: Karten und Geo-APIs für Österreich aus amtlichen Daten. Geocoding, Routing, Höhen, Karten, ÖV, Verkehr, Wetter. Kostenlos mit Konto und Token."
 layout: hextra-home
+# Alle Texte der Startseite stehen hier, das Layout (layouts/hextra-home.html) baut daraus die Seite.
+# Kartenstile und 3D-Bilder kommen aus data/gallery.yaml, Produktbilder aus data/demos.yaml, Pfade aus data/topics.yaml.
+home:
+  hero:
+    h1: "Die Karte Österreichs, gebaut aus amtlichen Daten."
+    p: "Karten, Adresssuche, Routing, Gelände, öffentlicher Verkehr und Wetter als APIs für deine eigenen Anwendungen, kostenlos mit Konto."
+    start: "Kostenlos starten"
+    map: "Karte öffnen"
+    chips_label: "Kartenstil der Vorschau wählen"
+    style: "Stil"
+    live: "Live ansehen"
+    # Stile im Schaufenster: id = Bild in static/lp/img/gallery/, key = Karte in data/gallery.yaml (Ort, Alt-Text); alt nur, wenn der Stil dort keinen eigenen hat
+    styles:
+      - {id: streets-3d, key: city3d, label: "3D-Stadt"}
+      - {id: relief-3d, key: terrain3d, label: "3D-Gelände"}
+      - {id: satellite-3d, key: aerial3d, label: "Luftbild 3D"}
+      - {id: streets, key: streets, label: "Straßen"}
+      - {id: streets-night, key: streets, label: "Nacht", alt: "Stil streets-night: Wiener Innenstadt bei Nacht mit hellen Straßen auf dunklem Blau"}
+      - {id: relief, key: relief, label: "Relief"}
+      - {id: traffic-day, key: traffic, label: "Verkehr"}
+  sources: "<strong>Datenquellen:</strong> BEV · GIP.at · ASFINAG · GeoSphere Austria · ÖBB · Umweltbundesamt · Stadt Wien · Statistik Austria · offene Lizenzen, überwiegend CC BY 4.0"
+  styles:
+    h2: "Kartenstile"
+    p: "Neun Karten in 26 Stilen, alle über dieselbe Karten-API. Ein Klick öffnet die Live-Karte in der Galerie."
+    all: "Alle Stile in der Galerie"
+  d3:
+    h2: "Österreich in 3D"
+    p: "Das Gelände kommt aus dem Laserscan des BEV mit 1 m Auflösung, jedes Gebäude steht mit seiner Höhe auf der Karte. In Wien zeigen wir zusätzlich Gebäudeteile aus dem Baukörpermodell der Stadt Wien."
+    imgs: [streets-3d, relief-3d, satellite-3d]
+    link: "In der Galerie drehen und neigen"
+  products:
+    h2: "Was mapx liefert"
+    p: "Jedes Produkt hat eine eigene Seite mit Beispiel, Datenquelle und Einschränkungen."
+    more: "Mehr dazu"
+    items:
+      - {key: karten, img: karten, t: "Karten, Kacheln und Stile", p: "Vektor-Basiskarte, fertige Stile, Höhenlinien und Orthofoto als Kacheln für MapLibre.", m: "PMTiles · TileJSON"}
+      - {key: geocoding, img: geocoding, t: "Geocoding und Adresssuche", p: "Adressen, Orte und Straßen finden, beim Tippen vorschlagen und prüfen.", m: "Adressregister, Stichtag 01.10.2026"}
+      - {key: routing, img: routing, t: "Routing", p: "Routen für Auto, Lkw, Rad und zu Fuß, Isochronen, Fahrzeitmatrix und Tourenplanung.", m: "GIP.at · CC BY 4.0"}
+      - {key: hoehe, img: hoehen, t: "Höhe und Gelände", p: "Höhen für Punkte und Profile aus Gelände- und Oberflächenmodell mit 1 m Auflösung.", m: "BEV · Stichtag 15.09.2025"}
+      - {key: oev, img: oev, t: "Öffentlicher Verkehr", p: "Verbindungen, Haltestellen und Abfahrten aus dem Soll-Fahrplan, Erreichbarkeit als Isochrone.", m: "ÖBB-Personenverkehr AG · CC BY 4.0"}
+      - {key: verkehr, img: verkehr, t: "Verkehr", p: "Verkehrsmeldungen, Baustellen und Sperren, Tempolimits der Autobahnen und eine Verkehrsebene.", m: "ASFINAG / EVIS.AT · CC BY 4.0"}
+      - {key: statisch, img: statisch, t: "Statische Kartenbilder", p: "Die Karte als PNG oder WebP mit Pins, Pfaden und GeoJSON, für Berichte und E-Mails.", m: "bis 1280 × 1280 Pixel"}
+      - {key: wetter, img: wetter, t: "Wetter und Klima", p: "Messwerte, Stundenvorhersage, Niederschlags-Nowcast, Warnungen und Luftqualität für einen Punkt.", m: "GeoSphere Austria · CC BY 4.0"}
+      - {key: mcp, t: "MCP-Server für KI-Assistenten", p: "21 lesende Werkzeuge für Adressen, Routen, Wetter und mehr, direkt in Claude Code, Cursor und VS Code.", m: "MCP · Streamable HTTP"}
+    mcp_label: "Beispiel: Frage an einen KI-Assistenten, der den mapx-MCP-Server nutzt"
+    mcp_q: "Wie komme ich morgen um 8 Uhr von Melk nach Krems?"
+    mcp_tool: "transit_route"
+    mcp_a: "Verbindung laut Fahrplan mit Umstieg und Ankunftszeit, dazu die Quellenangabe."
+  dev:
+    h2: "Für Entwickler"
+    p: "Ein paar Zeilen genügen für eine Karte mit MapLibre. Die APIs antworten mit JSON bzw. GeoJSON."
+    code_h: "Karte mit MapLibre"
+    code_c1: "öffentlicher Token mx_pk_… vom Konto"
+    code_c2: "hängt den Token an jede Anfrage an mapx.at"
+    result: "Das Ergebnis: Stil streets, Melk."
+    result_alt: "Ergebnis des Beispiels: Straßenkarte von Melk mit Donau"
+    points:
+      - "<strong>MapLibre und PMTiles.</strong> Kacheln mit HTTP-Range-Zugriff, ohne eigenen Kartenserver."
+      - "<strong>Fertige Stile.</strong> Alle Stile der Galerie kommen über <code>/v1/styles</code>."
+      - "<strong>Maschinenlesbar.</strong> OpenAPI-Beschreibung und <code>llms.txt</code> für alle APIs."
+    more_h: "Zweites Beispiel: Höhe abfragen"
+    more_c: "Gipfelhöhe aus dem Geländemodell (DTM, 1 m)"
+    docs: "Zur Entwicklerdoku"
+    docs_url: "https://docs.mapx.at/de/"
+    first: "Erste Karte in fünf Minuten"
+    first_url: "https://docs.mapx.at/de/start/first-map/"
+  access:
+    h2: "Kostenlos, mit eigenem Konto"
+    p: "Die APIs brauchen ein Konto mit Token. Das kostet nichts, zum Schutz vor Missbrauch gibt es Rate-Limits je Token."
+    steps:
+      - {t: "Anmelden", p: "Mit deiner E-Mail-Adresse und einem Code, den wir dir schicken. Ein Passwort gibt es nicht."}
+      - {t: "Token anlegen", p: "So viele du brauchst, jederzeit sperren, erneuern oder löschen."}
+      - {t: "Nutzung einsehen", p: "Je Token und Produkt pro Tag. Abgerechnet wird nichts."}
+    tokens: "Der <strong>öffentliche Token</strong> (<code>mx_pk_…</code>) ist für Webseiten und Apps: Er darf nur lesen und ist an deine Domains oder deine Android-App gebunden. Der <strong>geheime Token</strong> (<code>mx_sk_…</code>) gehört auf deinen Server oder in Skripte, nie in eine Webseite oder App."
+    start: "Kostenlos starten"
+    details: "Details in der Doku"
+    details_url: "https://docs.mapx.at/de/start/access-and-limits/"
+  data:
+    h2: "Eine Quelle, die man benennen kann"
+    p: "mapx baut Karten ausschließlich aus Daten von Behörden mit offener Lizenz, jeder Datensatz mit Herausgeber, Stichtag und Lizenz. OpenStreetMap verwenden wir nicht, auch Punkte von Interesse kommen aus amtlichen Quellen."
+    items:
+      - {t: "BEV", p: "Adressen, Gebäude und Bodennutzung, Gelände, Orthofoto"}
+      - {t: "GIP.at", p: "Straßen, Bahn, Routing"}
+      - {t: "Umweltbundesamt", p: "Gewässer"}
+      - {t: "ÖBB / Mobilitätsverbünde", p: "Fahrplan"}
+      - {t: "ASFINAG / EVIS.AT", p: "Verkehrsmeldungen"}
+      - {t: "GeoSphere Austria", p: "Wetter, Klima, Luftqualität"}
+      - {t: "Stadt Wien", p: "Gebäudeteile in Wien"}
+  end:
+    img: relief
+    key: relief
+    h2: "Probiere die Karte aus."
+    p: "Such eine Adresse, miss eine Strecke oder lass dir ein Höhenprofil zeigen."
+    docs: "Doku lesen"
 ---
-
-<div class="mx-hero"><div class="mx-hero-text">
-
-<div>
-{{< hextra/hero-badge link="https://docs.mapx.at" >}}
-  Österreich · amtliche Daten
-  {{< icon name="arrow-circle-right" attributes="height=14" >}}
-{{< /hextra/hero-badge >}}
-</div>
-
-<div>
-{{< hextra/hero-headline >}}
-  Die Karte Österreichs, gebaut aus amtlichen Daten.
-{{< /hextra/hero-headline >}}
-</div>
-
-<div>
-{{< hextra/hero-subtitle >}}
-  Adressen, Routing, Gelände, Orthofoto, öffentlicher Verkehr, Verkehrsmeldungen und Wetter – aus Katastermappe, Laserscan, Verkehrsgraph und Fahrplan der Behörden, als offene Kacheln und APIs für eigene Karten.
-{{< /hextra/hero-subtitle >}}
-</div>
-
-<div class="mx-btns">
-{{< hextra/hero-button text="Karte öffnen" link="https://map.mapx.at" >}}
-{{< hextra/hero-button text="Kostenlosen Zugang holen" link="#zugang" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
-</div>
-</div>
-
-<div class="mx-hero-img"><img src="/lp/img/hero-map.webp" alt="Dunkle mapx-Karte von Innsbruck mit Straßen, Inn und Höhenlinien" width="1600" height="900" fetchpriority="high"><p class="mx-hero-cap">Stil <code>streets-night</code>, Innsbruck. Daten: BEV, GIP.at, CC BY 4.0</p></div>
-</div>
-
-<p class="mx-note"><strong>Datenquellen:</strong> BEV · GIP.at · ASFINAG · GeoSphere Austria · ÖBB · Umweltbundesamt (GGN) · Statistik Austria · Offene Lizenzen, überwiegend CC BY 4.0</p>
-
-## Was mapx liefert {#produkte}
-
-Je Produkt ein eigener Datensatz mit Stichtag und Quelle. Jedes Produkt hat eine eigene Seite mit Beispiel, Datenquelle und Einschränkungen. Alles, was auf der Karte zu sehen ist, lässt sich auch direkt einbinden.
-
-{{< hextra/feature-grid cols="3" >}}
-  {{< hextra/feature-card title="Karten, Kacheln und Stile" subtitle="Vektor-Basiskarte, fertige Kartenstile, Höhenlinien und Orthofoto als Vektor- und Rasterkacheln für MapLibre. · *PMTiles · TileJSON*" icon="map" link="/karten-api/" >}}
-  {{< hextra/feature-card title="Geocoding und Adresssuche" subtitle="Adressregister, Orte und Straßen: Geocoding, Reverse Geocoding, Suche beim Tippen, Autofill und Adressprüfung. · *Adressregister, Stichtag 01.10.2026*" icon="location-marker" link="/geocoding-api/" >}}
-  {{< hextra/feature-card title="Routing" subtitle="Routen für Auto, Lkw, Rad und zu Fuß, Isochronen, Fahrzeitmatrix und Tourenplanung auf dem GIP-Straßengraphen. · *GIP.at · CC BY 4.0*" icon="switch-horizontal" link="/routing-api/" >}}
-  {{< hextra/feature-card title="Höhe und Gelände" subtitle="Höhen-API für Punkte und Profile, Geländemodell (DTM) und Oberflächenmodell (DSM) mit 1 m Auflösung, Höhenlinien. · *BEV · Stichtag 15.09.2025*" icon="trending-up" link="/hoehen-api/" >}}
-  {{< hextra/feature-card title="Öffentlicher Verkehr" subtitle="Verbindungen, Haltestellen und Abfahrten aus dem Soll-Fahrplan, Erreichbarkeit mit öffentlichem Verkehr als Isochrone. · *ÖBB-Personenverkehr AG · CC BY 4.0*" icon="ticket" link="/oev-api/" >}}
-  {{< hextra/feature-card title="Verkehr" subtitle="Verkehrsmeldungen, Baustellen und Sperren, Tempolimits auf Wechselverkehrszeichen der Autobahnen und eine Verkehrsebene für die Karte. · *ASFINAG / EVIS.AT · CC BY 4.0*" icon="exclamation-circle" link="/verkehr-api/" >}}
-  {{< hextra/feature-card title="Statische Kartenbilder" subtitle="Karte als PNG oder WebP mit Pins, Pfaden und GeoJSON, für Berichte, E-Mails und Exposés. · *bis 1280 × 1280 Pixel*" icon="photograph" link="/statische-karten/" >}}
-  {{< hextra/feature-card title="Wetter und Klima" subtitle="Messwerte, Stundenvorhersage, Niederschlags-Nowcast, Warnungen, Luftqualität und Klima für einen Punkt. · *GeoSphere Austria · CC BY 4.0*" icon="cloud" link="/wetter-api/" >}}
-  {{< hextra/feature-card title="MCP-Server für KI-Assistenten" subtitle="21 lesende Werkzeuge für Adressen, Routen, Wetter und mehr, direkt in Claude Code, Cursor und VS Code. · *MCP · Streamable HTTP*" icon="chip" link="/mcp-server/" >}}
-{{< /hextra/feature-grid >}}
-
-Alle fertigen Kartenstile mit Vorschau und Live-Karte: [Galerie der Kartenstile](/galerie/) →
-
-## Einbinden in fünf Minuten. {#entwickler}
-
-*Für Entwickler* – Kacheln sind PMTiles-Dateien mit HTTP-Range-Zugriff, ohne eigenen Kartenserver. Die APIs antworten mit JSON bzw. GeoJSON.
-
-- **MapLibre und PMTiles.** Fertige Kartenstile kommen über die Karten-API (`/v1/styles`).
-- **Ein kostenloses Konto genügt.** Anmelden, Token anlegen, loslegen. Herkunft, Stichtag und Attribution stehen je Produkt in der Doku.
-- **Maschinenlesbar.** OpenAPI-Beschreibung und `llms.txt` für alle APIs und die Kacheln.
-
-[Zur Entwicklerdoku](https://docs.mapx.at) · [Demo ansehen](https://map.mapx.at)
-
-**Karte mit MapLibre**
-
-```js
-import maplibregl from 'maplibre-gl';
-import { Protocol } from 'pmtiles';
-
-const TOKEN = 'YOUR_TOKEN'; // öffentlicher Token mx_pk_… vom Konto
-maplibregl.addProtocol('pmtiles', new Protocol().tile);
-
-const map = new maplibregl.Map({
-  container: 'map',
-  style: 'https://api.mapx.at/v1/styles/streets',
-  // hängt den Token an jede Anfrage an mapx.at (Style, Tiles, Schriften, Sprites)
-  transformRequest: (url) => ({ url: /^https:\/\/([\w-]+\.)?mapx\.at\//.test(url)
-    ? url + (url.includes('?') ? '&' : '?') + 'access_token=' + TOKEN : url }),
-  center: [15.33, 48.23],
-  zoom: 13
-});
-```
-
-**Höhe abfragen**
-
-```js
-// Gipfelhöhe aus dem Geländemodell (DTM, 1 m); Token vom Konto
-const r = await fetch(
-  'https://api.mapx.at/v1/elevation?points=12.694,47.074',
-  { headers: { Authorization: `Bearer ${TOKEN}` } }
-);
-const { features } = await r.json();
-console.log(features[0].properties.elevation);
-```
-
-## Kostenlos, mit eigenem Konto. {#zugang}
-
-*API-Zugang* – Die mapx-APIs (Kacheln, Suche, Routing, Höhe, ÖV, Verkehr, Bilder, Wetter) brauchen seit dem 08.11.2026 ein Konto mit API-Token. Das kostet nichts: anmelden, Token anlegen, loslegen.
-
-{{< hextra/feature-grid cols="3" >}}
-  {{< hextra/feature-card title="1. Anmelden" subtitle="Mit deiner E-Mail-Adresse und einem 8-stelligen Code, den wir dir per Mail schicken. Beim ersten Mal entsteht dabei dein Konto. Ein Passwort gibt es nicht." >}}
-  {{< hextra/feature-card title="2. Tokens anlegen" subtitle="Beliebig viele, jeweils mit eigenem Namen. Du kannst sie jederzeit sperren, erneuern oder löschen." >}}
-  {{< hextra/feature-card title="3. Nutzung einsehen" subtitle="Für jeden Token siehst du die Nutzung je Produkt und Tag. Abgerechnet wird nichts." >}}
-{{< /hextra/feature-grid >}}
-
-### Zwei Arten von Tokens
-
-- **Öffentlicher Token (`mx_pk_…`).** Für Webseiten und Apps. Er darf nur lesen und ist an deine Domains oder an deine Android-App gebunden, so kann ihn niemand sonst verwenden.
-- **Geheimer Token (`mx_sk_…`).** Für deinen Server oder Skripte. Nie in eine Webseite oder App einbauen.
-
-Zum Schutz vor Missbrauch gibt es Rate-Limits je Token. Die Nutzung selbst ist kostenlos.
-
-<div class="mx-btns">
-{{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
-{{< hextra/hero-button text="Details in der Doku" link="https://docs.mapx.at/de/start/access-and-limits/" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
-</div>
-
-## Eine Quelle, die man benennen kann. {#daten}
-
-*Warum amtliche Daten* – mapx baut Karten ausschließlich aus Daten von Behörden mit klarer offener Lizenz. Jeder Datensatz ist mit Herausgeber, Stichtag und Lizenz dokumentiert.
-
-- **Adressen, Katastermappe (Gebäude, Nutzung), Gelände, Orthofoto:** Bundesamt für Eich- und Vermessungswesen (BEV).
-- **Straßen, Bahn, Routing:** Graphenintegrations-Plattform GIP.at.
-- **Gewässer:** Gesamtgewässernetz des Umweltbundesamts.
-- **Fahrplan:** ÖBB-Personenverkehr AG, Datenquelle Mobilitätsverbünde Österreich OG.
-- **Verkehrsmeldungen:** ASFINAG / EVIS.AT.
-- **Wetter, Klima, Luftqualität:** GeoSphere Austria.
-- **Kein OpenStreetMap:** Punkte von Interesse kommen ebenfalls aus amtlichen Quellen.
-
-## Probiere die Karte aus.
-
-Suche eine Adresse, miss eine Strecke oder lass dir ein Höhenprofil zeigen.
-
-<div class="mx-btns">
-{{< hextra/hero-button text="Karte öffnen" link="https://map.mapx.at" >}}
-{{< hextra/hero-button text="Doku lesen" link="https://docs.mapx.at" style="background:transparent;color:inherit;border:1px solid rgb(156 163 175 / .5)" >}}
-</div>

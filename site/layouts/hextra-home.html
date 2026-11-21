@@ -1,17 +1,174 @@
+{{- /* Startseite (/ und /en/). Texte: Front Matter "home" in content/_index.<lang>.md.
+       Bilder und Alt-Texte: data/gallery.yaml (Kartenstile), data/demos.yaml (Produkte), Pfade: data/topics.yaml.
+       Erst sehen, dann lesen: Schaufenster mit vorgerenderten Bildern (/lp/home.js tauscht sie, ohne JavaScript bleibt das erste Bild),
+       vor einem Klick keine Anfrage an api.mapx.at. Klassen mit Präfix mx-h, damit Themenseiten und Galerie unberührt bleiben. */ -}}
 {{ define "main" }}
+  {{- $lang := .Language.Lang -}}
+  {{- $en := eq $lang "en" -}}
+  {{- $h := .Params.home -}}
+  {{- $gal := cond $en "/en/gallery/" "/galerie/" -}}
+  {{- $login := printf "https://account.mapx.at/login?lang=%s" $lang -}}
+  {{- $cards := dict -}}{{ range hugo.Data.gallery }}{{ $cards = merge $cards (dict .key .) }}{{ end -}}
+  {{- $topics := dict -}}{{ range hugo.Data.topics }}{{ $topics = merge $topics (dict .key (index . $lang)) }}{{ end -}}
+  {{- $img := "/lp/img/gallery/" -}}
   <div class="hx:mx-auto hx:flex hextra-max-page-width">
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true) }}
-    <main
-      id="content"
-      class="hx:w-full hx:break-words hx:min-h-[calc(100vh-var(--hextra-navbar-height))] hx:min-w-0 hx:pb-8 hx:pt-8 hx:md:pt-12 hx:pl-[max(env(safe-area-inset-left),1.5rem)] hx:pr-[max(env(safe-area-inset-right),1.5rem)]"
-    >
-      {{ partial "custom/page-begin.html" . }}
-      <div class="hx:flex hx:flex-col hx:items-start content">
-        {{ partial "custom/content-begin.html" . }}
-        {{ .Content }}
-        {{ partial "custom/content-end.html" . }}
-      </div>
-      {{ partial "custom/page-end.html" . }}
+    <main id="content" class="mx-home hx:w-full hx:break-words hx:min-w-0 hx:pb-8 hx:pl-[max(env(safe-area-inset-left),1.5rem)] hx:pr-[max(env(safe-area-inset-right),1.5rem)]">
+
+      {{- /* 1. Schaufenster */}}
+      {{- $s0 := index $h.hero.styles 0 }}{{ $c0 := index $cards $s0.key }}
+      <section class="mx-hhero" aria-labelledby="mx-hh1">
+        <div class="mx-hhero-text">
+          <h1 id="mx-hh1">{{ $h.hero.h1 }}</h1>
+          <p>{{ $h.hero.p }}</p>
+          <div class="mx-hbtns">
+            <a class="mx-hbtn" href="{{ $login }}">{{ $h.hero.start }}</a>
+            <a class="mx-hbtn mx-hbtn2" href="https://map.mapx.at">{{ $h.hero.map }}</a>
+          </div>
+        </div>
+        <figure class="mx-hshow">
+          <div class="mx-hstage">
+            <img class="mx-hlayer mx-hon" data-id="{{ $s0.id }}" src="{{ $img }}{{ $s0.id }}.webp" srcset="{{ $img }}{{ $s0.id }}-s.webp 480w, {{ $img }}{{ $s0.id }}.webp 1440w" sizes="(max-width: 900px) 100vw, 860px" width="1440" height="810" alt="{{ $s0.alt | default (index $c0 $lang).alt }}" fetchpriority="high" decoding="async">
+          </div>
+          <div class="mx-hchips" role="group" aria-label="{{ $h.hero.chips_label }}">
+            {{- range $i, $s := $h.hero.styles }}
+            {{- $c := index $cards $s.key }}{{ $t := index $c $lang }}
+            <button type="button" class="mx-hchip" aria-pressed="{{ cond (eq $i 0) "true" "false" }}" data-id="{{ $s.id }}" data-alt="{{ $s.alt | default $t.alt }}" data-place="{{ $t.place }}" disabled>{{ $s.label }}</button>
+            {{- end }}
+          </div>
+          <figcaption class="mx-hcap">{{ $h.hero.style }} <code class="mx-hid">{{ $s0.id }}</code>, <span class="mx-hplace">{{ (index $c0 $lang).place }}</span> · <a class="mx-hlive" href="{{ $gal }}#{{ $s0.id }}">{{ $h.hero.live }} →</a></figcaption>
+        </figure>
+      </section>
+
+      {{- /* 2. Datenquellen */}}
+      <p class="mx-hsrc">{{ $h.sources | safeHTML }}</p>
+
+      {{- /* 3. Kartenstile */}}
+      <section class="mx-hsec" aria-labelledby="stile">
+        <div class="mx-hhead"><h2 id="stile">{{ $h.styles.h2 }}</h2><p>{{ $h.styles.p }}</p></div>
+        <ul class="mx-hgrid" role="list">
+          {{- range hugo.Data.gallery }}{{ $t := index . $lang }}{{ $vs := slice }}{{ range .variants }}{{ $vs = $vs | append (index . $lang) }}{{ end }}
+          <li><a class="mx-hcard" href="{{ $gal }}#{{ .key }}">
+            <img src="{{ $img }}{{ .img }}-s.webp" width="480" height="270" alt="{{ $t.alt }}" loading="lazy" decoding="async">
+            <span class="mx-hname">{{ $t.name }}</span>
+            <span class="mx-hvars">{{ if gt (len $vs) 1 }}{{ delimit $vs " · " }}{{ else }}{{ $t.place }}{{ end }}</span>
+          </a></li>
+          {{- end }}
+        </ul>
+        <p class="mx-hmore"><a href="{{ $gal }}">{{ $h.styles.all }} →</a></p>
+      </section>
+
+      {{- /* 4. Österreich in 3D */}}
+      <section class="mx-hsec" aria-labelledby="mx-h3d-h">
+        <div class="mx-hhead"><h2 id="mx-h3d-h">{{ $h.d3.h2 }}</h2><p>{{ $h.d3.p }}</p></div>
+        <div class="mx-h3d">
+          {{- range $h.d3.imgs }}{{ $id := . }}
+          {{- range hugo.Data.gallery }}{{ if eq .img $id }}{{ $t := index . $lang }}
+          <a class="mx-h3dimg" href="{{ $gal }}#{{ $id }}">
+            <img src="{{ $img }}{{ $id }}.webp" srcset="{{ $img }}{{ $id }}-s.webp 480w, {{ $img }}{{ $id }}.webp 1440w" sizes="(max-width: 900px) 100vw, 840px" width="1440" height="810" alt="{{ $t.alt }}" loading="lazy" decoding="async">
+            <span class="mx-h3dcap">{{ $t.name }} · {{ $t.place }}</span>
+          </a>
+          {{- end }}{{ end }}{{ end }}
+        </div>
+        <p class="mx-hmore"><a href="{{ $gal }}#city3d">{{ $h.d3.link }} →</a></p>
+      </section>
+
+      {{- /* 5. Produkte */}}
+      <section class="mx-hsec" aria-labelledby="produkte">
+        <div class="mx-hhead"><h2 id="produkte">{{ $h.products.h2 }}</h2><p>{{ $h.products.p }}</p></div>
+        <ul class="mx-hprods" role="list">
+          {{- range $h.products.items }}{{ $tp := index $topics .key }}
+          <li><a class="mx-hprod" href="{{ $tp.path }}">
+            {{- if .img }}{{ $d := index hugo.Data.demos .key }}
+            <img src="/lp/img/demo/{{ .img }}.webp" width="800" height="400" alt="{{ (index $d $lang).alt }}" loading="lazy" decoding="async">
+            {{- else }}
+            <span class="mx-hmcp" role="img" aria-label="{{ $h.products.mcp_label }}">
+              <span class="mx-hmcp-q">{{ $h.products.mcp_q }}</span>
+              <span class="mx-hmcp-t">mapx · {{ $h.products.mcp_tool }}</span>
+              <span class="mx-hmcp-a">{{ $h.products.mcp_a }}</span>
+            </span>
+            {{- end }}
+            <span class="mx-hprod-t">{{ .t }}</span>
+            <span class="mx-hprod-p">{{ .p }}</span>
+            <span class="mx-hprod-m">{{ .m }}</span>
+          </a></li>
+          {{- end }}
+        </ul>
+      </section>
+
+      {{- /* 6. Entwickler */}}
+      {{- $code := printf `import maplibregl from 'maplibre-gl';
+import { Protocol } from 'pmtiles';
+
+const TOKEN = 'YOUR_TOKEN'; // %s
+maplibregl.addProtocol('pmtiles', new Protocol().tile);
+
+const map = new maplibregl.Map({
+  container: 'map',
+  style: 'https://api.mapx.at/v1/styles/streets',
+  // %s
+  transformRequest: (url) => ({ url: /^https:\/\/([\w-]+\.)?mapx\.at\//.test(url)
+    ? url + (url.includes('?') ? '&' : '?') + 'access_token=' + TOKEN : url }),
+  center: [15.33, 48.23],
+  zoom: 13
+});` $h.dev.code_c1 $h.dev.code_c2 }}
+      {{- $code2 := printf "// %s\nconst r = await fetch(\n  'https://api.mapx.at/v1/elevation?points=12.694,47.074',\n  { headers: { Authorization: `Bearer ${TOKEN}` } }\n);\nconst { features } = await r.json();\nconsole.log(features[0].properties.elevation);" $h.dev.more_c }}
+      <section class="mx-hsec" aria-labelledby="entwickler">
+        <div class="mx-hhead"><h2 id="entwickler">{{ $h.dev.h2 }}</h2><p>{{ $h.dev.p }}</p></div>
+        <div class="mx-hdev">
+          <div class="mx-hdev-code">
+            <p class="mx-hlabel">{{ $h.dev.code_h }}</p>
+            <div class="mx-hcode">{{ transform.Highlight $code "js" "noClasses=false" }}</div>
+            <details class="mx-hmorecode"><summary>{{ $h.dev.more_h }}</summary><div class="mx-hcode">{{ transform.Highlight $code2 "js" "noClasses=false" }}</div></details>
+          </div>
+          <div class="mx-hdev-side">
+            <figure class="mx-hdev-fig">
+              <img src="/lp/img/demo/routing.webp" width="800" height="400" alt="{{ $h.dev.result_alt }}" loading="lazy" decoding="async">
+              <figcaption>{{ $h.dev.result }}</figcaption>
+            </figure>
+            <ul class="mx-hpoints">{{ range $h.dev.points }}<li>{{ . | safeHTML }}</li>{{ end }}</ul>
+            <p class="mx-hlinks"><a href="{{ $h.dev.first_url }}">{{ $h.dev.first }} →</a><a href="{{ $h.dev.docs_url }}">{{ $h.dev.docs }} →</a></p>
+          </div>
+        </div>
+      </section>
+
+      {{- /* 7. Zugang */}}
+      <section class="mx-hsec" aria-labelledby="zugang">
+        <div class="mx-hhead"><h2 id="zugang">{{ $h.access.h2 }}</h2><p>{{ $h.access.p }}</p></div>
+        <ol class="mx-hsteps">
+          {{- range $i, $s := $h.access.steps }}
+          <li><span class="mx-hnum" aria-hidden="true">{{ add $i 1 }}</span><strong>{{ $s.t }}</strong><span>{{ $s.p }}</span></li>
+          {{- end }}
+        </ol>
+        <p class="mx-htokens">{{ $h.access.tokens | safeHTML }}</p>
+        <div class="mx-hbtns">
+          <a class="mx-hbtn" href="{{ $login }}">{{ $h.access.start }}</a>
+          <a class="mx-hbtn mx-hbtn2" href="{{ $h.access.details_url }}">{{ $h.access.details }}</a>
+        </div>
+      </section>
+
+      {{- /* 8. Daten */}}
+      <section class="mx-hsec" aria-labelledby="daten">
+        <div class="mx-hhead"><h2 id="daten">{{ $h.data.h2 }}</h2><p>{{ $h.data.p }}</p></div>
+        <dl class="mx-hdata">
+          {{- range $h.data.items }}<div><dt>{{ .t }}</dt><dd>{{ .p }}</dd></div>{{ end }}
+        </dl>
+      </section>
+
+      {{- /* 9. Abschluss */}}
+      {{- $ce := index $cards $h.end.key }}
+      <section class="mx-hend" aria-labelledby="mx-hend-h">
+        <img src="{{ $img }}{{ $h.end.img }}.webp" srcset="{{ $img }}{{ $h.end.img }}-s.webp 480w, {{ $img }}{{ $h.end.img }}.webp 1440w" sizes="(max-width: 900px) 100vw, 1280px" width="1440" height="810" alt="{{ (index $ce $lang).alt }}" loading="lazy" decoding="async">
+        <div class="mx-hend-text">
+          <h2 id="mx-hend-h">{{ $h.end.h2 }}</h2>
+          <p>{{ $h.end.p }}</p>
+          <div class="mx-hbtns">
+            <a class="mx-hbtn" href="https://map.mapx.at">{{ $h.hero.map }}</a>
+            <a class="mx-hbtn mx-hbtn2" href="{{ $h.dev.docs_url }}">{{ $h.end.docs }}</a>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
+  <script src="/lp/home.js?v=1" defer></script>
 {{ end }}
