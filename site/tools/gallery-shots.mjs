@@ -27,11 +27,11 @@ const items = [
   { id: 'relief-light', center: [12.694, 47.074], zoom: 11.5 },
   { id: 'relief-dark', center: [12.694, 47.074], zoom: 11.5 },
   // 3D-Stile: geneigt, Ausschnitt wie in site/data/gallery.yaml
-  { id: 'relief-3d', center: [12.694, 47.074], zoom: 12.5, pitch: 60, bearing: 0 },
-  { id: 'outdoors-3d', center: [12.694, 47.074], zoom: 12.5, pitch: 60, bearing: 0 },
-  { id: 'outdoors-winter-3d', center: [12.694, 47.074], zoom: 12.5, pitch: 60, bearing: 0 },
-  { id: 'satellite-3d', center: [13.6455, 47.5605], zoom: 14.7, pitch: 60, bearing: 250 },
-  { id: 'satellite-streets-3d', center: [13.6455, 47.5605], zoom: 14.7, pitch: 60, bearing: 250 },
+  { id: 'relief-3d', center: [12.694, 47.074], zoom: 12.8, pitch: 74, bearing: 0 },
+  { id: 'outdoors-3d', center: [12.694, 47.074], zoom: 12.8, pitch: 74, bearing: 0 },
+  { id: 'outdoors-winter-3d', center: [12.694, 47.074], zoom: 12.8, pitch: 74, bearing: 0 },
+  { id: 'satellite-3d', center: [15.5205, 48.3945], zoom: 14.6, pitch: 74, bearing: 300 },
+  { id: 'satellite-streets-3d', center: [15.5205, 48.3945], zoom: 14.6, pitch: 74, bearing: 300 },
   { id: 'streets-3d', center: [16.3725, 48.2085], zoom: 15.6, pitch: 60, bearing: -20 },
   { id: 'streets-night-3d', center: [16.3725, 48.2085], zoom: 15.6, pitch: 60, bearing: -20 },
   { id: 'light-3d', center: [16.3725, 48.2085], zoom: 15.6, pitch: 60, bearing: -20 },
@@ -53,7 +53,7 @@ import * as maplibregl from '/lp/vendor/maplibre-gl-6.19.0/maplibre-gl.mjs';
 const TOKEN = ${JSON.stringify(TOKEN)};
 maplibregl.addProtocol('pmtiles', new pmtiles.Protocol().tile);
 const map = new maplibregl.Map({ container: 'm', style: 'https://api.mapx.at/v1/styles/${s.id}',
-  center: ${JSON.stringify(s.center)}, zoom: ${s.zoom}, bearing: ${s.bearing || 0}, pitch: ${s.pitch || 0},
+  center: ${JSON.stringify(s.center)}, zoom: ${s.zoom}, bearing: ${s.bearing || 0}, pitch: ${s.pitch || 0}, maxPitch: 85,
   attributionControl: false, interactive: false, fadeDuration: 0,
   transformRequest: (url) => ({ url: /^https:\\/\\/([\\w-]+\\.)?mapx\\.at\\//.test(url) ? url + (url.includes('?') ? '&' : '?') + 'access_token=' + TOKEN : url }) });
 map.on('error', (e) => { window.__err = String(e.error?.message || e.error || e); });

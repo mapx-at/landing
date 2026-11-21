@@ -176,8 +176,8 @@
 - key: terrain3d
   img: relief-3d
   center: [12.694, 47.074]
-  zoom: 12.5
-  pitch: 60
+  zoom: 12.8
+  pitch: 74
   bearing: 0
   variants:
     - {id: relief-3d, de: Relief, en: Relief, map: "", default: true}
@@ -186,34 +186,34 @@
   de:
     name: 3D-Gelände
     place: Großglockner
-    alt: "Stil relief-3d: Großglockner als geneigte 3D-Ansicht mit Gletschern, Gipfeln und Tälern"
+    alt: "Stil relief-3d: Großglockner als geneigte 3D-Ansicht mit Gletschern, Gipfeln und Tälern bis zum Horizont, darüber Himmel"
     short: "Die Geländekarten geneigt über dem echten Geländemodell, als Relief, im Sommer oder im Winter."
     text: "Legt die Karte über das Geländemodell des BEV aus Laserscan (1 m), sodass Berge und Täler als Körper erscheinen. Gedacht für Tourenplanung, Präsentationen und überall dort, wo man das Gelände begreifen will. Im Fenster lässt sich die Karte drehen und neigen (rechte Maustaste oder zwei Finger). Braucht MapLibre mit 3D-Gelände; Bildkacheln und Kartenbilder gibt es für 3D-Stile nicht."
   en:
     name: 3D terrain
     place: Grossglockner
-    alt: "Style relief-3d: Grossglockner as a tilted 3D view with glaciers, peaks and valleys"
+    alt: "Style relief-3d: Grossglockner as a tilted 3D view with glaciers, peaks and valleys to the horizon, with sky above"
     short: "The terrain maps tilted over the real terrain model, as relief, in summer or in winter."
     text: "Drapes the map over the BEV terrain model from laser scanning (1 m), so mountains and valleys appear as solid shapes. Meant for tour planning, presentations and anywhere you want to grasp the terrain. In this window you can rotate and tilt the map (right mouse button or two fingers). Needs MapLibre with 3D terrain; raster tiles and static images are not available for 3D styles."
 - key: aerial3d
   img: satellite-3d
-  center: [13.6455, 47.5605]
-  zoom: 14.7
-  pitch: 60
-  bearing: 250
+  center: [15.5205, 48.3945]
+  zoom: 14.6
+  pitch: 74
+  bearing: 300
   variants:
     - {id: satellite-3d, de: Luftbild, en: Aerial, map: "", default: true}
     - {id: satellite-streets-3d, de: Mit Straßen, en: With streets, map: ""}
   de:
     name: 3D-Luftbild
-    place: Hallstatt
-    alt: "Stil satellite-3d: Hallstatt am See mit der Bergwand dahinter als 3D-Ansicht aus dem Orthofoto"
+    place: Wachau bei Dürnstein
+    alt: "Stil satellite-3d: Donau in der Wachau bei Dürnstein mit Weinbergen und Hügeln als 3D-Ansicht aus dem Orthofoto, darüber Himmel"
     short: "Das Orthofoto des BEV über dem Geländemodell, pur oder mit Straßen und Namen."
     text: "Legt das Digitale Orthofoto des BEV (20 cm) über das Geländemodell. Gedacht für Standortansichten, Tourismus und alles, wo ein Ort so aussehen soll wie in Wirklichkeit. „Mit Straßen“ ergänzt Straßen, Namen und Grenzen der Basiskarte. Im Fenster lässt sich die Karte drehen und neigen."
   en:
     name: 3D aerial
-    place: Hallstatt
-    alt: "Style satellite-3d: Hallstatt on the lake with the rock face behind as a 3D view from the orthophoto"
+    place: Wachau near Dürnstein
+    alt: "Style satellite-3d: the Danube in the Wachau near Dürnstein with vineyards and hills as a 3D view from the orthophoto, with sky above"
     short: "The BEV orthophoto over the terrain model, plain or with streets and names."
     text: "Drapes the BEV digital orthophoto (20 cm) over the terrain model. Meant for location views, tourism and anything where a place should look as it does in reality. “With streets” adds roads, names and boundaries from the base map. In this window you can rotate and tilt the map."
 - key: city3d
