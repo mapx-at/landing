@@ -75,7 +75,8 @@
     mapEl.setAttribute('aria-label', t('Interaktive Karte', 'Interactive map'));
     stage.replaceChildren(mapEl);
     map = L.map(mapEl, { scrollWheelZoom: false, dragging: !touch, tap: false, zoomAnimation: !reduce, fadeAnimation: !reduce, markerZoomAnimation: !reduce, attributionControl: false }).setView(center, zoom);
-    L.control.attribution({ prefix: '<a href="https://mapx.at">mapx.at</a>' })  // Leaflet trennt mit „ | “: mapx.at | Quellen.addTo(map);
+    // Leaflet trennt mit „ | “: mapx.at | Quellen
+    L.control.attribution({ prefix: '<a href="https://mapx.at">mapx.at</a>' }).addTo(map);
     base = tiles(style).addTo(map);
     if (touch) stage.append(el('p', { className: 'mx-demo-hint', textContent: t('Zwei Finger: zoomen und verschieben', 'Two fingers: zoom and pan') }));
     else stage.append(el('p', { className: 'mx-demo-hint', textContent: t('Ziehen verschiebt, + und − zoomen', 'Drag to pan, + and − to zoom') }));
