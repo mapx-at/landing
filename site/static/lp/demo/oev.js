@@ -2,7 +2,7 @@
 window.mxDemo = (c) => {
   const { L, t, el } = c;
   const map = c.makeMap([47.8131, 13.0451], 15, 'streets'); // Salzburg Hauptbahnhof
-  map.attributionControl.addAttribution(t('Fahrplan: ÖBB-Personenverkehr AG (CC BY 4.0), Mobilitätsverbünde Österreich OG', 'Timetable: ÖBB-Personenverkehr AG (CC BY 4.0), Mobilitätsverbünde Österreich OG'));
+  map.attributionControl.addAttribution('ÖBB-Personenverkehr AG (CC BY 4.0); Datenquelle: Mobilitätsverbünde Österreich OG – data.mobilitaetsverbuende.at');
   const list = el('ol', { className: 'mx-demo-list mx-demo-dep' });
   c.stage.after(list);
   const here = L.layerGroup().addTo(map);

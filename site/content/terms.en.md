@@ -20,7 +20,7 @@ mapx is a free service under development (beta). We provide it "as is" and "as a
 
 ## 3. Data without guarantee
 
-Content comes from open government data and other third-party sources (see [data sources and attribution](https://docs.mapx.at/reference/attribution/)) and is processed automatically. We give no warranty or assurance of correctness, completeness, timeliness, positional accuracy or fitness for a particular purpose.
+Content comes from open government data and other third-party sources (see [data sources and attribution](https://docs.mapx.at/reference/attribution/)) and is processed automatically. The data has been processed and modified by mapx (CC BY 4.0, section 3(a)(1)(B)): converted, merged, generalized and prepared; the results are not the original data of the data providers. We give no warranty or assurance of correctness, completeness, timeliness, positional accuracy or fitness for a particular purpose.
 
 This expressly applies to addresses, routes, travel times, departures (scheduled timetable, not real time), speed limits, traffic reports, elevations, weather and weather warnings, and air quality. They may be wrong, outdated or incomplete.
 

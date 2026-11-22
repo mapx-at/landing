@@ -57,7 +57,7 @@ home:
     mcp_label: "Beispiel: Frage an einen KI-Assistenten, der den mapx-MCP-Server nutzt"
     mcp_q: "Wie komme ich morgen um 8 Uhr von Melk nach Krems?"
     mcp_tool: "transit_route"
-    mcp_a: "Laut Fahrplan: 08:40 ab Melk Bahnhof mit dem CJX5 nach St. Pölten Hbf (an 08:58), um 09:06 weiter mit dem R44, an Krems Bahnhof 09:41. Quelle: ÖBB-Personenverkehr AG (CC BY 4.0), Mobilitätsverbünde Österreich, GIP.at"
+    mcp_a: "Laut Fahrplan: 08:40 ab Melk Bahnhof mit dem CJX5 nach St. Pölten Hbf (an 08:58), um 09:06 weiter mit dem R44, an Krems Bahnhof 09:41. Quelle: mapx.at | ÖBB-Personenverkehr AG (CC BY 4.0); Datenquelle: Mobilitätsverbünde Österreich OG – data.mobilitaetsverbuende.at; GIP.at (CC BY 4.0)"
   dev:
     eye: "Für Entwickler"
     h2: "Deine erste Karte in fünf Minuten"

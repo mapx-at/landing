@@ -59,7 +59,7 @@ The images are rendered from the same open government data as the interactive ma
 - At most 1280 by 1280 pixels, with `@2x` up to 2560 by 2560. The pitch is always 0.
 - Zoom levels: `satellite` from 5 to 18, `outdoors` from 5 to 16.
 - Images fall into the zone `heavy` with 30 requests per minute per token. Images are cacheable (`ETag`, `304`): store them on your side and do not request them anew on every page view.
-- The source must be visible next to the image, for example as a line `Quelle: BEV, CC BY 4.0`. The text for each dataset is in the [attribution docs](https://docs.mapx.at/reference/attribution/).
+- The source must be visible next to the image, for example as a line `Source: mapx.at | BEV (CC BY 4.0)`. The text for each dataset is in the [attribution docs](https://docs.mapx.at/reference/attribution/).
 
 ## Get started
 

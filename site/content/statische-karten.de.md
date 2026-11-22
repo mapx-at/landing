@@ -59,7 +59,7 @@ Die Bilder werden aus denselben offenen Verwaltungsdaten gerendert wie die inter
 - Höchstens 1280 mal 1280 Pixel, mit `@2x` bis 2560 mal 2560. Die Neigung (Pitch) ist immer 0.
 - Zoomstufen: `satellite` von 5 bis 18, `outdoors` von 5 bis 16.
 - Bilder liegen in der Zone `heavy` mit 30 Anfragen pro Minute je Token. Bilder sind cachebar (`ETag`, `304`): speichere sie auf deiner Seite zwischen und fordere sie nicht bei jedem Seitenaufruf neu an.
-- Die Quelle muss neben dem Bild sichtbar stehen, zum Beispiel als Zeile `Quelle: BEV, CC BY 4.0`. Den Text je Datensatz findest du in der [Doku zur Quellenangabe](https://docs.mapx.at/de/reference/attribution/).
+- Die Quelle muss neben dem Bild sichtbar stehen, zum Beispiel als Zeile `Quelle: mapx.at | BEV (CC BY 4.0)`. Den Text je Datensatz findest du in der [Doku zur Quellenangabe](https://docs.mapx.at/de/reference/attribution/).
 
 ## Loslegen
 
