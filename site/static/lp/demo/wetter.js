@@ -9,9 +9,11 @@ window.mxDemo = (c) => {
   c.panel.append(el('label', { className: 'mx-demo-range' }, el('span', { textContent: t('Stunde', 'Hour') }), slider, out));
   const fmt = new Intl.DateTimeFormat(t('de-AT', 'en-GB'), { weekday: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Vienna' });
   let times = [], timer;
+  // Zeiten kommen als 2026-11-22T04:00:00Z (früher ohne Sekunden: 2026-11-22T04:00Z); beides lesbar
+  const toDate = (ts) => new Date(/T\d\d:\d\dZ$/.test(ts) ? ts.replace(/Z$/, ':00Z') : ts);
   function show() {
     const ts = times[Number(slider.value)]; if (!ts) return;
-    const label = fmt.format(new Date(ts.replace(/Z$/, ':00Z')));
+    const label = fmt.format(toDate(ts));
     out.textContent = label; slider.setAttribute('aria-valuetext', label);
     layer.setUrl(`${c.API}/weather/tiles/${param.value}/${ts}/{z}/{x}/{y}.png?access_token=${encodeURIComponent(c.TOKEN)}`);
     c.say(t(`${param.selectedOptions[0].text}, ${label} (Prognose, Ortszeit Wien)`, `${param.selectedOptions[0].text}, ${label} (forecast, Vienna time)`));
@@ -23,7 +25,7 @@ window.mxDemo = (c) => {
       show();
     } catch (e) { c.fail(e); }
   }
-  slider.addEventListener('input', () => { out.textContent = fmt.format(new Date(times[Number(slider.value)].replace(/Z$/, ':00Z'))); clearTimeout(timer); timer = setTimeout(show, 300); }); // erst laden, wenn der Regler steht
+  slider.addEventListener('input', () => { out.textContent = fmt.format(toDate(times[Number(slider.value)])); clearTimeout(timer); timer = setTimeout(show, 300); }); // erst laden, wenn der Regler steht
   param.addEventListener('change', load);
   load();
 };

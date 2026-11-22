@@ -25,7 +25,7 @@ description: "Verkehrs-API für Österreich: Verkehrsmeldungen, Baustellen, Sper
 
 - `GET /v1/traffic/incidents`: Meldungen, filterbar nach Kartenausschnitt (`bbox`), Straße (`road`, `road_class`), Art (`type`, zum Beispiel `construction` oder `road_closure`), Zeitfenster und geplant oder ungeplant. Baustellen auf Autobahnen und Schnellstraßen tragen Fahrstreifen-Details.
 - `POST /v1/traffic/incidents`: dieselbe Abfrage mit JSON-Body, etwa für lange Routen. Die Meldungen entlang einer Route sind nach der Position auf der Route sortiert.
-- `GET /v1/traffic/flow`: Tempolimits auf Wechselverkehrszeichen der Autobahnen in einem Kartenausschnitt.
+- `GET /v1/traffic/sign-limits`: Tempolimits auf Wechselverkehrszeichen der Autobahnen in einem Kartenausschnitt.
 - `GET /v1/traffic/signs`: aktueller Zustand von Anzeigen mit Position.
 - `/v1/traffic/tiles.json`: Verkehrsebene als Vektorkacheln für die Karte. Die Stile `traffic-day` und `traffic-night` zeigen sie fertig.
 - Routing mit dem Profil `driving-traffic` umfährt verbindliche Totalsperren.
@@ -46,7 +46,7 @@ const data = await res.json();
 Tempolimits auf Autobahnanzeigen im selben Ausschnitt:
 
 ```bash
-curl -s -H "Authorization: Bearer YOUR_TOKEN" "https://api.mapx.at/v1/traffic/flow?bbox=16.0,48.0,16.8,48.5" | jq
+curl -s -H "Authorization: Bearer YOUR_TOKEN" "https://api.mapx.at/v1/traffic/sign-limits?bbox=16.0,48.0,16.8,48.5" | jq
 ```
 
 ## Woher die Daten kommen
