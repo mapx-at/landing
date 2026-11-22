@@ -168,7 +168,7 @@ const items = [
       c.map.addLayer({ id: 'wx', type: 'raster', source: 'wx', paint: { 'raster-opacity': 0.85, 'raster-resampling': 'linear' } }, first);
       const st = [];
       for (const [name, lon, lat] of [['Wien', 16.3738, 48.2082], ['Innsbruck', 11.3933, 47.2692]]) {
-        const f = (await c.api(`/weather/current?lon=${lon}&lat=${lat}&limit=1`)).features[0];
+        const f = (await c.api(`/weather/current?lng=${lon}&lat=${lat}&limit=1`)).features[0];
         st.push(`${name} ${f.properties.temperature_c} °C (${f.properties.name}, ${f.properties.time})`);
         await c.hideNear([f.geometry.coordinates], 36, [[[180, 310], [620, 400]]]);
         c.label(f.geometry.coordinates, `${name} <b>${c.num(f.properties.temperature_c, 1)} °C</b>`, 'up', true);
