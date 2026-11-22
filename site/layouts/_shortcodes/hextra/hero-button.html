@@ -1,0 +1,8 @@
+{{- /* Override des Hextra-Shortcodes: gleiche Button-Optik wie die Startseite (.mx-hbtn, mapx-Blau #0a64e8).
+     Mit style-Parameter (bisher fuer den transparenten Zweitbutton genutzt) wird daraus .mx-hbtn2. */ -}}
+{{- $link := .Get "link" -}}
+{{- $text := .Get "text" -}}
+{{- $second := .Get "style" -}}
+{{- $external := hasPrefix $link "http" -}}
+{{- $href := cond (hasPrefix $link "/") ($link | relURL) $link -}}
+<a href="{{ $href }}" class="not-prose mx-hbtn{{ with $second }} mx-hbtn2{{ end }}"{{ if $external }} target="_blank" rel="noreferrer"{{ end }}>{{- $text -}}</a>

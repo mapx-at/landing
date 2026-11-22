@@ -26,5 +26,7 @@ window.mxDemo = (c) => {
   map.on('click', set);
   profile.addEventListener('change', route);
   c.centerButton(t('Kartenmitte als Punkt', 'Use map centre'), set);
-  c.say(t('Tipp auf den Start, dann auf das Ziel.', 'Tap the start, then the destination.'));
+  // Startzustand: eine Beispielroute durch Melk, danach neu antippen
+  set({ latlng: L.latLng(48.2275, 15.3245) }); set({ latlng: L.latLng(48.2335, 15.3395) });
+  c.stage.querySelector('.mx-demo-hint').textContent = t('Neu: Start antippen, dann Ziel', 'New: tap start, then destination');
 };

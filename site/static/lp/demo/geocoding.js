@@ -37,6 +37,6 @@ window.mxDemo = (c) => {
     } catch (e) { c.fail(e); }
     session = crypto.randomUUID(); // die Sitzung endet mit retrieve
   }
-  c.say(t('Gib mindestens drei Zeichen ein.', 'Type at least three characters.'));
-  input.focus({ preventScroll: true });
+  // Startzustand: Beispielsuche schon ausgeführt, Vorschläge sichtbar
+  input.value = t('Hauptplatz Melk', 'Hauptplatz Melk'); suggest();
 };

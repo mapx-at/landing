@@ -63,6 +63,7 @@ nav a[href*="account.mapx.at/login"]:hover{background:#0853c4}
 .mx-demo-btn:hover,.mx-demo-seg button:hover{background:rgb(156 163 175 / .15)}
 .mx-demo-seg{display:flex;flex-wrap:wrap;gap:.4rem}
 .mx-demo-seg button[aria-pressed=true],.mx-demo-primary{background:#0a64e8;color:#fff;border-color:#0a64e8}
+.mx-demo-primary:hover{background:#0853c4;border-color:#0853c4}
 .mx-demo-search{flex:1 1 18rem;position:relative}
 .mx-demo-search input{width:100%}
 .mx-demo-list{list-style:none;margin:.4rem 0 0;padding:0;font-size:.875rem}
@@ -78,7 +79,8 @@ nav a[href*="account.mapx.at/login"]:hover{background:#0853c4}
 .mx-demo-foot a{text-decoration:underline;text-underline-offset:2px}
 .mx-demo-chart{display:block;width:100%;height:auto;margin-top:.6rem;color:inherit}
 .mx-demo-url{white-space:pre-wrap;word-break:break-all;font-size:.75rem;padding:.5rem .7rem;border-radius:.5rem;background:rgb(156 163 175 / .15);margin:0 0 .6rem}
-.mx-topic .content .mx-demo-static{display:block;max-width:100%;height:auto;margin:0 auto}
+.mx-topic .content .mx-demo-stage>img.mx-demo-static{display:block;max-width:100%;height:auto;margin:0 auto;object-fit:contain}
+.mx-demo-stage:has(>img.mx-demo-static){display:flex;justify-content:center}
 .mx-demo .leaflet-container{font:inherit;font-size:.75rem}
 /* Kacheln und Marker ohne Prosa-Abstand: die Theme-Regel .content img (margin-block, border-radius) verschob die Kartenkacheln um 16 px gegen die Meldungslinien */
 .mx-demo .leaflet-container img{margin:0;border-radius:0;max-width:none}
