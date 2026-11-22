@@ -16,7 +16,7 @@ window.mxDemo = (c) => {
   function update() { code.textContent = url() + '?access_token=YOUR_TOKEN'; c.say(t('Die URL ist fertig. „Bild erzeugen“ lädt sie.', 'The URL is ready. “Create image” loads it.')); }
   function render() {
     const u = url(), [w, h] = size.value.split('x');
-    img.width = Number(w); img.height = Number(h); img.style.width = w + 'px';
+    img.width = Number(w); img.height = Number(h); img.style.width = w + 'px'; img.style.aspectRatio = w + ' / ' + h; // unbeschnitten im echten Seitenverhältnis
     img.alt = t(`Kartenbild ${places[place.value][0]}, Stil ${style.selectedOptions[0].text}`, `Map image ${places[place.value][0]}, style ${style.selectedOptions[0].text}`);
     c.say(t('Lade das Bild …', 'Loading the image …'));
     img.onload = () => c.say(t(`Fertig: ${w} × ${h} px, doppelte Auflösung (@2x). Quellen: BEV, GIP.at, CC BY 4.0`, `Done: ${w} × ${h} px, double resolution (@2x). Sources: BEV, GIP.at, CC BY 4.0`));

@@ -63,22 +63,23 @@
 
   let L, map, base, mapEl, tileErr = false;
   function tiles(style) {
-    const layer = L.tileLayer(`${API}/styles/${style}/tiles/512/{z}/{x}/{y}?access_token=${encodeURIComponent(TOKEN)}`, { tileSize: 512, zoomOffset: -1, minZoom: 1, maxZoom: 21, attribution: ATTR[style] || ATTR.streets });
+    const layer = L.tileLayer(`${API}/styles/${style}/tiles/512/{z}/{x}/{y}{r}?access_token=${encodeURIComponent(TOKEN)}`, { tileSize: 512, zoomOffset: -1, minZoom: 1, maxZoom: 21, /* {r} = @2x bei devicePixelRatio > 1: gleiche Kachelzahl, 1024-px-Bilder */ attribution: ATTR[style] || ATTR.streets });
     layer.on('tileerror', async (e) => { // einmal nachfragen, warum die Kachel fehlt
       if (tileErr) return; tileErr = true;
       try { const r = await fetch(e.tile.src); if (!r.ok) say(errText(r.status), true); } catch { say(t('Kacheln konnten nicht geladen werden.', 'Tiles could not be loaded.'), true); }
     });
     return layer;
   }
-  function makeMap(center, zoom, style = 'streets') {
+  function makeMap(center, zoom, style = 'streets', hint) {
     mapEl = el('div', { className: 'mx-demo-map' });
     mapEl.setAttribute('aria-label', t('Interaktive Karte', 'Interactive map'));
     stage.replaceChildren(mapEl);
     map = L.map(mapEl, { scrollWheelZoom: false, dragging: !touch, tap: false, zoomAnimation: !reduce, fadeAnimation: !reduce, markerZoomAnimation: !reduce, attributionControl: false }).setView(center, zoom);
-    // Leaflet trennt mit „ | “: mapx.at | Quellen
-    L.control.attribution({ prefix: '<a href="https://mapx.at">mapx.at</a>' }).addTo(map);
+    // eigenes Control mit Präfix „mapx.at“ (Leaflet trennt mit „ | “); als map.attributionControl hinterlegt, damit Demos addAttribution nutzen können
+    map.attributionControl = L.control.attribution({ prefix: '<a href="https://mapx.at">mapx.at</a>' }).addTo(map);
     base = tiles(style).addTo(map);
-    if (touch) stage.append(el('p', { className: 'mx-demo-hint', textContent: t('Zwei Finger: zoomen und verschieben', 'Two fingers: zoom and pan') }));
+    if (hint) stage.append(el('p', { className: 'mx-demo-hint', textContent: hint }));
+    else if (touch) stage.append(el('p', { className: 'mx-demo-hint', textContent: t('Zwei Finger: zoomen und verschieben', 'Two fingers: zoom and pan') }));
     else stage.append(el('p', { className: 'mx-demo-hint', textContent: t('Ziehen verschiebt, + und − zoomen', 'Drag to pan, + and − to zoom') }));
     return map;
   }
