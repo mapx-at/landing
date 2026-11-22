@@ -13,16 +13,15 @@ home:
     start: "Kostenlos starten"
     map: "Karte öffnen"
     trust: "Amtliche offene Daten von BEV, GIP.at, GeoSphere Austria, ASFINAG und ÖBB"
-    chips_label: "Kartenstil der Vorschau wählen"
-    style: "Stil"
+    chips_label: "Kartenstile im Wechsel"
     move: "Live-Karte öffnen"
     # Schaufenster: id = Bild in static/lp/img/gallery/ (bewusst andere Bilder als im Stile-Raster darunter, kein Motiv doppelt)
     styles:
-      - {id: relief-dark, label: "Relief", place: "Großglockner", alt: "Stil relief-dark: Schummerung der Glocknergruppe in Grautönen auf Schwarz, mit Gipfeln und Gletschern"}
-      - {id: streets-night, label: "Nacht", place: "Wien Innenstadt", alt: "Stil streets-night: Wiener Innenstadt bei Nacht mit hellen Straßen auf dunklem Blau"}
-      - {id: outdoors-winter, label: "Winter", place: "Sölden", alt: "Stil outdoors-winter: verschneites Gelände um Sölden mit Höhenlinien und Liften"}
-      - {id: traffic-night, label: "Verkehr", place: "Wien", alt: "Stil traffic-night: Straßennetz von Wien auf Dunkel, Verkehrsmeldungen farbig hervorgehoben"}
-      - {id: satellite-streets-3d, label: "3D-Luftbild", place: "Wachau bei Dürnstein", alt: "Stil satellite-streets-3d: geneigter Blick über die Donau in der Wachau bei Dürnstein, Luftbild mit Straßen"}
+      - {id: relief-dark, label: "Relief", place: "Großglockner", p: "Gelände aus dem 1-m-Höhenmodell des BEV, hier die Glocknergruppe.", alt: "Stil relief-dark: Schummerung der Glocknergruppe in Grautönen auf Schwarz, mit Gipfeln und Gletschern"}
+      - {id: streets-night, label: "Nacht", place: "Wien Innenstadt", p: "Dunkle Straßenkarte für den Abend, hier die Wiener Innenstadt.", alt: "Stil streets-night: Wiener Innenstadt bei Nacht mit hellen Straßen auf dunklem Blau"}
+      - {id: outdoors-winter, label: "Winter", place: "Sölden", p: "Schnee, Höhenlinien und Lifte, hier rund um Sölden.", alt: "Stil outdoors-winter: verschneites Gelände um Sölden mit Höhenlinien und Liften"}
+      - {id: traffic-night, label: "Verkehr", place: "Wien", p: "Meldungen von ASFINAG und EVIS.AT auf dunkler Karte, hier Wien.", alt: "Stil traffic-night: Straßennetz von Wien auf Dunkel, Verkehrsmeldungen farbig hervorgehoben"}
+      - {id: satellite-streets-3d, label: "3D-Luftbild", place: "Wachau bei Dürnstein", p: "Luftbild auf dem Gelände, geneigt und drehbar, hier die Wachau bei Dürnstein.", alt: "Stil satellite-streets-3d: geneigter Blick über die Donau in der Wachau bei Dürnstein, Luftbild mit Straßen"}
   styles:
     eye: "Kartenstile"
     h2: "26 fertige Kartenstile für deine Anwendung"
@@ -58,7 +57,7 @@ home:
     mcp_label: "Beispiel: Frage an einen KI-Assistenten, der den mapx-MCP-Server nutzt"
     mcp_q: "Wie komme ich morgen um 8 Uhr von Melk nach Krems?"
     mcp_tool: "transit_route"
-    mcp_a: "Verbindung laut Fahrplan mit Umstieg und Ankunftszeit, dazu die Quellenangabe."
+    mcp_a: "Laut Fahrplan: 08:40 ab Melk Bahnhof mit dem CJX5 nach St. Pölten Hbf (an 08:58), um 09:06 weiter mit dem R44, an Krems Bahnhof 09:41. Quelle: ÖBB-Personenverkehr AG (CC BY 4.0), Mobilitätsverbünde Österreich, GIP.at"
   dev:
     eye: "Für Entwickler"
     h2: "Deine erste Karte in fünf Minuten"

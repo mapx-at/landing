@@ -15,7 +15,7 @@
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true) }}
     <main id="content" class="mx-home hx:w-full hx:break-words hx:min-w-0 hx:pb-8 hx:pl-[max(env(safe-area-inset-left),1.5rem)] hx:pr-[max(env(safe-area-inset-right),1.5rem)]">
 
-      {{- /* 1. Schaufenster: wischbare Reihe (scroll-snap), ohne JavaScript von Hand wischbar; /lp/home.js ergänzt Chips, Punkte, Wechsel */}}
+      {{- /* 1. Schaufenster: wischbare Reihe (scroll-snap), ohne JavaScript von Hand wischbar; /lp/home.js schaltet auf Überblendung mit Autoplay und Wischen um; je Bild Titel und Satz auf dem Verlauf */}}
       {{- $s0 := index $h.hero.styles 0 }}
       <section class="mx-hhero" aria-labelledby="mx-hh1">
         <div class="mx-hhero-text">
@@ -39,18 +39,12 @@
               {{- /* weitere Bilder lädt home.js erst bei Bedarf (das jeweils nächste vorab); ohne JavaScript über noscript */}}
               <img data-src="{{ $src }}" data-srcset="{{ $set }}" sizes="(max-width: 640px) 369px, (max-width: 900px) 100vw, 62vw" width="1440" height="810" alt="{{ $s.alt }}" decoding="async"><noscript><img src="{{ $src }}" srcset="{{ $set }}" sizes="(max-width: 640px) 369px, (max-width: 900px) 100vw, 62vw" width="1440" height="810" alt="{{ $s.alt }}" loading="lazy" decoding="async"></noscript>
               {{- end }}
+              <span class="mx-hlede"><span class="mx-hst">{{ $s.label }}</span><span class="mx-hsp">{{ $s.p }}</span></span>
             </a></li>
             {{- end }}
           </ul>
           <a class="mx-hgo" href="{{ $gal }}#{{ $s0.id }}"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ $h.hero.move }}</a>
-          <div class="mx-hdots" aria-hidden="true">{{ range $h.hero.styles }}<span></span>{{ end }}</div>
           </div>
-          <div class="mx-hchips" role="group" aria-label="{{ $h.hero.chips_label }}">
-            {{- range $i, $s := $h.hero.styles }}
-            <button type="button" class="mx-hchip" aria-pressed="{{ cond (eq $i 0) "true" "false" }}" data-id="{{ $s.id }}" data-place="{{ $s.place }}" disabled>{{ $s.label }}</button>
-            {{- end }}
-          </div>
-          <figcaption class="mx-hcap">{{ $h.hero.style }} <code class="mx-hid">{{ $s0.id }}</code> · <span class="mx-hplace">{{ $s0.place }}</span></figcaption>
         </figure>
       </section>
 
@@ -66,7 +60,7 @@
           </a></li>
           {{- end }}
         </ul>
-        <p class="mx-hmore"><a href="{{ $gal }}">{{ $h.styles.all }} <span aria-hidden="true">→</span></a></p>
+        <p class="mx-hmore mx-hmorebtn"><a class="mx-hbtn" href="{{ $gal }}">{{ $h.styles.all }} <span aria-hidden="true">→</span></a></p>
       </section>
 
       {{- /* 3. Österreich in 3D: ein Bild, das in den Hintergrund ausläuft, dazu drei Kennzahlen */}}
@@ -183,5 +177,5 @@ const map = new maplibregl.Map({
       </section>
     </main>
   </div>
-  <script src="/lp/home.js?v=3" defer></script>
+  <script src="/lp/home.js?v=4" defer></script>
 {{ end }}

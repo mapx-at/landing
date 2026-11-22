@@ -48,7 +48,7 @@
     const a = $('.mx-gdlg-map');
     a.hidden = !v.map; if (v.map) a.href = 'https://map.mapx.at/#' + v.map;
     for (const b of $('.mx-gseg').children) b.setAttribute('aria-pressed', String(b.dataset.id === id));
-    if (map) map.setStyle(data.api + id);
+    if (map) { map.setStyle(data.api + id); map.jumpTo({ zoom: v.zoom || card.zoom }); } // Variante mit eigenem Zoom (Höhenlinien)
     if (location.hash.slice(1) !== id && !(id === card.def && location.hash.slice(1) === card.key)) history.replaceState(null, '', '#' + id);
   }
 
@@ -74,7 +74,7 @@
       if (!dlg.open || card !== c) return;
       if (map) map.remove();
       map = new m.Map({
-        container: $('.mx-gmap'), style: data.api + style, center: c.center, zoom: c.zoom, pitch: c.pitch, bearing: c.bearing, maxPitch: d3 ? (c.maxPitch || 82) : 60,
+        container: $('.mx-gmap'), style: data.api + style, center: c.center, zoom: c.variants.find((x) => x.id === style)?.zoom || c.zoom, pitch: c.pitch, bearing: c.bearing, maxPitch: d3 ? (c.maxPitch || 82) : 60,
         transformRequest: auth, attributionControl: false,
         locale: de ? { 'FullscreenControl.Enter': 'Vollbild', 'FullscreenControl.Exit': 'Vollbild beenden', 'NavigationControl.ZoomIn': 'Hineinzoomen', 'NavigationControl.ZoomOut': 'Herauszoomen', 'NavigationControl.ResetBearing': 'Nach Norden ausrichten' } : {}, fadeDuration: reduce ? 0 : 300, cooperativeGestures: false,
         dragRotate: d3, pitchWithRotate: d3, touchPitch: d3, // flache Karten bleiben genordet, 3D-Karten lassen sich drehen und neigen
