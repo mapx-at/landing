@@ -231,7 +231,13 @@
     L.control.zoom({ position: 'topright', zoomInTitle: t('Hineinzoomen', 'Zoom in'), zoomOutTitle: t('Herauszoomen', 'Zoom out') }).addTo(map);
     // eigenes Control mit Präfix „mapx.at“ (Leaflet trennt mit „ | “); als map.attributionControl hinterlegt, damit Demos addAttribution nutzen können
     map.attributionControl = L.control.attribution({ prefix: '<a href="https://mapx.at">mapx.at</a>' }).addTo(map);
+    // Ergebnis-Karte immer über der Quellenzeile: deren Höhe (am Handy oft zwei Zeilen) als --mx-attr-h am Rahmen
+    const attrEl = map.attributionControl.getContainer();
+    const setAttr = () => frame.style.setProperty('--mx-attr-h', attrEl.offsetHeight + 'px');
+    if (window.ResizeObserver) new ResizeObserver(setAttr).observe(attrEl);
+    setAttr();
     base = tiles(style).addTo(map);
+    fullscreen();
     setTimeout(() => frame.classList.remove('mx-demo-loading'), 10000);
     map.on('click dragstart', endStart);
     // Gesten-Hinweis: nur kurz nach einem Einfinger-Touch (die Seite scrollt dabei weiter, das ist gewollt)
@@ -239,11 +245,59 @@
       const gesture = el('p', { className: 'mx-demo-gesture', hidden: true, textContent: t('Zwei Finger: zoomen und verschieben', 'Two fingers: zoom and pan') });
       frame.append(gesture);
       let gt;
-      mapEl.addEventListener('touchstart', (e) => { clearTimeout(gt); if (e.touches.length === 1) gt = setTimeout(() => flash(gesture, 1500), 150); }, { passive: true });
+      mapEl.addEventListener('touchstart', (e) => { clearTimeout(gt); if (e.touches.length === 1 && !fsOn) gt = setTimeout(() => flash(gesture, 1500), 150); }, { passive: true });
       mapEl.addEventListener('touchmove', (e) => { if (e.touches.length > 1) clearTimeout(gt); }, { passive: true });
     }
     if (hintText) hint(hintText);
     return map;
+  }
+  // --- Vollbild: Fullscreen-API, sonst fixiertes Overlay (iOS Safari) mit Schließen, Esc und Zurück-Taste ---------------
+  let fsOn = false, fsFake = false, fsClose, fsAt = 0;
+  const fsIcon = (on) => (on
+    ? '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 1v5H1M10 1v5h5M6 15v-5H1M10 15v-5h5"/></svg>'
+    : '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 6V1h5M15 6V1h-5M1 10v5h5M15 10v5h-5"/></svg>');
+  let fsBtn;
+  function fsApply(on) {
+    fsAt = Date.now();
+    if (fsOn === on) return;
+    fsOn = on;
+    frame.classList.toggle('mx-demo-fs', on && fsFake);
+    document.documentElement.classList.toggle('mx-demo-fs-lock', on && fsFake);
+    if (fsBtn) { fsBtn.innerHTML = fsIcon(on); const l = on ? t('Vollbild beenden', 'Exit full screen') : t('Vollbild', 'Full screen'); fsBtn.title = l; fsBtn.setAttribute('aria-label', l); fsBtn.setAttribute('aria-pressed', String(on)); }
+    if (on && fsFake && !fsClose) {
+      fsClose = el('button', { type: 'button', className: 'mx-demo-fsclose', textContent: t('Schließen', 'Close') });
+      fsClose.addEventListener('click', () => fsExit()); frame.append(fsClose);
+    }
+    if (fsClose) fsClose.hidden = !(on && fsFake);
+    if (touch && map) { if (on) map.dragging.enable(); else map.dragging.disable(); }
+    if (!on) fsFake = false;
+    setTimeout(() => map?.invalidateSize(), 60);
+  }
+  function fsEnter() {
+    if (frame.requestFullscreen && document.fullscreenEnabled !== false) {
+      frame.requestFullscreen().catch(() => { fsFake = true; history.pushState({ mxFs: 1 }, ''); fsApply(true); });
+    } else { fsFake = true; history.pushState({ mxFs: 1 }, ''); fsApply(true); }
+  }
+  function fsExit() {
+    if (document.fullscreenElement) { document.exitFullscreen(); return; }
+    if (fsFake) { if (history.state?.mxFs) history.back(); else fsApply(false); }
+  }
+  document.addEventListener('fullscreenchange', () => fsApply(document.fullscreenElement === frame));
+  addEventListener('popstate', () => { if (fsFake && fsOn) fsApply(false); });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape' && fsOn && fsFake) fsExit(); });
+  function fullscreen() {
+    const Ctl = L.Control.extend({ onAdd() {
+      const bar = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+      fsBtn = L.DomUtil.create('a', 'mx-demo-fsbtn', bar); fsBtn.href = '#'; fsBtn.setAttribute('role', 'button');
+      fsBtn.innerHTML = fsIcon(false); fsBtn.title = t('Vollbild', 'Full screen'); fsBtn.setAttribute('aria-label', fsBtn.title); fsBtn.setAttribute('aria-pressed', 'false');
+      L.DomEvent.disableClickPropagation(bar);
+      L.DomEvent.on(fsBtn, 'click', (e) => { fsAt = Date.now(); L.DomEvent.preventDefault(e); if (fsOn) fsExit(); else fsEnter(); });
+      return bar;
+    } });
+    new Ctl({ position: 'topright' }).addTo(map);
+    // Touch: der Tipp auf den Knopf kommt nach dem Umbau der Größe teils als Kartenklick an (verschiebt sonst Pins); kurz ignorieren
+    const fire = map.fire;
+    map.fire = function (type, ...rest) { if (type === 'click' && Date.now() - fsAt < 800) return this; return fire.call(this, type, ...rest); };
   }
   // Stilwechsel: neue Ebene darüber laden, alte erst nach `load` entfernen (keine grauen Kacheln)
   function setStyle(style) { const old = base; tileErr = false; base = tiles(style).addTo(map); const drop = () => { if (map.hasLayer(old)) old.remove(); }; base.once('load', drop); setTimeout(drop, 5000); }
@@ -290,7 +344,7 @@
       } else setTimeout(() => frame.classList.remove('mx-demo-loading'), 10000);
       await load(`/lp/demo/${root.dataset.demo}.js`);
       root.classList.add('mx-demo-on'); panel.hidden = false;
-      window.mxDemo({ L, de, t, api, errText, API, TOKEN, LIMITS, BUDGET, say, fail, result, hint, el, select, button, toggles, below, makeMap, setStyle, centerButton, dot, text, debounce, logReq, endStart, drawLine, pulse, countUp, typeText, panel, stage, frame, info, reduce, touch, ATTR, get map() { return map; }, done: () => frame.classList.remove('mx-demo-loading') });
+      window.mxDemo({ L, de, t, api, errText, API, TOKEN, LIMITS, BUDGET, say, fail, result, hint, el, select, button, toggles, below, makeMap, setStyle, centerButton, dot, text, debounce, logReq, endStart, drawLine, pulse, countUp, typeText, panel, stage, frame, info, reduce, touch, ATTR, flyTo: (ll, z) => (reduce ? map.setView(ll, z ?? map.getZoom()) : map.flyTo(ll, z ?? map.getZoom(), { duration: 1.1 })), get map() { return map; }, done: () => frame.classList.remove('mx-demo-loading') });
       if (!panel.childElementCount) panel.hidden = true;
     } catch (e) { frame.classList.remove('mx-demo-loading'); fail(e); }
   });

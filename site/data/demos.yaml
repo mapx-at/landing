@@ -11,16 +11,16 @@ geocoding:
   en: {h: Try it, p: 'Search for an address or place in Austria: suggestions while you type, the result appears on the map.', alt: 'Search box with “Hauptplatz 1, Li”, suggestions Linz and Traun, result on Linz main square on the map'}
 routing:
   docs: route
-  de: {h: Ausprobieren, p: 'Tipp in Melk Start und Ziel an und wähl Auto, Rad oder zu Fuß: Du siehst Route, Länge und Dauer.', alt: 'Autoroute von Melk nach St. Pölten mit Dauer und Länge'}
-  en: {h: Try it, p: 'Tap a start and a destination in Melk and choose car, bike or walking to see the route, length and duration.', alt: 'Car route from Melk to St. Pölten with duration and length'}
+  de: {h: Ausprobieren, p: 'Vom Bahnhof Melk über die Donau nach Emmersdorf, mit Auto, Rad oder zu Fuß: Zieh die Pins A und B, Länge und Dauer rechnen sich neu.', alt: 'Autoroute von Melk nach St. Pölten mit Dauer und Länge'}
+  en: {h: Try it, p: 'From Melk station across the Danube to Emmersdorf, by car, bike or on foot: drag pins A and B and the length and duration update.', alt: 'Car route from Melk to St. Pölten with duration and length'}
 hoehe:
   docs: elevation-profile
-  de: {h: Ausprobieren, p: 'Setz Punkte in den Hohen Tauern: Aus der Linie wird ein Höhenprofil mit Auf- und Abstieg.', alt: 'Großglockner-Hochalpenstraße von Heiligenblut zur Kaiser-Franz-Josefs-Höhe und ihr Höhenprofil mit höchstem Punkt, Anstieg und Länge'}
-  en: {h: Try it, p: 'Set points in the Hohe Tauern: the line becomes an elevation profile with ascent and descent.', alt: 'Grossglockner High Alpine Road from Heiligenblut to Kaiser-Franz-Josefs-Höhe and its elevation profile with highest point, ascent and length'}
+  de: {h: Ausprobieren, p: 'Eine Linie in den Hohen Tauern als Höhenprofil: Fahr mit Finger oder Maus darüber, der Punkt auf der Karte wandert mit. Weitere Punkte setzt du per Tipp.', alt: 'Großglockner-Hochalpenstraße von Heiligenblut zur Kaiser-Franz-Josefs-Höhe und ihr Höhenprofil mit höchstem Punkt, Anstieg und Länge'}
+  en: {h: Try it, p: 'A line in the Hohe Tauern as an elevation profile: move your finger or mouse along it and the point on the map follows. Tap to add more points.', alt: 'Grossglockner High Alpine Road from Heiligenblut to Kaiser-Franz-Josefs-Höhe and its elevation profile with highest point, ascent and length'}
 oev:
   docs: departures
-  de: {h: Ausprobieren, p: 'Tipp in Salzburg in die Nähe einer Haltestelle: Du siehst die nächsten Abfahrten laut Fahrplan.', alt: 'Abfahrtstafel des Salzburger Hauptbahnhofs mit drei Abfahrten laut Fahrplan, darunter die Haltestelle auf der Karte'}
-  en: {h: Try it, p: 'Tap near a stop in Salzburg to see the next departures according to the timetable.', alt: 'Departure board of Salzburg main station with three timetable departures, the stop on the map below'}
+  de: {h: Ausprobieren, p: 'Die Abfahrtstafel des Salzburger Hauptbahnhofs laut Fahrplan. Tipp auf einen blauen Punkt, um zu einer anderen Haltestelle zu wechseln.', alt: 'Abfahrtstafel des Salzburger Hauptbahnhofs mit drei Abfahrten laut Fahrplan, darunter die Haltestelle auf der Karte'}
+  en: {h: Try it, p: 'The departure board of Salzburg main station according to the timetable. Tap a blue dot to switch to another stop.', alt: 'Departure board of Salzburg main station with three timetable departures, the stop on the map below'}
 verkehr:
   docs: traffic
   de: {h: Ausprobieren, p: 'Die aktiven Verkehrsmeldungen im Kartenausschnitt, Sperren in Rot. Verschieb die Karte, um andere Gegenden zu sehen.', alt: 'Verkehrskarte von Wien mit Sperren in Rot und Baustellen in Orange, eine Sperre hervorgehoben'}
