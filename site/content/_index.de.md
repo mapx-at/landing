@@ -14,6 +14,7 @@ home:
     map: "Karte öffnen"
     trust: "Offene Verwaltungsdaten von BEV, GIP.at, GeoSphere Austria, ASFINAG und ÖBB"
     chips_label: "Kartenstile im Wechsel"
+    dot: "Ansicht"
     move: "Live-Karte öffnen"
     # Schaufenster: id = Bild in static/lp/img/gallery/ (bewusst andere Bilder als im Stile-Raster darunter, kein Motiv doppelt)
     styles:

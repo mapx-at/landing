@@ -196,14 +196,26 @@ nav a[href*="account.mapx.at/login"]:hover{background:#0853c4}
 .mx-hslide img[data-src]{visibility:hidden}
 /* mit JavaScript: Bilder liegen übereinander und blenden über; Titel und Satz auf dem Verlauf am unteren Rand (wie .mx-hend) */
 .mx-hjs .mx-htrack{display:block;position:relative;overflow:hidden;touch-action:pan-y}
-.mx-hjs .mx-hslide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .9s ease,visibility 0s linear .9s}
-.mx-hjs .mx-hslide.on{opacity:1;visibility:visible;transition:opacity .9s ease}
+.mx-hjs .mx-hslide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility 0s linear .6s}
+.mx-hjs .mx-hslide.on{opacity:1;visibility:visible;transition:opacity .6s ease}
 .mx-hslide a{position:relative;color:#fff!important;text-decoration:none!important}
 .mx-hlede{position:absolute;left:0;right:0;bottom:0;display:block;padding:6rem 1.75rem 1.5rem;background:linear-gradient(rgb(10 14 22 / 0),rgb(10 14 22 / .8) 45%,rgb(10 14 22 / .96))}
 .dark .mx-hlede{background:linear-gradient(rgb(17 17 17 / 0),rgb(17 17 17 / .85) 45%,#111)}
 .mx-hst{display:block;font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.15;font-weight:740;letter-spacing:-.025em;color:#fff}
 .mx-hsp{display:block;margin-top:.35rem;font-size:1rem;line-height:1.45;color:#e5e7eb;max-width:36rem}
 .dark .mx-hframe{border-color:transparent;background:#111}
+/* Punkte: aktive Ansicht als Pille, die sich während der Anzeigedauer füllt (--mx-hdur aus home.js) */
+.mx-hdots{display:none;position:absolute;left:0;right:0;bottom:.5rem;z-index:2;justify-content:center;gap:.1rem}
+.mx-hjs .mx-hdots{display:flex}
+.mx-hdot{display:flex;align-items:center;justify-content:center;width:1.5rem;height:1.75rem;padding:0;border:0;background:none;cursor:pointer}
+.mx-hdot[aria-current=true]{width:2.4rem}
+.mx-hdot span{position:relative;display:block;width:.45rem;height:.45rem;border-radius:9999px;background:rgb(255 255 255 / .45);overflow:hidden;transition:width .3s ease}
+.mx-hdot[aria-current=true] span{width:1.9rem}
+.mx-hdot[aria-current=true] span::after{content:"";position:absolute;inset:0;background:#fff;border-radius:inherit;transform-origin:left}
+.mx-hdots.run .mx-hdot[aria-current=true] span::after{animation:mx-hprog var(--mx-hdur,5s) linear both}
+@keyframes mx-hprog{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.mx-hdot:focus-visible{outline:2px solid #fff;outline-offset:-2px;border-radius:9999px}
+.mx-hjs .mx-hlede{padding-bottom:2.6rem}
 .mx-hgo{position:absolute;right:.75rem;top:.75rem;z-index:2;display:inline-flex;align-items:center;gap:.45rem;min-height:2.75rem;padding:.5rem 1rem;border-radius:9999px;background:rgb(17 24 39 / .8);color:#fff!important;font-size:.875rem;font-weight:600;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgb(255 255 255 / .2);white-space:nowrap;transition:background .2s ease}
 @media(hover:hover){.mx-hgo:hover{background:#0a64e8;border-color:#0a64e8}}
 /* Abschnitte */
@@ -368,4 +380,4 @@ nav a[href*="account.mapx.at/login"]:hover{background:#0853c4}
   .mx-hend-text{padding:10rem 1.5rem 1.75rem;background:linear-gradient(rgb(10 14 22 / 0),rgb(10 14 22 / .88) 42%,rgb(10 14 22))}
   .dark .mx-hend-text{background:linear-gradient(rgb(17 17 17 / 0),rgb(17 17 17 / .9) 42%,#111)}
 }
-@media(prefers-reduced-motion:reduce){.mx-hgo,.mx-harr,.mx-hcard img,.mx-hprod,.mx-hbtn,.mx-hjs .mx-hslide{transition:none}.mx-hcard:hover img{transform:none}.mx-htrack{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){.mx-hgo,.mx-harr,.mx-hcard img,.mx-hprod,.mx-hbtn,.mx-hjs .mx-hslide,.mx-hdot span{transition:none}.mx-hcard:hover img{transform:none}.mx-htrack{scroll-behavior:auto}}

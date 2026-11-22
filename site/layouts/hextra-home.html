@@ -44,6 +44,11 @@
             {{- end }}
           </ul>
           <a class="mx-hgo" href="{{ $gal }}#{{ $s0.id }}"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ $h.hero.move }}</a>
+          <div class="mx-hdots" role="group" aria-label="{{ $h.hero.chips_label }}">
+            {{- $n := len $h.hero.styles }}{{ range $i, $s := $h.hero.styles }}
+            <button type="button" class="mx-hdot" aria-label="{{ $h.hero.dot }} {{ add $i 1 }}/{{ $n }}: {{ $s.label }}"{{ if eq $i 0 }} aria-current="true"{{ end }} disabled><span></span></button>
+            {{- end }}
+          </div>
           </div>
         </figure>
       </section>
@@ -177,5 +182,5 @@ const map = new maplibregl.Map({
       </section>
     </main>
   </div>
-  <script src="/lp/home.js?v=4" defer></script>
+  <script src="/lp/home.js?v=5" defer></script>
 {{ end }}
