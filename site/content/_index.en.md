@@ -13,6 +13,7 @@ home:
     map: "Open map"
     trust: "Open government data from BEV, GIP.at, GeoSphere Austria, ASFINAG and ÖBB"
     chips_label: "Map styles in rotation"
+    dot: "View"
     move: "Open live map"
     styles:
       - {id: relief-dark, label: "Relief", place: "Grossglockner", p: "Terrain from the BEV 1 m elevation model, here the Glockner group.", alt: "Style relief-dark: hillshade of the Glockner group in greys on black, with peaks and glaciers"}
