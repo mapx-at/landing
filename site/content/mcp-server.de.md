@@ -10,9 +10,9 @@ images: ["/img/og-image.png"]
 description: "MCP-Server für Österreich-Geodaten: KI-Assistenten wie Claude Code, Cursor und VS Code nutzen Adressen, Routen, Wetter und Verkehr von mapx direkt."
 faq:
   - q: "Was ist ein MCP-Server?"
-    a: "MCP steht für Model Context Protocol, einen offenen Standard, über den KI-Assistenten externe Werkzeuge aufrufen. Der mapx-MCP-Server stellt 21 Werkzeuge für Österreich-Geodaten bereit, die der Assistent selbst auswählt und mit den Angaben aus deiner Frage füllt."
+    a: "MCP steht für Model Context Protocol, einen offenen Standard, über den KI-Assistenten externe Werkzeuge aufrufen. Der mapx-MCP-Server stellt 22 Werkzeuge für Österreich-Geodaten bereit, die der Assistent selbst auswählt und mit den Angaben aus deiner Frage füllt."
   - q: "Kann der Assistent etwas verändern?"
-    a: "Nein. Alle 21 Werkzeuge lesen nur. Der Assistent kann Daten abfragen, aber nichts anlegen, ändern oder löschen."
+    a: "Nein. Alle 22 Werkzeuge lesen nur. Der Assistent kann Daten abfragen, aber nichts anlegen, ändern oder löschen."
   - q: "Welche Assistenten funktionieren?"
     a: "claude.ai, ChatGPT und Claude Code melden sich direkt über dein mapx-Konto an, ohne Token. Cursor, VS Code, Gemini CLI und andere Clients sowie die APIs von Anthropic und OpenAI nutzen einen Token."
   - q: "Was kostet die Nutzung?"
@@ -44,13 +44,13 @@ Der Assistent wählt dazu selbst die passenden Werkzeuge und verbindet die Ergeb
 
 ## Die Werkzeuge
 
-Es sind 21 Werkzeuge, alle nur lesend, in sieben Gruppen:
+Es sind 22 Werkzeuge, alle nur lesend, in sieben Gruppen:
 
 - **Adressen und Orte:** `geocode`, `reverse_geocode`, `validate_address`, `search_places`, `list_place_categories`.
 - **Routen und Erreichbarkeit:** `route` für Auto, Lkw, Rad und zu Fuß, `isochrone`, `travel_matrix`, `optimize_stops`.
 - **Öffentlicher Verkehr:** `transit_route`, `departures`, `find_stops`. Grundlage ist der Fahrplan, keine Echtzeit.
 - **Höhe:** `elevation`, `elevation_profile`.
-- **Verkehr:** `traffic_incidents`, `speed_limits`.
+- **Verkehr:** `traffic_incidents`, `speed_limits`, `sign_limits`.
 - **Wetter und Klima:** `weather`, `weather_warnings`, `climate`, `air_quality`.
 - **Kartenbild:** `static_map`.
 

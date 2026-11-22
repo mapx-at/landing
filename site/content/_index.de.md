@@ -54,7 +54,7 @@ home:
       - {key: verkehr, img: verkehr, t: "Verkehr", p: "Verkehrsmeldungen, Baustellen und Sperren, Tempolimits der Autobahnen und eine Verkehrsebene.", m: "ASFINAG / EVIS.AT · CC BY 4.0"}
       - {key: statisch, img: statisch, t: "Statische Kartenbilder", p: "Die Karte als PNG oder WebP mit Pins, Pfaden und GeoJSON, für Berichte und E-Mails.", m: "bis 1280 × 1280 Pixel"}
       - {key: wetter, img: wetter, t: "Wetter und Klima", p: "Messwerte, Stundenvorhersage, Niederschlags-Nowcast, Warnungen und Luftqualität für einen Punkt.", m: "GeoSphere Austria · CC BY 4.0"}
-      - {key: mcp, size: w, t: "MCP-Server für KI-Assistenten", p: "21 lesende Werkzeuge für Adressen, Routen, Wetter und mehr, direkt in Claude Code, Cursor und VS Code.", m: "MCP · Streamable HTTP"}
+      - {key: mcp, size: w, t: "MCP-Server für KI-Assistenten", p: "22 lesende Werkzeuge für Adressen, Routen, Wetter und mehr, direkt in Claude Code, Cursor und VS Code.", m: "MCP · Streamable HTTP"}
     mcp_label: "Beispiel: Frage an einen KI-Assistenten, der den mapx-MCP-Server nutzt"
     mcp_q: "Wie komme ich morgen um 8 Uhr von Melk nach Krems?"
     mcp_tool: "transit_route"
