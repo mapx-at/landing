@@ -4,7 +4,7 @@ window.mxDemo = (c) => {
   const map = c.makeMap([48.15, 16.3], 11, 'streets'); // Wien und Umgebung
   map.attributionControl.addAttribution('ASFINAG / EVIS.AT (CC BY 4.0)');
   const list = el('ul', { className: 'mx-demo-list mx-demo-inc' });
-  c.stage.after(list);
+  c.below(list);
   // `kind` ist ein englisches Enum (API seit 22.11.2026); deutsche Anzeige über diese Tabelle, englisch lesbar aus dem Wert
   const KIND_DE = {
     road_closure: 'Straßensperre', winter_closure: 'Wintersperre', tunnel_closure: 'Tunnelsperre', ramp_closure: 'Rampensperre',
@@ -22,11 +22,11 @@ window.mxDemo = (c) => {
     pointToLayer: (f, ll) => L.circleMarker(ll, { radius: 7, color: '#fff', weight: 2, fillColor: f.properties.closed ? '#c8372d' : '#e8890c', fillOpacity: 1 }),
     onEachFeature: (f, l) => l.on('click', () => show(f)),
   }).addTo(map);
-  let timer, seq = 0;
+  let seq = 0;
   async function load() {
     const b = map.getBounds(), n = ++seq;
     try {
-      const fc = await c.api(`/traffic/incidents?bbox=${[b.getWest(), b.getSouth(), b.getEast(), b.getNorth()].map((v) => v.toFixed(4)).join(',')}&active=true&limit=50`);
+      const fc = await c.api(`/traffic/incidents?bbox=${[b.getWest(), b.getSouth(), b.getEast(), b.getNorth()].map((v) => v.toFixed(4)).join(',')}&active=true&limit=50`, { key: 'inc' });
       if (n !== seq) return;
       layer.clearLayers().addData(fc);
       list.replaceChildren(...fc.features.slice(0, 6).map((f) => {
@@ -38,6 +38,6 @@ window.mxDemo = (c) => {
       c.say(t(`${nn} aktive Meldung(en) im Ausschnitt${fc.features.length > 6 ? ', die ersten sechs unten' : ''}. Verschieben lädt neu.`, `${nn} active report(s) in view${fc.features.length > 6 ? ', the first six below' : ''}. Panning reloads.`));
     } catch (e) { c.fail(e); }
   }
-  map.on('moveend', () => { clearTimeout(timer); timer = setTimeout(load, 400); });
+  map.on('moveend', c.debounce(load, 400));
   load();
 };
