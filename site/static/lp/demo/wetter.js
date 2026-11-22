@@ -22,7 +22,7 @@ window.mxDemo = (c) => {
     const t0 = performance.now();
     (function step(now) { const k = Math.min(1, (now - t0) / 250); e.layer.setOpacity(OPA * k); if (old && old !== current) old.layer.setOpacity(OPA * (1 - k)); if (k < 1) requestAnimationFrame(step); })(t0);
   }
-  const param = c.select(t('Größe', 'Variable'), [['temperature', t('Temperatur', 'Temperature')], ['precipitation', t('Niederschlag', 'Precipitation')]], 'temperature');
+  const param = c.toggles([['temperature', t('Temperatur', 'Temperature')], ['precipitation', t('Niederschlag', 'Precipitation')]], 'temperature', () => load(), t('Größe', 'Variable'));
   const play = c.button(t('▶ Abspielen', '▶ Play'), () => (playing ? stop() : run()));
   const slider = el('input', { type: 'range', min: 0, max: 0, value: 0, step: 1 });
   const out = el('output', { textContent: '' });
@@ -42,7 +42,7 @@ window.mxDemo = (c) => {
     const nx = (i + 1) % times.length; get(keyOf(nx), times[nx]); // nächste Stunde vorladen
     const pv = (i - 1 + times.length) % times.length;
     prune([keyOf(i), keyOf(nx), keyOf(pv)].filter((k) => cache.has(k)).slice(0, 3));
-    c.say(t(`${param.selectedOptions[0].text}, ${label} (Prognose, Ortszeit Wien)`, `${param.selectedOptions[0].text}, ${label} (forecast, Vienna time)`));
+    c.say(t(`${param.label()}, ${label} (Prognose, Ortszeit Wien)`, `${param.label()}, ${label} (forecast, Vienna time)`));
   }
   // Abspielen: etwa 1 s je Stunde, der nächste Schritt erst, wenn die Ebene geladen ist (nie mehr als eine Stunde voraus)
   async function tick() {
@@ -55,7 +55,7 @@ window.mxDemo = (c) => {
   function stop() { playing = false; clearTimeout(ptimer); play.textContent = t('▶ Abspielen', '▶ Play'); play.setAttribute('aria-pressed', 'false'); }
   async function load() {
     try {
-      times = (await c.api(`/weather/tiles/${param.value}.json`))['mapx:time'].times;
+      times = (await c.api(`/weather/tiles/${param.value}.json`, { key: 'times' }))['mapx:time'].times;
       slider.max = String(times.length - 1); if (Number(slider.value) > times.length - 1) slider.value = '0';
       prune([]); current = null;
       await show();
@@ -63,7 +63,6 @@ window.mxDemo = (c) => {
   }
   // Ziehen: Zeit sofort anzeigen, geladen wird gedrosselt erst, wenn der Regler kurz steht
   slider.addEventListener('input', () => { stop(); out.textContent = fmt.format(toDate(times[Number(slider.value)])); clearTimeout(timer); timer = setTimeout(show, 250); });
-  param.addEventListener('change', load);
   // Der Demo-Start ist schon ein Antippen; bei prefers-reduced-motion nur von Hand abspielen
   load().then(() => { if (!c.reduce) run(); });
 };

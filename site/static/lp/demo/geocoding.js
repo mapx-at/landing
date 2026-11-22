@@ -7,14 +7,14 @@ window.mxDemo = (c) => {
   input.setAttribute('aria-label', t('Adresse oder Ort suchen', 'Search for an address or place'));
   const list = el('ul', { className: 'mx-demo-list' });
   c.panel.append(el('div', { className: 'mx-demo-search' }, input, list));
-  let marker, session = crypto.randomUUID(), timer, seq = 0;
-  input.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(suggest, 250); }); // nicht bei jedem Tastendruck
+  let marker, session = crypto.randomUUID(), seq = 0;
+  input.addEventListener('input', c.debounce(suggest, 300)); // nicht bei jedem Tastendruck
   async function suggest() {
     const q = input.value.trim(), n = ++seq;
     if (q.length < 3) { list.replaceChildren(); return; }
     const m = map.getCenter();
     try {
-      const { features } = await c.api(`/searchbox/suggest?q=${encodeURIComponent(q)}&session_token=${session}&proximity=${m.lng.toFixed(4)},${m.lat.toFixed(4)}&limit=5`);
+      const { features } = await c.api(`/searchbox/suggest?q=${encodeURIComponent(q)}&session_token=${session}&proximity=${m.lng.toFixed(4)},${m.lat.toFixed(4)}&limit=5`, { key: 'suggest' });
       const suggestions = features.map((f) => ({ id: f.id, name: f.properties.name, place_formatted: f.properties.place_formatted }));
       if (n !== seq) return;
       list.replaceChildren(...suggestions.map((s) => {
@@ -33,7 +33,8 @@ window.mxDemo = (c) => {
       marker = c.dot([lat, lng], '#2346d8').addTo(map).bindTooltip(c.text(s.name), { permanent: true, direction: 'top', offset: [0, -8] });
       map.setView([lat, lng], Math.min((f.properties.zoom ?? 15) + 1, 18), { animate: !c.reduce });
       list.replaceChildren(); input.value = s.name;
-      c.say(`${s.name}${s.place_formatted ? ', ' + s.place_formatted : ''} (${lat.toFixed(5)}, ${lng.toFixed(5)})`);
+      c.result({ title: s.name, rows: [[t('Ort', 'Place'), s.place_formatted || '–'], [t('Koordinaten', 'Coordinates'), `${lat.toFixed(5)}, ${lng.toFixed(5)}`]] });
+      c.say('');
     } catch (e) { c.fail(e); }
     session = crypto.randomUUID(); // die Sitzung endet mit retrieve
   }
