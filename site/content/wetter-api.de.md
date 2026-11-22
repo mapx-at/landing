@@ -12,7 +12,7 @@ description: "Wetter-API für Österreich: Messwerte, Stundenvorhersage, Nieders
 
 # Wetter-API für Österreich: Vorhersage, Nowcast, Luftqualität und Klima
 
-<p class="mx-lead">Die Wetter-API liefert aktuelle Messwerte, die Stundenvorhersage und den Niederschlags-Nowcast für einen Punkt, dazu amtliche Wetterwarnungen, die Luftqualität und Klimakennwerte. Wetterkacheln lassen sich als Ebene auf die Karte legen. Sie richtet sich an Entwickler von Wetter-, Tourismus-, Logistik- und Standortanwendungen in Österreich.</p>
+<p class="mx-lead">Die Wetter-API liefert aktuelle Messwerte, die Stundenvorhersage und den Niederschlags-Nowcast für einen Punkt, dazu Wetterwarnungen von GeoSphere Austria, die Luftqualität und Klimakennwerte. Wetterkacheln lassen sich als Ebene auf die Karte legen. Sie richtet sich an Entwickler von Wetter-, Tourismus-, Logistik- und Standortanwendungen in Österreich.</p>
 
 <div class="mx-btns">
 {{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}
@@ -26,7 +26,7 @@ description: "Wetter-API für Österreich: Messwerte, Stundenvorhersage, Nieders
 - `GET /v1/weather/current`: Messwerte der nächsten Stationen im 10-Minuten-Raster (Temperatur, Feuchte, Wind, Böen, Niederschlag, Luftdruck).
 - `GET /v1/weather/forecast`: Stundenvorhersage für einen Punkt, bis zu 60 Stunden, auf Wunsch mit Unsicherheitsbereich.
 - `GET /v1/weather/nowcast/{lon},{lat}`: Niederschlags-Nowcast in 15-Minuten-Schritten für 3 Stunden, mit Beginn und Ende des Niederschlags in Minuten.
-- `GET /v1/weather/warnings`: aktuelle und kommende amtliche Warnungen bis 4 Tage voraus als GeoJSON, Stufen 1 (gelb) bis 3 (rot).
+- `GET /v1/weather/warnings`: aktuelle und kommende Warnungen von GeoSphere Austria bis 4 Tage voraus als GeoJSON, Stufen 1 (gelb) bis 3 (rot).
 - `GET /v1/air-quality/{lon},{lat}`: Luftqualitätsindex, Stickstoffdioxid, Ozon, PM10, PM2.5 und Saharastaub.
 - `GET /v1/climate/{lon},{lat}`: Sonnenpotenzial, Temperatur- und Niederschlagsnormale, Hitze- und Schneetage, Dürreindex.
 - `GET /v1/weather/tiles/{param}.json`: Wetterkacheln wie Temperatur, Niederschlag, Wind oder Radar-Nowcast für die Karte.

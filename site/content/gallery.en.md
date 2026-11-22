@@ -12,7 +12,7 @@ description: "The ready-made mapx map styles at a glance: streets in four times 
 
 # Gallery
 
-<p class="mx-lead">The ready-made mapx map styles, each built from official data and added to MapLibre with one line. Pick a style to see it as a live map and copy its style URL.</p>
+<p class="mx-lead">The ready-made mapx map styles, each built from open government data and added to MapLibre with one line. Pick a style to see it as a live map and copy its style URL.</p>
 
 <div class="mx-btns">
 {{< hextra/hero-button text="Get started for free" link="https://account.mapx.at/login?lang=en" >}}

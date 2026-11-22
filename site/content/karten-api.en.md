@@ -7,7 +7,7 @@ translationKey: karten
 url: /en/maps-api/
 lastmod: 2026-11-17
 images: ["/img/og-image.png"]
-description: "Maps API for Austria: vector tiles, ready-made map styles for MapLibre, orthophoto and aerial imagery as tiles from official data. Free with a token."
+description: "Maps API for Austria: vector tiles, ready-made map styles for MapLibre, orthophoto and aerial imagery as tiles from open government data. Free with a token."
 ---
 
 # Maps API for Austria: vector tiles, map styles and orthophoto

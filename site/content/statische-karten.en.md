@@ -51,7 +51,7 @@ In an HTML page or e-mail the token goes into the URL (`access_token`), because 
 
 ## Where the data comes from
 
-The images are rendered from the same official data as the interactive map: the street styles from the vector basemap, `satellite` from the BEV orthophoto, `outdoors` from the BEV terrain model. The data is licensed under CC BY 4.0.
+The images are rendered from the same open government data as the interactive map: the street styles from the vector basemap, `satellite` from the BEV orthophoto, `outdoors` from the BEV terrain model. The data is licensed under CC BY 4.0.
 
 ## Limitations
 

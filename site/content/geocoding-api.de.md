@@ -7,7 +7,7 @@ translationKey: geocoding
 url: /geocoding-api/
 lastmod: 2026-11-17
 images: ["/img/og-image.png"]
-description: "Geocoding-API für Österreich: Adresssuche, Reverse Geocoding, Adress-Autofill und Adressprüfung gegen das amtliche Adressregister. Kostenlos mit Token."
+description: "Geocoding-API für Österreich: Adresssuche, Reverse Geocoding, Adress-Autofill und Adressprüfung gegen das Adressregister des BEV. Kostenlos mit Token."
 ---
 
 # Geocoding-API für Österreich: Adresssuche, Autofill und Adressprüfung
@@ -57,7 +57,7 @@ curl -s -H "Authorization: Bearer YOUR_TOKEN" "https://api.mapx.at/v1/address/va
 
 ## Woher die Daten kommen
 
-Adressen, Geographische Namen, und Verwaltungsgrenzen stammen vom Bundesamt für Eich- und Vermessungswesen (BEV) und stehen unter CC BY 4.0. Der Autofill verwendet ausschließlich das amtliche Adressregister des BEV. Orte von Interesse in der Suche stammen aus amtlichen Quellen, nicht aus OpenStreetMap.
+Adressen, Geographische Namen, und Verwaltungsgrenzen stammen vom Bundesamt für Eich- und Vermessungswesen (BEV) und stehen unter CC BY 4.0. Der Autofill verwendet ausschließlich das Adressregister des BEV. Orte von Interesse in der Suche stammen aus offenen Verwaltungsdaten, nicht aus OpenStreetMap.
 
 ## Einschränkungen
 
@@ -65,7 +65,7 @@ Adressen, Geographische Namen, und Verwaltungsgrenzen stammen vom Bundesamt für
 - Die Suche liegt in der Zone `search` mit 10 Anfragen pro Sekunde je Token, die Stapelabfrage in der Zone `heavy` mit 30 Anfragen pro Minute. Bei Überschreitung antwortet die API mit `429` und `Retry-After`.
 - Die Stapelabfrage nimmt höchstens 512 KB und 1000 Anfragen pro Aufruf.
 - Für günstige Abfragen immer `types` angeben.
-- Die Adressprüfung vergleicht mit dem amtlichen Register. Bei `ambiguous` liefert sie bis zu 5 Kandidaten statt einer Adresse.
+- Die Adressprüfung vergleicht mit dem Adressregister des BEV. Bei `ambiguous` liefert sie bis zu 5 Kandidaten statt einer Adresse.
 - Die Quelle muss sichtbar genannt werden, JSON-Antworten tragen dafür ein Feld `attribution`.
 
 ## Loslegen

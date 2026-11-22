@@ -74,7 +74,7 @@ The token way works with any MCP client, including Cursor, VS Code and Gemini CL
 
 ## Where the data comes from
 
-The tools use the same datasets as the mapx APIs: addresses and elevation from the BEV, road graph from GIP.at, timetable from ÖBB-Personenverkehr AG, traffic reports from ASFINAG / EVIS.AT, weather, climate and air quality from GeoSphere Austria. Only official open data is used, no OpenStreetMap. Every answer names its source; pass it on when you publish results.
+The tools use the same datasets as the mapx APIs: addresses and elevation from the BEV, road graph from GIP.at, timetable from ÖBB-Personenverkehr AG, traffic reports from ASFINAG / EVIS.AT, weather, climate and air quality from GeoSphere Austria. Only open government data is used, no OpenStreetMap. Every answer names its source; pass it on when you publish results.
 
 ## Limitations
 

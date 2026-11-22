@@ -1,6 +1,6 @@
 # mapx
 
-> mapx provides maps and location APIs for Austria, built exclusively from official open data (BEV, GIP.at, Umweltbundesamt, Statistik Austria; mostly CC BY 4.0). It does not use OpenStreetMap. Products: vector map tiles and styles, search and geocoding, routing, elevation, public transit departures, traffic, static map images, and weather and climate. Access is free with an account and an API token.
+> mapx provides maps and location APIs for Austria, built exclusively from open government data (BEV, GIP.at, Umweltbundesamt, Statistik Austria; mostly CC BY 4.0). It does not use OpenStreetMap. Products: vector map tiles and styles, search and geocoding, routing, elevation, public transit departures, traffic, static map images, and weather and climate. Access is free with an account and an API token.
 
 Contact: support@mapx.at. The website is available in German (https://mapx.at/) and English (https://mapx.at/en/).
 

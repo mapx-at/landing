@@ -12,7 +12,7 @@ description: "Weather API for Austria: observations, hourly forecast, precipitat
 
 # Weather API for Austria: forecast, nowcast, air quality and climate
 
-<p class="mx-lead">The weather API returns current observations, the hourly forecast and the precipitation nowcast for a point, plus official weather warnings, air quality and climate figures. Weather tiles can be laid over the map as a layer. It is meant for developers of weather, tourism, logistics and site-analysis applications in Austria.</p>
+<p class="mx-lead">The weather API returns current observations, the hourly forecast and the precipitation nowcast for a point, plus weather warnings from GeoSphere Austria, air quality and climate figures. Weather tiles can be laid over the map as a layer. It is meant for developers of weather, tourism, logistics and site-analysis applications in Austria.</p>
 
 <div class="mx-btns">
 {{< hextra/hero-button text="Get started free" link="https://account.mapx.at/login?lang=en" >}}
@@ -26,7 +26,7 @@ description: "Weather API for Austria: observations, hourly forecast, precipitat
 - `GET /v1/weather/current`: observations of the nearest stations in a 10-minute grid (temperature, humidity, wind, gusts, precipitation, pressure).
 - `GET /v1/weather/forecast`: hourly forecast for a point, up to 60 hours, optionally with an uncertainty range.
 - `GET /v1/weather/nowcast/{lon},{lat}`: precipitation nowcast in 15-minute steps for 3 hours, with the start and end of precipitation in minutes.
-- `GET /v1/weather/warnings`: current and upcoming official warnings up to 4 days ahead as GeoJSON, levels 1 (yellow) to 3 (red).
+- `GET /v1/weather/warnings`: current and upcoming warnings from GeoSphere Austria up to 4 days ahead as GeoJSON, levels 1 (yellow) to 3 (red).
 - `GET /v1/air-quality/{lon},{lat}`: air quality index, nitrogen dioxide, ozone, PM10, PM2.5 and Saharan dust.
 - `GET /v1/climate/{lon},{lat}`: solar potential, temperature and precipitation normals, hot and snow days, drought index.
 - `GET /v1/weather/tiles/{param}.json`: weather tiles such as temperature, precipitation, wind or radar nowcast for the map.

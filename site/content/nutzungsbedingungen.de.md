@@ -20,7 +20,7 @@ mapx ist ein kostenloser Dienst im Aufbau (Beta). Wir stellen ihn bereit, „wie
 
 ## 3. Daten ohne Gewähr
 
-Die Inhalte stammen aus amtlichen und anderen Quellen Dritter (siehe [Datenquellen und Attribution](https://docs.mapx.at/de/reference/attribution/)) und werden automatisch verarbeitet. Wir geben keine Gewähr und keine Zusicherung für Richtigkeit, Vollständigkeit, Aktualität, Lagegenauigkeit oder Eignung für einen bestimmten Zweck.
+Die Inhalte stammen aus offenen Verwaltungsdaten und anderen Quellen Dritter (siehe [Datenquellen und Attribution](https://docs.mapx.at/de/reference/attribution/)) und werden automatisch verarbeitet. Wir geben keine Gewähr und keine Zusicherung für Richtigkeit, Vollständigkeit, Aktualität, Lagegenauigkeit oder Eignung für einen bestimmten Zweck.
 
 Das gilt ausdrücklich für Adressen, Routen, Fahrzeiten, Abfahrten (Fahrplan-Soll, keine Echtzeit), Tempolimits, Verkehrsmeldungen, Höhen, Wetter und Wetterwarnungen sowie Luftqualität. Sie können falsch, veraltet oder unvollständig sein.
 

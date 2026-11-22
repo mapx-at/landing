@@ -7,7 +7,7 @@ translationKey: karten
 url: /karten-api/
 lastmod: 2026-11-17
 images: ["/img/og-image.png"]
-description: "Karten-API für Österreich: Vektorkacheln, fertige Kartenstile für MapLibre, Orthofoto und Luftbild als Kacheln aus amtlichen Daten. Kostenlos mit Token."
+description: "Karten-API für Österreich: Vektorkacheln, fertige Kartenstile für MapLibre, Orthofoto und Luftbild als Kacheln aus offenen Verwaltungsdaten. Kostenlos mit Token."
 ---
 
 # Karten-API für Österreich: Vektorkacheln, Kartenstile und Orthofoto

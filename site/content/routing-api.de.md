@@ -58,7 +58,7 @@ curl -s -H "Authorization: Bearer YOUR_TOKEN" "https://api.mapx.at/v1/matrix/dri
 
 ## Woher die Daten kommen
 
-Das Routing rechnet auf dem Routingexport der Graphenintegrations-Plattform GIP.at (CC BY 4.0). Die Mautdaten stammen von der ASFINAG (CC BY 4.0). Die Quelle ist amtlich, OpenStreetMap kommt nicht zum Einsatz.
+Das Routing rechnet auf dem Routingexport der Graphenintegrations-Plattform GIP.at (CC BY 4.0). Die Mautdaten stammen von der ASFINAG (CC BY 4.0). Die Quelle sind offene Verwaltungsdaten, OpenStreetMap kommt nicht zum Einsatz.
 
 ## Einschränkungen
 

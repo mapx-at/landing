@@ -51,7 +51,7 @@ In einer HTML-Seite oder E-Mail steht der Token in der URL (`access_token`), wei
 
 ## Woher die Daten kommen
 
-Die Bilder werden aus denselben amtlichen Daten gerendert wie die interaktive Karte: die Straßenstile aus der Vektor-Basiskarte, `satellite` aus dem Orthofoto des BEV, `outdoors` aus dem Geländemodell des BEV. Die Daten stehen unter CC BY 4.0.
+Die Bilder werden aus denselben offenen Verwaltungsdaten gerendert wie die interaktive Karte: die Straßenstile aus der Vektor-Basiskarte, `satellite` aus dem Orthofoto des BEV, `outdoors` aus dem Geländemodell des BEV. Die Daten stehen unter CC BY 4.0.
 
 ## Einschränkungen
 
