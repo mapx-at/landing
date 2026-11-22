@@ -93,7 +93,7 @@ nav a[href*="account.mapx.at/login"]:hover{background:#0853c4}
 .mx-demo-range{flex:1 1 14rem;min-width:0}.mx-demo-range input{flex:1 1 6rem;min-width:0;max-width:16rem}
 .mx-demo-range output{font-variant-numeric:tabular-nums}
 /* Overlay unten: Ergebnis-Karte (Bottom-Sheet, höchstens 40 % der Höhe) */
-.mx-demo-sheet{position:absolute;left:.5rem;bottom:1.6rem;z-index:800;max-width:min(26rem,calc(100% - 1rem));max-height:40%;overflow:auto;background:var(--mx-ov);color:var(--mx-ov-fg);border-radius:.75rem;box-shadow:var(--mx-shadow);padding:.45rem .7rem;font-size:.875rem;line-height:1.35}
+.mx-demo-sheet{position:absolute;left:.5rem;bottom:calc(var(--mx-attr-h,1.25rem) + .5rem);z-index:800;max-width:min(26rem,calc(100% - 1rem));max-height:40%;overflow:auto;background:var(--mx-ov);color:var(--mx-ov-fg);border-radius:.75rem;box-shadow:var(--mx-shadow);padding:.45rem .7rem;font-size:.875rem;line-height:1.35}
 .mx-demo-frame-free .mx-demo-sheet{bottom:.5rem}
 .mx-demo-res-title{margin:0 0 .25rem;font-weight:600}
 .mx-demo-chips{display:flex;flex-wrap:wrap;gap:.3rem;margin:0 0 .2rem}
@@ -125,7 +125,7 @@ nav a[href*="account.mapx.at/login"]:hover{background:#0853c4}
 .mx-topic .content .mx-demo-code pre{margin:0 0 .4rem;padding:0;background:none;white-space:pre-wrap;word-break:break-all;font-size:.75rem}
 .mx-demo-code a{text-decoration:underline;text-underline-offset:2px}
 .mx-topic .content .mx-demo-code code{background:none;border:0;padding:0;font-size:inherit}
-@media(max-width:640px){.mx-demo-sheet{bottom:2.6rem;max-height:35%}}
+@media(max-width:640px){.mx-demo-sheet{max-height:calc(45% - var(--mx-attr-h,1.25rem))}}
 .mx-demo-chart{display:block;width:100%;height:auto;margin-top:.6rem;color:inherit}
 .mx-demo-url{white-space:pre-wrap;word-break:break-all;font-size:.75rem;padding:.5rem .7rem;border-radius:.5rem;background:rgb(156 163 175 / .15);margin:0 0 .6rem}
 .mx-topic .content .mx-demo-stage>img.mx-demo-static{display:block;max-width:100%;height:auto;margin:0 auto;object-fit:contain}
@@ -434,3 +434,44 @@ nav a[href*="account.mapx.at/login"]:hover{background:#0853c4}
   .dark .mx-hend-text{background:linear-gradient(rgb(17 17 17 / 0),rgb(17 17 17 / .9) 42%,#111)}
 }
 @media(prefers-reduced-motion:reduce){.mx-hgo,.mx-harr,.mx-hcard img,.mx-hprod,.mx-hbtn,.mx-hjs .mx-hslide,.mx-hdot span{transition:none}.mx-hcard:hover img{transform:none}.mx-htrack{scroll-behavior:auto}}
+/* Paket 2: Abfahrtstafel im Bottom-Sheet */
+.mx-dep-title{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem}.mx-dep-title small{font-weight:400;font-size:.75rem;opacity:.7;white-space:nowrap}
+.mx-dep{list-style:none;margin:0;padding:0;min-width:min(20rem,calc(100vw - 4rem))}
+.mx-dep li{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:.5rem;padding:.18rem 0;max-height:2.2rem;overflow:hidden;transition:transform .5s ease,opacity .5s ease,max-height .5s ease .1s,padding .5s ease .1s}
+.mx-dep li+li{border-top:1px solid rgb(156 163 175 / .2)}
+.mx-dep li.mx-in{opacity:0;transform:translateY(.5rem)}
+.mx-dep li.mx-out{opacity:0;transform:translateX(-110%);max-height:0;padding:0}
+.mx-dep-line{min-width:2.4rem;text-align:center;padding:.05rem .4rem;border-radius:.35rem;color:#fff;font-weight:700;font-size:.75rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.mx-dep-to{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.mx-dep-min{font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+/* Paket 3: Routen überblenden, Pins A/B */
+.mx-demo path.mx-rt{opacity:.22;transition:opacity .45s ease}.mx-demo path.mx-rt.mx-rt-on{opacity:1}
+.mx-pin{background:none;border:0}
+.mx-pin span{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid #fff;box-shadow:var(--mx-shadow);cursor:grab}
+.mx-pin-a span{background:var(--mx-start)}.mx-pin-b span{background:var(--mx-end)}
+.mx-pin span{color:#fff;font-weight:700;font-size:.8125rem;line-height:1}
+.mx-pin b{transform:rotate(45deg)}
+/* Paket 4: Höhenprofil */
+.mx-prof{position:relative;margin-top:.6rem}.mx-prof .mx-demo-chart{margin-top:0;cursor:crosshair;touch-action:pan-y}
+@media(prefers-reduced-motion:reduce){.mx-dep li,.mx-demo path.mx-rt{transition:none}}
+/* Handy: größerer Rahmen bis an den Bildschirmrand, höchstens ~72 % der sichtbaren Höhe */
+@media(max-width:767px){.mx-demo-frame{aspect-ratio:4/5;max-height:72vh;max-height:72svh;margin-inline:calc(50% - 50vw);width:100vw;border-radius:0;border-inline:0}}
+@media(pointer:coarse) and (min-width:768px){.mx-demo-frame{max-height:75vh;max-height:75svh}}
+/* Vollbild (Fullscreen-API oder fixiertes Overlay als Ersatz) */
+.mx-demo-frame.mx-demo-fs{position:fixed;inset:0;z-index:10000;width:100vw;height:100vh;height:100dvh;max-height:none;aspect-ratio:auto;margin:0;border:0;border-radius:0;background:#e5e7eb}
+.mx-demo-frame:fullscreen{width:100%;height:100%;max-height:none;aspect-ratio:auto;margin:0;border:0;border-radius:0}
+html.mx-demo-fs-lock,html.mx-demo-fs-lock body{overflow:hidden}
+.mx-demo .leaflet-bar a.mx-demo-fsbtn{display:flex;align-items:center;justify-content:center;color:inherit}
+.mx-demo-fsbtn svg{width:16px;height:16px}
+.mx-demo-fsclose{position:absolute;right:.5rem;bottom:calc(var(--mx-attr-h,1.25rem) + .5rem);z-index:960;min-width:44px;min-height:44px;border-radius:9999px;background:var(--mx-ov);color:var(--mx-ov-fg);box-shadow:var(--mx-shadow);font-weight:600;padding:0 1rem}
+/* Touch-Ziele mindestens 44 px */
+@media(pointer:coarse){
+.mx-demo-btn,.mx-demo-seg button{min-height:44px}.mx-demo-seg button,.mx-demo-btn{padding:.3rem .9rem;display:inline-flex;align-items:center}
+.mx-demo .leaflet-touch .leaflet-bar a{width:44px;height:44px;line-height:44px}
+.mx-demo input[type=range]{-webkit-appearance:none;appearance:none;height:44px;background:transparent}
+.mx-demo input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:rgb(156 163 175 / .6)}
+.mx-demo input[type=range]::-moz-range-track{height:6px;border-radius:3px;background:rgb(156 163 175 / .6)}
+.mx-demo input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;margin-top:-19px;border-radius:50%;background:var(--mx-accent);border:8px solid transparent;background-clip:padding-box;box-sizing:content-box}
+.mx-demo input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:var(--mx-accent);border:8px solid transparent;background-clip:padding-box;box-sizing:content-box}
+}
+.mx-pin{display:flex;align-items:flex-end;justify-content:center}
