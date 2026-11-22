@@ -10,9 +10,9 @@ images: ["/img/og-image.png"]
 description: "MCP server for Austrian geodata: AI assistants such as Claude Code, Cursor and VS Code use mapx addresses, routes, weather and traffic directly."
 faq:
   - q: "What is an MCP server?"
-    a: "MCP stands for Model Context Protocol, an open standard through which AI assistants call external tools. The mapx MCP server provides 21 tools for Austrian geodata. The assistant picks them itself and fills them in from your question."
+    a: "MCP stands for Model Context Protocol, an open standard through which AI assistants call external tools. The mapx MCP server provides 22 tools for Austrian geodata. The assistant picks them itself and fills them in from your question."
   - q: "Can the assistant change anything?"
-    a: "No. All 21 tools are read-only. The assistant can query data, but cannot create, change or delete anything."
+    a: "No. All 22 tools are read-only. The assistant can query data, but cannot create, change or delete anything."
   - q: "Which assistants work?"
     a: "claude.ai, ChatGPT and Claude Code sign in directly through your mapx account, without a token. Cursor, VS Code, Gemini CLI and other clients, as well as the Anthropic and OpenAI APIs, use a token."
   - q: "What does it cost?"
@@ -44,13 +44,13 @@ The assistant picks the matching tools itself and combines the results into an a
 
 ## The tools
 
-There are 21 tools, all read-only, in seven groups:
+There are 22 tools, all read-only, in seven groups:
 
 - **Addresses and places:** `geocode`, `reverse_geocode`, `validate_address`, `search_places`, `list_place_categories`.
 - **Routes and reachability:** `route` for car, truck, bike and foot, `isochrone`, `travel_matrix`, `optimize_stops`.
 - **Public transport:** `transit_route`, `departures`, `find_stops`. Based on the timetable, not real time.
 - **Elevation:** `elevation`, `elevation_profile`.
-- **Traffic:** `traffic_incidents`, `speed_limits`.
+- **Traffic:** `traffic_incidents`, `speed_limits`, `sign_limits`.
 - **Weather and climate:** `weather`, `weather_warnings`, `climate`, `air_quality`.
 - **Map image:** `static_map`.
 

@@ -26,7 +26,7 @@ faq:
   - q: "Kann ich die Kacheln herunterladen?"
     a: "Nein. Karten und Kacheln bekommst du über die API: Stil, TileJSON oder `{z}/{x}/{y}`, siehe [Karten](https://docs.mapx.at/de/guides/maps/) und [QGIS](https://docs.mapx.at/de/guides/qgis/)."
   - q: "Kann ich mapx in einem KI-Assistenten nutzen?"
-    a: "Ja, über den gehosteten MCP-Server `https://mcp.mapx.at/mcp` mit 21 nur lesenden Werkzeugen. In claude.ai, ChatGPT und Claude Code trägst du nur die Adresse ein und meldest dich mit deinem Konto an; für andere Clients brauchst du einen Token vom Typ „KI-Assistent (MCP)“. Mehr auf der Seite [MCP-Server](/mcp-server/)."
+    a: "Ja, über den gehosteten MCP-Server `https://mcp.mapx.at/mcp` mit 22 nur lesenden Werkzeugen. In claude.ai, ChatGPT und Claude Code trägst du nur die Adresse ein und meldest dich mit deinem Konto an; für andere Clients brauchst du einen Token vom Typ „KI-Assistent (MCP)“. Mehr auf der Seite [MCP-Server](/mcp-server/)."
   - q: "Was ist der Unterschied zwischen DTM und DSM?"
     a: "Das DTM ist der nackte Boden, das DSM enthält Bäume und Gebäude. Nimm das DTM für Steigungen und Profile, das DSM für Sichtbarkeit und Gebäudehöhen. Mehr auf der Seite [Höhe und Gelände](/hoehen-api/)."
   - q: "Warum bekomme ich 401 oder 403?"

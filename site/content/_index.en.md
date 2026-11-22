@@ -52,7 +52,7 @@ home:
       - {key: verkehr, img: verkehr, t: "Traffic", p: "Traffic reports, roadworks and closures, motorway speed limits and a traffic layer.", m: "ASFINAG / EVIS.AT · CC BY 4.0"}
       - {key: statisch, img: statisch, t: "Static map images", p: "A map as PNG or WebP with pins, paths and GeoJSON, for reports and e-mails.", m: "up to 1280 × 1280 pixels"}
       - {key: wetter, img: wetter, t: "Weather and climate", p: "Observations, hourly forecast, precipitation nowcast, warnings and air quality for a point.", m: "GeoSphere Austria · CC BY 4.0"}
-      - {key: mcp, size: w, t: "MCP server for AI assistants", p: "21 read-only tools for addresses, routes, weather and more, right inside Claude Code, Cursor and VS Code.", m: "MCP · Streamable HTTP"}
+      - {key: mcp, size: w, t: "MCP server for AI assistants", p: "22 read-only tools for addresses, routes, weather and more, right inside Claude Code, Cursor and VS Code.", m: "MCP · Streamable HTTP"}
     mcp_label: "Example: a question to an AI assistant that uses the mapx MCP server"
     mcp_q: "How do I get from Melk to Krems at 8 tomorrow morning?"
     mcp_tool: "transit_route"

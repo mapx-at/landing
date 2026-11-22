@@ -26,7 +26,7 @@ faq:
   - q: "Can I download the tiles?"
     a: "No. You get maps and tiles through the API: style, TileJSON or `{z}/{x}/{y}`, see [Maps](https://docs.mapx.at/guides/maps/) and [QGIS](https://docs.mapx.at/guides/qgis/)."
   - q: "Can I use mapx in an AI assistant?"
-    a: "Yes, through the hosted MCP server `https://mcp.mapx.at/mcp` with 21 read-only tools. In claude.ai, ChatGPT and Claude Code you only enter the address and sign in with your account; other clients need a token of the type \"AI assistant (MCP)\". More on the [MCP server](/en/mcp-server/) page."
+    a: "Yes, through the hosted MCP server `https://mcp.mapx.at/mcp` with 22 read-only tools. In claude.ai, ChatGPT and Claude Code you only enter the address and sign in with your account; other clients need a token of the type \"AI assistant (MCP)\". More on the [MCP server](/en/mcp-server/) page."
   - q: "What is the difference between DTM and DSM?"
     a: "The DTM is bare ground, the DSM includes trees and buildings. Use the DTM for gradients and profiles, the DSM for visibility and building heights. More on the page [Elevation and terrain](/en/elevation-api/)."
   - q: "Why do I get 401 or 403?"
