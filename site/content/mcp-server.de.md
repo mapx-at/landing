@@ -74,7 +74,7 @@ Der Token-Weg funktioniert mit jedem MCP-Client, auch mit Cursor, VS Code und Ge
 
 ## Woher die Daten kommen
 
-Die Werkzeuge greifen auf dieselben Datensätze zu wie die mapx-APIs: Adressen und Höhen vom BEV, Straßengraph von GIP.at, Fahrplan der ÖBB-Personenverkehr AG, Verkehrsmeldungen von ASFINAG / EVIS.AT, Wetter, Klima und Luftqualität von GeoSphere Austria. Es kommen nur amtliche offene Daten zum Einsatz, kein OpenStreetMap. Jede Antwort nennt ihre Quelle, gib sie weiter, wenn du Ergebnisse veröffentlichst.
+Die Werkzeuge greifen auf dieselben Datensätze zu wie die mapx-APIs: Adressen und Höhen vom BEV, Straßengraph von GIP.at, Fahrplan der ÖBB-Personenverkehr AG, Verkehrsmeldungen von ASFINAG / EVIS.AT, Wetter, Klima und Luftqualität von GeoSphere Austria. Es kommen nur offene Verwaltungsdaten zum Einsatz, kein OpenStreetMap. Jede Antwort nennt ihre Quelle, gib sie weiter, wenn du Ergebnisse veröffentlichst.
 
 ## Einschränkungen
 

@@ -17,13 +17,13 @@
     place: Wien Innenstadt
     alt: "Stil streets: Wiener Innenstadt mit Straßen, Gebäuden und Namen"
     short: "Die Basiskarte mit Straßen, Orten und Gebäuden, in vier Tageszeiten."
-    text: "Baut auf der Vektor-Basiskarte aus amtlichen Daten auf: Straßen und Bahn aus GIP.at, Gebäude, Adressen und Namen des BEV, Gewässer des Umweltbundesamts. Gedacht als ruhiger Hintergrund zum Suchen, Orientieren und für eigene Punkte. Morgen, Abend und Nacht färben dieselbe Karte nach dem Licht um; die Nacht passt zu Seiten mit dunklem Design."
+    text: "Baut auf der Vektor-Basiskarte aus offenen Verwaltungsdaten auf: Straßen und Bahn aus GIP.at, Gebäude, Adressen und Namen des BEV, Gewässer des Umweltbundesamts. Gedacht als ruhiger Hintergrund zum Suchen, Orientieren und für eigene Punkte. Morgen, Abend und Nacht färben dieselbe Karte nach dem Licht um; die Nacht passt zu Seiten mit dunklem Design."
   en:
     name: Streets
     place: Vienna city centre
     alt: "Style streets: Vienna city centre with roads, buildings and names"
     short: "The base map with roads, places and buildings, in four times of day."
-    text: "Built on the vector base map from official data: roads and rail from GIP.at, buildings, addresses and names from BEV, water bodies from the Environment Agency Austria. Meant as a calm background for search, orientation and your own points. Dawn, dusk and night recolour the same map to match the light; night suits pages with a dark design."
+    text: "Built on the vector base map from open government data: roads and rail from GIP.at, buildings, addresses and names from BEV, water bodies from the Environment Agency Austria. Meant as a calm background for search, orientation and your own points. Dawn, dusk and night recolour the same map to match the light; night suits pages with a dark design."
 - key: light
   img: light
   center: [15.4385, 47.0710]
@@ -94,8 +94,8 @@
       en: Winter
       map: ""
       text:
-        de: "Dieselbe Geländekarte für die Wintersaison: Schummerung und Höhenlinien aus dem amtlichen Geländemodell, Gipfel und Wege bleiben, die Palette wechselt auf Weiß und Blaugrau mit eisblauen Gletschern. Zusätzlich hervorgehoben sind Skigebiete sowie Seilbahnen und Lifte."
-        en: "The same terrain map for the winter season: hillshade and contours from the official terrain model, peaks and trails remain, the palette changes to white and blue-grey with icy glaciers. Ski areas, cable cars and lifts are additionally highlighted."
+        de: "Dieselbe Geländekarte für die Wintersaison: Schummerung und Höhenlinien aus dem Geländemodell des BEV, Gipfel und Wege bleiben, die Palette wechselt auf Weiß und Blaugrau mit eisblauen Gletschern. Zusätzlich hervorgehoben sind Skigebiete sowie Seilbahnen und Lifte."
+        en: "The same terrain map for the winter season: hillshade and contours from the BEV terrain model, peaks and trails remain, the palette changes to white and blue-grey with icy glaciers. Ski areas, cable cars and lifts are additionally highlighted."
   de:
     name: Gelände
     place: Sölden

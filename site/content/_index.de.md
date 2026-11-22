@@ -1,18 +1,18 @@
 ---
-title: "mapx – Karten und Geo-APIs für Österreich aus amtlichen Daten"
+title: "mapx – Karten und Geo-APIs für Österreich aus offenen Verwaltungsdaten"
 lastmod: 2026-11-21
 images: ["/img/og-image.png"]
-description: "mapx: Karten und Geo-APIs für Österreich aus amtlichen Daten. Geocoding, Routing, Höhen, Karten, ÖV, Verkehr, Wetter. Kostenlos mit Konto und Token."
+description: "mapx: Karten und Geo-APIs für Österreich aus offenen Verwaltungsdaten. Geocoding, Routing, Höhen, Karten, ÖV, Verkehr, Wetter. Kostenlos mit Konto und Token."
 layout: hextra-home
 # Alle Texte der Startseite stehen hier, das Layout (layouts/hextra-home.html) baut daraus die Seite.
 # Kartenstile und 3D-Bilder kommen aus data/gallery.yaml, Produktbilder aus data/demos.yaml, Pfade aus data/topics.yaml.
 home:
   hero:
-    h1: "Österreich als Karte, aus amtlichen Daten."
+    h1: "Österreich als Karte, aus offenen Verwaltungsdaten."
     p: "Karten, Adressen, Routen, Höhen, Fahrplan und Wetter als API für deine Anwendung. Kostenlos mit Konto."
     start: "Kostenlos starten"
     map: "Karte öffnen"
-    trust: "Amtliche offene Daten von BEV, GIP.at, GeoSphere Austria, ASFINAG und ÖBB"
+    trust: "Offene Verwaltungsdaten von BEV, GIP.at, GeoSphere Austria, ASFINAG und ÖBB"
     chips_label: "Kartenstile im Wechsel"
     move: "Live-Karte öffnen"
     # Schaufenster: id = Bild in static/lp/img/gallery/ (bewusst andere Bilder als im Stile-Raster darunter, kein Motiv doppelt)
@@ -97,7 +97,7 @@ home:
   data:
     eye: "Daten"
     h2: "Jede Angabe mit Quelle und Stichtag"
-    p: "Ausschließlich offene Daten österreichischer Behörden, kein OpenStreetMap. So nennst du für jeden Datensatz Herausgeber, Stichtag und Lizenz."
+    p: "Ausschließlich offene Verwaltungsdaten aus Österreich, kein OpenStreetMap. So nennst du für jeden Datensatz Herausgeber, Stichtag und Lizenz."
     items:
       - {t: "BEV", p: "Adressen, Gebäude und Bodennutzung, Gelände, Orthofoto"}
       - {t: "GIP.at", p: "Straßen, Bahn, Routing"}

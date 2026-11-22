@@ -12,7 +12,7 @@ description: "Die fertigen Kartenstile von mapx auf einen Blick: Straßen in vie
 
 # Galerie
 
-<p class="mx-lead">Die fertigen Kartenstile von mapx, jeder aus amtlichen Daten gebaut und mit einer Zeile in MapLibre eingebunden. Wähle einen Stil, um ihn als Live-Karte anzusehen und die Stil-Adresse zu kopieren.</p>
+<p class="mx-lead">Die fertigen Kartenstile von mapx, jeder aus offenen Verwaltungsdaten gebaut und mit einer Zeile in MapLibre eingebunden. Wähle einen Stil, um ihn als Live-Karte anzusehen und die Stil-Adresse zu kopieren.</p>
 
 <div class="mx-btns">
 {{< hextra/hero-button text="Kostenlos starten" link="https://account.mapx.at/login?lang=de" >}}

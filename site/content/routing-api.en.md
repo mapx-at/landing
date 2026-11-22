@@ -58,7 +58,7 @@ curl -s -H "Authorization: Bearer YOUR_TOKEN" "https://api.mapx.at/v1/matrix/dri
 
 ## Where the data comes from
 
-Routing runs on the routing export of the Graph Integration Platform GIP.at (CC BY 4.0). Toll data comes from ASFINAG (CC BY 4.0). The source is official, OpenStreetMap is not used.
+Routing runs on the routing export of the Graph Integration Platform GIP.at (CC BY 4.0). Toll data comes from ASFINAG (CC BY 4.0). The source is open government data, OpenStreetMap is not used.
 
 ## Limitations
 

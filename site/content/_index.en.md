@@ -1,17 +1,17 @@
 ---
-title: "mapx – Maps and geo APIs for Austria from official data"
+title: "mapx – Maps and geo APIs for Austria from open government data"
 lastmod: 2026-11-21
 images: ["/img/og-image.png"]
-description: "mapx: maps and geo APIs for Austria from official data. Geocoding, routing, elevation, maps, transit, traffic, weather. Free with account and token."
+description: "mapx: maps and geo APIs for Austria from open government data. Geocoding, routing, elevation, maps, transit, traffic, weather. Free with account and token."
 layout: hextra-home
 # All texts of the home page live here; layouts/hextra-home.html builds the page (see _index.de.md).
 home:
   hero:
-    h1: "The map of Austria, from official data."
+    h1: "The map of Austria, from open government data."
     p: "Maps, addresses, routes, elevation, timetables and weather as an API for your application. Free with an account."
     start: "Start for free"
     map: "Open map"
-    trust: "Open official data from BEV, GIP.at, GeoSphere Austria, ASFINAG and ÖBB"
+    trust: "Open government data from BEV, GIP.at, GeoSphere Austria, ASFINAG and ÖBB"
     chips_label: "Map styles in rotation"
     move: "Open live map"
     styles:
@@ -95,7 +95,7 @@ home:
   data:
     eye: "Data"
     h2: "Every dataset with its source and reference date"
-    p: "Only open data from Austrian public authorities, no OpenStreetMap. So you can name the publisher, reference date and licence of every dataset."
+    p: "Only Austrian open government data, no OpenStreetMap. So you can name the publisher, reference date and licence of every dataset."
     items:
       - {t: "BEV", p: "Addresses, buildings and land use, terrain, orthophoto"}
       - {t: "GIP.at", p: "Roads, rail, routing"}

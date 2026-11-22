@@ -16,7 +16,7 @@ faq:
   - q: "Ist kommerzielle Nutzung erlaubt?"
     a: "Ja. Die Daten stehen unter [CC BY 4.0](https://docs.mapx.at/de/reference/attribution/): Du nennst die Quelle, alles andere ist frei. Die Quellenangabe muss für die Nutzer der Karte sichtbar sein, nicht nur im Impressum."
   - q: "Verwendet mapx OpenStreetMap?"
-    a: "Nein. mapx baut ausschließlich auf amtlichen offenen Daten auf, zum Beispiel von BEV, GIP.at, ASFINAG und GeoSphere Austria."
+    a: "Nein. mapx baut ausschließlich auf offenen Verwaltungsdaten auf, zum Beispiel von BEV, GIP.at, ASFINAG und GeoSphere Austria."
   - q: "Wie aktuell sind die Daten?"
     a: "Jedes Tileset hat ein Quelldatum. Es steht auf seiner Seite unter [Tilesets](https://docs.mapx.at/de/tilesets/) und im Feld `stand` von `GET /v1/tiles`."
   - q: "Ändert sich eine URL, wenn es neue Daten gibt?"

@@ -16,7 +16,7 @@ faq:
   - q: "May I use it commercially?"
     a: "Yes. The data is licensed under [CC BY 4.0](https://docs.mapx.at/reference/attribution/): you name the source, everything else is free. The attribution must be visible to the users of the map, not only in the imprint."
   - q: "Does mapx use OpenStreetMap?"
-    a: "No. mapx is built exclusively on official open data, for example from BEV, GIP.at, ASFINAG and GeoSphere Austria."
+    a: "No. mapx is built exclusively on open government data, for example from BEV, GIP.at, ASFINAG and GeoSphere Austria."
   - q: "How current is the data?"
     a: "Each tileset has a source date. It is shown on its page under [Tilesets](https://docs.mapx.at/tilesets/) and in the `stand` field of `GET /v1/tiles`."
   - q: "Does a URL change when there is new data?"

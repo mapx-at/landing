@@ -7,7 +7,7 @@ translationKey: geocoding
 url: /en/geocoding-api/
 lastmod: 2026-11-17
 images: ["/img/og-image.png"]
-description: "Geocoding API for Austria: address search, reverse geocoding, address autofill and address validation against the official address register. Free with a token."
+description: "Geocoding API for Austria: address search, reverse geocoding, address autofill and address validation against the BEV address register. Free with a token."
 ---
 
 # Geocoding API for Austria: address search, autofill and validation
@@ -57,7 +57,7 @@ curl -s -H "Authorization: Bearer YOUR_TOKEN" "https://api.mapx.at/v1/address/va
 
 ## Where the data comes from
 
-Addresses, geographic names, and administrative boundaries come from the Federal Office of Metrology and Surveying (BEV) and are licensed under CC BY 4.0. The autofill uses only the official address register of the BEV. Points of interest in the search come from official sources, not from OpenStreetMap.
+Addresses, geographic names, and administrative boundaries come from the Federal Office of Metrology and Surveying (BEV) and are licensed under CC BY 4.0. The autofill uses only the BEV address register. Points of interest in the search come from open government data, not from OpenStreetMap.
 
 ## Limitations
 
@@ -65,7 +65,7 @@ Addresses, geographic names, and administrative boundaries come from the Federal
 - The search falls into the zone `search` with 10 requests per second per token, the batch request into the zone `heavy` with 30 requests per minute. When you exceed a limit the API answers `429` with `Retry-After`.
 - The batch request takes at most 512 KB and 1000 requests per call.
 - Always pass `types` to keep queries cheap.
-- Address validation compares with the official register. For `ambiguous` it returns up to 5 candidates instead of one address.
+- Address validation compares with the BEV address register. For `ambiguous` it returns up to 5 candidates instead of one address.
 - The source must be shown visibly, JSON responses carry an `attribution` field for this.
 
 ## Get started
