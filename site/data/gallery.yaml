@@ -225,6 +225,8 @@
   bearing: -20
   maxPitch: 78   # darüber schneidet MapLibre das Gelände am Horizont ab, Gebäude auf den Hügeln schweben dann
   lod: [3, 6]   # höchstens drei Zoomstufen im Bild: sonst lädt MapLibre für die Ferne z11/z12-Kacheln ohne Gebäude
+  extrude: 12   # Körper schon aus z12-Kacheln (Höhen ab z12): mit minzoom 13 der Stilebene baut MapLibre für z12-Kacheln in der Ferne keine Körper, dort blieb alles flach
+  minZoom: 14   # nicht weiter hinaus: darunter kämen z11-Kacheln ohne Gebäude ins Bild
   variants:
     - {id: streets-3d, de: Tag, en: Day, map: "", default: true}
     - {id: streets-night-3d, de: Nacht, en: Night, map: ""}

@@ -74,7 +74,7 @@
       if (!dlg.open || card !== c) return;
       if (map) map.remove();
       map = new m.Map({
-        container: $('.mx-gmap'), style: data.api + style, center: c.center, zoom: c.variants.find((x) => x.id === style)?.zoom || c.zoom, pitch: c.pitch, bearing: c.bearing, maxPitch: d3 ? (c.maxPitch || 82) : 60,
+        container: $('.mx-gmap'), style: data.api + style, center: c.center, zoom: c.variants.find((x) => x.id === style)?.zoom || c.zoom, pitch: c.pitch, bearing: c.bearing, minZoom: c.minZoom || 0, maxPitch: d3 ? (c.maxPitch || 82) : 60,
         transformRequest: auth, attributionControl: false,
         locale: de ? { 'FullscreenControl.Enter': 'Vollbild', 'FullscreenControl.Exit': 'Vollbild beenden', 'NavigationControl.ZoomIn': 'Hineinzoomen', 'NavigationControl.ZoomOut': 'Herauszoomen', 'NavigationControl.ResetBearing': 'Nach Norden ausrichten' } : {}, fadeDuration: reduce ? 0 : 300, cooperativeGestures: false,
         dragRotate: d3, pitchWithRotate: d3, touchPitch: d3, // flache Karten bleiben genordet, 3D-Karten lassen sich drehen und neigen
@@ -83,6 +83,9 @@
       // 3D-Stadt: Kacheln auch in der Ferne aus höheren Zoomstufen laden, damit die Gebäude bis zum Horizont reichen
       // (gilt je Quelle, deshalb nach jedem Laden eines Stils neu setzen)
       if (c.lod && c.lod.length === 2 && map.setSourceTileLodParams) map.on('style.load', () => map.setSourceTileLodParams(c.lod[0], c.lod[1]));
+      // 3D-Stadt: Körper auch aus den Kacheln der Stufe 12 bauen. MapLibre baut eine Ebene nur für Kacheln ab ihrem minzoom
+      // (Kachelstufe, nicht Kartenzoom); bei geneigter Karte kommen die Ferne-Kacheln aus z12, dort blieben die Gebäude flach.
+      if (c.extrude) map.on('style.load', () => { for (const l of map.getStyle().layers) if (l.type === 'fill-extrusion' && (l.minzoom || 0) > c.extrude) map.setLayerZoomRange(l.id, c.extrude, l.maxzoom ?? 24); });
       map.addControl(new m.NavigationControl({ showCompass: d3, visualizePitch: d3 }), 'top-right');
       // Vollbild unter dem Zoom; die ganze Bühne geht mit, damit der Umschalter der Varianten sichtbar bleibt
       map.addControl(new m.FullscreenControl({ container: $('.mx-gdlg-stage') }), 'top-right');
