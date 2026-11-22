@@ -23,7 +23,7 @@ const items = [
   { id: 'outdoors', center: [10.985, 46.958], zoom: 13 },           // Sölden, wie outdoors-winter
   { id: 'outdoors-winter', center: [10.985, 46.958], zoom: 13 },    // Sölden
   { id: 'relief', center: [12.694, 47.074], zoom: 11.5 },           // Großglockner
-  { id: 'relief-contours', center: [12.694, 47.074], zoom: 11.5 },
+  { id: 'relief-contours', center: [12.694, 47.074], zoom: 13 },  // näher als die übrigen Relief-Varianten, sonst sind die Höhenlinien kaum zu sehen,
   { id: 'relief-light', center: [12.694, 47.074], zoom: 11.5 },
   { id: 'relief-dark', center: [12.694, 47.074], zoom: 11.5 },
   // 3D-Stile: geneigt, Ausschnitt wie in site/data/gallery.yaml
@@ -88,7 +88,7 @@ export default async (page) => {
       let src = img, sw = img.naturalWidth, sh = img.naturalHeight;
       const draw = (tw, th) => { const c = Object.assign(document.createElement('canvas'), { width: tw, height: th }); const x = c.getContext('2d'); x.imageSmoothingQuality = 'high'; x.drawImage(src, 0, 0, tw, th); src = c; sw = tw; sh = th; };
       while (sw / 2 >= w) draw(sw / 2, sh / 2);
-      if (sw !== w) draw(w, h);
+      if (sw !== w || src === img) draw(w, h);
       let q = 0.86, out;
       do { out = src.toDataURL('image/webp', q).split(',')[1]; q -= 0.06; } while (out.length * 0.75 > max && q > 0.4);
       return out;

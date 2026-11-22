@@ -124,6 +124,7 @@
     - id: relief-contours
       de: Höhenlinien
       en: Contours
+      zoom: 13  # näher, sonst sind die Höhenlinien kaum vom Stil „Farbe“ zu unterscheiden
       map: ""
       text:
         de: "Die farbige Reliefkarte mit Höhenlinien und Höhenangaben. Gedacht für alle, die Höhen ablesen wollen, ohne Straßen und Wege im Bild zu haben."

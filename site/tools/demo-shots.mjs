@@ -20,13 +20,13 @@ const items = [
   {
     id: 'karten',
     // derselbe Ausschnitt in vier Stilen, schräg in Streifen geteilt
-    maps: ['streets', 'streets-night', 'satellite', 'outdoors'].map((style, i) => ({ style, center: [11.395, 47.268], zoom: 13.2,
+    maps: ['streets', 'outdoors', 'satellite', 'streets-night'].map((style, i) => ({ style, center: [11.395, 47.268], zoom: 13.2,
       clip: `polygon(${[i * 200 - 60 - (i === 0 ? 400 : 0), (i + 1) * 200 - 60 + (i === 3 ? 400 : 0), (i + 1) * 200 + 60 + (i === 3 ? 400 : 0), i * 200 + 60 - (i === 0 ? 400 : 0)].map((x, k) => `${x}px ${k < 2 ? 400 : 0}px`).join(',')})` })),
     run: async (c) => {
-      const names = ['streets', 'streets-night', 'satellite', 'outdoors'];
+      const names = ['streets', 'outdoors', 'satellite', 'streets-night'];
       await c.hideNear([], 0, [[[0, 310], [800, 400]]]);
       c.add(`<div class="seams"><svg width="800" height="400">${[1, 2, 3].map((i) => `<line x1="${i * 200 - 60}" y1="400" x2="${i * 200 + 60}" y2="0" stroke="#fff" stroke-width="3"/>`).join('')}</svg></div>`);
-      c.add(names.map((n, i) => `<div class="chip ${i === 1 || i === 2 ? 'dark' : ''}" style="left:${i * 200 + 78}px;top:326px;transform:translateX(-50%)">${n}</div>`).join(''));
+      c.add(names.map((n, i) => `<div class="chip ${i === 2 || i === 3 ? 'dark' : ''}" style="left:${i * 200 + 78}px;top:326px;transform:translateX(-50%)">${n}</div>`).join(''));
     },
   },
   {
@@ -200,7 +200,7 @@ body.desk{background:radial-gradient(120% 120% at 50% 0%,#f4f8ff 0%,#dfe8f7 100%
 .big{display:flex;align-items:center;gap:14px;padding:14px 22px;font-size:28px}
 .big b{font-weight:700}.big small{display:block;font-size:18px;color:#64748b;font-weight:500;margin-top:2px}
 .big .sep{width:2px;height:28px;background:#e2e8f0}
-.chip{position:absolute;background:#fff;border-radius:10px;padding:7px 14px;font-size:20px;font-weight:600;box-shadow:0 1px 2px rgb(15 23 42/.10),0 6px 18px rgb(15 23 42/.22);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.chip{position:absolute;white-space:nowrap;background:#fff;border-radius:10px;padding:7px 14px;font-size:20px;font-weight:600;box-shadow:0 1px 2px rgb(15 23 42/.10),0 6px 18px rgb(15 23 42/.22);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
 .chip.dark{background:#0f172a;color:#fff}
 .seams{position:absolute;inset:0}
 .search{padding:8px}

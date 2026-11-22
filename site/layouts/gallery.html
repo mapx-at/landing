@@ -22,7 +22,7 @@
           {{- range hugo.Data.gallery }}
           {{- $t := index . $lang -}}
           {{- $def := index .variants 0 -}}{{ range .variants }}{{ if .default }}{{ $def = . }}{{ end }}{{ end }}
-          {{- $vs := slice -}}{{ range .variants }}{{ $vs = $vs | append (dict "id" .id "label" (index . $lang) "map" .map "text" (cond (isset . "text") (index (.text | default dict) $lang) "")) }}{{ end }}
+          {{- $vs := slice -}}{{ range .variants }}{{ $vs = $vs | append (dict "id" .id "label" (index . $lang) "map" .map "text" (cond (isset . "text") (index (.text | default dict) $lang) "") "zoom" (.zoom | default 0)) }}{{ end }}
           {{- $cards = $cards | append (dict "key" .key "name" $t.name "place" $t.place "text" $t.text "center" .center "zoom" .zoom "pitch" (.pitch | default 0) "bearing" (.bearing | default 0) "maxPitch" (.maxPitch | default 82) "lod" (.lod | default slice) "def" $def.id "variants" $vs) }}
           <li class="mx-gcard" id="{{ .key }}">
             <button type="button" class="mx-gbtn" data-key="{{ .key }}" aria-haspopup="dialog" disabled>
@@ -71,7 +71,7 @@
           </div>
         </dialog>
         <script type="application/json" id="mx-gdata">{{ dict "token" site.Params.demoToken "api" $api "cards" $cards | jsonify | safeJS }}</script>
-        <script src="/lp/gallery.js?v=12" defer></script>
+        <script src="/lp/gallery.js?v=13" defer></script>
         {{- $topics := index hugo.Data "topics" -}}
         <aside class="mx-related" aria-labelledby="mx-related-h">
           <h2 id="mx-related-h">{{ cond $en "More topics" "Weitere Themen" }}</h2>

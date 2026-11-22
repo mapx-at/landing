@@ -194,23 +194,18 @@ nav a[href*="account.mapx.at/login"]:hover{background:#0853c4}
 .mx-hslide a,.mx-hslide img{display:block;width:100%;height:100%}
 .mx-hslide img{object-fit:cover;-webkit-user-drag:none;user-select:none}
 .mx-hslide img[data-src]{visibility:hidden}
-.mx-hgo{position:absolute;right:.75rem;bottom:.75rem;z-index:2;display:inline-flex;align-items:center;gap:.45rem;min-height:2.75rem;padding:.5rem 1rem;border-radius:9999px;background:rgb(17 24 39 / .8);color:#fff!important;font-size:.875rem;font-weight:600;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgb(255 255 255 / .2);white-space:nowrap;transition:background .2s ease}
+/* mit JavaScript: Bilder liegen übereinander und blenden über; Titel und Satz auf dem Verlauf am unteren Rand (wie .mx-hend) */
+.mx-hjs .mx-htrack{display:block;position:relative;overflow:hidden;touch-action:pan-y}
+.mx-hjs .mx-hslide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .9s ease,visibility 0s linear .9s}
+.mx-hjs .mx-hslide.on{opacity:1;visibility:visible;transition:opacity .9s ease}
+.mx-hslide a{position:relative;color:#fff!important;text-decoration:none!important}
+.mx-hlede{position:absolute;left:0;right:0;bottom:0;display:block;padding:6rem 1.75rem 1.5rem;background:linear-gradient(rgb(10 14 22 / 0),rgb(10 14 22 / .8) 45%,rgb(10 14 22 / .96))}
+.dark .mx-hlede{background:linear-gradient(rgb(17 17 17 / 0),rgb(17 17 17 / .85) 45%,#111)}
+.mx-hst{display:block;font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.15;font-weight:740;letter-spacing:-.025em;color:#fff}
+.mx-hsp{display:block;margin-top:.35rem;font-size:1rem;line-height:1.45;color:#e5e7eb;max-width:36rem}
+.dark .mx-hframe{border-color:transparent;background:#111}
+.mx-hgo{position:absolute;right:.75rem;top:.75rem;z-index:2;display:inline-flex;align-items:center;gap:.45rem;min-height:2.75rem;padding:.5rem 1rem;border-radius:9999px;background:rgb(17 24 39 / .8);color:#fff!important;font-size:.875rem;font-weight:600;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgb(255 255 255 / .2);white-space:nowrap;transition:background .2s ease}
 @media(hover:hover){.mx-hgo:hover{background:#0a64e8;border-color:#0a64e8}}
-.mx-hdots{display:none;position:absolute;left:1rem;bottom:1.15rem;z-index:2;gap:.35rem;padding:.4rem .55rem;border-radius:9999px;background:rgb(17 24 39 / .55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-.mx-hjs .mx-hdots{display:flex}
-.mx-hdots span{position:relative;width:.4rem;height:.4rem;border-radius:9999px;background:rgb(255 255 255 / .45);overflow:hidden;transition:width .3s ease}
-.mx-hdots span.on{width:1.4rem;background:rgb(255 255 255 / .45)}
-.mx-hdots span.on::after{content:"";position:absolute;inset:0;background:#fff;border-radius:inherit}
-.mx-hdots.run span.on::after{transform-origin:left;animation:mx-hprog 5s linear both}
-@keyframes mx-hprog{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-.mx-hchips{display:none;gap:.4rem;margin:.85rem 0 0;overflow-x:auto;scrollbar-width:none;padding:3px}
-.mx-hchips::-webkit-scrollbar{display:none}
-.mx-hjs .mx-hchips{display:flex}
-.mx-hchip{flex:none;min-height:2.75rem;padding:.4rem 1rem;border-radius:9999px;border:1px solid rgb(127 137 152 / .45);font-size:.875rem;font-weight:550;color:inherit;background:transparent;white-space:nowrap;cursor:pointer;transition:background .15s ease,border-color .15s ease,color .15s ease}
-@media(hover:hover){.mx-hchip:hover{background:rgb(127 137 152 / .14)}}
-.mx-hchip[aria-pressed=true]{background:var(--mx-ink);border-color:var(--mx-ink);color:var(--mx-bg)}
-.mx-hcap{margin:.6rem .15rem 0;font-size:.8125rem;color:var(--mx-mut)}
-.mx-hcap code{font-size:.8125rem;background:rgb(127 137 152 / .16);padding:.05rem .35rem;border-radius:.3rem}
 /* Abschnitte */
 .mx-hsec{padding:6rem 0 0;scroll-margin-top:4rem}
 .mx-hsec h2,.mx-hend h2{scroll-margin-top:5rem}
@@ -220,6 +215,9 @@ nav a[href*="account.mapx.at/login"]:hover{background:#0853c4}
 .mx-hmore{margin:1.5rem 0 0;font-size:.9375rem}
 .mx-hmore a{display:inline-flex;align-items:center;gap:.3rem;min-height:2.75rem;color:var(--mx-acc);font-weight:600}
 @media(hover:hover){.mx-hmore a:hover{text-decoration:underline;text-underline-offset:3px}}
+.mx-hmorebtn{text-align:center}.mx-hmorebtn .mx-hbtn{gap:.4rem;min-width:min(100%,22rem);color:#fff!important}
+@media(hover:hover){.mx-hmorebtn .mx-hbtn:hover{text-decoration:none}}
+@media(max-width:640px){.mx-hmorebtn .mx-hbtn{display:flex;width:100%}}
 .mx-hband{position:relative;margin-top:6rem;padding:4.5rem 0;background:var(--mx-soft);box-shadow:0 0 0 100vmax var(--mx-soft);clip-path:inset(0 -100vmax)}
 .dark .mx-hband{border-top:1px solid var(--mx-line);border-bottom:1px solid var(--mx-line)}
 .mx-hband+.mx-hsec{padding-top:5rem}
@@ -328,15 +326,11 @@ nav a[href*="account.mapx.at/login"]:hover{background:#0853c4}
   .mx-hhero h1{font-size:2.125rem}
   /* Hero randlos; im Dunkelmodus läuft das Bild nach unten in den Hintergrund aus, Punkte und Chips liegen auf dem Verlauf */
   .mx-hframe{margin:0 -1.5rem;border-radius:0;border-left:0;border-right:0;box-shadow:none}
-  .mx-htrack{aspect-ratio:4/3.4}
+  .mx-htrack{aspect-ratio:4/4.3}
+  .mx-hlede{padding:7rem 1.5rem 1.25rem}
+  .mx-hst{font-size:1.625rem}
   .dark .mx-hframe{border:0;background:none}
-  .dark .mx-htrack{-webkit-mask-image:linear-gradient(#000 70%,transparent);mask-image:linear-gradient(#000 70%,transparent)}
-  .dark .mx-hdots{background:none;backdrop-filter:none;-webkit-backdrop-filter:none;left:50%;transform:translateX(-50%);bottom:.35rem}
-  .dark .mx-hgo{bottom:auto;top:.75rem}
-  .mx-hgo{right:.6rem;bottom:.6rem;min-height:2.75rem;padding:.4rem .85rem;font-size:.8125rem}
-  .mx-hdots{left:.75rem;bottom:.95rem}
-  .mx-hchips{margin:.75rem -1.5rem 0;padding:3px 1.5rem}
-  .mx-hcap{display:none}
+  .mx-hgo{right:.6rem;top:.6rem;min-height:2.75rem;padding:.4rem .85rem;font-size:.8125rem}
   .mx-hbtns .mx-hbtn{flex:1 1 auto}
   .mx-hsec{padding-top:4rem}
   .mx-hhead{margin-bottom:1.5rem}
@@ -374,4 +368,4 @@ nav a[href*="account.mapx.at/login"]:hover{background:#0853c4}
   .mx-hend-text{padding:10rem 1.5rem 1.75rem;background:linear-gradient(rgb(10 14 22 / 0),rgb(10 14 22 / .88) 42%,rgb(10 14 22))}
   .dark .mx-hend-text{background:linear-gradient(rgb(17 17 17 / 0),rgb(17 17 17 / .9) 42%,#111)}
 }
-@media(prefers-reduced-motion:reduce){.mx-hgo,.mx-harr,.mx-hcard img,.mx-hprod,.mx-hdots span,.mx-hbtn,.mx-hchip{transition:none}.mx-hcard:hover img{transform:none}.mx-hdots.run span.on::after{animation:none}.mx-htrack{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){.mx-hgo,.mx-harr,.mx-hcard img,.mx-hprod,.mx-hbtn,.mx-hjs .mx-hslide{transition:none}.mx-hcard:hover img{transform:none}.mx-htrack{scroll-behavior:auto}}

@@ -1,7 +1,7 @@
-// Startseite (layouts/hextra-home.html). Schaufenster: wischbare Reihe (scroll-snap), die ohne dieses Skript von Hand
-// wischbar bleibt. Das Skript ergänzt Chips, Punkte mit Fortschritt, Bildunterschrift und den automatischen Wechsel.
-// Keine Anfrage an api.mapx.at. Der Wechsel läuft nur ohne prefers-reduced-motion und endet bei Berührung, Wischen,
-// Mausrad, Hover, Fokus oder eigener Auswahl. Dazu der Kopierknopf im Code-Beispiel.
+// Startseite (layouts/hextra-home.html). Schaufenster: ohne dieses Skript eine wischbare Reihe (scroll-snap).
+// Mit Skript liegen die Bilder übereinander und blenden über (Autoplay alle 6 s), Titel und Satz stehen je Bild auf
+// dem Verlauf. Wischen und Pfeiltasten wechseln von Hand. Keine Anfrage an api.mapx.at. Autoplay nur ohne
+// prefers-reduced-motion; endet bei Berührung, Wischen, Hover, Fokus oder Tastendruck. Dazu der Kopierknopf im Code-Beispiel.
 (function () {
   const show = document.querySelector('.mx-hshow');
   if (show) carousel(show);
@@ -10,95 +10,60 @@
   function carousel(show) {
     const track = show.querySelector('.mx-htrack');
     const slides = [...track.querySelectorAll('.mx-hslide')];
-    const chips = [...show.querySelectorAll('.mx-hchip')];
-    const dots = show.querySelector('.mx-hdots');
-    const dot = dots ? [...dots.children] : [];
     const go = show.querySelector('.mx-hgo');
-    const cap = { id: show.querySelector('.mx-hid'), place: show.querySelector('.mx-hplace') };
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const N = slides.length;
     let cur = -1, timer = null, stopped = reduce, visible = true, ready = false;
 
-    // Bild i laden lassen (lazy -> eager); vorab nur das jeweils nächste
-    function warm(i) { const img = slides[i % N].querySelector('img'); if (img.dataset.src) { img.srcset = img.dataset.srcset; img.src = img.dataset.src; delete img.dataset.src; } return img; }
-    function active(i) {
+    // Bild i laden lassen; vorab nur das jeweils nächste
+    function warm(i) { const img = slides[(i + N) % N].querySelector('img'); if (img.dataset.src) { img.srcset = img.dataset.srcset; img.src = img.dataset.src; delete img.dataset.src; } return img; }
+    function to(i) {
+      i = (i + N) % N;
       if (i === cur) return;
-      cur = i;
-      const c = chips[i];
-      chips.forEach((o, j) => o.setAttribute('aria-pressed', String(j === i)));
-      dot.forEach((d, j) => d.classList.toggle('on', j === i));
-      slides.forEach((s, j) => s.toggleAttribute('aria-hidden', j !== i));
-      if (c) {
-        cap.id.textContent = c.dataset.id;
-        cap.place.textContent = c.dataset.place;
+      const img = warm(i);
+      const apply = () => {
+        cur = i;
+        slides.forEach((s, j) => { s.classList.toggle('on', j === i); s.toggleAttribute('aria-hidden', j !== i); });
         go.href = slides[i].querySelector('a').href;
-        reveal(c);
-      }
-      if (ready) warm(i + 1);
-      restart();
+        if (ready) warm(i + 1);
+      };
+      // erst überblenden, wenn das Bild da ist
+      if (img.complete || cur < 0) apply(); else img.addEventListener('load', apply, { once: true });
     }
-    function to(i, smooth) {
-      warm(i);
-      track.scrollTo({ left: i * track.clientWidth, behavior: smooth && !reduce ? 'smooth' : 'auto' });
-      active(i);
-    }
-    // aktiven Chip in den sichtbaren Teil seiner Reihe schieben; nur die Reihe scrollt, nie die Seite
-    function reveal(c) {
-      const row = c.parentElement, l = c.offsetLeft - row.offsetLeft, pad = 40;
-      let x = row.scrollLeft;
-      if (l - pad < x) x = l - pad;
-      else if (l + c.offsetWidth + pad > x + row.clientWidth) x = l + c.offsetWidth + pad - row.clientWidth;
-      if (x !== row.scrollLeft) row.scrollTo({ left: Math.max(0, x), behavior: reduce ? 'auto' : 'smooth' });
-    }
-    // Fortschrittsstrich im aktiven Punkt neu starten
-    function restart() {
-      if (!dots) return;
-      dots.classList.remove('run');
-      if (!stopped) { void dots.offsetWidth; dots.classList.add('run'); }
-    }
-    function stop() { if (stopped) return; stopped = true; clearTimeout(timer); if (dots) dots.classList.remove('run'); }
+    function stop() { if (stopped) return; stopped = true; clearTimeout(timer); }
     function tick() {
       if (stopped) return;
       clearTimeout(timer);
       timer = setTimeout(() => {
         if (stopped) return;
-        if (document.hidden || !visible) return tick();
-        to((cur + 1) % N, true);
+        if (!document.hidden && visible) to(cur + 1);
         tick();
-      }, 5000);
+      }, 6000);
     }
 
-    let raf = 0;
-    track.addEventListener('scroll', () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => active(Math.max(0, Math.min(N - 1, Math.round(track.scrollLeft / track.clientWidth)))));
+    // Wischen (waagrecht), senkrechtes Scrollen bleibt der Seite
+    let x0 = null, y0 = 0;
+    track.addEventListener('touchstart', (e) => { stop(); x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; warm(cur + 1); warm(cur - 1); }, { passive: true });
+    track.addEventListener('touchend', (e) => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+      x0 = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) to(cur + (dx < 0 ? 1 : -1));
     }, { passive: true });
-    chips.forEach((c, i) => { c.disabled = false; c.addEventListener('click', () => { stop(); to(i, true); }); });
     show.addEventListener('keydown', (e) => {
       if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-      const k = chips.indexOf(document.activeElement);
-      if (k < 0 && document.activeElement !== track) return;
-      const step = e.key === 'ArrowRight' ? 1 : N - 1;
       e.preventDefault();
       stop();
-      const n = ((k >= 0 ? k : cur) + step) % N;
-      if (k >= 0) chips[n].focus();
-      to(n, true);
+      to(cur + (e.key === 'ArrowRight' ? 1 : -1));
     });
-    // Benutzer greift ein: Wechsel endet
-    for (const ev of ['touchstart', 'wheel', 'focusin']) show.addEventListener(ev, stop, { passive: true });
-    show.addEventListener('pointerdown', stop);
+    show.addEventListener('focusin', stop);
     show.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') stop(); });
-    addEventListener('resize', () => track.scrollTo({ left: cur * track.clientWidth }), { passive: true });
 
     document.documentElement.classList.add('mx-hjs');
-    active(0);
+    to(0);
     if ('IntersectionObserver' in window) new IntersectionObserver((es) => { visible = es[0].isIntersecting; }).observe(track);
-    // erst nach dem Laden der Seite das nächste Bild holen und weiterschalten
-    const start = () => { ready = true; warm(cur + 1); if (!stopped) { restart(); tick(); } };
+    const start = () => { ready = true; warm(cur + 1); tick(); };
     if (document.readyState === 'complete') start(); else addEventListener('load', start, { once: true });
-    // wer zu wischen beginnt, bekommt die Nachbarn sofort
-    for (const ev of ['touchstart', 'pointerdown']) track.addEventListener(ev, () => { warm(cur + 1); warm(cur + N - 1); }, { passive: true });
   }
 
   function copy() {

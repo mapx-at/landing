@@ -12,15 +12,14 @@ home:
     start: "Start for free"
     map: "Open map"
     trust: "Open official data from BEV, GIP.at, GeoSphere Austria, ASFINAG and ÖBB"
-    chips_label: "Choose the map style of the preview"
-    style: "Style"
+    chips_label: "Map styles in rotation"
     move: "Open live map"
     styles:
-      - {id: relief-dark, label: "Relief", place: "Grossglockner", alt: "Style relief-dark: hillshade of the Glockner group in greys on black, with peaks and glaciers"}
-      - {id: streets-night, label: "Night", place: "Vienna city centre", alt: "Style streets-night: Vienna city centre at night with bright roads on dark blue"}
-      - {id: outdoors-winter, label: "Winter", place: "Sölden", alt: "Style outdoors-winter: snowy terrain around Sölden with contours and lifts"}
-      - {id: traffic-night, label: "Traffic", place: "Vienna", alt: "Style traffic-night: Vienna's road network on dark, traffic reports highlighted in colour"}
-      - {id: satellite-streets-3d, label: "3D aerial", place: "Wachau near Dürnstein", alt: "Style satellite-streets-3d: tilted view over the Danube in the Wachau near Dürnstein, aerial imagery with roads"}
+      - {id: relief-dark, label: "Relief", place: "Grossglockner", p: "Terrain from the BEV 1 m elevation model, here the Glockner group.", alt: "Style relief-dark: hillshade of the Glockner group in greys on black, with peaks and glaciers"}
+      - {id: streets-night, label: "Night", place: "Vienna city centre", p: "A dark street map for the evening, here Vienna's city centre.", alt: "Style streets-night: Vienna city centre at night with bright roads on dark blue"}
+      - {id: outdoors-winter, label: "Winter", place: "Sölden", p: "Snow, contours and lifts, here around Sölden.", alt: "Style outdoors-winter: snowy terrain around Sölden with contours and lifts"}
+      - {id: traffic-night, label: "Traffic", place: "Vienna", p: "Reports from ASFINAG and EVIS.AT on a dark map, here Vienna.", alt: "Style traffic-night: Vienna's road network on dark, traffic reports highlighted in colour"}
+      - {id: satellite-streets-3d, label: "3D aerial", place: "Wachau near Dürnstein", p: "Aerial imagery on the terrain, tilted and rotatable, here the Wachau near Dürnstein.", alt: "Style satellite-streets-3d: tilted view over the Danube in the Wachau near Dürnstein, aerial imagery with roads"}
   styles:
     eye: "Map styles"
     h2: "26 ready-made map styles for your application"
@@ -56,7 +55,7 @@ home:
     mcp_label: "Example: a question to an AI assistant that uses the mapx MCP server"
     mcp_q: "How do I get from Melk to Krems at 8 tomorrow morning?"
     mcp_tool: "transit_route"
-    mcp_a: "A connection from the timetable with change and arrival time, plus the source."
+    mcp_a: "From the timetable: CJX5 from Melk station at 08:40 to St. Pölten Hbf (arr. 08:58), change to the R44 at 09:06, arriving at Krems station at 09:41. Source: ÖBB-Personenverkehr AG (CC BY 4.0), Mobilitätsverbünde Österreich, GIP.at"
   dev:
     eye: "For developers"
     h2: "Your first map in five minutes"
