@@ -55,7 +55,7 @@ home:
     mcp_label: "Example: a question to an AI assistant that uses the mapx MCP server"
     mcp_q: "How do I get from Melk to Krems at 8 tomorrow morning?"
     mcp_tool: "transit_route"
-    mcp_a: "From the timetable: CJX5 from Melk station at 08:40 to St. Pölten Hbf (arr. 08:58), change to the R44 at 09:06, arriving at Krems station at 09:41. Source: ÖBB-Personenverkehr AG (CC BY 4.0), Mobilitätsverbünde Österreich, GIP.at"
+    mcp_a: "From the timetable: CJX5 from Melk station at 08:40 to St. Pölten Hbf (arr. 08:58), change to the R44 at 09:06, arriving at Krems station at 09:41. Source: mapx.at | ÖBB-Personenverkehr AG (CC BY 4.0); Datenquelle: Mobilitätsverbünde Österreich OG – data.mobilitaetsverbuende.at; GIP.at (CC BY 4.0)"
   dev:
     eye: "For developers"
     h2: "Your first map in five minutes"
