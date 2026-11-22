@@ -1,4 +1,5 @@
 // Geocoding: Vorschläge beim Tippen (/v1/searchbox/suggest), Lage nach der Auswahl (/v1/searchbox/retrieve). Ein Sitzungs-Token je Suche.
+// Antwort: GeoJSON-FeatureCollection, je Treffer `id` und `properties.name` / `properties.place_formatted`.
 window.mxDemo = (c) => {
   const { L, t, el } = c;
   const map = c.makeMap([47.6, 14.3], 7, 'streets');
@@ -13,7 +14,8 @@ window.mxDemo = (c) => {
     if (q.length < 3) { list.replaceChildren(); return; }
     const m = map.getCenter();
     try {
-      const { suggestions } = await c.api(`/searchbox/suggest?q=${encodeURIComponent(q)}&session_token=${session}&proximity=${m.lng.toFixed(4)},${m.lat.toFixed(4)}&limit=5&language=${t('de', 'en')}`);
+      const { features } = await c.api(`/searchbox/suggest?q=${encodeURIComponent(q)}&session_token=${session}&proximity=${m.lng.toFixed(4)},${m.lat.toFixed(4)}&limit=5`);
+      const suggestions = features.map((f) => ({ id: f.id, name: f.properties.name, place_formatted: f.properties.place_formatted }));
       if (n !== seq) return;
       list.replaceChildren(...suggestions.map((s) => {
         const b = el('button', { type: 'button' }, el('strong', { textContent: s.name }), ' ', el('span', { textContent: s.place_formatted || '' }));
@@ -25,7 +27,7 @@ window.mxDemo = (c) => {
   }
   async function pick(s) {
     try {
-      const f = (await c.api(`/searchbox/retrieve/${encodeURIComponent(s.mapbox_id)}?session_token=${session}`)).features[0];
+      const f = (await c.api(`/searchbox/retrieve/${encodeURIComponent(s.id)}?session_token=${session}`)).features[0];
       const [lng, lat] = f.geometry.coordinates;
       marker?.remove();
       marker = c.dot([lat, lng], '#2346d8').addTo(map).bindTooltip(c.text(s.name), { permanent: true, direction: 'top', offset: [0, -8] });

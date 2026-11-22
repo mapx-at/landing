@@ -25,7 +25,7 @@ description: "Traffic API for Austria: traffic reports, roadworks, closures and 
 
 - `GET /v1/traffic/incidents`: reports, filterable by map extent (`bbox`), road (`road`, `road_class`), type (`type`, for example `construction` or `road_closure`), time window and planned or unplanned. Roadworks on motorways and expressways carry lane details.
 - `POST /v1/traffic/incidents`: the same query with a JSON body, for example for long routes. Reports along a route are sorted by position on the route.
-- `GET /v1/traffic/flow`: speed limits on variable message signs of the motorways in a map extent.
+- `GET /v1/traffic/sign-limits`: speed limits on variable message signs of the motorways in a map extent.
 - `GET /v1/traffic/signs`: current state of signs with a position.
 - `/v1/traffic/tiles.json`: traffic layer as vector tiles for the map. The `traffic-day` and `traffic-night` styles show it ready-made.
 - Routing with the `driving-traffic` profile avoids binding full closures.
@@ -46,7 +46,7 @@ const data = await res.json();
 Speed limits on motorway signs in the same extent:
 
 ```bash
-curl -s -H "Authorization: Bearer YOUR_TOKEN" "https://api.mapx.at/v1/traffic/flow?bbox=16.0,48.0,16.8,48.5" | jq
+curl -s -H "Authorization: Bearer YOUR_TOKEN" "https://api.mapx.at/v1/traffic/sign-limits?bbox=16.0,48.0,16.8,48.5" | jq
 ```
 
 ## Where the data comes from
