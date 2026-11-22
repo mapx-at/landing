@@ -95,7 +95,7 @@ home:
   data:
     eye: "Data"
     h2: "Every dataset with its source and reference date"
-    p: "Only open data from Austrian public authorities, no OpenStreetMap. So you can name the publisher, reference date and licence of every dataset."
+    p: "Only Austrian open government data, no OpenStreetMap. So you can name the publisher, reference date and licence of every dataset."
     items:
       - {t: "BEV", p: "Addresses, buildings and land use, terrain, orthophoto"}
       - {t: "GIP.at", p: "Roads, rail, routing"}

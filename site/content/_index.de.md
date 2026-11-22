@@ -97,7 +97,7 @@ home:
   data:
     eye: "Daten"
     h2: "Jede Angabe mit Quelle und Stichtag"
-    p: "Ausschließlich offene Daten österreichischer Behörden, kein OpenStreetMap. So nennst du für jeden Datensatz Herausgeber, Stichtag und Lizenz."
+    p: "Ausschließlich offene Verwaltungsdaten aus Österreich, kein OpenStreetMap. So nennst du für jeden Datensatz Herausgeber, Stichtag und Lizenz."
     items:
       - {t: "BEV", p: "Adressen, Gebäude und Bodennutzung, Gelände, Orthofoto"}
       - {t: "GIP.at", p: "Straßen, Bahn, Routing"}
