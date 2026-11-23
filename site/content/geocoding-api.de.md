@@ -43,7 +43,7 @@ const res = await fetch("https://api.mapx.at/v1/geocode?q=Herrengasse%2013%20Wie
 const data = await res.json();
 ```
 
-Die nächste Adresse zu einem Punkt (Koordinaten immer als `lon,lat`):
+Die nächste Adresse zu einem Punkt (Koordinaten immer als `lng,lat`):
 
 ```bash
 curl -s -H "Authorization: Bearer YOUR_TOKEN" "https://api.mapx.at/v1/reverse?lng=16.3725&lat=48.2085&limit=1&types=address" | jq
