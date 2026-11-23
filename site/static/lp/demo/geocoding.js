@@ -2,7 +2,7 @@
 // Antwort: GeoJSON-FeatureCollection, je Treffer `id` und `properties.name` / `properties.place_formatted`.
 window.mxDemo = (c) => {
   const { L, t, el } = c;
-  const map = c.makeMap([47.6, 14.3], 7, 'streets');
+  const map = c.makeMap([48.2272, 15.3326], 15, 'streets') // Melk, die Startsuche zeigt dorthin;
   const input = el('input', { type: 'search', placeholder: t('z. B. Hauptplatz Melk', 'e.g. Hauptplatz Melk'), autocomplete: 'off' });
   input.setAttribute('aria-label', t('Adresse oder Ort suchen', 'Search for an address or place'));
   const list = el('ul', { className: 'mx-demo-list' });
@@ -22,7 +22,8 @@ window.mxDemo = (c) => {
         b.addEventListener('click', () => pick(s));
         return el('li', {}, b);
       }));
-      c.say(suggestions.length ? t(`${suggestions.length} Vorschläge`, `${suggestions.length} suggestions`) : t('Keine Vorschläge', 'No suggestions'));
+      c.say(suggestions.length ? '' : t('Keine Vorschläge', 'No suggestions')); // die Liste selbst ist die Rückmeldung
+      if (suggestions.length) c.result(null);
     } catch (e) { c.fail(e); }
   }
   async function pick(s) {
@@ -31,9 +32,11 @@ window.mxDemo = (c) => {
       const [lng, lat] = f.geometry.coordinates;
       marker?.remove();
       marker = c.dot([lat, lng], '#2346d8').addTo(map).bindTooltip(c.text(s.name), { permanent: true, direction: 'top', offset: [0, -8] });
-      map.setView([lat, lng], Math.min((f.properties.zoom ?? 15) + 1, 18), { animate: !c.reduce });
+      const z = Math.min((f.properties.zoom ?? 15) + 1, 18), far = map.distance(map.getCenter(), [lat, lng]) > 20000;
+      if (far || c.reduce) map.setView([lat, lng], z, { animate: false }); else map.flyTo([lat, lng], z, { duration: 0.6 });
+      input.blur(); // schließt die Bildschirmtastatur
       list.replaceChildren(); input.value = s.name;
-      c.result({ title: s.name, rows: [[t('Ort', 'Place'), s.place_formatted || '–'], [t('Koordinaten', 'Coordinates'), `${lat.toFixed(5)}, ${lng.toFixed(5)}`]] });
+      c.result({ title: s.name, rows: [[t('Ort', 'Place'), s.place_formatted || '–'], [t('Koordinaten', 'Coordinates'), `lng ${lng.toFixed(5)} · lat ${lat.toFixed(5)}`]] });
       c.say('');
     } catch (e) { c.fail(e); }
     session = crypto.randomUUID(); // die Sitzung endet mit retrieve

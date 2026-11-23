@@ -11,7 +11,8 @@
 // - Budget je Demo-Start: höchstens BUDGET.tiles Kacheln und BUDGET.requests API-Requests bis zur ersten Nutzer-Interaktion (Warnung in der Konsole).
 // - Rasterkacheln laufen über einen Puffer (Token-Bucket TILE_RATE/TILE_BURST), weil /v1/styles/*/tiles/* in der Gateway-Zone
 //   „static“ liegt (5/s je IP, burst 60); 429 auf Kacheln wird nach Retry-After still nachgeladen.
-// - Animation: c.drawLine, c.pulse, c.countUp, c.typeText; bei prefers-reduced-motion sofort im Endzustand.
+// - Tempo (Handy-QA 23.11.2026): Startansicht direkt setzen, Flüge höchstens 0,7 s, Animationen höchstens 0,8 s.
+  // - Animation: c.drawLine, c.pulse, c.countUp, c.typeText; bei prefers-reduced-motion sofort im Endzustand.
 (() => {
   'use strict';
   const root = document.querySelector('.mx-demo');
@@ -207,7 +208,7 @@
         return img;
       },
     });
-    const layer = new Buffered(`${API}/styles/${style}/tiles/512/{z}/{x}/{y}{r}?access_token=${encodeURIComponent(TOKEN)}`, { tileSize: 512, zoomOffset: -1, minZoom: 1, maxZoom: 21, keepBuffer: 1, /* {r} = @2x bei devicePixelRatio > 1: gleiche Kachelzahl, 1024-px-Bilder */ attribution: ATTR[style] || ATTR.streets });
+    const layer = new Buffered(`${API}/styles/${style}/tiles/512/{z}/{x}/{y}{r}.webp?access_token=${encodeURIComponent(TOKEN)}`, { tileSize: 512, zoomOffset: -1, minZoom: 1, maxZoom: 21, keepBuffer: 1, /* {r} = @2x bei devicePixelRatio > 1; WebP statt PNG: @2x-Kachel ~65 KB statt ~1,1 MB (Handy-Netz) */ attribution: ATTR[style] || ATTR.streets });
     layer.on('tileunload', (e) => e.tile._mxAbort?.abort());
     layer.once('load', () => frame.classList.remove('mx-demo-loading'));
     return layer;
@@ -252,7 +253,7 @@
     return map;
   }
   // --- Vollbild: Fullscreen-API, sonst fixiertes Overlay (iOS Safari) mit Schließen, Esc und Zurück-Taste ---------------
-  let fsOn = false, fsFake = false, fsClose, fsAt = 0;
+  let fsOn = false, fsFake = false, fsAt = 0;
   const fsIcon = (on) => (on
     ? '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 1v5H1M10 1v5h5M6 15v-5H1M10 15v-5h5"/></svg>'
     : '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 6V1h5M15 6V1h-5M1 10v5h5M15 10v5h-5"/></svg>');
@@ -264,11 +265,8 @@
     frame.classList.toggle('mx-demo-fs', on && fsFake);
     document.documentElement.classList.toggle('mx-demo-fs-lock', on && fsFake);
     if (fsBtn) { fsBtn.innerHTML = fsIcon(on); const l = on ? t('Vollbild beenden', 'Exit full screen') : t('Vollbild', 'Full screen'); fsBtn.title = l; fsBtn.setAttribute('aria-label', l); fsBtn.setAttribute('aria-pressed', String(on)); }
-    if (on && fsFake && !fsClose) {
-      fsClose = el('button', { type: 'button', className: 'mx-demo-fsclose', textContent: t('Schließen', 'Close') });
-      fsClose.addEventListener('click', () => fsExit()); frame.append(fsClose);
-    }
-    if (fsClose) fsClose.hidden = !(on && fsFake);
+    // Kein eigener „Schließen“-Knopf mehr (lag am Handy über der Ergebnis-Karte): der Vollbild-Knopf oben rechts zeigt dann
+    // „Vollbild beenden“, dazu Esc und die Zurück-Taste.
     if (touch && map) { if (on) map.dragging.enable(); else map.dragging.disable(); }
     if (!on) fsFake = false;
     setTimeout(() => map?.invalidateSize(), 60);
@@ -334,17 +332,32 @@
     });
   }
 
+  // Leaflet und die Beispieldatei (beide lokal, nichts von api.mapx.at) schon laden, sobald der Rahmen in Sicht kommt:
+  // spart am Handy-Netz etwa eine Sekunde zwischen Klick und erstem Bild.
+  let pre;
+  function prefetch() {
+    pre ||= (async () => {
+      if (root.dataset.leaflet !== 'false') await Promise.all([load(LEAFLET + 'leaflet.css', true), load(LEAFLET + 'leaflet.js')]);
+      await load(`/lp/demo/${root.dataset.demo}.js`);
+    })();
+    pre.catch(() => { pre = null; });
+    return pre;
+  }
+  if (window.IntersectionObserver) {
+    const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); prefetch().catch(() => {}); } }, { rootMargin: '400px' });
+    io.observe(frame);
+  }
+  // Verbindung zu api.mapx.at erst beim Antippen des Knopfs aufbauen (vor dem Klick keine Anfrage dorthin), spart den TLS-Aufbau
+  start.addEventListener('pointerdown', () => { prefetch().catch(() => {}); document.head.append(el('link', { rel: 'preconnect', href: 'https://api.mapx.at', crossOrigin: 'anonymous' })); }, { once: true });
   start.addEventListener('click', async () => {
-    start.disabled = true; start.hidden = true; frame.classList.add('mx-demo-loading');
+    start.disabled = true; start.hidden = true; frame.classList.add('mx-demo-loading', 'mx-demo-run');
     if (!/^mx_pk_/.test(TOKEN)) { frame.classList.remove('mx-demo-loading'); say(t('Für dieses Beispiel ist noch kein öffentlicher Token hinterlegt.', 'No public token has been set for this example yet.'), true); return; }
     try {
-      if (root.dataset.leaflet !== 'false') {
-        await Promise.all([load(LEAFLET + 'leaflet.css', true), load(LEAFLET + 'leaflet.js')]);
-        L = window.L;
-      } else setTimeout(() => frame.classList.remove('mx-demo-loading'), 10000);
-      await load(`/lp/demo/${root.dataset.demo}.js`);
+      await prefetch();
+      if (root.dataset.leaflet !== 'false') L = window.L;
+      else setTimeout(() => frame.classList.remove('mx-demo-loading'), 10000);
       root.classList.add('mx-demo-on'); panel.hidden = false;
-      window.mxDemo({ L, de, t, api, errText, API, TOKEN, LIMITS, BUDGET, say, fail, result, hint, el, select, button, toggles, below, makeMap, setStyle, centerButton, dot, text, debounce, logReq, endStart, drawLine, pulse, countUp, typeText, panel, stage, frame, info, reduce, touch, ATTR, flyTo: (ll, z) => (reduce ? map.setView(ll, z ?? map.getZoom()) : map.flyTo(ll, z ?? map.getZoom(), { duration: 1.1 })), get map() { return map; }, done: () => frame.classList.remove('mx-demo-loading') });
+      window.mxDemo({ L, de, t, api, errText, API, TOKEN, LIMITS, BUDGET, say, fail, result, hint, el, select, button, toggles, below, makeMap, setStyle, centerButton, dot, text, debounce, logReq, endStart, drawLine, pulse, countUp, typeText, panel, stage, frame, info, reduce, touch, ATTR, flyTo: (ll, z) => (reduce ? map.setView(ll, z ?? map.getZoom()) : map.flyTo(ll, z ?? map.getZoom(), { duration: 0.7, easeLinearity: 0.4 })), get map() { return map; }, done: () => frame.classList.remove('mx-demo-loading') });
       if (!panel.childElementCount) panel.hidden = true;
     } catch (e) { frame.classList.remove('mx-demo-loading'); fail(e); }
   });

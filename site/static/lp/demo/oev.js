@@ -60,6 +60,8 @@ window.mxDemo = (c) => {
         if (!c.reduce) { r.li.classList.add('mx-in'); requestAnimationFrame(() => requestAnimationFrame(() => r.li.classList.remove('mx-in'))); }
       }
       rows.sort((a, b) => a.when - b.when); for (const r of rows) list.append(r.li);
+      list.querySelector('.mx-dep-none')?.remove();
+      if (!rows.length) list.append(el('li', { className: 'mx-dep-none', textContent: t('Gerade keine Abfahrten laut Fahrplan. Tipp auf einen anderen blauen Punkt.', 'No departures in the timetable right now. Tap another blue dot.') }));
       c.say(rows.length ? t(`${s.name}: nächste Abfahrten laut Fahrplan`, `${s.name}: next departures according to the timetable`)
         : t(`${s.name}: gerade keine Abfahrten im Fahrplan. Tipp auf einen anderen blauen Punkt.`, `${s.name}: no departures in the timetable right now. Tap another blue dot.`));
     } catch (e) { if (n === seq) c.fail(e); }
