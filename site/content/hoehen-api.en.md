@@ -24,7 +24,7 @@ description: "Elevation API for Austria: height for points, elevation profile al
 ## What the API can do
 
 - `GET /v1/elevation`: heights for up to 512 points (`points`) or along a polyline (`path`, with `samples`), from the terrain model `dtm` or the surface model `dsm`.
-- `GET /v1/elevation/{lon},{lat}`: terrain and surface height at one point.
+- `GET /v1/elevation/{lng},{lat}`: terrain and surface height at one point.
 - `GET /v1/elevation/profile`: elevation profile with distances, heights, ascent, descent, minimum and maximum.
 - Tileset `terrain-rgb`: the terrain model as Terrain-RGB tiles for hillshade and 3D terrain in MapLibre.
 - Tileset `dsm`: the surface model with buildings and vegetation in the same format.

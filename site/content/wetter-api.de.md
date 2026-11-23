@@ -25,10 +25,10 @@ description: "Wetter-API für Österreich: Messwerte, Stundenvorhersage, Nieders
 
 - `GET /v1/weather/current`: Messwerte der nächsten Stationen im 10-Minuten-Raster (Temperatur, Feuchte, Wind, Böen, Niederschlag, Luftdruck).
 - `GET /v1/weather/forecast`: Stundenvorhersage für einen Punkt, bis zu 60 Stunden, auf Wunsch mit Unsicherheitsbereich.
-- `GET /v1/weather/nowcast/{lon},{lat}`: Niederschlags-Nowcast in 15-Minuten-Schritten für 3 Stunden, mit Beginn und Ende des Niederschlags in Minuten.
+- `GET /v1/weather/nowcast/{lng},{lat}`: Niederschlags-Nowcast in 15-Minuten-Schritten für 3 Stunden, mit Beginn und Ende des Niederschlags in Minuten.
 - `GET /v1/weather/warnings`: aktuelle und kommende Warnungen von GeoSphere Austria bis 4 Tage voraus als GeoJSON, Stufen 1 (gelb) bis 3 (rot).
-- `GET /v1/air-quality/{lon},{lat}`: Luftqualitätsindex, Stickstoffdioxid, Ozon, PM10, PM2.5 und Saharastaub.
-- `GET /v1/climate/{lon},{lat}`: Sonnenpotenzial, Temperatur- und Niederschlagsnormale, Hitze- und Schneetage, Dürreindex.
+- `GET /v1/air-quality/{lng},{lat}`: Luftqualitätsindex, Stickstoffdioxid, Ozon, PM10, PM2.5 und Saharastaub.
+- `GET /v1/climate/{lng},{lat}`: Sonnenpotenzial, Temperatur- und Niederschlagsnormale, Hitze- und Schneetage, Dürreindex.
 - `GET /v1/weather/tiles/{param}.json`: Wetterkacheln wie Temperatur, Niederschlag, Wind oder Radar-Nowcast für die Karte.
 
 ## Beispiel

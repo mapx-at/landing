@@ -24,7 +24,7 @@ description: "Höhen-API für Österreich: Höhe für Punkte, Höhenprofil entla
 ## Was die Schnittstelle kann
 
 - `GET /v1/elevation`: Höhen für bis zu 512 Punkte (`points`) oder entlang eines Linienzugs (`path`, mit `samples`), wahlweise aus dem Geländemodell `dtm` oder dem Oberflächenmodell `dsm`.
-- `GET /v1/elevation/{lon},{lat}`: Gelände- und Oberflächenhöhe an einem Punkt.
+- `GET /v1/elevation/{lng},{lat}`: Gelände- und Oberflächenhöhe an einem Punkt.
 - `GET /v1/elevation/profile`: Höhenprofil mit Distanzen, Höhen, Anstieg, Abstieg, Minimum und Maximum.
 - Tileset `terrain-rgb`: das Geländemodell als Terrain-RGB-Kacheln für Schummerung und 3D-Gelände in MapLibre.
 - Tileset `dsm`: das Oberflächenmodell mit Gebäuden und Bewuchs im gleichen Format.

@@ -25,10 +25,10 @@ description: "Weather API for Austria: observations, hourly forecast, precipitat
 
 - `GET /v1/weather/current`: observations of the nearest stations in a 10-minute grid (temperature, humidity, wind, gusts, precipitation, pressure).
 - `GET /v1/weather/forecast`: hourly forecast for a point, up to 60 hours, optionally with an uncertainty range.
-- `GET /v1/weather/nowcast/{lon},{lat}`: precipitation nowcast in 15-minute steps for 3 hours, with the start and end of precipitation in minutes.
+- `GET /v1/weather/nowcast/{lng},{lat}`: precipitation nowcast in 15-minute steps for 3 hours, with the start and end of precipitation in minutes.
 - `GET /v1/weather/warnings`: current and upcoming warnings from GeoSphere Austria up to 4 days ahead as GeoJSON, levels 1 (yellow) to 3 (red).
-- `GET /v1/air-quality/{lon},{lat}`: air quality index, nitrogen dioxide, ozone, PM10, PM2.5 and Saharan dust.
-- `GET /v1/climate/{lon},{lat}`: solar potential, temperature and precipitation normals, hot and snow days, drought index.
+- `GET /v1/air-quality/{lng},{lat}`: air quality index, nitrogen dioxide, ozone, PM10, PM2.5 and Saharan dust.
+- `GET /v1/climate/{lng},{lat}`: solar potential, temperature and precipitation normals, hot and snow days, drought index.
 - `GET /v1/weather/tiles/{param}.json`: weather tiles such as temperature, precipitation, wind or radar nowcast for the map.
 
 ## Example
