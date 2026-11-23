@@ -23,8 +23,8 @@ description: "Statische Karten für Österreich als PNG oder WebP mit Pins, Pfad
 
 ## Was die Schnittstelle kann
 
-- `GET /v1/static/{style}/{view}/{size}`: Kartenbild ohne Overlay. `view` ist `lon,lat,zoom[,bearing]`, `size` ist Breite mal Höhe, zum Beispiel `600x400`, mit optionalem `@2x` und Endung `.png` oder `.webp`.
-- `GET /v1/static/{style}/{overlay}/{view}/{size}`: Kartenbild mit Overlays. Pins (`pin-s+ff0000(lon,lat)`), Pfade (kodierte Polyline) und GeoJSON mit einfachen Stilangaben, bis zu 50 Overlays.
+- `GET /v1/static/{style}/{view}/{size}`: Kartenbild ohne Overlay. `view` ist `lng,lat,zoom[,bearing]`, `size` ist Breite mal Höhe, zum Beispiel `600x400`, mit optionalem `@2x` und Endung `.png` oder `.webp`.
+- `GET /v1/static/{style}/{overlay}/{view}/{size}`: Kartenbild mit Overlays. Pins (`pin-s+ff0000(lng,lat)`), Pfade (kodierte Polyline) und GeoJSON mit einfachen Stilangaben, bis zu 50 Overlays.
 - Mit `auto` statt der Ansicht passt sich der Ausschnitt den Overlays an.
 - Stile: `streets`, `streets-dawn`, `streets-dusk`, `streets-night`, `satellite` (Orthofoto), `satellite-streets` und `outdoors` (Höhenlinien mit Schummerung).
 

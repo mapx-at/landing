@@ -34,7 +34,7 @@ faq:
   - q: "Why do I get 429?"
     a: "You exceeded the rate limit of the zone. Wait the seconds given in `Retry-After` and retry with a growing delay. For heavy loads, cache tiles in the client."
   - q: "My points land in the wrong country."
-    a: "Longitude and latitude are swapped. mapx and GeoJSON use `lon,lat`, longitude comes first."
+    a: "Longitude and latitude are swapped. mapx and GeoJSON use `lng,lat`, longitude comes first."
   - q: "My map is blurry."
     a: "Raster tiles are 512 pixels. Set `tileSize: 512` in your client."
   - q: "Where do I report a problem?"

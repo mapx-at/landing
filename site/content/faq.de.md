@@ -34,7 +34,7 @@ faq:
   - q: "Warum bekomme ich 429?"
     a: "Du hast das Rate-Limit der Zone überschritten. Warte die Sekunden aus `Retry-After` ab und versuche es mit wachsender Pause erneut. Bei hoher Last hilft es, Kacheln im Client zu cachen."
   - q: "Meine Punkte landen im falschen Land."
-    a: "Längen- und Breitengrad sind vertauscht. mapx und GeoJSON verwenden `lon,lat`, die Länge kommt zuerst."
+    a: "Längen- und Breitengrad sind vertauscht. mapx und GeoJSON verwenden `lng,lat`, die Länge kommt zuerst."
   - q: "Meine Karte ist unscharf."
     a: "Rasterkacheln haben 512 Pixel. Setze im Client `tileSize: 512`."
   - q: "Wo melde ich ein Problem?"

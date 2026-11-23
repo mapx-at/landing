@@ -23,8 +23,8 @@ description: "Static maps for Austria as PNG or WebP with pins, paths and GeoJSO
 
 ## What the API can do
 
-- `GET /v1/static/{style}/{view}/{size}`: a map image without overlay. `view` is `lon,lat,zoom[,bearing]`, `size` is width times height, for example `600x400`, with optional `@2x` and the extension `.png` or `.webp`.
-- `GET /v1/static/{style}/{overlay}/{view}/{size}`: a map image with overlays. Pins (`pin-s+ff0000(lon,lat)`), paths (encoded polyline) and GeoJSON with simple style properties, up to 50 overlays.
+- `GET /v1/static/{style}/{view}/{size}`: a map image without overlay. `view` is `lng,lat,zoom[,bearing]`, `size` is width times height, for example `600x400`, with optional `@2x` and the extension `.png` or `.webp`.
+- `GET /v1/static/{style}/{overlay}/{view}/{size}`: a map image with overlays. Pins (`pin-s+ff0000(lng,lat)`), paths (encoded polyline) and GeoJSON with simple style properties, up to 50 overlays.
 - With `auto` instead of the view the extent fits the overlays.
 - Styles: `streets`, `streets-dawn`, `streets-dusk`, `streets-night`, `satellite` (orthophoto), `satellite-streets` and `outdoors` (contour lines with hillshade).
 
