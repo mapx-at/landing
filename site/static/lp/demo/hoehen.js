@@ -11,11 +11,12 @@ window.mxDemo = (c) => {
   const canvas = el('canvas', { className: 'mx-demo-chart' });
   canvas.setAttribute('role', 'img'); canvas.setAttribute('aria-label', t('Höhenprofil', 'Elevation profile'));
   wrap.append(canvas);
-  c.button(t('Neue Linie', 'New line'), () => { pts = []; prof = null; c.result(null); cursor.remove(); draw(); });
+  c.button(t('Neue Linie', 'New line'), () => { pts = []; prof = null; c.result(null); cursor.remove(); load(); });
   c.centerButton(t('Kartenmitte als Punkt', 'Use map centre'), (e) => add(e));
   function add(e) { pts.push([e.latlng.lat, e.latlng.lng]); load(); }
   map.on('click', add);
   const nf = (v) => Math.round(v).toLocaleString(t('de-AT', 'en-GB'));
+  const km = (m) => (m / 1000).toLocaleString(t('de-AT', 'en-GB'), { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   let prof = null, at = -1; // prof: {p:[{d,h,ll}], dMax, lo, hi, iHi, iLo}
   const PAD = { l: 44, r: 10, t: 22, b: 20 };
@@ -34,7 +35,7 @@ window.mxDemo = (c) => {
     const x = (d) => PAD.l + (d / dMax) * (w - PAD.l - PAD.r), y = (v) => h - PAD.b - ((v - lo) / (hi - lo || 1)) * (h - PAD.t - PAD.b);
     prof.x = x; prof.w = w;
     g.font = '11px Inter, system-ui, sans-serif'; g.fillStyle = fg; g.globalAlpha = 0.65;
-    g.fillText(`${nf(hi)} m`, 2, PAD.t + 4); g.fillText(`${nf(lo)} m`, 2, h - PAD.b); g.textAlign = 'right'; g.fillText(`${(dMax / 1000).toFixed(2)} km`, w - PAD.r, h - 4); g.textAlign = 'left';
+    g.fillText(`${nf(hi)} m`, 2, PAD.t + 4); g.fillText(`${nf(lo)} m`, 2, h - PAD.b); g.textAlign = 'right'; g.fillText(`${km(dMax)} km`, w - PAD.r, h - 4); g.textAlign = 'left';
     g.globalAlpha = 0.18; g.fillRect(PAD.l, h - PAD.b, w - PAD.l - PAD.r, 1); g.globalAlpha = 1;
     const path = () => { g.beginPath(); p.forEach((q, i) => (i ? g.lineTo(x(q.d), y(q.h)) : g.moveTo(x(q.d), y(q.h)))); };
     path(); g.lineTo(x(dMax), h - PAD.b); g.lineTo(x(0), h - PAD.b); g.closePath();
@@ -56,7 +57,7 @@ window.mxDemo = (c) => {
       const q = p[at], X = x(q.d), Y = y(q.h);
       g.strokeStyle = fg; g.globalAlpha = 0.35; g.lineWidth = 1; g.beginPath(); g.moveTo(X, PAD.t - 6); g.lineTo(X, h - PAD.b); g.stroke(); g.globalAlpha = 1;
       g.fillStyle = '#e8890c'; g.strokeStyle = '#fff'; g.lineWidth = 2; g.beginPath(); g.arc(X, Y, 5, 0, Math.PI * 2); g.fill(); g.stroke();
-      const s = `${nf(q.h)} m · ${(q.d / 1000).toFixed(2)} km`; g.font = '600 12px Inter, system-ui, sans-serif';
+      const s = `${nf(q.h)} m · ${km(q.d)} km`; g.font = '600 12px Inter, system-ui, sans-serif';
       const tw = g.measureText(s).width, bx = Math.min(Math.max(PAD.l, X - tw / 2 - 6), w - PAD.r - tw - 12);
       g.fillStyle = cs.getPropertyValue('--mx-ov').trim() || '#fff'; g.globalAlpha = 0.92; g.fillRect(bx, 2, tw + 12, 18); g.globalAlpha = 1;
       g.fillStyle = fg; g.fillText(s, bx + 6, 15);
@@ -86,7 +87,7 @@ window.mxDemo = (c) => {
   function ride() { // einmal die Linie abfahren (2 s)
     if (c.reduce || !prof) return;
     const id = ++run, t0 = performance.now(), n = prof.p.length;
-    (function step(now) { if (id !== run) return; const k = Math.min(1, (now - t0) / 2000); scrub(Math.round(k * (n - 1))); if (k < 1) requestAnimationFrame(step); })(t0);
+    (function step(now) { if (id !== run) return; const k = Math.min(1, (now - t0) / 800); scrub(Math.round(k * (n - 1))); if (k < 1) requestAnimationFrame(step); })(t0);
   }
 
   let seq = 0;
@@ -109,8 +110,8 @@ window.mxDemo = (c) => {
       line.setLatLngs(p.map((q) => q.ll)); hit.setLatLngs(p.map((q) => q.ll));
       draw();
       c.result({ chips: [`${nf(lo)}–${nf(hi)} m`, `↑ ${nf(up)} m`, `↓ ${nf(down)} m`, t(`max. ${Math.round(slope * 100)} % Steigung`, `max. ${Math.round(slope * 100)} % grade`)] });
-      c.say(t(`${(prof.dMax / 1000).toFixed(2)} km, Höhe ${nf(lo)} bis ${nf(hi)} m, Aufstieg ${nf(up)} m, Abstieg ${nf(down)} m, maximale Steigung ${Math.round(slope * 100)} %`,
-        `${(prof.dMax / 1000).toFixed(2)} km, elevation ${nf(lo)} to ${nf(hi)} m, ascent ${nf(up)} m, descent ${nf(down)} m, max. grade ${Math.round(slope * 100)} %`));
+      c.say(t(`${km(prof.dMax)} km, Höhe ${nf(lo)} bis ${nf(hi)} m, Aufstieg ${nf(up)} m, Abstieg ${nf(down)} m, maximale Steigung ${Math.round(slope * 100)} %`,
+        `${km(prof.dMax)} km, elevation ${nf(lo)} to ${nf(hi)} m, ascent ${nf(up)} m, descent ${nf(down)} m, max. grade ${Math.round(slope * 100)} %`));
       ride();
     } catch (e) { c.fail(e); }
   }

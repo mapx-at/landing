@@ -475,3 +475,44 @@ html.mx-demo-fs-lock,html.mx-demo-fs-lock body{overflow:hidden}
 .mx-demo input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:var(--mx-accent);border:8px solid transparent;background-clip:padding-box;box-sizing:content-box}
 }
 .mx-pin{display:flex;align-items:flex-end;justify-content:center}
+/* Handy-QA 23.11.2026: Vorschau vollständig, Overlays mit Innenabstand/safe-area, Suchfeld deckend, Ergebniszeilen, Verkehrskarte */
+@media(max-width:767px){.mx-demo-frame:not(.mx-demo-run){aspect-ratio:2/1}}
+.mx-demo{--mx-in-l:max(.5rem,env(safe-area-inset-left));--mx-in-r:max(.5rem,env(safe-area-inset-right));--mx-ctl:44px}
+.mx-demo .leaflet-right .leaflet-control{margin-right:var(--mx-in-r)}.mx-demo .leaflet-top .leaflet-control{margin-top:.5rem}
+.mx-demo .leaflet-left .leaflet-control{margin-left:var(--mx-in-l)}
+.mx-demo .leaflet-bottom.leaflet-right .leaflet-control-attribution{margin-right:0}
+.mx-demo-panel{left:var(--mx-in-l);right:calc(var(--mx-in-r) + var(--mx-ctl) + .5rem)}
+.mx-demo-sheet{left:var(--mx-in-l);max-width:min(26rem,calc(100% - var(--mx-in-l) - var(--mx-in-r)))}
+.mx-demo .mx-demo-search input{width:100%;min-height:44px;padding:.45rem .8rem .45rem 2.3rem;border-radius:9999px;background:var(--mx-ov) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M15.5 15.5 21 21'/%3E%3C/svg%3E") no-repeat .8rem 50%;color:var(--mx-ov-fg);border:1px solid var(--mx-ov-bd);box-shadow:var(--mx-shadow);-webkit-appearance:none;appearance:none}
+.mx-demo .mx-demo-search input::placeholder{color:var(--mx-ov-fg);opacity:.55}
+.mx-demo .mx-demo-search input:focus-visible{outline:2px solid var(--mx-accent);outline-offset:1px}
+.mx-demo-search .mx-demo-list{border:1px solid var(--mx-ov-bd);overflow:hidden;border-radius:.75rem}
+.mx-demo-search .mx-demo-list button{padding:.6rem .8rem;min-height:44px;border-radius:0}
+.mx-demo-search .mx-demo-list li+li{border-top:1px solid var(--mx-ov-bd)}
+.mx-demo-search .mx-demo-list span{opacity:.7}
+.mx-demo .mx-demo-rows{display:grid;grid-template-columns:auto 1fr;gap:.15rem .75rem;margin:0;padding:0}
+.mx-demo .mx-demo-rows dt,.mx-demo .mx-demo-rows dd{margin:0;padding:0;font-weight:400;line-height:1.35}
+.mx-demo .mx-demo-rows dt{opacity:.7}.mx-demo .mx-demo-rows dd{font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.mx-inc-badge{display:inline-block;padding:.08rem .5rem;border-radius:9999px;font-size:.75rem;font-weight:700;color:#fff;background:var(--mx-warn);white-space:nowrap}
+.mx-inc-badge.mx-closed{background:#c8372d}
+.mx-inc-head{display:flex;align-items:center;gap:.4rem;margin:0 0 .2rem}
+.mx-inc-until{font-size:.75rem;opacity:.75;white-space:nowrap}
+.mx-inc-text{margin:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.mx-inc-text.mx-open{display:block;-webkit-line-clamp:unset}
+.mx-inc-more{font-size:.8125rem;font-weight:600;color:var(--mx-line);padding:.2rem 0;min-height:32px}
+.mx-demo .mx-demo-inc{margin:.6rem 0 0;font-size:.875rem}
+.mx-demo .mx-demo-inc li{padding:0}.mx-demo .mx-demo-inc li+li{border-top:1px solid rgb(156 163 175 / .25)}
+.mx-demo .mx-demo-inc button{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:.6rem;padding:.55rem .25rem;min-height:44px;border-radius:0}
+.mx-demo-inc .mx-inc-road{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.mx-demo .mx-demo-inc button[aria-current=true]{background:rgb(156 163 175 / .15)}
+.mx-dep li{transition:transform .25s ease,opacity .25s ease,max-height .3s ease .05s,padding .3s ease .05s}
+.mx-demo-gesture,.mx-demo-hint{line-height:1.3;padding:.4rem .85rem;font-weight:500}
+.mx-demo .leaflet-control-attribution{line-height:1.35;padding:.1rem .4rem}
+@media(max-width:767px){.mx-demo .leaflet-control-attribution{font-size:.625rem}}
+.mx-demo-sheet{line-height:1.4}
+.mx-demo-status{line-height:1.35}
+@media(max-width:640px){.mx-demo-sheet{max-height:calc(56% - var(--mx-attr-h,1.25rem))}}
+/* Vorschlagsliste nie über den Rahmen bzw. die Quellenzeile hinaus (kleine Rahmen, Handy quer, Tastatur) */
+.mx-demo-frame:not(.mx-demo-frame-free){container-type:size}
+.mx-demo-search .mx-demo-list{max-height:calc(100cqh - 44px - 1.5rem - var(--mx-attr-h,1.25rem));overflow-y:auto;overscroll-behavior:contain}
+.mx-dep li.mx-dep-none{display:block;max-height:none;white-space:normal;opacity:.8;padding:.3rem 0}

@@ -54,7 +54,7 @@ window.mxDemo = (c) => {
     await done[PROF.findIndex(([p]) => p === profile.value)];
     if (at !== q()) return;
     paint();
-    if (first) await c.drawLine(lines[profile.value], 1300);
+    if (first) await c.drawLine(lines[profile.value], 800);
     show(true);
     await Promise.all(done); paint();
   }
